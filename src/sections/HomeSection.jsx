@@ -32,6 +32,29 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
     { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library },
   ];
 
+  const pathwaySteps = [
+    {
+      label: 'Verstehen',
+      title: 'Familiendynamik einordnen',
+      desc: 'Elternrolle, Belastung, kindliche Perspektive und Schutzfaktoren gemeinsam betrachten.',
+    },
+    {
+      label: 'Einschätzen',
+      title: 'Risiken und Ressourcen gewichten',
+      desc: 'Krise, Entlastung, Parentifizierung, Routinen und verfügbare Bezugspersonen klären.',
+    },
+    {
+      label: 'Handeln',
+      title: 'Nächste Schritte konkret machen',
+      desc: 'Psychoedukation, Krisenplan, Gesprächsführung und schriftliche Absprachen alltagstauglich übersetzen.',
+    },
+    {
+      label: 'Vernetzen',
+      title: 'Hilfen erreichbar machen',
+      desc: 'Offizielle Stellen, Beratung, Kinderangebote und Entlastung passend zur Lage aktivieren.',
+    },
+  ];
+
   return (
     <article className="space-y-16 no-print">
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -147,6 +170,64 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
               Zu den Trainingsfällen <ChevronRight size={14} />
             </button>
           )}
+        </div>
+      </section>
+
+      <section className="rounded-[3rem] border border-slate-200 bg-white p-8 shadow-sm md:p-12">
+        <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_18rem] xl:items-start">
+          <div>
+            <div className="mb-5 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.24em] text-emerald-700">
+              <div className="h-[2px] w-10 bg-emerald-200" />
+              Fachdiagramm
+            </div>
+            <h3 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900">
+              Ein möglicher <span className="text-emerald-600 italic">Arbeitsweg</span> durch die Website.
+            </h3>
+            <p className="mt-5 max-w-4xl text-base md:text-lg leading-relaxed text-slate-600">
+              Die Inhalte sind nicht als lose Sammlung gedacht, sondern als fachliche Abfolge: erst verstehen, dann
+              einschätzen, daraus konkrete Schritte ableiten und passende Hilfen vernetzen. Das Diagramm bündelt diese
+              Logik auf einer Seite.
+            </p>
+          </div>
+          <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Einordnung</div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              Kein starres Schema, sondern eine ruhige fachliche Leitstruktur für Orientierung, Triage und Gesprächsplanung.
+            </p>
+          </aside>
+        </div>
+
+        <div className="mt-10 overflow-hidden rounded-[2.5rem] border border-slate-200 bg-[#F6F7F3] p-5 md:p-8">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
+            {pathwaySteps.map((step, index) => (
+              <div key={step.label} className="relative">
+                <section className="h-full rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+                  <div className="mb-4 inline-flex rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700">
+                    {step.label}
+                  </div>
+                  <h4 className="text-xl font-black tracking-tight text-slate-900">{step.title}</h4>
+                  <p className="mt-4 text-sm leading-relaxed text-slate-600">{step.desc}</p>
+                </section>
+
+                {index < pathwaySteps.length - 1 && (
+                  <>
+                    <div className="absolute right-[-0.85rem] top-1/2 hidden h-[2px] w-7 -translate-y-1/2 bg-emerald-300 lg:block" />
+                    <div className="absolute right-[-0.6rem] top-1/2 hidden h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-r-2 border-t-2 border-emerald-400 lg:block" />
+                    <div className="mx-auto mt-4 flex h-8 w-8 items-center justify-center rounded-full border border-emerald-200 bg-white text-emerald-700 lg:hidden">
+                      <ChevronRight size={16} />
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 rounded-[1.75rem] border border-emerald-100 bg-emerald-50/80 px-5 py-4">
+            <p className="text-sm leading-relaxed font-medium text-emerald-950">
+              Leitidee: Gute Begleitung verbindet systemisches Verstehen, pragmatische Einschätzung, klare nächste
+              Schritte und aktivierte Unterstützung statt isolierter Einzelentscheidungen.
+            </p>
+          </div>
         </div>
       </section>
 
