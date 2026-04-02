@@ -1,4 +1,23 @@
-import { APP_STATE_VERSION, DEFAULT_COMPLETED, DEFAULT_QUIZ_STATE, DEFAULT_SCORE, DEFAULT_SELECTED_OPTION, NETWORK_FILTERS, TAB_ITEMS, VIGNETTEN } from '../data/content';
+import {
+  APP_STATE_VERSION,
+  ASSESSMENT_ITEMS,
+  DEFAULT_COMPLETED,
+  DEFAULT_QUIZ_STATE,
+  DEFAULT_SCORE,
+  DEFAULT_SELECTED_OPTION,
+  E_MODULES,
+  NETWORK_FILTERS,
+  TAB_ITEMS,
+  VIGNETTEN,
+} from '../data/content';
+
+const VALID_ASSESSMENT_ITEM_IDS = new Set(ASSESSMENT_ITEMS.map((item) => item.id));
+const ASSESSMENT_ITEM_WEIGHTS = new Map(ASSESSMENT_ITEMS.map((item) => [item.id, item.val]));
+const VALID_MODULE_IDS = new Set(E_MODULES.map((module) => module.id));
+const MODULE_BY_ID = new Map(E_MODULES.map((module) => [module.id, module]));
+const VIGNETTE_OPTION_IDS = new Map(
+  VIGNETTEN.map((vignette) => [vignette.id, new Set(vignette.options.map((option) => option.id))])
+);
 
 export const safeParse = (key, fallback, validate) => {
   if (typeof window === 'undefined') return fallback;
@@ -79,6 +98,43 @@ export const getDefaultAppState = () => ({
   completedModules: DEFAULT_COMPLETED,
 });
 
+const normalizeScore = (value) => {
+  if (!isValidScore(value)) return DEFAULT_SCORE;
+
+  const checked = [...new Set(value.checked.filter((entry) => VALID_ASSESSMENT_ITEM_IDS.has(entry)))];
+  const risk = checked.reduce((sum, entry) => sum + (ASSESSMENT_ITEM_WEIGHTS.get(entry) ?? 0), 0);
+
+  return { risk, checked };
+};
+
+const normalizeCompletedModules = (value) => {
+  if (!isValidCompleted(value)) return DEFAULT_COMPLETED;
+
+  return [...new Set(value.filter((entry) => VALID_MODULE_IDS.has(entry)))];
+};
+
+const normalizeSelectedOptionData = (value) => {
+  if (!isValidSelectedOption(value)) return DEFAULT_SELECTED_OPTION;
+
+  return Object.fromEntries(
+    Object.entries(value).filter(([vignetteId, optionId]) => VIGNETTE_OPTION_IDS.get(vignetteId)?.has(optionId))
+  );
+};
+
+const normalizeQuizStateData = (value) => {
+  if (!isValidQuizState(value)) return DEFAULT_QUIZ_STATE;
+
+  return Object.fromEntries(
+    Object.entries(value).flatMap(([moduleId, entry]) => {
+      const module = MODULE_BY_ID.get(moduleId);
+      if (!module) return [];
+      if (!Number.isInteger(entry.answerIdx) || entry.answerIdx < 0 || entry.answerIdx >= module.quizOptions.length) return [];
+
+      return [[moduleId, { answerIdx: entry.answerIdx, isCorrect: entry.answerIdx === module.correctQuizIdx }]];
+    })
+  );
+};
+
 export const normalizeAppStateData = (value) => {
   const defaults = getDefaultAppState();
   const source = value && typeof value === 'object' ? value : {};
@@ -89,15 +145,15 @@ export const normalizeAppStateData = (value) => {
       Number.isInteger(source.currentVignette) && source.currentVignette >= 0 && source.currentVignette < VIGNETTEN.length
         ? source.currentVignette
         : defaults.currentVignette,
-    selectedOption: isValidSelectedOption(source.selectedOption) ? source.selectedOption : defaults.selectedOption,
+    selectedOption: normalizeSelectedOptionData(source.selectedOption),
     searchTerm: typeof source.searchTerm === 'string' ? source.searchTerm : defaults.searchTerm,
     activeResourceFilter: isValidResourceFilter(source.activeResourceFilter)
       ? source.activeResourceFilter
       : defaults.activeResourceFilter,
-    quizState: isValidQuizState(source.quizState) ? source.quizState : defaults.quizState,
+    quizState: normalizeQuizStateData(source.quizState),
     showSafeNote: typeof source.showSafeNote === 'boolean' ? source.showSafeNote : defaults.showSafeNote,
-    score: isValidScore(source.score) ? source.score : defaults.score,
-    completedModules: isValidCompleted(source.completedModules) ? source.completedModules : defaults.completedModules,
+    score: normalizeScore(source.score),
+    completedModules: normalizeCompletedModules(source.completedModules),
   };
 };
 
