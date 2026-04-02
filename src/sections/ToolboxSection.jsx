@@ -16,6 +16,46 @@ import { getRiskLabel, getRiskTone } from '../utils/appHelpers';
 
 export default function ToolboxSection({ score, onToggleAssessment, onResetAssessment, onPrint, onDownloadCrisisPlan, acuteCrisisSectionRef, safetyPlanSectionRef, childProtectionSectionRef, onJumpToPrioritySection }) {
   const assessmentLiveText = `Aktueller Assessment-Score: ${score.risk}. ${getRiskLabel(score.risk)}. Der Score dient nur als Orientierungshilfe.`;
+  const pathwaySteps = [
+    {
+      label: 'Orientieren',
+      title: 'Belastung kurz einordnen',
+      desc: 'Welche Faktoren sind aktuell sichtbar, und wo braucht es sofort mehr Aufmerksamkeit?',
+    },
+    {
+      label: 'Sichern',
+      title: 'Akute Risiken zuerst klären',
+      desc: 'Selbstgefährdung, Kindersicherheit, Versorgung und erreichbare Sofortkontakte priorisieren.',
+    },
+    {
+      label: 'Planen',
+      title: 'Krisenvorsorge schriftlich machen',
+      desc: 'Warnzeichen, Betreuung, Kontaktkette und Übergaben für belastete Phasen festhalten.',
+    },
+    {
+      label: 'Kooperieren',
+      title: 'Freiwillige Hilfe oder Abklärung',
+      desc: 'Mit Familie, Netzwerk und Fachstellen den nächsten tragfähigen Schritt bestimmen.',
+    },
+  ];
+
+  const scoreBands = [
+    {
+      label: '0–2',
+      title: 'tragende Ressourcen genauer sichtbar machen',
+      tone: 'border-emerald-200 bg-emerald-50 text-emerald-950',
+    },
+    {
+      label: '3–6',
+      title: 'vertiefte Begleitung und Krisenvorsorge prüfen',
+      tone: 'border-amber-200 bg-amber-50 text-amber-950',
+    },
+    {
+      label: '7+',
+      title: 'Schutz, Sicherung und formelle Abklärung mitdenken',
+      tone: 'border-red-200 bg-red-50 text-red-950',
+    },
+  ];
 
   return (
     <article className="space-y-16">
@@ -99,12 +139,67 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
       </section>
 
       <section className="rounded-[3rem] border border-slate-100 bg-slate-50 p-6 md:p-8 shadow-sm no-print">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
+          <div>
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Entscheidungsdiagramm</div>
+            <h3 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900">
+              Die Toolbox folgt einer <span className="text-emerald-600 italic">klaren Triage-Logik</span>.
+            </h3>
+            <p className="mt-5 max-w-4xl text-base md:text-lg leading-relaxed text-slate-600">
+              Das Assessment ist nicht das Ziel, sondern der Einstieg. Entscheidend ist, wie daraus ein kurzer,
+              nachvollziehbarer Weg zu Sicherheit, Krisenvorsorge und den nächsten Absprachen entsteht.
+            </p>
+          </div>
+          <aside className="rounded-[2rem] border border-slate-200 bg-white p-6">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Leitidee</div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              Nicht jeder hohe Wert bedeutet automatisch Gefährdung. Aber jeder Wert sollte in einen konkreten nächsten Schritt übersetzt werden.
+            </p>
+          </aside>
+        </div>
+
+        <div className="mt-8 overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white p-5 md:p-8">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
+            {pathwaySteps.map((step, index) => (
+              <div key={step.label} className="relative">
+                <section className="h-full rounded-[2rem] border border-slate-200 bg-[#F6F7F3] p-6 shadow-sm">
+                  <div className="mb-4 inline-flex rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700">
+                    {step.label}
+                  </div>
+                  <h4 className="text-xl font-black tracking-tight text-slate-900">{step.title}</h4>
+                  <p className="mt-4 text-sm leading-relaxed text-slate-600">{step.desc}</p>
+                </section>
+                {index < pathwaySteps.length - 1 && (
+                  <>
+                    <div className="absolute right-[-0.85rem] top-1/2 hidden h-[2px] w-7 -translate-y-1/2 bg-emerald-300 lg:block" />
+                    <div className="absolute right-[-0.6rem] top-1/2 hidden h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-r-2 border-t-2 border-emerald-400 lg:block" />
+                    <div className="mx-auto mt-4 flex h-8 w-8 items-center justify-center rounded-full border border-emerald-200 bg-white text-emerald-700 lg:hidden">
+                      <ChevronRight size={16} />
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-[3rem] border border-slate-100 bg-slate-50 p-6 md:p-8 shadow-sm no-print">
         <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Von der Einschätzung zum Handeln</div>
         <p className="text-sm md:text-base text-slate-600 leading-relaxed max-w-4xl">
           Die folgenden Arbeitsfenster übersetzen die bisherige Einschätzung in konkrete Praxis: zuerst akute Sicherheit,
           dann Krisenvorsorge und schliesslich Schutz- und Kooperationsfragen im Alltag. So bleibt die Toolbox systemisch,
           aber auch in belasteten Situationen handlungsnah.
         </p>
+
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          {scoreBands.map((band) => (
+            <div key={band.label} className={`rounded-[1.75rem] border p-5 ${band.tone}`}>
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">Score {band.label}</div>
+              <p className="mt-3 text-sm leading-relaxed font-medium">{band.title}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section
