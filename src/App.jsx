@@ -26,6 +26,7 @@ import {
   isValidStoredAppState,
   normalizeAppStateData,
   normalizeHashToTab,
+  safeLocalStorageSet,
   safeParse,
 } from './utils/appHelpers';
 
@@ -97,7 +98,7 @@ export default function App() {
     };
 
     latestAppliedTimestampRef.current = payload.updatedAt;
-    window.localStorage.setItem(STORAGE_KEYS.appState, JSON.stringify(payload));
+    safeLocalStorageSet(STORAGE_KEYS.appState, JSON.stringify(payload));
 
     if (broadcastChannelRef.current) {
       broadcastChannelRef.current.postMessage(payload);

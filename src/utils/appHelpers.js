@@ -13,6 +13,17 @@ export const safeParse = (key, fallback, validate) => {
   }
 };
 
+export const safeLocalStorageSet = (key, value) => {
+  if (typeof window === 'undefined') return false;
+
+  try {
+    window.localStorage.setItem(key, value);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 export const isValidScore = (value) => {
   return (
     value &&
