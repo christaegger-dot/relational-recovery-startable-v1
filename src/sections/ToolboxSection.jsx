@@ -7,6 +7,8 @@ import {
   ADDICTION_TIPS,
   CHILD_PROTECTION_THRESHOLDS,
   CHILD_PROTECTION_TIPS,
+  PRACTICE_BLOCKS,
+  PRACTICE_BLOCK_FILTERS,
   RIGHTS_FAQ,
   SAFETY_PLAN_POINTS,
   SAFETY_PLAN_TEMPLATE_FIELDS,
@@ -16,6 +18,7 @@ import { getRiskLabel, getRiskTone } from '../utils/appHelpers';
 
 export default function ToolboxSection({ score, onToggleAssessment, onResetAssessment, onPrint, onDownloadCrisisPlan, acuteCrisisSectionRef, safetyPlanSectionRef, childProtectionSectionRef, onJumpToPrioritySection }) {
   const [triageAnswers, setTriageAnswers] = useState({});
+  const [activePracticeFilter, setActivePracticeFilter] = useState('all');
   const assessmentLiveText = `Aktueller Assessment-Score: ${score.risk}. ${getRiskLabel(score.risk)}. Der Score dient nur als Orientierungshilfe.`;
   const pathwaySteps = [
     {
@@ -147,6 +150,10 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
       [id]: current[id] === answer ? undefined : answer,
     }));
   };
+
+  const filteredPracticeBlocks = PRACTICE_BLOCKS.filter(
+    (item) => activePracticeFilter === 'all' || item.tags.includes(activePracticeFilter)
+  );
 
   return (
     <article className="space-y-16">
@@ -389,6 +396,72 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
         )}
       </section>
 
+      <section className="rounded-[3rem] border border-slate-100 bg-slate-50 p-6 shadow-sm md:p-8 no-print">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_21rem] xl:items-start">
+          <div>
+            <div className="mb-4 text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Filterbare Praxisbausteine</div>
+            <h3 className="text-3xl font-black tracking-tight text-slate-900 md:text-4xl">
+              Situationen schneller in <span className="text-emerald-600 italic">konkrete Handlungsfenster</span> übersetzen.
+            </h3>
+            <p className="mt-5 max-w-4xl text-base leading-relaxed text-slate-600 md:text-lg">
+              Die Bausteine bündeln wiederkehrende Praxislagen. So lassen sich Krise, Gespräch, Kinderschutz,
+              Elternrolle, Sucht und Vernetzung gezielt filtern, statt die ganze Toolbox durchsuchen zu müssen.
+            </p>
+          </div>
+          <aside className="rounded-[2rem] border border-slate-200 bg-white p-6">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Nutzung</div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              Die Filter sind als Einstieg gedacht. Sie ersetzen keine Einschätzung, helfen aber dabei, passende
+              Abschnitte schneller zu öffnen.
+            </p>
+          </aside>
+        </div>
+
+        <div className="mt-8 flex flex-wrap gap-2" aria-label="Praxisbausteine filtern">
+          {PRACTICE_BLOCK_FILTERS.map((filter) => (
+            <button
+              key={filter.id}
+              type="button"
+              onClick={() => setActivePracticeFilter(filter.id)}
+              aria-pressed={activePracticeFilter === filter.id}
+              className={`rounded-full border px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] transition-colors haptic-btn ${
+                activePracticeFilter === filter.id
+                  ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
+                  : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-100'
+              }`}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+          {filteredPracticeBlocks.map((item) => (
+            <section key={item.title} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="flex flex-wrap gap-2">
+                {item.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-emerald-800"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <h4 className="mt-5 text-xl font-black tracking-tight text-slate-900">{item.title}</h4>
+              <p className="mt-4 text-sm leading-relaxed text-slate-600">{item.text}</p>
+              <button
+                type="button"
+                onClick={() => onJumpToPrioritySection(item.target)}
+                className="mt-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-slate-900 transition-colors hover:bg-slate-100 haptic-btn"
+              >
+                {item.targetLabel} <ChevronRight size={14} />
+              </button>
+            </section>
+          ))}
+        </div>
+      </section>
+
       <section
         id="priority-acute-crisis"
         ref={acuteCrisisSectionRef}
@@ -600,7 +673,7 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
       </section>
 
 
-      <section className="bg-white p-8 md:p-16 rounded-[4rem] border border-slate-100 shadow-sm no-print">
+      <section id="addiction" className="bg-white p-8 md:p-16 rounded-[4rem] border border-slate-100 shadow-sm no-print scroll-mt-28">
         <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-5">Sucht und psychische Erkrankung zusammen</div>
         <h3 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900 mb-5">
           Zwischen <span className="text-emerald-600 italic">Sicherheit</span>, Grenzen und Hilfezugang.
@@ -632,7 +705,7 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
         </div>
       </section>
 
-      <section className="bg-white p-8 md:p-16 rounded-[4rem] border border-slate-100 shadow-sm no-print">
+      <section id="rights" className="bg-white p-8 md:p-16 rounded-[4rem] border border-slate-100 shadow-sm no-print scroll-mt-28">
         <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-5">Rolle, Rechte und Schweigepflicht</div>
         <h3 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900 mb-5">
           Angehörige dürfen <span className="text-emerald-600 italic">mitteilen</span>, auch wenn Teams nicht alles zurückmelden dürfen.

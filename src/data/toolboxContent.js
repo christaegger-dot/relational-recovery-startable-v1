@@ -146,3 +146,86 @@ export const RIGHTS_FAQ = [
       'Die Angehörigenberatung der PUK Zürich und Pro Mente Sana bieten Orientierung auf unterschiedlichen Ebenen. Pro Mente Sana berät kostenlos zu psychosozialen und rechtlichen Fragen.',
   },
 ];
+
+export const PRACTICE_BLOCK_FILTERS = [
+  { id: 'all', label: 'Alle' },
+  { id: 'Krise', label: 'Krise' },
+  { id: 'Gespräch', label: 'Gespräch' },
+  { id: 'Kinderschutz', label: 'Kinderschutz' },
+  { id: 'Elternrolle', label: 'Elternrolle' },
+  { id: 'Sucht', label: 'Sucht' },
+  { id: 'Vernetzung', label: 'Vernetzung' },
+];
+
+export const PRACTICE_BLOCKS = [
+  {
+    title: 'Akute Sicherheit zuerst ordnen',
+    text: 'Suizidgedanken, Desorganisation, Intoxikation oder fehlende Aufsicht der Kinder verlangen zuerst einen klaren Sicherheits- und Notfallfokus.',
+    tags: ['Krise', 'Kinderschutz'],
+    target: 'acute-crisis',
+    targetLabel: 'Zur Akut-Krise',
+  },
+  {
+    title: 'Das Gespräch kurz und konkret halten',
+    text: 'In belasteten Situationen helfen direkte Fragen nach Sicherheit, Betreuung, Mitwissenden und nächstem Schritt meist mehr als lange Exploration.',
+    tags: ['Gespräch', 'Krise'],
+    target: 'acute-crisis',
+    targetLabel: 'Zu den Sofort-Schritten',
+  },
+  {
+    title: 'Elternrolle entlastend ansprechen',
+    text: 'Nicht moralisch bewerten, sondern klären, was heute verlässlich bleiben muss und wo Eltern früh Unterstützung annehmen können.',
+    tags: ['Elternrolle', 'Gespräch'],
+    target: 'safety-plan',
+    targetLabel: 'Zum Sicherheitsplan',
+  },
+  {
+    title: 'Kinder-Schutzteil immer mitdenken',
+    text: 'Wer übernimmt Betreuung, Übergaben, Information an Schule oder Kita und sichere Orte für Kinder, wenn Symptome eskalieren?',
+    tags: ['Kinderschutz', 'Krise', 'Vernetzung'],
+    target: 'safety-plan',
+    targetLabel: 'Zum Kinder-Schutzteil',
+  },
+  {
+    title: 'Freiwillige Hilfe vor formeller Eskalation prüfen',
+    text: 'Wenn Sicherheit noch tragfähig ist, sind kjz, Familienberatung, Entlastung oder konkrete Alltagshilfe oft der erste passende Schritt.',
+    tags: ['Kinderschutz', 'Vernetzung'],
+    target: 'child-protection',
+    targetLabel: 'Zu den Schutzschwellen',
+  },
+  {
+    title: 'Beobachtungen statt Diagnosen dokumentieren',
+    text: 'Für Schutzfragen zählen beobachtbare Hinweise zu Versorgung, Aufsicht, Gewalt, Rückzug oder Krisenverlauf mehr als vorschnelle Deutungen.',
+    tags: ['Kinderschutz'],
+    target: 'child-protection',
+    targetLabel: 'Zu den Leitfragen',
+  },
+  {
+    title: 'Sucht und psychische Erkrankung zusammen betrachten',
+    text: 'Substanzkonsum verändert oft Sicherheit, Impulsivität und Kinderbetreuung. Darum nicht nur die Diagnose, sondern auch Intoxikation und Entzug mitdenken.',
+    tags: ['Sucht', 'Krise'],
+    target: 'addiction',
+    targetLabel: 'Zum Sucht-Block',
+  },
+  {
+    title: 'Klare Grenzen ohne Beschämung setzen',
+    text: 'Keine Kinderbetreuung unter starkem Einfluss, kein Fahren unter Einfluss und klare Regeln zu Geld, Medikamenten und Erreichbarkeit.',
+    tags: ['Sucht', 'Elternrolle'],
+    target: 'addiction',
+    targetLabel: 'Zu den Leitlinien',
+  },
+  {
+    title: 'Mitwissende aktiv einbinden',
+    text: 'Eine tragende Bezugsperson oder Fachstelle sollte wissen, was aktuell schwierig ist, was sie konkret übernehmen kann und wann sie alarmiert wird.',
+    tags: ['Vernetzung', 'Gespräch'],
+    target: 'safety-plan',
+    targetLabel: 'Zu den Absprachen',
+  },
+  {
+    title: 'Rechte und Schweigepflicht pragmatisch erklären',
+    text: 'Angehörige dürfen Beobachtungen mitteilen. Teams dürfen oft nicht alles zurückmelden, können aber Orientierung geben und Informationen aufnehmen.',
+    tags: ['Gespräch', 'Vernetzung'],
+    target: 'rights',
+    targetLabel: 'Zu Rolle und Rechten',
+  },
+];
