@@ -50,6 +50,30 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
     return 'border-amber-200 bg-amber-50 text-amber-950';
   };
 
+  const lensSummary =
+    networkLens === 'gap'
+      ? 'Die Karte macht sichtbar, wo Mitwissende, Betreuung oder formelle Absicherung noch fehlen.'
+      : networkLens === 'private'
+        ? 'Im Fokus stehen tragende persönliche Beziehungen und emotionale Nähe im Alltag.'
+        : networkLens === 'support'
+          ? 'Im Fokus stehen alltagsnahe Stützen wie Schule, Betreuung und entlastende Außenbezüge.'
+          : networkLens === 'formal'
+            ? 'Im Fokus stehen professionelle Kontakte und institutionelle Mitverantwortung.'
+            : 'Das Gesamtbild verbindet private, unterstützende, formelle und noch fehlende Netzwerkbausteine.';
+
+  const nextStepText =
+    networkLens === 'gap'
+      ? 'Nächster Schritt: fehlende Mitwissende, Kinderbetreuung und formelle Absicherung zuerst konkret benennen.'
+      : networkLens === 'private'
+        ? 'Nächster Schritt: klären, wer wirklich informiert ist und in belasteten Phasen kurzfristig mittragen kann.'
+        : networkLens === 'support'
+          ? 'Nächster Schritt: Tagesstruktur, Schule, Betreuung und entlastende Außenkontakte verbindlicher verankern.'
+          : networkLens === 'formal'
+            ? 'Nächster Schritt: Zuständigkeiten, Erreichbarkeit und Rückmeldewege mit Fachstellen konkretisieren.'
+            : 'Nächster Schritt: Mischung, Lücken und Erreichbarkeit gemeinsam lesen und daraus konkrete Absprachen ableiten.';
+
+  const highlightedNode = visibleMapNodes[0] ?? null;
+
   return (
     <article className="space-y-16 no-print">
       <div className="rounded-[4rem] border border-slate-200 bg-white p-8 shadow-sm md:p-16">
@@ -158,8 +182,8 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
             </aside>
           </div>
 
-          <div className="mt-8 rounded-[2.5rem] border border-emerald-100 bg-white p-5 md:p-8">
-            <div className="mb-5 flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+            <div className="mt-8 rounded-[2.5rem] border border-emerald-100 bg-white p-5 md:p-8">
+              <div className="mb-5 flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Nutzbare Netzwerkkarte</div>
                 <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">
@@ -204,7 +228,9 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
                     return (
                       <div
                         key={node.label}
-                        className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-[1.5rem] border px-4 py-3 text-center shadow-sm ${getNodeToneClass(node.tone)}`}
+                        className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-[1.5rem] border px-4 py-3 text-center shadow-sm transition-all ${
+                          highlightedNode?.label === node.label ? 'ring-2 ring-emerald-300 ring-offset-2 ring-offset-[#F6F7F3]' : ''
+                        } ${getNodeToneClass(node.tone)}`}
                         style={{ top: node.desktopTop, left: node.desktopLeft }}
                       >
                         <div className="text-[11px] font-black leading-tight tracking-[0.08em]">{node.label}</div>
@@ -222,7 +248,9 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
                     return (
                       <div
                         key={node.label}
-                        className={`rounded-[1.5rem] border p-4 text-center shadow-sm ${getNodeToneClass(node.tone)}`}
+                        className={`rounded-[1.5rem] border p-4 text-center shadow-sm ${
+                          highlightedNode?.label === node.label ? 'ring-2 ring-emerald-300 ring-offset-2 ring-offset-white' : ''
+                        } ${getNodeToneClass(node.tone)}`}
                         style={{ gridRow: node.mobileRow, gridColumn: node.mobileCol }}
                       >
                         <div className="text-[11px] font-black leading-tight">{node.label}</div>
@@ -236,6 +264,10 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Aktive Lesart</div>
                 <h4 className="mt-3 text-lg font-black tracking-tight text-slate-900">{activeLens.label}</h4>
                 <p className="mt-3 text-sm leading-relaxed text-slate-700">{activeLens.description}</p>
+                <div className="mt-4 rounded-[1.5rem] border border-emerald-100 bg-emerald-50/70 p-4">
+                  <div className="text-[10px] font-black uppercase tracking-[0.18em] text-emerald-800">Fokus dieser Linse</div>
+                  <p className="mt-2 text-sm leading-relaxed text-emerald-950">{lensSummary}</p>
+                </div>
                 <div className="mt-4 space-y-3">
                   <p className="text-sm leading-relaxed text-slate-700">
                     <span className="font-black text-slate-900">Nähe:</span> Innen liegende Kontakte sind oft emotional näher oder im Alltag relevanter.
@@ -269,12 +301,42 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
                     <div className="mt-2 text-xl font-black text-amber-950">{gapCount}</div>
                   </div>
                 </div>
+
+                <div className="mt-6 rounded-[1.5rem] border border-slate-200 bg-white p-4">
+                  <div className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Nächster Schritt</div>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-700">{nextStepText}</p>
+                </div>
               </aside>
+            </div>
+
+            <div className="mt-6 rounded-[2rem] border border-slate-200 bg-slate-50 p-5">
+              <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_18rem] xl:items-start">
+                <div>
+                  <div className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">Arbeitsauswertung</div>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-700">
+                    Die Karte wird am nützlichsten, wenn nach dem Visualisieren drei Fragen folgen:
+                    Wer trägt schon? Wo ist die Lage brüchig? Was muss als Nächstes konkret abgesprochen werden?
+                  </p>
+                </div>
+                <div className="rounded-[1.5rem] border border-white bg-white p-4 shadow-sm">
+                  <div className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Leitfragen danach</div>
+                  <div className="mt-3 space-y-2">
+                    <p className="text-sm leading-relaxed text-slate-700">Wer weiss bereits Bescheid?</p>
+                    <p className="text-sm leading-relaxed text-slate-700">Wer könnte Kinder kurzfristig übernehmen?</p>
+                    <p className="text-sm leading-relaxed text-slate-700">Welche Stelle fehlt noch im Netzwerk?</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {visibleMapNodes.map((node) => (
-                <section key={node.label} className={`rounded-[1.75rem] border p-5 shadow-sm ${getNodeToneClass(node.tone)}`}>
+                <section
+                  key={node.label}
+                  className={`rounded-[1.75rem] border p-5 shadow-sm transition-all ${
+                    highlightedNode?.label === node.label ? 'border-emerald-300 shadow-md' : ''
+                  } ${getNodeToneClass(node.tone)}`}
+                >
                   <div className="text-[10px] font-black uppercase tracking-[0.18em] opacity-80">
                     {node.zone === 'near' ? 'nahe Ebene' : node.zone === 'mid' ? 'tragende Ebene' : node.zone === 'outer' ? 'äussere Ebene' : 'Versorgungslücke'}
                   </div>
