@@ -131,6 +131,42 @@ export default function EvidenceSection({ downloadResources = [] }) {
       desc: 'Psychoedukation als fortlaufendes Gespräch verstehen und bei Verlauf oder Alter anpassen.',
     },
   ];
+  const supportTracks = [
+    {
+      id: 'orientation',
+      label: 'Erste Orientierung',
+      desc: 'Wenn noch unklar ist, welche Hilfe passt oder wo ein realistischer Einstieg liegt.',
+      offers: SUPPORT_OFFERS.filter((offer) =>
+        [
+          'PUK Zürich – offizielle Angehörigenberatung',
+          'Institut Kinderseele Schweiz (iks)',
+          'Kinder- und Jugendhilfezentren (kjz)',
+        ].includes(offer.name)
+      ),
+    },
+    {
+      id: 'crisis',
+      label: 'Krise und Entlastung',
+      desc: 'Wenn rasch Orientierung, Entlastung oder alltagsnahe Absicherung gebraucht wird.',
+      offers: SUPPORT_OFFERS.filter((offer) =>
+        ['Elternnotruf', 'Caritas «mit mir»-Patenschaften'].includes(offer.name)
+      ),
+    },
+    {
+      id: 'children',
+      label: 'Kinder und Jugendliche',
+      desc: 'Wenn Kinder einen eigenen geschützten Ort oder spezialisierte Unterstützung brauchen.',
+      offers: SUPPORT_OFFERS.filter((offer) =>
+        ['Stiftung Windlicht', 'Zebra Winterthur'].includes(offer.name)
+      ),
+    },
+    {
+      id: 'peers',
+      label: 'Austausch und Selbsthilfe',
+      desc: 'Wenn Entlastung über Austausch mit ähnlich Betroffenen oder Angehörigen im Vordergrund steht.',
+      offers: SUPPORT_OFFERS.filter((offer) => ['VASK Zürich'].includes(offer.name)),
+    },
+  ];
   const protectionSystemNodes = [
     {
       label: 'verlässliche Bezugsperson',
@@ -1524,6 +1560,38 @@ export default function EvidenceSection({ downloadResources = [] }) {
                 </a>
               </section>
             ))}
+          </div>
+
+          <div className="mt-10 rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Schnellübersicht nach Situation</div>
+              <SectionTypeBadge type="Arbeitsabschnitt" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {supportTracks.map((track) => (
+                <section key={track.id} className="rounded-[2rem] border border-slate-100 bg-slate-50 p-6">
+                  <h4 className="text-xl font-black tracking-tight text-slate-900 mb-3">{track.label}</h4>
+                  <p className="text-sm leading-relaxed text-slate-600 mb-5">{track.desc}</p>
+                  <div className="space-y-3">
+                    {track.offers.map((offer) => (
+                      <a
+                        key={offer.name}
+                        href={offer.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-start justify-between gap-4 rounded-[1.5rem] border border-white bg-white p-4 transition-colors hover:border-emerald-200"
+                      >
+                        <div>
+                          <div className="text-sm font-black text-slate-900">{offer.name}</div>
+                          <div className="mt-1 text-xs font-medium uppercase tracking-[0.18em] text-slate-500">{offer.category}</div>
+                        </div>
+                        <ExternalLink size={16} className="mt-1 shrink-0 text-slate-400" />
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
           </div>
 
           <div className="mt-10 rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
