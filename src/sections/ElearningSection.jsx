@@ -29,6 +29,27 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
         </div>
       </header>
 
+      <section className="rounded-[3rem] border border-slate-100 bg-slate-50 p-6 shadow-sm md:p-8">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_18rem] xl:items-start">
+          <div>
+            <div className="mb-4 text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Visuelle Leselogik</div>
+            <h3 className="text-3xl font-black tracking-tight text-slate-900 md:text-4xl">
+              Jedes Modul folgt einer <span className="text-emerald-600 italic">ruhigen Fachsequenz</span>.
+            </h3>
+            <p className="mt-5 max-w-4xl text-base leading-relaxed text-slate-600 md:text-lg">
+              Leitidee, kurze Einordnung, dann eine einzelne Reflexionsfrage. So bleiben die Module näher an
+              Fallarbeit und Supervision als an einem quizartigen Lernformat.
+            </p>
+          </div>
+          <aside className="rounded-[2rem] border border-slate-200 bg-white p-6">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Hinweis</div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              Die visuelle Überarbeitung reduziert Kontrast und Box-Schichtung, damit die Fachinhalte ruhiger lesbar werden.
+            </p>
+          </aside>
+        </div>
+      </section>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {E_MODULES.map((mod) => {
           const result = quizState[mod.id];
@@ -37,31 +58,42 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
           return (
             <section
               key={mod.id}
-              className="flex flex-col overflow-hidden rounded-[3rem] border border-slate-200 bg-white p-1 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+              className="flex flex-col overflow-hidden rounded-[3rem] border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
             >
-              <div className="p-8 md:p-12 flex flex-col h-full">
-                <div className="flex justify-between items-center mb-10">
-                  <span className="rounded-2xl border border-emerald-100 bg-emerald-50 px-5 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700 shadow-sm">
-                    {mod.duration}
-                  </span>
-                  {completedModules.includes(mod.id) && (
-                    <div className="bg-emerald-500 text-white p-2.5 rounded-full shadow-lg" aria-hidden="true">
-                      <Check size={18} strokeWidth={4} />
-                    </div>
-                  )}
+              <div className="flex h-full flex-col p-8 md:p-10">
+                <div className="flex items-start justify-between gap-6 border-b border-slate-100 pb-8">
+                  <div>
+                    <span className="rounded-full border border-emerald-100 bg-emerald-50 px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700">
+                      Lernmodul
+                    </span>
+                    <h3 className="mt-5 text-3xl font-black leading-tight tracking-tight text-slate-900">{mod.title}</h3>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">
+                      {mod.duration}
+                    </span>
+                    {completedModules.includes(mod.id) && (
+                      <div className="rounded-full border border-emerald-200 bg-emerald-50 p-2.5 text-emerald-700" aria-hidden="true">
+                        <Check size={18} strokeWidth={4} />
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <h3 className="text-3xl font-black mb-6 leading-tight tracking-tight text-slate-900">{mod.title}</h3>
-                <p className="mb-10 border-l-4 border-emerald-100 pl-6 text-lg leading-relaxed text-slate-600">
-                  “{mod.storyboard}”
-                </p>
 
-                <div className="mt-auto rounded-[2.5rem] border border-slate-200 bg-slate-50 p-8">
-                  <div className="text-[10px] font-black uppercase mb-4 flex items-center gap-4 text-slate-400 tracking-[0.2em]">
+                <div className="py-8">
+                  <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Leitidee</div>
+                  <p className="mt-4 max-w-2xl border-l-2 border-emerald-200 pl-5 text-base leading-relaxed text-slate-600 md:text-lg">
+                    “{mod.storyboard}”
+                  </p>
+                </div>
+
+                <div className="mt-auto rounded-[2.5rem] border border-slate-200 bg-[#F6F7F3] p-6 md:p-8">
+                  <div className="mb-4 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                     <Brain size={18} className="text-emerald-600" /> Reflexionsfrage
                   </div>
                   <fieldset aria-describedby={result ? feedbackId : undefined}>
-                    <legend className="text-sm font-bold mb-8 text-slate-800">{mod.quiz}</legend>
-                    <div className="space-y-4">
+                    <legend className="mb-7 text-sm font-bold leading-relaxed text-slate-800">{mod.quiz}</legend>
+                    <div className="space-y-3">
                       {mod.quizOptions.map((opt, idx) => {
                         const isSelected = result?.answerIdx === idx;
                         const isCorrect = idx === mod.correctQuizIdx;
@@ -76,12 +108,12 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
                               onChange={() => onAnswer(mod.id, idx, mod.correctQuizIdx)}
                             />
                             <span
-                              className={`block w-full text-left p-5 rounded-2xl text-[14px] font-black transition-all duration-300 border-2 haptic-btn ${
+                              className={`block w-full rounded-[1.5rem] border px-5 py-4 text-left text-[14px] font-black transition-all duration-300 haptic-btn ${
                                 isSelected
                                   ? isCorrect
-                                    ? 'bg-emerald-600 border-emerald-600 text-white shadow-lg'
-                                    : 'bg-red-50 border-red-200 text-red-700'
-                                  : 'bg-white border-slate-100 hover:border-emerald-200'
+                                    ? 'border-emerald-600 bg-emerald-600 text-white shadow-sm'
+                                    : 'border-red-200 bg-red-50 text-red-700'
+                                  : 'border-slate-200 bg-white text-slate-800 hover:border-emerald-200 hover:bg-emerald-50/30'
                               }`}
                             >
                               {opt}
@@ -97,7 +129,7 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
                       role="status"
                       aria-live="polite"
                       aria-atomic="true"
-                      className={`mt-6 rounded-2xl px-5 py-4 text-sm font-medium ${
+                      className={`mt-6 rounded-[1.5rem] px-5 py-4 text-sm font-medium ${
                         result.isCorrect ? 'bg-emerald-50 text-emerald-800' : 'bg-red-50 text-red-700'
                       }`}
                     >
