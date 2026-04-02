@@ -39,6 +39,9 @@ import {
   PARENT_EXPERIENCE_PANELS,
   PARENT_EXPERIENCE_POINTS,
   PARENT_PRACTICE_POINTS,
+  PARENT_ROLE_EVIDENCE_POINTS,
+  PARENT_SELF_HELP_PANELS,
+  PARENT_SELF_HELP_POINTS,
   PHRASE_GUIDES,
   PRACTICE_PILLARS,
   PROTECTION_PRACTICE_POINTS,
@@ -250,6 +253,34 @@ export default function EvidenceSection() {
             ))}
           </div>
 
+          <div className="mb-12 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Evidenz zur Elternrolle</div>
+                <p className="max-w-4xl text-base leading-relaxed text-emerald-950">
+                  Die Forschung beschreibt Eltern mit psychischer Erkrankung nicht nur als belastet, sondern oft auch als
+                  stark an ihrer Elternrolle orientiert. Elternschaft kann Sinn, Zugehörigkeit und Motivation geben.
+                  Gleichzeitig sind Scham, Angst vor Bewertung und Befürchtungen rund um Hilfesysteme häufige Gründe,
+                  weshalb Sorgen spät angesprochen werden.
+                </p>
+              </div>
+              <aside className="rounded-[2rem] border border-emerald-200 bg-white/80 p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-800 mb-3">Quellenbasis</div>
+                <p className="text-sm leading-relaxed text-emerald-950">
+                  Jones et al. (2016), Reupert et al. (2021) und pädiatrie schweiz (2021).
+                </p>
+              </aside>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+              {PARENT_ROLE_EVIDENCE_POINTS.map((point) => (
+                <div key={point} className="rounded-[1.75rem] border border-emerald-100 bg-white/90 p-5">
+                  <p className="text-sm leading-relaxed font-medium text-slate-800">{point}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
             <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-6">Für die Praxis</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -257,6 +288,46 @@ export default function EvidenceSection() {
                 <div key={point} className="flex items-start gap-3 rounded-[1.5rem] bg-slate-50 border border-slate-100 p-5">
                   <ShieldCheck size={18} className="mt-1 shrink-0 text-emerald-600" />
                   <p className="text-sm text-slate-700 leading-relaxed font-medium">{point}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-8 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-start">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Direkte Orientierung für Eltern</div>
+                <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
+                  Was Eltern trotz Erkrankung <span className="text-emerald-700 italic">konkret tun können</span>.
+                </h4>
+                <p className="max-w-3xl text-base text-slate-700 leading-relaxed">
+                  Dieser Block ist bewusst direkt formuliert. Er ersetzt keine Beratung, kann aber Eltern helfen,
+                  die eigene Rolle in belasteten Phasen realistischer, freundlicher und handlungsnäher zu sehen.
+                </p>
+              </div>
+              <aside className="rounded-[2rem] border border-emerald-200 bg-white/80 p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-800 mb-3">Leitidee</div>
+                <p className="text-sm leading-relaxed text-emerald-950">
+                  Nicht Perfektion ist entscheidend, sondern möglichst viel Verlässlichkeit, frühe Entlastung und eine
+                  klare Sicherung des Alltags, wenn Symptome stärker werden.
+                </p>
+              </aside>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+              {PARENT_SELF_HELP_PANELS.map((panel) => (
+                <section key={panel.title} className="rounded-[2.25rem] border border-emerald-100 bg-white p-6 shadow-sm">
+                  <h5 className="text-xl font-black tracking-tight text-slate-900 mb-3">{panel.title}</h5>
+                  <p className="text-slate-700 leading-relaxed">{panel.text}</p>
+                </section>
+              ))}
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {PARENT_SELF_HELP_POINTS.map((point) => (
+                <div key={point} className="flex items-start gap-3 rounded-[1.5rem] border border-emerald-100 bg-white/90 p-5">
+                  <ShieldCheck size={18} className="mt-1 shrink-0 text-emerald-700" />
+                  <p className="text-sm leading-relaxed font-medium text-slate-800">{point}</p>
                 </div>
               ))}
             </div>

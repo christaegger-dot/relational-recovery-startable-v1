@@ -38,6 +38,18 @@ export const LITERATUR = [
     publisher: 'Online-Such- und Orientierungshilfe.',
     link: 'https://www.kinderseele.ch/hilfe-finden',
   },
+  {
+    author: 'Jones, M. et al. (2016)',
+    title: 'Parents with mental illness - a qualitative study of identities and experiences with support services.',
+    publisher: 'Journal of Psychiatric and Mental Health Nursing, 23(8), 471-478. DOI: 10.1111/jpm.12321',
+    link: 'https://pubmed.ncbi.nlm.nih.gov/27500507/',
+  },
+  {
+    author: 'Reupert, A. et al. (2021)',
+    title: 'Stigma in relation to families living with parental mental illness: An integrative review.',
+    publisher: 'International Journal of Mental Health Nursing, 30(1), 6-26. DOI: 10.1111/inm.12820',
+    link: 'https://pubmed.ncbi.nlm.nih.gov/33283387/',
+  },
 ];
 
 export const RELEVANCE_STATS = [
@@ -110,11 +122,49 @@ export const PARENT_EXPERIENCE_POINTS = [
   'Für die Praxis ist zentral, diese Ambivalenz ernst zu nehmen: Eltern brauchen nicht vorschnelle Urteile, sondern Entlastung, Respekt und konkrete Hilfe im Alltag.',
 ];
 
+export const PARENT_ROLE_EVIDENCE_POINTS = [
+  'Elternschaft ist für viele psychisch belastete Mütter und Väter nicht nur Stressfaktor, sondern auch Identität, Sinnquelle und Motivation, Hilfe anzunehmen und dranzubleiben.',
+  'Viele Eltern wünschen sich, dass ihre Elternrolle fachlich gesehen und gestärkt wird, statt nur unter Risikoaspekten betrachtet zu werden.',
+  'Stigma, Scham und die Angst, als Mutter oder Vater negativ beurteilt zu werden, können Offenheit und Hilfesuche deutlich erschweren.',
+];
+
 export const PARENT_PRACTICE_POINTS = [
   'Elternschaft aktiv ansprechen, ohne moralischen Unterton',
   'Belastung und Ressourcen gleichzeitig erfassen',
   'Scham und Angst vor Bewertung explizit entlasten',
   'konkrete Alltagshilfen vor abstrakte Appelle stellen',
+];
+
+export const PARENT_SELF_HELP_PANELS = [
+  {
+    title: 'Weniger, aber verlässlich',
+    text:
+      'Kinder brauchen nicht perfekte Eltern, sondern möglichst verlässliche Orientierung. Wenn gerade wenig Kraft da ist, helfen kleine, wiedererkennbare Dinge oft mehr als grosse Vorhaben: ein kurzer Gruss am Morgen, ein gemeinsames Abendritual oder eine klare Absprache für den Nachmittag.',
+  },
+  {
+    title: 'Kurz und ehrlich sprechen',
+    text:
+      'Kinder spüren meist, dass etwas anders ist. Eine kurze, einfache Erklärung ist oft entlastender als Schweigen: zum Beispiel, dass Mama oder Papa gerade krank, erschöpft oder schneller gereizt ist und dass andere Erwachsene mithelfen.',
+  },
+  {
+    title: 'Hilfe früh organisieren',
+    text:
+      'Unterstützung ist kein Zeichen von Versagen. Wenn Einkaufen, Aufstehen, Übergaben, Hausaufgaben oder Termine zu viel werden, ist es oft sinnvoll, früh eine Bezugsperson, Familienhilfe, Beratung oder Entlastung einzubeziehen.',
+  },
+  {
+    title: 'Krisen vorher absprechen',
+    text:
+      'Besonders entlastend ist ein einfacher Plan für belastete Phasen: Wer übernimmt die Kinder? Wen rufe ich zuerst an? Was sage ich der Schule oder Kita? Was muss sicher versorgt werden? Solche Absprachen helfen, bevor es akut wird.',
+  },
+];
+
+export const PARENT_SELF_HELP_POINTS = [
+  'Im Alltag zuerst das Wichtigste sichern: Nahrung, Aufsicht, Schlaf, Übergaben und eine ruhige Information an das Kind.',
+  'Eine kleine stabile Routine ist oft hilfreicher als der Versuch, alles wie früher zu schaffen.',
+  'Wenn Reizbarkeit, Rückzug oder Erschöpfung zunehmen, früh entlasten statt bis zur Eskalation durchhalten.',
+  'Kinder brauchen die klare Botschaft: Du bist nicht schuld, und Erwachsene kümmern sich.',
+  'Wenn Betreuung oder Sicherheit vorübergehend nicht verlässlich gewährleistet sind, braucht es sofort Unterstützung von aussen.',
+  'Hilfreich ist die Leitfrage: Was muss heute wirklich verlässlich bleiben, und wer kann mich dabei konkret unterstützen?',
 ];
 
 export const FAMILY_SYSTEM_PANELS = [
