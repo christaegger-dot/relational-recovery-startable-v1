@@ -65,12 +65,12 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
               </button>
             </div>
 
-            <div className="mt-12 flex justify-end">
-              <div className="w-full max-w-[34rem] overflow-hidden rounded-[2.75rem] border border-slate-200 bg-[#F3F5EF] p-4 md:p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)]">
+            <div className="mt-10 flex justify-center lg:mt-12 lg:justify-end">
+              <div className="w-full max-w-[24rem] overflow-hidden rounded-[2.25rem] border border-slate-200 bg-[#F3F5EF] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] sm:max-w-[30rem] sm:rounded-[2.5rem] sm:p-4 lg:max-w-[34rem] lg:rounded-[2.75rem] lg:p-6">
                 <img
                   src={heroIllustration}
                   alt="Minimalistische Illustration eines Familiensystems mit Nähe, Distanz und Unterstützung"
-                  className="aspect-[16/10] w-full rounded-[2rem] object-contain"
+                  className="aspect-[4/3] w-full rounded-[1.75rem] object-contain object-center sm:aspect-[16/10] sm:rounded-[2rem]"
                 />
               </div>
             </div>
