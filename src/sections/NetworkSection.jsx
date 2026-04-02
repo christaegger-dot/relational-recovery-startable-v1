@@ -3,6 +3,14 @@ import { ExternalLink, MapPin, Search, XCircle } from 'lucide-react';
 import { NETWORK_FILTERS, NETWORK_MAP_QUESTIONS, NETWORK_MAP_STEPS, RESOURCE_DATA } from '../data/networkContent';
 
 export default function NetworkSection({ searchTerm, setSearchTerm, activeResourceFilter, setActiveResourceFilter }) {
+  const networkExampleNodes = [
+    { label: 'Partner:in', tone: 'primary', mobileRow: '1 / span 1', mobileCol: '2 / span 2', desktopTop: '22%', desktopLeft: '48%' },
+    { label: 'Grosseltern', tone: 'primary', mobileRow: '2 / span 1', mobileCol: '1 / span 2', desktopTop: '48%', desktopLeft: '16%' },
+    { label: 'Schule / Kita', tone: 'support', mobileRow: '2 / span 1', mobileCol: '3 / span 2', desktopTop: '49%', desktopLeft: '80%' },
+    { label: 'Freund:in des Kindes', tone: 'support', mobileRow: '3 / span 1', mobileCol: '1 / span 2', desktopTop: '76%', desktopLeft: '30%' },
+    { label: 'PUK / kjz', tone: 'formal', mobileRow: '3 / span 1', mobileCol: '3 / span 2', desktopTop: '74%', desktopLeft: '69%' },
+  ];
+
   const filteredResources = useMemo(() => {
     const q = searchTerm.trim().toLowerCase();
 
@@ -133,6 +141,107 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
                 ))}
               </div>
             </aside>
+          </div>
+
+          <div className="mt-8 rounded-[2.5rem] border border-emerald-100 bg-white p-5 md:p-8">
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Beispiel-Visualisierung</div>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">
+                  Die Mitte steht für das Kind oder die Familie. Je näher ein Kontakt platziert ist, desto tragender oder emotional näher wird er aktuell erlebt.
+                </p>
+              </div>
+              <div className="hidden md:flex flex-wrap justify-end gap-2">
+                <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-emerald-800">
+                  nah
+                </span>
+                <span className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-sky-800">
+                  unterstützend
+                </span>
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-slate-700">
+                  formell
+                </span>
+              </div>
+            </div>
+
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+              <div>
+                <div className="relative hidden min-h-[30rem] overflow-hidden rounded-[2.25rem] border border-slate-200 bg-[#F6F7F3] lg:block">
+                  <div className="absolute left-1/2 top-1/2 h-[11rem] w-[11rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-emerald-200 bg-white/90" />
+                  <div className="absolute left-1/2 top-1/2 h-[18rem] w-[18rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-emerald-200/90" />
+                  <div className="absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-slate-200" />
+
+                  <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-slate-300 bg-slate-900 text-center shadow-lg">
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-[0.18em] text-white/70">Zentrum</div>
+                      <div className="mt-2 text-sm font-black leading-tight text-white">Kind / Familie</div>
+                    </div>
+                  </div>
+
+                  {networkExampleNodes.map((node) => {
+                    const toneClass =
+                      node.tone === 'primary'
+                        ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
+                        : node.tone === 'support'
+                          ? 'border-sky-200 bg-sky-50 text-sky-900'
+                          : 'border-slate-200 bg-white text-slate-800';
+
+                    return (
+                      <div
+                        key={node.label}
+                        className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-[1.5rem] border px-4 py-3 text-center shadow-sm ${toneClass}`}
+                        style={{ top: node.desktopTop, left: node.desktopLeft }}
+                      >
+                        <div className="text-[11px] font-black leading-tight tracking-[0.08em]">{node.label}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="grid grid-cols-4 gap-3 lg:hidden">
+                  <div className="col-span-4 rounded-[1.75rem] border border-slate-300 bg-slate-900 p-5 text-center shadow-sm">
+                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-white/70">Zentrum</div>
+                    <div className="mt-2 text-sm font-black text-white">Kind / Familie</div>
+                  </div>
+                  {networkExampleNodes.map((node) => {
+                    const toneClass =
+                      node.tone === 'primary'
+                        ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
+                        : node.tone === 'support'
+                          ? 'border-sky-200 bg-sky-50 text-sky-900'
+                          : 'border-slate-200 bg-white text-slate-800';
+
+                    return (
+                      <div
+                        key={node.label}
+                        className={`rounded-[1.5rem] border p-4 text-center shadow-sm ${toneClass}`}
+                        style={{ gridRow: node.mobileRow, gridColumn: node.mobileCol }}
+                      >
+                        <div className="text-[11px] font-black leading-tight">{node.label}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Wie man die Visualisierung liest</div>
+                <div className="mt-4 space-y-3">
+                  <p className="text-sm leading-relaxed text-slate-700">
+                    <span className="font-black text-slate-900">Nähe:</span> Innen liegende Kontakte sind oft emotional näher oder im Alltag relevanter.
+                  </p>
+                  <p className="text-sm leading-relaxed text-slate-700">
+                    <span className="font-black text-slate-900">Mischung:</span> Gute Netzwerke bestehen meist aus privaten, unterstützenden und formellen Kontakten.
+                  </p>
+                  <p className="text-sm leading-relaxed text-slate-700">
+                    <span className="font-black text-slate-900">Lücken:</span> Fehlen Schule, Verwandte oder Fachstellen ganz, wird das schnell sichtbar.
+                  </p>
+                  <p className="text-sm leading-relaxed text-slate-700">
+                    <span className="font-black text-slate-900">Dynamik:</span> Eine Netzwerkkarte ist nie endgültig, sondern bildet eine aktuelle Situation ab.
+                  </p>
+                </div>
+              </aside>
+            </div>
           </div>
         </section>
 
