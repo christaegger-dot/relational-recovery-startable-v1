@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { ChevronRight, ExternalLink, GraduationCap, HeartHandshake, Library, MapPin, Sparkles } from 'lucide-react';
+import { ChevronRight, ClipboardCheck, ExternalLink, GraduationCap, HeartHandshake, Library, MapPin, Sparkles } from 'lucide-react';
 import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
 import { E_MODULE_COUNT, HOME_REFERENCE_COUNT, NETWORK_RESOURCE_COUNT, VIGNETTE_COUNT } from '../data/appShellContent';
 
@@ -26,10 +26,41 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
   );
 
   const overviewCards = [
-    { label: 'Module', val: E_MODULE_COUNT, desc: 'kompakte Lernbausteine', icon: GraduationCap },
-    { label: 'Trainingsfälle', val: VIGNETTE_COUNT, desc: 'für Fallreflexion und Dialog', icon: HeartHandshake },
-    { label: 'Netzwerkstellen', val: NETWORK_RESOURCE_COUNT, desc: 'für Triage und Entlastung', icon: MapPin },
-    { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library },
+    { label: 'Module', val: E_MODULE_COUNT, desc: 'kompakte Lernbausteine', icon: GraduationCap, tab: 'elearning' },
+    { label: 'Trainingsfälle', val: VIGNETTE_COUNT, desc: 'für Fallreflexion und Dialog', icon: HeartHandshake, tab: 'vignetten' },
+    { label: 'Netzwerkstellen', val: NETWORK_RESOURCE_COUNT, desc: 'für Triage und Entlastung', icon: MapPin, tab: 'zuerich' },
+    { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library, tab: 'zaesur' },
+  ];
+
+  const dashboardRoutes = [
+    {
+      title: 'Wenn du verstehen willst, was in der Familie passiert',
+      desc: 'Belastung, Schutzfaktoren, Elternrolle und kindliche Perspektive fachlich einordnen.',
+      target: 'zaesur',
+      cta: 'Zu Evidenz',
+      icon: Library,
+    },
+    {
+      title: 'Wenn du entscheiden musst, was jetzt prioritär ist',
+      desc: 'Assessment, Krisenlogik, Sicherheitsplan und Schutzfragen schrittweise durchgehen.',
+      target: 'toolbox',
+      cta: 'Zur Toolbox',
+      icon: ClipboardCheck,
+    },
+    {
+      title: 'Wenn du triagieren oder weitervermitteln willst',
+      desc: 'Offizielle Stellen, Entlastung, Kinderangebote und regionale Hilfen gezielt finden.',
+      target: 'zuerich',
+      cta: 'Zum Netzwerk',
+      icon: MapPin,
+    },
+    {
+      title: 'Wenn du üben oder im Team reflektieren willst',
+      desc: 'Mit Lernmodulen und Vignetten Sprache, Einschätzung und Falllogik trainieren.',
+      target: 'vignetten',
+      cta: 'Zum Training',
+      icon: HeartHandshake,
+    },
   ];
 
   const pathwaySteps = [
@@ -231,11 +262,61 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
         </div>
       </section>
 
+      <section className="rounded-[3rem] border border-slate-200 bg-slate-50 p-8 shadow-sm md:p-12">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_18rem] xl:items-start">
+          <div>
+            <div className="mb-5 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.24em] text-emerald-700">
+              <div className="h-[2px] w-10 bg-emerald-200" />
+              Navigations-Dashboard
+            </div>
+            <h3 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900">
+              Einstieg nach <span className="text-emerald-600 italic">Fachfrage</span> statt nach Menüpunkt.
+            </h3>
+            <p className="mt-5 max-w-4xl text-base md:text-lg leading-relaxed text-slate-600">
+              Die Startseite funktioniert am besten, wenn typische Praxisanliegen direkt in den passenden Bereich
+              führen. Die Karten unten übersetzen häufige Arbeitsfragen in klare Einstiegswege.
+            </p>
+          </div>
+          <aside className="rounded-[2rem] border border-slate-200 bg-white p-6">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Orientierung</div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              Weniger suchen, schneller einsteigen: Verstehen, entscheiden, triagieren oder trainieren.
+            </p>
+          </aside>
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-2">
+          {dashboardRoutes.map((route) => (
+            <button
+              key={route.title}
+              type="button"
+              onClick={() => setActiveTab(route.target)}
+              className="rounded-[2.25rem] border border-slate-200 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-lg"
+            >
+              <div className="flex items-start gap-5">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[1.25rem] border border-emerald-100 bg-emerald-50 text-emerald-700">
+                  <route.icon size={24} strokeWidth={2.2} />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-xl font-black tracking-tight text-slate-900">{route.title}</h4>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{route.desc}</p>
+                  <div className="mt-5 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.18em] text-emerald-800">
+                    {route.cta} <ChevronRight size={14} />
+                  </div>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {overviewCards.map((card) => (
-          <div
+          <button
             key={card.label}
-            className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            type="button"
+            onClick={() => setActiveTab(card.tab)}
+            className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-left"
           >
             <div className="text-emerald-600 mb-8 bg-slate-50 w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner">
               <card.icon size={24} strokeWidth={2.3} />
@@ -243,7 +324,10 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
             <div className="text-4xl font-black mb-3 text-slate-900 tracking-tighter tabular-nums">{card.val}</div>
             <h3 className="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-4">● {card.label}</h3>
             <p className="text-[14px] text-slate-500 leading-relaxed font-medium">{card.desc}</p>
-          </div>
+            <div className="mt-5 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.18em] text-emerald-800">
+              Bereich öffnen <ChevronRight size={14} />
+            </div>
+          </button>
         ))}
       </section>
     </article>
