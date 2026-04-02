@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { ExternalLink, Search, XCircle } from 'lucide-react';
-import { NETWORK_FILTERS, RESOURCE_DATA } from '../data/networkContent';
+import { ExternalLink, MapPin, Search, XCircle } from 'lucide-react';
+import { NETWORK_FILTERS, NETWORK_MAP_QUESTIONS, NETWORK_MAP_STEPS, RESOURCE_DATA } from '../data/networkContent';
 
 export default function NetworkSection({ searchTerm, setSearchTerm, activeResourceFilter, setActiveResourceFilter }) {
   const filteredResources = useMemo(() => {
@@ -100,6 +100,41 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
             </p>
           </div>
         </div>
+
+        <section className="mb-10 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-6 md:p-8 shadow-sm">
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_24rem] xl:items-start">
+            <div>
+              <div className="mb-4 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900">
+                <MapPin size={16} /> Netzwerkkarte als Arbeitshilfe
+              </div>
+              <p className="max-w-4xl text-sm leading-relaxed text-slate-700">
+                Netzwerke werden oft erst sichtbar, wenn sie konkret gesammelt und geordnet werden: Wer gehört dazu,
+                wer ist emotional nah, wer ist erreichbar, wer weiss Bescheid und wo fehlen tragende Beziehungen? Eine
+                einfache Netzwerkkarte kann diese Klärung deutlich erleichtern.
+              </p>
+
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                {NETWORK_MAP_STEPS.map((step) => (
+                  <div key={step} className="rounded-[1.5rem] border border-emerald-100 bg-white/90 p-5">
+                    <p className="text-sm leading-relaxed font-medium text-slate-800">{step}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <aside className="rounded-[2rem] border border-emerald-200 bg-white/80 p-6">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-800 mb-4">Leitfragen für die Exploration</div>
+              <div className="space-y-3">
+                {NETWORK_MAP_QUESTIONS.map((question) => (
+                  <div key={question} className="flex items-start gap-3">
+                    <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-600" />
+                    <p className="text-sm leading-relaxed text-slate-700">{question}</p>
+                  </div>
+                ))}
+              </div>
+            </aside>
+          </div>
+        </section>
 
         {filteredResources.length === 0 ? (
           <div className="py-28 text-center flex flex-col items-center">

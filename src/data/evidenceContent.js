@@ -50,6 +50,16 @@ export const LITERATUR = [
     publisher: 'International Journal of Mental Health Nursing, 30(1), 6-26. DOI: 10.1111/inm.12820',
     link: 'https://pubmed.ncbi.nlm.nih.gov/33283387/',
   },
+  {
+    author: 'Stauber, A., Nyffeler, C. & Gosteli, L.',
+    title: 'Psychisch kranke Eltern im Beratungskontext: Was stärkt psychisch kranke Eltern und deren Kinder?',
+    publisher: 'Praxisforschung Band 25.',
+  },
+  {
+    author: 'Lenz, A. (2019)',
+    title: 'Interventionen bei Kindern psychisch kranker Eltern: Grundlagen, Methoden und Strategien.',
+    publisher: 'Kinderschutzkongress 2019, Zürich.',
+  },
 ];
 
 export const RELEVANCE_STATS = [
@@ -135,6 +145,55 @@ export const PARENT_PRACTICE_POINTS = [
   'konkrete Alltagshilfen vor abstrakte Appelle stellen',
 ];
 
+export const COLLABORATION_PANELS = [
+  {
+    title: 'Information und Transparenz',
+    text:
+      'Fachpersonen sollen ihre Beobachtungen, Einschätzungen und nächsten Schritte nachvollziehbar machen. Transparenz senkt Kontrollängste und erleichtert Kooperation.',
+  },
+  {
+    title: 'Anhörung und Mitsprache',
+    text:
+      'Eltern erleben Zusammenarbeit eher als tragfähig, wenn ihre Sicht ernst genommen wird und sie nicht nur Empfängerinnen und Empfänger von Vorgaben bleiben.',
+  },
+  {
+    title: 'Mitbestimmung',
+    text:
+      'Gerade bei Scham, Hilflosigkeit oder Misstrauen ist es wichtig, Ziele und Vorgehen gemeinsam zu entwickeln. Das stärkt Selbstwirksamkeit und reduziert erlebte Ohnmacht.',
+  },
+  {
+    title: 'Auf Augenhöhe',
+    text:
+      'Eltern sind Expertinnen und Experten ihrer Lebenssituation. Gute Zusammenarbeit verbindet fachliche Verantwortung mit Respekt vor ihrem Wissen über Alltag, Beziehung und Belastungsgrenzen.',
+  },
+];
+
+export const COLLABORATION_FOUR_AS = [
+  'Anlass: Was führt Sie heute hierher?',
+  'Anliegen: Was möchten Sie für sich, Ihre Kinder oder Ihre Familie erreichen?',
+  'Auftrag: Was wünschen Sie konkret von mir oder von dieser Stelle?',
+  'Abmachungen: Was ist unser nächster Schritt, und wer übernimmt was?',
+];
+
+export const FAMILY_WISHES_PANELS = [
+  {
+    title: 'Was Eltern häufig wünschen',
+    text:
+      'Viele Eltern suchen Unterstützung beim Erklären der Erkrankung gegenüber den Kindern, bei Erziehungsfragen, bei der Reduktion elterlicher Belastung, bei Betreuungsorganisation und bei Austausch mit anderen Betroffenen.',
+  },
+  {
+    title: 'Was Kinder häufig wünschen',
+    text:
+      'Kinder wünschen sich vor allem verständliche Informationen über die Erkrankung, einen Ort für Sorgen und Fragen, mehr Normalität im Alltag und eine Reduktion von Stigma und Geheimhaltung.',
+  },
+];
+
+export const FAMILY_WISHES_POINTS = [
+  'Hilfebedarf verändert sich mit dem Alter der Kinder: bei jüngeren Kindern stehen Alltag, Erziehung und emotionale Unterstützung stärker im Vordergrund, bei Jugendlichen häufiger Beziehungsgestaltung und Autonomiefragen.',
+  'Viele Eltern erleben alltagspraktische Entlastung als ebenso wichtig wie Psychotherapie oder Beratung.',
+  'Wenn Fachpersonen zuerst nach konkreten Anliegen fragen, wird Unterstützung oft anschlussfähiger als bei vorschnell vorgegebenen Lösungen.',
+];
+
 export const PARENT_SELF_HELP_PANELS = [
   {
     title: 'Weniger, aber verlässlich',
@@ -165,6 +224,29 @@ export const PARENT_SELF_HELP_POINTS = [
   'Kinder brauchen die klare Botschaft: Du bist nicht schuld, und Erwachsene kümmern sich.',
   'Wenn Betreuung oder Sicherheit vorübergehend nicht verlässlich gewährleistet sind, braucht es sofort Unterstützung von aussen.',
   'Hilfreich ist die Leitfrage: Was muss heute wirklich verlässlich bleiben, und wer kann mich dabei konkret unterstützen?',
+];
+
+export const PARENT_EVERYDAY_SUPPORT_PANELS = [
+  {
+    title: 'Wenn ein Kind viel weint oder Nähe sucht',
+    text:
+      'Gerade unter Stress kann kindliches Schreien oder Klammern schnell überfordernd wirken. Hilfreich ist, diese Belastung offen anzusprechen, Beruhigungsstrategien zu üben und Entlastung früh mitzudenken, statt sich dafür zu verurteilen.',
+  },
+  {
+    title: 'Lob, Anerkennung und kleine positive Signale',
+    text:
+      'Kinder profitieren von kleinen Momenten der Bestärkung. Ein ehrliches Lob, richtiges Zuhören oder das Ernstnehmen ihrer Meinung kann im Alltag oft mehr stabilisieren als grosse Erziehungspläne.',
+  },
+  {
+    title: 'Probleme in kleinen Schritten lösen',
+    text:
+      'Kinder brauchen Unterstützung, wenn Sorgen oder Alltagsprobleme zu gross werden. Hilfreich ist, gemeinsam ein Problem auszuwählen, Lösungsideen zu sammeln, Vor- und Nachteile zu besprechen und den nächsten kleinen Schritt zu planen.',
+  },
+  {
+    title: 'Soziale Kontakte ausdrücklich erlauben',
+    text:
+      'Kinder psychisch belasteter Eltern brauchen oft verlässliche Beziehungen ausserhalb der Kernfamilie. Entscheidend ist, dass Eltern diese Kontakte innerlich erlauben, fördern und mit dem Kind besprechen, wem es was erzählen möchte.',
+  },
 ];
 
 export const FAMILY_SYSTEM_PANELS = [
@@ -363,6 +445,49 @@ export const PSYCHOEDUCATION_PRACTICE_POINTS = [
   'Psychoedukation als fortlaufendes Gespräch verstehen, nicht als einmalige Erklärung',
 ];
 
+export const PSYCHOEDUCATION_PREPARATION_POINTS = [
+  'Vor dem Gespräch mit den Kindern zuerst die Sorgen der Eltern ernst nehmen: Was befürchten sie, wenn das Kind mehr erfährt?',
+  'Hilfreich ist die Frage: Was könnte sich für das Kind entlasten, wenn es mehr über die Erkrankung verstehen würde?',
+  'Vorbereitung heisst auch klären, wie in der Familie bisher über die Erkrankung gesprochen wurde, was tabu geblieben ist und was das Kind vermutlich schon mitbekommen hat.',
+  'Fachlich zentral ist die Botschaft: Nicht die Information selbst überfordert meist, sondern das Fehlen einer verstehbaren Erklärung.',
+];
+
+export const PSYCHOEDUCATION_SETTINGS = [
+  {
+    title: 'Eltern sprechen selbst mit Unterstützung',
+    text:
+      'Wenn Eltern grundsätzlich gesprächsbereit sind, kann es sinnvoll sein, dass sie das Gespräch selbst führen und von einer Fachperson nur in Vorbereitung, Struktur und Sprache unterstützt werden.',
+  },
+  {
+    title: 'Begleitetes Familiengespräch',
+    text:
+      'Bei Tabuisierung, Sprachlosigkeit oder grosser Unsicherheit kann ein professionell moderiertes Familiengespräch entlasten. Die Fachperson unterstützt Offenheit, die Eltern bleiben aber zentrale Gesprächspersonen.',
+  },
+  {
+    title: 'Vorgespräch mit dem Kind',
+    text:
+      'Wenn ein Kind ängstlich, zurückhaltend oder jahrelang an Schweigen gewöhnt ist, kann ein geschütztes Einzelgespräch vor einem Familiengespräch sinnvoll sein. Dort lassen sich Sorgen, Fragen und der bisherige Wissensstand besser erfassen.',
+  },
+];
+
+export const PSYCHOEDUCATION_DIFFICULTIES = [
+  {
+    title: 'Das Kind will scheinbar nicht sprechen',
+    text:
+      'Rückzug oder Abwehr bedeuten nicht automatisch Desinteresse. Dahinter können Angst vor schlimmen Informationen, alte Sprachlosigkeit oder Loyalitätskonflikte stehen.',
+  },
+  {
+    title: 'Das Gespräch bricht ab',
+    text:
+      'Ein Abbruch kann ein gesunder Schutzmechanismus sein, wenn Aufmerksamkeit oder emotionale Aufnahmekapazität erschöpft sind. Dann hilft eher ein späteres Wiederanknüpfen als Drängen.',
+  },
+  {
+    title: 'Das Kind stellt sehr viele Fragen',
+    text:
+      'Viele Fragen können Ausdruck von Neugier, Angst, Verunsicherung oder Misstrauen sein. Dann ist nicht nur Sachinformation, sondern auch das Nachfragen nach Gefühlen und Sorgen wichtig.',
+  },
+];
+
 export const HELP_BARRIER_PANELS = [
   {
     title: 'Scham und Stigmatisierung',
@@ -438,6 +563,37 @@ export const CLINICAL_PRACTICE_STEPS = [
   'mit Familie und Netzwerk konkrete Bezugspersonen, Zuständigkeiten und erreichbare Hilfen benennen',
   'Krisenplan und Kommunikationswege schriftlich festhalten und für Kinder verständlich übersetzen',
   'bei Rollenumkehr gezielt Erwachsene stärken statt Kinder still weiter mittragen zu lassen',
+];
+
+export const MENTALIZATION_PANELS = [
+  {
+    title: 'Mentalisieren als Kernprozess',
+    text:
+      'Mentalisieren meint, über eigene und fremde Gedanken, Gefühle, Bedürfnisse und Absichten nachdenken zu können. Gerade in belasteten Familien unterstützt diese Fähigkeit dabei, Verhalten weniger vorschnell und mehr verstehend einzuordnen.',
+  },
+  {
+    title: 'Haltung der Fachperson',
+    text:
+      'Eine mentalisierende Haltung nimmt die Realität des Gegenübers empathisch ernst, arbeitet mit einer Haltung des Nicht-Wissens und bleibt neugierig statt vorschnell sicher.',
+  },
+  {
+    title: 'Familienorientierte Interventionen',
+    text:
+      'Neben Psychoedukation gehören begleitende Familientherapie, bindungsbezogene Interventionen, Förderung familiärer Kommunikation und Aktivierung sozialer Ressourcen zu den zentralen evidenzbasierten Basisinterventionen.',
+  },
+];
+
+export const MENTALIZATION_REFLECTIVE_QUESTIONS = [
+  'Was ist in dieser Situation in Ihnen vorgegangen?',
+  'Wie glauben Sie, hat sich Ihr Kind in diesem Moment gefühlt?',
+  'Was könnte Ihr Kind dazu gebracht haben, so zu reagieren?',
+  'Was hätte Ihnen geholfen, in dieser Situation ruhiger oder gelassener zu bleiben?',
+];
+
+export const INTERVENTION_PROGRAM_POINTS = [
+  'Familienorientierte Interventionen wirken besonders dann plausibel, wenn sie nicht nur Symptome, sondern Kommunikation, Beziehung, Alltag und soziale Ressourcen gemeinsam betrachten.',
+  'Das Vortragsmaterial von Lenz verweist auf multimodale Programme wie Beardslee, CHIMPs, Kindergruppen und mentalisierungsorientierte Elternprogramme als anschlussfähige Interventionsmodelle.',
+  'Für die Website reicht eine kompakte Einordnung: Nicht jede Familie braucht dasselbe Format, aber viele profitieren von einer Kombination aus Psychoedukation, Familiengespräch, Entlastung und Ressourcenaktivierung.',
 ];
 
 export const SUPPORT_OFFERS = [

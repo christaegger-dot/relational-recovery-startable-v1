@@ -21,6 +21,8 @@ import {
   CLINICAL_PRACTICE_PANELS,
   CLINICAL_PRACTICE_POINTS,
   CLINICAL_PRACTICE_STEPS,
+  COLLABORATION_FOUR_AS,
+  COLLABORATION_PANELS,
   CROSS_DIAGNOSIS_POINTS,
   DIAGNOSIS_PROFILES,
   EVIDENCE_PROFILE_ROWS,
@@ -29,15 +31,21 @@ import {
   FAMILY_SYSTEM_PANELS,
   FAMILY_SYSTEM_POINTS,
   FAMILY_SYSTEM_PRACTICE_POINTS,
+  FAMILY_WISHES_PANELS,
+  FAMILY_WISHES_POINTS,
   HELP_BARRIER_PANELS,
   HELP_BARRIER_POINTS,
   HELP_BARRIER_PRACTICE_POINTS,
+  INTERVENTION_PROGRAM_POINTS,
   LITERATUR,
   MEDIA_BOOKS,
   MEDIA_DIGITAL,
   MEDIA_NOTES,
+  MENTALIZATION_PANELS,
+  MENTALIZATION_REFLECTIVE_QUESTIONS,
   PARENT_EXPERIENCE_PANELS,
   PARENT_EXPERIENCE_POINTS,
+  PARENT_EVERYDAY_SUPPORT_PANELS,
   PARENT_PRACTICE_POINTS,
   PARENT_ROLE_EVIDENCE_POINTS,
   PARENT_SELF_HELP_PANELS,
@@ -47,7 +55,10 @@ import {
   PROTECTION_PRACTICE_POINTS,
   PSYCHOEDUCATION_AGE_GROUPS,
   PSYCHOEDUCATION_BENEFITS,
+  PSYCHOEDUCATION_DIFFICULTIES,
+  PSYCHOEDUCATION_PREPARATION_POINTS,
   PSYCHOEDUCATION_PRACTICE_POINTS,
+  PSYCHOEDUCATION_SETTINGS,
   PUK_CONTEXT_POINTS,
   RELEVANCE_POINTS,
   RELEVANCE_STATS,
@@ -293,6 +304,89 @@ export default function EvidenceSection() {
             </div>
           </div>
 
+          <div className="mt-8 rounded-[3rem] border border-slate-100 bg-slate-50 p-8 md:p-10 shadow-sm">
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Zusammenarbeit mit Eltern</div>
+                <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
+                  Kooperation gelingt eher über <span className="text-emerald-600 italic">Transparenz und Mitbestimmung</span>.
+                </h4>
+                <p className="max-w-4xl text-base leading-relaxed text-slate-600">
+                  Fachlich hilfreich ist eine Haltung, die Eltern früh in Zieldefinition, Auftragsklärung und weitere
+                  Schritte einbezieht. Das reduziert erlebte Ohnmacht und stärkt Selbstwirksamkeit gerade dort, wo
+                  Scham, Hilflosigkeit oder Misstrauen stark sind.
+                </p>
+              </div>
+              <aside className="rounded-[2rem] border border-emerald-100 bg-emerald-50/70 p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-3">Quellenbasis</div>
+                <p className="text-sm leading-relaxed text-emerald-950">
+                  Stauber, Nyffeler & Gosteli sowie die dort referierten Empowerment- und Beratungsansätze.
+                </p>
+              </aside>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+              {COLLABORATION_PANELS.map((panel) => (
+                <section key={panel.title} className="rounded-[2.25rem] border border-slate-100 bg-white p-6 shadow-sm">
+                  <h5 className="text-xl font-black tracking-tight text-slate-900 mb-3">{panel.title}</h5>
+                  <p className="text-slate-700 leading-relaxed">{panel.text}</p>
+                </section>
+              ))}
+            </div>
+
+            <div className="mt-8 rounded-[2.5rem] border border-emerald-100 bg-white p-6 md:p-8">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-800 mb-5">Die Vier A&apos;s der Auftragsklärung</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {COLLABORATION_FOUR_AS.map((point) => (
+                  <div key={point} className="flex items-start gap-3 rounded-[1.5rem] border border-emerald-100 bg-emerald-50/60 p-5">
+                    <ShieldCheck size={18} className="mt-1 shrink-0 text-emerald-700" />
+                    <p className="text-sm leading-relaxed font-medium text-slate-800">{point}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Anliegen und Wünsche</div>
+                <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
+                  Was Eltern und Kinder häufig <span className="text-emerald-600 italic">konkret wünschen</span>.
+                </h4>
+                <p className="max-w-4xl text-base leading-relaxed text-slate-600">
+                  Die Fachliteratur beschreibt Hilfebedarf oft erstaunlich praktisch: Unterstützung beim Erklären der
+                  Erkrankung, bei Entlastung, Erziehungsfragen, Organisation und beim Sprechen über Sorgen. Auch Kinder
+                  wünschen vor allem Verstehen, Gesprächsmöglichkeiten und mehr Normalität.
+                </p>
+              </div>
+              <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500 mb-3">Praxisnutzen</div>
+                <p className="text-sm leading-relaxed text-slate-700">
+                  Solche Wunschprofile helfen, Unterstützungsangebote stärker an realen Anliegen auszurichten statt nur an fachlichen Standardannahmen.
+                </p>
+              </aside>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+              {FAMILY_WISHES_PANELS.map((panel) => (
+                <section key={panel.title} className="rounded-[2.25rem] border border-slate-100 bg-slate-50 p-6 shadow-sm">
+                  <h5 className="text-xl font-black tracking-tight text-slate-900 mb-3">{panel.title}</h5>
+                  <p className="text-slate-700 leading-relaxed">{panel.text}</p>
+                </section>
+              ))}
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+              {FAMILY_WISHES_POINTS.map((point) => (
+                <div key={point} className="flex items-start gap-3 rounded-[1.5rem] border border-slate-100 bg-white p-5">
+                  <CheckCircle2 size={18} className="mt-1 shrink-0 text-emerald-600" />
+                  <p className="text-sm leading-relaxed font-medium text-slate-800">{point}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="mt-8 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-start">
               <div>
@@ -330,6 +424,18 @@ export default function EvidenceSection() {
                   <p className="text-sm leading-relaxed font-medium text-slate-800">{point}</p>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-8">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Weitere alltagsnahe Themen</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {PARENT_EVERYDAY_SUPPORT_PANELS.map((panel) => (
+                  <section key={panel.title} className="rounded-[2.25rem] border border-emerald-100 bg-white p-6 shadow-sm">
+                    <h5 className="text-xl font-black tracking-tight text-slate-900 mb-3">{panel.title}</h5>
+                    <p className="text-slate-700 leading-relaxed">{panel.text}</p>
+                  </section>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -612,6 +718,54 @@ export default function EvidenceSection() {
             ))}
           </div>
 
+          <div className="mb-12 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-start">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Vorbereitung mit den Eltern</div>
+                <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
+                  Vor dem Gespräch zuerst die <span className="text-emerald-700 italic">Befürchtungen der Eltern</span> klären.
+                </h4>
+                <p className="max-w-4xl text-base leading-relaxed text-slate-700">
+                  Viele Eltern sind nicht gegen Information, sondern unsicher, was ein offenes Gespräch beim Kind
+                  auslösen könnte. Deshalb ist die Vorbereitung ein eigener Schritt und nicht nur ein Nebensatz vor dem
+                  Familiengespräch.
+                </p>
+              </div>
+              <aside className="rounded-[2rem] border border-emerald-200 bg-white/80 p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-800 mb-3">Kernaussage</div>
+                <p className="text-sm leading-relaxed text-emerald-950">
+                  Häufig ist nicht die Information selbst belastender, sondern das Fehlen einer verstehbaren, ehrlichen Erklärung.
+                </p>
+              </aside>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {PSYCHOEDUCATION_PREPARATION_POINTS.map((point) => (
+                <div key={point} className="flex items-start gap-3 rounded-[1.5rem] border border-emerald-100 bg-white/90 p-5">
+                  <ShieldCheck size={18} className="mt-1 shrink-0 text-emerald-700" />
+                  <p className="text-sm leading-relaxed font-medium text-slate-800">{point}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-8">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Mögliche Settings</div>
+            <p className="text-base text-slate-600 leading-relaxed max-w-4xl">
+              Psychoedukation ist kein Einheitsformat. Je nach Tabuisierung, Alter und Sicherheit des Kindes können
+              unterschiedliche Gesprächssettings hilfreich sein.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {PSYCHOEDUCATION_SETTINGS.map((setting) => (
+              <section key={setting.title} className="rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-sm">
+                <h4 className="text-2xl font-black tracking-tight text-slate-900 mb-4">{setting.title}</h4>
+                <p className="text-slate-600 leading-relaxed">{setting.text}</p>
+              </section>
+            ))}
+          </div>
+
           <div className="mb-8">
             <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Formulierungshilfen</div>
             <p className="text-base text-slate-600 leading-relaxed max-w-4xl">
@@ -627,6 +781,18 @@ export default function EvidenceSection() {
                 <p className="text-slate-600 leading-relaxed">{guide.text}</p>
               </section>
             ))}
+          </div>
+
+          <div className="mb-12 rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-6">Typische Schwierigkeiten im Gespräch</div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {PSYCHOEDUCATION_DIFFICULTIES.map((item) => (
+                <section key={item.title} className="rounded-[2rem] border border-slate-100 bg-slate-50 p-6">
+                  <h4 className="text-xl font-black tracking-tight text-slate-900 mb-3">{item.title}</h4>
+                  <p className="text-slate-600 leading-relaxed">{item.text}</p>
+                </section>
+              ))}
+            </div>
           </div>
 
           <div className="rounded-[3rem] border border-slate-100 bg-slate-50 p-8 md:p-10 shadow-sm">
@@ -759,6 +925,59 @@ export default function EvidenceSection() {
                 <p className="text-slate-600 leading-relaxed">{panel.text}</p>
               </section>
             ))}
+          </div>
+
+          <div className="mb-12 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Mentalisieren und familienorientierte Interventionen</div>
+                <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
+                  Verhalten besser verstehen, statt nur Symptome <span className="text-emerald-700 italic">abzuarbeiten</span>.
+                </h4>
+                <p className="max-w-4xl text-base leading-relaxed text-slate-700">
+                  Albert Lenz beschreibt Mentalisierung als wichtigen Wirkmechanismus familienorientierter Arbeit:
+                  Gedanken, Gefühle, Bedürfnisse und Absichten hinter Verhalten besser zu erfassen. Das unterstützt
+                  Perspektivwechsel, entlastet Beziehung und hilft bei der Bearbeitung von Parentifizierung,
+                  Kommunikationsabbrüchen und belasteten Interaktionen.
+                </p>
+              </div>
+              <aside className="rounded-[2rem] border border-emerald-200 bg-white/80 p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-800 mb-3">Interventionsrahmen</div>
+                <p className="text-sm leading-relaxed text-emerald-950">
+                  Basale Interventionen sind laut Lenz vor allem Psychoedukation, begleitende Familientherapie und bindungsbezogene Interventionen.
+                </p>
+              </aside>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+              {MENTALIZATION_PANELS.map((panel) => (
+                <section key={panel.title} className="rounded-[2.25rem] border border-emerald-100 bg-white p-6 shadow-sm">
+                  <h5 className="text-xl font-black tracking-tight text-slate-900 mb-3">{panel.title}</h5>
+                  <p className="text-slate-700 leading-relaxed">{panel.text}</p>
+                </section>
+              ))}
+            </div>
+
+            <div className="mt-8 rounded-[2.5rem] border border-emerald-100 bg-white p-6 md:p-8">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-800 mb-5">Reflexive Fragen für Gespräche</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {MENTALIZATION_REFLECTIVE_QUESTIONS.map((question) => (
+                  <div key={question} className="flex items-start gap-3 rounded-[1.5rem] border border-emerald-100 bg-emerald-50/60 p-5">
+                    <Brain size={18} className="mt-1 shrink-0 text-emerald-700" />
+                    <p className="text-sm leading-relaxed font-medium text-slate-800">{question}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+              {INTERVENTION_PROGRAM_POINTS.map((point) => (
+                <div key={point} className="flex items-start gap-3 rounded-[1.5rem] border border-emerald-100 bg-white/90 p-5">
+                  <CheckCircle2 size={18} className="mt-1 shrink-0 text-emerald-700" />
+                  <p className="text-sm leading-relaxed font-medium text-slate-800">{point}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">

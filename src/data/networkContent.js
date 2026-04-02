@@ -113,3 +113,18 @@ export const NETWORK_FILTERS = [
   { id: 'Selbsthilfe', label: 'Selbsthilfe' },
   { id: 'Entlastung', label: 'Entlastung' },
 ];
+
+export const NETWORK_MAP_STEPS = [
+  'zuerst alle wichtigen Personen und Stellen sammeln: Familie, erweiterte Familie, Freunde, Schule, Betreuung, Fachstellen',
+  'danach Nähe, Vertrauen und Erreichbarkeit sichtbar machen: Wer ist nah, wer eher randständig, wer aktuell belastbar?',
+  'anschliessend Lücken besprechen: Wo fehlt Unterstützung, wer weiss schon Bescheid, wem könnte man sich anvertrauen?',
+];
+
+export const NETWORK_MAP_QUESTIONS = [
+  'Wer gehört zu deiner Kernfamilie und wer zur erweiterten Familie?',
+  'Wer hat dir oder deiner Familie bei Schwierigkeiten schon geholfen?',
+  'Mit wem kannst du reden oder etwas unternehmen?',
+  'Wer weiss über die aktuelle Belastung oder Erkrankung Bescheid?',
+  'Gibt es Schule, Verein, Nachbarschaft oder Fachstellen, die eine tragende Rolle spielen?',
+  'Wem möchtest du was erzählen und wo braucht es eher Schutz der Privatsphäre?',
+];
