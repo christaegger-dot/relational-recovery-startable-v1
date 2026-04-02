@@ -249,15 +249,14 @@ export default function EvidenceSection() {
                 Der Evidenzteil folgt einer <span className="text-emerald-600 italic">klareren Fachlogik</span>.
               </h3>
               <p className="max-w-4xl text-base leading-relaxed text-slate-600">
-                Die Inhalte bleiben fachlich gleich, sind aber stärker als Web-Dossier gegliedert: zuerst verstehen,
-                dann mit Kindern sprechen, mit Eltern arbeiten und schliesslich konkrete Interventionen, Netzwerk und
-                Angebote nutzen.
+                Die Inhalte bleiben fachlich gleich, sind aber klarer gegliedert: verstehen, mit Kindern sprechen,
+                mit Eltern arbeiten, dann Interventionen und Netzwerk nutzen.
               </p>
             </div>
             <aside className="rounded-[2rem] border border-slate-200 bg-white p-6">
               <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500 mb-3">Leselogik</div>
               <p className="text-sm leading-relaxed text-slate-700">
-                So lässt sich der Bereich eher kapitelweise lesen statt als lange Folge einzelner Unterthemen.
+                So lässt sich der Bereich kapitelweise statt blockweise lesen.
               </p>
             </aside>
           </div>
@@ -289,21 +288,13 @@ export default function EvidenceSection() {
               </h3>
               <div className="space-y-5 text-base md:text-lg text-slate-600 leading-relaxed">
                 <p>
-                  Elternschaft ist bei psychischer Belastung oft beides zugleich: eine wichtige Kraftquelle und eine
-                  erhebliche zusätzliche Belastung. Viele Mütter und Väter erleben ihre Kinder als Sinn, Halt und
-                  Motivation. Gleichzeitig können Symptome dazu führen, dass genau jene Aufgaben schwerfallen, die im
-                  Familienalltag täglich anstehen.
+                  Elternschaft ist bei psychischer Belastung oft beides zugleich: Sinnquelle und zusätzliche
+                  Belastung. Viele Eltern erleben ihre Kinder als Halt und Motivation, während Symptome genau jene
+                  Aufgaben erschweren, die im Alltag täglich anstehen.
                 </p>
                 <p>
-                  Besonders quälend ist für viele Eltern nicht nur die Erkrankung selbst, sondern die Diskrepanz zwischen
-                  dem eigenen Anspruch und dem tatsächlichen Erleben. Wer spürt, weniger geduldig, weniger verfügbar oder
-                  weniger belastbar zu sein als früher, erlebt oft starke Schuldgefühle, Scham und Angst, dem Kind nicht
-                  zu genügen.
-                </p>
-                <p>
-                  Gute Begleitung beginnt deshalb nicht mit vorschneller Problemfokussierung, sondern mit einer
-                  respektvollen Anerkennung dieser Ambivalenz. Erst wenn Eltern sich nicht primär beurteilt fühlen, können
-                  sie Belastung, Sorge und Unterstützungsbedarf offen benennen.
+                  Besonders belastend ist oft die Diskrepanz zwischen Anspruch und aktuellem Erleben. Gute Begleitung
+                  beginnt deshalb mit Entlastung und Anerkennung dieser Ambivalenz, nicht mit vorschneller Bewertung.
                 </p>
               </div>
             </div>
@@ -380,9 +371,8 @@ export default function EvidenceSection() {
                   Kooperation gelingt eher über <span className="text-emerald-600 italic">Transparenz und Mitbestimmung</span>.
                 </h4>
                 <p className="max-w-4xl text-base leading-relaxed text-slate-600">
-                  Fachlich hilfreich ist eine Haltung, die Eltern früh in Zieldefinition, Auftragsklärung und weitere
-                  Schritte einbezieht. Das reduziert erlebte Ohnmacht und stärkt Selbstwirksamkeit gerade dort, wo
-                  Scham, Hilflosigkeit oder Misstrauen stark sind.
+                  Hilfreich ist eine Haltung, die Eltern früh in Zieldefinition, Auftragsklärung und nächste Schritte
+                  einbezieht. Das reduziert Ohnmacht und stärkt Selbstwirksamkeit gerade dort, wo Scham oder Misstrauen stark sind.
                 </p>
               </div>
               <aside className="rounded-[2rem] border border-emerald-100 bg-emerald-50/70 p-6">
@@ -423,9 +413,9 @@ export default function EvidenceSection() {
                   Was Eltern und Kinder häufig <span className="text-emerald-600 italic">konkret wünschen</span>.
                 </h4>
                 <p className="max-w-4xl text-base leading-relaxed text-slate-600">
-                  Die Fachliteratur beschreibt Hilfebedarf oft erstaunlich praktisch: Unterstützung beim Erklären der
-                  Erkrankung, bei Entlastung, Erziehungsfragen, Organisation und beim Sprechen über Sorgen. Auch Kinder
-                  wünschen vor allem Verstehen, Gesprächsmöglichkeiten und mehr Normalität.
+                  Der Hilfebedarf ist oft erstaunlich praktisch: Unterstützung beim Erklären der Erkrankung, bei
+                  Entlastung, Erziehungsfragen, Organisation und beim Sprechen über Sorgen. Kinder wünschen vor allem
+                  Verstehen, Gesprächsmöglichkeiten und mehr Normalität.
                 </p>
               </div>
               <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
@@ -463,8 +453,8 @@ export default function EvidenceSection() {
                   Was Eltern trotz Erkrankung <span className="text-emerald-700 italic">konkret tun können</span>.
                 </h4>
                 <p className="max-w-3xl text-base text-slate-700 leading-relaxed">
-                  Dieser Block ist bewusst direkt formuliert. Er ersetzt keine Beratung, kann aber Eltern helfen,
-                  die eigene Rolle in belasteten Phasen realistischer, freundlicher und handlungsnäher zu sehen.
+                  Der Block ist bewusst direkt formuliert. Er ersetzt keine Beratung, kann Eltern aber helfen,
+                  ihre Rolle in belasteten Phasen realistischer und handlungsnäher zu sehen.
                 </p>
               </div>
               <aside className="rounded-[2rem] border border-emerald-200 bg-white/80 p-6">
@@ -521,21 +511,14 @@ export default function EvidenceSection() {
               </h3>
               <div className="space-y-5 text-base md:text-lg text-slate-600 leading-relaxed">
                 <p>
-                  Psychische Erkrankungen wirken häufig nicht nur auf einzelne Symptome oder einzelne Beziehungen,
-                  sondern auf den Alltag der Familie als Ganzes. Routinen können instabil werden, Zuständigkeiten
-                  sich verschieben und alle beginnen, sich stärker am aktuellen Befinden des erkrankten Elternteils
-                  zu orientieren.
+                  Psychische Erkrankungen wirken meist nicht nur auf Symptome, sondern auf den Alltag der ganzen
+                  Familie. Routinen werden instabiler, Zuständigkeiten verschieben sich und vieles richtet sich stärker
+                  nach dem Befinden des erkrankten Elternteils.
                 </p>
                 <p>
-                  Für Familien besonders belastend sind dabei nicht nur akute Krisen, sondern auch die langsame
-                  Veränderung von Stimmung, Kommunikation und Verlässlichkeit. Kinder, Partnerinnen und Partner
-                  sowie weitere Bezugspersonen versuchen oft, das System mitzutragen, ohne dass ihre eigene
-                  Belastung früh genug sichtbar wird.
-                </p>
-                <p>
-                  Gerade deshalb ist es wichtig, die Familie nicht nur in Einzelperspektiven zu sehen. Wer die
-                  Belastung eines erkrankten Elternteils verstehen will, muss auch auf Beziehungen, Rollen,
-                  Kommunikation, Rückzug und Möglichkeiten zur Entlastung im gesamten Familiensystem schauen.
+                  Belastend sind dabei nicht nur Krisen, sondern auch langsame Veränderungen von Stimmung,
+                  Kommunikation und Verlässlichkeit. Deshalb braucht es einen Blick auf Rollen, Beziehungen,
+                  Rückzug und Entlastung im ganzen System.
                 </p>
               </div>
             </div>
@@ -653,22 +636,12 @@ export default function EvidenceSection() {
               </h3>
               <div className="space-y-5 text-base md:text-lg text-slate-600 leading-relaxed">
                 <p>
-                  Kinder psychisch erkrankter Eltern sind keine einheitliche Gruppe. Manche zeigen früh deutliche
-                  Belastungszeichen, andere wirken lange unauffällig, übernehmen viel Verantwortung oder passen sich
-                  stark an. Für Fachpersonen ist deshalb wichtig, nicht nur nach offenem Problemverhalten zu fragen,
-                  sondern auch nach stiller Überforderung und übermässiger Reife.
+                  Kinder psychisch erkrankter Eltern sind keine einheitliche Gruppe. Manche zeigen früh Belastungszeichen,
+                  andere wirken lange unauffällig, übernehmen viel Verantwortung oder passen sich stark an.
                 </p>
                 <p>
-                  Viele Kinder entwickeln feine Antennen für Stimmungswechsel, Rückzug, Gereiztheit oder Unruhe zuhause.
-                  Sie spüren oft sehr genau, wann sie sich zurücknehmen, wann sie trösten oder wann sie besonders
-                  unauffällig bleiben sollten. Diese innere Alarmbereitschaft ist weniger eine Familienstruktur als
-                  eine kindliche Anpassungsleistung – und sie bindet langfristig viel emotionale Energie.
-                </p>
-                <p>
-                  Besonders belastend wird es, wenn Kinder Verantwortung übernehmen, die nicht zu ihrem Alter passt,
-                  wenn sie sich zwischen Loyalität und eigener Not hin- und hergerissen fühlen oder wenn über die
-                  Erkrankung kaum offen gesprochen werden kann. Dann fehlt oft genau die Sprache, die entlasten und
-                  Orientierung geben könnte.
+                  Fachlich wichtig ist deshalb, nicht nur nach offenem Problemverhalten zu fragen, sondern auch nach
+                  stiller Überforderung, Parentifizierung, Loyalitätskonflikten und fehlender Sprache für das, was zuhause geschieht.
                 </p>
               </div>
             </div>
@@ -721,11 +694,8 @@ export default function EvidenceSection() {
               Was Familien und Kindern <span className="text-emerald-600 italic">Stabilität</span> geben kann.
             </h3>
             <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-4xl">
-              Schutz entsteht in belasteten Familien selten durch einen einzelnen Faktor. Nach dem Blick auf Belastungen von
-              Eltern, Familie und Kindern ist deshalb wichtig, die stabilisierenden Gegenkräfte sichtbar zu machen:
-              tragfähige Beziehungen, verlässliche Abläufe, ansprechbare Kommunikation und zugängliche Hilfe von
-              aussen. Erst darauf aufbauend kommen kindbezogene Stärken wie Selbstwirksamkeit,
-              Problemlösefähigkeit und aktive Bewältigung voll zur Geltung.
+              Schutz entsteht selten durch einen einzelnen Faktor. Entscheidend sind meist tragfähige Beziehungen,
+              verlässliche Abläufe, ansprechbare Kommunikation und zugängliche Hilfe von aussen.
             </p>
           </div>
 
@@ -802,14 +772,8 @@ export default function EvidenceSection() {
               </h3>
               <div className="space-y-5 text-base md:text-lg text-slate-600 leading-relaxed">
                 <p>
-                  Kinder merken meist früh, dass etwas nicht stimmt. Belastend ist oft nicht nur die psychische Erkrankung
-                  selbst, sondern auch das Schweigen darum. Wenn Kinder keine verständliche Erklärung bekommen, entstehen
-                  leicht Schuldgefühle, diffuse Ängste oder eigene falsche Deutungen.
-                </p>
-                <p>
-                  Psychoedukation bedeutet deshalb nicht, Kinder mit Fachwissen zu überladen. Gemeint ist eine ehrliche,
-                  altersgerechte Gesprächsführung, die Orientierung gibt, entlastet und Beziehung stärkt. Entscheidend ist weniger,
-                  dass alles perfekt erklärt wird, sondern dass das Kind spürt: Darüber darf gesprochen werden und Fragen sind erlaubt.
+                  Kinder merken meist früh, dass etwas nicht stimmt. Entlastend ist deshalb nicht möglichst viel
+                  Information, sondern eine ehrliche, altersgerechte Erklärung, die Orientierung gibt und Fragen erlaubt.
                 </p>
               </div>
             </div>
@@ -858,9 +822,8 @@ export default function EvidenceSection() {
                   Vor dem Gespräch zuerst die <span className="text-emerald-700 italic">Befürchtungen der Eltern</span> klären.
                 </h4>
                 <p className="max-w-4xl text-base leading-relaxed text-slate-700">
-                  Viele Eltern sind nicht gegen Information, sondern unsicher, was ein offenes Gespräch beim Kind
-                  auslösen könnte. Deshalb ist die Vorbereitung ein eigener Schritt und nicht nur ein Nebensatz vor dem
-                  Familiengespräch.
+                  Viele Eltern sind nicht gegen Information, sondern unsicher, was ein offenes Gespräch beim Kind auslösen könnte.
+                  Deshalb ist Vorbereitung ein eigener Schritt und nicht nur ein Nebensatz vor dem Familiengespräch.
                 </p>
               </div>
               <aside className="rounded-[2rem] border border-emerald-200 bg-white/80 p-6">
@@ -996,19 +959,12 @@ export default function EvidenceSection() {
               </h3>
               <div className="space-y-5 text-base md:text-lg text-slate-600 leading-relaxed">
                 <p>
-                  Der Bedarf an Unterstützung ist in vielen Familien hoch. Trotzdem nehmen Eltern und Angehörige Hilfe
-                  oft erst spät oder nur zögerlich in Anspruch. Das liegt nicht einfach an fehlender Einsicht, sondern
-                  häufig an nachvollziehbaren Ängsten, Scham, Stigmatisierung und dem Erleben, unter Druck zu geraten.
+                  Der Bedarf an Unterstützung ist oft hoch, trotzdem wird Hilfe häufig spät gesucht. Dahinter stehen
+                  meist nicht fehlende Einsicht, sondern Angst, Scham, Stigmatisierung und das Erleben, unter Druck zu geraten.
                 </p>
                 <p>
-                  Besonders belastend ist die Sorge, durch Offenheit Kontrolle zu verlieren. Wenn Eltern befürchten,
-                  als ungenügend wahrgenommen zu werden oder behördliche Schritte auszulösen, wird Schweigen schnell
-                  zur vermeintlich sichereren Strategie. Dazu kommt: Gerade depressive oder ängstliche Symptome können
-                  die Organisation von Hilfe massiv erschweren.
-                </p>
-                <p>
-                  Gute Versorgung beginnt deshalb nicht erst bei der Empfehlung eines Angebots, sondern bei einer
-                  Haltung, die Schwellen reduziert: transparent, nicht moralisierend, konkret und auf Augenhöhe.
+                  Besonders belastend ist die Sorge, durch Offenheit Kontrolle zu verlieren. Gute Versorgung beginnt
+                  deshalb mit einer Haltung, die Schwellen reduziert: transparent, konkret und nicht moralisierend.
                 </p>
               </div>
             </div>
@@ -1064,16 +1020,9 @@ export default function EvidenceSection() {
               </h3>
               <div className="space-y-5 text-base md:text-lg text-slate-600 leading-relaxed">
                 <p>
-                  Gute familienorientierte Praxis erschöpft sich nicht in der Diagnose oder im Benennen von Belastungen.
-                  Entscheidend ist, ob sich daraus alltagstaugliche Schritte ableiten lassen: Wer ist erreichbar, wer
-                  trägt mit, was passiert in einer Krise, wie bleibt Kontakt möglich und was hilft beim Übergang zurück
-                  in den Alltag?
-                </p>
-                <p>
-                  Der Grundlagentext betont dafür besonders die Netzwerkkarte, den Krisenplan, die sensible Arbeit an
-                  parentifizierten Beziehungen sowie klare Regelungen bei stationären Aufenthalten und beim Austritt.
-                  Diese Instrumente sollen nicht bürokratisch wirken, sondern Beziehungen, Orientierung und
-                  Handlungssicherheit stärken.
+                  Gute familienorientierte Praxis erschöpft sich nicht in Diagnose oder Problembenennung. Entscheidend
+                  ist, ob daraus alltagstaugliche Schritte entstehen: Wer ist erreichbar, wer trägt mit, was gilt in
+                  der Krise und was hilft beim Übergang zurück in den Alltag?
                 </p>
               </div>
             </div>
