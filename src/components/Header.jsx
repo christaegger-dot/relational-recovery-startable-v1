@@ -1,6 +1,6 @@
 import React from 'react';
 import { AlertTriangle, Check, Menu, Trash2, X } from 'lucide-react';
-import { TAB_ITEMS } from '../data/content';
+import { TAB_ITEMS } from '../data/appShellContent';
 
 export default function Header({ activeTab, setActiveTab, onReset, isResetting, mobileMenuOpen, setMobileMenuOpen, mobileMenuButtonRef, firstMobileNavItemRef, mobileMenuContainerRef, onEmergencyAccess }) {
   return (

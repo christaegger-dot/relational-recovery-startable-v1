@@ -5,13 +5,13 @@ import {
   ACUTE_CRISIS_STEPS,
   ADDICTION_PANELS,
   ADDICTION_TIPS,
-  ASSESSMENT_ITEMS,
   CHILD_PROTECTION_THRESHOLDS,
   CHILD_PROTECTION_TIPS,
   RIGHTS_FAQ,
   SAFETY_PLAN_POINTS,
   SAFETY_PLAN_TEMPLATE_FIELDS,
-} from '../data/content';
+} from '../data/toolboxContent';
+import { ASSESSMENT_ITEMS } from '../data/learningContent';
 import { getRiskLabel, getRiskTone } from '../utils/appHelpers';
 
 export default function ToolboxSection({ score, onToggleAssessment, onResetAssessment, onPrint, onDownloadCrisisPlan, acuteCrisisSectionRef, safetyPlanSectionRef, childProtectionSectionRef, onJumpToPrioritySection }) {

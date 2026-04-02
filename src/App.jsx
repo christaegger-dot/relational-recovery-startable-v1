@@ -1,23 +1,17 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react';
 import './styles/app-global.css';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomeSection from './sections/HomeSection';
-import ElearningSection from './sections/ElearningSection';
-import VignettenSection from './sections/VignettenSection';
-import ToolboxSection from './sections/ToolboxSection';
-import NetworkSection from './sections/NetworkSection';
-import EvidenceSection from './sections/EvidenceSection';
 import {
-  ASSESSMENT_ITEMS,
   APP_BROADCAST_CHANNEL,
   APP_STATE_VERSION,
   DEFAULT_SCORE,
-  E_MODULES,
-  RESOURCE_DATA,
   STORAGE_KEYS,
-} from './data/content';
+} from './data/appShellContent';
+import { ASSESSMENT_ITEMS, E_MODULES } from './data/learningContent';
+import { RESOURCE_DATA } from './data/networkContent';
 import {
   downloadTextFile,
   getInitialAppState,
@@ -29,6 +23,25 @@ import {
   safeLocalStorageSet,
   safeParse,
 } from './utils/appHelpers';
+
+const ElearningSection = lazy(() => import('./sections/ElearningSection'));
+const VignettenSection = lazy(() => import('./sections/VignettenSection'));
+const ToolboxSection = lazy(() => import('./sections/ToolboxSection'));
+const NetworkSection = lazy(() => import('./sections/NetworkSection'));
+const EvidenceSection = lazy(() => import('./sections/EvidenceSection'));
+
+function SectionLoadingFallback() {
+  return (
+    <section className="rounded-[3rem] border border-slate-200 bg-white px-8 py-12 shadow-sm md:px-12 md:py-16">
+      <div className="max-w-2xl">
+        <div className="mb-5 h-2 w-20 rounded-full bg-emerald-100" />
+        <div className="mb-4 h-8 w-64 rounded-full bg-slate-100" />
+        <div className="mb-3 h-4 w-full max-w-xl rounded-full bg-slate-100" />
+        <div className="h-4 w-full max-w-lg rounded-full bg-slate-100" />
+      </div>
+    </section>
+  );
+}
 
 export default function App() {
   const initialAppStateRef = useRef(null);
@@ -73,12 +86,16 @@ export default function App() {
     }
   }, []);
 
-  const applyAppState = (nextState) => {
+  const applyAppState = (nextState, options = {}) => {
     const normalized = normalizeAppStateData(nextState);
+    const { preserveSearchTerm = false } = options;
+
     setActiveTab(normalized.activeTab);
     setCurrentVignette(normalized.currentVignette);
     setSelectedOption(normalized.selectedOption);
-    setSearchTerm(normalized.searchTerm);
+    if (!preserveSearchTerm) {
+      setSearchTerm(normalized.searchTerm);
+    }
     setActiveResourceFilter(normalized.activeResourceFilter);
     setQuizState(normalized.quizState);
     setShowSafeNote(normalized.showSafeNote);
@@ -213,19 +230,18 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [mobileMenuOpen]);
 
-  const syncedAppState = useMemo(
+  const persistedAppState = useMemo(
     () => ({
       activeTab,
       currentVignette,
       selectedOption,
-      searchTerm,
       activeResourceFilter,
       quizState,
       showSafeNote,
       score,
       completedModules,
     }),
-    [activeTab, currentVignette, selectedOption, searchTerm, activeResourceFilter, quizState, showSafeNote, score, completedModules]
+    [activeTab, currentVignette, selectedOption, activeResourceFilter, quizState, showSafeNote, score, completedModules]
   );
 
   useEffect(() => {
@@ -242,7 +258,7 @@ export default function App() {
 
       latestAppliedTimestampRef.current = payload.updatedAt;
       skipNextPersistRef.current = true;
-      applyAppState(payload.data);
+      applyAppState(payload.data, { preserveSearchTerm: true });
     };
 
     const handleStorage = (event) => {
@@ -283,8 +299,8 @@ export default function App() {
       return;
     }
 
-    publishAppState(syncedAppState);
-  }, [syncedAppState]);
+    publishAppState(persistedAppState);
+  }, [persistedAppState]);
 
   const progressPercent = E_MODULES.length ? Math.round((completedModules.length / E_MODULES.length) * 100) : 0;
 
@@ -454,43 +470,50 @@ Aktueller Assessment-Score: ${score.risk}
         tabIndex={-1}
         className="flex-grow max-w-7xl mx-auto w-full px-4 md:px-6 py-8 md:py-10 outline-none page-enter"
       >
-        {activeTab === 'home' && (
+        {activeTab === 'home' ? (
           <HomeSection activeTab={activeTab} setActiveTab={setActiveTab} progressPercent={progressPercent} completedModules={completedModules} />
-        )}
+        ) : (
+          <Suspense fallback={<SectionLoadingFallback />}>
+            {activeTab === 'elearning' && (
+              <ElearningSection quizState={quizState} onAnswer={handleQuizAnswer} completedModules={completedModules} />
+            )}
 
-        {activeTab === 'elearning' && (
-          <ElearningSection quizState={quizState} onAnswer={handleQuizAnswer} completedModules={completedModules} />
-        )}
+            {activeTab === 'vignetten' && (
+              <VignettenSection
+                currentIndex={currentVignette}
+                setCurrentIndex={setCurrentVignette}
+                selectedOption={selectedOption}
+                onSelectOption={handleSelectVignetteOption}
+              />
+            )}
 
-        {activeTab === 'vignetten' && (
-          <VignettenSection currentIndex={currentVignette} setCurrentIndex={setCurrentVignette} selectedOption={selectedOption} onSelectOption={handleSelectVignetteOption} />
-        )}
+            {activeTab === 'toolbox' && (
+              <ToolboxSection
+                score={score}
+                onToggleAssessment={handleScoreChange}
+                onResetAssessment={() => setScore(DEFAULT_SCORE)}
+                onPrint={() => window.print()}
+                onDownloadCrisisPlan={handleDownloadCrisisPlan}
+                acuteCrisisSectionRef={acuteCrisisSectionRef}
+                safetyPlanSectionRef={safetyPlanSectionRef}
+                childProtectionSectionRef={childProtectionSectionRef}
+                onJumpToPrioritySection={openPriorityToolboxSection}
+              />
+            )}
 
-        {activeTab === 'toolbox' && (
-          <ToolboxSection
-            score={score}
-            onToggleAssessment={handleScoreChange}
-            onResetAssessment={() => setScore(DEFAULT_SCORE)}
-            onPrint={() => window.print()}
-            onDownloadCrisisPlan={handleDownloadCrisisPlan}
-            acuteCrisisSectionRef={acuteCrisisSectionRef}
-            safetyPlanSectionRef={safetyPlanSectionRef}
-            childProtectionSectionRef={childProtectionSectionRef}
-            onJumpToPrioritySection={openPriorityToolboxSection}
-          />
-        )}
+            {activeTab === 'zuerich' && (
+              <NetworkSection
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                filteredResources={filteredResources}
+                activeResourceFilter={activeResourceFilter}
+                setActiveResourceFilter={setActiveResourceFilter}
+              />
+            )}
 
-        {activeTab === 'zuerich' && (
-          <NetworkSection
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            filteredResources={filteredResources}
-            activeResourceFilter={activeResourceFilter}
-            setActiveResourceFilter={setActiveResourceFilter}
-          />
+            {activeTab === 'zaesur' && <EvidenceSection />}
+          </Suspense>
         )}
-
-        {activeTab === 'zaesur' && <EvidenceSection />}
       </main>
 
       <Footer setActiveTab={setActiveTab} />

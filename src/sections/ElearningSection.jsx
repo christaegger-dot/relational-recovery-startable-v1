@@ -1,6 +1,6 @@
 import React from 'react';
 import { Brain, Check } from 'lucide-react';
-import { E_MODULES } from '../data/content';
+import { E_MODULES } from '../data/learningContent';
 
 export default function ElearningSection({ quizState, onAnswer, completedModules }) {
   return (

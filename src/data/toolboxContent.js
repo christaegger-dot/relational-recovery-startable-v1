@@ -1,0 +1,148 @@
+export const ACUTE_CRISIS_STEPS = [
+  'Suizidgedanken oder akute Gefährdung ruhig und direkt ansprechen.',
+  'Bei akuter Lebensgefahr sofort 144 wählen und nicht erst lange erklären.',
+  'Kinder und andere abhängige Personen sofort in Sicherheit bringen.',
+  'Parallel eine Vertrauensperson oder professionelle Stelle dazuholen.',
+];
+
+export const ACUTE_CRISIS_CONTACTS = [
+  {
+    name: '144',
+    note: 'Schweizer Notruf bei akuter Lebensgefahr',
+    link: null,
+  },
+  {
+    name: 'PUK Zürich – Notfall für Eltern',
+    note: 'Kinder- und jugendpsychiatrischer Notfall für Eltern',
+    link: 'https://www.pukzh.ch/unsere-angebote/kinder-und-jugendpsychiatrie/anmeldung/notfall-fuer-eltern/',
+  },
+  {
+    name: 'PUK Erwachsene',
+    note: 'Psychiatrische Notfallkontakte für Erwachsene',
+    link: 'https://www.pukzh.ch/zuweiser-fachpersonen/erwachsene/',
+  },
+  {
+    name: 'AERZTEFON',
+    note: 'Triage im Kanton Zürich bei nicht lebensbedrohlichen Situationen',
+    link: 'https://www.aerztefon.ch/',
+  },
+  {
+    name: '143',
+    note: 'Anonyme Krisenhilfe für Erwachsene',
+    link: 'https://www.143.ch/',
+  },
+  {
+    name: '147',
+    note: 'Jugendhilfe; das Telefon ist in akuten Situationen der schnellste Kontakt, WhatsApp und E-Mail eher bei weniger dringlichen Anliegen.',
+    link: 'https://www.147.ch/de/beratung/dein-kontakt-zu-uns/',
+  },
+];
+
+export const SAFETY_PLAN_POINTS = [
+  'Warnzeichen: Woran merken wir früh, dass es kippt?',
+  'Selbstberuhigung: Was hilft kurzfristig, ohne die Lage zu verschärfen?',
+  'Kontaktkette: Wen rufen wir zuerst, wen danach an?',
+  'Kinder-Schutzteil: Wer übernimmt Betreuung, Übergaben und Information?',
+  'Risikoreduktion: Was muss vorübergehend sicher verstaut oder reduziert werden?',
+  'Nachsorge: Wer kümmert sich um Anschluss an Beratung oder Behandlung?',
+];
+
+export const SAFETY_PLAN_TEMPLATE_FIELDS = [
+  {
+    title: 'Warnzeichen',
+    hint: 'Woran merken wir früh, dass es kippt? Zum Beispiel Schlaf, Rückzug, Gereiztheit oder Hoffnungslosigkeit.',
+  },
+  {
+    title: 'Sofortkontakte',
+    hint: 'Wer wird zuerst angerufen? In welcher Reihenfolge? Notruf, PUK, AERZTEFON, Vertrauensperson.',
+  },
+  {
+    title: 'Kinderbetreuung',
+    hint: 'Wer übernimmt die Kinder sofort? Wo können sie sicher bleiben oder übernachten?',
+  },
+  {
+    title: 'Sichere Orte',
+    hint: 'Wo ist es gerade ruhiger, heller und weniger isoliert? Welche Orte helfen kurzfristig?',
+  },
+  {
+    title: 'Wer informiert wen',
+    hint: 'Wer informiert Schule, Kita, weitere Bezugspersonen oder Angehörige – und was genau wird gesagt?',
+  },
+  {
+    title: 'Was wird gesichert',
+    hint: 'Welche Medikamente, Mittel, Schlüssel oder anderen Risiken müssen vorübergehend sicher weg?',
+  },
+];
+
+export const CHILD_PROTECTION_THRESHOLDS = [
+  {
+    title: 'Freiwillige Hilfe zuerst',
+    text:
+      'Wenn Sicherheit und Grundversorgung aktuell gewährleistet sind, ist freiwillige Unterstützung oft der erste sinnvolle Schritt – zum Beispiel über das kjz, Familienberatung oder konkrete Entlastung im Alltag.',
+  },
+  {
+    title: 'Wann es enger wird',
+    text:
+      'Wenn Nahrung, Aufsicht, medizinische Versorgung, Sicherheit oder Schutz vor Gewalt nicht verlässlich gewährleistet sind, braucht es eine vertiefte Kindesschutzabklärung.',
+  },
+  {
+    title: 'Was eine Meldung bedeutet',
+    text:
+      'Eine besorgte Person muss eine Gefährdung nicht beweisen. Die Prüfung und Kindeswohlabklärung ist Aufgabe der KESB oder der beauftragten Fachstellen.',
+  },
+];
+
+export const CHILD_PROTECTION_TIPS = [
+  'Beobachtbare Fakten notieren, nicht vorschnell Diagnosen formulieren.',
+  'Bei Unsicherheit zuerst fachlich rückfragen – etwa beim kjz oder einer offiziellen Beratungsstelle.',
+  'Leitfrage für den Alltag: Sind Sicherheit, Nahrung, Aufsicht und Schutz auch morgen verlässlich gewährleistet?',
+  'Nach einer Meldung weiter kooperieren: Schutz und Beziehung müssen nicht gegeneinander ausgespielt werden.',
+];
+
+export const ADDICTION_PANELS = [
+  {
+    title: 'Psychische Erkrankung und Substanzkonsum zusammen denken',
+    text:
+      'Alkohol, Medikamente, Cannabis oder andere Substanzen können psychische Symptome verstärken, Krisen verschärfen und Behandlung erschweren. Für Familien ist wichtig, Moral und Sicherheit auseinanderzuhalten.',
+  },
+  {
+    title: 'Grenzen ohne Beschämung',
+    text:
+      'Hilfreich sind klare Sicherheitsregeln: keine Kinderbetreuung unter starkem Einfluss, kein Fahren unter Einfluss, keine Beschaffung von Substanzen. Gleichzeitig sollten Hilfewege offen bleiben.',
+  },
+  {
+    title: 'Niederschwelliger Einstieg',
+    text:
+      'Gerade bei Scham, Rückzug oder Ambivalenz kann anonyme Online-Beratung ein realistischer erster Schritt sein – auch für Angehörige und Nahestehende.',
+  },
+];
+
+export const ADDICTION_TIPS = [
+  'über Auswirkungen im Alltag sprechen, nicht über Schuld',
+  'Sicherheitsregeln für Kinderbetreuung, Autofahren, Geld und Medikamente festlegen',
+  'bei Intoxikation, Entzug oder Impulsivität Suizid- und Gewaltrisiken mitdenken',
+  'anonyme und kostenlose Suchtberatung wie SafeZone als Einstieg nutzen',
+];
+
+export const RIGHTS_FAQ = [
+  {
+    question: 'Was dürfen Angehörige dem Behandlungsteam mitteilen?',
+    answer:
+      'Relevante Beobachtungen zu Alltag, Kindersicherheit, Krisenverlauf oder Versorgung dürfen Angehörige immer weitergeben. Schweigepflicht verhindert meist eher das Zurückmelden als das Zuhören.',
+  },
+  {
+    question: 'Was dürfen Teams ohne Einwilligung oft nicht zurückmelden?',
+    answer:
+      'Ohne Zustimmung der betroffenen Person dürfen Teams meist keine detaillierten Behandlungsinformationen herausgeben. Trotzdem können sie Informationen aufnehmen und allgemeine Orientierung geben.',
+  },
+  {
+    question: 'Wozu dient eine psychiatrische Patientenverfügung?',
+    answer:
+      'Sie hilft, Wünsche für Krisen oder Phasen eingeschränkter Urteilsfähigkeit früh festzuhalten – zum Beispiel zu Behandlung, Kontakten oder wichtigen Bezugspersonen.',
+  },
+  {
+    question: 'Wo gibt es unabhängige Beratung?',
+    answer:
+      'Die Angehörigenberatung der PUK Zürich und Pro Mente Sana bieten Orientierung auf unterschiedlichen Ebenen. Pro Mente Sana berät kostenlos zu psychosozialen und rechtlichen Fragen.',
+  },
+];

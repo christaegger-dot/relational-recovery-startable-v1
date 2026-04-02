@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
-import { VIGNETTEN } from '../data/content';
+import { VIGNETTEN } from '../data/learningContent';
 
 export default function VignettenSection({ currentIndex, setCurrentIndex, selectedOption, onSelectOption }) {
   const vignette = VIGNETTEN[currentIndex];

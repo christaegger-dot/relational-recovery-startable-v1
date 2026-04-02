@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
 import { ChevronRight, ExternalLink, GraduationCap, HeartHandshake, Library, MapPin, Sparkles } from 'lucide-react';
 import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
-import { E_MODULES, LITERATUR, RESOURCE_DATA, VIGNETTEN } from '../data/content';
+import { HOME_REFERENCE_COUNT } from '../data/appShellContent';
+import { E_MODULES, VIGNETTEN } from '../data/learningContent';
+import { RESOURCE_DATA } from '../data/networkContent';
 
 export default function HomeSection({ activeTab, setActiveTab, progressPercent, completedModules }) {
   const progressSummaryItems = useMemo(
@@ -29,7 +31,7 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
     { label: 'Module', val: E_MODULES.length, desc: 'kompakte Lernbausteine', icon: GraduationCap },
     { label: 'Trainingsfälle', val: VIGNETTEN.length, desc: 'für Fallreflexion und Dialog', icon: HeartHandshake },
     { label: 'Netzwerkstellen', val: RESOURCE_DATA.length, desc: 'für Triage und Entlastung', icon: MapPin },
-    { label: 'Referenzen', val: LITERATUR.length, desc: 'für fachliche Vertiefung', icon: Library },
+    { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library },
   ];
 
   return (

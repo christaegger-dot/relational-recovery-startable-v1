@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExternalLink, Search, XCircle } from 'lucide-react';
-import { NETWORK_FILTERS } from '../data/content';
+import { NETWORK_FILTERS } from '../data/networkContent';
 
 export default function NetworkSection({ searchTerm, setSearchTerm, filteredResources, activeResourceFilter, setActiveResourceFilter }) {
   const searchStatusText = searchTerm.trim()

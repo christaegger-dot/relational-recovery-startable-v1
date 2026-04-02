@@ -1,15 +1,13 @@
 import {
   APP_STATE_VERSION,
-  ASSESSMENT_ITEMS,
   DEFAULT_COMPLETED,
   DEFAULT_QUIZ_STATE,
   DEFAULT_SCORE,
   DEFAULT_SELECTED_OPTION,
-  E_MODULES,
-  NETWORK_FILTERS,
   TAB_ITEMS,
-  VIGNETTEN,
-} from '../data/content';
+} from '../data/appShellContent';
+import { ASSESSMENT_ITEMS, E_MODULES, VIGNETTEN } from '../data/learningContent';
+import { NETWORK_FILTERS } from '../data/networkContent';
 
 const VALID_ASSESSMENT_ITEM_IDS = new Set(ASSESSMENT_ITEMS.map((item) => item.id));
 const ASSESSMENT_ITEM_WEIGHTS = new Map(ASSESSMENT_ITEMS.map((item) => [item.id, item.val]));
@@ -146,7 +144,7 @@ export const normalizeAppStateData = (value) => {
         ? source.currentVignette
         : defaults.currentVignette,
     selectedOption: normalizeSelectedOptionData(source.selectedOption),
-    searchTerm: typeof source.searchTerm === 'string' ? source.searchTerm : defaults.searchTerm,
+    searchTerm: defaults.searchTerm,
     activeResourceFilter: isValidResourceFilter(source.activeResourceFilter)
       ? source.activeResourceFilter
       : defaults.activeResourceFilter,

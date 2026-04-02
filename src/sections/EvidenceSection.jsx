@@ -50,7 +50,7 @@ import {
   RELEVANCE_STATS,
   SUPPORT_OFFERS,
   SUPPORT_OFFER_NOTES,
-} from '../data/content';
+} from '../data/evidenceContent';
 
 export default function EvidenceSection() {
   return (
