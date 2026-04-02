@@ -100,6 +100,43 @@ export default function EvidenceSection() {
       desc: 'Psychoedukation als fortlaufendes Gespräch verstehen und bei Verlauf oder Alter anpassen.',
     },
   ];
+  const protectionSystemNodes = [
+    {
+      label: 'verlässliche Bezugsperson',
+      note: 'mindestens eine emotional tragende erwachsene Person',
+      top: '16%',
+      left: '50%',
+      tone: 'border-emerald-200 bg-emerald-50 text-emerald-950',
+    },
+    {
+      label: 'Routinen und Alltag',
+      note: 'wiederkehrende Abläufe, Übergaben, Schule, Schlaf',
+      top: '36%',
+      left: '82%',
+      tone: 'border-sky-200 bg-sky-50 text-sky-950',
+    },
+    {
+      label: 'offene Sprache',
+      note: 'kindgerechte Erklärung statt Tabuisierung',
+      top: '73%',
+      left: '71%',
+      tone: 'border-slate-200 bg-white text-slate-900',
+    },
+    {
+      label: 'Hilfe von aussen',
+      note: 'Beratung, Netzwerk, Entlastung, Fachstellen',
+      top: '74%',
+      left: '29%',
+      tone: 'border-amber-200 bg-amber-50 text-amber-950',
+    },
+    {
+      label: 'Kinder-Schutzteil',
+      note: 'klare Zuständigkeiten in belasteten Phasen',
+      top: '36%',
+      left: '18%',
+      tone: 'border-emerald-200 bg-white text-emerald-950',
+    },
+  ];
 
   const EvidenceDisclosure = ({ eyebrow = 'Vertiefung', title, note, children }) => (
     <details className="group rounded-[3rem] border border-slate-200 bg-slate-50 p-6 shadow-sm md:p-8">
@@ -753,6 +790,79 @@ export default function EvidenceSection() {
                   <p className="text-sm text-emerald-950 leading-relaxed font-medium">{point}</p>
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className="mb-12 rounded-[3rem] border border-slate-200 bg-white p-8 md:p-10 shadow-sm">
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Schutzfaktoren- und Versorgungsgrafik</div>
+                <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
+                  Stabilität entsteht meist durch <span className="text-emerald-600 italic">mehrere kleine tragende Elemente</span>.
+                </h4>
+                <p className="max-w-4xl text-base leading-relaxed text-slate-600">
+                  Nicht ein einzelner Faktor trägt die Familie. Schutz wird eher dann spürbar, wenn Beziehungen,
+                  Alltag, Sprache, externe Hilfe und klare Zuständigkeiten zusammenwirken.
+                </p>
+              </div>
+              <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Lesart</div>
+                <p className="mt-3 text-sm leading-relaxed text-slate-700">
+                  Die Mitte steht für die Versorgung des Kindes im Alltag. Je mehr Elemente aktiviert sind, desto tragfähiger
+                  wird die familiäre Schutzebene in belasteten Phasen.
+                </p>
+              </aside>
+            </div>
+
+            <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+              <div>
+                <div className="relative hidden min-h-[31rem] overflow-hidden rounded-[2.5rem] border border-slate-200 bg-[#F6F7F3] lg:block">
+                  <div className="absolute left-1/2 top-1/2 h-[10rem] w-[10rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-slate-300 bg-slate-900 text-white shadow-lg" />
+                  <div className="absolute left-1/2 top-1/2 h-[17rem] w-[17rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-emerald-200" />
+                  <div className="absolute left-1/2 top-1/2 h-[24rem] w-[24rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-slate-200" />
+
+                  <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center text-center">
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-[0.18em] text-white/65">Zentrum</div>
+                      <div className="mt-2 text-sm font-black leading-tight text-white">tragfähige Versorgung</div>
+                    </div>
+                  </div>
+
+                  {protectionSystemNodes.map((node) => (
+                    <div
+                      key={node.label}
+                      className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-[1.5rem] border px-4 py-4 text-center shadow-sm ${node.tone}`}
+                      style={{ top: node.top, left: node.left }}
+                    >
+                      <div className="text-[11px] font-black leading-tight tracking-[0.08em]">{node.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 lg:hidden">
+                  <div className="rounded-[1.75rem] border border-slate-300 bg-slate-900 p-5 text-center shadow-sm">
+                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-white/70">Zentrum</div>
+                    <div className="mt-2 text-sm font-black text-white">tragfähige Versorgung</div>
+                  </div>
+                  {protectionSystemNodes.map((node) => (
+                    <div key={node.label} className={`rounded-[1.5rem] border p-4 text-center shadow-sm ${node.tone}`}>
+                      <div className="text-[11px] font-black leading-tight">{node.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Versorgungsbausteine</div>
+                <div className="mt-4 space-y-3">
+                  {protectionSystemNodes.map((node) => (
+                    <div key={node.label} className="rounded-[1.25rem] border border-slate-200 bg-white p-4">
+                      <h5 className="text-sm font-black tracking-tight text-slate-900">{node.label}</h5>
+                      <p className="mt-2 text-sm leading-relaxed text-slate-600">{node.note}</p>
+                    </div>
+                  ))}
+                </div>
+              </aside>
             </div>
           </div>
 
