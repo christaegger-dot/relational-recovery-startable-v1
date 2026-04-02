@@ -21,4 +21,7 @@ export const DEFAULT_COMPLETED = [];
 export const DEFAULT_SELECTED_OPTION = {};
 export const DEFAULT_QUIZ_STATE = {};
 
+export const E_MODULE_COUNT = 2;
+export const VIGNETTE_COUNT = 2;
+export const NETWORK_RESOURCE_COUNT = 16;
 export const HOME_REFERENCE_COUNT = 7;

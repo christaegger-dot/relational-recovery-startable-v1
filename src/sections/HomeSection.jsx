@@ -1,21 +1,19 @@
 import React, { useMemo } from 'react';
 import { ChevronRight, ExternalLink, GraduationCap, HeartHandshake, Library, MapPin, Sparkles } from 'lucide-react';
 import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
-import { HOME_REFERENCE_COUNT } from '../data/appShellContent';
-import { E_MODULES, VIGNETTEN } from '../data/learningContent';
-import { RESOURCE_DATA } from '../data/networkContent';
+import { E_MODULE_COUNT, HOME_REFERENCE_COUNT, NETWORK_RESOURCE_COUNT, VIGNETTE_COUNT } from '../data/appShellContent';
 
 export default function HomeSection({ activeTab, setActiveTab, progressPercent, completedModules }) {
   const progressSummaryItems = useMemo(
     () => [
       {
         label: 'Bearbeitet',
-        value: `${completedModules.length} von ${E_MODULES.length}`,
+        value: `${completedModules.length} von ${E_MODULE_COUNT}`,
         note: 'Lernmodule mit Abschlussstatus',
       },
       {
         label: 'Offen',
-        value: `${Math.max(E_MODULES.length - completedModules.length, 0)}`,
+        value: `${Math.max(E_MODULE_COUNT - completedModules.length, 0)}`,
         note: 'noch nicht bearbeitete Module',
       },
       {
@@ -28,9 +26,9 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
   );
 
   const overviewCards = [
-    { label: 'Module', val: E_MODULES.length, desc: 'kompakte Lernbausteine', icon: GraduationCap },
-    { label: 'Trainingsfälle', val: VIGNETTEN.length, desc: 'für Fallreflexion und Dialog', icon: HeartHandshake },
-    { label: 'Netzwerkstellen', val: RESOURCE_DATA.length, desc: 'für Triage und Entlastung', icon: MapPin },
+    { label: 'Module', val: E_MODULE_COUNT, desc: 'kompakte Lernbausteine', icon: GraduationCap },
+    { label: 'Trainingsfälle', val: VIGNETTE_COUNT, desc: 'für Fallreflexion und Dialog', icon: HeartHandshake },
+    { label: 'Netzwerkstellen', val: NETWORK_RESOURCE_COUNT, desc: 'für Triage und Entlastung', icon: MapPin },
     { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library },
   ];
 
@@ -122,7 +120,7 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
             <div className="text-center mb-6">
               <div className="font-black text-5xl tabular-nums tracking-tighter">{progressPercent}%</div>
               <p className="text-sm font-medium leading-relaxed opacity-80 mt-2">
-                {completedModules.length} von {E_MODULES.length} Lernmodulen sind bereits bearbeitet.
+                {completedModules.length} von {E_MODULE_COUNT} Lernmodulen sind bereits bearbeitet.
               </p>
             </div>
             <div className="space-y-3">

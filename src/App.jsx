@@ -8,10 +8,10 @@ import {
   APP_BROADCAST_CHANNEL,
   APP_STATE_VERSION,
   DEFAULT_SCORE,
+  E_MODULE_COUNT,
   STORAGE_KEYS,
 } from './data/appShellContent';
-import { ASSESSMENT_ITEMS, E_MODULES } from './data/learningContent';
-import { RESOURCE_DATA } from './data/networkContent';
+import { ASSESSMENT_ITEMS } from './data/learningContent';
 import {
   downloadTextFile,
   getInitialAppState,
@@ -45,6 +45,7 @@ function SectionLoadingFallback() {
 
 export default function App() {
   const initialAppStateRef = useRef(null);
+  const focusFrameRef = useRef(null);
 
   if (!initialAppStateRef.current) {
     initialAppStateRef.current = getInitialAppState(STORAGE_KEYS.appState);
@@ -132,16 +133,35 @@ export default function App() {
 
     setMobileMenuOpen(false);
 
-    window.requestAnimationFrame(() => {
+    let remainingAttempts = 60;
+
+    const focusActiveHeading = () => {
       const headingId = getPageHeadingId(activeTab);
       const heading = typeof document !== 'undefined' ? document.getElementById(headingId) : null;
 
       if (heading && typeof heading.focus === 'function') {
         heading.focus();
+        focusFrameRef.current = null;
+        return;
+      }
+
+      if (remainingAttempts > 0) {
+        remainingAttempts -= 1;
+        focusFrameRef.current = window.requestAnimationFrame(focusActiveHeading);
       } else if (mainContentRef.current) {
         mainContentRef.current.focus();
+        focusFrameRef.current = null;
       }
-    });
+    };
+
+    focusFrameRef.current = window.requestAnimationFrame(focusActiveHeading);
+
+    return () => {
+      if (focusFrameRef.current !== null) {
+        window.cancelAnimationFrame(focusFrameRef.current);
+        focusFrameRef.current = null;
+      }
+    };
   }, [activeTab]);
 
   useEffect(() => {
@@ -302,22 +322,7 @@ export default function App() {
     publishAppState(persistedAppState);
   }, [persistedAppState]);
 
-  const progressPercent = E_MODULES.length ? Math.round((completedModules.length / E_MODULES.length) * 100) : 0;
-
-  const filteredResources = useMemo(() => {
-    const q = searchTerm.trim().toLowerCase();
-
-    return RESOURCE_DATA.filter((res) => {
-      const matchesSearch =
-        !q ||
-        res.name.toLowerCase().includes(q) ||
-        res.info.toLowerCase().includes(q) ||
-        res.tags.some((tag) => tag.toLowerCase().includes(q));
-
-      const matchesFilter = activeResourceFilter === 'all' || res.tags.includes(activeResourceFilter);
-      return matchesSearch && matchesFilter;
-    });
-  }, [searchTerm, activeResourceFilter]);
+  const progressPercent = E_MODULE_COUNT ? Math.round((completedModules.length / E_MODULE_COUNT) * 100) : 0;
 
   const handleQuizAnswer = (modId, answerIdx, correctIdx) => {
     setQuizState((prev) => ({
@@ -505,7 +510,6 @@ Aktueller Assessment-Score: ${score.risk}
               <NetworkSection
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
-                filteredResources={filteredResources}
                 activeResourceFilter={activeResourceFilter}
                 setActiveResourceFilter={setActiveResourceFilter}
               />

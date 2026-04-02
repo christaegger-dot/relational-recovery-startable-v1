@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ExternalLink, Search, XCircle } from 'lucide-react';
-import { NETWORK_FILTERS } from '../data/networkContent';
+import { NETWORK_FILTERS, RESOURCE_DATA } from '../data/networkContent';
 
-export default function NetworkSection({ searchTerm, setSearchTerm, filteredResources, activeResourceFilter, setActiveResourceFilter }) {
+export default function NetworkSection({ searchTerm, setSearchTerm, activeResourceFilter, setActiveResourceFilter }) {
+  const filteredResources = useMemo(() => {
+    const q = searchTerm.trim().toLowerCase();
+
+    return RESOURCE_DATA.filter((res) => {
+      const matchesSearch =
+        !q ||
+        res.name.toLowerCase().includes(q) ||
+        res.info.toLowerCase().includes(q) ||
+        res.tags.some((tag) => tag.toLowerCase().includes(q));
+
+      const matchesFilter = activeResourceFilter === 'all' || res.tags.includes(activeResourceFilter);
+      return matchesSearch && matchesFilter;
+    });
+  }, [searchTerm, activeResourceFilter]);
+
   const searchStatusText = searchTerm.trim()
     ? `${filteredResources.length} Treffer für ${searchTerm.trim()}.`
     : `${filteredResources.length} Fachstellen werden angezeigt.`;
