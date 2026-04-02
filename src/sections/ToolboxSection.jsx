@@ -154,6 +154,11 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
   const filteredPracticeBlocks = PRACTICE_BLOCKS.filter(
     (item) => activePracticeFilter === 'all' || item.tags.includes(activePracticeFilter)
   );
+  const answeredCount = answeredPrompts.length;
+  const triageSummaryText =
+    answeredCount === 0
+      ? 'Noch keine Fragen beantwortet. Die Triage startet mit akuter Sicherheit und endet bei Kooperation und Absicherung.'
+      : `${answeredCount} von ${triagePrompts.length} Fragen beantwortet. Die aktuell wichtigste Spur ist ${primaryPriority?.title?.toLowerCase() ?? 'noch offen'}.`;
 
   return (
     <article className="space-y-16">
@@ -253,6 +258,12 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
             <p className="mt-3 text-sm leading-relaxed text-slate-700">
               Nicht jeder hohe Wert bedeutet automatisch Gefährdung. Aber jeder Wert sollte in einen konkreten nächsten Schritt übersetzt werden.
             </p>
+            <div className="mt-5 rounded-[1.5rem] border border-emerald-100 bg-emerald-50/70 p-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.18em] text-emerald-800">Arbeitslogik</div>
+              <p className="mt-2 text-sm leading-relaxed text-emerald-950">
+                Erst Sicherheit, dann Vorsorge, danach Schutz- und Kooperationsfragen. Die Grafik hält diese Reihenfolge sichtbar.
+              </p>
+            </div>
           </aside>
         </div>
 
@@ -261,9 +272,14 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
             {pathwaySteps.map((step, index) => (
               <div key={step.label} className="relative">
                 <section className="h-full rounded-[2rem] border border-slate-200 bg-[#F6F7F3] p-6 shadow-sm">
-                  <div className="mb-4 inline-flex rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700">
-                    {step.label}
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <div className="inline-flex rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700">
+                      Schritt {index + 1}
+                    </div>
+                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">{step.label}</div>
                   </div>
+                  <div className="mb-4 h-[2px] w-12 bg-emerald-200" />
+                  <div className="mb-2 text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">Arbeitsfenster</div>
                   <h4 className="text-xl font-black tracking-tight text-slate-900">{step.title}</h4>
                   <p className="mt-4 text-sm leading-relaxed text-slate-600">{step.desc}</p>
                 </section>
@@ -279,6 +295,12 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
               </div>
             ))}
           </div>
+
+          <div className="mt-6 rounded-[1.75rem] border border-emerald-100 bg-emerald-50/80 px-5 py-4">
+            <p className="text-sm leading-relaxed font-medium text-emerald-950">
+              Leitidee: Gute Triage hält die Reihenfolge stabil. Akute Sicherheit wird nicht von späteren Kooperationsfragen überlagert.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -290,13 +312,23 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
           aber auch in belasteten Situationen handlungsnah.
         </p>
 
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {scoreBands.map((band) => (
-            <div key={band.label} className={`rounded-[1.75rem] border p-5 ${band.tone}`}>
-              <div className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">Score {band.label}</div>
-              <p className="mt-3 text-sm leading-relaxed font-medium">{band.title}</p>
-            </div>
-          ))}
+        <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {scoreBands.map((band) => (
+              <div key={band.label} className={`rounded-[1.75rem] border p-5 ${band.tone}`}>
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">Score {band.label}</div>
+                <p className="mt-3 text-sm leading-relaxed font-medium">{band.title}</p>
+              </div>
+            ))}
+          </div>
+
+          <aside className="rounded-[2rem] border border-slate-200 bg-white p-6">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Kurzlesart</div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              Die Score-Bänder ersetzen keine Beurteilung. Sie schärfen nur den Ton der nächsten Schritte: Ressourcen halten,
+              Vorsorge ausbauen oder Schutz formeller prüfen.
+            </p>
+          </aside>
         </div>
       </section>
 
@@ -378,6 +410,11 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
               </section>
             );
           })}
+        </div>
+
+        <div className="mt-6 rounded-[1.75rem] border border-slate-200 bg-slate-50 p-5">
+          <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Triage-Status</div>
+          <p className="mt-3 text-sm leading-relaxed text-slate-700">{triageSummaryText}</p>
         </div>
 
         {primaryPriority && (
