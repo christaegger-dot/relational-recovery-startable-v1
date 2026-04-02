@@ -14,19 +14,57 @@ export default function NetworkSection({ searchTerm, setSearchTerm, filteredReso
 
   return (
     <article className="space-y-16 no-print">
-      <div className="bg-white p-8 md:p-16 rounded-[4rem] shadow-sm border border-slate-100">
-        <header className="flex flex-col xl:flex-row justify-between xl:items-end mb-16 gap-10 border-b border-slate-50 pb-12">
-          <div className="max-w-2xl">
-            <div className="text-emerald-600 font-black text-[11px] uppercase tracking-[0.45em] mb-6 flex items-center gap-4">
-              <div className="w-10 h-[2px] bg-emerald-200" /> Triage & Support (CH)
+      <div className="rounded-[4rem] border border-slate-200 bg-white p-8 shadow-sm md:p-16">
+        <header className="mb-16 grid gap-10 border-b border-slate-100 pb-12 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-end">
+          <div className="max-w-3xl">
+            <div className="mb-6 flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.45em] text-emerald-700">
+              <div className="h-[2px] w-10 bg-emerald-200" /> Triage & Support (CH)
             </div>
-            <h2 id="page-heading-zuerich" tabIndex={-1} className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-none">Netzwerk Schweiz</h2>
-            <p className="text-slate-500 text-lg font-medium mt-6 leading-relaxed">
+            <h2 id="page-heading-zuerich" tabIndex={-1} className="text-4xl font-black leading-none tracking-tight text-slate-900 md:text-6xl">Netzwerk Schweiz</h2>
+            <p className="mt-6 text-lg leading-relaxed text-slate-600">
               Fachstellen für Akutunterstützung, Entlastung, Kinder- und Angehörigenberatung sowie längerfristige Orientierung im psychiatrischen Kontext.
             </p>
           </div>
+          <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Einordnung</div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              Der Bereich ist als fachliche Such- und Filterhilfe gedacht: offizielle Krisenwege, Familienberatung,
+              Kinder- und Jugendangebote sowie längerfristige Entlastung in einer ruhigen Übersicht.
+            </p>
+          </aside>
+        </header>
 
-          <div className="w-full xl:max-w-[420px]">
+        <div className="mb-10 grid gap-8 xl:grid-cols-[minmax(0,1fr)_26rem] xl:items-start">
+          <div>
+            <p className="mb-5 max-w-4xl text-sm leading-relaxed text-slate-500">
+              Das Netzwerk verbindet offizielle Krisenwege, familienbezogene Beratung, spezialisierte Angebote für Kinder und Jugendliche
+              sowie längerfristige Entlastung. Die Filter helfen, je nach Lage schneller zwischen Akutunterstützung, Jugendhilfe,
+              Suchtthematik, mehrsprachigen Angeboten oder Selbsthilfe zu unterscheiden.
+            </p>
+            <div className="mb-4 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">Filter</div>
+            <div className="flex flex-wrap gap-2" aria-label="Netzwerkfilter">
+              {NETWORK_FILTERS.map((filter) => (
+                <button
+                  key={filter.id}
+                  type="button"
+                  onClick={() => setActiveResourceFilter(filter.id)}
+                  className={`rounded-full border px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] transition-colors ${
+                    activeResourceFilter === filter.id
+                      ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
+                      : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                  }`}
+                  aria-pressed={activeResourceFilter === filter.id}
+                >
+                  {filter.label}
+                </button>
+              ))}
+            </div>
+            <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+              {filterStatusText}
+            </p>
+          </div>
+
+          <div className="w-full">
             <label htmlFor="resource-search" className="block text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">
               Fachstelle suchen
             </label>
@@ -46,35 +84,6 @@ export default function NetworkSection({ searchTerm, setSearchTerm, filteredReso
               {searchStatusText}
             </p>
           </div>
-        </header>
-
-        <div className="mb-10">
-          <p className="text-sm text-slate-500 leading-relaxed mb-5 max-w-4xl">
-            Das Netzwerk verbindet offizielle Krisenwege, familienbezogene Beratung, spezialisierte Angebote für Kinder und Jugendliche
-            sowie längerfristige Entlastung. Die Filter helfen, je nach Lage schneller zwischen Akutunterstützung, Jugendhilfe,
-            Suchtthematik, mehrsprachigen Angeboten oder Selbsthilfe zu unterscheiden.
-          </p>
-          <div className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">Filter</div>
-          <div className="flex flex-wrap gap-2" aria-label="Netzwerkfilter">
-            {NETWORK_FILTERS.map((filter) => (
-              <button
-                key={filter.id}
-                type="button"
-                onClick={() => setActiveResourceFilter(filter.id)}
-                className={`rounded-full border px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] transition-colors ${
-                  activeResourceFilter === filter.id
-                    ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
-                    : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
-                }`}
-                aria-pressed={activeResourceFilter === filter.id}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div>
-          <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
-            {filterStatusText}
-          </p>
         </div>
 
         {filteredResources.length === 0 ? (
@@ -94,10 +103,10 @@ export default function NetworkSection({ searchTerm, setSearchTerm, filteredReso
             {filteredResources.map((res) => (
               <section
                 key={res.name}
-                className="p-8 bg-slate-50 rounded-[2.5rem] border-2 border-transparent hover:border-emerald-200 hover:bg-white transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between h-full"
+                className="flex h-full flex-col justify-between rounded-[2.5rem] border border-slate-200 bg-slate-50 p-8 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200 hover:bg-white hover:shadow-lg"
               >
                 <div>
-                  <div className="flex flex-wrap gap-2 mb-8">
+                  <div className="mb-8 flex flex-wrap gap-2">
                     {res.tags.map((tag) => (
                       <span
                         key={tag}
@@ -107,8 +116,8 @@ export default function NetworkSection({ searchTerm, setSearchTerm, filteredReso
                       </span>
                     ))}
                   </div>
-                  <h4 className="font-black text-slate-900 text-2xl mb-5 tracking-tight">{res.name}</h4>
-                  <p className="text-base text-slate-500 leading-relaxed mb-10 font-medium">{res.info}</p>
+                  <h4 className="mb-5 text-2xl font-black tracking-tight text-slate-900">{res.name}</h4>
+                  <p className="mb-10 text-base leading-relaxed text-slate-600">{res.info}</p>
                 </div>
                 <a
                   href={res.link}

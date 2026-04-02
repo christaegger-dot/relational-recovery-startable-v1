@@ -5,11 +5,28 @@ import { E_MODULES } from '../data/content';
 export default function ElearningSection({ quizState, onAnswer, completedModules }) {
   return (
     <article className="space-y-16 no-print">
-      <header className="max-w-2xl mx-auto text-center">
-        <h2 id="page-heading-elearning" tabIndex={-1} className="text-4xl font-black mb-6 tracking-tight italic uppercase tracking-widest">Lernmodule</h2>
-        <p className="text-slate-500 text-lg leading-relaxed font-light">
-          Kompakte Impulse zur Stärkung der elterlichen Selbstwirksamkeit im Klinikalltag.
-        </p>
+      <header className="rounded-[3rem] border border-slate-200 bg-white px-8 py-10 shadow-sm md:px-12 md:py-14">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+          <div className="max-w-3xl">
+            <div className="mb-6 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.35em] text-emerald-700">
+              <div className="h-[2px] w-10 bg-emerald-200" />
+              Fachliche Kurzformate
+            </div>
+            <h2 id="page-heading-elearning" tabIndex={-1} className="text-4xl font-black tracking-tight text-slate-900 md:text-5xl">
+              Lernmodule
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
+              Kompakte Impulse für Gesprächsführung, Sprache und Einschätzung im Klinikalltag. Ruhig aufbereitet,
+              schnell erfassbar und auf fachliche Anwendung ausgerichtet.
+            </p>
+          </div>
+          <aside className="rounded-[2rem] border border-emerald-100 bg-emerald-50/70 p-6">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900">Einordnung</div>
+            <p className="mt-3 text-sm leading-relaxed text-emerald-950">
+              Kurze Module, klare Leitidee, anschliessend eine einzelne Reflexionsfrage statt eines prüfungsartigen Formats.
+            </p>
+          </aside>
+        </div>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -20,11 +37,11 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
           return (
             <section
               key={mod.id}
-              className="bg-white rounded-[3rem] p-1 shadow-sm border border-slate-200 transition-all duration-300 hover:shadow-xl flex flex-col overflow-hidden"
+              className="flex flex-col overflow-hidden rounded-[3rem] border border-slate-200 bg-white p-1 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
             >
               <div className="p-8 md:p-12 flex flex-col h-full">
                 <div className="flex justify-between items-center mb-10">
-                  <span className="bg-emerald-50 text-emerald-700 px-5 py-2 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-sm">
+                  <span className="rounded-2xl border border-emerald-100 bg-emerald-50 px-5 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700 shadow-sm">
                     {mod.duration}
                   </span>
                   {completedModules.includes(mod.id) && (
@@ -34,11 +51,11 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
                   )}
                 </div>
                 <h3 className="text-3xl font-black mb-6 leading-tight tracking-tight text-slate-900">{mod.title}</h3>
-                <p className="text-lg text-slate-600 italic mb-10 leading-relaxed border-l-8 border-emerald-50 pl-8 font-light">
+                <p className="mb-10 border-l-4 border-emerald-100 pl-6 text-lg leading-relaxed text-slate-600">
                   “{mod.storyboard}”
                 </p>
 
-                <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200 mt-auto">
+                <div className="mt-auto rounded-[2.5rem] border border-slate-200 bg-slate-50 p-8">
                   <div className="text-[10px] font-black uppercase mb-4 flex items-center gap-4 text-slate-400 tracking-[0.2em]">
                     <Brain size={18} className="text-emerald-600" /> Reflexionsfrage
                   </div>

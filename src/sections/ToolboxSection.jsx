@@ -19,30 +19,62 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
 
   return (
     <article className="space-y-16">
-      <section className="bg-slate-900 rounded-[4rem] p-8 md:p-16 text-white shadow-2xl relative overflow-hidden group no-print">
-        <div className="relative z-10 flex flex-col items-center text-center">
-          <div className="bg-emerald-600/20 p-5 rounded-full mb-8">
-            <ClipboardCheck className="text-emerald-400" size={48} />
+      <section className="rounded-[4rem] border border-slate-200 bg-white p-8 shadow-sm md:p-16 no-print">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start">
+          <div>
+            <div className="mb-8 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.35em] text-emerald-700">
+              <div className="h-[2px] w-10 bg-emerald-200" />
+              Klinische Orientierung
+            </div>
+            <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-[1.75rem] border border-emerald-100 bg-emerald-50">
+              <ClipboardCheck className="text-emerald-700" size={30} />
+            </div>
+            <h2 id="page-heading-toolbox" tabIndex={-1} className="mb-5 text-4xl font-black tracking-tight text-slate-900 md:text-5xl">
+              Orientierung, Schutz und nächste Schritte
+            </h2>
+            <p className="mb-5 max-w-3xl text-lg leading-relaxed text-slate-600">
+              Strukturierte Einschätzung familiärer Belastung als Gesprächshilfe für Abwägung, Schutz und nächste Schritte,
+              nicht als Diagnose- oder Urteilsinstrument.
+            </p>
+            <p className="max-w-3xl text-sm leading-relaxed text-slate-500">
+              Hohe Werte bedeuten nicht automatisch Gefährdung. Sie zeigen vor allem an, dass Schutz, Entlastung,
+              Krisenvorsorge und gemeinsame Absprachen genauer betrachtet werden sollten.
+            </p>
           </div>
-          <h2 id="page-heading-toolbox" tabIndex={-1} className="text-4xl font-black mb-5 italic tracking-tight uppercase">Orientierung, Schutz und nächste Schritte</h2>
-          <p className="opacity-70 text-lg mb-10 max-w-2xl font-light">
-            Strukturierte Einschätzung familiärer Belastung – als Gesprächshilfe für Abwägung, Schutz und nächste Schritte, nicht als Diagnose- oder Urteilsinstrument.
-          </p>
-          <p className="max-w-2xl text-sm md:text-base text-white/75 leading-relaxed mb-14">
-            Hohe Werte bedeuten nicht automatisch Gefährdung. Sie zeigen vor allem an, dass Schutz, Entlastung, Krisenvorsorge und gemeinsame Absprachen genauer betrachtet werden sollten.
-          </p>
 
+          <aside className="rounded-[2.5rem] border border-slate-200 bg-slate-50 p-8">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Orientierender Hinweis</div>
+            <div className="mt-6 text-6xl font-black leading-none tracking-tight text-slate-900 tabular-nums">{score.risk}</div>
+            <div className={`mt-6 inline-block rounded-full px-6 py-3 text-[11px] font-black uppercase tracking-[0.28em] ${getRiskTone(score.risk)}`}>
+              {getRiskLabel(score.risk)}
+            </div>
+            <p id="assessment-score-status" role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+              {assessmentLiveText}
+            </p>
+            <button
+              type="button"
+              onClick={onResetAssessment}
+              className="mt-8 inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.28em] text-slate-500 transition-colors hover:text-slate-900 haptic-btn"
+            >
+              <RotateCcw size={16} /> Assessment zurücksetzen
+            </button>
+          </aside>
+        </div>
+
+        <div className="mt-12 rounded-[3rem] border border-slate-200 bg-slate-50 p-6 md:p-8">
           <fieldset className="w-full text-left" aria-describedby="assessment-score-status">
-            <legend className="sr-only">Assessment-Faktoren auswählen</legend>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full text-left">
+            <legend className="mb-5 text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Assessment-Faktoren</legend>
+            <div className="grid w-full grid-cols-1 gap-4 text-left md:grid-cols-2">
               {ASSESSMENT_ITEMS.map((item) => {
                 const checked = score.checked.includes(item.id);
 
                 return (
                   <label
                     key={item.id}
-                    className={`flex items-center gap-5 p-6 rounded-[2rem] border-2 transition-all cursor-pointer haptic-btn ${
-                      checked ? 'bg-emerald-600 border-emerald-400 shadow-xl scale-[1.01]' : 'bg-white/5 border-white/10 hover:bg-white/10'
+                    className={`flex cursor-pointer items-center gap-5 rounded-[2rem] border p-6 transition-all haptic-btn ${
+                      checked
+                        ? 'border-emerald-200 bg-white shadow-sm'
+                        : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50'
                     }`}
                   >
                     <input
@@ -51,37 +83,18 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
                       checked={checked}
                       onChange={() => onToggleAssessment(item.id)}
                     />
-                    <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${checked ? 'bg-white border-white' : 'border-white/20'}`}>
-                      {checked && <Check size={16} className="text-emerald-600" strokeWidth={4} aria-hidden="true" />}
+                    <div className={`flex h-6 w-6 items-center justify-center rounded-lg border-2 transition-all ${checked ? 'border-emerald-600 bg-emerald-600' : 'border-slate-300 bg-white'}`}>
+                      {checked && <Check size={16} className="text-white" strokeWidth={4} aria-hidden="true" />}
                     </div>
                     <div>
-                      <div className="text-xs font-black uppercase tracking-widest">{item.label}</div>
-                      <div className="text-[11px] uppercase tracking-[0.2em] opacity-60 mt-2">Hinweisgewicht: {item.val}</div>
+                      <div className="text-xs font-black uppercase tracking-widest text-slate-900">{item.label}</div>
+                      <div className="mt-2 text-[11px] uppercase tracking-[0.2em] text-slate-500">Hinweisgewicht: {item.val}</div>
                     </div>
                   </label>
                 );
               })}
             </div>
           </fieldset>
-
-          <div className="mt-16 p-10 md:p-14 bg-white/5 rounded-[3rem] border border-white/10 min-w-[280px] shadow-inner">
-            <div className="text-[10px] font-black uppercase tracking-[0.45em] opacity-40 mb-8 text-emerald-400">Orientierender Hinweis</div>
-            <span className="text-[5rem] md:text-[7rem] font-black block mb-6 leading-none tabular-nums">{score.risk}</span>
-            <div className={`px-8 py-3 rounded-full inline-block text-[11px] font-black uppercase tracking-[0.35em] shadow-2xl transition-colors duration-300 ${getRiskTone(score.risk)}`}>
-              {getRiskLabel(score.risk)}
-            </div>
-            <p id="assessment-score-status" role="status" aria-live="polite" aria-atomic="true" className="sr-only">
-              {assessmentLiveText}
-            </p>
-          </div>
-
-          <button
-            type="button"
-            onClick={onResetAssessment}
-            className="mt-10 text-slate-300 hover:text-white transition-all flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.35em] haptic-btn"
-          >
-            <RotateCcw size={16} /> Assessment zurücksetzen
-          </button>
         </div>
       </section>
 
@@ -291,13 +304,13 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
           ))}
         </div>
 
-        <div className="mt-8 rounded-[2.5rem] border border-slate-100 bg-slate-900 p-6 md:p-8">
-          <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-400 mb-5">Praktische Leitfragen</div>
+        <div className="mt-8 rounded-[2.5rem] border border-slate-200 bg-slate-50 p-6 md:p-8">
+          <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500 mb-5">Praktische Leitfragen</div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {CHILD_PROTECTION_TIPS.map((tip) => (
-              <div key={tip} className="flex items-start gap-3 rounded-[1.5rem] bg-white/5 border border-white/10 p-5">
-                <CheckCircle2 size={18} className="mt-1 shrink-0 text-emerald-400" />
-                <p className="text-sm text-white/90 leading-relaxed font-medium">{tip}</p>
+              <div key={tip} className="flex items-start gap-3 rounded-[1.5rem] border border-slate-200 bg-white p-5">
+                <CheckCircle2 size={18} className="mt-1 shrink-0 text-emerald-600" />
+                <p className="text-sm text-slate-700 leading-relaxed font-medium">{tip}</p>
               </div>
             ))}
           </div>
@@ -324,13 +337,13 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
           ))}
         </div>
 
-        <div className="mt-8 rounded-[2.5rem] border border-slate-100 bg-slate-900 p-6 md:p-8">
-          <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-400 mb-5">Praktische Leitlinien</div>
+        <div className="mt-8 rounded-[2.5rem] border border-slate-200 bg-slate-50 p-6 md:p-8">
+          <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500 mb-5">Praktische Leitlinien</div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {ADDICTION_TIPS.map((tip) => (
-              <div key={tip} className="flex items-start gap-3 rounded-[1.5rem] bg-white/5 border border-white/10 p-5">
-                <CheckCircle2 size={18} className="mt-1 shrink-0 text-emerald-400" />
-                <p className="text-sm text-white/90 leading-relaxed font-medium">{tip}</p>
+              <div key={tip} className="flex items-start gap-3 rounded-[1.5rem] border border-slate-200 bg-white p-5">
+                <CheckCircle2 size={18} className="mt-1 shrink-0 text-emerald-600" />
+                <p className="text-sm text-slate-700 leading-relaxed font-medium">{tip}</p>
               </div>
             ))}
           </div>

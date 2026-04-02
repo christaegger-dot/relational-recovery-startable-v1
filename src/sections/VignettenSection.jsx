@@ -10,11 +10,28 @@ export default function VignettenSection({ currentIndex, setCurrentIndex, select
 
   return (
     <article className="space-y-16 no-print">
-      <header className="max-w-3xl mx-auto text-center">
-        <h2 id="page-heading-vignetten" tabIndex={-1} className="text-4xl font-black mb-6 tracking-tight italic uppercase tracking-widest">Training mit Vignetten</h2>
-        <p className="text-slate-500 text-lg leading-relaxed font-light">
-          Kurze Fallsituationen zur Reflexion zwischen Schutz, Kooperation und systemischer Entlastung – mit Fokus auf Abwägung statt Prüfung.
-        </p>
+      <header className="rounded-[3rem] border border-slate-200 bg-white px-8 py-10 shadow-sm md:px-12 md:py-14">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+          <div className="max-w-3xl">
+            <div className="mb-6 flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.35em] text-emerald-700">
+              <div className="h-[2px] w-10 bg-emerald-200" />
+              Fallreflexion
+            </div>
+            <h2 id="page-heading-vignetten" tabIndex={-1} className="text-4xl font-black tracking-tight text-slate-900 md:text-5xl">
+              Training mit Vignetten
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
+              Kurze Fallsituationen zur Reflexion zwischen Schutz, Kooperation und systemischer Entlastung. Die
+              Darstellung bleibt bewusst fachlich und abwägend statt dramatisch.
+            </p>
+          </div>
+          <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Format</div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              Ein Fall, zwei Optionen, direkte fachliche Rückmeldung. Gedacht als Gesprächsimpuls, nicht als Prüfung.
+            </p>
+          </aside>
+        </div>
       </header>
 
       <section className="bg-white rounded-[3rem] border border-slate-200 shadow-sm p-8 md:p-14">
@@ -35,7 +52,7 @@ export default function VignettenSection({ currentIndex, setCurrentIndex, select
         <fieldset className="mt-12" aria-describedby={selected ? feedbackId : undefined}>
           <legend className="text-sm font-bold mb-6 text-slate-800">Welche Option ist in dieser Situation fachlich eher angezeigt?</legend>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {vignette.options.map((option) => {
+            {vignette.options.map((option, index) => {
               const isActive = selectedId === option.id;
               const tone = option.isCorrect
                 ? 'border-emerald-200 hover:border-emerald-400'
@@ -57,7 +74,9 @@ export default function VignettenSection({ currentIndex, setCurrentIndex, select
                   >
                     <span className="flex items-start justify-between gap-4">
                       <span>
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-70 mb-3 block">Entscheidungsoption</span>
+                        <span className="mb-3 block text-[10px] font-black uppercase tracking-[0.2em] opacity-70">
+                          Entscheidungsoption {index + 1}
+                        </span>
                         <span className="text-lg font-black leading-snug">{option.label}</span>
                       </span>
                       {isActive && <CheckCircle2 size={22} className="shrink-0" aria-hidden="true" />}
