@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AlertTriangle, Check, CheckCircle2, ChevronRight, ClipboardCheck, Download, ExternalLink, Printer, RotateCcw, ShieldCheck } from 'lucide-react';
 import {
   ACUTE_CRISIS_CONTACTS,
@@ -15,6 +15,7 @@ import { ASSESSMENT_ITEMS } from '../data/learningContent';
 import { getRiskLabel, getRiskTone } from '../utils/appHelpers';
 
 export default function ToolboxSection({ score, onToggleAssessment, onResetAssessment, onPrint, onDownloadCrisisPlan, acuteCrisisSectionRef, safetyPlanSectionRef, childProtectionSectionRef, onJumpToPrioritySection }) {
+  const [triageAnswers, setTriageAnswers] = useState({});
   const assessmentLiveText = `Aktueller Assessment-Score: ${score.risk}. ${getRiskLabel(score.risk)}. Der Score dient nur als Orientierungshilfe.`;
   const pathwaySteps = [
     {
@@ -56,6 +57,96 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
       tone: 'border-red-200 bg-red-50 text-red-950',
     },
   ];
+
+  const triagePrompts = [
+    {
+      id: 'acute-danger',
+      question: 'Gibt es Hinweise auf akute Selbstgefährdung, Fremdgefährdung oder unmittelbare Unsicherheit für Kinder?',
+      yes: {
+        title: 'Akute Sicherheit sofort priorisieren',
+        text: 'Notruf, Krisendienst oder offizielle Notfallwege gehen vor längerer Abklärung. Kinderbetreuung und Aufsicht sofort mitdenken.',
+        target: 'acute-crisis',
+        targetLabel: 'Zur Akut-Krise',
+        tone: 'border-red-200 bg-red-50 text-red-950',
+      },
+      no: {
+        title: 'Akute Gefährdung aktuell nicht im Vordergrund',
+        text: 'Die Einschätzung kann ruhiger in Richtung Krisenvorsorge, Alltag und Kooperation weitergeführt werden.',
+        target: 'safety-plan',
+        targetLabel: 'Zum Sicherheitsplan',
+        tone: 'border-emerald-200 bg-emerald-50 text-emerald-950',
+      },
+    },
+    {
+      id: 'care-gap',
+      question: 'Sind Aufsicht, Tagesstruktur, Versorgung oder verlässliche Betreuung der Kinder derzeit brüchig?',
+      yes: {
+        title: 'Schutz und Entlastung konkret prüfen',
+        text: 'Wenn Grundversorgung oder Aufsicht nicht verlässlich sind, braucht es rasch konkrete Hilfe und gegebenenfalls eine Kindesschutzabklärung.',
+        target: 'child-protection',
+        targetLabel: 'Zum Kindeswohl',
+        tone: 'border-amber-200 bg-amber-50 text-amber-950',
+      },
+      no: {
+        title: 'Versorgung wirkt aktuell tragfähig',
+        text: 'Dann lohnt es sich, tragende Routinen und Schutzfaktoren sichtbar zu halten und nicht nur auf Risiken zu fokussieren.',
+        target: 'safety-plan',
+        targetLabel: 'Schutzfaktoren absichern',
+        tone: 'border-emerald-200 bg-emerald-50 text-emerald-950',
+      },
+    },
+    {
+      id: 'crisis-plan',
+      question: 'Gibt es bereits einen besprochenen Krisen- oder Sicherheitsplan mit Kinder-Schutzteil?',
+      yes: {
+        title: 'Bestehende Absprachen aktualisieren',
+        text: 'Vorhandene Pläne sind hilfreich, wenn sie überprüft, mit Kontakten ergänzt und in stabileren Phasen gemeinsam geübt werden.',
+        target: 'safety-plan',
+        targetLabel: 'Plan überprüfen',
+        tone: 'border-slate-200 bg-slate-50 text-slate-900',
+      },
+      no: {
+        title: 'Krisenvorsorge schriftlich machen',
+        text: 'Ein kurzer Plan zu Warnzeichen, Kinderbetreuung, Kontaktkette und sicheren Orten entlastet in belasteten Phasen deutlich.',
+        target: 'safety-plan',
+        targetLabel: 'Plan anlegen',
+        tone: 'border-emerald-200 bg-emerald-50 text-emerald-950',
+      },
+    },
+    {
+      id: 'network',
+      question: 'Gibt es mindestens eine mitwissende Bezugsperson oder Fachstelle, die kurzfristig mittragen kann?',
+      yes: {
+        title: 'Kooperation aktiv nutzen',
+        text: 'Bestehende Unterstützung sollte konkret in Absprachen, Übergaben und Rückmeldewegen eingebunden werden.',
+        target: 'safety-plan',
+        targetLabel: 'Kooperation konkretisieren',
+        tone: 'border-slate-200 bg-slate-50 text-slate-900',
+      },
+      no: {
+        title: 'Netzwerk rasch erweitern',
+        text: 'Fehlende Mitwissende erhöhen die Belastung. Jetzt sind niedrigschwellige Hilfen, Bezugspersonen und Fachstellen besonders wichtig.',
+        target: 'child-protection',
+        targetLabel: 'Unterstützung prüfen',
+        tone: 'border-amber-200 bg-amber-50 text-amber-950',
+      },
+    },
+  ];
+
+  const answeredPrompts = triagePrompts.filter((prompt) => triageAnswers[prompt.id]);
+  const triagePriorities = answeredPrompts.map((prompt) => prompt[triageAnswers[prompt.id]]);
+  const primaryPriority =
+    triagePriorities.find((item) => item.target === 'acute-crisis') ||
+    triagePriorities.find((item) => item.target === 'child-protection') ||
+    triagePriorities.find((item) => item.target === 'safety-plan') ||
+    null;
+
+  const setTriageAnswer = (id, answer) => {
+    setTriageAnswers((current) => ({
+      ...current,
+      [id]: current[id] === answer ? undefined : answer,
+    }));
+  };
 
   return (
     <article className="space-y-16">
@@ -200,6 +291,102 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="rounded-[3rem] border border-slate-100 bg-white p-6 shadow-sm md:p-8 no-print">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_21rem] xl:items-start">
+          <div>
+            <div className="mb-4 text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Interaktive Triage</div>
+            <h3 className="text-3xl font-black tracking-tight text-slate-900 md:text-4xl">
+              Vier kurze Fragen helfen, den <span className="text-emerald-600 italic">nächsten sinnvollen Schritt</span> zu klären.
+            </h3>
+            <p className="mt-5 max-w-4xl text-base leading-relaxed text-slate-600 md:text-lg">
+              Die Triage ersetzt keine klinische Beurteilung. Sie übersetzt aber typische Praxisfragen rasch in Akut-Sicherung,
+              Krisenvorsorge oder Schutzabklärung.
+            </p>
+          </div>
+          <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Anwendung</div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              Die Fragen können im Gespräch, in der Fallbesprechung oder zur eigenen Strukturierung genutzt werden. Mehrere
+              Antworten können gleichzeitig relevant sein.
+            </p>
+          </aside>
+        </div>
+
+        <div className="mt-8 grid gap-4">
+          {triagePrompts.map((prompt, index) => {
+            const currentAnswer = triageAnswers[prompt.id];
+            const recommendation = currentAnswer ? prompt[currentAnswer] : null;
+
+            return (
+              <section key={prompt.id} className="rounded-[2rem] border border-slate-200 bg-slate-50 p-5 md:p-6">
+                <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+                  <div className="max-w-3xl">
+                    <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Frage {index + 1}</div>
+                    <h4 className="mt-3 text-lg font-black leading-snug text-slate-900 md:text-xl">{prompt.question}</h4>
+                  </div>
+                  <div className="flex shrink-0 flex-wrap gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setTriageAnswer(prompt.id, 'yes')}
+                      aria-pressed={currentAnswer === 'yes'}
+                      className={`rounded-full border px-5 py-3 text-[11px] font-black uppercase tracking-[0.18em] transition-colors haptic-btn ${
+                        currentAnswer === 'yes'
+                          ? 'border-emerald-700 bg-emerald-700 text-white'
+                          : 'border-slate-300 bg-white text-slate-900 hover:border-emerald-400 hover:bg-emerald-50'
+                      }`}
+                    >
+                      Ja
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setTriageAnswer(prompt.id, 'no')}
+                      aria-pressed={currentAnswer === 'no'}
+                      className={`rounded-full border px-5 py-3 text-[11px] font-black uppercase tracking-[0.18em] transition-colors haptic-btn ${
+                        currentAnswer === 'no'
+                          ? 'border-slate-900 bg-slate-900 text-white'
+                          : 'border-slate-300 bg-white text-slate-900 hover:border-slate-400 hover:bg-slate-100'
+                      }`}
+                    >
+                      Nein
+                    </button>
+                  </div>
+                </div>
+
+                {recommendation && (
+                  <div className={`mt-5 rounded-[1.5rem] border p-5 ${recommendation.tone}`}>
+                    <div className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">Einordnung</div>
+                    <h5 className="mt-3 text-lg font-black tracking-tight">{recommendation.title}</h5>
+                    <p className="mt-3 text-sm leading-relaxed">{recommendation.text}</p>
+                    <button
+                      type="button"
+                      onClick={() => onJumpToPrioritySection(recommendation.target)}
+                      className="mt-5 inline-flex items-center gap-2 rounded-full border border-current/20 bg-white/70 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] transition-colors hover:bg-white haptic-btn"
+                    >
+                      {recommendation.targetLabel} <ChevronRight size={14} />
+                    </button>
+                  </div>
+                )}
+              </section>
+            );
+          })}
+        </div>
+
+        {primaryPriority && (
+          <div className={`mt-8 rounded-[2rem] border p-6 md:p-7 ${primaryPriority.tone}`}>
+            <div className="text-[10px] font-black uppercase tracking-[0.24em] opacity-80">Aktuell wichtigste Spur</div>
+            <h4 className="mt-3 text-2xl font-black tracking-tight">{primaryPriority.title}</h4>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed">{primaryPriority.text}</p>
+            <button
+              type="button"
+              onClick={() => onJumpToPrioritySection(primaryPriority.target)}
+              className="mt-5 inline-flex items-center gap-2 rounded-full border border-current/20 bg-white/70 px-5 py-3 text-[11px] font-black uppercase tracking-[0.18em] transition-colors hover:bg-white haptic-btn"
+            >
+              {primaryPriority.targetLabel} <ChevronRight size={14} />
+            </button>
+          </div>
+        )}
       </section>
 
       <section
