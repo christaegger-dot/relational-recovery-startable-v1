@@ -74,6 +74,31 @@ export default function EvidenceSection() {
     { id: 'evidence-interventions', label: '4 Handeln und vernetzen', note: 'Interventionen, Netzwerk, Angebote' },
     { id: 'evidence-materials', label: '5 Materialien', note: 'Bücher, Medien, Referenzen' },
   ];
+  const familyDynamicsNodes = [
+    { label: 'elterliche Symptome', top: '14%', left: '50%', tone: 'bg-slate-900 text-white border-slate-300' },
+    { label: 'Alltag unter Druck', top: '38%', left: '82%', tone: 'bg-white text-slate-900 border-slate-200' },
+    { label: 'kindliche Anpassung', top: '72%', left: '68%', tone: 'bg-emerald-50 text-emerald-950 border-emerald-200' },
+    { label: 'mehr familiärer Stress', top: '76%', left: '30%', tone: 'bg-amber-50 text-amber-950 border-amber-200' },
+    { label: 'weniger offene Kommunikation', top: '38%', left: '18%', tone: 'bg-sky-50 text-sky-950 border-sky-200' },
+  ];
+  const psychoeducationPath = [
+    {
+      label: 'Vorbereiten',
+      desc: 'Mit Eltern Sorgen, Tabus, bisherigen Wissensstand und Ziel des Gesprächs klären.',
+    },
+    {
+      label: 'Erklären',
+      desc: 'Einfach, ehrlich und altersgerecht benennen, was los ist und was das Kind konkret betrifft.',
+    },
+    {
+      label: 'Nachfragen',
+      desc: 'Auf Fragen, Gefühle, Missverständnisse und nonverbale Reaktionen des Kindes eingehen.',
+    },
+    {
+      label: 'Weiterführen',
+      desc: 'Psychoedukation als fortlaufendes Gespräch verstehen und bei Verlauf oder Alter anpassen.',
+    },
+  ];
 
   return (
     <article className="space-y-16 no-print">
@@ -550,6 +575,70 @@ export default function EvidenceSection() {
               ))}
             </div>
           </div>
+
+          <div className="mt-8 rounded-[3rem] border border-slate-100 bg-slate-50 p-8 md:p-10 shadow-sm">
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Fachdiagramm</div>
+                <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
+                  Belastung wirkt oft als <span className="text-emerald-600 italic">familiärer Kreislauf</span>.
+                </h4>
+                <p className="max-w-4xl text-base leading-relaxed text-slate-600">
+                  Nicht nur die Erkrankung selbst belastet Kinder und Familie, sondern die wechselseitige Verstärkung
+                  zwischen Symptomen, Alltag, Stress und Kommunikation. Genau deshalb greifen gute Hilfen an mehreren
+                  Stellen gleichzeitig an.
+                </p>
+              </div>
+              <aside className="rounded-[2rem] border border-slate-200 bg-white p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500 mb-3">Lesart</div>
+                <p className="text-sm leading-relaxed text-slate-700">
+                  Das Diagramm zeigt keine lineare Ursache, sondern einen zirkulären Prozess mit mehreren Verstärkungen.
+                </p>
+              </aside>
+            </div>
+
+            <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+              <div className="relative min-h-[28rem] overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white">
+                <div className="absolute left-1/2 top-1/2 h-[20rem] w-[20rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-emerald-200" />
+                <div className="absolute left-1/2 top-1/2 h-[13rem] w-[13rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-slate-200" />
+
+                {familyDynamicsNodes.map((node) => (
+                  <div
+                    key={node.label}
+                    className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-[1.5rem] border px-4 py-3 text-center shadow-sm ${node.tone}`}
+                    style={{ top: node.top, left: node.left }}
+                  >
+                    <div className="text-[11px] font-black uppercase tracking-[0.08em]">{node.label}</div>
+                  </div>
+                ))}
+
+                <div className="absolute left-[50%] top-[24%] h-[16%] w-[2px] -translate-x-1/2 bg-emerald-300" />
+                <div className="absolute left-[62%] top-[30%] h-[2px] w-[16%] bg-emerald-300" />
+                <div className="absolute left-[73%] top-[49%] h-[16%] w-[2px] bg-emerald-300" />
+                <div className="absolute left-[32%] top-[74%] h-[2px] w-[28%] bg-emerald-300" />
+                <div className="absolute left-[18%] top-[46%] h-[16%] w-[2px] bg-emerald-300" />
+                <div className="absolute left-[21%] top-[30%] h-[2px] w-[16%] bg-emerald-300" />
+              </div>
+
+              <aside className="rounded-[2rem] border border-slate-200 bg-white p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500 mb-4">Wo Interventionen ansetzen</div>
+                <div className="space-y-3">
+                  <p className="text-sm leading-relaxed text-slate-700">
+                    <span className="font-black text-slate-900">bei Symptomen:</span> Behandlung und Krisenintervention
+                  </p>
+                  <p className="text-sm leading-relaxed text-slate-700">
+                    <span className="font-black text-slate-900">im Alltag:</span> Entlastung, Routinen, Betreuung
+                  </p>
+                  <p className="text-sm leading-relaxed text-slate-700">
+                    <span className="font-black text-slate-900">bei Kindern:</span> Schutz, Sprache, Beziehung
+                  </p>
+                  <p className="text-sm leading-relaxed text-slate-700">
+                    <span className="font-black text-slate-900">im System:</span> Netzwerk, Absprachen, Koordination
+                  </p>
+                </div>
+              </aside>
+            </div>
+          </div>
         </section>
 
         <section className="mb-20 border-t-2 border-slate-50 pt-16">
@@ -847,6 +936,49 @@ export default function EvidenceSection() {
                   <p className="text-sm text-slate-700 leading-relaxed font-medium">{point}</p>
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className="mt-8 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_18rem] xl:items-start">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Fachdiagramm</div>
+                <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
+                  Psychoedukation ist eher ein <span className="text-emerald-700 italic">Prozess</span> als ein Einzelgespräch.
+                </h4>
+                <p className="max-w-4xl text-base leading-relaxed text-slate-700">
+                  Das Diagramm übersetzt den Abschnitt in einen nachvollziehbaren Ablauf: vorbereiten, erklären,
+                  nachfragen und später wieder aufnehmen. So wird klarer, warum gute Psychoedukation nicht mit einem
+                  einzigen Informationsmoment abgeschlossen ist.
+                </p>
+              </div>
+              <aside className="rounded-[2rem] border border-emerald-200 bg-white/80 p-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-800 mb-3">Leitidee</div>
+                <p className="text-sm leading-relaxed text-emerald-950">
+                  Wissen entlastet am meisten, wenn es vorbereitet, dialogisch vermittelt und später wieder aufgenommen wird.
+                </p>
+              </aside>
+            </div>
+
+            <div className="mt-8 overflow-hidden rounded-[2.5rem] border border-emerald-100 bg-white p-5 md:p-8">
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
+                {psychoeducationPath.map((step, index) => (
+                  <div key={step.label} className="relative">
+                    <section className="h-full rounded-[2rem] border border-emerald-100 bg-emerald-50/40 p-6 shadow-sm">
+                      <div className="mb-4 inline-flex rounded-full border border-emerald-200 bg-white px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700">
+                        {step.label}
+                      </div>
+                      <p className="text-sm leading-relaxed text-slate-700">{step.desc}</p>
+                    </section>
+                    {index < psychoeducationPath.length - 1 && (
+                      <>
+                        <div className="absolute right-[-0.85rem] top-1/2 hidden h-[2px] w-7 -translate-y-1/2 bg-emerald-300 lg:block" />
+                        <div className="absolute right-[-0.6rem] top-1/2 hidden h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-r-2 border-t-2 border-emerald-400 lg:block" />
+                      </>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
