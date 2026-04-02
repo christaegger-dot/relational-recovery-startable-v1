@@ -67,6 +67,14 @@ import {
 } from '../data/evidenceContent';
 
 export default function EvidenceSection() {
+  const chapterLinks = [
+    { id: 'evidence-understand', label: '1 Verstehen', note: 'Eltern, Familie, Kinder, Schutz' },
+    { id: 'evidence-psychoeducation', label: '2 Mit Kindern sprechen', note: 'Psychoedukation und Gesprächsführung' },
+    { id: 'evidence-parentwork', label: '3 Mit Eltern arbeiten', note: 'Barrieren, Kooperation, Hilfen' },
+    { id: 'evidence-interventions', label: '4 Handeln und vernetzen', note: 'Interventionen, Netzwerk, Angebote' },
+    { id: 'evidence-materials', label: '5 Materialien', note: 'Bücher, Medien, Referenzen' },
+  ];
+
   return (
     <article className="space-y-16 no-print">
       <div className="bg-white p-8 md:p-16 rounded-[4rem] shadow-sm border border-slate-100">
@@ -208,10 +216,45 @@ export default function EvidenceSection() {
           </section>
         </section>
 
+        <section className="mb-20 rounded-[3rem] border border-slate-100 bg-slate-50 p-8 md:p-10 shadow-sm">
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-start">
+            <div>
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Kapitelübersicht</div>
+              <h3 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900 mb-4">
+                Der Evidenzteil folgt einer <span className="text-emerald-600 italic">klareren Fachlogik</span>.
+              </h3>
+              <p className="max-w-4xl text-base leading-relaxed text-slate-600">
+                Die Inhalte bleiben fachlich gleich, sind aber stärker als Web-Dossier gegliedert: zuerst verstehen,
+                dann mit Kindern sprechen, mit Eltern arbeiten und schliesslich konkrete Interventionen, Netzwerk und
+                Angebote nutzen.
+              </p>
+            </div>
+            <aside className="rounded-[2rem] border border-slate-200 bg-white p-6">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500 mb-3">Leselogik</div>
+              <p className="text-sm leading-relaxed text-slate-700">
+                So lässt sich der Bereich eher kapitelweise lesen statt als lange Folge einzelner Unterthemen.
+              </p>
+            </aside>
+          </div>
 
-        <section className="mb-20 border-t-2 border-slate-50 pt-16">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
+            {chapterLinks.map((chapter) => (
+              <a
+                key={chapter.id}
+                href={`#${chapter.id}`}
+                className="rounded-[1.75rem] border border-slate-200 bg-white p-5 transition-colors hover:border-emerald-200 hover:bg-emerald-50/40"
+              >
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700">{chapter.label}</div>
+                <p className="mt-3 text-sm leading-relaxed font-medium text-slate-700">{chapter.note}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+
+
+        <section id="evidence-understand" className="mb-20 border-t-2 border-slate-50 pt-16">
           <div className="text-emerald-600 font-black text-[11px] uppercase tracking-[0.5em] mb-8 flex items-center gap-4">
-            <div className="w-14 h-[2px] bg-emerald-200" /> Was Eltern erleben
+            <div className="w-14 h-[2px] bg-emerald-200" /> 1 Verstehen
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
@@ -443,7 +486,7 @@ export default function EvidenceSection() {
 
         <section className="mb-20 border-t-2 border-slate-50 pt-16">
           <div className="text-emerald-600 font-black text-[11px] uppercase tracking-[0.5em] mb-8 flex items-center gap-4">
-            <div className="w-14 h-[2px] bg-emerald-200" /> Familie als Ganzes
+            <div className="w-14 h-[2px] bg-emerald-200" /> 1 Verstehen
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
@@ -511,7 +554,7 @@ export default function EvidenceSection() {
 
         <section className="mb-20 border-t-2 border-slate-50 pt-16">
           <div className="text-emerald-600 font-black text-[11px] uppercase tracking-[0.5em] mb-8 flex items-center gap-4">
-            <div className="w-14 h-[2px] bg-emerald-200" /> Was Kinder typischerweise erleben
+            <div className="w-14 h-[2px] bg-emerald-200" /> 1 Verstehen
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
@@ -581,7 +624,7 @@ export default function EvidenceSection() {
 
         <section className="mb-20 border-t-2 border-slate-50 pt-16">
           <div className="text-emerald-600 font-black text-[11px] uppercase tracking-[0.5em] mb-8 flex items-center gap-4">
-            <div className="w-14 h-[2px] bg-emerald-200" /> Was Familien und Kinder schützt
+            <div className="w-14 h-[2px] bg-emerald-200" /> 1 Verstehen
           </div>
 
           <div className="mb-12">
@@ -658,9 +701,9 @@ export default function EvidenceSection() {
 
 
 
-        <section className="mb-20 border-t-2 border-slate-50 pt-16">
+        <section id="evidence-psychoeducation" className="mb-20 border-t-2 border-slate-50 pt-16">
           <div className="text-emerald-600 font-black text-[11px] uppercase tracking-[0.5em] mb-8 flex items-center gap-4">
-            <div className="w-14 h-[2px] bg-emerald-200" /> Psychoedukation mit Kindern
+            <div className="w-14 h-[2px] bg-emerald-200" /> 2 Mit Kindern sprechen
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
@@ -809,9 +852,9 @@ export default function EvidenceSection() {
         </section>
 
 
-        <section className="mb-20 border-t-2 border-slate-50 pt-16">
+        <section id="evidence-parentwork" className="mb-20 border-t-2 border-slate-50 pt-16">
           <div className="text-emerald-600 font-black text-[11px] uppercase tracking-[0.5em] mb-8 flex items-center gap-4">
-            <div className="w-14 h-[2px] bg-emerald-200" /> Warum Hilfe oft nicht ankommt
+            <div className="w-14 h-[2px] bg-emerald-200" /> 3 Mit Eltern arbeiten
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
@@ -877,9 +920,9 @@ export default function EvidenceSection() {
 
 
 
-        <section className="mb-20 border-t-2 border-slate-50 pt-16">
+        <section id="evidence-interventions" className="mb-20 border-t-2 border-slate-50 pt-16">
           <div className="text-emerald-600 font-black text-[11px] uppercase tracking-[0.5em] mb-8 flex items-center gap-4">
-            <div className="w-14 h-[2px] bg-emerald-200" /> Klinische Praxis und Interventionen
+            <div className="w-14 h-[2px] bg-emerald-200" /> 4 Handeln und vernetzen
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
@@ -997,7 +1040,7 @@ export default function EvidenceSection() {
 
         <section className="mb-20 border-t-2 border-slate-50 pt-16">
           <div className="text-emerald-600 font-black text-[11px] uppercase tracking-[0.5em] mb-8 flex items-center gap-4">
-            <div className="w-14 h-[2px] bg-emerald-200" /> Angebote in Zürich und der Schweiz
+            <div className="w-14 h-[2px] bg-emerald-200" /> 4 Handeln und vernetzen
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
@@ -1113,9 +1156,9 @@ export default function EvidenceSection() {
 
 
 
-        <section className="mb-20 border-t-2 border-slate-50 pt-16">
+        <section id="evidence-materials" className="mb-20 border-t-2 border-slate-50 pt-16">
           <div className="text-emerald-600 font-black text-[11px] uppercase tracking-[0.5em] mb-8 flex items-center gap-4">
-            <div className="w-14 h-[2px] bg-emerald-200" /> Bücher, Medien und Materialien
+            <div className="w-14 h-[2px] bg-emerald-200" /> 5 Materialien
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
