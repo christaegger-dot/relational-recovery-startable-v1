@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { ChevronRight, ExternalLink, GraduationCap, HeartHandshake, Library, MapPin, Sparkles } from 'lucide-react';
+import heroIllustration from '../assets/relational-recovery-hero-v3.png';
 import { E_MODULES, LITERATUR, RESOURCE_DATA, VIGNETTEN } from '../data/content';
 
 export default function HomeSection({ activeTab, setActiveTab, progressPercent, completedModules }) {
@@ -62,6 +63,16 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
               >
                 Toolbox öffnen
               </button>
+            </div>
+
+            <div className="mt-12 flex justify-end">
+              <div className="w-full max-w-[34rem] overflow-hidden rounded-[2.75rem] border border-slate-200 bg-[#F3F5EF] p-4 md:p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)]">
+                <img
+                  src={heroIllustration}
+                  alt="Minimalistische Illustration eines Familiensystems mit Nähe, Distanz und Unterstützung"
+                  className="aspect-[16/10] w-full rounded-[2rem] object-contain"
+                />
+              </div>
             </div>
 
             <div className="mt-10 rounded-[2.25rem] border border-emerald-100 bg-emerald-50/70 p-6 md:p-8">
