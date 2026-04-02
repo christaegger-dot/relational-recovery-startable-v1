@@ -1,0 +1,53 @@
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 200;
+    background: #0f172a;
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    font-weight: 800;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+  .haptic-btn {
+    transition: transform 0.1s, background-color 0.3s, box-shadow 0.3s, border-color 0.3s, color 0.3s;
+  }
+  .haptic-btn:active {
+    transform: scale(0.98);
+  }
+  .page-enter {
+    animation: pageEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .chart-shell {
+    position: relative;
+    width: 100%;
+  }
+  @keyframes pageEnter {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  :focus-visible {
+    outline: 3px solid #059669;
+    outline-offset: 4px;
+    border-radius: 12px;
+  }
+  .print-only {
+    display: none;
+  }
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    .print-only {
+      display: block !important;
+    }
+  }
