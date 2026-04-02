@@ -6,6 +6,7 @@ import {
   ChevronDown,
   CheckCircle2,
   ClipboardCheck,
+  Download,
   ExternalLink,
   HeartHandshake,
   Library,
@@ -67,7 +68,7 @@ import {
   SUPPORT_OFFER_NOTES,
 } from '../data/evidenceContent';
 
-export default function EvidenceSection() {
+export default function EvidenceSection({ downloadResources = [] }) {
   const chapterLinks = [
     { id: 'evidence-understand', label: '1 Verstehen', note: 'Eltern, Familie, Kinder, Schutz' },
     { id: 'evidence-psychoeducation', label: '2 Mit Kindern sprechen', note: 'Psychoedukation und Gesprächsführung' },
@@ -1607,6 +1608,39 @@ export default function EvidenceSection() {
             title="Buecher und digitale Materialien"
             note="Die Materialsammlung ist als Nachschlageblock gedacht. Sie verlinkt vor allem externe Ressourcen und ist kein eigener Download-Hub."
           >
+            {downloadResources.length > 0 && (
+              <>
+                <div className="mb-6">
+                  <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Eigene Arbeitsmaterialien</div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                  {downloadResources.map((item) => (
+                    <section key={item.title} className="rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-sm flex flex-col h-full">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {item.meta.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1 rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h4 className="text-2xl font-black tracking-tight text-slate-900 mb-4">{item.title}</h4>
+                      <p className="text-slate-600 leading-relaxed mb-8">{item.description}</p>
+                      <button
+                        type="button"
+                        onClick={item.onDownload}
+                        className="mt-auto inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.24em] text-slate-900 hover:text-emerald-600 transition-colors text-left"
+                      >
+                        {item.actionLabel} <Download size={16} />
+                      </button>
+                    </section>
+                  ))}
+                </div>
+              </>
+            )}
+
             <div className="mb-6">
               <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Empfohlene Bücher</div>
             </div>
