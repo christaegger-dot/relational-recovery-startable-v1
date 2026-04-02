@@ -184,6 +184,21 @@ export default function EvidenceSection() {
     </details>
   );
 
+  const SectionTypeBadge = ({ type }) => {
+    const tone =
+      type === 'Leitabschnitt'
+        ? 'border-slate-200 bg-white text-slate-700'
+        : type === 'Arbeitsabschnitt'
+          ? 'border-emerald-100 bg-emerald-50 text-emerald-800'
+          : 'border-slate-200 bg-slate-50 text-slate-600';
+
+    return (
+      <span className={`inline-flex rounded-full border px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] ${tone}`}>
+        {type}
+      </span>
+    );
+  };
+
   return (
     <article className="space-y-16 no-print">
       <div className="bg-white p-8 md:p-16 rounded-[4rem] shadow-sm border border-slate-100">
@@ -342,6 +357,11 @@ export default function EvidenceSection() {
               <p className="text-sm leading-relaxed text-slate-700">
                 So lässt sich der Bereich kapitelweise statt blockweise lesen.
               </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                <SectionTypeBadge type="Leitabschnitt" />
+                <SectionTypeBadge type="Arbeitsabschnitt" />
+                <SectionTypeBadge type="Vertiefung" />
+              </div>
             </aside>
           </div>
 
@@ -367,6 +387,9 @@ export default function EvidenceSection() {
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
             <div className="xl:col-span-7">
+              <div className="mb-4">
+                <SectionTypeBadge type="Leitabschnitt" />
+              </div>
               <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-6">
                 Zwischen Verantwortung, <span className="text-emerald-600 italic">Erschöpfung</span> und Bindung.
               </h3>
@@ -443,7 +466,10 @@ export default function EvidenceSection() {
           </div>
 
           <div className="rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-6">Für die Praxis</div>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Für die Praxis</div>
+              <SectionTypeBadge type="Arbeitsabschnitt" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {PARENT_PRACTICE_POINTS.map((point) => (
                 <div key={point} className="flex items-start gap-3 rounded-[1.5rem] bg-slate-50 border border-slate-100 p-5">
@@ -619,6 +645,9 @@ export default function EvidenceSection() {
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
             <div className="xl:col-span-7">
+              <div className="mb-4">
+                <SectionTypeBadge type="Leitabschnitt" />
+              </div>
               <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-6">
                 Wenn ein Elternteil erkrankt, reagiert oft das <span className="text-emerald-600 italic">ganze Familiensystem</span>.
               </h3>
@@ -661,7 +690,10 @@ export default function EvidenceSection() {
           </div>
 
           <div className="rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-6">Für die Praxis</div>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Für die Praxis</div>
+              <SectionTypeBadge type="Arbeitsabschnitt" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {FAMILY_SYSTEM_PRACTICE_POINTS.map((point) => (
                 <div key={point} className="flex items-start gap-3 rounded-[1.5rem] bg-slate-50 border border-slate-100 p-5">
@@ -675,7 +707,10 @@ export default function EvidenceSection() {
           <div className="mt-8 rounded-[3rem] border border-slate-100 bg-slate-50 p-8 md:p-10 shadow-sm">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
               <div>
-                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Fachdiagramm</div>
+                <div className="mb-4 flex flex-wrap items-center gap-3">
+                  <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Fachdiagramm</div>
+                  <SectionTypeBadge type="Arbeitsabschnitt" />
+                </div>
                 <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
                   Belastung wirkt oft als <span className="text-emerald-600 italic">familiärer Kreislauf</span>.
                 </h4>
@@ -782,6 +817,9 @@ export default function EvidenceSection() {
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
             <div className="xl:col-span-7">
+              <div className="mb-4">
+                <SectionTypeBadge type="Leitabschnitt" />
+              </div>
               <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-6">
                 Zwischen Anpassung, <span className="text-emerald-600 italic">Sorge</span> und stiller Überforderung.
               </h3>
@@ -822,7 +860,10 @@ export default function EvidenceSection() {
           </div>
 
           <div className="rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-6">Für die Praxis</div>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Für die Praxis</div>
+              <SectionTypeBadge type="Arbeitsabschnitt" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {CHILD_EXPERIENCE_PRACTICE_POINTS.map((point) => (
                 <div key={point} className="flex items-start gap-3 rounded-[1.5rem] bg-slate-50 border border-slate-100 p-5">
@@ -841,6 +882,9 @@ export default function EvidenceSection() {
           </div>
 
           <div className="mb-12">
+            <div className="mb-4">
+              <SectionTypeBadge type="Leitabschnitt" />
+            </div>
             <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-5">
               Was Familien und Kindern <span className="text-emerald-600 italic">Stabilität</span> geben kann.
             </h3>
@@ -864,7 +908,10 @@ export default function EvidenceSection() {
           <div className="mb-12 rounded-[3rem] border border-slate-200 bg-white p-8 md:p-10 shadow-sm">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
               <div>
-                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Schutzfaktoren- und Versorgungsgrafik</div>
+                <div className="mb-4 flex flex-wrap items-center gap-3">
+                  <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Schutzfaktoren- und Versorgungsgrafik</div>
+                  <SectionTypeBadge type="Arbeitsabschnitt" />
+                </div>
                 <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
                   Stabilität entsteht meist durch <span className="text-emerald-600 italic">mehrere kleine tragende Elemente</span>.
                 </h4>
@@ -964,7 +1011,10 @@ export default function EvidenceSection() {
           </div>
 
           <div className="rounded-[3rem] border border-slate-100 bg-slate-900 p-8 md:p-10 shadow-sm">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-400 mb-6">Für die Praxis</div>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-400">Für die Praxis</div>
+              <SectionTypeBadge type="Arbeitsabschnitt" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {PROTECTION_PRACTICE_POINTS.map((point) => (
                 <div key={point} className="flex items-start gap-3 rounded-[1.5rem] bg-white/5 border border-white/10 p-5">
@@ -991,6 +1041,9 @@ export default function EvidenceSection() {
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
             <div className="xl:col-span-7">
+              <div className="mb-4">
+                <SectionTypeBadge type="Leitabschnitt" />
+              </div>
               <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-6">
                 Wie man mit Kindern <span className="text-emerald-600 italic">darüber sprechen</span> kann.
               </h3>
@@ -1041,7 +1094,10 @@ export default function EvidenceSection() {
           <div className="mb-12 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-start">
               <div>
-                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Vorbereitung mit den Eltern</div>
+                <div className="mb-4 flex flex-wrap items-center gap-3">
+                  <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900">Vorbereitung mit den Eltern</div>
+                  <SectionTypeBadge type="Arbeitsabschnitt" />
+                </div>
                 <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
                   Vor dem Gespräch zuerst die <span className="text-emerald-700 italic">Befürchtungen der Eltern</span> klären.
                 </h4>
@@ -1110,7 +1166,10 @@ export default function EvidenceSection() {
           </div>
 
           <div className="mb-12 rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-6">Typische Schwierigkeiten im Gespräch</div>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Typische Schwierigkeiten im Gespräch</div>
+              <SectionTypeBadge type="Arbeitsabschnitt" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {PSYCHOEDUCATION_DIFFICULTIES.map((item) => (
                 <section key={item.title} className="rounded-[2rem] border border-slate-100 bg-slate-50 p-6">
@@ -1122,7 +1181,10 @@ export default function EvidenceSection() {
           </div>
 
           <div className="rounded-[3rem] border border-slate-100 bg-slate-50 p-8 md:p-10 shadow-sm">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-6">Für die Praxis</div>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Für die Praxis</div>
+              <SectionTypeBadge type="Arbeitsabschnitt" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {PSYCHOEDUCATION_PRACTICE_POINTS.map((point) => (
                 <div key={point} className="flex items-start gap-3 rounded-[1.5rem] bg-white border border-slate-100 p-5">
@@ -1192,6 +1254,9 @@ export default function EvidenceSection() {
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
             <div className="xl:col-span-7">
+              <div className="mb-4">
+                <SectionTypeBadge type="Leitabschnitt" />
+              </div>
               <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-6">
                 Zwischen <span className="text-emerald-600 italic">Hilfebedarf</span> und Hürden im Alltag.
               </h3>
@@ -1232,7 +1297,10 @@ export default function EvidenceSection() {
           </div>
 
           <div className="rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-6">Für die Praxis</div>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Für die Praxis</div>
+              <SectionTypeBadge type="Arbeitsabschnitt" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {HELP_BARRIER_PRACTICE_POINTS.map((point) => (
                 <div key={point} className="flex items-start gap-3 rounded-[1.5rem] bg-slate-50 border border-slate-100 p-5">
@@ -1253,6 +1321,9 @@ export default function EvidenceSection() {
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
             <div className="xl:col-span-7">
+              <div className="mb-4">
+                <SectionTypeBadge type="Leitabschnitt" />
+              </div>
               <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-6">
                 Von der <span className="text-emerald-600 italic">Einsicht</span> zur konkreten Entlastung im Alltag.
               </h3>
@@ -1292,7 +1363,10 @@ export default function EvidenceSection() {
           <div className="mb-12 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
               <div>
-                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Mentalisieren und familienorientierte Interventionen</div>
+                <div className="mb-4 flex flex-wrap items-center gap-3">
+                  <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900">Mentalisieren und familienorientierte Interventionen</div>
+                  <SectionTypeBadge type="Arbeitsabschnitt" />
+                </div>
                 <h4 className="text-3xl font-black tracking-tight text-slate-900 mb-4">
                   Verhalten besser verstehen, statt nur Symptome <span className="text-emerald-700 italic">abzuarbeiten</span>.
                 </h4>
@@ -1343,7 +1417,10 @@ export default function EvidenceSection() {
           </div>
 
           <div className="rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-6">Konkrete nächste Schritte</div>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Konkrete nächste Schritte</div>
+              <SectionTypeBadge type="Arbeitsabschnitt" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {CLINICAL_PRACTICE_STEPS.map((step) => (
                 <div key={step} className="flex items-start gap-3 rounded-[1.5rem] bg-slate-50 border border-slate-100 p-5">
@@ -1364,6 +1441,9 @@ export default function EvidenceSection() {
 
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
             <div className="xl:col-span-7">
+              <div className="mb-4">
+                <SectionTypeBadge type="Leitabschnitt" />
+              </div>
               <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-6">
                 Unterstützung, die <span className="text-emerald-600 italic">unterschiedliche Zugänge</span> erlaubt.
               </h3>
@@ -1446,7 +1526,10 @@ export default function EvidenceSection() {
           </div>
 
           <div className="mt-10 rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-6">Über diese Website</div>
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Über diese Website</div>
+              <SectionTypeBadge type="Arbeitsabschnitt" />
+            </div>
             <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
               <div className="xl:col-span-7 space-y-4 text-slate-600 leading-relaxed">
                 <p>
