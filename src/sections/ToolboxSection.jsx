@@ -764,9 +764,13 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
       </section>
 
       <section className="bg-white p-8 md:p-16 rounded-[4rem] border border-slate-100 shadow-sm">
-        <h3 className="text-3xl font-black text-slate-900 mb-14 uppercase tracking-[0.25em] italic border-b-8 border-slate-50 pb-10">
-          Klinische Dokumente
+        <h3 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-[0.25em] italic border-b-8 border-slate-50 pb-10">
+          Arbeitsmaterialien
         </h3>
+        <p className="mb-12 max-w-3xl text-base leading-relaxed text-slate-600">
+          Zwei direkte Arbeitsmittel fuer Fallgespraech, Supervision oder Krisenvorsorge: eine druckbare
+          Gespraechszusammenfassung und eine bearbeitbare Textvorlage. Nichts wird automatisch gespeichert.
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 no-print">
           <button type="button" className="group text-left" onClick={onPrint}>
             <div className="bg-slate-50 rounded-[3rem] p-16 border-2 border-slate-100 group-hover:border-emerald-500 transition-all duration-300 mb-8 flex items-center justify-center relative overflow-hidden haptic-btn shadow-inner">
@@ -779,10 +783,15 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
             </div>
             <h4 className="text-2xl font-black mb-3 tracking-tight">Anamnese-Protokoll</h4>
             <p className="text-base text-slate-500 font-medium leading-relaxed mb-6">
-              Druckansicht mit aktuellem Assessment-Stand für Gespräch, Fallnotiz oder Supervision.
+              Druckbare Gespraechszusammenfassung mit aktuellem Assessment-Stand fuer Fallnotiz, Uebergabe oder Supervision.
             </p>
+            <div className="mb-5 flex flex-wrap gap-2 text-[10px] font-black uppercase tracking-[0.22em] text-slate-500">
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-2">Printansicht</span>
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-2">mit aktuellem Score</span>
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-2">keine Speicherung</span>
+            </div>
             <div className="flex items-center gap-3 text-emerald-600 font-black text-[11px] uppercase tracking-[0.2em] underline underline-offset-8 decoration-2">
-              <Printer size={18} /> Druckansicht öffnen
+              <Printer size={18} /> Printansicht oeffnen
             </div>
           </button>
 
@@ -796,10 +805,15 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
             </div>
             <h4 className="text-2xl font-black mb-3 tracking-tight">Krisenplan (Textvorlage)</h4>
             <p className="text-base text-slate-500 font-medium leading-relaxed mb-6">
-              Lädt eine echte Textvorlage herunter, die im Gespräch oder in der Fallarbeit weiterbearbeitet werden kann.
+              Bearbeitbare TXT-Vorlage mit Leitfragen zu Warnzeichen, Kinderbetreuung, Kontaktkette und sicheren Orten.
             </p>
+            <div className="mb-5 flex flex-wrap gap-2 text-[10px] font-black uppercase tracking-[0.22em] text-slate-500">
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-2">TXT editierbar</span>
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-2">fuer Gespraech und Fallarbeit</span>
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-2">keine Speicherung</span>
+            </div>
             <div className="flex items-center gap-3 text-slate-900 font-black text-[11px] uppercase tracking-[0.2em] underline underline-offset-8 decoration-2">
-              <Download size={18} /> Vorlage herunterladen
+              <Download size={18} /> TXT-Vorlage herunterladen
             </div>
           </button>
         </div>

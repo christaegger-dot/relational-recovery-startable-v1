@@ -73,7 +73,7 @@ export default function EvidenceSection() {
     { id: 'evidence-psychoeducation', label: '2 Mit Kindern sprechen', note: 'Psychoedukation und Gesprächsführung' },
     { id: 'evidence-parentwork', label: '3 Mit Eltern arbeiten', note: 'Barrieren, Kooperation, Hilfen' },
     { id: 'evidence-interventions', label: '4 Handeln und vernetzen', note: 'Interventionen, Netzwerk, Angebote' },
-    { id: 'evidence-materials', label: '5 Materialien', note: 'Bücher, Medien, Referenzen' },
+    { id: 'evidence-materials', label: '5 Materialien', note: 'Buecher, externe Ressourcen, Referenzen' },
   ];
   const familyDynamicsNodes = [
     {
@@ -1566,7 +1566,7 @@ export default function EvidenceSection() {
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
             <div className="xl:col-span-7">
               <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-6">
-                Materialien, die <span className="text-emerald-600 italic">Sprache und Entlastung</span> ermöglichen.
+                Materialien und externe Ressourcen, die <span className="text-emerald-600 italic">Sprache und Entlastung</span> ermoeglichen.
               </h3>
               <div className="space-y-5 text-base md:text-lg text-slate-600 leading-relaxed">
                 <p>
@@ -1579,6 +1579,11 @@ export default function EvidenceSection() {
                   Der Grundlagentext empfiehlt Materialien für verschiedene Altersstufen sowie digitale Ressourcen,
                   die Orientierung und Psychoedukation erleichtern. Für die Website ist entscheidend, diese Hilfen
                   nicht als Pflichtlektüre, sondern als entlastende Werkzeuge sichtbar zu machen.
+                </p>
+                <p>
+                  Dieser Bereich ist bewusst als kommentierte Materialsammlung aufgebaut: Buecher werden kurz
+                  eingeordnet, digitale Angebote verlinkt. Eigene Downloads der Website finden sich in der Toolbox
+                  unter Arbeitsmaterialien.
                 </p>
               </div>
             </div>
@@ -1599,8 +1604,8 @@ export default function EvidenceSection() {
           </div>
 
           <EvidenceDisclosure
-            title="Bücher und digitale Materialien"
-            note="Die Materialsammlung ist als Nachschlageblock gedacht und bleibt standardmässig kompakt."
+            title="Buecher und digitale Materialien"
+            note="Die Materialsammlung ist als Nachschlageblock gedacht. Sie verlinkt vor allem externe Ressourcen und ist kein eigener Download-Hub."
           >
             <div className="mb-6">
               <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Empfohlene Bücher</div>

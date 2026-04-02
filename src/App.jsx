@@ -12,6 +12,7 @@ import {
   STORAGE_KEYS,
 } from './data/appShellContent';
 import { ASSESSMENT_ITEMS } from './data/learningContent';
+import { SAFETY_PLAN_TEMPLATE_FIELDS } from './data/toolboxContent';
 import {
   downloadTextFile,
   getInitialAppState,
@@ -376,36 +377,24 @@ export default function App() {
   };
 
   const handleDownloadCrisisPlan = () => {
+    const sections = SAFETY_PLAN_TEMPLATE_FIELDS.map(
+      (field, index) => `${index + 1}. ${field.title}
+Leitfrage: ${field.hint}
+-
+-
+-
+`
+    ).join('\n');
+
     const template = `Krisenplan – Relational Recovery Fachportal
 
+Bearbeitbare Textvorlage fuer Gespraech, Fallarbeit oder gemeinsame Krisenvorsorge.
 Aktueller Assessment-Score: ${score.risk}
+Hinweis: Diese Vorlage speichert nichts automatisch und ersetzt keine fachliche Absprache.
 
-1. Warnzeichen
--
--
--
-
-2. Sofortkontakte
--
--
--
-
-3. Kinderbetreuung
--
--
--
-
-4. Sichere Orte
--
--
--
-
-5. Wer informiert wen
--
--
--
-
-6. Was wird gesichert
+${sections}
+Naechster gemeinsamer Schritt
+Leitfrage: Was wird bis zum naechsten Kontakt konkret vereinbart?
 -
 -
 -
