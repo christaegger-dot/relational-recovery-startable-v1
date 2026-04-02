@@ -76,11 +76,41 @@ export default function EvidenceSection() {
     { id: 'evidence-materials', label: '5 Materialien', note: 'Bücher, Medien, Referenzen' },
   ];
   const familyDynamicsNodes = [
-    { label: 'elterliche Symptome', top: '14%', left: '50%', tone: 'bg-slate-900 text-white border-slate-300' },
-    { label: 'Alltag unter Druck', top: '38%', left: '82%', tone: 'bg-white text-slate-900 border-slate-200' },
-    { label: 'kindliche Anpassung', top: '72%', left: '68%', tone: 'bg-emerald-50 text-emerald-950 border-emerald-200' },
-    { label: 'mehr familiärer Stress', top: '76%', left: '30%', tone: 'bg-amber-50 text-amber-950 border-amber-200' },
-    { label: 'weniger offene Kommunikation', top: '38%', left: '18%', tone: 'bg-sky-50 text-sky-950 border-sky-200' },
+    {
+      label: 'elterliche Symptome',
+      note: 'Erschöpfung, Angst, Instabilität oder Desorganisation',
+      top: '14%',
+      left: '50%',
+      tone: 'bg-slate-900 text-white border-slate-300',
+    },
+    {
+      label: 'Alltag unter Druck',
+      note: 'Routinen kippen, Betreuung und Übergaben werden brüchig',
+      top: '38%',
+      left: '82%',
+      tone: 'bg-white text-slate-900 border-slate-200',
+    },
+    {
+      label: 'kindliche Anpassung',
+      note: 'Sorge, Rückzug, Überanpassung oder stille Mitverantwortung',
+      top: '72%',
+      left: '68%',
+      tone: 'bg-emerald-50 text-emerald-950 border-emerald-200',
+    },
+    {
+      label: 'mehr familiärer Stress',
+      note: 'Spannung, Überforderung und neue Konflikte im System',
+      top: '76%',
+      left: '30%',
+      tone: 'bg-amber-50 text-amber-950 border-amber-200',
+    },
+    {
+      label: 'weniger offene Kommunikation',
+      note: 'Tabuisierung, Missverständnisse und weniger Orientierung',
+      top: '38%',
+      left: '18%',
+      tone: 'bg-sky-50 text-sky-950 border-sky-200',
+    },
   ];
   const psychoeducationPath = [
     {
@@ -663,27 +693,48 @@ export default function EvidenceSection() {
               </aside>
             </div>
 
-            <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
-              <div className="relative min-h-[28rem] overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white">
-                <div className="absolute left-1/2 top-1/2 h-[20rem] w-[20rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-emerald-200" />
-                <div className="absolute left-1/2 top-1/2 h-[13rem] w-[13rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-slate-200" />
-
-                {familyDynamicsNodes.map((node) => (
-                  <div
-                    key={node.label}
-                    className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-[1.5rem] border px-4 py-3 text-center shadow-sm ${node.tone}`}
-                    style={{ top: node.top, left: node.left }}
-                  >
-                    <div className="text-[11px] font-black uppercase tracking-[0.08em]">{node.label}</div>
+          <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+              <div>
+                <div className="relative hidden min-h-[30rem] overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white lg:block">
+                  <div className="absolute left-1/2 top-1/2 h-[20rem] w-[20rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-emerald-200" />
+                  <div className="absolute left-1/2 top-1/2 h-[13rem] w-[13rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-slate-200" />
+                  <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-100 bg-emerald-50 text-center shadow-sm">
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-[0.18em] text-emerald-700">Kreislauf</div>
+                      <div className="mt-2 text-sm font-black leading-tight text-emerald-950">gegenseitige Verstärkung</div>
+                    </div>
                   </div>
-                ))}
 
-                <div className="absolute left-[50%] top-[24%] h-[16%] w-[2px] -translate-x-1/2 bg-emerald-300" />
-                <div className="absolute left-[62%] top-[30%] h-[2px] w-[16%] bg-emerald-300" />
-                <div className="absolute left-[73%] top-[49%] h-[16%] w-[2px] bg-emerald-300" />
-                <div className="absolute left-[32%] top-[74%] h-[2px] w-[28%] bg-emerald-300" />
-                <div className="absolute left-[18%] top-[46%] h-[16%] w-[2px] bg-emerald-300" />
-                <div className="absolute left-[21%] top-[30%] h-[2px] w-[16%] bg-emerald-300" />
+                  {familyDynamicsNodes.map((node) => (
+                    <div
+                      key={node.label}
+                      className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-[1.5rem] border px-4 py-4 text-center shadow-sm ${node.tone}`}
+                      style={{ top: node.top, left: node.left }}
+                    >
+                      <div className="text-[11px] font-black uppercase tracking-[0.08em]">{node.label}</div>
+                    </div>
+                  ))}
+
+                  <div className="absolute left-[50%] top-[24%] h-[16%] w-[2px] -translate-x-1/2 bg-emerald-300" />
+                  <div className="absolute left-[62%] top-[30%] h-[2px] w-[16%] bg-emerald-300" />
+                  <div className="absolute left-[73%] top-[49%] h-[16%] w-[2px] bg-emerald-300" />
+                  <div className="absolute left-[32%] top-[74%] h-[2px] w-[28%] bg-emerald-300" />
+                  <div className="absolute left-[18%] top-[46%] h-[16%] w-[2px] bg-emerald-300" />
+                  <div className="absolute left-[21%] top-[30%] h-[2px] w-[16%] bg-emerald-300" />
+                </div>
+
+                <div className="grid gap-4 lg:hidden">
+                  <div className="rounded-[1.75rem] border border-emerald-100 bg-emerald-50 p-5 text-center shadow-sm">
+                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-emerald-700">Kreislauf</div>
+                    <div className="mt-2 text-sm font-black text-emerald-950">gegenseitige Verstärkung</div>
+                  </div>
+                  {familyDynamicsNodes.map((node) => (
+                    <section key={node.label} className={`rounded-[1.5rem] border p-4 shadow-sm ${node.tone}`}>
+                      <h5 className="text-[11px] font-black uppercase tracking-[0.08em]">{node.label}</h5>
+                      <p className="mt-2 text-sm leading-relaxed opacity-90">{node.note}</p>
+                    </section>
+                  ))}
+                </div>
               </div>
 
               <aside className="rounded-[2rem] border border-slate-200 bg-white p-6">
@@ -702,7 +753,24 @@ export default function EvidenceSection() {
                     <span className="font-black text-slate-900">im System:</span> Netzwerk, Absprachen, Koordination
                   </p>
                 </div>
+                <div className="mt-6 rounded-[1.5rem] border border-emerald-100 bg-emerald-50/70 p-4">
+                  <div className="text-[10px] font-black uppercase tracking-[0.18em] text-emerald-800">Leitidee</div>
+                  <p className="mt-2 text-sm leading-relaxed text-emerald-950">
+                    Gute Interventionen unterbrechen nicht nur Symptome, sondern auch die stillen Rückkopplungen zwischen Alltag,
+                    Kommunikation, kindlicher Anpassung und systemischem Stress.
+                  </p>
+                </div>
               </aside>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {familyDynamicsNodes.map((node) => (
+                <section key={node.label} className={`rounded-[1.75rem] border p-5 shadow-sm ${node.tone}`}>
+                  <div className="text-[10px] font-black uppercase tracking-[0.18em] opacity-80">Systemebene</div>
+                  <h5 className="mt-3 text-base font-black tracking-tight">{node.label}</h5>
+                  <p className="mt-3 text-sm leading-relaxed">{node.note}</p>
+                </section>
+              ))}
             </div>
           </div>
         </section>
