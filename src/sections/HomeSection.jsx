@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { ChevronRight, ExternalLink, GraduationCap, HeartHandshake, Library, MapPin, Sparkles } from 'lucide-react';
-import heroIllustration from '../assets/relational-recovery-hero-v3.png';
+import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
 import { E_MODULES, LITERATUR, RESOURCE_DATA, VIGNETTEN } from '../data/content';
 
 export default function HomeSection({ activeTab, setActiveTab, progressPercent, completedModules }) {
