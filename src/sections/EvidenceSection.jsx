@@ -3,6 +3,7 @@ import {
   Activity,
   AlertTriangle,
   Brain,
+  ChevronDown,
   CheckCircle2,
   ClipboardCheck,
   ExternalLink,
@@ -99,6 +100,22 @@ export default function EvidenceSection() {
       desc: 'Psychoedukation als fortlaufendes Gespräch verstehen und bei Verlauf oder Alter anpassen.',
     },
   ];
+
+  const EvidenceDisclosure = ({ eyebrow = 'Vertiefung', title, note, children }) => (
+    <details className="group rounded-[3rem] border border-slate-200 bg-slate-50 p-6 shadow-sm md:p-8">
+      <summary className="flex cursor-pointer list-none items-start justify-between gap-6">
+        <div>
+          <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">{eyebrow}</div>
+          <h4 className="mt-3 text-2xl font-black tracking-tight text-slate-900">{title}</h4>
+          {note ? <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-600">{note}</p> : null}
+        </div>
+        <span className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition-transform group-open:rotate-180">
+          <ChevronDown size={18} />
+        </span>
+      </summary>
+      <div className="mt-8">{children}</div>
+    </details>
+  );
 
   return (
     <article className="space-y-16 no-print">
@@ -323,7 +340,12 @@ export default function EvidenceSection() {
             ))}
           </div>
 
-          <div className="mb-12 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
+          <div className="mb-12">
+            <EvidenceDisclosure
+              title="Mentalisieren und familienorientierte Interventionen"
+              note="Dieser Block vertieft den Wirkmechanismus familienorientierter Arbeit und konkrete reflexive Fragen."
+            >
+            <div className="rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Evidenz zur Elternrolle</div>
@@ -349,6 +371,8 @@ export default function EvidenceSection() {
                 </div>
               ))}
             </div>
+            </div>
+            </EvidenceDisclosure>
           </div>
 
           <div className="rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
@@ -363,7 +387,12 @@ export default function EvidenceSection() {
             </div>
           </div>
 
-          <div className="mt-8 rounded-[3rem] border border-slate-100 bg-slate-50 p-8 md:p-10 shadow-sm">
+          <div className="mt-8">
+            <EvidenceDisclosure
+              title="Zusammenarbeit mit Eltern"
+              note="Diese Vertiefung beschreibt, wie Kooperation, Transparenz und Mitsprache konkret aufgebaut werden können."
+            >
+            <div className="rounded-[3rem] border border-slate-100 bg-slate-50 p-8 md:p-10 shadow-sm">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Zusammenarbeit mit Eltern</div>
@@ -403,9 +432,16 @@ export default function EvidenceSection() {
                 ))}
               </div>
             </div>
+            </div>
+            </EvidenceDisclosure>
           </div>
 
-          <div className="mt-8 rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
+          <div className="mt-8">
+            <EvidenceDisclosure
+              title="Anliegen und Wünsche von Eltern und Kindern"
+              note="Die Verdichtung hilft, Hilfen stärker an realen Anliegen statt an allgemeinen Annahmen auszurichten."
+            >
+            <div className="rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Anliegen und Wünsche</div>
@@ -443,9 +479,17 @@ export default function EvidenceSection() {
                 </div>
               ))}
             </div>
+            </div>
+            </EvidenceDisclosure>
           </div>
 
-          <div className="mt-8 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
+          <div className="mt-8">
+            <EvidenceDisclosure
+              eyebrow="Praxisvertiefung"
+              title="Direkte Orientierung für Eltern"
+              note="Der Abschnitt bleibt bewusst alltagsnah und direkt, ist aber nur bei Bedarf geöffnet."
+            >
+            <div className="rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-start">
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Direkte Orientierung für Eltern</div>
@@ -495,6 +539,8 @@ export default function EvidenceSection() {
                 ))}
               </div>
             </div>
+            </div>
+            </EvidenceDisclosure>
           </div>
         </section>
 
@@ -844,38 +890,45 @@ export default function EvidenceSection() {
             </div>
           </div>
 
-          <div className="mb-8">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Mögliche Settings</div>
-            <p className="text-base text-slate-600 leading-relaxed max-w-4xl">
-              Psychoedukation ist kein Einheitsformat. Je nach Tabuisierung, Alter und Sicherheit des Kindes können
-              unterschiedliche Gesprächssettings hilfreich sein.
-            </p>
-          </div>
+          <div className="mb-12">
+            <EvidenceDisclosure
+              title="Gesprächssettings und Formulierungshilfen"
+              note="Diese Vertiefung eignet sich für konkrete Gesprächsvorbereitung mit Eltern oder Kindern."
+            >
+              <div className="mb-8">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Mögliche Settings</div>
+                <p className="text-base text-slate-600 leading-relaxed max-w-4xl">
+                  Psychoedukation ist kein Einheitsformat. Je nach Tabuisierung, Alter und Sicherheit des Kindes können
+                  unterschiedliche Gesprächssettings hilfreich sein.
+                </p>
+              </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {PSYCHOEDUCATION_SETTINGS.map((setting) => (
-              <section key={setting.title} className="rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-sm">
-                <h4 className="text-2xl font-black tracking-tight text-slate-900 mb-4">{setting.title}</h4>
-                <p className="text-slate-600 leading-relaxed">{setting.text}</p>
-              </section>
-            ))}
-          </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                {PSYCHOEDUCATION_SETTINGS.map((setting) => (
+                  <section key={setting.title} className="rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-sm">
+                    <h4 className="text-2xl font-black tracking-tight text-slate-900 mb-4">{setting.title}</h4>
+                    <p className="text-slate-600 leading-relaxed">{setting.text}</p>
+                  </section>
+                ))}
+              </div>
 
-          <div className="mb-8">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Formulierungshilfen</div>
-            <p className="text-base text-slate-600 leading-relaxed max-w-4xl">
-              Eltern und Fachpersonen hilft oft nicht nur Wissen, sondern auch eine konkrete Sprache. Solche Sätze sollen
-              keine starre Vorlage sein, sondern eine Richtung: einfach, ehrlich, nicht beschämend und entlastend.
-            </p>
-          </div>
+              <div className="mb-8">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Formulierungshilfen</div>
+                <p className="text-base text-slate-600 leading-relaxed max-w-4xl">
+                  Eltern und Fachpersonen hilft oft nicht nur Wissen, sondern auch eine konkrete Sprache. Solche Sätze sollen
+                  keine starre Vorlage sein, sondern eine Richtung: einfach, ehrlich, nicht beschämend und entlastend.
+                </p>
+              </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {PHRASE_GUIDES.map((guide) => (
-              <section key={guide.title} className="rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-sm">
-                <h4 className="text-2xl font-black tracking-tight text-slate-900 mb-4">{guide.title}</h4>
-                <p className="text-slate-600 leading-relaxed">{guide.text}</p>
-              </section>
-            ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {PHRASE_GUIDES.map((guide) => (
+                  <section key={guide.title} className="rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-sm">
+                    <h4 className="text-2xl font-black tracking-tight text-slate-900 mb-4">{guide.title}</h4>
+                    <p className="text-slate-600 leading-relaxed">{guide.text}</p>
+                  </section>
+                ))}
+              </div>
+            </EvidenceDisclosure>
           </div>
 
           <div className="mb-12 rounded-[3rem] border border-slate-100 bg-white p-8 md:p-10 shadow-sm">
@@ -902,7 +955,12 @@ export default function EvidenceSection() {
             </div>
           </div>
 
-          <div className="mt-8 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
+          <div className="mt-8">
+            <EvidenceDisclosure
+              title="Prozesslogik der Psychoedukation"
+              note="Das Diagramm ergänzt den Haupttext als Arbeitslogik und bleibt standardmässig eingeklappt."
+            >
+            <div className="rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-8 md:p-10 shadow-sm">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_18rem] xl:items-start">
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Fachdiagramm</div>
@@ -943,6 +1001,8 @@ export default function EvidenceSection() {
                 ))}
               </div>
             </div>
+            </div>
+            </EvidenceDisclosure>
           </div>
         </section>
 
@@ -1277,47 +1337,52 @@ export default function EvidenceSection() {
             </aside>
           </div>
 
-          <div className="mb-6">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Empfohlene Bücher</div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {MEDIA_BOOKS.map((book) => (
-              <section key={book.title} className="rounded-[2.5rem] border border-slate-100 bg-slate-50 p-8 shadow-sm">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-800 bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full">
-                    {book.age}
-                  </span>
-                </div>
-                <h4 className="text-2xl font-black tracking-tight text-slate-900 mb-4">{book.title}</h4>
-                <p className="text-slate-600 leading-relaxed">{book.focus}</p>
-              </section>
-            ))}
-          </div>
+          <EvidenceDisclosure
+            title="Bücher und digitale Materialien"
+            note="Die Materialsammlung ist als Nachschlageblock gedacht und bleibt standardmässig kompakt."
+          >
+            <div className="mb-6">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Empfohlene Bücher</div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+              {MEDIA_BOOKS.map((book) => (
+                <section key={book.title} className="rounded-[2.5rem] border border-slate-100 bg-slate-50 p-8 shadow-sm">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-800 bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full">
+                      {book.age}
+                    </span>
+                  </div>
+                  <h4 className="text-2xl font-black tracking-tight text-slate-900 mb-4">{book.title}</h4>
+                  <p className="text-slate-600 leading-relaxed">{book.focus}</p>
+                </section>
+              ))}
+            </div>
 
-          <div className="mb-6">
-            <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Digitale Ressourcen</div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {MEDIA_DIGITAL.map((item) => (
-              <section key={item.name} className="rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-sm flex flex-col h-full">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1 rounded-full">
-                    {item.type}
-                  </span>
-                </div>
-                <h4 className="text-2xl font-black tracking-tight text-slate-900 mb-4">{item.name}</h4>
-                <p className="text-slate-600 leading-relaxed mb-8">{item.description}</p>
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.24em] text-slate-900 hover:text-emerald-600 transition-colors"
-                >
-                  Webseite öffnen <ExternalLink size={16} />
-                </a>
-              </section>
-            ))}
-          </div>
+            <div className="mb-6">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-4">Digitale Ressourcen</div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {MEDIA_DIGITAL.map((item) => (
+                <section key={item.name} className="rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-sm flex flex-col h-full">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1 rounded-full">
+                      {item.type}
+                    </span>
+                  </div>
+                  <h4 className="text-2xl font-black tracking-tight text-slate-900 mb-4">{item.name}</h4>
+                  <p className="text-slate-600 leading-relaxed mb-8">{item.description}</p>
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.24em] text-slate-900 hover:text-emerald-600 transition-colors"
+                  >
+                    Webseite öffnen <ExternalLink size={16} />
+                  </a>
+                </section>
+              ))}
+            </div>
+          </EvidenceDisclosure>
         </section>
 
 
@@ -1325,7 +1390,10 @@ export default function EvidenceSection() {
           <div className="text-emerald-600 font-black text-[11px] uppercase tracking-[0.5em] mb-8 flex items-center gap-4">
             <div className="w-14 h-[2px] bg-emerald-200" /> Vertiefung: Unterschiede nach Krankheitsbild
           </div>
-
+          <EvidenceDisclosure
+            title="Unterschiede nach Krankheitsbild"
+            note="Diese Diagnoseperspektive ist bewusst als spätere fachliche Vertiefung angelegt und nicht Teil des ersten Lesepfads."
+          >
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 items-start mb-12">
             <div className="xl:col-span-7">
               <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-6">
@@ -1384,6 +1452,7 @@ export default function EvidenceSection() {
               </section>
             ))}
           </div>
+          </EvidenceDisclosure>
         </section>
         <footer className="mt-24 pt-16 border-t-2 border-slate-50">
           <h4 className="text-2xl font-black mb-4 flex items-center gap-4 text-slate-900 italic tracking-tight">
