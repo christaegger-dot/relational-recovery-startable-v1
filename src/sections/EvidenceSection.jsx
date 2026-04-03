@@ -1651,8 +1651,9 @@ export default function EvidenceSection({ downloadResources = [] }) {
                 </p>
                 <p>
                   Dieser Bereich ist bewusst als kommentierte Materialsammlung aufgebaut: Bücher werden kurz
-                  eingeordnet, digitale Angebote verlinkt. Eigene Downloads und Arbeitshilfen dieser Website sind
-                  direkt hier im Materialbereich gebündelt.
+                  eingeordnet, digitale Angebote verlinkt und zusätzliche Downloads gebündelt. Die Toolbox ergänzt
+                  dies durch direkte Arbeitsmittel für Triage, Sicherheitsplan und Fallarbeit im Verlauf des
+                  Gesprächs.
                 </p>
               </div>
             </div>
@@ -1673,8 +1674,8 @@ export default function EvidenceSection({ downloadResources = [] }) {
           </div>
 
           <EvidenceDisclosure
-            title="Buecher und digitale Materialien"
-            note="Die Materialsammlung ist als Nachschlageblock gedacht. Sie verlinkt vor allem externe Ressourcen und ist kein eigener Download-Hub."
+            title="Bücher und digitale Materialien"
+            note="Der Bereich bündelt kommentierte Materialien, externe Ressourcen und zusätzliche Website-Downloads. Direkte klinische Arbeitsmittel finden sich ergänzend auch in der Toolbox."
           >
             {downloadResources.length > 0 && (
               <>

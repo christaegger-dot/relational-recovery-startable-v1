@@ -768,8 +768,8 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
           Arbeitsmaterialien
         </h3>
         <p className="mb-12 max-w-3xl text-base leading-relaxed text-slate-600">
-          Zwei direkte Arbeitsmittel fuer Fallgespraech, Supervision oder Krisenvorsorge: eine druckbare
-          Gespraechszusammenfassung und eine bearbeitbare Textvorlage. Nichts wird automatisch gespeichert.
+          Zwei direkte Arbeitsmittel für Fallgespräch, Supervision oder Krisenvorsorge: eine druckbare
+          Gesprächszusammenfassung und eine bearbeitbare Textvorlage. Nichts wird automatisch gespeichert.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 no-print">
           <button type="button" className="group text-left" onClick={onPrint}>
@@ -783,7 +783,7 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
             </div>
             <h4 className="text-2xl font-black mb-3 tracking-tight">Anamnese-Protokoll</h4>
             <p className="text-base text-slate-500 font-medium leading-relaxed mb-6">
-              Druckbare Gespraechszusammenfassung mit aktuellem Assessment-Stand fuer Fallnotiz, Uebergabe oder Supervision.
+              Druckbare Gesprächszusammenfassung mit aktuellem Assessment-Stand für Fallnotiz, Übergabe oder Supervision.
             </p>
             <div className="mb-5 flex flex-wrap gap-2 text-[10px] font-black uppercase tracking-[0.22em] text-slate-500">
               <span className="rounded-full border border-slate-200 bg-white px-3 py-2">Printansicht</span>
@@ -791,7 +791,7 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
               <span className="rounded-full border border-slate-200 bg-white px-3 py-2">keine Speicherung</span>
             </div>
             <div className="flex items-center gap-3 text-emerald-600 font-black text-[11px] uppercase tracking-[0.2em] underline underline-offset-8 decoration-2">
-              <Printer size={18} /> Printansicht oeffnen
+              <Printer size={18} /> Printansicht öffnen
             </div>
           </button>
 
@@ -809,7 +809,7 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
             </p>
             <div className="mb-5 flex flex-wrap gap-2 text-[10px] font-black uppercase tracking-[0.22em] text-slate-500">
               <span className="rounded-full border border-slate-200 bg-white px-3 py-2">TXT editierbar</span>
-              <span className="rounded-full border border-slate-200 bg-white px-3 py-2">fuer Gespraech und Fallarbeit</span>
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-2">für Gespräch und Fallarbeit</span>
               <span className="rounded-full border border-slate-200 bg-white px-3 py-2">keine Speicherung</span>
             </div>
             <div className="flex items-center gap-3 text-slate-900 font-black text-[11px] uppercase tracking-[0.2em] underline underline-offset-8 decoration-2">
