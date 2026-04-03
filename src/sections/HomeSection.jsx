@@ -149,7 +149,7 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
                   onClick={() => setActiveTab('zuerich')}
                   className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-emerald-900 hover:bg-emerald-100 transition-colors"
                 >
-                  Offizielle PUK-Beratung im Angebotsbereich
+                  Zum Netzwerkbereich mit PUK-Angeboten
                 </button>
                 <a
                   href="https://www.pukzh.ch/patienten-angehoerige/informationen-fuer-angehoerige/"

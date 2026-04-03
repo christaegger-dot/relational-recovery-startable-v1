@@ -656,6 +656,14 @@ export const SUPPORT_OFFERS = [
     link: 'https://www.elternnotruf.ch/angebot/beratung',
   },
   {
+    name: 'Pro Mente Sana',
+    category: 'Schweizweite Orientierung / Rechte',
+    audience: 'Betroffene, Angehörige, Nahestehende',
+    description:
+      'Unabhängige psychosoziale und rechtliche Beratung für Betroffene und Angehörige. Besonders sinnvoll als ergänzende nationale Stelle für Rechtefragen und allgemeine Orientierung.',
+    link: 'https://promentesana.ch/angebote/beratung/beratung-fuer-betroffene-nahestehende',
+  },
+  {
     name: 'Zebra Winterthur',
     category: 'Suchtbelastete Familien',
     audience: 'Kinder und Jugendliche',
@@ -668,6 +676,7 @@ export const SUPPORT_OFFERS = [
 export const SUPPORT_OFFER_NOTES = [
   'Nicht jede Familie braucht sofort ein spezialisiertes Angebot. Oft ist schon eine erste Orientierung, eine Triage oder ein entlastendes Gespräch ein sinnvoller Einstieg.',
   'Hilfreich ist die Unterscheidung zwischen Akutunterstützung, längerfristiger Begleitung, Kinderangeboten, Suchtberatung und Selbsthilfe für Angehörige.',
+  'Die Übersicht ist bewusst zürich-zentriert angelegt und wird nur punktuell durch schweizweite Stellen ergänzt, wenn diese für Orientierung oder Rechtefragen besonders hilfreich sind.',
   'Angebote wirken besonders gut, wenn sie zum Alter der Kinder, zur aktuellen Krisenlage, zur Belastbarkeit der Familie und zu sprachlichen oder sozialen Barrieren passen.',
 ];
 

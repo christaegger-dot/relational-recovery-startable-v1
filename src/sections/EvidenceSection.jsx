@@ -1651,8 +1651,8 @@ export default function EvidenceSection({ downloadResources = [] }) {
                 </p>
                 <p>
                   Dieser Bereich ist bewusst als kommentierte Materialsammlung aufgebaut: Buecher werden kurz
-                  eingeordnet, digitale Angebote verlinkt. Eigene Downloads der Website finden sich in der Toolbox
-                  unter Arbeitsmaterialien.
+                  eingeordnet, digitale Angebote verlinkt. Eigene Downloads und Arbeitshilfen dieser Website sind
+                  direkt hier im Materialbereich gebuendelt.
                 </p>
               </div>
             </div>
