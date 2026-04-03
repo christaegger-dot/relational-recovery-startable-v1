@@ -688,7 +688,7 @@ export const PUK_CONTEXT_POINTS = [
 
 export const ABOUT_THIS_WEBSITE_POINTS = [
   'Die Website will orientieren, erklären und entlasten – nicht institutionelle Beratung ersetzen.',
-  'Sie versteht sich als ergänzende Vertiefung zu offiziellen Angeboten wie der Angehörigenberatung der PUK Zürich sowie zu weiteren Stellen in Zürich und der Schweiz.',
+  'Sie ergänzt die Angehörigenberatung der PUK Zürich sowie weitere Stellen in Zürich, Winterthur und punktuell schweizweit.',
   'Offizielle Informationen, Anmeldung, Krisenwege und konkrete Beratung laufen über die jeweils zuständigen Institutionen.',
 ];
 

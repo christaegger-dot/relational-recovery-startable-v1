@@ -88,17 +88,17 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
 
   return (
     <article className="space-y-16 no-print">
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <section className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-8 bg-white border border-slate-200 rounded-[3rem] p-8 md:p-16 shadow-sm relative overflow-hidden group">
           <div className="relative z-10">
-            <div className="flex items-center gap-4 mb-8">
+            <div className="flex items-center gap-4 mb-6 md:mb-8">
               <div className="w-10 h-[2px] bg-emerald-500" />
               <span className="text-emerald-600 font-black text-[10px] uppercase tracking-[0.45em]">Systemische Orientierung</span>
             </div>
-            <h2 id="page-heading-home" tabIndex={-1} className="text-4xl md:text-7xl font-black mb-8 leading-[1.05] tracking-tight text-slate-900">
+            <h2 id="page-heading-home" tabIndex={-1} className="text-4xl md:text-7xl font-black mb-6 md:mb-8 leading-[1.05] tracking-tight text-slate-900">
               Begleitung ist <span className="text-emerald-600 italic">Beziehungsarbeit</span>.
             </h2>
-            <p className="text-lg md:text-2xl text-slate-500 mb-12 leading-relaxed font-light max-w-3xl">
+            <p className="text-lg md:text-2xl text-slate-500 mb-8 md:mb-12 leading-relaxed font-light max-w-3xl">
               Interaktive Fachressourcen für die Begleitung von Eltern mit psychischer Belastung – mit Training, systemischer
               Orientierung, Krisenhilfe, Netzwerk und printfähigen Arbeitshilfen.
             </p>
@@ -119,7 +119,14 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
               </button>
             </div>
 
-            <div className="mt-10 flex justify-center lg:mt-12 lg:justify-end">
+            <div className="mt-5 rounded-[1.75rem] border border-slate-200 bg-slate-50 px-5 py-4 lg:hidden">
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Lernstand</div>
+              <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                {completedModules.length} von {E_MODULE_COUNT} Lernmodulen bearbeitet. Das Dashboard unten führt direkt zu den nächsten Arbeitsbereichen.
+              </p>
+            </div>
+
+            <div className="mt-8 flex justify-center lg:mt-12 lg:justify-end">
               <div className="w-full max-w-[24rem] overflow-hidden rounded-[2.25rem] border border-slate-200 bg-[#F3F5EF] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] sm:max-w-[30rem] sm:rounded-[2.5rem] sm:p-4 lg:max-w-[34rem] lg:rounded-[2.75rem] lg:p-6">
                 <img
                   src={heroIllustration}
@@ -129,17 +136,13 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
               </div>
             </div>
 
-            <div className="mt-10 rounded-[2.25rem] border border-emerald-100 bg-emerald-50/70 p-6 md:p-8">
+            <div className="mt-8 rounded-[2.25rem] border border-emerald-100 bg-emerald-50/70 p-5 md:p-8">
               <div className="text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900 mb-4">Wichtiger Hinweis zur Einordnung</div>
               <div className="space-y-3 text-sm md:text-base text-emerald-950 leading-relaxed">
                 <p>
                   Diese Website ist ein ergänzendes psychoedukatives Informationsangebot im Themenfeld Angehörigenarbeit,
-                  psychisch belastete Elternschaft und Kinder psychisch erkrankter Eltern. Sie ist keine offizielle
-                  Unterseite der Psychiatrischen Universitätsklinik Zürich.
-                </p>
-                <p>
-                  Für offizielle Informationen, Kontaktaufnahme und Beratung bleibt die Angehörigenberatung der PUK Zürich
-                  die primäre Anlaufstelle. Diese Website ergänzt sie durch vertiefende Orientierung und Arbeitshilfen.
+                  psychisch belastete Elternschaft und Kinder psychisch erkrankter Eltern. Für offizielle Informationen
+                  und Beratung bleibt die Angehörigenberatung der PUK Zürich die zentrale Anlaufstelle.
                 </p>
               </div>
               <div className="mt-5 flex flex-wrap gap-3">
@@ -166,7 +169,7 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
           </div>
         </div>
 
-        <div className="lg:col-span-4 bg-emerald-900 rounded-[3rem] p-8 md:p-12 text-white flex flex-col justify-center shadow-2xl relative overflow-hidden">
+        <div className="hidden lg:flex lg:col-span-4 bg-emerald-900 rounded-[3rem] p-8 md:p-12 text-white flex-col justify-center shadow-2xl relative overflow-hidden">
           <div className="absolute inset-0 bg-emerald-800/10 mix-blend-overlay" />
           <h4 className="text-[10px] font-black uppercase tracking-[0.35em] mb-6 opacity-70 text-center">Lernfortschritt</h4>
           <div className="rounded-[2rem] bg-white/8 border border-white/10 p-6 mb-6">
