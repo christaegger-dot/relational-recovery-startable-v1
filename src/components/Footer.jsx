@@ -18,14 +18,14 @@ export default function Footer({ setActiveTab }) {
           <div className="rounded-[2.75rem] border border-white/70 bg-white/70 p-8 shadow-sm">
             <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-emerald-100 bg-emerald-50 px-4 py-2 text-[10px] font-black uppercase tracking-[0.24em] text-emerald-800">
               <Library size={14} />
-              Schweizer Fachportal
+              Fachportal Zürich
             </div>
             <h2 className="text-4xl font-black uppercase italic tracking-tighter text-slate-900 md:text-5xl">
               Relational <br /> Recovery
             </h2>
             <p className="mt-6 max-w-md text-sm leading-loose text-slate-600">
               Ergänzendes psychoedukatives Informationsangebot zu psychisch belasteter Elternschaft, Kinderschutz,
-              Angehörigenarbeit und alltagsnaher Vernetzung im Versorgungskontext.
+              Angehörigenarbeit und zürich-zentrierter Vernetzung mit punktuellen schweizweiten Ergänzungen.
             </p>
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
               <div className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-4">
@@ -64,18 +64,18 @@ export default function Footer({ setActiveTab }) {
           </div>
 
           <div className="rounded-[2.5rem] border border-slate-200 bg-slate-900 p-8 text-white shadow-sm">
-            <div className="mb-4 text-[10px] font-black uppercase tracking-[0.35em] text-white/55">Einordnung</div>
+            <div className="mb-4 text-[10px] font-black uppercase tracking-[0.35em] text-white/55">Arbeitsrahmen</div>
             <div className="space-y-5">
               <div className="flex items-start gap-4">
                 <ShieldCheck size={18} className="mt-1 shrink-0 text-emerald-300" />
                 <p className="text-sm leading-relaxed text-white/85">
-                  Keine offizielle PUK-Unterseite. Für offizielle Informationen und Beratung nutzen Sie bitte die Angehörigenberatung der PUK Zürich.
+                  Zentrale Orientierung für Fachpersonen mit Fokus auf Einordnung, Triage, Gesprächsführung und regionale Weitervermittlung.
                 </p>
               </div>
               <div className="flex items-start gap-4">
                 <Users size={18} className="mt-1 shrink-0 text-emerald-300" />
                 <p className="text-sm leading-relaxed text-white/85">
-                  Lokale Speicherung nur im Browser. Sitzung und Lernstand können jederzeit zurückgesetzt werden.
+                  Arbeitsstände bleiben lokal im Browser und können jederzeit zurückgesetzt oder neu aufgebaut werden.
                 </p>
               </div>
             </div>

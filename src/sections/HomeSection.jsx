@@ -108,14 +108,14 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
                 onClick={() => setActiveTab('elearning')}
                 className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-emerald-600 transition-all shadow-xl haptic-btn flex items-center gap-3"
               >
-                Training starten <ChevronRight size={18} />
+                Falllogik trainieren <ChevronRight size={18} />
               </button>
               <button
                 type="button"
                 onClick={() => setActiveTab('toolbox')}
                 className="bg-slate-50 text-slate-900 px-8 py-4 rounded-2xl font-black uppercase text-xs tracking-widest border border-slate-200 hover:bg-slate-100 transition-all haptic-btn"
               >
-                Toolbox öffnen
+                Prioritäten klären
               </button>
             </div>
 
