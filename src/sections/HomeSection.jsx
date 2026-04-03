@@ -138,9 +138,8 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
                   Unterseite der Psychiatrischen Universitätsklinik Zürich.
                 </p>
                 <p>
-                  Für offizielle Informationen, Kontaktaufnahme und Beratung ist die Angehörigenberatung der PUK Zürich
-                  die primäre Anlaufstelle. Die Website ergänzt diese offizielle Beratung durch vertiefende Orientierung,
-                  ersetzt sie aber nicht.
+                  Für offizielle Informationen, Kontaktaufnahme und Beratung bleibt die Angehörigenberatung der PUK Zürich
+                  die primäre Anlaufstelle. Diese Website ergänzt sie durch vertiefende Orientierung und Arbeitshilfen.
                 </p>
               </div>
               <div className="mt-5 flex flex-wrap gap-3">

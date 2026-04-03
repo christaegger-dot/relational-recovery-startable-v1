@@ -80,18 +80,18 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
         <header className="mb-16 grid gap-10 border-b border-slate-100 pb-12 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-end">
           <div className="max-w-3xl">
             <div className="mb-6 flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.45em] text-emerald-700">
-              <div className="h-[2px] w-10 bg-emerald-200" /> Triage & Support (Zuerich + CH)
+              <div className="h-[2px] w-10 bg-emerald-200" /> Triage & Support (Zürich + CH)
             </div>
-            <h2 id="page-heading-zuerich" tabIndex={-1} className="text-4xl font-black leading-none tracking-tight text-slate-900 md:text-6xl">Netzwerk Zuerich mit schweizweiten Ergaenzungen</h2>
+            <h2 id="page-heading-zuerich" tabIndex={-1} className="text-4xl font-black leading-none tracking-tight text-slate-900 md:text-6xl">Netzwerk Zürich mit schweizweiten Ergänzungen</h2>
             <p className="mt-6 text-lg leading-relaxed text-slate-600">
-              Zuerich-zentrierte Fachstellen fuer Akutunterstuetzung, Entlastung, Kinder- und Angehoerigenberatung sowie einige schweizweite Ergaenzungen fuer Orientierung und Rechtefragen.
+              Zürich-zentrierte Fachstellen für Akutunterstützung, Entlastung, Kinder- und Angehörigenberatung sowie einige schweizweite Ergänzungen für Orientierung und Rechtefragen.
             </p>
           </div>
           <aside className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
             <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Einordnung</div>
             <p className="mt-3 text-sm leading-relaxed text-slate-700">
-              Der Bereich ist bewusst Zuerich-zentriert angelegt: offizielle Krisenwege, Familienberatung,
-              Kinder- und Jugendangebote sowie laengerfristige Entlastung in und um Zuerich, ergaenzt um wenige nationale Stellen.
+              Der Bereich ist bewusst Zürich-zentriert angelegt: offizielle Krisenwege, Familienberatung,
+              Kinder- und Jugendangebote sowie längerfristige Entlastung in und um Zürich, ergänzt um wenige nationale Stellen.
             </p>
           </aside>
         </header>
@@ -99,9 +99,9 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
         <div className="mb-10 grid gap-8 xl:grid-cols-[minmax(0,1fr)_26rem] xl:items-start">
           <div>
             <p className="mb-5 max-w-4xl text-sm leading-relaxed text-slate-500">
-              Das Netzwerk verbindet offizielle Krisenwege, familienbezogene Beratung, spezialisierte Angebote fuer Kinder und Jugendliche
-              sowie laengerfristige Entlastung. Der Schwerpunkt liegt auf Zuerich und Winterthur; einzelne schweizweite Stellen
-              bleiben ergaenzend sichtbar. Die Filter helfen, je nach Lage schneller zwischen Akutunterstuetzung, Jugendhilfe,
+              Das Netzwerk verbindet offizielle Krisenwege, familienbezogene Beratung, spezialisierte Angebote für Kinder und Jugendliche
+              sowie längerfristige Entlastung. Der Schwerpunkt liegt auf Zürich und Winterthur; einzelne schweizweite Stellen
+              bleiben ergänzend sichtbar. Die Filter helfen, je nach Lage schneller zwischen Akutunterstützung, Jugendhilfe,
               Suchtthematik, mehrsprachigen Angeboten oder Selbsthilfe zu unterscheiden.
             </p>
             <fieldset>

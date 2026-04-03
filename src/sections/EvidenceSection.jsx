@@ -1494,8 +1494,8 @@ export default function EvidenceSection({ downloadResources = [] }) {
                 <p>
                   Der Grundlagentext beschreibt für Zürich und die Schweiz ein bereits gut ausgebautes Netz mit
                   klinischen Angeboten, kantonaler Beratung, Kindergruppen, Patenschaften, Selbsthilfe und
-                  Krisenberatung. Für die Website geht es dabei nicht um Vollständigkeit, sondern um eine erste,
-                  verständliche Orientierung. 
+                  Krisenberatung. Für diese Website werden daraus vor allem Zürich und Winterthur fokussiert, ergänzt
+                  um wenige schweizweite Stellen für Orientierung und Rechtefragen.
                 </p>
               </div>
             </div>
@@ -1606,9 +1606,9 @@ export default function EvidenceSection({ downloadResources = [] }) {
                   Elternschaft, Familiendynamik, Kinderperspektive, Schutzfaktoren und Unterstützungsangeboten.
                 </p>
                 <p>
-                  Sie ersetzt keine offizielle Beratung und ist keine offizielle PUK-Unterseite. Sie versteht sich als
-                  ergänzende Vertiefung zu bestehenden Angeboten wie der Angehörigenberatung der PUK Zürich sowie zu
-                  weiteren Unterstützungsstrukturen in Zürich und der Schweiz.
+                  Sie ergänzt offizielle Angebote wie die Angehörigenberatung der PUK Zürich sowie weitere
+                  Unterstützungsstrukturen in Zürich, Winterthur und einzelne schweizweite Stellen. Offizielle
+                  Beratung, Anmeldung und Krisenwege laufen weiterhin über die zuständigen Institutionen.
                 </p>
               </div>
               <div className="xl:col-span-5 space-y-4">
@@ -1650,9 +1650,9 @@ export default function EvidenceSection({ downloadResources = [] }) {
                   nicht als Pflichtlektüre, sondern als entlastende Werkzeuge sichtbar zu machen.
                 </p>
                 <p>
-                  Dieser Bereich ist bewusst als kommentierte Materialsammlung aufgebaut: Buecher werden kurz
+                  Dieser Bereich ist bewusst als kommentierte Materialsammlung aufgebaut: Bücher werden kurz
                   eingeordnet, digitale Angebote verlinkt. Eigene Downloads und Arbeitshilfen dieser Website sind
-                  direkt hier im Materialbereich gebuendelt.
+                  direkt hier im Materialbereich gebündelt.
                 </p>
               </div>
             </div>
