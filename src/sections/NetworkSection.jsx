@@ -104,24 +104,26 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
               bleiben ergaenzend sichtbar. Die Filter helfen, je nach Lage schneller zwischen Akutunterstuetzung, Jugendhilfe,
               Suchtthematik, mehrsprachigen Angeboten oder Selbsthilfe zu unterscheiden.
             </p>
-            <div className="mb-4 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">Filter</div>
-            <div className="flex flex-wrap gap-2" aria-label="Netzwerkfilter">
-              {NETWORK_FILTERS.map((filter) => (
-                <button
-                  key={filter.id}
-                  type="button"
-                  onClick={() => setActiveResourceFilter(filter.id)}
-                  className={`rounded-full border px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] transition-colors ${
-                    activeResourceFilter === filter.id
-                      ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
-                      : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
-                  }`}
-                  aria-pressed={activeResourceFilter === filter.id}
-                >
-                  {filter.label}
-                </button>
-              ))}
-            </div>
+            <fieldset>
+              <legend className="mb-4 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">Filter</legend>
+              <div className="flex flex-wrap gap-2">
+                {NETWORK_FILTERS.map((filter) => (
+                  <button
+                    key={filter.id}
+                    type="button"
+                    onClick={() => setActiveResourceFilter(filter.id)}
+                    className={`rounded-full border px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] transition-colors ${
+                      activeResourceFilter === filter.id
+                        ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
+                        : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                    }`}
+                    aria-pressed={activeResourceFilter === filter.id}
+                  >
+                    {filter.label}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
             <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
               {filterStatusText}
             </p>

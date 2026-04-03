@@ -79,7 +79,7 @@ export default function Header({ activeTab, setActiveTab, onReset, isResetting, 
       </div>
 
       {mobileMenuOpen && (
-        <div ref={mobileMenuContainerRef} id="mobile-nav" className="lg:hidden border-t border-slate-200 bg-white px-4 pb-4 pt-3 shadow-sm" aria-label="Mobile Navigation">
+        <nav ref={mobileMenuContainerRef} id="mobile-nav" className="lg:hidden border-t border-slate-200 bg-white px-4 pb-4 pt-3 shadow-sm" aria-label="Mobile Navigation">
           <div className="grid grid-cols-1 gap-2">
             <button
               type="button"
@@ -122,7 +122,7 @@ export default function Header({ activeTab, setActiveTab, onReset, isResetting, 
               <span>Sitzung zurücksetzen</span>
             </button>
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );
