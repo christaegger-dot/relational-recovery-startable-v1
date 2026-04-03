@@ -773,8 +773,8 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 no-print">
           <button type="button" className="group text-left" onClick={onPrint}>
-            <div className="bg-slate-50 rounded-[3rem] p-16 border-2 border-slate-100 group-hover:border-emerald-500 transition-all duration-300 mb-8 flex items-center justify-center relative overflow-hidden haptic-btn shadow-inner">
-              <div className="bg-white shadow-2xl w-36 h-52 rounded-xl p-8 flex flex-col gap-4 group-hover:-translate-y-2 transition-transform duration-300">
+            <div className="bg-slate-50 rounded-[3rem] p-8 md:p-16 border-2 border-slate-100 group-hover:border-emerald-500 transition-all duration-300 mb-6 md:mb-8 flex items-center justify-center relative overflow-hidden haptic-btn shadow-inner">
+              <div className="bg-white shadow-2xl w-28 h-40 md:w-36 md:h-52 rounded-xl p-6 md:p-8 flex flex-col gap-3 md:gap-4 group-hover:-translate-y-2 transition-transform duration-300">
                 <div className="h-4 w-full bg-slate-100 rounded" />
                 <div className="h-2 w-3/4 bg-slate-50 rounded" />
                 <div className="h-2 w-full bg-slate-50 rounded" />
@@ -796,8 +796,8 @@ export default function ToolboxSection({ score, onToggleAssessment, onResetAsses
           </button>
 
           <button type="button" className="group text-left" onClick={onDownloadCrisisPlan}>
-            <div className="bg-slate-50 rounded-[3rem] p-16 border-2 border-slate-100 group-hover:border-slate-900 transition-all duration-300 mb-8 flex items-center justify-center relative overflow-hidden haptic-btn shadow-inner">
-              <div className="bg-white shadow-2xl w-36 h-52 rounded-xl p-8 flex flex-col gap-4 group-hover:-translate-y-2 transition-transform duration-300">
+            <div className="bg-slate-50 rounded-[3rem] p-8 md:p-16 border-2 border-slate-100 group-hover:border-slate-900 transition-all duration-300 mb-6 md:mb-8 flex items-center justify-center relative overflow-hidden haptic-btn shadow-inner">
+              <div className="bg-white shadow-2xl w-28 h-40 md:w-36 md:h-52 rounded-xl p-6 md:p-8 flex flex-col gap-3 md:gap-4 group-hover:-translate-y-2 transition-transform duration-300">
                 <div className="h-4 w-1/2 bg-slate-900 rounded" />
                 <div className="h-2 w-full bg-slate-100 rounded" />
                 <div className="h-14 border-2 border-dashed border-slate-200 rounded-2xl mt-6" />

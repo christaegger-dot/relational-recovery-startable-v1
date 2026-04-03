@@ -151,7 +151,61 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
           </div>
         </div>
 
-        <section className="mb-10 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-6 md:p-8 shadow-sm">
+        <div className="mb-8 rounded-[2rem] border border-slate-200 bg-slate-50 p-5 lg:hidden">
+          <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Direkter Einstieg</div>
+          <p className="mt-2 text-sm leading-relaxed text-slate-700">
+            Die Trefferliste folgt direkt nach diesem Block. Die Netzwerkkarte darunter dient als ergänzende Arbeitshilfe für Gespräche und Fallreflexion.
+          </p>
+        </div>
+
+        {filteredResources.length === 0 ? (
+          <div className="py-20 text-center flex flex-col items-center">
+            <XCircle size={72} className="text-slate-100 mb-6" />
+            <h3 className="text-2xl font-black text-slate-400 uppercase tracking-widest">Keine Treffer gefunden</h3>
+            <button
+              type="button"
+              onClick={() => setSearchTerm('')}
+              className="mt-6 text-emerald-600 font-black uppercase text-[10px] tracking-[0.35em] underline underline-offset-8 decoration-2 haptic-btn"
+            >
+              Suche zurücksetzen
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {filteredResources.map((res) => (
+              <section
+                key={res.name}
+                className="flex h-full flex-col justify-between rounded-[2.5rem] border border-slate-200 bg-slate-50 p-6 md:p-8 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200 hover:bg-white hover:shadow-lg"
+              >
+                <div>
+                  <div className="mb-6 flex flex-wrap gap-2">
+                    {res.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[9px] font-black uppercase bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <h4 className="mb-4 text-2xl font-black tracking-tight text-slate-900">{res.name}</h4>
+                  <p className="mb-8 text-base leading-relaxed text-slate-600">{res.info}</p>
+                </div>
+                <a
+                  href={res.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] font-black text-slate-900 uppercase tracking-[0.25em] flex items-center justify-between hover:text-emerald-600 transition-all border-t-2 pt-6 border-slate-100"
+                >
+                  <span>Webseite öffnen</span>
+                  <ExternalLink size={22} strokeWidth={2.5} />
+                </a>
+              </section>
+            ))}
+          </div>
+        )}
+
+        <section className="mb-10 mt-10 rounded-[3rem] border border-emerald-100 bg-emerald-50/70 p-6 md:p-8 shadow-sm">
           <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_24rem] xl:items-start">
             <div>
               <div className="mb-4 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.24em] text-emerald-900">
@@ -351,52 +405,6 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
           </div>
         </section>
 
-        {filteredResources.length === 0 ? (
-          <div className="py-28 text-center flex flex-col items-center">
-            <XCircle size={72} className="text-slate-100 mb-6" />
-            <h3 className="text-2xl font-black text-slate-400 uppercase tracking-widest">Keine Treffer gefunden</h3>
-            <button
-              type="button"
-              onClick={() => setSearchTerm('')}
-              className="mt-6 text-emerald-600 font-black uppercase text-[10px] tracking-[0.35em] underline underline-offset-8 decoration-2 haptic-btn"
-            >
-              Suche zurücksetzen
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            {filteredResources.map((res) => (
-              <section
-                key={res.name}
-                className="flex h-full flex-col justify-between rounded-[2.5rem] border border-slate-200 bg-slate-50 p-8 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-200 hover:bg-white hover:shadow-lg"
-              >
-                <div>
-                  <div className="mb-8 flex flex-wrap gap-2">
-                    {res.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[9px] font-black uppercase bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-100 shadow-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <h4 className="mb-5 text-2xl font-black tracking-tight text-slate-900">{res.name}</h4>
-                  <p className="mb-10 text-base leading-relaxed text-slate-600">{res.info}</p>
-                </div>
-                <a
-                  href={res.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[11px] font-black text-slate-900 uppercase tracking-[0.25em] flex items-center justify-between hover:text-emerald-600 transition-all border-t-2 pt-8 border-slate-100"
-                >
-                  <span>Webseite öffnen</span>
-                  <ExternalLink size={22} strokeWidth={2.5} />
-                </a>
-              </section>
-            ))}
-          </div>
-        )}
       </div>
     </article>
   );
