@@ -4,7 +4,7 @@ import './styles/app-global.css';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomeSection from './sections/HomeSection';
+import HomeLandingTemplate from './templates/HomeLandingTemplate';
 import {
   APP_BROADCAST_CHANNEL,
   APP_STATE_VERSION,
@@ -28,6 +28,8 @@ import {
 
 const ElearningSection = lazy(() => import('./sections/ElearningSection'));
 const VignettenSection = lazy(() => import('./sections/VignettenSection'));
+const GlossarSection = lazy(() => import('./sections/GlossarSection'));
+const GrundlagenSection = lazy(() => import('./sections/GrundlagenSection'));
 const ToolboxSection = lazy(() => import('./sections/ToolboxSection'));
 const NetworkSection = lazy(() => import('./sections/NetworkSection'));
 const EvidenceSection = lazy(() => import('./sections/EvidenceSection'));
@@ -684,52 +686,66 @@ Aktueller Assessment-Score: ${score.risk}
         tabIndex={-1}
         className="flex-grow max-w-7xl mx-auto w-full px-4 md:px-6 py-8 md:py-10 outline-none page-enter"
       >
-        {activeTab === 'home' ? (
-          <HomeSection activeTab={activeTab} setActiveTab={setActiveTab} progressPercent={progressPercent} completedModules={completedModules} />
-        ) : (
-          <Suspense fallback={<SectionLoadingFallback />}>
-            {activeTab === 'elearning' && (
-              <ElearningSection quizState={quizState} onAnswer={handleQuizAnswer} completedModules={completedModules} />
-            )}
+        <Suspense fallback={<SectionLoadingFallback />}>
+          {activeTab === 'home' && (
+            <HomeLandingTemplate
+              setActiveTab={setActiveTab}
+              progressPercent={progressPercent}
+              completedModules={completedModules}
+              pageHeadingId={getPageHeadingId('home')}
+            />
+          )}
 
-            {activeTab === 'vignetten' && (
-              <VignettenSection
-                currentIndex={currentVignette}
-                setCurrentIndex={setCurrentVignette}
-                selectedOption={selectedOption}
-                onSelectOption={handleSelectVignetteOption}
-              />
-            )}
+          {activeTab === 'elearning' && (
+            <ElearningSection quizState={quizState} onAnswer={handleQuizAnswer} completedModules={completedModules} />
+          )}
 
-            {activeTab === 'toolbox' && (
-              <ToolboxSection
-                score={score}
-                onToggleAssessment={handleScoreChange}
-                onResetAssessment={() => setScore(DEFAULT_SCORE)}
-                onPrint={() => window.print()}
-                onDownloadCrisisPlan={handleDownloadCrisisPlan}
-                acuteCrisisSectionRef={acuteCrisisSectionRef}
-                safetyPlanSectionRef={safetyPlanSectionRef}
-                childProtectionSectionRef={childProtectionSectionRef}
-                onJumpToPrioritySection={openPriorityToolboxSection}
-              />
-            )}
+          {activeTab === 'vignetten' && (
+            <VignettenSection
+              currentIndex={currentVignette}
+              setCurrentIndex={setCurrentVignette}
+              selectedOption={selectedOption}
+              onSelectOption={handleSelectVignetteOption}
+            />
+          )}
 
-            {activeTab === 'zuerich' && (
-              <NetworkSection
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                activeResourceFilter={activeResourceFilter}
-                setActiveResourceFilter={setActiveResourceFilter}
-              />
-            )}
+          {activeTab === 'glossar' && <GlossarSection />}
 
-            {activeTab === 'zaesur' && <EvidenceSection downloadResources={downloadResources} />}
-          </Suspense>
-        )}
+          {activeTab === 'grundlagen' && (
+            <GrundlagenSection
+              sharedDownloadResources={downloadResources}
+              onNavigateToTab={setActiveTab}
+            />
+          )}
+
+          {activeTab === 'toolbox' && (
+            <ToolboxSection
+              score={score}
+              onToggleAssessment={handleScoreChange}
+              onResetAssessment={() => setScore(DEFAULT_SCORE)}
+              onPrint={() => window.print()}
+              onDownloadCrisisPlan={handleDownloadCrisisPlan}
+              acuteCrisisSectionRef={acuteCrisisSectionRef}
+              safetyPlanSectionRef={safetyPlanSectionRef}
+              childProtectionSectionRef={childProtectionSectionRef}
+              onJumpToPrioritySection={openPriorityToolboxSection}
+            />
+          )}
+
+          {activeTab === 'zuerich' && (
+            <NetworkSection
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              activeResourceFilter={activeResourceFilter}
+              setActiveResourceFilter={setActiveResourceFilter}
+            />
+          )}
+
+          {activeTab === 'zaesur' && <EvidenceSection downloadResources={downloadResources} />}
+        </Suspense>
       </main>
 
-      <Footer setActiveTab={setActiveTab} />
+      <Footer onNavigateToTab={setActiveTab} />
     </div>
   );
 }

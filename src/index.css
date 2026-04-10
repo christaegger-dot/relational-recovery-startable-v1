@@ -1,6 +1,7 @@
 /* Design note: Global editorial foundation with warm surfaces, serif-led hierarchy, restrained terracotta accents, and generous whitespace. */
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./styles/primitives.css";
 
 @custom-variant dark (&:is(.dark *));
 

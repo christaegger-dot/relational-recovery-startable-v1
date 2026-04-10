@@ -58,7 +58,7 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
         </div>
 
         {assessment.items?.length ? (
-          <div className="rounded-[2rem] border border-[var(--border-default)] bg-white p-5 md:p-7">
+          <div className="ui-card--outline rounded-[2rem] bg-[var(--surface-app)] p-5 md:p-7">
             <fieldset className="w-full text-left" aria-describedby={scoreStatusId}>
               <legend className="ui-fact-card__label mb-5">{assessment.itemsLabel}</legend>
               <div className="grid gap-4 md:grid-cols-2">
@@ -68,10 +68,10 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
                   return (
                     <label
                       key={item.id}
-                      className={`flex cursor-pointer items-center gap-5 rounded-[1.75rem] border p-5 transition-all ${
+                      className={`ui-card--interactive flex cursor-pointer items-center gap-5 rounded-[1.75rem] border p-5 transition-all ${
                         checked
                           ? 'border-[var(--accent-primary)] bg-[color-mix(in_srgb,var(--surface-app)_88%,var(--accent-primary-soft)_12%)] shadow-sm'
-                          : 'border-[var(--border-default)] bg-white hover:bg-[var(--surface-panel)]'
+                          : 'border-[var(--border-default)] bg-[var(--surface-app)] hover:bg-[var(--surface-panel)]'
                       }`}
                     >
                       <input type="checkbox" className="sr-only" checked={checked} onChange={item.onChange} />
@@ -127,13 +127,14 @@ function PathwaySection({ pathway }) {
         </div>
 
         {pathway.steps?.length ? (
-          <div className="rounded-[2rem] border border-[var(--border-default)] bg-white p-5 md:p-7">
+          <div className="ui-card--outline rounded-[2rem] bg-[var(--surface-app)] p-5 md:p-7">
             <div className="grid gap-4 lg:grid-cols-4">
               {pathway.steps.map((step, index) => (
                 <div key={step.label} className="relative">
                   <SurfaceCard tone="soft" className="h-full">
                     <div className="mb-4 flex items-center justify-between gap-4">
-                      <div className="inline-flex rounded-full border border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] bg-[var(--surface-note)] px-3 py-1.5 text-[0.65rem] font-black uppercase tracking-[0.18em] text-[var(--accent-primary-strong)]">
+                          <div className="ui-chip ui-chip--active px-3 py-1.5 text-[0.65rem]">
+
                         Schritt {index + 1}
                       </div>
                       <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">{step.label}</div>
@@ -147,7 +148,7 @@ function PathwaySection({ pathway }) {
                     <>
                       <div className="absolute right-[-0.85rem] top-1/2 hidden h-[2px] w-7 -translate-y-1/2 bg-[color-mix(in_srgb,var(--accent-primary)_35%,white_65%)] lg:block" />
                       <div className="absolute right-[-0.6rem] top-1/2 hidden h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-r-2 border-t-2 border-[color-mix(in_srgb,var(--accent-primary)_55%,white_45%)] lg:block" />
-                      <div className="mx-auto mt-4 flex h-8 w-8 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--accent-primary)_20%,white_80%)] bg-white text-[var(--accent-primary-strong)] lg:hidden">
+                      <div className="mx-auto mt-4 flex h-8 w-8 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--accent-primary)_20%,white_80%)] bg-[var(--surface-app)] text-[var(--accent-primary-strong)] lg:hidden">
                         <ChevronRight size={16} />
                       </div>
                     </>
@@ -274,7 +275,7 @@ function TriageSection({ triage }) {
         ) : null}
 
         {triage.primaryPriority ? (
-          <div className={`rounded-[2rem] border p-6 md:p-7 ${triage.primaryPriority.className}`}>
+          <div className={`ui-card--outline rounded-[2rem] p-6 md:p-7 ${triage.primaryPriority.className}`}>
             <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] opacity-80">Aktuell wichtigste Spur</div>
             <h3 className="mt-3 text-2xl font-black tracking-tight">{triage.primaryPriority.title}</h3>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed">{triage.primaryPriority.text}</p>
@@ -313,14 +314,15 @@ function PracticeBlocksSection({ practice }) {
           ) : null}
         </div>
 
-        <div className="flex flex-wrap gap-2" aria-label={practice.filterAriaLabel}>
+        <div className="ui-chip-row" aria-label={practice.filterAriaLabel}>
           {practice.filters.map((filter) => (
             <Button
               key={filter.id}
               variant={filter.active ? 'primary' : 'secondary'}
               onClick={filter.onSelect}
               aria-pressed={filter.active}
-              className="!min-h-0 px-4 py-3"
+                className="px-4 py-3"
+
             >
               {filter.label}
             </Button>
@@ -437,7 +439,7 @@ function ClusterSection({ cluster }) {
             {cluster.listCards.map((item) => (
               <div
                 key={item.title || item.text}
-                className={`rounded-[1.5rem] border border-[var(--border-default)] p-5 ${item.className || 'bg-white'}`}
+                className={`ui-card--outline rounded-[1.5rem] p-5 ${item.className || 'bg-[var(--surface-app)]'}`}
               >
                 <div className="flex items-start gap-3">
                   {item.icon ? <span className="mt-1 shrink-0 text-[var(--accent-primary-strong)]">{item.icon}</span> : null}
@@ -456,7 +458,7 @@ function ClusterSection({ cluster }) {
             {cluster.disclosureItems.map((item) => (
               <details
                 key={item.title}
-                className={`group rounded-[1.5rem] border border-[var(--border-default)] bg-white p-5 ${item.className || ''}`}
+                className={`group ui-card--outline ui-card--interactive rounded-[1.5rem] bg-[var(--surface-app)] p-5 ${item.className || ''}`}
               >
                 <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
                   <div className="flex items-start gap-3">
@@ -481,7 +483,7 @@ function ClusterSection({ cluster }) {
         ) : null}
 
         {cluster.templateFields?.length ? (
-          <div className="rounded-[2rem] border border-[var(--border-default)] bg-white p-6 md:p-8 shadow-sm">
+          <div className="ui-card--outline rounded-[2rem] bg-[var(--surface-app)] p-6 md:p-8">
             <div className="flex flex-col gap-4 border-b border-[var(--border-subtle)] pb-6 md:flex-row md:items-end md:justify-between">
               <div>
                 {cluster.templateMeta?.label ? <p className="ui-fact-card__label mb-3">{cluster.templateMeta.label}</p> : null}

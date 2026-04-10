@@ -1,4 +1,5 @@
 import { ExternalLink, MapPin, Search, XCircle } from 'lucide-react';
+import Button from '../components/ui/Button';
 import Container from '../components/ui/Container';
 import Eyebrow from '../components/ui/Eyebrow';
 import PageHero from '../components/ui/PageHero';
@@ -18,7 +19,7 @@ function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm,
 
         <fieldset>
           <legend className="sr-only">Fachstellen filtern</legend>
-          <div className="flex flex-wrap gap-2">
+          <div className="ui-chip-row">
             {filters.map((filter) => {
               const isActive = activeFilter === filter.id;
 
@@ -28,11 +29,7 @@ function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm,
                   type="button"
                   onClick={() => onFilterChange(filter.id)}
                   aria-pressed={isActive}
-                  className={`rounded-full border px-4 py-2 text-[0.7rem] font-black uppercase tracking-[0.18em] transition-colors ${
-                    isActive
-                      ? 'border-[color-mix(in_srgb,var(--accent-primary)_26%,white_74%)] bg-[var(--surface-note)] text-[var(--accent-primary-strong)]'
-                      : 'border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] hover:bg-[var(--surface-subtle)]'
-                  }`}
+                  className={`ui-chip ${isActive ? 'ui-chip--active' : ''}`}
                 >
                   {filter.label}
                 </button>
@@ -58,20 +55,16 @@ function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm,
             onChange={(event) => onSearchChange(event.target.value)}
             placeholder="Name, Schlagwort oder Tag"
             aria-describedby="network-resource-search-status"
-            className="w-full rounded-[1.5rem] border border-[var(--border-default)] bg-white py-4 pl-14 pr-5 text-sm font-medium text-[var(--text-primary)] outline-none transition-colors placeholder:text-[var(--text-muted)] focus:border-[color-mix(in_srgb,var(--accent-primary)_32%,white_68%)] focus:bg-[var(--surface-note)]"
+            className="ui-input pl-14 pr-5"
           />
         </div>
         <p id="network-resource-search-status" role="status" aria-live="polite" aria-atomic="true" className="sr-only">
           {searchStatusText}
         </p>
         {(searchTerm.trim() || activeFilter !== 'all') && (
-          <button
-            type="button"
-            onClick={onReset}
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border-default)] bg-white px-4 py-2 text-[0.68rem] font-black uppercase tracking-[0.18em] text-[var(--text-secondary)] transition-colors hover:border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] hover:bg-[var(--surface-subtle)]"
-          >
+          <Button variant="secondary" className="w-fit" onClick={onReset}>
             <XCircle size={14} /> Suche und Filter zurücksetzen
-          </button>
+          </Button>
         )}
       </div>
     </div>
@@ -122,7 +115,7 @@ function ResourceDirectorySection({ directory }) {
         {resources.length ? (
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {resources.map((resource) => (
-              <SurfaceCard key={resource.name} tone="default" className="h-full">
+              <SurfaceCard key={resource.name} tone="default" className="ui-card--interactive h-full">
                 {resource.tags?.length ? (
                   <div className="mb-4 flex flex-wrap gap-2">
                     {resource.tags.map((tag) => (
@@ -138,14 +131,9 @@ function ResourceDirectorySection({ directory }) {
                 <h3 className="ui-card__title">{resource.name}</h3>
                 <p className="ui-card__copy">{resource.info}</p>
                 <div className="mt-auto pt-6">
-                  <a
-                    href={resource.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-black text-[var(--accent-primary-strong)]"
-                  >
+                  <Button href={resource.link} target="_blank" rel="noopener noreferrer" variant="subtle">
                     Webseite öffnen <ExternalLink size={16} />
-                  </a>
+                  </Button>
                 </div>
               </SurfaceCard>
             ))}
@@ -158,13 +146,9 @@ function ResourceDirectorySection({ directory }) {
                 <h3 className="ui-card__title">Zur aktuellen Kombination wurden keine Fachstellen gefunden.</h3>
                 <p className="ui-card__copy">Prüfen Sie Schreibweise, entfernen Sie einzelne Filter oder setzen Sie Suche und Auswahl gemeinsam zurück.</p>
               </div>
-              <button
-                type="button"
-                onClick={onReset}
-                className="inline-flex items-center gap-2 rounded-full border border-[var(--border-default)] bg-white px-5 py-3 text-[0.7rem] font-black uppercase tracking-[0.18em] text-[var(--text-secondary)] transition-colors hover:border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] hover:bg-[var(--surface-subtle)]"
-              >
+              <Button type="button" onClick={onReset} variant="secondary">
                 <XCircle size={16} /> Zurücksetzen
-              </button>
+              </Button>
             </div>
           </SurfaceCard>
         )}
@@ -175,7 +159,7 @@ function ResourceDirectorySection({ directory }) {
 
 function MapLensButtons({ lenses = [], activeLens, onLensChange }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="ui-chip-row">
       {lenses.map((lens) => {
         const isActive = activeLens === lens.id;
 
@@ -185,11 +169,7 @@ function MapLensButtons({ lenses = [], activeLens, onLensChange }) {
             type="button"
             onClick={() => onLensChange(lens.id)}
             aria-pressed={isActive}
-            className={`rounded-full border px-4 py-2 text-[0.68rem] font-black uppercase tracking-[0.18em] transition-colors ${
-              isActive
-                ? 'border-[color-mix(in_srgb,var(--accent-primary)_26%,white_74%)] bg-[var(--surface-note)] text-[var(--accent-primary-strong)]'
-                : 'border-[var(--border-default)] bg-white text-[var(--text-secondary)] hover:border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] hover:bg-[var(--surface-subtle)]'
-            }`}
+            className={`ui-chip ${isActive ? 'ui-chip--active' : ''}`}
           >
             {lens.label}
           </button>
@@ -297,12 +277,12 @@ function NetworkMapSection({ mapping }) {
 
             <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
               <div>
-                <div className="relative hidden min-h-[30rem] overflow-hidden rounded-[2rem] border border-[var(--border-default)] bg-[var(--surface-subtle)] lg:block">
+                <div className="ui-card--outline relative hidden min-h-[30rem] overflow-hidden rounded-[2rem] bg-[var(--surface-panel)] lg:block">
                   <div className="absolute left-1/2 top-1/2 h-[11rem] w-[11rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[color-mix(in_srgb,var(--accent-primary)_24%,white_76%)] bg-white/90" />
                   <div className="absolute left-1/2 top-1/2 h-[18rem] w-[18rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[color-mix(in_srgb,var(--accent-primary)_24%,white_76%)]" />
                   <div className="absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[var(--border-default)]" />
 
-                  <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-slate-300 bg-slate-900 text-center shadow-lg">
+                  <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[color-mix(in_srgb,white_14%,var(--accent-primary-strong)_86%)] bg-[var(--surface-panel-strong)] text-center shadow-lg">
                     <div>
                       <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] text-white/70">Zentrum</div>
                       <div className="mt-2 text-sm font-black leading-tight text-white">Kind / Familie</div>
@@ -315,7 +295,7 @@ function NetworkMapSection({ mapping }) {
                 </div>
 
                 <div className="grid grid-cols-4 gap-3 lg:hidden">
-                  <div className="col-span-4 rounded-[1.5rem] border border-slate-300 bg-slate-900 p-5 text-center shadow-sm">
+                  <div className="col-span-4 rounded-[1.5rem] border border-[color-mix(in_srgb,white_14%,var(--accent-primary-strong)_86%)] bg-[var(--surface-panel-strong)] p-5 text-center shadow-sm">
                     <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] text-white/70">Zentrum</div>
                     <div className="mt-2 text-sm font-black text-white">Kind / Familie</div>
                   </div>
@@ -331,7 +311,7 @@ function NetworkMapSection({ mapping }) {
                   {activeLens?.label ? <h3 className="ui-card__title">{activeLens.label}</h3> : null}
                   {activeLens?.description ? <p className="ui-card__copy">{activeLens.description}</p> : null}
                   {lensSummary ? (
-                    <div className="mt-5 rounded-[1.5rem] border border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] bg-white px-4 py-4">
+                    <div className="mt-5 rounded-[1.5rem] border border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] bg-[var(--surface-app)] px-4 py-4">
                       <p className="m-0 text-sm font-medium leading-relaxed text-[var(--text-primary)]">{lensSummary}</p>
                     </div>
                   ) : null}

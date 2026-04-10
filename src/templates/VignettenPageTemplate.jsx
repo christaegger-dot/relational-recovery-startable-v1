@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
+import Button from '../components/ui/Button';
 import Container from '../components/ui/Container';
 import Eyebrow from '../components/ui/Eyebrow';
 import PageHero from '../components/ui/PageHero';
@@ -56,14 +57,14 @@ function VignettenCaseSection({ caseStudy }) {
 function DecisionOption({ option, index, isActive, onSelect }) {
   const toneClass = isActive
     ? option.isCorrect
-      ? 'border-[var(--accent-primary-strong)] bg-[var(--accent-primary-strong)] text-white shadow-sm'
-      : 'border-amber-300 bg-amber-50 text-amber-900'
-    : 'border-[var(--border-default)] bg-white text-[var(--text-primary)] hover:border-[color-mix(in_srgb,var(--accent-primary)_24%,white_76%)] hover:bg-[var(--surface-note)]';
+      ? 'border-[var(--accent-primary-strong)] bg-[var(--surface-panel-strong)] text-[var(--text-inverse)] shadow-sm'
+      : 'border-[var(--border-default)] bg-[color-mix(in_srgb,var(--surface-muted)_72%,white_28%)] text-[var(--text-primary)]'
+    : 'border-[var(--border-default)] bg-[var(--surface-app)] text-[var(--text-primary)] hover:border-[color-mix(in_srgb,var(--accent-primary)_24%,white_76%)] hover:bg-[var(--surface-note)]';
 
   return (
     <label className="block cursor-pointer">
       <input type="radio" name={option.groupName} className="sr-only" checked={isActive} onChange={onSelect} />
-      <span className={`block rounded-[1.5rem] border px-5 py-5 text-left transition-all ${toneClass}`}>
+      <span className={`ui-card--interactive block rounded-[1.5rem] border px-5 py-5 text-left transition-all ${toneClass}`}>
         <span className="flex items-start justify-between gap-4">
           <span className="ui-stack ui-stack--tight" style={{ gap: '0.45rem' }}>
             <span className="text-[0.65rem] font-black uppercase tracking-[0.18em] opacity-70">Option {index + 1}</span>
@@ -126,8 +127,8 @@ function VignettenDecisionSection({ decision }) {
               aria-atomic="true"
               className={`mt-6 rounded-[1.5rem] border px-5 py-5 text-sm leading-relaxed ${
                 decision.feedback.tone === 'success'
-                  ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
-                  : 'border-amber-200 bg-amber-50 text-amber-900'
+                  ? 'border-[color-mix(in_srgb,var(--accent-primary)_26%,white_74%)] bg-[var(--surface-note)] text-[var(--text-primary)]'
+                  : 'border-[var(--border-default)] bg-[color-mix(in_srgb,var(--surface-muted)_72%,white_28%)] text-[var(--text-primary)]'
               }`}
             >
               <div className="mb-2 text-[0.65rem] font-black uppercase tracking-[0.18em] opacity-70">Rückmeldung</div>
@@ -154,22 +155,22 @@ function VignettenNavigationSection({ navigation }) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <button
+            <Button
               type="button"
               onClick={navigation.onPrevious}
               disabled={navigation.disablePrevious}
-              className="inline-flex items-center gap-2 rounded-[999px] border border-[var(--border-default)] bg-white px-5 py-3 text-sm font-black text-[var(--text-primary)] transition-colors hover:bg-[var(--surface-note)] disabled:cursor-not-allowed disabled:opacity-40"
+              variant="secondary"
             >
               <ChevronLeft size={16} /> {navigation.previousLabel}
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               onClick={navigation.onNext}
               disabled={navigation.disableNext}
-              className="inline-flex items-center gap-2 rounded-[999px] bg-[var(--text-primary)] px-5 py-3 text-sm font-black text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+              variant="primary"
             >
               {navigation.nextLabel} <ChevronRight size={16} />
-            </button>
+            </Button>
           </div>
         </div>
       </SurfaceCard>

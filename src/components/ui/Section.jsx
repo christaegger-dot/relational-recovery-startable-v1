@@ -10,9 +10,14 @@ export default function Section({
   children,
   ...props
 }) {
-  const spacingClass = spacing === 'tight' ? 'ui-section ui-section--tight' : spacing === 'wide' ? 'ui-section ui-section--wide' : 'ui-section';
+  const spacingClass =
+    spacing === 'tight' || spacing === 'compact'
+      ? 'ui-section ui-section--tight'
+      : spacing === 'wide'
+        ? 'ui-section ui-section--wide'
+        : 'ui-section';
   const surfaceClass =
-    surface === 'subtle'
+    surface === 'subtle' || surface === 'muted'
       ? 'ui-section__surface ui-section__surface--subtle'
       : surface === 'warm'
         ? 'ui-section__surface ui-section__surface--warm'

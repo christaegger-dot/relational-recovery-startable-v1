@@ -1,0 +1,22 @@
+Lokale Vorschauvalidierung am 2026-04-10
+
+1. Die über einen öffentlich exponierten Dev-Server geöffnete Vorschau wurde von Vite blockiert, weil der Host nicht in den erlaubten Hosts stand.
+2. Die direkte Browser-Navigation auf http://127.0.0.1:4176 lud den Seitentitel "Relational Recovery", zeigte im Screenshot aber nur eine leere, hell getönte Fläche ohne sichtbare UI-Elemente.
+3. Der Browser landete dabei auf dem Hash #toolbox statt stabil auf #home; das spricht für einen lokal gespeicherten App-Zustand oder eine frühe Render-/Hydrationsabweichung.
+4. Nächster Prüfschritt: Browser-Konsole und DOM-Status auslesen, um zu klären, ob ein Laufzeitfehler oder ein Overlay den sichtbaren Render blockiert.
+5. Die Browser-Konsole der lokalen Vorschau war leer; es lag also kein direkt sichtbarer Frontend-Fehler im Standard-Log vor.
+6. Ein erneuter Seitenabruf zeigte weiterhin eine leere, beige Fläche ohne interaktive Elemente, obwohl der Titel korrekt gesetzt war und die HTML-Datei gespeichert werden konnte.
+7. Nächster Prüfschritt: DOM und Styles direkt auslesen, um zu prüfen, ob der Inhalt gerendert, aber durch Layout-/CSS-Regeln unsichtbar oder aus dem Viewport verschoben ist.
+8. Der statisch servierte Produktions-Build unter http://127.0.0.1:4180/#home rendert sichtbar und lädt genau ein CSS-Bundle mit 74 Regeln; die Grundstile, Tokens und Button-Formate greifen also prinzipiell.
+9. Gleichzeitig wirkt die Oberfläche im sichtbaren Hero-Zustand nur teilweise komponiert: Textblöcke laufen ungebunden, der Header liegt über dem Content, und einzelne dekorative Flächen erscheinen ohne klaren Layoutzusammenhang. Das deutet eher auf eine unvollständige Template-/Shell-Integration als auf komplett fehlendes CSS.
+10. Nächster Prüfschritt: Quellkomponenten der Home-Landingpage und globalen Shell erneut lesen und gezielt die Struktur- bzw. Containerlogik korrigieren.
+11. Nach Ergänzung der Primitive-Schicht in der globalen CSS-Kette enthält das erzeugte Dist-Stylesheet die zentralen Editorial-Selektoren `.page-shell`, `.ui-hero`, `.ui-section` und `.ui-card`; der Produktions-Build läuft weiterhin erfolgreich durch.
+12. Die statische Vorschau auf http://127.0.0.1:4180/#home rendert jetzt Inhalte und Navigation sichtbar, zeigt aber weiterhin eine fehlerhafte Komposition: Der Hero bleibt weitgehend textartig, dekorative Flächen stehen isoliert, und die Shell wirkt noch nicht als gebundene Editorial-Oberfläche.
+13. Nächster Prüfschritt: aktive Home-/Editorial-Templates sowie Hero- und Container-Bausteine strukturell gegen den sichtbaren Produktionszustand prüfen, weil das Problem nun eher in der Template-/Shell-Integration als in der CSS-Importkette liegt.
+14. Nach Ergänzung von `preview.allowedHosts` und `server.allowedHosts` in der Vite-Konfiguration lädt die lokal exponierte Preview nun korrekt über die Proxy-Domain.
+15. Die Startseite erscheint jetzt editorial gebunden: Hero, Kennzahlenkarten, Primär-/Sekundär-CTAs und die Hauptnavigation wirken konsistent und ohne offensichtliche Layout-Brüche.
+16. Die ersten Einstiegssektionen der Startseite zeigen ruhige Flächen, saubere Kartenraster und eine plausibel priorisierte Interaktionssprache.
+17. Nächster Prüfschritt: direkte visuelle Kontrolle der überarbeiteten Kernrouten bzw. Anker für Toolbox, Netzwerk, Grundlagen und Training, um verbliebene lokale Stilinseln auf den Zielseiten zu identifizieren.
+18. Beim Wechsel von der Startseite auf `#toolbox` zeigt die lokale Preview erneut nur eine leere, beige Fläche ohne sichtbare UI-Elemente; die URL ändert sich korrekt, die Ansicht rendert jedoch nicht sichtbar.
+19. Ein erneuter Seitenabruf auf derselben Hash-URL bestätigt das Verhalten: Seitentitel vorhanden, aber keine interaktiven Elemente im Viewport und kein extrahierbarer Artikelinhalt.
+20. Nächster Prüfschritt: DOM- bzw. Laufzeitdiagnose der Toolbox-Hash-Ansicht, um zu klären, ob ein Renderfehler, ein Scroll-/Focus-Problem oder eine Template-seitige Bedingung die Seite unsichtbar macht.

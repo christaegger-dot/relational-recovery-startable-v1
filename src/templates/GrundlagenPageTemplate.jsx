@@ -55,7 +55,7 @@ function GrundlagenIndex({ clusters }) {
   if (!clusters?.length) return null;
 
   return (
-    <Section spacing="compact" surface="muted">
+    <Section spacing="tight" surface="subtle">
       <div className="ui-stack ui-stack--tight">
         <Eyebrow>Schnellzugriff</Eyebrow>
         <div className="ui-button-row">
@@ -72,20 +72,20 @@ function GrundlagenIndex({ clusters }) {
 
 function GrundlagenFaqItem({ item, index }) {
   return (
-    <details className="group rounded-[1.75rem] border border-slate-200 bg-white px-5 py-4 shadow-[0_18px_60px_-36px_rgba(15,23,42,0.28)] transition-colors open:border-emerald-300 open:bg-emerald-50/50">
-      <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
+    <details className="group ui-card ui-card--interactive rounded-[1.75rem] bg-[var(--surface-app)]">
+      <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-5 py-4">
         <div className="ui-stack ui-stack--tight">
           <p className="ui-fact-card__label">Frage {index + 1}</p>
           <h3 className="ui-card__title">{item.question}</h3>
         </div>
         <span
           aria-hidden="true"
-          className="mt-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-lg font-semibold text-slate-600 transition-transform duration-200 group-open:rotate-45 group-open:border-emerald-300 group-open:bg-emerald-100 group-open:text-emerald-800"
+          className="mt-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-panel)] text-lg font-semibold text-[var(--text-muted)] transition-transform duration-200 group-open:rotate-45 group-open:border-[var(--border-default)] group-open:bg-[var(--surface-note)] group-open:text-[var(--accent-primary-strong)]"
         >
           +
         </span>
       </summary>
-      <div className="mt-4 border-t border-slate-200 pt-4">
+      <div className="border-t border-[var(--border-subtle)] px-5 pb-5 pt-4">
         <p className="ui-card__copy">{item.answer}</p>
       </div>
     </details>
