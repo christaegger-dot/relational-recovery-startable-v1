@@ -1,3 +1,4 @@
+// Design note: This file preserves the application's information architecture while the visual language is shifted toward a warm editorial interface with calmer surfaces, serif-led hierarchy and lower-arousal accents.
 import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react';
 import './styles/app-global.css';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
@@ -622,22 +623,22 @@ Aktueller Assessment-Score: ${score.risk}
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans text-slate-900 overflow-x-hidden selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen bg-[#f6efe7] flex flex-col font-sans text-stone-900 overflow-x-hidden selection:bg-[#ead8c3] selection:text-[#5f3c2d]">
       <a href="#main-content" className="skip-link">
         Zum Inhalt springen
       </a>
 
       {showSafeNote && (
-        <div className="bg-slate-900 text-white p-3 no-print border-b border-white/10 relative z-[100]">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-2 md:px-6">
-            <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest">
-              <ShieldCheck size={16} className="text-emerald-400 shrink-0" />
+        <div className="relative z-[100] border-b border-[#4b392f] bg-[linear-gradient(180deg,#3f322b,#2d241f)] px-3 py-3 text-[#f6efe7] no-print">
+          <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-2 md:flex-row md:items-center md:px-6">
+            <div className="flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#eadfce]">
+              <ShieldCheck size={16} className="shrink-0 text-[#f0c786]" />
               <span>Lokale Speicherung im Browser • auf gemeinsam genutzten Geräten nach der Nutzung zurücksetzen • keine serverseitige Falldokumentation in dieser Ansicht</span>
             </div>
             <button
               type="button"
               onClick={() => setShowSafeNote(false)}
-              className="text-emerald-400 hover:text-white transition-colors text-[10px] font-black haptic-btn px-2 py-1"
+              className="haptic-btn rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#f0c786] transition-colors hover:bg-white/10 hover:text-white"
             >
               Schliessen
             </button>
@@ -645,17 +646,17 @@ Aktueller Assessment-Score: ${score.risk}
         </div>
       )}
 
-      <div className="no-print border-b border-red-100 bg-red-50/70">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <div className="text-sm text-red-950 leading-relaxed">
-            <span className="font-black uppercase tracking-[0.18em] text-[10px] mr-3">Akute Krise</span>
-            Bei akuter Lebensgefahr: <span className="font-black">144</span>. Im Kanton Zürich bei nicht lebensbedrohlichen Situationen:
-            <span className="font-black"> AERZTEFON 0800 33 66 55</span>. Für Jugendliche ist <span className="font-black">147 telefonisch</span> der schnellste Weg.
+      <div className="no-print border-b border-[#e4cbbb] bg-[linear-gradient(180deg,#fff6ee,#f4e4d6)]">
+        <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-4 py-3 md:flex-row md:items-center md:px-6">
+          <div className="text-sm leading-relaxed text-[#6d342c]">
+            <span className="mr-3 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#9a4b3c]">Akute Krise</span>
+            Bei akuter Lebensgefahr: <span className="font-extrabold">144</span>. Im Kanton Zürich bei nicht lebensbedrohlichen Situationen:
+            <span className="font-extrabold"> AERZTEFON 0800 33 66 55</span>. Für Jugendliche ist <span className="font-extrabold">147 telefonisch</span> der schnellste Weg.
           </div>
           <button
             type="button"
             onClick={handleEmergencyAccess}
-            className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-white px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-red-800 hover:bg-red-100 transition-colors haptic-btn"
+            className="haptic-btn inline-flex items-center gap-2 rounded-full border border-[#dec2b2] bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#8d3f32] shadow-[0_10px_24px_rgba(141,63,50,0.06)] transition-colors hover:bg-[#fff0e6]"
           >
             <AlertTriangle size={14} />
             Zu Notfallinformationen

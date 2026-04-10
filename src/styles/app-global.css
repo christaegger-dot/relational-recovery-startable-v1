@@ -1,15 +1,18 @@
-@import "tailwindcss";
-
+/* Design note: Shared application polish for a warm editorial interface with restrained motion, softer outlines, and paper-like depth. */
 .skip-link {
   position: absolute;
   left: 1rem;
   top: -4rem;
   z-index: 200;
-  background: #0f172a;
-  color: white;
-  padding: 0.75rem 1rem;
-  border-radius: 1rem;
-  font-weight: 800;
+  background: #2f2f28;
+  color: #fffaf6;
+  padding: 0.8rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  box-shadow: 0 18px 38px rgba(47, 47, 40, 0.16);
 }
 
 .skip-link:focus {
@@ -17,15 +20,25 @@
 }
 
 .haptic-btn {
-  transition: transform 0.1s, background-color 0.3s, box-shadow 0.3s, border-color 0.3s, color 0.3s;
+  transition:
+    transform 0.18s ease,
+    background-color 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    color 0.28s ease,
+    opacity 0.28s ease;
+}
+
+.haptic-btn:hover {
+  transform: translateY(-1px);
 }
 
 .haptic-btn:active {
-  transform: scale(0.98);
+  transform: scale(0.985);
 }
 
 .page-enter {
-  animation: pageEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: pageEnter 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .chart-shell {
@@ -33,22 +46,37 @@
   width: 100%;
 }
 
+.soft-panel {
+  background: rgba(255, 251, 246, 0.78);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(140, 112, 86, 0.18);
+  box-shadow: 0 24px 60px rgba(66, 49, 38, 0.08);
+}
+
+.section-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(120, 90, 70, 0.35) 20%, rgba(120, 90, 70, 0.35) 80%, transparent 100%);
+}
+
 @keyframes pageEnter {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(14px);
+    filter: blur(4px);
   }
 
   to {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
 }
 
 :focus-visible {
-  outline: 3px solid #059669;
+  outline: 3px solid rgba(210, 65, 54, 0.72);
   outline-offset: 4px;
-  border-radius: 12px;
+  border-radius: 14px;
 }
 
 .print-only {
