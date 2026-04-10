@@ -1,15 +1,13 @@
 // Design note: Editorial footer with warm layered panels, serif brand close, and calmer navigation rhythm that extends the paper-like interface language.
 import { ArrowUpRight, Library, ShieldCheck, Users } from 'lucide-react';
+import { TAB_ITEMS } from '../data/appShellContent';
 
-export default function Footer({ setActiveTab }) {
-  const footerRoutes = [
-    { label: 'Start', tab: 'home', note: 'Dashboard und Orientierung' },
-    { label: 'Lernmodule', tab: 'elearning', note: 'Kurzformate für Fachpraxis' },
-    { label: 'Training', tab: 'vignetten', note: 'Fallreflexion und Dialog' },
-    { label: 'Toolbox', tab: 'toolbox', note: 'Triage, Schutz, nächste Schritte' },
-    { label: 'Netzwerk', tab: 'zuerich', note: 'Hilfen, Stellen, Weitervermittlung' },
-    { label: 'Evidenz', tab: 'zaesur', note: 'Grundlagen, Vertiefung, Materialien' },
-  ];
+export default function Footer({ onNavigateToTab }) {
+  const footerRoutes = TAB_ITEMS.filter((route) => route.priority === 'primary').map((route) => ({
+    label: route.label,
+    tab: route.id,
+    note: route.footerNote,
+  }));
 
   return (
     <footer
