@@ -1,20 +1,64 @@
-import { Activity, ClipboardCheck, GraduationCap, HeartHandshake, LayoutDashboard, MapPin } from 'lucide-react';
+import { Activity, BookOpenText, ClipboardCheck, CircleHelp, GraduationCap, HeartHandshake, LayoutDashboard, MapPin } from 'lucide-react';
 
 export const TAB_ITEMS = [
-  { id: 'home', label: 'Start', icon: LayoutDashboard },
-  { id: 'elearning', label: 'Lernmodule', icon: GraduationCap },
-  { id: 'vignetten', label: 'Training', icon: HeartHandshake },
-  { id: 'zaesur', label: 'Evidenz', icon: Activity },
-  { id: 'toolbox', label: 'Toolbox', icon: ClipboardCheck },
-  { id: 'zuerich', label: 'Netzwerk', icon: MapPin },
+  { id: 'home', label: 'Start', icon: LayoutDashboard, footerNote: 'Dashboard und Orientierung', priority: 'primary' },
+  {
+    id: 'elearning',
+    label: 'Lernmodule',
+    icon: GraduationCap,
+    footerNote: 'Kurzformate für Fachpraxis',
+    priority: 'primary',
+  },
+  {
+    id: 'vignetten',
+    label: 'Training',
+    icon: HeartHandshake,
+    footerNote: 'Fallreflexion und Dialog',
+    priority: 'primary',
+  },
+  {
+    id: 'glossar',
+    label: 'Glossar',
+    icon: BookOpenText,
+    footerNote: 'Begriffe, Konzepte und Sprache',
+    priority: 'primary',
+  },
+  {
+    id: 'grundlagen',
+    label: 'Grundlagen',
+    icon: CircleHelp,
+    footerNote: 'FAQ, Einordnung und Orientierung',
+    priority: 'primary',
+  },
+  {
+    id: 'zaesur',
+    label: 'Evidenz',
+    icon: Activity,
+    footerNote: 'Grundlagen, Vertiefung, Materialien',
+    priority: 'primary',
+  },
+  {
+    id: 'toolbox',
+    label: 'Toolbox',
+    icon: ClipboardCheck,
+    footerNote: 'Triage, Schutz, nächste Schritte',
+    priority: 'primary',
+  },
+  {
+    id: 'zuerich',
+    label: 'Netzwerk',
+    icon: MapPin,
+    footerNote: 'Hilfen, Stellen, Weitervermittlung',
+    priority: 'primary',
+  },
 ];
 
 export const STORAGE_KEYS = {
-  appState: 'rr_app_state_v3',
+  appState: 'rr_app_state_v4',
 };
 
 export const APP_STATE_VERSION = 1;
-export const APP_BROADCAST_CHANNEL = 'rr_app_sync_v3';
+export const APP_BROADCAST_CHANNEL = 'rr_app_sync_v4';
 
 export const DEFAULT_SCORE = { risk: 0, checked: [] };
 export const DEFAULT_COMPLETED = [];
