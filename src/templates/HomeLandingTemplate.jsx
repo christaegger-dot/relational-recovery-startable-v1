@@ -1,0 +1,200 @@
+import { ChevronRight, ExternalLink } from 'lucide-react';
+import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
+import EditorialPageTemplate from './EditorialPageTemplate';
+import { E_MODULE_COUNT, HOME_REFERENCE_COUNT, NETWORK_RESOURCE_COUNT, VIGNETTE_COUNT } from '../data/appShellContent';
+
+export default function HomeLandingTemplate({ setActiveTab, progressPercent, completedModules, pageHeadingId }) {
+  const hero = {
+    eyebrow: 'Systemische Orientierung',
+    title: 'Begleitung ist',
+    accent: 'Beziehungsarbeit.',
+    lead:
+      'Interaktive Fachressourcen für die Begleitung von Eltern mit psychischer Belastung – mit Training, systemischer Orientierung, Krisenhilfe, Netzwerk und printfähigen Arbeitshilfen.',
+    image: heroIllustration,
+    imageAlt: 'Minimalistische Illustration eines Familiensystems mit Nähe, Distanz und Unterstützung',
+    asideTitle: 'Wichtiger Hinweis zur Einordnung',
+    asideCopy:
+      'Dieses Angebot dient der psychoedukativen Orientierung. Für offizielle Informationen und Beratung bleibt die Angehörigenberatung der PUK Zürich die zentrale Anlaufstelle.',
+    actions: [
+      {
+        label: 'Falllogik trainieren',
+        onClick: () => setActiveTab('elearning', { focusTarget: 'heading' }),
+        variant: 'primary',
+        icon: ChevronRight,
+      },
+      {
+        label: 'Prioritäten klären',
+        onClick: () => setActiveTab('toolbox', { focusTarget: 'heading' }),
+        variant: 'secondary',
+      },
+      {
+        label: 'Offizielle PUK-Seite öffnen',
+        href: 'https://www.pukzh.ch/patienten-angehoerige/informationen-fuer-angehoerige/',
+        variant: 'subtle',
+        target: '_blank',
+        rel: 'noopener noreferrer',
+        icon: ExternalLink,
+      },
+    ],
+    stats: [
+      {
+        label: 'Lernfortschritt',
+        value: `${progressPercent}%`,
+        note: `${completedModules.length} von ${E_MODULE_COUNT} Lernmodulen bearbeitet`,
+      },
+      {
+        label: 'Module',
+        value: String(E_MODULE_COUNT),
+        note: 'kompakte Lernbausteine für die systemische Einordnung',
+      },
+      {
+        label: 'Trainingsfälle',
+        value: String(VIGNETTE_COUNT),
+        note: 'für Fallreflexion, Sprache und Dialog',
+      },
+      {
+        label: 'Netzwerkstellen',
+        value: String(NETWORK_RESOURCE_COUNT),
+        note: 'für Triage, Entlastung und Weitervermittlung',
+      },
+    ],
+  };
+
+  const sections = [
+    {
+      eyebrow: 'Arbeitslogik',
+      title: 'Ein ruhiger, fachlich klarer Weg durch die Website.',
+      description:
+        'Die Inhalte sind als Abfolge gedacht: zuerst verstehen, dann einschätzen, daraus konkrete Schritte ableiten und schliesslich passende Hilfen erreichbar machen. Das Seitentemplate übersetzt diese Logik in wiederverwendbare, editoriale Bausteine.',
+      aside: {
+        label: 'Einordnung',
+        title: 'Kein starres Schema',
+        copy: 'Die Reihenfolge dient als Orientierung für Triage, Gesprächsplanung und psychoedukative Begleitung – nicht als lineares Pflichtprogramm.',
+      },
+      actions: [
+        {
+          label: 'Zum Evidenzteil',
+          onClick: () => setActiveTab('zaesur', { focusTarget: 'heading' }),
+          variant: 'secondary',
+        },
+        {
+          label: 'Zur Toolbox',
+          onClick: () => setActiveTab('toolbox', { focusTarget: 'heading' }),
+          variant: 'secondary',
+        },
+      ],
+      cards: [
+        {
+          label: 'Verstehen',
+          title: 'Familiendynamik einordnen',
+          copy: 'Elternrolle, Belastung, kindliche Perspektive und Schutzfaktoren gemeinsam betrachten.',
+          onClick: () => setActiveTab('zaesur', { focusTarget: 'heading' }),
+          actionLabel: 'Zum Wissensbereich',
+        },
+        {
+          label: 'Einschätzen',
+          title: 'Risiken und Ressourcen gewichten',
+          copy: 'Krise, Entlastung, Parentifizierung, Routinen und verfügbare Bezugspersonen zusammenführen.',
+          onClick: () => setActiveTab('toolbox', { focusTarget: 'heading' }),
+          actionLabel: 'Zur Priorisierung',
+        },
+        {
+          label: 'Handeln',
+          title: 'Nächste Schritte konkret machen',
+          copy: 'Psychoedukation, Sicherheitsplanung und Gesprächsführung in den Alltag übersetzen.',
+          onClick: () => setActiveTab('toolbox', { focusTarget: 'heading' }),
+          actionLabel: 'Zu den Arbeitsinstrumenten',
+        },
+        {
+          label: 'Vernetzen',
+          title: 'Hilfen erreichbar machen',
+          copy: 'Offizielle Stellen, Beratungsangebote und regionale Hilfen passend zur Lage aktivieren.',
+          onClick: () => setActiveTab('zuerich', { focusTarget: 'heading' }),
+          actionLabel: 'Zum Netzwerk',
+        },
+      ],
+    },
+    {
+      eyebrow: 'Direkte Einstiege',
+      title: 'Die Startseite wird zur operativen Schaltfläche des neuen Systems.',
+      description:
+        'Statt nur auf Bereiche hinzuweisen, führt die Landingpage jetzt gezielt in jene Seitentypen, die bereits im Rebuild tragfähig angelegt sind. So wird die Startseite selbst zum Navigationsmuster für spätere Themen- oder Unterseiten.',
+      surface: 'subtle',
+      aside: {
+        label: 'Rebuild-Nutzen',
+        title: 'Navigation und Architektur greifen ineinander',
+        copy: 'Wenn Einstiege bereits im Template modelliert sind, muss die Orientierung nicht später über Sondermodule nachgerüstet werden.',
+        tone: 'default',
+      },
+      cards: [
+        {
+          label: 'Training',
+          title: 'Mit Lernmodulen üben',
+          copy: `${E_MODULE_COUNT} kompakte Lerneinheiten helfen, Sprache, Falllogik und Gesprächsorientierung schrittweise aufzubauen.`,
+          tone: 'soft',
+          onClick: () => setActiveTab('elearning', { focusTarget: 'heading' }),
+          actionLabel: 'Zum E-Learning',
+        },
+        {
+          label: 'Wissensraum',
+          title: 'Familiendynamik vertiefen',
+          copy: `Der Evidenzbereich bündelt aktuell ${HOME_REFERENCE_COUNT} kuratierte Einstiegspunkte, Materialien und Referenzen in einer ruhigeren Leselogik.`,
+          tone: 'accent',
+          onClick: () => setActiveTab('zaesur', { focusTarget: 'heading' }),
+          actionLabel: 'Zum Evidenzteil',
+        },
+        {
+          label: 'Versorgung',
+          title: 'Regionale Hilfen aufrufen',
+          copy: `${NETWORK_RESOURCE_COUNT} Netzwerkstellen unterstützen bei Triage, Entlastung und der Weitervermittlung an passende Angebote.`,
+          onClick: () => setActiveTab('zuerich', { focusTarget: 'heading' }),
+          actionLabel: 'Zum Netzwerk',
+        },
+        {
+          label: 'Fallarbeit',
+          title: 'Dialoge und Entscheidungssituationen reflektieren',
+          copy: `${VIGNETTE_COUNT} Trainingsfälle machen Belastungsdynamiken, Sprache und nächste Schritte konkreter als rein abstrakte Wissensvermittlung.`,
+          onClick: () => setActiveTab('vignetten', { focusTarget: 'heading' }),
+          actionLabel: 'Zu den Vignetten',
+        },
+      ],
+    },
+    {
+      eyebrow: 'Vertrauen und Orientierung',
+      title: 'Die Startseite markiert jetzt auch fachliche Rollen klarer.',
+      description:
+        'Für sensible Themen braucht es nicht nur Funktionen, sondern auch erkennbare Einordnung. Die Landingpage benennt daher explizit, wofür das Angebot gedacht ist und welche nächsten Wege je nach Anliegen sinnvoll sind.',
+      aside: {
+        label: 'Für wen gedacht',
+        title: 'Psychoedukative Orientierung statt Ersatzversorgung',
+        copy: 'Die Website unterstützt beim Verstehen, Strukturieren und Vorbereiten. Offizielle Beratung, Krisenhilfe und Behandlung bleiben eigenständige Versorgungsleistungen.',
+        tone: 'soft',
+      },
+      cards: [
+        {
+          label: 'Wenn Sie zuerst verstehen möchten',
+          title: 'Im Evidenzbereich beginnen',
+          copy: 'Geeignet, wenn Familiendynamik, kindliche Perspektive, Psychoedukation oder Schutzfaktoren zunächst fachlich eingeordnet werden sollen.',
+          onClick: () => setActiveTab('zaesur', { focusTarget: 'heading' }),
+          actionLabel: 'Wissensseite öffnen',
+        },
+        {
+          label: 'Wenn Sie rasch priorisieren müssen',
+          title: 'Mit der Toolbox starten',
+          copy: 'Geeignet, wenn akute Belastung, Sicherheitsfragen, Kindeswohl oder nächste Schritte im Vordergrund stehen.',
+          onClick: () => setActiveTab('toolbox', { focusTarget: 'heading' }),
+          actionLabel: 'Toolbox öffnen',
+        },
+        {
+          label: 'Wenn Sie üben oder lehren möchten',
+          title: 'Lernmodule und Vignetten kombinieren',
+          copy: 'Geeignet für Selbststudium, Weiterbildung oder Teams, die Sprache und Falllogik anhand konkreter Situationen vertiefen möchten.',
+          onClick: () => setActiveTab('elearning', { focusTarget: 'heading' }),
+          actionLabel: 'Zum Training',
+        },
+      ],
+    },
+  ];
+
+  return <EditorialPageTemplate hero={hero} pageHeadingId={pageHeadingId} sections={sections} />;
+}
