@@ -88,83 +88,68 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
   ];
 
   return (
-    <article className="no-print space-y-10 md:space-y-14 lg:space-y-18">
-      <section className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8 xl:gap-10">
-        <div className="editorial-shell relative overflow-hidden rounded-[2.5rem] border border-stone-300/70 bg-[linear-gradient(180deg,rgba(255,252,247,0.96),rgba(248,240,231,0.96))] p-7 shadow-[0_30px_80px_rgba(78,58,42,0.08)] md:p-10 lg:col-span-8 lg:rounded-[3rem] lg:p-12 xl:p-14">
-          <div className="absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_top,rgba(235,138,62,0.12),transparent_70%)]" />
-          <div className="relative z-10">
-            <div className="mb-6 flex items-center gap-4 md:mb-8">
-              <div className="h-px w-12 bg-[#b98967]" />
-              <span className="text-[10px] font-extrabold uppercase tracking-[0.34em] text-[#7a4c35]">Systemische Orientierung</span>
+    <article className="home-section no-print">
+      <section className="home-hero-layout">
+        <div className="home-hero-main">
+          <div className="home-hero-main__inner">
+            <div className="home-hero-main__header">
+              <div className="ui-eyebrow">Systemische Orientierung</div>
+
+              <div className="home-hero-main__title-wrap">
+                <h2 id="page-heading-home" tabIndex={-1} className="home-hero-main__title">
+                  Begleitung ist <span className="ui-hero__accent">Beziehungsarbeit</span>.
+                </h2>
+                <p className="home-hero-main__lead">
+                  Interaktive Fachressourcen für die Begleitung von Eltern mit psychischer Belastung – mit Training,
+                  systemischer Orientierung, Krisenhilfe, Netzwerk und printfähigen Arbeitshilfen.
+                </p>
+              </div>
             </div>
 
-            <div className="max-w-4xl">
-              <h2 id="page-heading-home" tabIndex={-1} className="font-serif text-[2.75rem] font-semibold leading-[0.97] tracking-[-0.04em] text-stone-900 md:text-[4.5rem] xl:text-[5.35rem]">
-                Begleitung ist{' '}
-                <span className="text-[#a55a42] italic">Beziehungsarbeit</span>.
-              </h2>
-              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-stone-600 md:text-[1.45rem] md:leading-relaxed">
-                Interaktive Fachressourcen für die Begleitung von Eltern mit psychischer Belastung – mit Training,
-                systemischer Orientierung, Krisenhilfe, Netzwerk und printfähigen Arbeitshilfen.
-              </p>
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-4 md:mt-10 md:gap-5">
-              <button
-                type="button"
-                onClick={() => setActiveTab('elearning')}
-                className="haptic-btn inline-flex items-center gap-3 rounded-full bg-[#2f2f28] px-7 py-4 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#fffaf6] shadow-[0_18px_34px_rgba(47,47,40,0.16)] hover:bg-[#7a4c35]"
-              >
+            <div className="ui-button-row">
+              <button type="button" onClick={() => setActiveTab('elearning')} className="ui-button ui-button--primary">
                 Falllogik trainieren <ChevronRight size={18} />
               </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab('toolbox')}
-                className="haptic-btn rounded-full border border-stone-300/80 bg-white/75 px-7 py-4 text-[11px] font-extrabold uppercase tracking-[0.18em] text-stone-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] hover:bg-[#f5ece2]"
-              >
+              <button type="button" onClick={() => setActiveTab('toolbox')} className="ui-button ui-button--secondary">
                 Prioritäten klären
               </button>
             </div>
 
-            <div className="mt-6 rounded-[1.85rem] border border-stone-300/80 bg-white/70 px-5 py-4 lg:hidden">
-              <div className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7a4c35]">Lernstand</div>
-              <p className="mt-2 text-sm leading-relaxed text-stone-700">
-                {completedModules.length} von {E_MODULE_COUNT} Lernmodulen bearbeitet. Das Dashboard unten führt direkt zu den nächsten Arbeitsbereichen.
+            <div className="ui-note-panel home-hero-main__progress-note">
+              <div className="ui-note-panel__label">Lernstand</div>
+              <p className="ui-note-panel__copy">
+                {completedModules.length} von {E_MODULE_COUNT} Lernmodulen bearbeitet. Das Dashboard unten führt direkt zu den
+                nächsten Arbeitsbereichen.
               </p>
             </div>
 
-            <div className="mt-10 flex justify-center lg:mt-12 lg:justify-end">
-              <div className="w-full max-w-[24rem] overflow-hidden rounded-[2rem] border border-stone-300/80 bg-[linear-gradient(180deg,#f6ede2,#efe3d6)] p-3 shadow-[0_24px_50px_rgba(95,69,50,0.10)] sm:max-w-[31rem] sm:p-4 lg:max-w-[35rem] lg:rounded-[2.5rem] lg:p-5">
+            <div className="home-hero-main__media">
+              <div className="home-hero-main__figure">
                 <img
                   src={heroIllustration}
                   alt="Minimalistische Illustration eines Familiensystems mit Nähe, Distanz und Unterstützung"
-                  className="aspect-[4/3] w-full rounded-[1.65rem] object-contain object-center sm:aspect-[16/10] sm:rounded-[2rem]"
                 />
               </div>
             </div>
 
-            <div className="mt-8 rounded-[2rem] border border-[#ddc9b6] bg-[linear-gradient(180deg,rgba(255,248,241,0.95),rgba(246,235,221,0.9))] p-6 md:mt-10 md:p-8">
-              <div className="mb-4 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7a4c35]">Wichtiger Hinweis zur Einordnung</div>
-              <div className="space-y-3 text-sm leading-relaxed text-stone-700 md:text-base">
+            <div className="ui-note-panel home-hero-note">
+              <div className="ui-note-panel__label">Wichtiger Hinweis zur Einordnung</div>
+              <div className="ui-copy">
                 <p>
                   Diese Website ist ein ergänzendes psychoedukatives Informationsangebot im Themenfeld Angehörigenarbeit,
                   psychisch belastete Elternschaft und Kinder psychisch erkrankter Eltern. Für offizielle Informationen und Beratung
                   bleibt die Angehörigenberatung der PUK Zürich die zentrale Anlaufstelle.
                 </p>
               </div>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('network')}
-                  className="inline-flex items-center gap-2 rounded-full border border-[#d9c0a8] bg-white px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-stone-800 shadow-[0_10px_24px_rgba(95,69,50,0.06)] transition-colors hover:bg-[#f9f1e7]"
-                >
+              <div className="ui-button-row">
+                <button type="button" onClick={() => setActiveTab('network')} className="ui-button ui-button--secondary">
                   Zum Netzwerkbereich mit PUK-Angeboten
                 </button>
                 <a
                   href="https://www.pukzh.ch/patienten-angehoerige/informationen-fuer-angehoerige/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#d9c0a8] bg-white px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-stone-800 shadow-[0_10px_24px_rgba(95,69,50,0.06)] transition-colors hover:bg-[#f9f1e7]"
+                  className="ui-button ui-button--secondary"
                 >
                   Offizielle PUK-Seite öffnen <ExternalLink size={14} />
                 </a>
@@ -173,41 +158,37 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
           </div>
         </div>
 
-        <aside className="hidden lg:flex lg:col-span-4 flex-col justify-between rounded-[3rem] border border-stone-300/70 bg-[linear-gradient(180deg,#3d3128,#262019)] p-8 text-[#fff7ef] shadow-[0_28px_80px_rgba(38,32,25,0.28)] xl:p-10">
+        <aside className="home-progress-panel home-hero-aside">
           <div>
-            <div className="text-center text-[10px] font-extrabold uppercase tracking-[0.34em] text-[#e7d7c6]">Lernfortschritt</div>
-            <div className="mt-6 rounded-[2rem] border border-white/10 bg-white/6 p-6 backdrop-blur-sm">
-              <div className="text-center">
-                <div className="font-serif text-6xl font-semibold tracking-[-0.05em] tabular-nums">{progressPercent}%</div>
-                <p className="mx-auto mt-3 max-w-[17rem] text-sm leading-relaxed text-[#efe2d5]">
+            <p className="home-progress-panel__eyebrow">Lernfortschritt</p>
+            <div className="home-progress-panel__card">
+              <div>
+                <p className="home-progress-panel__value">{progressPercent}%</p>
+                <p className="home-progress-panel__lead">
                   {completedModules.length} von {E_MODULE_COUNT} Lernmodulen sind bereits bearbeitet.
                 </p>
               </div>
 
-              <div className="mt-6 space-y-3">
+              <div className="home-progress-panel__list">
                 {progressSummaryItems.map((item) => (
-                  <div key={item.label} className="rounded-[1.45rem] border border-white/10 bg-white/6 px-4 py-3">
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#d9cabb]">{item.label}</span>
-                      <span className="text-lg font-extrabold tabular-nums text-white">{item.value}</span>
+                  <div key={item.label} className="home-progress-panel__item">
+                    <div className="home-progress-panel__item-header">
+                      <span className="home-progress-panel__item-label">{item.label}</span>
+                      <span className="home-progress-panel__item-value">{item.value}</span>
                     </div>
-                    <p className="mt-1 text-xs leading-relaxed text-[#d9cabb]">{item.note}</p>
+                    <p className="home-progress-panel__item-note">{item.note}</p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          <div>
-            <p className="text-center text-xs leading-relaxed text-[#dfd0c1]">
+          <div className="home-progress-panel__footer">
+            <p className="home-progress-panel__copy">
               Die Fortschrittsansicht bleibt bewusst ruhig und textbasiert, damit Orientierung wichtiger ist als reine UI-Inszenierung.
             </p>
             {activeTab !== 'vignetten' && (
-              <button
-                type="button"
-                onClick={() => setActiveTab('vignetten')}
-                className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/12 bg-white/8 px-5 py-3 text-[11px] font-extrabold uppercase tracking-[0.18em] text-white transition-colors hover:bg-white/12"
-              >
+              <button type="button" onClick={() => setActiveTab('vignetten')} className="ui-button ui-button--secondary">
                 Zu den Trainingsfällen <ChevronRight size={14} />
               </button>
             )}
@@ -215,100 +196,94 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
         </aside>
       </section>
 
-      <section className="rounded-[2.5rem] border border-stone-300/70 bg-[linear-gradient(180deg,rgba(255,251,246,0.96),rgba(247,239,230,0.96))] p-7 shadow-[0_26px_70px_rgba(78,58,42,0.06)] md:p-10 lg:rounded-[3rem] lg:p-12">
-        <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_18rem] xl:items-start">
-          <div>
-            <div className="mb-5 flex items-center gap-4 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7a4c35]">
-              <div className="h-px w-10 bg-[#b98967]" />
-              Fachdiagramm
-            </div>
-            <h3 className="font-serif text-3xl font-semibold tracking-[-0.03em] text-stone-900 md:text-5xl">
-              Ein möglicher <span className="text-[#a55a42] italic">Arbeitsweg</span> durch die Website.
+      <section className="home-feature-panel home-feature-panel--pathway">
+        <div className="ui-split home-feature-panel__header">
+          <div className="home-feature-panel__intro">
+            <div className="ui-eyebrow">Fachdiagramm</div>
+            <h3 className="home-feature-panel__title">
+              Ein möglicher <span className="ui-hero__accent">Arbeitsweg</span> durch die Website.
             </h3>
-            <p className="mt-5 max-w-4xl text-base leading-relaxed text-stone-600 md:text-lg">
+            <p className="home-feature-panel__lead">
               Die Inhalte sind nicht als lose Sammlung gedacht, sondern als fachliche Abfolge: erst verstehen, dann einschätzen,
               daraus konkrete Schritte ableiten und passende Hilfen vernetzen. Das Diagramm bündelt diese Logik auf einer Seite.
             </p>
           </div>
-          <aside className="rounded-[1.85rem] border border-stone-300/80 bg-white/70 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
-            <div className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7a4c35]">Einordnung</div>
-            <p className="mt-3 text-sm leading-relaxed text-stone-700">
+          <aside className="ui-note-panel home-support-panel">
+            <div className="ui-note-panel__label">Einordnung</div>
+            <p className="ui-note-panel__copy">
               Kein starres Schema, sondern eine ruhige fachliche Leitstruktur für Orientierung, Triage und Gesprächsplanung.
             </p>
           </aside>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-[2.2rem] border border-stone-300/80 bg-[linear-gradient(180deg,#f6eee3,#efe3d6)] p-5 md:p-8">
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-5">
+        <div className="home-pathway-shell">
+          <div className="ui-card-grid ui-card-grid--4 home-pathway-grid">
             {pathwaySteps.map((step, index) => (
-              <div key={step.label} className="relative">
-                <section className="h-full rounded-[1.8rem] border border-stone-300/80 bg-white/86 p-6 shadow-[0_18px_38px_rgba(93,68,51,0.05)]">
-                  <div className="mb-4 inline-flex rounded-full border border-[#e4d2c1] bg-[#fbf2e8] px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#7a4c35]">
-                    {step.label}
+              <div key={step.label} className="home-pathway-step">
+                <section className="ui-card home-pathway-step__card">
+                  <div className="ui-card__body">
+                    <div className="ui-badge ui-badge--soft home-pathway-step__badge">{step.label}</div>
+                    <h4 className="home-pathway-step__title">{step.title}</h4>
+                    <p className="home-pathway-step__copy">{step.desc}</p>
                   </div>
-                  <h4 className="font-serif text-2xl font-semibold tracking-[-0.03em] text-stone-900">{step.title}</h4>
-                  <p className="mt-4 text-sm leading-relaxed text-stone-600">{step.desc}</p>
                 </section>
 
                 {index < pathwaySteps.length - 1 && (
-                  <>
-                    <div className="absolute right-[-0.85rem] top-1/2 hidden h-px w-7 -translate-y-1/2 bg-[#c69f7d] lg:block" />
-                    <div className="absolute right-[-0.6rem] top-1/2 hidden h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-r-2 border-t-2 border-[#c69f7d] lg:block" />
-                    <div className="mx-auto mt-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#d9c0a8] bg-white text-[#7a4c35] lg:hidden">
+                  <div className="home-pathway-step__connector" aria-hidden="true">
+                    <span className="home-pathway-step__connector-dot">
                       <ChevronRight size={16} />
-                    </div>
-                  </>
+                    </span>
+                  </div>
                 )}
               </div>
             ))}
           </div>
 
-          <div className="mt-6 rounded-[1.6rem] border border-[#d9c0a8] bg-white/72 px-5 py-4">
-            <p className="text-sm leading-relaxed font-medium text-stone-800">
-              Leitidee: Gute Begleitung verbindet systemisches Verstehen, pragmatische Einschätzung, klare nächste Schritte und aktivierte Unterstützung statt isolierter Einzelentscheidungen.
+          <div className="ui-note-panel ui-note-panel--muted home-pathway-summary">
+            <p className="ui-note-panel__copy">
+              Leitidee: Gute Begleitung verbindet systemisches Verstehen, pragmatische Einschätzung, klare nächste Schritte und
+              aktivierte Unterstützung statt isolierter Einzelentscheidungen.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="rounded-[2.5rem] border border-stone-300/70 bg-[linear-gradient(180deg,rgba(248,240,231,0.96),rgba(244,234,223,0.96))] p-7 shadow-[0_26px_70px_rgba(78,58,42,0.06)] md:p-10 lg:rounded-[3rem] lg:p-12">
-        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_18rem] xl:items-start">
-          <div>
-            <div className="mb-5 flex items-center gap-4 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7a4c35]">
-              <div className="h-px w-10 bg-[#b98967]" />
-              Navigations-Dashboard
-            </div>
-            <h3 className="font-serif text-3xl font-semibold tracking-[-0.03em] text-stone-900 md:text-5xl">
-              Einstieg nach <span className="text-[#a55a42] italic">Fachfrage</span> statt nach Menüpunkt.
+      <section className="home-feature-panel home-feature-panel--dashboard">
+        <div className="ui-split home-feature-panel__header">
+          <div className="home-feature-panel__intro">
+            <div className="ui-eyebrow">Navigations-Dashboard</div>
+            <h3 className="home-feature-panel__title">
+              Einstieg nach <span className="ui-hero__accent">Fachfrage</span> statt nach Menüpunkt.
             </h3>
-            <p className="mt-5 max-w-4xl text-base leading-relaxed text-stone-600 md:text-lg">
-              Die Startseite funktioniert am besten, wenn typische Praxisanliegen direkt in den passenden Bereich führen. Die Karten unten übersetzen häufige Arbeitsfragen in klare Einstiegswege.
+            <p className="home-feature-panel__lead">
+              Die Startseite funktioniert am besten, wenn typische Praxisanliegen direkt in den passenden Bereich führen. Die Karten
+              unten übersetzen häufige Arbeitsfragen in klare Einstiegswege.
             </p>
           </div>
-          <aside className="rounded-[1.85rem] border border-stone-300/80 bg-white/75 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
-            <div className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7a4c35]">Orientierung</div>
-            <p className="mt-3 text-sm leading-relaxed text-stone-700">
+          <aside className="ui-note-panel home-support-panel">
+            <div className="ui-note-panel__label">Orientierung</div>
+            <p className="ui-note-panel__copy">
               Weniger suchen, schneller einsteigen: Verstehen, entscheiden, triagieren oder trainieren.
             </p>
           </aside>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <div className="ui-card-grid ui-card-grid--2 home-route-grid">
           {dashboardRoutes.map((route) => (
             <button
               key={route.title}
               type="button"
               onClick={() => setActiveTab(route.target)}
-              className="rounded-[2rem] border border-stone-300/80 bg-white/86 p-6 text-left shadow-[0_18px_40px_rgba(93,68,51,0.05)] transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_24px_50px_rgba(93,68,51,0.08)]"
+              className="ui-card ui-card--interactive home-route-card"
             >
-              <div className="flex items-start gap-5">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[1.2rem] border border-[#e4d2c1] bg-[#fbf2e8] text-[#7a4c35]">
+              <div className="ui-card__body home-route-card__body">
+                <div className="home-icon-badge">
                   <route.icon size={24} strokeWidth={2.1} />
                 </div>
-                <div className="min-w-0">
-                  <h4 className="font-serif text-2xl font-semibold tracking-[-0.03em] text-stone-900">{route.title}</h4>
-                  <p className="mt-3 text-sm leading-relaxed text-stone-600">{route.desc}</p>
-                  <div className="mt-5 inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#8d3f32]">
+                <div className="home-route-card__content">
+                  <h4 className="home-route-card__title">{route.title}</h4>
+                  <p className="home-route-card__copy">{route.desc}</p>
+                  <div className="home-inline-cta">
                     {route.cta} <ChevronRight size={14} />
                   </div>
                 </div>
@@ -318,21 +293,21 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
         </div>
       </section>
 
-      <section className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <section className="home-overview-grid">
         {overviewCards.map((card) => (
           <button
             key={card.label}
             type="button"
             onClick={() => setActiveTab(card.tab)}
-            className="rounded-[2rem] border border-stone-300/75 bg-[linear-gradient(180deg,rgba(255,252,247,0.95),rgba(248,240,231,0.95))] p-7 text-left shadow-[0_22px_44px_rgba(93,68,51,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_54px_rgba(93,68,51,0.08)]"
+            className="ui-card ui-card--interactive home-overview-card"
           >
-            <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-[1.2rem] border border-[#e4d2c1] bg-white/90 text-[#7a4c35] shadow-[inset_0_1px_0_rgba(255,255,255,0.82)]">
+            <div className="home-icon-badge home-overview-card__icon">
               <card.icon size={24} strokeWidth={2.1} />
             </div>
-            <div className="font-serif text-5xl font-semibold tracking-[-0.05em] text-stone-900 tabular-nums">{card.val}</div>
-            <h3 className="mt-3 text-[10px] font-extrabold uppercase tracking-[0.22em] text-[#8a705f]">● {card.label}</h3>
-            <p className="mt-4 text-[15px] leading-relaxed text-stone-600">{card.desc}</p>
-            <div className="mt-5 inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#8d3f32]">
+            <p className="home-overview-card__value">{card.val}</p>
+            <h3 className="home-overview-card__label">{card.label}</h3>
+            <p className="home-overview-card__copy">{card.desc}</p>
+            <div className="home-inline-cta">
               Bereich öffnen <ChevronRight size={14} />
             </div>
           </button>
