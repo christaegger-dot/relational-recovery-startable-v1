@@ -57,14 +57,14 @@ function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm,
             onChange={(event) => onSearchChange(event.target.value)}
             placeholder="Name, Schlagwort oder Tag"
             aria-describedby="network-resource-search-status"
-            className="ui-input pl-14 pr-5"
+            className="ui-input ui-network-search__input"
           />
         </div>
         <p id="network-resource-search-status" role="status" aria-live="polite" aria-atomic="true" className="sr-only">
           {searchStatusText}
         </p>
         {(searchTerm.trim() || activeFilter !== 'all') && (
-          <Button variant="secondary" className="w-fit" onClick={onReset}>
+          <Button variant="secondary" className="ui-button--fit-content" onClick={onReset}>
             <XCircle size={14} /> Suche und Filter zurücksetzen
           </Button>
         )}
@@ -115,9 +115,9 @@ function ResourceDirectorySection({ directory }) {
         />
 
         {resources.length ? (
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="ui-network-resource-grid">
             {resources.map((resource) => (
-              <SurfaceCard key={resource.name} tone="default" className="ui-card--interactive h-full">
+              <SurfaceCard key={resource.name} tone="default" className="ui-card--interactive ui-card--full-height">
                 {resource.tags?.length ? (
                   <div className="ui-network-tag-row">
                     {resource.tags.map((tag) => (
@@ -280,7 +280,7 @@ function NetworkMapSection({ mapping }) {
           ) : null}
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="ui-network-steps-grid">
           {steps.map((step, index) => (
             <SurfaceCard key={step} tone={index === 2 ? 'soft' : 'default'}>
               <p className="ui-fact-card__label">Schritt {index + 1}</p>
@@ -289,9 +289,9 @@ function NetworkMapSection({ mapping }) {
           ))}
         </div>
 
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
+        <div className="ui-network-analysis-grid">
           <SurfaceCard tone="default">
-            <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+            <div className="ui-network-map-header">
               <div>
                 <p className="ui-fact-card__label">Nutzbare Netzwerkkarte</p>
                 <p className="ui-card__copy">
@@ -343,9 +343,9 @@ function NetworkMapSection({ mapping }) {
                   ) : null}
                 </SurfaceCard>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="ui-network-count-grid">
                   {counts.map((count) => (
-                    <SurfaceCard key={count.label} tone={count.tone || 'default'} className="h-full">
+                    <SurfaceCard key={count.label} tone={count.tone || 'default'} className="ui-card--full-height">
                       <p className="ui-fact-card__label">{count.label}</p>
                       <p className="ui-fact-card__value">{count.value}</p>
                       {count.note ? <p className="ui-fact-card__note">{count.note}</p> : null}
@@ -376,7 +376,7 @@ function NetworkMapSection({ mapping }) {
           </SurfaceCard>
         </div>
 
-        <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_18rem] xl:items-start">
+        <div className="ui-network-reflection-grid">
           <SurfaceCard tone="default">
             <p className="ui-fact-card__label">Arbeitsauswertung</p>
             <p className="ui-card__copy">
@@ -393,9 +393,9 @@ function NetworkMapSection({ mapping }) {
           </SurfaceCard>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="ui-network-node-grid">
           {visibleNodes.map((node) => (
-            <SurfaceCard key={node.label} tone={node.tone === 'gap' ? 'soft' : 'default'} className="h-full">
+            <SurfaceCard key={node.label} tone={node.tone === 'gap' ? 'soft' : 'default'} className="ui-card--full-height">
               <p className="ui-fact-card__label">
                 {node.zone === 'near'
                   ? 'Nahe Ebene'
