@@ -541,7 +541,7 @@ export default function ToolboxPageTemplate({
   scoreBands,
   triage,
   practice,
-  prioritySections = [],
+  clusters = [],
   closingSection,
   scoreStatusId = 'assessment-score-status',
 }) {
@@ -555,7 +555,7 @@ export default function ToolboxPageTemplate({
       <ScoreBandsSection scoreBands={scoreBands} />
       <TriageSection triage={triage} />
       <PracticeBlocksSection practice={practice} />
-      {prioritySections.map((cluster) => (
+      {clusters.map((cluster) => (
         <ClusterSection key={cluster.id} cluster={cluster} />
       ))}
       <ResourcesSection closingSection={closingSection} />
