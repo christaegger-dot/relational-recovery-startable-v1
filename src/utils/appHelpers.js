@@ -169,15 +169,24 @@ export const getInitialAppState = (storageKey) => {
 
   if (typeof window === 'undefined') return defaults;
 
+  const rawHash = String(window.location.hash || '').replace(/^#/, '');
+  const hasExplicitKnownHash = TAB_ITEMS.some((item) => item.id === rawHash);
+  const requestedTab = hasExplicitKnownHash ? rawHash : null;
   const storedAppState = safeParse(storageKey, null, (value) => isValidStoredAppState(value));
 
   if (storedAppState?.data) {
-    return normalizeAppStateData(storedAppState.data);
+    const normalizedStoredState = normalizeAppStateData(storedAppState.data);
+    return requestedTab
+      ? {
+          ...normalizedStoredState,
+          activeTab: requestedTab,
+        }
+      : normalizedStoredState;
   }
 
   return {
     ...defaults,
-    activeTab: normalizeHashToTab(window.location.hash),
+    activeTab: requestedTab ?? normalizeHashToTab(window.location.hash),
   };
 };
 

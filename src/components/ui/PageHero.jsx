@@ -1,6 +1,25 @@
+import { cloneElement, isValidElement } from 'react';
 import Button from './Button';
 import Eyebrow from './Eyebrow';
 import SurfaceCard from './SurfaceCard';
+
+function renderActionIcon(icon) {
+  if (!icon) return null;
+
+  if (typeof icon === 'function') {
+    const Icon = icon;
+    return <Icon size={16} />;
+  }
+
+  if (isValidElement(icon)) {
+    return cloneElement(icon, {
+      size: icon.props?.size ?? 16,
+      'aria-hidden': icon.props?.['aria-hidden'] ?? true,
+    });
+  }
+
+  return null;
+}
 
 export default function PageHero({
   eyebrow,
@@ -39,7 +58,7 @@ export default function PageHero({
                   aria-label={action.ariaLabel}
                 >
                   {action.label}
-                  {action.icon ? <action.icon size={16} /> : null}
+                  {renderActionIcon(action.icon)}
                 </Button>
               ))}
             </div>
