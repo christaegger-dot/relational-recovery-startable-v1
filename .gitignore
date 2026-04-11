@@ -3,3 +3,5 @@ dist
 .vite
 .DS_Store
 output
+tmp/
+pnpm-lock.yaml
