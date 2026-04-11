@@ -31,7 +31,7 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
                 <p className="ui-toolbox-score">{assessment.scoreAside.value}</p>
               ) : null}
               {assessment.scoreAside.badge ? (
-                <div className={`ui-toolbox-status-badge mt-4 ${assessment.scoreAside.badgeClassName || ''}`}>
+                <div className={`ui-toolbox-status-badge ui-toolbox-status-badge--spaced ${assessment.scoreAside.badgeClassName || ''}`}>
                   {assessment.scoreAside.badge}
                 </div>
               ) : null}
@@ -58,8 +58,8 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
         {assessment.items?.length ? (
           <div className="ui-card--outline ui-toolbox-panel">
             <fieldset className="ui-toolbox-checklist" aria-describedby={scoreStatusId}>
-              <legend className="ui-fact-card__label mb-5">{assessment.itemsLabel}</legend>
-              <div className="grid gap-4 md:grid-cols-2">
+              <legend className="ui-form-legend">{assessment.itemsLabel}</legend>
+              <div className="ui-card-grid ui-card-grid--2">
                 {assessment.items.map((item) => {
                   const checked = Boolean(item.checked);
 
@@ -130,7 +130,7 @@ function PathwaySection({ pathway }) {
                     </div>
                     <div className="ui-toolbox-step__divider" />
                     <div className="ui-toolbox-kicker ui-toolbox-step__window">Arbeitsfenster</div>
-                    <h3 className="ui-card__title mt-3">{step.title}</h3>
+                    <h3 className="ui-card__title ui-toolbox-step__title">{step.title}</h3>
                     <p className="ui-card__copy">{step.desc}</p>
                   </SurfaceCard>
                   {index < pathway.steps.length - 1 ? (
@@ -169,8 +169,8 @@ function ScoreBandsSection({ scoreBands }) {
           </div>
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
-          <div className="grid gap-4 md:grid-cols-3">
+        <div className="ui-toolbox-band-layout">
+          <div className="ui-card-grid ui-card-grid--3">
             {scoreBands.items.map((band) => (
               <div key={band.label} className={`ui-toolbox-band ${band.className}`}>
                 <div className="ui-toolbox-kicker">Score {band.label}</div>
@@ -214,15 +214,15 @@ function TriageSection({ triage }) {
           ) : null}
         </div>
 
-        <div className="grid gap-4">
+        <div className="ui-card-grid">
           {triage.prompts.map((prompt, index) => (
             <section key={prompt.id} className="ui-toolbox-prompt">
-              <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-                <div className="max-w-3xl">
+              <div className="ui-toolbox-prompt__header">
+                <div className="ui-toolbox-prompt__intro">
                   <div className="ui-toolbox-kicker">Frage {index + 1}</div>
                   <h3 className="ui-toolbox-question-title">{prompt.question}</h3>
                 </div>
-                <div className="flex shrink-0 flex-wrap gap-3">
+                <div className="ui-button-row ui-toolbox-prompt__actions">
                   <Button
                     variant={prompt.currentAnswer === 'yes' ? 'primary' : 'secondary'}
                     onClick={() => prompt.onAnswer('yes')}
@@ -243,8 +243,8 @@ function TriageSection({ triage }) {
               {prompt.recommendation ? (
                 <div className={`ui-toolbox-feedback ui-editorial-card__action ${prompt.recommendation.className}`}>
                   <div className="ui-note-panel__label">Einordnung</div>
-                  <h4 className="mt-3 text-lg font-black tracking-tight">{prompt.recommendation.title}</h4>
-                  <p className="mt-3 text-sm leading-relaxed">{prompt.recommendation.text}</p>
+                  <h4 className="ui-toolbox-feedback__title">{prompt.recommendation.title}</h4>
+                  <p className="ui-toolbox-feedback__copy">{prompt.recommendation.text}</p>
                   <Button variant="secondary" className="ui-editorial-card__action" onClick={() => prompt.recommendation.onJump(prompt.recommendation.target)}>
                     {prompt.recommendation.targetLabel}
                     <ChevronRight size={14} />
@@ -265,8 +265,8 @@ function TriageSection({ triage }) {
         {triage.primaryPriority ? (
           <div className={`ui-card--outline ui-toolbox-priority ${triage.primaryPriority.className}`}>
             <div className="ui-note-panel__label">Aktuell wichtigste Spur</div>
-            <h3 className="mt-3 text-2xl font-black tracking-tight">{triage.primaryPriority.title}</h3>
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed">{triage.primaryPriority.text}</p>
+            <h3 className="ui-toolbox-priority__title">{triage.primaryPriority.title}</h3>
+            <p className="ui-toolbox-priority__copy">{triage.primaryPriority.text}</p>
             <Button variant="secondary" className="ui-editorial-card__action" onClick={() => triage.primaryPriority.onJump(triage.primaryPriority.target)}>
               {triage.primaryPriority.targetLabel}
               <ChevronRight size={14} />
@@ -316,10 +316,10 @@ function PracticeBlocksSection({ practice }) {
           ))}
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="ui-card-grid ui-card-grid--2">
           {practice.items.map((item) => (
             <SurfaceCard key={item.title} tone="default">
-              <div className="flex flex-wrap gap-2">
+              <div className="ui-chip-row">
                 {item.tags.map((tag) => (
                   <span
                     key={tag}
@@ -378,11 +378,11 @@ function ClusterSection({ cluster }) {
               {cluster.aside.title ? <h3 className="ui-card__title">{cluster.aside.title}</h3> : null}
               {cluster.aside.copy ? <p className="ui-card__copy">{cluster.aside.copy}</p> : null}
               {cluster.aside.items?.length ? (
-                <div className="ui-stack ui-stack--tight mt-4">
+                <div className="ui-stack ui-stack--tight ui-card__section--spaced">
                   {cluster.aside.items.map((item, index) => (
-                    <div key={`${cluster.id}-aside-${index}`} className="flex items-start gap-3">
-                      {item.icon ? <span className="mt-1 shrink-0 text-[var(--accent-primary-strong)]">{item.icon}</span> : null}
-                      <p className="m-0 text-sm font-medium leading-relaxed text-[inherit]">{item.text}</p>
+                    <div key={`${cluster.id}-aside-${index}`} className="ui-bullet-panel__item">
+                      {item.icon ? <span className="ui-bullet-panel__marker ui-toolbox-inline-icon">{item.icon}</span> : null}
+                      <p className="ui-bullet-panel__copy">{item.text}</p>
                     </div>
                   ))}
                 </div>
@@ -392,7 +392,7 @@ function ClusterSection({ cluster }) {
         </div>
 
         {cluster.actions?.length ? (
-          <div className="flex flex-wrap gap-3">
+          <div className="ui-button-row">
             {cluster.actions.map((action) => (
               <Button
                 key={action.label}
@@ -422,17 +422,17 @@ function ClusterSection({ cluster }) {
         ) : null}
 
         {cluster.listCards?.length ? (
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="ui-card-grid ui-card-grid--2">
             {cluster.listCards.map((item) => (
               <div
                 key={item.title || item.text}
-                className={`ui-card--outline ui-toolbox-list-card ${item.className || 'bg-[var(--surface-app)]'}`}
+                className={`ui-card--outline ui-toolbox-list-card ${item.className || 'ui-toolbox-list-card--default'}`}
               >
-                <div className="flex items-start gap-3">
-                  {item.icon ? <span className="mt-1 shrink-0 text-[var(--accent-primary-strong)]">{item.icon}</span> : null}
+                <div className="ui-bullet-panel__item">
+                  {item.icon ? <span className="ui-bullet-panel__marker ui-toolbox-inline-icon">{item.icon}</span> : null}
                   <div>
                     {item.title ? <h3 className="ui-card__title">{item.title}</h3> : null}
-                    {item.text ? <p className={item.title ? 'ui-card__copy' : 'm-0 text-sm font-medium leading-relaxed text-[var(--text-primary)]'}>{item.text}</p> : null}
+                    {item.text ? <p className={item.title ? 'ui-card__copy' : 'ui-bullet-panel__copy'}>{item.text}</p> : null}
                   </div>
                 </div>
               </div>
@@ -441,7 +441,7 @@ function ClusterSection({ cluster }) {
         ) : null}
 
         {cluster.disclosureItems?.length ? (
-          <div className="grid gap-4">
+          <div className="ui-card-grid">
             {cluster.disclosureItems.map((item) => (
               <details
                 key={item.title}
@@ -451,8 +451,8 @@ function ClusterSection({ cluster }) {
                   className="ui-toolbox-disclosure__summary"
                   aria-label={item.summaryAriaLabel || item.title}
                 >
-                  <div className="flex items-start gap-3">
-                    {item.icon ? <span className="mt-1 shrink-0 text-[var(--accent-primary-strong)]">{item.icon}</span> : null}
+                  <div className="ui-bullet-panel__item">
+                    {item.icon ? <span className="ui-bullet-panel__marker ui-toolbox-inline-icon">{item.icon}</span> : null}
                     <div>
                       <span className="ui-card__title block">{item.title}</span>
                       {item.meta ? <p className="ui-fact-card__label ui-editorial-card__action">{item.meta}</p> : null}
@@ -462,7 +462,7 @@ function ClusterSection({ cluster }) {
                     +
                   </span>
                 </summary>
-                <div className="ui-copy mt-4 border-t border-[var(--border-subtle)] pt-4">
+                <div className="ui-copy ui-toolbox-disclosure__content">
                   {Array.isArray(item.content)
                     ? item.content.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
                     : <p>{item.content}</p>}
@@ -482,16 +482,16 @@ function ClusterSection({ cluster }) {
           <div className="ui-card--outline ui-toolbox-template">
             <div className="ui-toolbox-template__header">
               <div>
-                {cluster.templateMeta?.label ? <p className="ui-fact-card__label mb-3">{cluster.templateMeta.label}</p> : null}
+                {cluster.templateMeta?.label ? <p className="ui-toolbox-template__label">{cluster.templateMeta.label}</p> : null}
                 {cluster.templateMeta?.title ? <h3 className="ui-card__title ui-toolbox-template__title">{cluster.templateMeta.title}</h3> : null}
               </div>
               {cluster.templateMeta?.meta ? <p className="ui-toolbox-template__meta">{cluster.templateMeta.meta}</p> : null}
             </div>
-            <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="ui-toolbox-template__grid">
               {cluster.templateFields.map((field) => (
                 <section key={field.title} className="ui-toolbox-template__field">
-                  <p className="ui-fact-card__label mb-3">{field.title}</p>
-                  <p className="m-0 text-sm leading-relaxed text-[var(--text-secondary)]">{field.hint}</p>
+                  <p className="ui-toolbox-template__label">{field.title}</p>
+                  <p className="ui-toolbox-template__hint">{field.hint}</p>
                   <div className="ui-toolbox-template__lines">
                     <div className="ui-toolbox-template__line" />
                     <div className="ui-toolbox-template__line" />
