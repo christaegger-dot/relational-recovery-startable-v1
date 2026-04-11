@@ -72,7 +72,7 @@ function GlossarIndex({ groups }) {
 function GlossarGroup({ group }) {
   return (
     <Section spacing="tight" surface={group.surface || 'plain'}>
-      <div id={group.id} className="ui-stack ui-stack--loose scroll-mt-32">
+      <div id={group.id} className="ui-stack ui-stack--loose ui-anchor-offset-target">
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {group.eyebrow ? <Eyebrow>{group.eyebrow}</Eyebrow> : null}
@@ -94,7 +94,7 @@ function GlossarGroup({ group }) {
           ) : null}
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="ui-glossary-term-grid">
           {group.terms.map((entry) => (
             <SurfaceCard key={entry.term} tone={entry.tone || 'default'}>
               <p className="ui-fact-card__label">Begriff</p>

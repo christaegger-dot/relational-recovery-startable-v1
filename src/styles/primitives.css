@@ -398,6 +398,17 @@
   gap: 0.875rem;
 }
 
+.ui-glossary-term-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 64rem) {
+  .ui-glossary-term-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .ui-fact-card__meta {
   margin: 0.875rem 0 0;
   color: var(--text-muted);
