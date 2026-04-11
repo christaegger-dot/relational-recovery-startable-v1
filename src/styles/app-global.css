@@ -188,15 +188,15 @@
     margin-top: 0.55rem !important;
   }
 
-  .print-shell .toolbox-print-view .h-24 {
+  .print-shell .toolbox-print-view .toolbox-print-field--large {
     height: 3.2rem !important;
   }
 
-  .print-shell .toolbox-print-view .h-20 {
+  .print-shell .toolbox-print-view .toolbox-print-field--medium {
     height: 2.6rem !important;
   }
 
-  .print-shell .toolbox-print-view .h-16 {
+  .print-shell .toolbox-print-view .toolbox-print-field--small {
     height: 2rem !important;
   }
 }

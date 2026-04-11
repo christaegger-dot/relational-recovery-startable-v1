@@ -30,25 +30,25 @@ import { createClosingSectionModel } from '../utils/closingModel';
 
 const SCORE_STATUS_ID = 'assessment-score-status';
 
-const RECOMMENDATION_TONE_CLASSNAMES = {
-  'border-red-200 bg-red-50 text-red-950': 'border-[color-mix(in_srgb,#c2410c_22%,white_78%)] bg-[color-mix(in_srgb,#fff7ed_86%,white_14%)] text-[var(--text-primary)]',
-  'border-amber-200 bg-amber-50 text-amber-950': 'border-[color-mix(in_srgb,#d97706_22%,white_78%)] bg-[color-mix(in_srgb,#fffbeb_84%,white_16%)] text-[var(--text-primary)]',
-  'border-emerald-200 bg-emerald-50 text-emerald-950': 'border-[color-mix(in_srgb,var(--accent-primary)_20%,white_80%)] bg-[var(--surface-note)] text-[var(--text-primary)]',
-  'border-slate-200 bg-slate-50 text-slate-900': 'border-[var(--border-default)] bg-[var(--surface-panel)] text-[var(--text-primary)]',
+const TOOLBOX_RECOMMENDATION_TONE_CLASSNAMES = {
+  danger: 'ui-toolbox-feedback--danger',
+  caution: 'ui-toolbox-feedback--caution',
+  supportive: 'ui-toolbox-feedback--supportive',
+  neutral: 'ui-toolbox-feedback--neutral',
 };
 
-const SCORE_BAND_CLASSNAMES = {
-  'border-emerald-200 bg-emerald-50 text-emerald-950': 'border-[color-mix(in_srgb,var(--accent-primary)_20%,white_80%)] bg-[var(--surface-note)] text-[var(--text-primary)]',
-  'border-amber-200 bg-amber-50 text-amber-950': 'border-[color-mix(in_srgb,#d97706_22%,white_78%)] bg-[color-mix(in_srgb,#fffbeb_84%,white_16%)] text-[var(--text-primary)]',
-  'border-red-200 bg-red-50 text-red-950': 'border-[color-mix(in_srgb,#c2410c_22%,white_78%)] bg-[color-mix(in_srgb,#fff7ed_86%,white_14%)] text-[var(--text-primary)]',
+const TOOLBOX_SCORE_BAND_CLASSNAMES = {
+  supportive: 'ui-toolbox-band--supportive',
+  caution: 'ui-toolbox-band--caution',
+  danger: 'ui-toolbox-band--danger',
 };
 
-function mapRecommendationTone(className) {
-  return RECOMMENDATION_TONE_CLASSNAMES[className] || 'border-[var(--border-default)] bg-[var(--surface-panel)] text-[var(--text-primary)]';
+function mapRecommendationTone(tone) {
+  return TOOLBOX_RECOMMENDATION_TONE_CLASSNAMES[tone] || 'ui-toolbox-feedback--neutral';
 }
 
-function mapScoreBandTone(className) {
-  return SCORE_BAND_CLASSNAMES[className] || 'border-[var(--border-default)] bg-[var(--surface-panel)] text-[var(--text-primary)]';
+function mapScoreBandTone(tone) {
+  return TOOLBOX_SCORE_BAND_CLASSNAMES[tone] || 'ui-toolbox-band--neutral';
 }
 
 export default function ToolboxSection({
@@ -96,17 +96,17 @@ export default function ToolboxSection({
     {
       label: '0–2',
       title: 'tragende Ressourcen genauer sichtbar machen',
-      className: mapScoreBandTone('border-emerald-200 bg-emerald-50 text-emerald-950'),
+      className: mapScoreBandTone('supportive'),
     },
     {
       label: '3–6',
       title: 'vertiefte Begleitung und Krisenvorsorge prüfen',
-      className: mapScoreBandTone('border-amber-200 bg-amber-50 text-amber-950'),
+      className: mapScoreBandTone('caution'),
     },
     {
       label: '7+',
       title: 'Schutz, Sicherung und formelle Abklärung mitdenken',
-      className: mapScoreBandTone('border-red-200 bg-red-50 text-red-950'),
+      className: mapScoreBandTone('danger'),
     },
   ];
 
@@ -119,14 +119,14 @@ export default function ToolboxSection({
         text: 'Notruf, Krisendienst oder offizielle Notfallwege gehen vor längerer Abklärung. Kinderbetreuung und Aufsicht sofort mitdenken.',
         target: 'acute-crisis',
         targetLabel: 'Zur Akut-Krise',
-        className: mapRecommendationTone('border-red-200 bg-red-50 text-red-950'),
+        className: mapRecommendationTone('danger'),
       },
       no: {
         title: 'Akute Gefährdung aktuell nicht im Vordergrund',
         text: 'Die Einschätzung kann ruhiger in Richtung Krisenvorsorge, Alltag und Kooperation weitergeführt werden.',
         target: 'safety-plan',
         targetLabel: 'Zum Sicherheitsplan',
-        className: mapRecommendationTone('border-emerald-200 bg-emerald-50 text-emerald-950'),
+        className: mapRecommendationTone('supportive'),
       },
     },
     {
@@ -137,14 +137,14 @@ export default function ToolboxSection({
         text: 'Wenn Grundversorgung oder Aufsicht nicht verlässlich sind, braucht es rasch konkrete Hilfe und gegebenenfalls eine Kindesschutzabklärung.',
         target: 'child-protection',
         targetLabel: 'Zum Kindeswohl',
-        className: mapRecommendationTone('border-amber-200 bg-amber-50 text-amber-950'),
+        className: mapRecommendationTone('caution'),
       },
       no: {
         title: 'Versorgung wirkt aktuell tragfähig',
         text: 'Dann lohnt es sich, tragende Routinen und Schutzfaktoren sichtbar zu halten und nicht nur auf Risiken zu fokussieren.',
         target: 'safety-plan',
         targetLabel: 'Schutzfaktoren absichern',
-        className: mapRecommendationTone('border-emerald-200 bg-emerald-50 text-emerald-950'),
+        className: mapRecommendationTone('supportive'),
       },
     },
     {
@@ -155,14 +155,14 @@ export default function ToolboxSection({
         text: 'Vorhandene Pläne sind hilfreich, wenn sie überprüft, mit Kontakten ergänzt und in stabileren Phasen gemeinsam geübt werden.',
         target: 'safety-plan',
         targetLabel: 'Plan überprüfen',
-        className: mapRecommendationTone('border-slate-200 bg-slate-50 text-slate-900'),
+        className: mapRecommendationTone('neutral'),
       },
       no: {
         title: 'Krisenvorsorge schriftlich machen',
         text: 'Ein kurzer Plan zu Warnzeichen, Kinderbetreuung, Kontaktkette und sicheren Orten entlastet in belasteten Phasen deutlich.',
         target: 'safety-plan',
         targetLabel: 'Plan anlegen',
-        className: mapRecommendationTone('border-emerald-200 bg-emerald-50 text-emerald-950'),
+        className: mapRecommendationTone('supportive'),
       },
     },
     {
@@ -173,14 +173,14 @@ export default function ToolboxSection({
         text: 'Bestehende Unterstützung sollte konkret in Absprachen, Übergaben und Rückmeldewegen eingebunden werden.',
         target: 'safety-plan',
         targetLabel: 'Kooperation konkretisieren',
-        className: mapRecommendationTone('border-slate-200 bg-slate-50 text-slate-900'),
+        className: mapRecommendationTone('neutral'),
       },
       no: {
         title: 'Netzwerk rasch erweitern',
         text: 'Fehlende Mitwissende erhöhen die Belastung. Jetzt sind niedrigschwellige Hilfen, Bezugspersonen und Fachstellen besonders wichtig.',
         target: 'child-protection',
         targetLabel: 'Unterstützung prüfen',
-        className: mapRecommendationTone('border-amber-200 bg-amber-50 text-amber-950'),
+        className: mapRecommendationTone('caution'),
       },
     },
   ];
@@ -387,7 +387,7 @@ export default function ToolboxSection({
           title: `Sofort-Schritt ${index + 1}`,
           text: step,
           icon: <AlertTriangle size={18} />,
-          className: 'bg-white',
+          className: 'ui-toolbox-list-card--plain',
         })),
         disclosureItems: ACUTE_CRISIS_CONTACTS.map((contact) => ({
           title: contact.name,
@@ -434,7 +434,7 @@ export default function ToolboxSection({
           title: `Baustein ${index + 1}`,
           text: item,
           icon: <ShieldCheck size={18} />,
-          className: 'bg-white',
+          className: 'ui-toolbox-list-card--plain',
         })),
         gridCards: SAFETY_PLAN_TEMPLATE_FIELDS.map((field) => ({
           label: 'Leitfrage',
@@ -442,7 +442,7 @@ export default function ToolboxSection({
           copy: field.hint,
           tone: 'soft',
         })),
-        gridClassName: 'grid gap-4 md:grid-cols-2 xl:grid-cols-3',
+        gridClassName: 'ui-card-grid ui-card-grid--3',
       },
       {
         id: 'child-protection',
@@ -470,7 +470,7 @@ export default function ToolboxSection({
           title: `Leitfrage ${index + 1}`,
           text: tip,
           icon: <CheckCircle2 size={18} />,
-          className: 'bg-[var(--surface-panel)]',
+          className: 'ui-toolbox-list-card--panel',
         })),
       },
       {
@@ -497,7 +497,7 @@ export default function ToolboxSection({
           title: `Leitlinie ${index + 1}`,
           text: tip,
           icon: <ChevronRight size={18} />,
-          className: 'bg-white',
+          className: 'ui-toolbox-list-card--plain',
         })),
       },
       {
@@ -533,39 +533,39 @@ export default function ToolboxSection({
   );
 
   const toolboxPrintView = (
-    <div className="toolbox-print-view bg-white text-slate-950">
-      <div className="mx-auto flex w-full max-w-[840px] flex-col gap-6 p-6 text-[12px] leading-relaxed">
-        <header className="toolbox-print-block rounded-[1.5rem] border border-slate-300 bg-white p-6">
-          <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Relational Recovery · Toolbox Arbeitsansicht</p>
-          <h1 className="mt-3 text-[2rem] font-black leading-tight text-slate-950">Orientierung, Schutz und nächste Schritte</h1>
-          <p className="mt-3 m-0 text-sm text-slate-700">
+    <div className="toolbox-print-view">
+      <div className="toolbox-print-view__inner">
+        <header className="toolbox-print-block toolbox-print-card toolbox-print-card--hero">
+          <p className="toolbox-print-kicker">Relational Recovery · Toolbox Arbeitsansicht</p>
+          <h1 className="toolbox-print-title">Orientierung, Schutz und nächste Schritte</h1>
+          <p className="toolbox-print-lead">
             Kompakte Gesprächs- und Protokollansicht für akute Belastung, Krisenvorsorge und nächste verlässliche Schritte.
           </p>
         </header>
 
-        <section className="toolbox-print-section toolbox-print-grid-two gap-4">
-          <div className="toolbox-print-block rounded-[1.25rem] border border-slate-300 p-5">
-            <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Kurzlage</p>
-            <div className="mt-4 space-y-3">
+        <section className="toolbox-print-section toolbox-print-grid-two toolbox-print-grid-two--spaced">
+          <div className="toolbox-print-block toolbox-print-card">
+            <p className="toolbox-print-kicker">Kurzlage</p>
+            <div className="toolbox-print-stack">
               <div>
-                <p className="m-0 font-bold text-slate-900">Beobachtbare Hinweise / Anlass</p>
-                <div className="mt-2 h-20 rounded-xl border border-slate-300 bg-white" />
+                <p className="toolbox-print-label">Beobachtbare Hinweise / Anlass</p>
+                <div className="toolbox-print-field toolbox-print-field--medium" />
               </div>
               <div>
-                <p className="m-0 font-bold text-slate-900">Tragende Ressourcen / Mitwissende</p>
-                <div className="mt-2 h-16 rounded-xl border border-slate-300 bg-white" />
+                <p className="toolbox-print-label">Tragende Ressourcen / Mitwissende</p>
+                <div className="toolbox-print-field toolbox-print-field--small" />
               </div>
             </div>
           </div>
 
-          <div className="toolbox-print-block rounded-[1.25rem] border border-slate-300 p-5">
-            <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Sofort-Triage</p>
-            <div className="mt-4 space-y-3">
+          <div className="toolbox-print-block toolbox-print-card">
+            <p className="toolbox-print-kicker">Sofort-Triage</p>
+            <div className="toolbox-print-stack">
               {triagePrompts.map((prompt, index) => (
-                <div key={prompt.id} className="toolbox-print-block rounded-xl border border-slate-300 px-4 py-3">
-                  <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.16em] text-slate-500">Frage {index + 1}</p>
-                  <p className="mt-1 mb-2 font-semibold text-slate-900">{prompt.question}</p>
-                  <div className="flex gap-4 text-sm text-slate-700">
+                <div key={prompt.id} className="toolbox-print-block toolbox-print-card toolbox-print-card--compact">
+                  <p className="toolbox-print-kicker toolbox-print-kicker--compact">Frage {index + 1}</p>
+                  <p className="toolbox-print-question">{prompt.question}</p>
+                  <div className="toolbox-print-choice-row">
                     <span>☐ Ja</span>
                     <span>☐ Nein</span>
                   </div>
@@ -575,37 +575,37 @@ export default function ToolboxSection({
           </div>
         </section>
 
-        <section className="toolbox-print-section toolbox-print-section-compact rounded-[1.25rem] border border-slate-300 p-5">
-          <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Krisenvorsorge und Kinder-Schutzteil</p>
-          <div className="toolbox-print-grid-two mt-4 gap-4">
+        <section className="toolbox-print-section toolbox-print-section-compact toolbox-print-card">
+          <p className="toolbox-print-kicker">Krisenvorsorge und Kinder-Schutzteil</p>
+          <div className="toolbox-print-grid-two toolbox-print-grid-two--top-spaced">
             {SAFETY_PLAN_TEMPLATE_FIELDS.map((field) => (
-              <div key={field.title} className="toolbox-print-block rounded-xl border border-slate-300 p-4">
-                <p className="m-0 font-bold text-slate-900">{field.title}</p>
-                <p className="mt-1 mb-3 text-sm text-slate-600">{field.hint}</p>
-                <div className="h-24 rounded-lg border border-slate-300 bg-white" />
+              <div key={field.title} className="toolbox-print-block toolbox-print-card toolbox-print-card--compact toolbox-print-card--field">
+                <p className="toolbox-print-label">{field.title}</p>
+                <p className="toolbox-print-hint">{field.hint}</p>
+                <div className="toolbox-print-field toolbox-print-field--large" />
               </div>
             ))}
           </div>
         </section>
 
-        <section className="toolbox-print-section rounded-[1.25rem] border border-slate-300 p-5">
-          <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Nächste verlässliche Schritte</p>
-          <div className="toolbox-print-grid-two mt-4 gap-3">
+        <section className="toolbox-print-section toolbox-print-card">
+          <p className="toolbox-print-kicker">Nächste verlässliche Schritte</p>
+          <div className="toolbox-print-grid-two toolbox-print-grid-two--top-spaced toolbox-print-grid-two--compact-gap">
             {SAFETY_PLAN_POINTS.map((item, index) => (
-              <div key={item} className="toolbox-print-block rounded-xl border border-slate-300 px-4 py-3">
-                <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.16em] text-slate-500">Baustein {index + 1}</p>
-                <p className="mt-1 m-0 font-semibold text-slate-900">{item}</p>
+              <div key={item} className="toolbox-print-block toolbox-print-card toolbox-print-card--compact">
+                <p className="toolbox-print-kicker toolbox-print-kicker--compact">Baustein {index + 1}</p>
+                <p className="toolbox-print-question toolbox-print-question--tight">{item}</p>
               </div>
             ))}
           </div>
-          <div className="toolbox-print-grid-two toolbox-print-followup-grid mt-4 gap-4">
+          <div className="toolbox-print-grid-two toolbox-print-followup-grid toolbox-print-grid-two--top-spaced">
             <div>
-              <p className="m-0 font-bold text-slate-900">Zuständigkeit / nächste Kontaktaufnahme</p>
-              <div className="mt-2 h-20 rounded-xl border border-slate-300 bg-white" />
+              <p className="toolbox-print-label">Zuständigkeit / nächste Kontaktaufnahme</p>
+              <div className="toolbox-print-field toolbox-print-field--medium" />
             </div>
             <div>
-              <p className="m-0 font-bold text-slate-900">Datum / Rückmeldung / Follow-up</p>
-              <div className="mt-2 h-20 rounded-xl border border-slate-300 bg-white" />
+              <p className="toolbox-print-label">Datum / Rückmeldung / Follow-up</p>
+              <div className="toolbox-print-field toolbox-print-field--medium" />
             </div>
           </div>
         </section>
