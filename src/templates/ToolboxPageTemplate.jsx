@@ -121,7 +121,7 @@ function PathwaySection({ pathway }) {
             <div className="ui-toolbox-step-grid">
               {pathway.steps.map((step, index) => (
                 <div key={step.label} className="ui-toolbox-step">
-                  <SurfaceCard tone="soft" className="h-full">
+                  <SurfaceCard tone="soft" className="ui-card--full-height">
                     <div className="ui-toolbox-step__header">
                       <div className="ui-chip ui-chip--active ui-toolbox-step__chip">
                         Schritt {index + 1}
@@ -445,7 +445,7 @@ function ClusterSection({ cluster }) {
             {cluster.disclosureItems.map((item) => (
               <details
                 key={item.title}
-                className={`group ui-card--outline ui-card--interactive ui-toolbox-disclosure ${item.className || ''}`}
+                className={`ui-toolbox-disclosure-group ui-card--outline ui-card--interactive ui-toolbox-disclosure ${item.className || ''}`}
               >
                 <summary
                   className="ui-toolbox-disclosure__summary"
@@ -454,7 +454,7 @@ function ClusterSection({ cluster }) {
                   <div className="ui-bullet-panel__item">
                     {item.icon ? <span className="ui-bullet-panel__marker ui-toolbox-inline-icon">{item.icon}</span> : null}
                     <div>
-                      <span className="ui-card__title block">{item.title}</span>
+                      <span className="ui-card__title ui-display-block">{item.title}</span>
                       {item.meta ? <p className="ui-fact-card__label ui-editorial-card__action">{item.meta}</p> : null}
                     </div>
                   </div>

@@ -242,6 +242,15 @@
   width: fit-content;
 }
 
+.ui-button--compact {
+  min-height: 2.75rem;
+  padding: 0.625rem 0.875rem;
+}
+
+.ui-display-block {
+  display: block;
+}
+
 .ui-card--editorial-link {
   text-align: left;
   transition: transform var(--motion-fast) ease;
@@ -1842,7 +1851,7 @@ order: 1px solid var(--border-subtle);
   border-top: 1px solid var(--border-subtle);
 }
 
-.group[open] .ui-toolbox-disclosure__toggle {
+.ui-toolbox-disclosure-group[open] .ui-toolbox-disclosure__toggle {
   transform: rotate(45deg);
 }
 
