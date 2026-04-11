@@ -74,7 +74,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
       actions: [
         {
           label: 'Zum Evidenzteil',
-          onClick: () => setActiveTab('zaesur', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('evidence', { focusTarget: 'heading' }),
           variant: 'secondary',
         },
         {
@@ -88,7 +88,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           label: 'Verstehen',
           title: 'Familiendynamik einordnen',
           copy: 'Elternrolle, Belastung, kindliche Perspektive und Schutzfaktoren gemeinsam betrachten.',
-          onClick: () => setActiveTab('zaesur', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('evidence', { focusTarget: 'heading' }),
           actionLabel: 'Zum Wissensbereich',
         },
         {
@@ -109,7 +109,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           label: 'Vernetzen',
           title: 'Hilfen erreichbar machen',
           copy: 'Offizielle Stellen, Beratungsangebote und regionale Hilfen passend zur Lage aktivieren.',
-          onClick: () => setActiveTab('zuerich', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('network', { focusTarget: 'heading' }),
           actionLabel: 'Zum Netzwerk',
         },
       ],
@@ -140,14 +140,14 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           title: 'Familiendynamik vertiefen',
           copy: `Der Evidenzbereich bündelt aktuell ${HOME_REFERENCE_COUNT} kuratierte Einstiegspunkte, Materialien und Referenzen in einer ruhigeren Leselogik.`,
           tone: 'accent',
-          onClick: () => setActiveTab('zaesur', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('evidence', { focusTarget: 'heading' }),
           actionLabel: 'Zum Evidenzteil',
         },
         {
           label: 'Versorgung',
           title: 'Regionale Hilfen aufrufen',
           copy: `${NETWORK_RESOURCE_COUNT} Netzwerkstellen unterstützen bei Triage, Entlastung und der Weitervermittlung an passende Angebote.`,
-          onClick: () => setActiveTab('zuerich', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('network', { focusTarget: 'heading' }),
           actionLabel: 'Zum Netzwerk',
         },
         {
@@ -175,7 +175,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           label: 'Wenn Sie zuerst verstehen möchten',
           title: 'Im Evidenzbereich beginnen',
           copy: 'Geeignet, wenn Familiendynamik, kindliche Perspektive, Psychoedukation oder Schutzfaktoren zunächst fachlich eingeordnet werden sollen.',
-          onClick: () => setActiveTab('zaesur', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('evidence', { focusTarget: 'heading' }),
           actionLabel: 'Wissensseite öffnen',
         },
         {

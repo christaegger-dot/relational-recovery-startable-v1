@@ -16,7 +16,7 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             <Eyebrow>{assessment.eyebrow}</Eyebrow>
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {assessment.title}
             </h2>
             <div className="ui-copy">
@@ -28,12 +28,10 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
             <SurfaceCard as="aside" tone="soft">
               {assessment.scoreAside.label ? <p className="ui-fact-card__label">{assessment.scoreAside.label}</p> : null}
               {assessment.scoreAside.value ? (
-                <p className="m-0 text-[clamp(2.8rem,6vw,4.5rem)] font-black leading-none tracking-tight text-slate-900 tabular-nums">
-                  {assessment.scoreAside.value}
-                </p>
+                <p className="ui-toolbox-score">{assessment.scoreAside.value}</p>
               ) : null}
               {assessment.scoreAside.badge ? (
-                <div className={`mt-4 inline-flex rounded-full px-4 py-2 text-[0.72rem] font-black uppercase tracking-[0.18em] ${assessment.scoreAside.badgeClassName || ''}`}>
+                <div className={`ui-toolbox-status-badge mt-4 ${assessment.scoreAside.badgeClassName || ''}`}>
                   {assessment.scoreAside.badge}
                 </div>
               ) : null}
@@ -58,8 +56,8 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
         </div>
 
         {assessment.items?.length ? (
-          <div className="ui-card--outline rounded-[2rem] bg-[var(--surface-app)] p-5 md:p-7">
-            <fieldset className="w-full text-left" aria-describedby={scoreStatusId}>
+          <div className="ui-card--outline ui-toolbox-panel">
+            <fieldset className="ui-toolbox-checklist" aria-describedby={scoreStatusId}>
               <legend className="ui-fact-card__label mb-5">{assessment.itemsLabel}</legend>
               <div className="grid gap-4 md:grid-cols-2">
                 {assessment.items.map((item) => {
@@ -68,25 +66,17 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
                   return (
                     <label
                       key={item.id}
-                      className={`ui-card--interactive flex cursor-pointer items-center gap-5 rounded-[1.75rem] border p-5 transition-all ${
-                        checked
-                          ? 'border-[var(--accent-primary)] bg-[color-mix(in_srgb,var(--surface-app)_88%,var(--accent-primary-soft)_12%)] shadow-sm'
-                          : 'border-[var(--border-default)] bg-[var(--surface-app)] hover:bg-[var(--surface-panel)]'
-                      }`}
+                      className={`ui-card--interactive ui-toolbox-check ${checked ? 'ui-toolbox-check--checked' : ''}`}
                     >
                       <input type="checkbox" className="sr-only" checked={checked} onChange={item.onChange} />
                       <div
-                        className={`flex h-6 w-6 items-center justify-center rounded-lg border-2 transition-all ${
-                          checked
-                            ? 'border-[var(--accent-primary-strong)] bg-[var(--accent-primary-strong)] text-white'
-                            : 'border-[var(--border-default)] bg-white text-transparent'
-                        }`}
+                        className="ui-toolbox-check__box"
                       >
                         {item.checkIcon}
                       </div>
-                      <div className="ui-stack ui-stack--tight" style={{ gap: '0.35rem' }}>
-                        <span className="text-xs font-black uppercase tracking-[0.18em] text-[var(--text-primary)]">{item.label}</span>
-                        {item.meta ? <span className="text-[0.72rem] uppercase tracking-[0.16em] text-[var(--text-muted)]">{item.meta}</span> : null}
+                      <div className="ui-toolbox-check__content">
+                        <span className="ui-toolbox-check__label">{item.label}</span>
+                        {item.meta ? <span className="ui-toolbox-check__meta">{item.meta}</span> : null}
                       </div>
                     </label>
                   );
@@ -109,7 +99,7 @@ function PathwaySection({ pathway }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             <Eyebrow>{pathway.eyebrow}</Eyebrow>
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {pathway.titlePrefix} <span className="ui-hero__accent">{pathway.titleAccent}</span>
             </h2>
             <div className="ui-copy">
@@ -127,28 +117,26 @@ function PathwaySection({ pathway }) {
         </div>
 
         {pathway.steps?.length ? (
-          <div className="ui-card--outline rounded-[2rem] bg-[var(--surface-app)] p-5 md:p-7">
-            <div className="grid gap-4 lg:grid-cols-4">
+          <div className="ui-card--outline ui-toolbox-panel">
+            <div className="ui-toolbox-step-grid">
               {pathway.steps.map((step, index) => (
-                <div key={step.label} className="relative">
+                <div key={step.label} className="ui-toolbox-step">
                   <SurfaceCard tone="soft" className="h-full">
-                    <div className="mb-4 flex items-center justify-between gap-4">
-                          <div className="ui-chip ui-chip--active px-3 py-1.5 text-[0.65rem]">
-
+                    <div className="ui-toolbox-step__header">
+                      <div className="ui-chip ui-chip--active ui-toolbox-step__chip">
                         Schritt {index + 1}
                       </div>
-                      <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">{step.label}</div>
+                      <div className="ui-toolbox-kicker ui-toolbox-step__label">{step.label}</div>
                     </div>
-                    <div className="mb-4 h-[2px] w-12 bg-[color-mix(in_srgb,var(--accent-primary)_35%,white_65%)]" />
-                    <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">Arbeitsfenster</div>
+                    <div className="ui-toolbox-step__divider" />
+                    <div className="ui-toolbox-kicker ui-toolbox-step__window">Arbeitsfenster</div>
                     <h3 className="ui-card__title mt-3">{step.title}</h3>
                     <p className="ui-card__copy">{step.desc}</p>
                   </SurfaceCard>
                   {index < pathway.steps.length - 1 ? (
                     <>
-                      <div className="absolute right-[-0.85rem] top-1/2 hidden h-[2px] w-7 -translate-y-1/2 bg-[color-mix(in_srgb,var(--accent-primary)_35%,white_65%)] lg:block" />
-                      <div className="absolute right-[-0.6rem] top-1/2 hidden h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-r-2 border-t-2 border-[color-mix(in_srgb,var(--accent-primary)_55%,white_45%)] lg:block" />
-                      <div className="mx-auto mt-4 flex h-8 w-8 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--accent-primary)_20%,white_80%)] bg-[var(--surface-app)] text-[var(--accent-primary-strong)] lg:hidden">
+                      <div className="ui-toolbox-step__connector" />
+                      <div className="ui-toolbox-step__connector-mobile">
                         <ChevronRight size={16} />
                       </div>
                     </>
@@ -157,8 +145,8 @@ function PathwaySection({ pathway }) {
               ))}
             </div>
             {pathway.summary ? (
-              <div className="mt-6 rounded-[1.5rem] border border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] bg-[var(--surface-note)] px-5 py-4">
-                <p className="m-0 text-sm font-medium leading-relaxed text-[var(--text-primary)]">{pathway.summary}</p>
+              <div className="ui-toolbox-note mt-6">
+                <p>{pathway.summary}</p>
               </div>
             ) : null}
           </div>
@@ -184,8 +172,8 @@ function ScoreBandsSection({ scoreBands }) {
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
           <div className="grid gap-4 md:grid-cols-3">
             {scoreBands.items.map((band) => (
-              <div key={band.label} className={`rounded-[1.75rem] border p-5 ${band.className}`}>
-                <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] opacity-80">Score {band.label}</div>
+              <div key={band.label} className={`ui-toolbox-band ${band.className}`}>
+                <div className="ui-toolbox-kicker" style={{ opacity: 0.8 }}>Score {band.label}</div>
                 <p className="mt-3 text-sm font-medium leading-relaxed">{band.title}</p>
               </div>
             ))}
@@ -211,7 +199,7 @@ function TriageSection({ triage }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             <Eyebrow>{triage.eyebrow}</Eyebrow>
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {triage.titlePrefix} <span className="ui-hero__accent">{triage.titleAccent}</span>
             </h2>
             <div className="ui-copy">
@@ -228,11 +216,11 @@ function TriageSection({ triage }) {
 
         <div className="grid gap-4">
           {triage.prompts.map((prompt, index) => (
-            <section key={prompt.id} className="rounded-[2rem] border border-[var(--border-default)] bg-[var(--surface-panel)] p-5 md:p-6">
+            <section key={prompt.id} className="ui-toolbox-prompt">
               <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
                 <div className="max-w-3xl">
-                  <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">Frage {index + 1}</div>
-                  <h3 className="mt-3 text-lg font-black leading-snug text-[var(--text-primary)] md:text-xl">{prompt.question}</h3>
+                  <div className="ui-toolbox-kicker">Frage {index + 1}</div>
+                  <h3 className="ui-toolbox-question-title">{prompt.question}</h3>
                 </div>
                 <div className="flex shrink-0 flex-wrap gap-3">
                   <Button
@@ -253,7 +241,7 @@ function TriageSection({ triage }) {
               </div>
 
               {prompt.recommendation ? (
-                <div className={`mt-5 rounded-[1.5rem] border p-5 ${prompt.recommendation.className}`}>
+                <div className={`ui-toolbox-feedback mt-5 ${prompt.recommendation.className}`}>
                   <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] opacity-80">Einordnung</div>
                   <h4 className="mt-3 text-lg font-black tracking-tight">{prompt.recommendation.title}</h4>
                   <p className="mt-3 text-sm leading-relaxed">{prompt.recommendation.text}</p>
@@ -275,7 +263,7 @@ function TriageSection({ triage }) {
         ) : null}
 
         {triage.primaryPriority ? (
-          <div className={`ui-card--outline rounded-[2rem] p-6 md:p-7 ${triage.primaryPriority.className}`}>
+          <div className={`ui-card--outline ui-toolbox-priority ${triage.primaryPriority.className}`}>
             <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] opacity-80">Aktuell wichtigste Spur</div>
             <h3 className="mt-3 text-2xl font-black tracking-tight">{triage.primaryPriority.title}</h3>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed">{triage.primaryPriority.text}</p>
@@ -299,7 +287,7 @@ function PracticeBlocksSection({ practice }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             <Eyebrow>{practice.eyebrow}</Eyebrow>
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {practice.titlePrefix} <span className="ui-hero__accent">{practice.titleAccent}</span>
             </h2>
             <div className="ui-copy">
@@ -321,9 +309,8 @@ function PracticeBlocksSection({ practice }) {
               variant={filter.active ? 'primary' : 'secondary'}
               onClick={filter.onSelect}
               aria-pressed={filter.active}
-                className="px-4 py-3"
-
-            >
+                className="ui-button--compact"
+              >
               {filter.label}
             </Button>
           ))}
@@ -336,7 +323,7 @@ function PracticeBlocksSection({ practice }) {
                 {item.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-[color-mix(in_srgb,var(--accent-primary)_12%,white_88%)] bg-[var(--surface-note)] px-3 py-1 text-[0.65rem] font-black uppercase tracking-[0.18em] text-[var(--accent-primary-strong)]"
+                    className="ui-toolbox-tag"
                   >
                     {tag}
                   </span>
@@ -372,7 +359,7 @@ function ClusterSection({ cluster }) {
           <div className="ui-stack ui-stack--tight">
             {cluster.eyebrow ? <Eyebrow>{cluster.eyebrow}</Eyebrow> : null}
             {cluster.title ? (
-              <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+              <h2 className="ui-hero__title ui-section-title">
                 {cluster.titlePrefix ? <>{cluster.titlePrefix} </> : null}
                 {cluster.titleAccent ? <span className="ui-hero__accent">{cluster.titleAccent}</span> : cluster.title}
               </h2>
@@ -439,7 +426,7 @@ function ClusterSection({ cluster }) {
             {cluster.listCards.map((item) => (
               <div
                 key={item.title || item.text}
-                className={`ui-card--outline rounded-[1.5rem] p-5 ${item.className || 'bg-[var(--surface-app)]'}`}
+                className={`ui-card--outline ui-toolbox-list-card ${item.className || 'bg-[var(--surface-app)]'}`}
               >
                 <div className="flex items-start gap-3">
                   {item.icon ? <span className="mt-1 shrink-0 text-[var(--accent-primary-strong)]">{item.icon}</span> : null}
@@ -458,17 +445,20 @@ function ClusterSection({ cluster }) {
             {cluster.disclosureItems.map((item) => (
               <details
                 key={item.title}
-                className={`group ui-card--outline ui-card--interactive rounded-[1.5rem] bg-[var(--surface-app)] p-5 ${item.className || ''}`}
+                className={`group ui-card--outline ui-card--interactive ui-toolbox-disclosure ${item.className || ''}`}
               >
-                <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
+                <summary
+                  className="ui-toolbox-disclosure__summary"
+                  aria-label={item.summaryAriaLabel || item.title}
+                >
                   <div className="flex items-start gap-3">
                     {item.icon ? <span className="mt-1 shrink-0 text-[var(--accent-primary-strong)]">{item.icon}</span> : null}
                     <div>
-                      <h3 className="ui-card__title">{item.title}</h3>
+                      <span className="ui-card__title block">{item.title}</span>
                       {item.meta ? <p className="mt-2 text-xs font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">{item.meta}</p> : null}
                     </div>
                   </div>
-                  <span className="mt-1 text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-primary-strong)] transition-transform duration-200 group-open:rotate-45">
+                  <span className="ui-toolbox-disclosure__toggle">
                     +
                   </span>
                 </summary>
@@ -476,6 +466,12 @@ function ClusterSection({ cluster }) {
                   {Array.isArray(item.content)
                     ? item.content.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
                     : <p>{item.content}</p>}
+                  {item.href ? (
+                    <Button variant="secondary" className="mt-5" href={item.href} target={item.target} rel={item.rel}>
+                      {item.actionLabel || 'Mehr anzeigen'}
+                      {item.actionIcon}
+                    </Button>
+                  ) : null}
                 </div>
               </details>
             ))}
@@ -483,30 +479,30 @@ function ClusterSection({ cluster }) {
         ) : null}
 
         {cluster.templateFields?.length ? (
-          <div className="ui-card--outline rounded-[2rem] bg-[var(--surface-app)] p-6 md:p-8">
-            <div className="flex flex-col gap-4 border-b border-[var(--border-subtle)] pb-6 md:flex-row md:items-end md:justify-between">
+          <div className="ui-card--outline ui-toolbox-template">
+            <div className="ui-toolbox-template__header">
               <div>
                 {cluster.templateMeta?.label ? <p className="ui-fact-card__label mb-3">{cluster.templateMeta.label}</p> : null}
-                {cluster.templateMeta?.title ? <h3 className="ui-card__title text-[1.55rem]">{cluster.templateMeta.title}</h3> : null}
+                {cluster.templateMeta?.title ? <h3 className="ui-card__title ui-toolbox-template__title">{cluster.templateMeta.title}</h3> : null}
               </div>
-              {cluster.templateMeta?.meta ? <p className="m-0 text-sm leading-relaxed text-[var(--text-muted)]">{cluster.templateMeta.meta}</p> : null}
+              {cluster.templateMeta?.meta ? <p className="ui-toolbox-template__meta">{cluster.templateMeta.meta}</p> : null}
             </div>
             <div className="mt-6 grid gap-6 md:grid-cols-2">
               {cluster.templateFields.map((field) => (
-                <section key={field.title} className="rounded-[1.5rem] border border-[var(--border-subtle)] bg-[var(--surface-panel)] p-5">
+                <section key={field.title} className="ui-toolbox-template__field">
                   <p className="ui-fact-card__label mb-3">{field.title}</p>
                   <p className="m-0 text-sm leading-relaxed text-[var(--text-secondary)]">{field.hint}</p>
-                  <div className="mt-5 space-y-3">
-                    <div className="h-8 border-b border-[var(--border-default)]" />
-                    <div className="h-8 border-b border-[var(--border-default)]" />
-                    <div className="h-8 border-b border-[var(--border-default)]" />
+                  <div className="ui-toolbox-template__lines">
+                    <div className="ui-toolbox-template__line" />
+                    <div className="ui-toolbox-template__line" />
+                    <div className="ui-toolbox-template__line" />
                   </div>
                 </section>
               ))}
             </div>
             {cluster.templateMeta?.note ? (
-              <div className="mt-6 rounded-[1.5rem] border border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] bg-[var(--surface-note)] p-5">
-                <p className="m-0 text-sm leading-relaxed text-[var(--text-primary)]">{cluster.templateMeta.note}</p>
+              <div className="ui-toolbox-note mt-6">
+                <p>{cluster.templateMeta.note}</p>
               </div>
             ) : null}
           </div>
@@ -543,14 +539,46 @@ export default function ToolboxPageTemplate({
   practice,
   clusters = [],
   closingSection,
-  scoreStatusId = 'assessment-score-status',
+  scoreStatusId,
+  hasPrintView = false,
 }) {
-  const hasPrintView = Boolean(closingSection?.printView);
+  const heroTitleText = [hero?.title, hero?.accent].filter(Boolean).join(' ').trim();
 
   return (
-    <div className="ui-stack">
+    <div className="ui-stack" role="region" aria-labelledby={pageHeadingId}>
       <div className={hasPrintView ? 'ui-stack no-print' : 'ui-stack'}>
         <Container width="wide">
+          {hero?.actions?.length ? (
+            <Section spacing="tight" surface="plain" className="no-print">
+              <div className="ui-card--outline ui-toolbox-quick-access">
+                <div className="ui-stack ui-stack--tight">
+                  <Eyebrow>Schnellzugriff</Eyebrow>
+                  <h2 className="ui-hero__title ui-section-title--compact">
+                    {heroTitleText || 'Orientierung, Schutz und nächste Schritte'}
+                  </h2>
+                  <p className="ui-card__copy">
+                    Die wichtigsten Arbeitsaktionen der Toolbox sind hier zusätzlich direkt erreichbar, damit Tastatur- und Screenreader-Nutzung ohne Umwege in den zentralen Handlungsbereich gelangen.
+                  </p>
+                </div>
+                <div className="ui-button-row ui-toolbox-quick-access__actions" role="group" aria-label="Primäre Toolbox-Aktionen">
+                  {hero.actions.map((action) => (
+                    <Button
+                      key={`quick-${action.label}`}
+                      as={action.href ? 'a' : 'button'}
+                      href={action.href}
+                      onClick={action.onClick}
+                      variant={action.variant}
+                      target={action.target}
+                      rel={action.rel}
+                      aria-label={action.ariaLabel}
+                    >
+                      {action.label}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </Section>
+          ) : null}
           <PageHero {...hero} headingId={pageHeadingId} />
         </Container>
         <AssessmentPanel assessment={assessment} scoreStatusId={scoreStatusId} />

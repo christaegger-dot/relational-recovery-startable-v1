@@ -33,13 +33,19 @@ export default function PageHero({
   image,
   imageAlt,
   stats = [],
+  headingAriaLabel,
 }) {
   return (
     <div className="ui-hero">
       <div className="ui-hero__inner">
         <div className="ui-hero__content">
           {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
-          <h1 id={headingId} tabIndex={-1} className="ui-hero__title focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 focus-visible:ring-offset-4 focus-visible:ring-offset-white">
+          <h1
+            id={headingId}
+            tabIndex={-1}
+            aria-label={headingAriaLabel}
+            className="ui-hero__title focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 focus-visible:ring-offset-4 focus-visible:ring-offset-white"
+          >
             {title} {accent ? <span className="ui-hero__accent">{accent}</span> : null}
           </h1>
           {lead ? <p className="ui-hero__lead">{lead}</p> : null}

@@ -1,4 +1,7 @@
-import { Activity, BookOpenText, ClipboardCheck, CircleHelp, GraduationCap, HeartHandshake, LayoutDashboard, MapPin } from 'lucide-react';
+import { Activity, BookOpenText, CircleHelp, ClipboardCheck, GraduationCap, HeartHandshake, LayoutDashboard, MapPin } from 'lucide-react';
+import { E_MODULES, VIGNETTEN } from './learningContent';
+import { RESOURCE_DATA } from './networkContent';
+import { LITERATUR } from './evidenceContent';
 
 export const TAB_ITEMS = [
   { id: 'home', label: 'Start', icon: LayoutDashboard, footerNote: 'Dashboard und Orientierung', priority: 'primary' },
@@ -31,7 +34,7 @@ export const TAB_ITEMS = [
     priority: 'primary',
   },
   {
-    id: 'zaesur',
+    id: 'evidence',
     label: 'Evidenz',
     icon: Activity,
     footerNote: 'Grundlagen, Vertiefung, Materialien',
@@ -45,7 +48,7 @@ export const TAB_ITEMS = [
     priority: 'primary',
   },
   {
-    id: 'zuerich',
+    id: 'network',
     label: 'Netzwerk',
     icon: MapPin,
     footerNote: 'Hilfen, Stellen, Weitervermittlung',
@@ -54,18 +57,18 @@ export const TAB_ITEMS = [
 ];
 
 export const STORAGE_KEYS = {
-  appState: 'rr_app_state_v4',
+  appState: 'rr_app_state_v5',
 };
 
-export const APP_STATE_VERSION = 1;
-export const APP_BROADCAST_CHANNEL = 'rr_app_sync_v4';
+export const APP_STATE_VERSION = 2;
+export const APP_BROADCAST_CHANNEL = 'rr_app_sync_v5';
 
 export const DEFAULT_SCORE = { risk: 0, checked: [] };
 export const DEFAULT_COMPLETED = [];
 export const DEFAULT_SELECTED_OPTION = {};
 export const DEFAULT_QUIZ_STATE = {};
 
-export const E_MODULE_COUNT = 2;
-export const VIGNETTE_COUNT = 2;
-export const NETWORK_RESOURCE_COUNT = 16;
-export const HOME_REFERENCE_COUNT = 7;
+export const E_MODULE_COUNT = E_MODULES.length;
+export const VIGNETTE_COUNT = VIGNETTEN.length;
+export const NETWORK_RESOURCE_COUNT = RESOURCE_DATA.length;
+export const HOME_REFERENCE_COUNT = LITERATUR.length;

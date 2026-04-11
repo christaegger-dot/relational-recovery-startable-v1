@@ -6,6 +6,7 @@ export function normalizeClosingAction(item = {}, fallbackLabel = 'Aktion öffne
     meta: item.meta || [],
     assetMeta: item.assetMeta || null,
     actionLabel: item.actionLabel || fallbackLabel,
+    ariaLabel: item.ariaLabel || null,
     href: item.href || null,
     onClick: item.onClick || null,
     target: item.target,

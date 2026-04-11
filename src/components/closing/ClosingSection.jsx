@@ -89,7 +89,7 @@ function ClosingPrimaryActions({ items = [] }) {
   return (
     <div className="grid gap-6 md:grid-cols-2 no-print">
       {items.map((item) => (
-        <button key={item.title} type="button" className="group text-left" onClick={item.onClick}>
+        <button key={item.title} type="button" className="group text-left" onClick={item.onClick} aria-label={item.ariaLabel || item.title}>
           <div
             className={`mb-6 flex min-h-[16rem] items-center justify-center overflow-hidden rounded-[2rem] border-2 p-8 transition-all duration-300 ${item.previewClassName || ''}`}
           >
@@ -120,7 +120,7 @@ function ClosingPrimaryActions({ items = [] }) {
 function ClosingActionButton({ item, defaultLabel }) {
   if (item.href) {
     return (
-      <Button as="a" href={item.href} className="mt-5" variant="secondary" target={item.target} rel={item.rel} download={item.kind === 'download'}>
+      <Button as="a" href={item.href} className="mt-5" variant="secondary" target={item.target} rel={item.rel} download={item.kind === 'download'} aria-label={item.ariaLabel || item.actionLabel || defaultLabel}>
         {item.actionLabel || defaultLabel}
       </Button>
     );
@@ -128,7 +128,7 @@ function ClosingActionButton({ item, defaultLabel }) {
 
   if (item.onClick) {
     return (
-      <Button className="mt-5" variant="secondary" onClick={item.onClick}>
+      <Button className="mt-5" variant="secondary" onClick={item.onClick} aria-label={item.ariaLabel || item.actionLabel || defaultLabel}>
         {item.actionLabel || defaultLabel}
       </Button>
     );
@@ -162,8 +162,21 @@ function filterActionItems(items = [], query = '') {
   return items.filter((item) => getActionSearchText(item).includes(query));
 }
 
+function slugifyToken(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 function getCollectionAnchorId(collection, index) {
-  return collection.id || `closing-collection-${index + 1}`;
+  const derivedId = slugifyToken(collection.id || collection.eyebrow || collection.title);
+  return derivedId ? `closing-${derivedId}` : `closing-collection-${index + 1}`;
+}
+
+function getActionItemKey(item, index) {
+  return item.id || item.href || item.link || item.title || `closing-item-${index + 1}`;
 }
 
 function ClosingNavigator({ entries = [], query, setQuery, totalCount, resultCount }) {
@@ -243,8 +256,8 @@ function ClosingCollections({ collections = [] }) {
         </div>
       ) : null}
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {collection.items.map((item) => (
-          <SurfaceCard key={item.title} tone={collection.collectionKind === 'books' ? 'soft' : 'default'} className="h-full">
+        {collection.items.map((item, itemIndex) => (
+          <SurfaceCard key={getActionItemKey(item, itemIndex)} tone={collection.collectionKind === 'books' ? 'soft' : 'default'} className="h-full">
             <MetaTags items={item.meta} />
             {item.age || item.type ? <p className="ui-fact-card__label">{item.age || item.type}</p> : null}
             <h3 className="ui-card__title">{item.title}</h3>
@@ -278,8 +291,8 @@ function ClosingRelatedLinks({ relatedLinks, relatedLinksId }) {
         {relatedLinks.description ? <p>{relatedLinks.description}</p> : null}
       </div>
       <div className="grid gap-4 md:grid-cols-3">
-        {relatedLinks.items.map((item) => (
-          <SurfaceCard key={item.title} tone="soft" className="h-full">
+        {relatedLinks.items.map((item, itemIndex) => (
+          <SurfaceCard key={getActionItemKey(item, itemIndex)} tone="soft" className="h-full">
             <MetaTags items={item.meta} tone="accent" />
             <h3 className="ui-card__title">{item.title}</h3>
             {item.description ? <p className="ui-card__copy">{item.description}</p> : null}

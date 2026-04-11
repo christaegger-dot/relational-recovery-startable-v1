@@ -29,15 +29,15 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
   const overviewCards = [
     { label: 'Module', val: E_MODULE_COUNT, desc: 'kompakte Lernbausteine', icon: GraduationCap, tab: 'elearning' },
     { label: 'Trainingsfälle', val: VIGNETTE_COUNT, desc: 'für Fallreflexion und Dialog', icon: HeartHandshake, tab: 'vignetten' },
-    { label: 'Netzwerkstellen', val: NETWORK_RESOURCE_COUNT, desc: 'für Triage und Entlastung', icon: MapPin, tab: 'zuerich' },
-    { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library, tab: 'zaesur' },
+    { label: 'Netzwerkstellen', val: NETWORK_RESOURCE_COUNT, desc: 'für Triage und Entlastung', icon: MapPin, tab: 'network' },
+    { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library, tab: 'evidence' },
   ];
 
   const dashboardRoutes = [
     {
       title: 'Wenn du verstehen willst, was in der Familie passiert',
       desc: 'Belastung, Schutzfaktoren, Elternrolle und kindliche Perspektive fachlich einordnen.',
-      target: 'zaesur',
+      target: 'evidence',
       cta: 'Zu Evidenz',
       icon: Library,
     },
@@ -51,7 +51,7 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
     {
       title: 'Wenn du triagieren oder weitervermitteln willst',
       desc: 'Offizielle Stellen, Entlastung, Kinderangebote und regionale Hilfen gezielt finden.',
-      target: 'zuerich',
+      target: 'network',
       cta: 'Zum Netzwerk',
       icon: MapPin,
     },
@@ -155,7 +155,7 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
               <div className="mt-5 flex flex-wrap gap-3">
                 <button
                   type="button"
-                  onClick={() => setActiveTab('zuerich')}
+                  onClick={() => setActiveTab('network')}
                   className="inline-flex items-center gap-2 rounded-full border border-[#d9c0a8] bg-white px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-stone-800 shadow-[0_10px_24px_rgba(95,69,50,0.06)] transition-colors hover:bg-[#f9f1e7]"
                 >
                   Zum Netzwerkbereich mit PUK-Angeboten

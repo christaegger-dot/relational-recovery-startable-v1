@@ -12,9 +12,13 @@ export default function Button({
       ? 'ui-button ui-button--secondary'
       : variant === 'subtle'
         ? 'ui-button ui-button--subtle'
-        : variant === 'danger'
-          ? 'ui-button ui-button--danger'
-          : 'ui-button ui-button--primary';
+        : variant === 'ghost'
+          ? 'ui-button ui-button--ghost'
+          : variant === 'danger'
+            ? 'ui-button ui-button--danger'
+            : variant === 'emergency'
+              ? 'ui-button ui-button--emergency'
+              : 'ui-button ui-button--primary';
 
   const classes = [variantClass, className].filter(Boolean).join(' ');
   const Tag = as || (href ? 'a' : 'button');

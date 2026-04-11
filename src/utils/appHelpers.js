@@ -16,6 +16,10 @@ const MODULE_BY_ID = new Map(E_MODULES.map((module) => [module.id, module]));
 const VIGNETTE_OPTION_IDS = new Map(
   VIGNETTEN.map((vignette) => [vignette.id, new Set(vignette.options.map((option) => option.id))])
 );
+const TAB_ALIASES = {
+  zuerich: 'network',
+  zaesur: 'evidence',
+};
 
 export const safeParse = (key, fallback, validate) => {
   if (typeof window === 'undefined') return fallback;
@@ -75,8 +79,9 @@ export const isValidResourceFilter = (value) =>
   typeof value === 'string' && NETWORK_FILTERS.some((filter) => filter.id === value);
 
 export const normalizeHashToTab = (hashValue) => {
-  const cleaned = String(hashValue || '').replace(/^#/, '');
-  return TAB_ITEMS.some((item) => item.id === cleaned) ? cleaned : 'home';
+  const cleaned = String(hashValue || '').replace(/^#/, '').trim().toLowerCase();
+  const aliased = TAB_ALIASES[cleaned] ?? cleaned;
+  return TAB_ITEMS.some((item) => item.id === aliased) ? aliased : 'home';
 };
 
 export const getInitialTab = () => {
@@ -144,7 +149,7 @@ export const normalizeAppStateData = (value) => {
         ? source.currentVignette
         : defaults.currentVignette,
     selectedOption: normalizeSelectedOptionData(source.selectedOption),
-    searchTerm: defaults.searchTerm,
+    searchTerm: typeof source.searchTerm === 'string' ? source.searchTerm.trimStart() : defaults.searchTerm,
     activeResourceFilter: isValidResourceFilter(source.activeResourceFilter)
       ? source.activeResourceFilter
       : defaults.activeResourceFilter,
@@ -158,7 +163,9 @@ export const normalizeAppStateData = (value) => {
 export const isValidStoredAppState = (value) =>
   value &&
   typeof value === 'object' &&
-  value.version === APP_STATE_VERSION &&
+  typeof value.version === 'number' &&
+  value.version >= 1 &&
+  value.version <= APP_STATE_VERSION &&
   typeof value.updatedAt === 'number' &&
   typeof value.sourceId === 'string' &&
   value.data &&
@@ -170,8 +177,8 @@ export const getInitialAppState = (storageKey) => {
   if (typeof window === 'undefined') return defaults;
 
   const rawHash = String(window.location.hash || '').replace(/^#/, '');
-  const hasExplicitKnownHash = TAB_ITEMS.some((item) => item.id === rawHash);
-  const requestedTab = hasExplicitKnownHash ? rawHash : null;
+  const normalizedHash = normalizeHashToTab(rawHash);
+  const requestedTab = rawHash && normalizedHash !== 'home' ? normalizedHash : TAB_ITEMS.some((item) => item.id === rawHash) ? rawHash : null;
   const storedAppState = safeParse(storageKey, null, (value) => isValidStoredAppState(value));
 
   if (storedAppState?.data) {
@@ -200,10 +207,10 @@ export const getPageHeadingId = (tab) => {
       return 'page-heading-vignetten';
     case 'toolbox':
       return 'page-heading-toolbox';
-    case 'zuerich':
-      return 'page-heading-zuerich';
-    case 'zaesur':
-      return 'page-heading-zaesur';
+    case 'network':
+      return 'page-heading-network';
+    case 'evidence':
+      return 'page-heading-evidence';
     default:
       return 'page-heading-home';
   }

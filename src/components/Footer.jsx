@@ -51,7 +51,7 @@ export default function Footer({ onNavigateToTab }) {
                 <button
                   key={route.tab}
                   type="button"
-                  onClick={() => onNavigateToTab?.(route.tab)}
+                  onClick={() => onNavigateToTab?.(route.tab, { focusTarget: 'heading' })}
                   className="flex w-full items-start justify-between gap-4 rounded-[1.35rem] border border-transparent px-4 py-4 text-left transition-all hover:border-[#e4d2c1] hover:bg-white/85 hover:shadow-[0_16px_34px_rgba(93,68,51,0.05)]"
                 >
                   <div>

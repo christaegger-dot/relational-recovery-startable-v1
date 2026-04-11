@@ -178,5 +178,5 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
               : 'Nächster Schritt: Mischung, Lücken und Erreichbarkeit gemeinsam lesen und daraus konkrete Absprachen ableiten.',
   };
 
-  return <NetworkPageTemplate hero={hero} pageHeadingId={getPageHeadingId('zuerich')} directory={directory} mapping={mapping} />;
+  return <NetworkPageTemplate hero={hero} pageHeadingId={getPageHeadingId('network')} directory={directory} mapping={mapping} />;
 }

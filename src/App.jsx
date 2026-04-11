@@ -1,114 +1,20 @@
 // Design note: This file preserves the application's information architecture while the visual language is shifted toward a warm editorial interface with calmer surfaces, serif-led hierarchy and lower-arousal accents.
-import React, { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
-
-const TOOLBOX_PRINT_STORAGE_KEY = 'rr-toolbox-print-payload';
+import React, { lazy, Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 function getToolboxPrintMode() {
-  if (typeof window === 'undefined') return false;
-  return new URLSearchParams(window.location.search).get('print') === 'toolbox';
-}
-
-function readToolboxPrintPayload() {
-  if (typeof window === 'undefined') return null;
-
-  try {
-    const raw = window.localStorage.getItem(TOOLBOX_PRINT_STORAGE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (!parsed || typeof parsed.html !== 'string' || !parsed.html.trim()) return null;
-    return parsed;
-  } catch {
-    return null;
-  }
-}
-
-function storeToolboxPrintPayload(payload) {
-  if (typeof window === 'undefined') return false;
-
-  try {
-    window.localStorage.setItem(
-      TOOLBOX_PRINT_STORAGE_KEY,
-      JSON.stringify({
-        title: payload.title,
-        html: payload.html,
-        updatedAt: Date.now(),
-      })
-    );
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function openIsolatedPrintView({ contentSelector, title }) {
-  if (typeof window === 'undefined' || typeof document === 'undefined') return false;
-
-  const printNode = document.querySelector(contentSelector);
-  if (!printNode) return false;
-
-  const stored = storeToolboxPrintPayload({
-    title,
-    html: printNode.outerHTML,
-  });
-  if (!stored) return false;
-
-  const printUrl = new URL(window.location.href);
-  printUrl.searchParams.set('print', 'toolbox');
-  printUrl.searchParams.set('ts', String(Date.now()));
-
-  const printWindow = window.open(printUrl.toString(), '_blank');
-  if (!printWindow) return false;
-
-  if (typeof printWindow.focus === 'function') {
-    window.setTimeout(() => printWindow.focus(), 150);
-  }
-
-  return true;
+  return false;
 }
 
 function ToolboxPrintPage() {
-  const payload = useMemo(() => readToolboxPrintPayload(), []);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return undefined;
-
-    const timer = window.setTimeout(() => {
-      window.focus();
-      window.print();
-    }, 400);
-
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  if (!payload?.html) {
-    return (
-      <div className="min-h-screen bg-white px-6 py-10 text-slate-900">
-        <main className="mx-auto max-w-3xl">
-          <h1 className="text-2xl font-semibold">Druckansicht konnte nicht geladen werden</h1>
-          <p className="mt-4 text-base leading-relaxed text-slate-700">
-            Bitte dieses Fenster schliessen und die Arbeitsansicht noch einmal direkt aus der Toolbox starten.
-          </p>
-        </main>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <main className="print-shell" dangerouslySetInnerHTML={{ __html: payload.html }} />
-    </div>
-  );
+  return null;
 }
 
 function handleToolboxPrint() {
-  const opened = openIsolatedPrintView({
-    contentSelector: '#toolbox-next-steps .print-only',
-    title: 'Relational Recovery – Toolbox Arbeitsansicht',
-  });
+  if (typeof window === 'undefined') return;
 
-  if (!opened) {
+  window.requestAnimationFrame(() => {
     window.print();
-  }
+  });
 }
 
 import './styles/app-global.css';
@@ -158,6 +64,16 @@ function SectionLoadingFallback() {
   );
 }
 
+function getFocusableElements(container) {
+  if (!container || typeof container.querySelectorAll !== 'function') return [];
+
+  return Array.from(
+    container.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((element) => !element.hasAttribute('disabled') && element.getAttribute('aria-hidden') !== 'true' && element.offsetParent !== null);
+}
+
 export default function App() {
   const initialAppStateRef = useRef(null);
   const focusFrameRef = useRef(null);
@@ -178,6 +94,10 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pendingPriorityFocus, setPendingPriorityFocus] = useState(null);
   const mainContentRef = useRef(null);
+  const navigationFocusTargetRef = useRef(initialAppState.activeTab === 'home' ? 'none' : 'heading');
+  const skipLinkActivatedRef = useRef(false);
+  const hasProcessedInitialFocusRef = useRef(false);
+  const skipLinkRef = useRef(null);
   const acuteCrisisSectionRef = useRef(null);
   const safetyPlanSectionRef = useRef(null);
   const childProtectionSectionRef = useRef(null);
@@ -208,6 +128,7 @@ export default function App() {
     const normalized = normalizeAppStateData(nextState);
     const { preserveSearchTerm = false } = options;
 
+    navigationFocusTargetRef.current = 'none';
     setActiveTab(normalized.activeTab);
     setCurrentVignette(normalized.currentVignette);
     setSelectedOption(normalized.selectedOption);
@@ -240,8 +161,31 @@ export default function App() {
     }
   };
 
-  useEffect(() => {
+  const getExplicitTabHash = () => {
+    if (typeof window === 'undefined') return null;
+
+    const rawHash = String(window.location.hash || '').replace(/^#/, '');
+    if (!rawHash || rawHash === 'main-content') return null;
+
+    const normalizedHash = normalizeHashToTab(rawHash);
+    return normalizedHash === 'home' && rawHash !== 'home' ? null : normalizedHash;
+  };
+
+  const navigateToTab = (nextTab, options = {}) => {
+    const { focusTarget = 'heading' } = options;
+    navigationFocusTargetRef.current = focusTarget;
+    setActiveTab((prev) => (prev === nextTab ? prev : nextTab));
+  };
+
+  useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
+      const explicitTabHash = getExplicitTabHash();
+      if (explicitTabHash && explicitTabHash !== activeTab) {
+        navigationFocusTargetRef.current = explicitTabHash === 'home' ? 'none' : 'heading';
+        setActiveTab(explicitTabHash);
+        return undefined;
+      }
+
       const nextHash = `#${activeTab}`;
       if (window.location.hash !== nextHash) {
         window.location.hash = nextHash;
@@ -250,28 +194,52 @@ export default function App() {
 
     setMobileMenuOpen(false);
 
+    const focusTarget = navigationFocusTargetRef.current;
+    if (!hasProcessedInitialFocusRef.current) {
+      hasProcessedInitialFocusRef.current = true;
+      if (activeTab === 'home') {
+        navigationFocusTargetRef.current = 'none';
+        return undefined;
+      }
+    }
+
+    if (focusTarget === 'none' || skipLinkActivatedRef.current) {
+      skipLinkActivatedRef.current = false;
+      navigationFocusTargetRef.current = 'none';
+      return undefined;
+    }
+
     let remainingAttempts = 60;
 
-    const focusActiveHeading = () => {
+    const focusNavigationTarget = () => {
       const headingId = getPageHeadingId(activeTab);
       const heading = typeof document !== 'undefined' ? document.getElementById(headingId) : null;
+
+      if (focusTarget === 'main' && mainContentRef.current && typeof mainContentRef.current.focus === 'function') {
+        mainContentRef.current.focus();
+        focusFrameRef.current = null;
+        navigationFocusTargetRef.current = 'none';
+        return;
+      }
 
       if (heading && typeof heading.focus === 'function') {
         heading.focus();
         focusFrameRef.current = null;
+        navigationFocusTargetRef.current = 'none';
         return;
       }
 
       if (remainingAttempts > 0) {
         remainingAttempts -= 1;
-        focusFrameRef.current = window.requestAnimationFrame(focusActiveHeading);
+        focusFrameRef.current = window.requestAnimationFrame(focusNavigationTarget);
       } else if (mainContentRef.current) {
         mainContentRef.current.focus();
         focusFrameRef.current = null;
+        navigationFocusTargetRef.current = 'none';
       }
     };
 
-    focusFrameRef.current = window.requestAnimationFrame(focusActiveHeading);
+    focusFrameRef.current = window.requestAnimationFrame(focusNavigationTarget);
 
     return () => {
       if (focusFrameRef.current !== null) {
@@ -284,13 +252,30 @@ export default function App() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+
     const handleHashChange = () => {
+      const rawHash = String(window.location.hash || '').replace(/^#/, '');
+
+      if (rawHash === 'main-content') {
+        navigationFocusTargetRef.current = 'main';
+        skipLinkActivatedRef.current = true;
+        window.requestAnimationFrame(() => {
+          if (mainContentRef.current && typeof mainContentRef.current.focus === 'function') {
+            mainContentRef.current.focus();
+          }
+        });
+        return;
+      }
+
       const nextTab = normalizeHashToTab(window.location.hash);
+      navigationFocusTargetRef.current = 'heading';
       setActiveTab((prev) => (prev === nextTab ? prev : nextTab));
     };
 
     window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
 
   useEffect(() => {
@@ -374,13 +359,14 @@ export default function App() {
       activeTab,
       currentVignette,
       selectedOption,
+      searchTerm,
       activeResourceFilter,
       quizState,
       showSafeNote,
       score,
       completedModules,
     }),
-    [activeTab, currentVignette, selectedOption, activeResourceFilter, quizState, showSafeNote, score, completedModules]
+    [activeTab, currentVignette, selectedOption, searchTerm, activeResourceFilter, quizState, showSafeNote, score, completedModules]
   );
 
   useEffect(() => {
@@ -395,9 +381,18 @@ export default function App() {
       if (payload.sourceId === tabInstanceIdRef.current) return;
       if (payload.updatedAt <= latestAppliedTimestampRef.current) return;
 
+      const explicitTabHash = getExplicitTabHash();
+
       latestAppliedTimestampRef.current = payload.updatedAt;
       skipNextPersistRef.current = true;
-      applyAppState(payload.data, { preserveSearchTerm: true });
+      applyAppState(
+        explicitTabHash
+          ? {
+              ...payload.data,
+              activeTab: explicitTabHash,
+            }
+          : payload.data
+      );
     };
 
     const handleStorage = (event) => {
@@ -466,7 +461,7 @@ export default function App() {
   };
 
   const openPriorityToolboxSection = (section) => {
-    setActiveTab('toolbox');
+    navigateToTab('toolbox', { focusTarget: 'heading' });
     setPendingPriorityFocus(section);
   };
 
@@ -747,9 +742,47 @@ Aktueller Assessment-Score: ${score.risk}
 
   return (
     <div className="min-h-screen bg-[#f6efe7] flex flex-col font-sans text-stone-900 overflow-x-hidden selection:bg-[#ead8c3] selection:text-[#5f3c2d]">
-      <a href="#main-content" className="skip-link">
+      <a
+        ref={skipLinkRef}
+        href="#main-content"
+        className="skip-link"
+        onClick={(event) => {
+          event.preventDefault();
+          skipLinkActivatedRef.current = true;
+          navigationFocusTargetRef.current = 'main';
+          if (mainContentRef.current && typeof mainContentRef.current.focus === 'function') {
+            mainContentRef.current.focus();
+          }
+        }}
+      >
         Zum Inhalt springen
       </a>
+
+      {activeTab === 'toolbox' && (
+        <div className="no-print border-b border-stone-300/60 bg-white/80 px-4 py-3 shadow-[0_8px_20px_rgba(76,55,39,0.04)]">
+          <div className="mx-auto flex max-w-[86rem] flex-col gap-3 md:px-2">
+            <h2 className="text-base font-semibold text-stone-900">Orientierung, Schutz und nächste Schritte</h2>
+            <div className="flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={handleDownloadCrisisPlan}
+                className="haptic-btn inline-flex items-center gap-2 rounded-full border border-stone-300/70 bg-white px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-stone-700 shadow-[0_10px_24px_rgba(76,55,39,0.06)]"
+                aria-label="Krisenplan herunterladen"
+              >
+                Krisenplan herunterladen
+              </button>
+              <button
+                type="button"
+                onClick={handleToolboxPrint}
+                className="haptic-btn inline-flex items-center gap-2 rounded-full border border-stone-300/70 bg-white px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-stone-700 shadow-[0_10px_24px_rgba(76,55,39,0.06)]"
+                aria-label="Arbeitsansicht drucken"
+              >
+                Arbeitsansicht drucken
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showSafeNote && (
         <div className="relative z-[100] border-b border-[#4b392f] bg-[linear-gradient(180deg,#3f322b,#2d241f)] px-3 py-3 text-[#f6efe7] no-print">
@@ -789,7 +822,7 @@ Aktueller Assessment-Score: ${score.risk}
 
       <Header
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        setActiveTab={navigateToTab}
         onReset={clearSession}
         isResetting={isResetting}
         mobileMenuOpen={mobileMenuOpen}
@@ -810,7 +843,7 @@ Aktueller Assessment-Score: ${score.risk}
         <Suspense fallback={<SectionLoadingFallback />}>
           {activeTab === 'home' && (
             <HomeLandingTemplate
-              setActiveTab={setActiveTab}
+              setActiveTab={navigateToTab}
               progressPercent={progressPercent}
               completedModules={completedModules}
               pageHeadingId={getPageHeadingId('home')}
@@ -835,12 +868,13 @@ Aktueller Assessment-Score: ${score.risk}
           {activeTab === 'grundlagen' && (
             <GrundlagenSection
               sharedDownloadResources={downloadResources}
-              onNavigateToTab={setActiveTab}
+              onNavigateToTab={navigateToTab}
             />
           )}
 
           {activeTab === 'toolbox' && (
             <ToolboxSection
+              pageHeadingId={getPageHeadingId('toolbox')}
               score={score}
               onToggleAssessment={handleScoreChange}
               onResetAssessment={() => setScore(DEFAULT_SCORE)}
@@ -855,7 +889,7 @@ Aktueller Assessment-Score: ${score.risk}
             />
           )}
 
-          {activeTab === 'zuerich' && (
+          {activeTab === 'network' && (
             <NetworkSection
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
@@ -864,11 +898,11 @@ Aktueller Assessment-Score: ${score.risk}
             />
           )}
 
-          {activeTab === 'zaesur' && <EvidenceSection downloadResources={downloadResources} />}
+          {activeTab === 'evidence' && <EvidenceSection downloadResources={downloadResources} />}
         </Suspense>
       </main>
 
-      <Footer onNavigateToTab={setActiveTab} />
+      <Footer onNavigateToTab={navigateToTab} />
     </div>
   );
 }

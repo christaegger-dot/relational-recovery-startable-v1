@@ -378,5 +378,5 @@ export default function EvidenceSection({ downloadResources = [] }) {
     notes: MEDIA_NOTES,
   });
 
-  return <EvidencePageTemplate hero={hero} pageHeadingId={getPageHeadingId('zaesur')} chapterOverview={chapterOverview} zones={zones} closingSection={closingSection} />;
+  return <EvidencePageTemplate hero={hero} pageHeadingId={getPageHeadingId('evidence')} chapterOverview={chapterOverview} zones={zones} closingSection={closingSection} />;
 }

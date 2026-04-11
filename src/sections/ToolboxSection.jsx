@@ -211,8 +211,9 @@ export default function ToolboxSection({
 
   const hero = {
     eyebrow: 'Klinische Orientierung',
-    title: 'Orientierung, Schutz und nächste Schritte',
+    title: 'Toolbox: Orientierung, Schutz und nächste Schritte',
     accent: 'in belasteten Familiensituationen.',
+    headingAriaLabel: 'Toolbox: Orientierung, Schutz und nächste Schritte in belasteten Familiensituationen.',
     description:
       'Strukturierte Einschätzung familiärer Belastung als Gesprächshilfe für Abwägung, Schutz und nächste Schritte – nicht als Diagnose- oder Urteilsinstrument.',
     supportingCopy:
@@ -220,11 +221,13 @@ export default function ToolboxSection({
     actions: [
       {
         label: 'Krisenplan herunterladen',
+        ariaLabel: 'Krisenplan der Toolbox herunterladen',
         onClick: onDownloadCrisisPlan,
         icon: <Download size={16} />,
       },
       {
         label: 'Arbeitsansicht drucken',
+        ariaLabel: 'Arbeitsansicht drucken',
         onClick: onPrint,
         icon: <Printer size={16} />,
         variant: 'secondary',
@@ -388,7 +391,8 @@ export default function ToolboxSection({
         })),
         disclosureItems: ACUTE_CRISIS_CONTACTS.map((contact) => ({
           title: contact.name,
-          copy: [contact.note],
+          summaryAriaLabel: `Kontaktinformation ${contact.name}`,
+          content: [contact.note],
           actionLabel: contact.link ? 'Kontakt öffnen' : null,
           href: contact.link,
           target: contact.link ? '_blank' : undefined,
@@ -512,7 +516,8 @@ export default function ToolboxSection({
         },
         disclosureItems: RIGHTS_FAQ.map((item) => ({
           title: item.question,
-          copy: [item.answer],
+          summaryAriaLabel: `FAQ ${item.question}`,
+          content: [item.answer],
         })),
       },
     ],
@@ -633,6 +638,7 @@ export default function ToolboxSection({
         description: 'Bearbeitbare Kurzvorlage für Warnzeichen, Kontaktkette, Kinderbetreuung, sichere Orte und nächste Schritte.',
         meta: ['TXT editierbar', 'Krise / Vorsorge'],
         actionLabel: 'Vorlage herunterladen',
+        ariaLabel: 'Krisenplan als Textvorlage aus der Toolbox herunterladen',
         onClick: onDownloadCrisisPlan,
         actionIcon: <Download size={14} />,
       },
@@ -642,6 +648,7 @@ export default function ToolboxSection({
         description: 'Praktisch für Gespräch, Supervision oder gemeinsame Krisenvorsorge im Team oder mit Angehörigen.',
         meta: ['Print', 'Gespräch / Team'],
         actionLabel: 'Druckansicht öffnen',
+        ariaLabel: 'Druckansicht der Toolbox-Arbeitsansicht öffnen',
         onClick: onPrint,
         actionIcon: <Printer size={14} />,
       },
