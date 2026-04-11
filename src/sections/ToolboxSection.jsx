@@ -527,6 +527,87 @@ export default function ToolboxSection({
     ]
   );
 
+  const toolboxPrintView = (
+    <div className="bg-white text-slate-950">
+      <div className="mx-auto flex w-full max-w-[840px] flex-col gap-8 p-8 text-[12px] leading-relaxed">
+        <header className="rounded-[1.5rem] border border-slate-300 bg-white p-6">
+          <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Relational Recovery · Toolbox Arbeitsansicht</p>
+          <h1 className="mt-3 text-[2rem] font-black leading-tight text-slate-950">Orientierung, Schutz und nächste Schritte</h1>
+          <p className="mt-3 m-0 text-sm text-slate-700">
+            Kompakte Gesprächs- und Protokollansicht für akute Belastung, Krisenvorsorge und nächste verlässliche Schritte.
+          </p>
+        </header>
+
+        <section className="grid gap-4 md:grid-cols-2">
+          <div className="rounded-[1.25rem] border border-slate-300 p-5">
+            <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Kurzlage</p>
+            <div className="mt-4 space-y-3">
+              <div>
+                <p className="m-0 font-bold text-slate-900">Beobachtbare Hinweise / Anlass</p>
+                <div className="mt-2 h-20 rounded-xl border border-slate-300 bg-white" />
+              </div>
+              <div>
+                <p className="m-0 font-bold text-slate-900">Tragende Ressourcen / Mitwissende</p>
+                <div className="mt-2 h-16 rounded-xl border border-slate-300 bg-white" />
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-[1.25rem] border border-slate-300 p-5">
+            <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Sofort-Triage</p>
+            <div className="mt-4 space-y-3">
+              {triagePrompts.map((prompt, index) => (
+                <div key={prompt.id} className="rounded-xl border border-slate-300 px-4 py-3">
+                  <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.16em] text-slate-500">Frage {index + 1}</p>
+                  <p className="mt-1 mb-2 font-semibold text-slate-900">{prompt.question}</p>
+                  <div className="flex gap-4 text-sm text-slate-700">
+                    <span>☐ Ja</span>
+                    <span>☐ Nein</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-[1.25rem] border border-slate-300 p-5 break-before-page">
+          <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Krisenvorsorge und Kinder-Schutzteil</p>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {SAFETY_PLAN_TEMPLATE_FIELDS.map((field) => (
+              <div key={field.title} className="rounded-xl border border-slate-300 p-4">
+                <p className="m-0 font-bold text-slate-900">{field.title}</p>
+                <p className="mt-1 mb-3 text-sm text-slate-600">{field.hint}</p>
+                <div className="h-24 rounded-lg border border-slate-300 bg-white" />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-[1.25rem] border border-slate-300 p-5">
+          <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Nächste verlässliche Schritte</p>
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {SAFETY_PLAN_POINTS.map((item, index) => (
+              <div key={item} className="rounded-xl border border-slate-300 px-4 py-3">
+                <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.16em] text-slate-500">Baustein {index + 1}</p>
+                <p className="mt-1 m-0 font-semibold text-slate-900">{item}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <div>
+              <p className="m-0 font-bold text-slate-900">Zuständigkeit / nächste Kontaktaufnahme</p>
+              <div className="mt-2 h-20 rounded-xl border border-slate-300 bg-white" />
+            </div>
+            <div>
+              <p className="m-0 font-bold text-slate-900">Datum / Rückmeldung / Follow-up</p>
+              <div className="mt-2 h-20 rounded-xl border border-slate-300 bg-white" />
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+
   const closingSection = createClosingSectionModel({
     id: 'toolbox-next-steps',
     eyebrow: 'Weiterarbeiten',
@@ -544,6 +625,7 @@ export default function ToolboxSection({
       copy: 'Gerade in hoch belasteten Situationen hilft weniger ein grosser Informationsblock als ein kleiner nächster Schritt mit klarer Zuständigkeit.',
       tone: 'soft',
     },
+    printView: toolboxPrintView,
     primaryActions: [
       {
         kind: 'download',

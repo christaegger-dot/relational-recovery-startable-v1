@@ -1,5 +1,85 @@
 // Design note: This file preserves the application's information architecture while the visual language is shifted toward a warm editorial interface with calmer surfaces, serif-led hierarchy and lower-arousal accents.
-import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
+
+function openIsolatedPrintView({ contentSelector, title }) {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return false;
+
+  const printNode = document.querySelector(contentSelector);
+  if (!printNode) return false;
+
+  const printWindow = window.open('', '_blank', 'noopener,noreferrer');
+  if (!printWindow) return false;
+
+  const headMarkup = Array.from(document.head.querySelectorAll('link[rel="stylesheet"], style'))
+    .map((node) => node.outerHTML)
+    .join('\n');
+
+  const html = `<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${title}</title>
+    ${headMarkup}
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+      }
+
+      body {
+        color: #111827;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .print-shell {
+        padding: 0;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .print-only {
+        display: block !important;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="print-shell">${printNode.innerHTML}</main>
+  </body>
+</html>`;
+
+  printWindow.document.open();
+  printWindow.document.write(html);
+  printWindow.document.close();
+
+  const triggerPrint = () => {
+    printWindow.focus();
+    printWindow.print();
+  };
+
+  printWindow.addEventListener('load', () => {
+    window.setTimeout(triggerPrint, 150);
+  }, { once: true });
+
+  window.setTimeout(triggerPrint, 500);
+  return true;
+}
+
+function handleToolboxPrint() {
+  const opened = openIsolatedPrintView({
+    contentSelector: '#toolbox-next-steps .print-only',
+    title: 'Relational Recovery – Toolbox Arbeitsansicht',
+  });
+
+  if (!opened) {
+    window.print();
+  }
+}
+
 import './styles/app-global.css';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import Header from './components/Header';
@@ -727,7 +807,7 @@ Aktueller Assessment-Score: ${score.risk}
               score={score}
               onToggleAssessment={handleScoreChange}
               onResetAssessment={() => setScore(DEFAULT_SCORE)}
-              onPrint={() => window.print()}
+              onPrint={handleToolboxPrint}
               onDownloadCrisisPlan={handleDownloadCrisisPlan}
               acuteCrisisSectionRef={acuteCrisisSectionRef}
               safetyPlanSectionRef={safetyPlanSectionRef}
