@@ -15,7 +15,7 @@ function VignettenCaseSection({ caseStudy }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {caseStudy.eyebrow ? <Eyebrow>{caseStudy.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {caseStudy.titlePrefix}{' '}
               {caseStudy.titleAccent ? <span className="ui-hero__accent">{caseStudy.titleAccent}</span> : null}
             </h2>
@@ -34,15 +34,11 @@ function VignettenCaseSection({ caseStudy }) {
 
         <SurfaceCard tone={caseStudy.cardTone || 'default'} className="no-print">
           <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[var(--border-subtle)] pb-6">
-            <div className="ui-stack ui-stack--tight" style={{ gap: '0.5rem' }}>
+            <div className="ui-stack ui-stack--compact">
               {caseStudy.statusLabel ? <p className="ui-fact-card__label">{caseStudy.statusLabel}</p> : null}
               <h3 className="ui-card__title">{caseStudy.title}</h3>
             </div>
-            {caseStudy.badge ? (
-              <span className="rounded-full border border-[var(--border-default)] bg-[var(--surface-panel)] px-4 py-2 text-[0.72rem] font-black uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                {caseStudy.badge}
-              </span>
-            ) : null}
+            {caseStudy.badge ? <span className="ui-badge">{caseStudy.badge}</span> : null}
           </div>
 
           <div className="mt-6 ui-copy">
@@ -66,8 +62,8 @@ function DecisionOption({ option, index, isActive, onSelect }) {
       <input type="radio" name={option.groupName} className="sr-only" checked={isActive} onChange={onSelect} />
       <span className={`ui-card--interactive block rounded-[1.5rem] border px-5 py-5 text-left transition-all ${toneClass}`}>
         <span className="flex items-start justify-between gap-4">
-          <span className="ui-stack ui-stack--tight" style={{ gap: '0.45rem' }}>
-            <span className="text-[0.65rem] font-black uppercase tracking-[0.18em] opacity-70">Option {index + 1}</span>
+          <span className="ui-stack ui-stack--compact">
+            <span className="ui-note-panel__label">Option {index + 1}</span>
             <span className="text-base font-black leading-snug">{option.label}</span>
           </span>
           {isActive ? <CheckCircle2 size={18} className="shrink-0 opacity-90" aria-hidden="true" /> : null}
@@ -86,7 +82,7 @@ function VignettenDecisionSection({ decision }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {decision.eyebrow ? <Eyebrow>{decision.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.75rem, 2.7vw, 2.7rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {decision.titlePrefix}{' '}
               {decision.titleAccent ? <span className="ui-hero__accent">{decision.titleAccent}</span> : null}
             </h2>
@@ -125,14 +121,10 @@ function VignettenDecisionSection({ decision }) {
               role="status"
               aria-live="polite"
               aria-atomic="true"
-              className={`mt-6 rounded-[1.5rem] border px-5 py-5 text-sm leading-relaxed ${
-                decision.feedback.tone === 'success'
-                  ? 'border-[color-mix(in_srgb,var(--accent-primary)_26%,white_74%)] bg-[var(--surface-note)] text-[var(--text-primary)]'
-                  : 'border-[var(--border-default)] bg-[color-mix(in_srgb,var(--surface-muted)_72%,white_28%)] text-[var(--text-primary)]'
-              }`}
+              className={`ui-note-panel mt-6 ${decision.feedback.tone === 'success' ? '' : 'ui-note-panel--muted'}`.trim()}
             >
-              <div className="mb-2 text-[0.65rem] font-black uppercase tracking-[0.18em] opacity-70">Rückmeldung</div>
-              <p className="m-0 font-medium">{decision.feedback.copy}</p>
+              <p className="ui-note-panel__label">Rückmeldung</p>
+              <p className="ui-note-panel__copy">{decision.feedback.copy}</p>
             </div>
           ) : null}
         </SurfaceCard>
@@ -148,7 +140,7 @@ function VignettenNavigationSection({ navigation }) {
     <Section spacing="tight" surface={navigation.surface || 'plain'} className="no-print">
       <SurfaceCard tone={navigation.cardTone || 'soft'}>
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="ui-stack ui-stack--tight" style={{ gap: '0.45rem' }}>
+          <div className="ui-stack ui-stack--compact">
             {navigation.eyebrow ? <Eyebrow>{navigation.eyebrow}</Eyebrow> : null}
             <h2 className="ui-card__title">{navigation.title}</h2>
             <p className="ui-card__copy">{navigation.description}</p>

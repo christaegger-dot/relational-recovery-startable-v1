@@ -95,7 +95,7 @@ function ChapterOverview({ chapterOverview }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {chapterOverview.eyebrow ? <Eyebrow>{chapterOverview.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {chapterOverview.title}{' '}
               {chapterOverview.accent ? <span className="ui-hero__accent">{chapterOverview.accent}</span> : null}
             </h2>
@@ -110,12 +110,9 @@ function ChapterOverview({ chapterOverview }) {
               {chapterOverview.aside.title ? <h3 className="ui-card__title">{chapterOverview.aside.title}</h3> : null}
               {chapterOverview.aside.copy ? <p className="ui-card__copy">{chapterOverview.aside.copy}</p> : null}
               {chapterOverview.aside.badges?.length ? (
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="ui-badge-row ui-editorial-card__action">
                   {chapterOverview.aside.badges.map((badge) => (
-                    <span
-                      key={badge}
-                      className="inline-flex rounded-full border border-[var(--border-default)] bg-[var(--surface-panel)] px-3 py-1 text-[0.7rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]"
-                    >
+                    <span key={badge} className="ui-badge">
                       {badge}
                     </span>
                   ))}
@@ -128,13 +125,9 @@ function ChapterOverview({ chapterOverview }) {
         {chapterOverview.items?.length ? (
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {chapterOverview.items.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className="rounded-[1.75rem] border border-[var(--border-default)] bg-white p-5 transition-colors hover:border-[color-mix(in_srgb,var(--accent-primary)_32%,white_68%)] hover:bg-[var(--surface-note)]"
-              >
-                <div className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-[var(--accent-primary-strong)]">{item.label}</div>
-                <p className="mt-3 text-sm font-medium leading-relaxed text-[var(--text-primary)]">{item.note}</p>
+              <a key={item.id} href={`#${item.id}`} className="ui-card ui-card--editorial-link">
+                <div className="ui-fact-card__label">{item.label}</div>
+                <p className="ui-card__copy">{item.note}</p>
               </a>
             ))}
           </div>
@@ -153,7 +146,7 @@ function ZoneSection({ zone }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {zone.eyebrow ? <Eyebrow>{zone.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {zone.title} {zone.accent ? <span className="ui-hero__accent">{zone.accent}</span> : null}
             </h2>
             <RichCopy paragraphs={zone.paragraphs} />
@@ -187,8 +180,8 @@ function ZoneSection({ zone }) {
         ) : null}
 
         {zone.callout ? (
-          <div className={`rounded-[1.75rem] border px-5 py-4 ${zone.callout.className || 'border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] bg-[var(--surface-note)]'}`}>
-            <p className="m-0 text-sm font-medium leading-relaxed text-[var(--text-primary)]">{zone.callout.text}</p>
+          <div className={`ui-note-panel ${zone.callout.className || ''}`.trim()}>
+            <p className="ui-note-panel__copy">{zone.callout.text}</p>
           </div>
         ) : null}
       </div>

@@ -19,6 +19,8 @@ const VIGNETTE_OPTION_IDS = new Map(
 const TAB_ALIASES = {
   zuerich: 'network',
   zaesur: 'evidence',
+  'network-map': 'network',
+  'network-directory': 'network',
 };
 
 export const safeParse = (key, fallback, validate) => {

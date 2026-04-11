@@ -43,7 +43,7 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
               {assessment.scoreAside.action ? (
                 <Button
                   variant="subtle"
-                  className="mt-5"
+                  className="ui-editorial-card__action"
                   onClick={assessment.scoreAside.action.onClick}
                   aria-describedby={scoreStatusId}
                 >
@@ -145,8 +145,8 @@ function PathwaySection({ pathway }) {
               ))}
             </div>
             {pathway.summary ? (
-              <div className="ui-toolbox-note mt-6">
-                <p>{pathway.summary}</p>
+              <div className="ui-note-panel ui-editorial-card__action">
+                <p className="ui-note-panel__copy">{pathway.summary}</p>
               </div>
             ) : null}
           </div>
@@ -173,8 +173,8 @@ function ScoreBandsSection({ scoreBands }) {
           <div className="grid gap-4 md:grid-cols-3">
             {scoreBands.items.map((band) => (
               <div key={band.label} className={`ui-toolbox-band ${band.className}`}>
-                <div className="ui-toolbox-kicker" style={{ opacity: 0.8 }}>Score {band.label}</div>
-                <p className="mt-3 text-sm font-medium leading-relaxed">{band.title}</p>
+                <div className="ui-toolbox-kicker">Score {band.label}</div>
+                <p className="ui-card__copy">{band.title}</p>
               </div>
             ))}
           </div>
@@ -241,11 +241,11 @@ function TriageSection({ triage }) {
               </div>
 
               {prompt.recommendation ? (
-                <div className={`ui-toolbox-feedback mt-5 ${prompt.recommendation.className}`}>
-                  <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] opacity-80">Einordnung</div>
+                <div className={`ui-toolbox-feedback ui-editorial-card__action ${prompt.recommendation.className}`}>
+                  <div className="ui-note-panel__label">Einordnung</div>
                   <h4 className="mt-3 text-lg font-black tracking-tight">{prompt.recommendation.title}</h4>
                   <p className="mt-3 text-sm leading-relaxed">{prompt.recommendation.text}</p>
-                  <Button variant="secondary" className="mt-5" onClick={() => prompt.recommendation.onJump(prompt.recommendation.target)}>
+                  <Button variant="secondary" className="ui-editorial-card__action" onClick={() => prompt.recommendation.onJump(prompt.recommendation.target)}>
                     {prompt.recommendation.targetLabel}
                     <ChevronRight size={14} />
                   </Button>
@@ -264,10 +264,10 @@ function TriageSection({ triage }) {
 
         {triage.primaryPriority ? (
           <div className={`ui-card--outline ui-toolbox-priority ${triage.primaryPriority.className}`}>
-            <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] opacity-80">Aktuell wichtigste Spur</div>
+            <div className="ui-note-panel__label">Aktuell wichtigste Spur</div>
             <h3 className="mt-3 text-2xl font-black tracking-tight">{triage.primaryPriority.title}</h3>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed">{triage.primaryPriority.text}</p>
-            <Button variant="secondary" className="mt-5" onClick={() => triage.primaryPriority.onJump(triage.primaryPriority.target)}>
+            <Button variant="secondary" className="ui-editorial-card__action" onClick={() => triage.primaryPriority.onJump(triage.primaryPriority.target)}>
               {triage.primaryPriority.targetLabel}
               <ChevronRight size={14} />
             </Button>
@@ -329,9 +329,9 @@ function PracticeBlocksSection({ practice }) {
                   </span>
                 ))}
               </div>
-              <h3 className="ui-card__title mt-5">{item.title}</h3>
+              <h3 className="ui-card__title ui-editorial-card__action">{item.title}</h3>
               <p className="ui-card__copy">{item.text}</p>
-              <Button variant="secondary" className="mt-5" onClick={() => item.onJump(item.target)}>
+              <Button variant="secondary" className="ui-editorial-card__action" onClick={() => item.onJump(item.target)}>
                 {item.targetLabel}
                 <ChevronRight size={14} />
               </Button>
@@ -455,7 +455,7 @@ function ClusterSection({ cluster }) {
                     {item.icon ? <span className="mt-1 shrink-0 text-[var(--accent-primary-strong)]">{item.icon}</span> : null}
                     <div>
                       <span className="ui-card__title block">{item.title}</span>
-                      {item.meta ? <p className="mt-2 text-xs font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">{item.meta}</p> : null}
+                      {item.meta ? <p className="ui-fact-card__label ui-editorial-card__action">{item.meta}</p> : null}
                     </div>
                   </div>
                   <span className="ui-toolbox-disclosure__toggle">
@@ -467,7 +467,7 @@ function ClusterSection({ cluster }) {
                     ? item.content.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
                     : <p>{item.content}</p>}
                   {item.href ? (
-                    <Button variant="secondary" className="mt-5" href={item.href} target={item.target} rel={item.rel}>
+                    <Button variant="secondary" className="ui-editorial-card__action" href={item.href} target={item.target} rel={item.rel}>
                       {item.actionLabel || 'Mehr anzeigen'}
                       {item.actionIcon}
                     </Button>
@@ -501,8 +501,8 @@ function ClusterSection({ cluster }) {
               ))}
             </div>
             {cluster.templateMeta?.note ? (
-              <div className="ui-toolbox-note mt-6">
-                <p>{cluster.templateMeta.note}</p>
+              <div className="ui-note-panel ui-editorial-card__action">
+                <p className="ui-note-panel__copy">{cluster.templateMeta.note}</p>
               </div>
             ) : null}
           </div>

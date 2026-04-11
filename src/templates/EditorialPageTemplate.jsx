@@ -13,7 +13,7 @@ function ContentSection({ section }) {
           <div className="ui-split">
             <div className="ui-stack ui-stack--tight">
               {section.eyebrow ? <Eyebrow>{section.eyebrow}</Eyebrow> : null}
-              {section.title ? <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>{section.title}</h2> : null}
+              {section.title ? <h2 className="ui-hero__title ui-section-title">{section.title}</h2> : null}
               {section.description ? (
                 <div className="ui-copy">
                   <p>{section.description}</p>
@@ -63,7 +63,7 @@ function ContentSection({ section }) {
                   key={card.title}
                   as={CardTag}
                   tone={card.tone || 'default'}
-                  className={card.href || card.onClick ? 'text-left transition-transform duration-200 hover:-translate-y-0.5' : undefined}
+                  className={card.href || card.onClick ? 'ui-card--editorial-link' : undefined}
                   {...interactiveProps}
                 >
                   {card.label ? <p className="ui-fact-card__label">{card.label}</p> : null}
@@ -71,7 +71,7 @@ function ContentSection({ section }) {
                   {card.copy ? <p className="ui-card__copy">{card.copy}</p> : null}
                   {card.meta ? <p className="ui-fact-card__meta">{card.meta}</p> : null}
                   {card.actionLabel ? (
-                    <div className="mt-5">
+                    <div className="ui-editorial-card__action">
                       <span className="ui-button ui-button--secondary">{card.actionLabel}</span>
                     </div>
                   ) : null}

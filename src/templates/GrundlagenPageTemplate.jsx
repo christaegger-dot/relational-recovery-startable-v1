@@ -15,7 +15,7 @@ function GrundlagenIntro({ intro }) {
           <div className="ui-stack ui-stack--tight">
             {intro.eyebrow ? <Eyebrow>{intro.eyebrow}</Eyebrow> : null}
             {intro.title ? (
-              <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+              <h2 className="ui-hero__title ui-section-title">
                 {intro.title}
               </h2>
             ) : null}
@@ -72,20 +72,17 @@ function GrundlagenIndex({ clusters }) {
 
 function GrundlagenFaqItem({ item, index }) {
   return (
-    <details className="group ui-card ui-card--interactive rounded-[1.75rem] bg-[var(--surface-app)]">
-      <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-5 py-4">
+    <details className="group ui-card ui-card--interactive ui-disclosure-card">
+      <summary className="ui-disclosure-card__summary">
         <div className="ui-stack ui-stack--tight">
           <p className="ui-fact-card__label">Frage {index + 1}</p>
           <h3 className="ui-card__title">{item.question}</h3>
         </div>
-        <span
-          aria-hidden="true"
-          className="mt-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-panel)] text-lg font-semibold text-[var(--text-muted)] transition-transform duration-200 group-open:rotate-45 group-open:border-[var(--border-default)] group-open:bg-[var(--surface-note)] group-open:text-[var(--accent-primary-strong)]"
-        >
+        <span aria-hidden="true" className="ui-disclosure-card__toggle">
           +
         </span>
       </summary>
-      <div className="border-t border-[var(--border-subtle)] px-5 pb-5 pt-4">
+      <div className="ui-disclosure-card__content">
         <p className="ui-card__copy">{item.answer}</p>
       </div>
     </details>
@@ -99,7 +96,7 @@ function GrundlagenCluster({ cluster }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {cluster.eyebrow ? <Eyebrow>{cluster.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {cluster.title}
             </h2>
             {cluster.description ? (

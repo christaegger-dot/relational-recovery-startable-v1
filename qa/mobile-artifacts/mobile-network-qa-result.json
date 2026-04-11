@@ -1,0 +1,132 @@
+{
+  "url": "https://5173-iqwo6k8xgw8jt9sev422q-e09a7634.us2.manus.computer/#network",
+  "viewport": {
+    "width": 375,
+    "height": 812
+  },
+  "checks": {
+    "layout_initial": {
+      "innerWidth": 375,
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "hasHorizontalOverflow": false,
+      "hash": "#network",
+      "documentTitle": "Relational Recovery"
+    },
+    "directory_visible": {
+      "passed": true,
+      "filterButtons": [
+        "Alle",
+        "Krise",
+        "24/7",
+        "kostenlos",
+        "anonym",
+        "Zürich",
+        "mehrsprachig",
+        "Jugendliche",
+        "Erwachsene",
+        "Eltern 0–5",
+        "Sucht",
+        "offizielle Stelle",
+        "Selbsthilfe",
+        "Entlastung"
+      ],
+      "visibleWebsiteLinks": 16
+    },
+    "filter_interaction": {
+      "passed": true,
+      "beforeCount": 16,
+      "afterCount": 5,
+      "changed": true
+    },
+    "search_interaction": {
+      "passed": true,
+      "query": "147",
+      "visibleWebsiteLinks": 1,
+      "titles": [
+        "Suche erst, entscheide dann",
+        "147 – Beratung für Kinder und Jugendliche"
+      ]
+    },
+    "map_visible": {
+      "passed": true,
+      "lensButtons": [
+        "Gesamtbild",
+        "Privates Umfeld",
+        "Alltagsstützen",
+        "Fachstellen",
+        "Lücken"
+      ]
+    },
+    "map_lens_fachstellen": {
+      "passed": true,
+      "activeReadingTitle": "Von der Sammlung zur Absprache",
+      "countValues": [
+        "2",
+        "2",
+        "1",
+        "2"
+      ]
+    },
+    "map_lens_luecken": {
+      "passed": true,
+      "activeReadingTitle": "Von der Sammlung zur Absprache",
+      "countValues": [
+        "2",
+        "2",
+        "1",
+        "2"
+      ]
+    },
+    "layout_final": {
+      "innerWidth": 375,
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "hasHorizontalOverflow": false,
+      "hash": "#network",
+      "documentTitle": "Relational Recovery"
+    }
+  },
+  "screenshots": {
+    "hero": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-hero.png",
+    "directory": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-directory.png",
+    "filter": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-filter.png",
+    "search": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-search-147.png",
+    "map_overview": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-map-overview.png",
+    "map_fachstellen": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-map-fachstellen.png",
+    "map_luecken": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-map-luecken.png"
+  },
+  "timestamp": "2026-04-11T12:18:30.201Z",
+  "steps": [
+    {
+      "name": "directory_visible",
+      "status": "passed",
+      "at": "2026-04-11T12:18:34.428Z"
+    },
+    {
+      "name": "filter_interaction",
+      "status": "passed",
+      "at": "2026-04-11T12:18:35.424Z"
+    },
+    {
+      "name": "search_interaction",
+      "status": "passed",
+      "at": "2026-04-11T12:18:37.166Z"
+    },
+    {
+      "name": "map_visible",
+      "status": "passed",
+      "at": "2026-04-11T12:18:38.282Z"
+    },
+    {
+      "name": "map_lens_fachstellen",
+      "status": "passed",
+      "at": "2026-04-11T12:18:39.229Z"
+    },
+    {
+      "name": "map_lens_luecken",
+      "status": "passed",
+      "at": "2026-04-11T12:18:40.184Z"
+    }
+  ]
+}

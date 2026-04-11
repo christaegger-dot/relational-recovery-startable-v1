@@ -93,6 +93,11 @@ export default function App() {
   const [isResetting, setIsResetting] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pendingPriorityFocus, setPendingPriorityFocus] = useState(null);
+  const [pendingSectionHash, setPendingSectionHash] = useState(() => {
+    if (typeof window === 'undefined') return null;
+    const rawHash = String(window.location.hash || '').replace(/^#/, '').trim().toLowerCase();
+    return ['network-map', 'network-directory'].includes(rawHash) ? rawHash : null;
+  });
   const mainContentRef = useRef(null);
   const navigationFocusTargetRef = useRef(initialAppState.activeTab === 'home' ? 'none' : 'heading');
   const skipLinkActivatedRef = useRef(false);
@@ -171,6 +176,11 @@ export default function App() {
     return normalizedHash === 'home' && rawHash !== 'home' ? null : normalizedHash;
   };
 
+  const getSectionHashTarget = (hashValue) => {
+    const cleaned = String(hashValue || '').replace(/^#/, '').trim().toLowerCase();
+    return ['network-map', 'network-directory'].includes(cleaned) ? cleaned : null;
+  };
+
   const navigateToTab = (nextTab, options = {}) => {
     const { focusTarget = 'heading' } = options;
     navigationFocusTargetRef.current = focusTarget;
@@ -186,8 +196,12 @@ export default function App() {
         return undefined;
       }
 
+      const rawHash = String(window.location.hash || '').replace(/^#/, '').trim().toLowerCase();
+      const currentHashTab = rawHash ? normalizeHashToTab(rawHash) : null;
+      const shouldPreserveSectionHash = rawHash && rawHash !== activeTab && currentHashTab === activeTab && getSectionHashTarget(rawHash);
+
       const nextHash = `#${activeTab}`;
-      if (window.location.hash !== nextHash) {
+      if (!shouldPreserveSectionHash && window.location.hash !== nextHash) {
         window.location.hash = nextHash;
       }
     }
@@ -267,8 +281,10 @@ export default function App() {
         return;
       }
 
+      const sectionHashTarget = getSectionHashTarget(rawHash);
       const nextTab = normalizeHashToTab(window.location.hash);
-      navigationFocusTargetRef.current = 'heading';
+      navigationFocusTargetRef.current = sectionHashTarget ? 'none' : 'heading';
+      setPendingSectionHash(sectionHashTarget);
       setActiveTab((prev) => (prev === nextTab ? prev : nextTab));
     };
 
@@ -277,6 +293,39 @@ export default function App() {
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
+
+  useEffect(() => {
+    if (!pendingSectionHash) return;
+
+    const targetTab = normalizeHashToTab(pendingSectionHash);
+    if (activeTab !== targetTab) return;
+
+    let cancelled = false;
+
+    const focusSectionTarget = () => {
+      if (cancelled) return;
+      const targetElement = document.getElementById(pendingSectionHash);
+      if (!targetElement) return;
+
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const heading = targetElement.querySelector('h2, h3');
+      if (heading && typeof heading.focus === 'function') {
+        heading.focus();
+      } else if (typeof targetElement.focus === 'function') {
+        targetElement.focus();
+      }
+      setPendingSectionHash(null);
+    };
+
+    const frame = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(focusSectionTarget);
+    });
+
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(frame);
+    };
+  }, [activeTab, pendingSectionHash]);
 
   useEffect(() => {
     if (activeTab !== 'toolbox' || !pendingPriorityFocus) return;

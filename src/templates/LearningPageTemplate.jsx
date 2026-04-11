@@ -14,7 +14,7 @@ function LearningFlowSection({ sequence }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {sequence.eyebrow ? <Eyebrow>{sequence.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {sequence.titlePrefix} {sequence.titleAccent ? <span className="ui-hero__accent">{sequence.titleAccent}</span> : null}
             </h2>
             <div className="ui-copy">
@@ -34,7 +34,7 @@ function LearningFlowSection({ sequence }) {
           <div className="grid gap-4 lg:grid-cols-3">
             {sequence.steps.map((step, index) => (
               <SurfaceCard key={step.title} tone={step.tone || 'default'} className="h-full">
-                <div className="inline-flex rounded-full border border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] bg-[var(--surface-note)] px-3 py-1.5 text-[0.65rem] font-black uppercase tracking-[0.18em] text-[var(--accent-primary-strong)]">
+                <div className="ui-badge ui-badge--soft">
                   Schritt {index + 1}
                 </div>
                 {step.label ? <p className="ui-fact-card__label mt-4">{step.label}</p> : null}
@@ -56,35 +56,29 @@ function ModuleCard({ module }) {
     <SurfaceCard tone={module.completed ? 'soft' : 'default'} className="h-full no-print">
       <div className="flex h-full flex-col gap-6">
         <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[var(--border-subtle)] pb-6">
-          <div className="ui-stack ui-stack--tight" style={{ gap: '0.5rem' }}>
+          <div className="ui-stack ui-stack--compact">
             <p className="ui-fact-card__label">{module.kicker}</p>
             <h3 className="ui-card__title">{module.title}</h3>
             {module.description ? <p className="ui-card__copy">{module.description}</p> : null}
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            {module.duration ? (
-              <span className="rounded-full border border-[var(--border-default)] bg-[var(--surface-panel)] px-4 py-2 text-[0.72rem] font-black uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                {module.duration}
-              </span>
-            ) : null}
+            {module.duration ? <span className="ui-badge">{module.duration}</span> : null}
             {module.completed ? (
-              <div className="inline-flex items-center gap-2 rounded-full border border-[color-mix(in_srgb,var(--accent-primary)_24%,white_76%)] bg-[var(--surface-note)] px-4 py-2 text-[0.72rem] font-black uppercase tracking-[0.18em] text-[var(--accent-primary-strong)]">
+              <div className="ui-badge ui-badge--soft">
                 <Check size={14} /> Bearbeitet
               </div>
             ) : null}
           </div>
         </div>
 
-        <div className="ui-stack ui-stack--tight" style={{ gap: '0.75rem' }}>
-          <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">Leitidee</div>
-          <p className="m-0 border-l-2 border-[color-mix(in_srgb,var(--accent-primary)_35%,white_65%)] pl-4 text-[var(--text-secondary)] leading-relaxed">
-            „{module.storyboard}“
-          </p>
+        <div className="ui-note-panel">
+          <p className="ui-note-panel__label">Leitidee</p>
+          <p className="ui-note-panel__copy">„{module.storyboard}“</p>
         </div>
 
-        <div className="mt-auto rounded-[1.75rem] border border-[var(--border-default)] bg-[var(--surface-panel)] p-5">
-          <div className="mb-4 flex items-center gap-3 text-[0.65rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">
-            <Brain size={16} className="text-[var(--accent-primary-strong)]" /> Reflexionsfrage
+        <div className="ui-card__section--push ui-card__section--panel">
+          <div className="ui-note-panel__label ui-note-panel__label--with-icon">
+            <Brain size={16} /> Reflexionsfrage
           </div>
           <fieldset aria-describedby={module.result ? feedbackId : undefined}>
             <legend className="mb-5 text-sm font-bold leading-relaxed text-[var(--text-primary)]">{module.quiz}</legend>
@@ -103,15 +97,15 @@ function ModuleCard({ module }) {
                       onChange={() => module.onAnswer(module.id, idx, module.correctQuizIdx)}
                     />
                     <span
-                      className={`flex items-center gap-3 rounded-[1.25rem] border px-4 py-4 text-left text-sm font-bold transition-all ${
-                        isSelected
-                          ? isCorrect
-                            ? 'border-[var(--accent-primary-strong)] bg-[var(--accent-primary-strong)] text-white shadow-sm'
-                            : 'border-red-200 bg-red-50 text-red-700'
-                          : 'border-[var(--border-default)] bg-white text-[var(--text-primary)] hover:border-[color-mix(in_srgb,var(--accent-primary)_24%,white_76%)] hover:bg-[var(--surface-note)]'
-                      }`}
+                      className={[
+                        'ui-choice-card',
+                        isSelected ? 'ui-choice-card--selected' : '',
+                        isSelected ? (isCorrect ? 'ui-choice-card--correct' : 'ui-choice-card--incorrect') : '',
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
                     >
-                      <Circle size={16} className={isSelected ? 'opacity-80' : 'text-[var(--text-muted)]'} />
+                      <Circle size={16} className="ui-choice-card__control" />
                       <span>{option}</span>
                     </span>
                   </label>
@@ -125,13 +119,13 @@ function ModuleCard({ module }) {
               role="status"
               aria-live="polite"
               aria-atomic="true"
-              className={`mt-5 rounded-[1.25rem] px-4 py-4 text-sm font-medium ${
-                module.result.isCorrect ? 'bg-emerald-50 text-emerald-800' : 'bg-red-50 text-red-700'
-              }`}
+              className={`ui-note-panel ui-note-panel--spaced ${module.result.isCorrect ? '' : 'ui-note-panel--muted'}`.trim()}
             >
-              {module.result.isCorrect
-                ? 'Diese Antwort passt hier fachlich besser. Das Modul gilt als bearbeitet.'
-                : 'Diese Antwort wäre hier eher nicht der erste Schritt. Sie können erneut wählen.'}
+              <p className="ui-note-panel__copy">
+                {module.result.isCorrect
+                  ? 'Diese Antwort passt hier fachlich besser. Das Modul gilt als bearbeitet.'
+                  : 'Diese Antwort wäre hier eher nicht der erste Schritt. Sie können erneut wählen.'}
+              </p>
             </div>
           ) : null}
         </div>
@@ -149,7 +143,7 @@ function LearningModulesSection({ modulesSection }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {modulesSection.eyebrow ? <Eyebrow>{modulesSection.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {modulesSection.titlePrefix}{' '}
               {modulesSection.titleAccent ? <span className="ui-hero__accent">{modulesSection.titleAccent}</span> : null}
             </h2>

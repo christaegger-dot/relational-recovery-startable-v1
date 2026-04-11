@@ -14,7 +14,7 @@ function GlossarIntro({ intro }) {
           <div className="ui-stack ui-stack--tight">
             {intro.eyebrow ? <Eyebrow>{intro.eyebrow}</Eyebrow> : null}
             {intro.title ? (
-              <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+              <h2 className="ui-hero__title ui-section-title">
                 {intro.title}
               </h2>
             ) : null}
@@ -76,7 +76,7 @@ function GlossarGroup({ group }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {group.eyebrow ? <Eyebrow>{group.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {group.title}
             </h2>
             {group.description ? (
@@ -101,9 +101,9 @@ function GlossarGroup({ group }) {
               <h3 className="ui-card__title">{entry.term}</h3>
               <p className="ui-card__copy">{entry.definition}</p>
               {entry.practice ? (
-                <div className="mt-5 rounded-[1.5rem] border border-slate-200 bg-slate-50 px-5 py-4">
-                  <p className="ui-fact-card__label">Praxisbezug</p>
-                  <p className="ui-card__copy">{entry.practice}</p>
+                <div className="ui-note-panel ui-editorial-card__action">
+                  <p className="ui-note-panel__label">Praxisbezug</p>
+                  <p className="ui-note-panel__copy">{entry.practice}</p>
                 </div>
               ) : null}
             </SurfaceCard>

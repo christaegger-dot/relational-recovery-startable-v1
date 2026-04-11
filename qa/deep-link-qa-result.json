@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-04-11T12:20:12.076Z",
+  "checks": {
+    "direct_network": {
+      "label": "direct_network",
+      "hash": "#network",
+      "title": "Relational Recovery",
+      "heading": "Relational Recovery",
+      "directoryPresent": true,
+      "mapPresent": true,
+      "activeElementText": "Netzwerk in Zürich und schweizweit lesen."
+    },
+    "after_click_map_anchor": {
+      "label": "after_click_map_anchor",
+      "hash": "#home",
+      "title": "Relational Recovery",
+      "heading": "Relational Recovery",
+      "directoryPresent": false,
+      "mapPresent": false,
+      "activeElementText": "Begleitung ist Beziehungsarbeit."
+    },
+    "direct_network_map": {
+      "label": "direct_network_map",
+      "hash": "#network-map",
+      "title": "Relational Recovery",
+      "heading": "Relational Recovery",
+      "directoryPresent": false,
+      "mapPresent": false,
+      "activeElementText": "Begleitung ist Beziehungsarbeit."
+    },
+    "direct_network_directory": {
+      "label": "direct_network_directory",
+      "hash": "#network-directory",
+      "title": "Relational Recovery",
+      "heading": "Relational Recovery",
+      "directoryPresent": false,
+      "mapPresent": false,
+      "activeElementText": "Begleitung ist Beziehungsarbeit."
+    }
+  }
+}

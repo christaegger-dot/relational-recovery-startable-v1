@@ -8,13 +8,15 @@ import SurfaceCard from '../components/ui/SurfaceCard';
 
 function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm, onSearchChange, onReset, searchStatusText, filterStatusText }) {
   return (
-    <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-start">
+    <div className="ui-network-toolbar">
       <div className="ui-stack ui-stack--tight">
-        <div>
+        <div className="ui-stack ui-stack--relaxed">
           <Eyebrow>Filter</Eyebrow>
-          <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
-            Die Filter gruppieren Krisenwege, jugendbezogene Angebote, Entlastung und offizielle Stellen, damit je nach Lage schneller priorisiert werden kann.
-          </p>
+          <div className="ui-copy">
+            <p>
+              Die Filter gruppieren Krisenwege, jugendbezogene Angebote, Entlastung und offizielle Stellen, damit je nach Lage schneller priorisiert werden kann.
+            </p>
+          </div>
         </div>
 
         <fieldset>
@@ -43,11 +45,11 @@ function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm,
       </div>
 
       <div className="ui-stack ui-stack--tight">
-        <label htmlFor="network-resource-search" className="text-[0.7rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">
+        <label htmlFor="network-resource-search" className="ui-network-search-label">
           Fachstelle suchen
         </label>
-        <div className="relative">
-          <Search className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={18} />
+        <div className="ui-network-search">
+          <Search className="ui-network-search__icon" size={18} />
           <input
             id="network-resource-search"
             type="text"
@@ -82,7 +84,7 @@ function ResourceDirectorySection({ directory }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {intro?.eyebrow ? <Eyebrow>{intro.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {intro?.title} {intro?.accent ? <span className="ui-hero__accent">{intro.accent}</span> : null}
             </h2>
             <div className="ui-copy">
@@ -117,12 +119,9 @@ function ResourceDirectorySection({ directory }) {
             {resources.map((resource) => (
               <SurfaceCard key={resource.name} tone="default" className="ui-card--interactive h-full">
                 {resource.tags?.length ? (
-                  <div className="mb-4 flex flex-wrap gap-2">
+                  <div className="ui-network-tag-row">
                     {resource.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex rounded-full border border-[var(--border-default)] bg-[var(--surface-panel)] px-3 py-1 text-[0.68rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]"
-                      >
+                      <span key={tag} className="ui-network-tag">
                         {tag}
                       </span>
                     ))}
@@ -130,7 +129,7 @@ function ResourceDirectorySection({ directory }) {
                 ) : null}
                 <h3 className="ui-card__title">{resource.name}</h3>
                 <p className="ui-card__copy">{resource.info}</p>
-                <div className="mt-auto pt-6">
+                <div className="ui-editorial-card__action">
                   <Button href={resource.link} target="_blank" rel="noopener noreferrer" variant="subtle">
                     Webseite öffnen <ExternalLink size={16} />
                   </Button>
@@ -140,7 +139,7 @@ function ResourceDirectorySection({ directory }) {
           </div>
         ) : (
           <SurfaceCard tone="soft" className="no-print">
-            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="ui-network-empty">
               <div>
                 <p className="ui-fact-card__label">Keine Treffer</p>
                 <h3 className="ui-card__title">Zur aktuellen Kombination wurden keine Fachstellen gefunden.</h3>
@@ -179,46 +178,73 @@ function MapLensButtons({ lenses = [], activeLens, onLensChange }) {
   );
 }
 
-function MapNode({ node, highlighted }) {
-  const toneClass =
-    node.tone === 'private'
-      ? 'border-emerald-200 bg-emerald-50 text-emerald-950'
-      : node.tone === 'support'
-        ? 'border-sky-200 bg-sky-50 text-sky-950'
-        : node.tone === 'formal'
-          ? 'border-slate-200 bg-white text-slate-900'
-          : 'border-amber-200 bg-amber-50 text-amber-950';
+function getNodeToneClass(tone) {
+  switch (tone) {
+    case 'private':
+      return 'ui-network-map-node--private';
+    case 'support':
+      return 'ui-network-map-node--support';
+    case 'gap':
+      return 'ui-network-map-node--gap';
+    case 'formal':
+    default:
+      return 'ui-network-map-node--formal';
+  }
+}
 
+function getNodePositionKey(label) {
+  switch (label) {
+    case 'Partner:in':
+      return 'partner-in';
+    case 'Grosseltern':
+      return 'grosseltern';
+    case 'Schule / Kita':
+      return 'schule-kita';
+    case 'Freund:in des Kindes':
+      return 'freund-in-des-kindes';
+    case 'PUK / kjz':
+      return 'puk-kjz';
+    case 'Kinderbetreuung im Notfall':
+      return 'kinderbetreuung-im-notfall';
+    case 'Mitwissende Vertrauensperson':
+      return 'mitwissende-vertrauensperson';
+    default:
+      return null;
+  }
+}
+
+function MapNode({ node, highlighted }) {
   return (
     <div
-      className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-[1.25rem] border px-4 py-3 text-center shadow-sm ${toneClass} ${
-        highlighted ? 'ring-2 ring-[color-mix(in_srgb,var(--accent-primary)_34%,white_66%)] ring-offset-2 ring-offset-[var(--surface-subtle)]' : ''
-      }`}
-      style={{ top: node.desktopTop, left: node.desktopLeft }}
+      className={[
+        'ui-network-map-node',
+        'ui-network-map-node--desktop',
+        getNodeToneClass(node.tone),
+        getNodePositionKey(node.label) ? `ui-network-map-node--${getNodePositionKey(node.label)}` : '',
+        highlighted ? 'ui-network-map-node--highlighted' : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
     >
-      <div className="text-[0.72rem] font-black leading-tight tracking-[0.08em]">{node.label}</div>
+      <div className="ui-network-map-node__label">{node.label}</div>
     </div>
   );
 }
 
 function MobileMapNode({ node, highlighted }) {
-  const toneClass =
-    node.tone === 'private'
-      ? 'border-emerald-200 bg-emerald-50 text-emerald-950'
-      : node.tone === 'support'
-        ? 'border-sky-200 bg-sky-50 text-sky-950'
-        : node.tone === 'formal'
-          ? 'border-slate-200 bg-white text-slate-900'
-          : 'border-amber-200 bg-amber-50 text-amber-950';
-
   return (
     <div
-      className={`rounded-[1.25rem] border p-4 text-center shadow-sm ${toneClass} ${
-        highlighted ? 'ring-2 ring-[color-mix(in_srgb,var(--accent-primary)_34%,white_66%)] ring-offset-2 ring-offset-white' : ''
-      }`}
-      style={{ gridRow: node.mobileRow, gridColumn: node.mobileCol }}
+      className={[
+        'ui-network-map-node',
+        'ui-network-map-node--mobile',
+        getNodeToneClass(node.tone),
+        getNodePositionKey(node.label) ? `ui-network-map-node--mobile-${getNodePositionKey(node.label)}` : '',
+        highlighted ? 'ui-network-map-node--highlighted' : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
     >
-      <div className="text-[0.72rem] font-black leading-tight">{node.label}</div>
+      <div className="ui-network-map-node__label">{node.label}</div>
     </div>
   );
 }
@@ -235,7 +261,7 @@ function NetworkMapSection({ mapping }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {intro?.eyebrow ? <Eyebrow>{intro.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.85rem, 3vw, 3rem)' }}>
+            <h2 className="ui-hero__title ui-section-title">
               {intro?.title} {intro?.accent ? <span className="ui-hero__accent">{intro.accent}</span> : null}
             </h2>
             <div className="ui-copy">
@@ -275,17 +301,17 @@ function NetworkMapSection({ mapping }) {
               <MapLensButtons lenses={lenses} activeLens={activeLensId} onLensChange={onLensChange} />
             </div>
 
-            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+            <div className="ui-network-map-shell">
               <div>
-                <div className="ui-card--outline relative hidden min-h-[30rem] overflow-hidden rounded-[2rem] bg-[var(--surface-panel)] lg:block">
-                  <div className="absolute left-1/2 top-1/2 h-[11rem] w-[11rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[color-mix(in_srgb,var(--accent-primary)_24%,white_76%)] bg-white/90" />
-                  <div className="absolute left-1/2 top-1/2 h-[18rem] w-[18rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[color-mix(in_srgb,var(--accent-primary)_24%,white_76%)]" />
-                  <div className="absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[var(--border-default)]" />
+                <div className="ui-card--outline ui-network-map-stage is-desktop">
+                  <div className="ui-network-map-center-shell" />
+                  <div className="ui-network-map-center-orbit" />
+                  <div className="ui-network-map-ring" />
 
-                  <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[color-mix(in_srgb,white_14%,var(--accent-primary-strong)_86%)] bg-[var(--surface-panel-strong)] text-center shadow-lg">
+                  <div className="ui-network-map-center">
                     <div>
-                      <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] text-white/70">Zentrum</div>
-                      <div className="mt-2 text-sm font-black leading-tight text-white">Kind / Familie</div>
+                      <div className="ui-network-map-center__label">Zentrum</div>
+                      <div className="ui-network-map-center__title">Kind / Familie</div>
                     </div>
                   </div>
 
@@ -294,10 +320,10 @@ function NetworkMapSection({ mapping }) {
                   ))}
                 </div>
 
-                <div className="grid grid-cols-4 gap-3 lg:hidden">
-                  <div className="col-span-4 rounded-[1.5rem] border border-[color-mix(in_srgb,white_14%,var(--accent-primary-strong)_86%)] bg-[var(--surface-panel-strong)] p-5 text-center shadow-sm">
-                    <div className="text-[0.65rem] font-black uppercase tracking-[0.18em] text-white/70">Zentrum</div>
-                    <div className="mt-2 text-sm font-black text-white">Kind / Familie</div>
+                <div className="ui-network-map-mobile">
+                  <div className="ui-network-map-mobile__center">
+                    <div className="ui-network-map-center__label">Zentrum</div>
+                    <div className="ui-network-map-center__title">Kind / Familie</div>
                   </div>
                   {visibleNodes.map((node) => (
                     <MobileMapNode key={node.label} node={node} highlighted={highlightedNode?.label === node.label} />
@@ -311,8 +337,8 @@ function NetworkMapSection({ mapping }) {
                   {activeLens?.label ? <h3 className="ui-card__title">{activeLens.label}</h3> : null}
                   {activeLens?.description ? <p className="ui-card__copy">{activeLens.description}</p> : null}
                   {lensSummary ? (
-                    <div className="mt-5 rounded-[1.5rem] border border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] bg-[var(--surface-app)] px-4 py-4">
-                      <p className="m-0 text-sm font-medium leading-relaxed text-[var(--text-primary)]">{lensSummary}</p>
+                    <div className="ui-network-map-summary">
+                      <p>{lensSummary}</p>
                     </div>
                   ) : null}
                 </SurfaceCard>
@@ -336,14 +362,14 @@ function NetworkMapSection({ mapping }) {
           </SurfaceCard>
 
           <SurfaceCard as="aside" tone="default">
-            <div className="mb-4 inline-flex items-center gap-3 text-[0.7rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">
-              <MapPin size={16} className="text-[var(--accent-primary-strong)]" /> Leitfragen für die Exploration
+            <div className="ui-note-panel__label ui-note-panel__label--with-icon">
+              <MapPin size={16} /> Leitfragen für die Exploration
             </div>
-            <div className="space-y-3">
+            <div className="ui-network-question-list">
               {questions.map((question) => (
-                <div key={question} className="flex items-start gap-3">
-                  <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--accent-primary-strong)]" />
-                  <p className="m-0 text-sm leading-relaxed text-[var(--text-secondary)]">{question}</p>
+                <div key={question} className="ui-network-question-item">
+                  <span className="ui-network-question-item__bullet" />
+                  <p className="ui-network-question-item__text">{question}</p>
                 </div>
               ))}
             </div>
@@ -359,10 +385,10 @@ function NetworkMapSection({ mapping }) {
           </SurfaceCard>
           <SurfaceCard tone="soft">
             <p className="ui-fact-card__label">Leitfragen danach</p>
-            <div className="space-y-2 text-sm leading-relaxed text-[var(--text-secondary)]">
-              <p className="m-0">Wer weiss bereits Bescheid?</p>
-              <p className="m-0">Wer könnte Kinder kurzfristig übernehmen?</p>
-              <p className="m-0">Welche Stelle fehlt noch im Netzwerk?</p>
+            <div className="ui-network-followup-list">
+              <p className="ui-network-question-item__text">Wer weiss bereits Bescheid?</p>
+              <p className="ui-network-question-item__text">Wer könnte Kinder kurzfristig übernehmen?</p>
+              <p className="ui-network-question-item__text">Welche Stelle fehlt noch im Netzwerk?</p>
             </div>
           </SurfaceCard>
         </div>
