@@ -72,7 +72,7 @@ function GrundlagenIndex({ clusters }) {
 
 function GrundlagenFaqItem({ item, index }) {
   return (
-    <details className="group ui-card ui-card--interactive ui-disclosure-card">
+    <details className="ui-card ui-card--interactive ui-disclosure-card">
       <summary className="ui-disclosure-card__summary">
         <div className="ui-stack ui-stack--tight">
           <p className="ui-fact-card__label">Frage {index + 1}</p>
@@ -92,7 +92,7 @@ function GrundlagenFaqItem({ item, index }) {
 function GrundlagenCluster({ cluster }) {
   return (
     <Section spacing="tight" surface={cluster.surface || 'plain'}>
-      <div id={cluster.id} className="ui-stack ui-stack--loose scroll-mt-32">
+      <div id={cluster.id} className="ui-stack ui-stack--loose ui-section-anchor-offset">
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {cluster.eyebrow ? <Eyebrow>{cluster.eyebrow}</Eyebrow> : null}
@@ -115,7 +115,7 @@ function GrundlagenCluster({ cluster }) {
         </div>
 
         {cluster.faqs?.length ? (
-          <div className="grid gap-4 lg:grid-cols-2">
+          <div className="grundlagen-faq-grid">
             {cluster.faqs.map((item, index) => (
               <GrundlagenFaqItem key={item.question} item={item} index={index} />
             ))}
