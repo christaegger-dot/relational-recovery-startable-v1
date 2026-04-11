@@ -92,7 +92,7 @@ function ModuleCard({ module }) {
                     <input
                       type="radio"
                       name={`${module.id}-quiz`}
-                      className="sr-only"
+                      className="ui-visually-hidden"
                       checked={isSelected}
                       onChange={() => module.onAnswer(module.id, idx, module.correctQuizIdx)}
                     />

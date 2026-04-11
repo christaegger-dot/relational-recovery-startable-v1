@@ -60,8 +60,8 @@ function DecisionOption({ option, index, isActive, onSelect }) {
     .join(' ');
 
   return (
-    <label className="block cursor-pointer">
-      <input type="radio" name={option.groupName} className="sr-only" checked={isActive} onChange={onSelect} />
+    <label className="ui-choice-control">
+      <input type="radio" name={option.groupName} className="ui-visually-hidden" checked={isActive} onChange={onSelect} />
       <span className={toneClass}>
         <span className="ui-choice-card__body">
           <span className="ui-choice-card__stack">

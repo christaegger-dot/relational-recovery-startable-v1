@@ -251,6 +251,23 @@
   display: block;
 }
 
+.ui-choice-control {
+  display: block;
+  cursor: pointer;
+}
+
+.ui-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .ui-card--editorial-link {
   text-align: left;
   transition: transform var(--motion-fast) ease;

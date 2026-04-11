@@ -36,7 +36,7 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
                 </div>
               ) : null}
               {assessment.scoreAside.liveText ? (
-                <p id={scoreStatusId} role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+                <p id={scoreStatusId} role="status" aria-live="polite" aria-atomic="true" className="ui-visually-hidden">
                   {assessment.scoreAside.liveText}
                 </p>
               ) : null}
@@ -68,7 +68,7 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
                       key={item.id}
                       className={`ui-card--interactive ui-toolbox-check ${checked ? 'ui-toolbox-check--checked' : ''}`}
                     >
-                      <input type="checkbox" className="sr-only" checked={checked} onChange={item.onChange} />
+                      <input type="checkbox" className="ui-visually-hidden" checked={checked} onChange={item.onChange} />
                       <div
                         className="ui-toolbox-check__box"
                       >

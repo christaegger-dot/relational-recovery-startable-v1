@@ -20,7 +20,7 @@ function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm,
         </div>
 
         <fieldset>
-          <legend className="sr-only">Fachstellen filtern</legend>
+          <legend className="ui-visually-hidden">Fachstellen filtern</legend>
           <div className="ui-chip-row">
             {filters.map((filter) => {
               const isActive = activeFilter === filter.id;
@@ -39,7 +39,7 @@ function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm,
             })}
           </div>
         </fieldset>
-        <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+        <p className="ui-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
           {filterStatusText}
         </p>
       </div>
@@ -60,7 +60,7 @@ function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm,
             className="ui-input ui-network-search__input"
           />
         </div>
-        <p id="network-resource-search-status" role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        <p id="network-resource-search-status" role="status" aria-live="polite" aria-atomic="true" className="ui-visually-hidden">
           {searchStatusText}
         </p>
         {(searchTerm.trim() || activeFilter !== 'all') && (
