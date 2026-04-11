@@ -33,7 +33,7 @@ function VignettenCaseSection({ caseStudy }) {
         </div>
 
         <SurfaceCard tone={caseStudy.cardTone || 'default'} className="no-print">
-          <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[var(--border-subtle)] pb-6">
+          <div className="ui-card__header">
             <div className="ui-stack ui-stack--compact">
               {caseStudy.statusLabel ? <p className="ui-fact-card__label">{caseStudy.statusLabel}</p> : null}
               <h3 className="ui-card__title">{caseStudy.title}</h3>
@@ -41,7 +41,7 @@ function VignettenCaseSection({ caseStudy }) {
             {caseStudy.badge ? <span className="ui-badge">{caseStudy.badge}</span> : null}
           </div>
 
-          <div className="mt-6 ui-copy">
+          <div className="ui-card__section--spaced ui-copy">
             <p>{caseStudy.body}</p>
           </div>
         </SurfaceCard>
@@ -51,22 +51,24 @@ function VignettenCaseSection({ caseStudy }) {
 }
 
 function DecisionOption({ option, index, isActive, onSelect }) {
-  const toneClass = isActive
-    ? option.isCorrect
-      ? 'border-[var(--accent-primary-strong)] bg-[var(--surface-panel-strong)] text-[var(--text-inverse)] shadow-sm'
-      : 'border-[var(--border-default)] bg-[color-mix(in_srgb,var(--surface-muted)_72%,white_28%)] text-[var(--text-primary)]'
-    : 'border-[var(--border-default)] bg-[var(--surface-app)] text-[var(--text-primary)] hover:border-[color-mix(in_srgb,var(--accent-primary)_24%,white_76%)] hover:bg-[var(--surface-note)]';
+  const toneClass = [
+    'ui-choice-card',
+    isActive ? 'ui-choice-card--selected' : '',
+    isActive ? (option.isCorrect ? 'ui-choice-card--correct' : 'ui-choice-card--incorrect') : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <label className="block cursor-pointer">
       <input type="radio" name={option.groupName} className="sr-only" checked={isActive} onChange={onSelect} />
-      <span className={`ui-card--interactive block rounded-[1.5rem] border px-5 py-5 text-left transition-all ${toneClass}`}>
-        <span className="flex items-start justify-between gap-4">
-          <span className="ui-stack ui-stack--compact">
+      <span className={toneClass}>
+        <span className="ui-choice-card__body">
+          <span className="ui-choice-card__stack">
             <span className="ui-note-panel__label">Option {index + 1}</span>
-            <span className="text-base font-black leading-snug">{option.label}</span>
+            <span className="ui-choice-card__title">{option.label}</span>
           </span>
-          {isActive ? <CheckCircle2 size={18} className="shrink-0 opacity-90" aria-hidden="true" /> : null}
+          {isActive ? <CheckCircle2 size={18} className="ui-choice-card__control" aria-hidden="true" /> : null}
         </span>
       </span>
     </label>
@@ -101,8 +103,8 @@ function VignettenDecisionSection({ decision }) {
 
         <SurfaceCard tone={decision.cardTone || 'default'} className="no-print">
           <fieldset aria-describedby={decision.feedback ? decision.feedback.id : undefined}>
-            <legend className="mb-6 text-sm font-bold leading-relaxed text-[var(--text-primary)]">{decision.question}</legend>
-            <div className="grid gap-4 xl:grid-cols-2">
+            <legend className="ui-form-legend">{decision.question}</legend>
+            <div className="ui-card-grid ui-card-grid--2">
               {decision.options.map((option, index) => (
                 <DecisionOption
                   key={option.id}
@@ -121,7 +123,13 @@ function VignettenDecisionSection({ decision }) {
               role="status"
               aria-live="polite"
               aria-atomic="true"
-              className={`ui-note-panel mt-6 ${decision.feedback.tone === 'success' ? '' : 'ui-note-panel--muted'}`.trim()}
+              className={[
+                'ui-note-panel',
+                'ui-note-panel--spaced',
+                decision.feedback.tone === 'success' ? '' : 'ui-note-panel--muted',
+              ]
+                .filter(Boolean)
+                .join(' ')}
             >
               <p className="ui-note-panel__label">Rückmeldung</p>
               <p className="ui-note-panel__copy">{decision.feedback.copy}</p>
@@ -139,14 +147,14 @@ function VignettenNavigationSection({ navigation }) {
   return (
     <Section spacing="tight" surface={navigation.surface || 'plain'} className="no-print">
       <SurfaceCard tone={navigation.cardTone || 'soft'}>
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+        <div className="ui-card-layout">
           <div className="ui-stack ui-stack--compact">
             {navigation.eyebrow ? <Eyebrow>{navigation.eyebrow}</Eyebrow> : null}
             <h2 className="ui-card__title">{navigation.title}</h2>
             <p className="ui-card__copy">{navigation.description}</p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="ui-button-row">
             <Button
               type="button"
               onClick={navigation.onPrevious}

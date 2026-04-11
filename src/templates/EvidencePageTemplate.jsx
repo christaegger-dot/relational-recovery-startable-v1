@@ -23,18 +23,18 @@ function BulletList({ items = [], tone = 'default', icon }) {
 
   const toneClass =
     tone === 'strong'
-      ? 'bg-slate-900 text-white border-slate-800'
+      ? 'ui-bullet-panel ui-bullet-panel--strong'
       : tone === 'soft'
-        ? 'bg-[var(--surface-note)] text-[var(--text-primary)] border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)]'
-        : 'bg-white text-[var(--text-primary)] border-[var(--border-default)]';
+        ? 'ui-bullet-panel ui-bullet-panel--soft'
+        : 'ui-bullet-panel';
 
   return (
-    <div className={`rounded-[2rem] border p-6 md:p-7 ${toneClass}`}>
+    <div className={toneClass}>
       <div className="ui-stack ui-stack--tight">
         {items.map((item) => (
-          <div key={item} className="flex items-start gap-3">
-            {icon ? <span className="mt-0.5 shrink-0">{icon}</span> : <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-current opacity-70" />}
-            <p className="m-0 text-sm leading-relaxed md:text-[0.98rem]">{item}</p>
+          <div key={item} className="ui-bullet-panel__item">
+            {icon ? <span className="ui-bullet-panel__marker">{icon}</span> : <span className="ui-bullet-panel__dot" />}
+            <p className="ui-bullet-panel__copy">{item}</p>
           </div>
         ))}
       </div>
@@ -47,10 +47,10 @@ function CardGrid({ items = [], columns = 'three', tone = 'default', renderItem 
 
   const gridClass =
     columns === 'two'
-      ? 'grid gap-4 md:grid-cols-2'
+      ? 'ui-card-grid ui-card-grid--2'
       : columns === 'four'
-        ? 'grid gap-4 md:grid-cols-2 xl:grid-cols-4'
-        : 'grid gap-4 md:grid-cols-2 xl:grid-cols-3';
+        ? 'ui-card-grid ui-card-grid--4'
+        : 'ui-card-grid ui-card-grid--3';
 
   return (
     <div className={gridClass}>
@@ -74,7 +74,7 @@ function MetricGrid({ items = [] }) {
   if (!items.length) return null;
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+    <div className="ui-card-grid ui-card-grid--3">
       {items.map((item) => (
         <SurfaceCard key={item.label} tone={item.tone || 'default'} className="h-full">
           <p className="ui-fact-card__label">{item.label}</p>
@@ -123,7 +123,7 @@ function ChapterOverview({ chapterOverview }) {
         </div>
 
         {chapterOverview.items?.length ? (
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          <div className="ui-card-grid ui-card-grid--5">
             {chapterOverview.items.map((item) => (
               <a key={item.id} href={`#${item.id}`} className="ui-card ui-card--editorial-link">
                 <div className="ui-fact-card__label">{item.label}</div>
