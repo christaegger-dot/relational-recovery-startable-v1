@@ -21,12 +21,10 @@ function MetaTags({ items = [], tone = 'default' }) {
   if (!items.length) return null;
 
   const className =
-    tone === 'accent'
-      ? 'inline-flex rounded-full border border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] bg-white px-3 py-1 text-[0.68rem] font-black uppercase tracking-[0.18em] text-[var(--accent-primary-strong)]'
-      : 'inline-flex rounded-full border border-[var(--border-default)] bg-[var(--surface-panel)] px-3 py-1 text-[0.68rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]';
+    tone === 'accent' ? 'ui-closing-tag ui-closing-tag--accent' : 'ui-closing-tag';
 
   return (
-    <div className="mb-4 flex flex-wrap gap-2">
+    <div className="ui-badge-row ui-closing-tags">
       {items.map((tag) => (
         <span key={tag} className={className}>
           {tag}
@@ -44,12 +42,14 @@ function ClosingHeader({ section }) {
       <div className="ui-stack ui-stack--tight">
         {section.eyebrow ? <Eyebrow>{section.eyebrow}</Eyebrow> : null}
         <h2
-          className="ui-hero__title"
-          style={{
-            fontSize: 'clamp(1.85rem, 3vw, 3rem)',
-            textTransform: section.headingTransform || undefined,
-            letterSpacing: section.headingLetterSpacing || undefined,
-          }}
+          className={[
+            'ui-hero__title',
+            'ui-closing-header__title',
+            section.headingTransform === 'uppercase' ? 'ui-closing-header__title--uppercase' : '',
+            section.headingLetterSpacing === '0.12em' ? 'ui-closing-header__title--tracked' : '',
+          ]
+            .filter(Boolean)
+            .join(' ')}
         >
           {section.title}
           {section.accent ? (
@@ -68,11 +68,11 @@ function ClosingHeader({ section }) {
           {section.aside.title ? <h3 className="ui-card__title">{section.aside.title}</h3> : null}
           {section.aside.copy ? <p className="ui-card__copy">{section.aside.copy}</p> : null}
           {section.aside.points?.length ? (
-            <div className="mt-5 ui-stack ui-stack--tight">
+            <div className="ui-card__section--spaced ui-stack ui-stack--tight">
               {section.aside.points.map((item) => (
-                <div key={item} className="flex items-start gap-3">
-                  <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-current opacity-70" />
-                  <p className="m-0 text-sm leading-relaxed md:text-[0.98rem]">{item}</p>
+                <div key={item} className="ui-bullet-panel__item">
+                  <span className="ui-bullet-panel__dot" />
+                  <p className="ui-bullet-panel__copy">{item}</p>
                 </div>
               ))}
             </div>
@@ -87,27 +87,27 @@ function ClosingPrimaryActions({ items = [] }) {
   if (!items.length) return null;
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 no-print">
+    <div className="ui-closing-actions-grid no-print">
       {items.map((item) => (
-        <button key={item.title} type="button" className="group text-left" onClick={item.onClick} aria-label={item.ariaLabel || item.title}>
+        <button key={item.title} type="button" className="ui-closing-action" onClick={item.onClick} aria-label={item.ariaLabel || item.title}>
           <div
-            className={`mb-6 flex min-h-[16rem] items-center justify-center overflow-hidden rounded-[2rem] border-2 p-8 transition-all duration-300 ${item.previewClassName || ''}`}
+            className={`ui-closing-action__preview ${item.previewClassName || ''}`}
           >
             {item.preview}
           </div>
-          <h3 className="text-2xl font-black tracking-tight text-[var(--text-primary)]">{item.title}</h3>
-          {item.description ? <p className="mt-3 text-base font-medium leading-relaxed text-[var(--text-secondary)]">{item.description}</p> : null}
+          <h3 className="ui-closing-action__title">{item.title}</h3>
+          {item.description ? <p className="ui-closing-action__copy">{item.description}</p> : null}
           {item.meta?.length ? (
-            <div className="mt-5 flex flex-wrap gap-2 text-[0.65rem] font-black uppercase tracking-[0.2em] text-[var(--text-muted)]">
+            <div className="ui-badge-row ui-closing-action__meta">
               {item.meta.map((tag) => (
-                <span key={tag} className="rounded-full border border-[var(--border-default)] bg-white px-3 py-2">
+                <span key={tag} className="ui-badge ui-badge--subtle">
                   {tag}
                 </span>
               ))}
             </div>
           ) : null}
-          {item.assetMeta ? <p className="mt-4 text-[0.68rem] font-medium uppercase tracking-[0.16em] text-[var(--text-muted)]">{item.assetMeta}</p> : null}
-          <div className="mt-5 flex items-center gap-3 text-[0.72rem] font-black uppercase tracking-[0.18em] text-[var(--accent-primary-strong)] underline underline-offset-8 decoration-2">
+          {item.assetMeta ? <p className="ui-closing-item__meta">{item.assetMeta}</p> : null}
+          <div className="ui-closing-action__link">
             {item.actionIcon}
             {item.actionLabel}
           </div>
@@ -120,7 +120,7 @@ function ClosingPrimaryActions({ items = [] }) {
 function ClosingActionButton({ item, defaultLabel }) {
   if (item.href) {
     return (
-      <Button as="a" href={item.href} className="mt-5" variant="secondary" target={item.target} rel={item.rel} download={item.kind === 'download'} aria-label={item.ariaLabel || item.actionLabel || defaultLabel}>
+      <Button as="a" href={item.href} className="ui-editorial-card__action" variant="secondary" target={item.target} rel={item.rel} download={item.kind === 'download'} aria-label={item.ariaLabel || item.actionLabel || defaultLabel}>
         {item.actionLabel || defaultLabel}
       </Button>
     );
@@ -128,7 +128,7 @@ function ClosingActionButton({ item, defaultLabel }) {
 
   if (item.onClick) {
     return (
-      <Button className="mt-5" variant="secondary" onClick={item.onClick} aria-label={item.ariaLabel || item.actionLabel || defaultLabel}>
+      <Button className="ui-editorial-card__action" variant="secondary" onClick={item.onClick} aria-label={item.ariaLabel || item.actionLabel || defaultLabel}>
         {item.actionLabel || defaultLabel}
       </Button>
     );
@@ -183,10 +183,10 @@ function ClosingNavigator({ entries = [], query, setQuery, totalCount, resultCou
   if (!entries.length && totalCount === 0) return null;
 
   return (
-    <div className="rounded-[2rem] border border-[var(--border-default)] bg-white p-5 md:p-7 no-print">
+    <div className="ui-closing-navigator no-print">
       <div className="ui-stack ui-stack--tight">
-        <div className="ui-split" style={{ alignItems: 'flex-start' }}>
-          <div className="ui-stack ui-stack--tight" style={{ gap: '0.6rem' }}>
+        <div className="ui-split ui-closing-navigator__intro">
+          <div className="ui-stack ui-stack--tight ui-closing-navigator__copy">
             <Eyebrow>Arbeitsindex</Eyebrow>
             <div className="ui-copy">
               <p>
@@ -198,33 +198,33 @@ function ClosingNavigator({ entries = [], query, setQuery, totalCount, resultCou
               </p>
             </div>
           </div>
-          <div className="rounded-[1.5rem] border border-[var(--border-default)] bg-[var(--surface-panel)] px-4 py-3 text-right">
-            <div className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">Treffer</div>
-            <div className="mt-1 text-2xl font-black tracking-tight text-[var(--text-primary)]">{resultCount}/{totalCount}</div>
+          <div className="ui-closing-navigator__stat">
+            <div className="ui-closing-navigator__stat-label">Treffer</div>
+            <div className="ui-closing-navigator__stat-value">{resultCount}/{totalCount}</div>
           </div>
         </div>
 
-        <label className="block">
-          <span className="mb-2 block text-[0.72rem] font-black uppercase tracking-[0.18em] text-[var(--text-muted)]">Suche in Materialien und Anschlusswegen</span>
+        <label className="ui-closing-navigator__search">
+          <span className="ui-closing-navigator__search-label">Suche in Materialien und Anschlusswegen</span>
           <input
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="z. B. Krisenplan, Netzwerkkarte, Glossar"
-            className="w-full rounded-[1.25rem] border border-[var(--border-default)] bg-[var(--surface-app)] px-4 py-3 text-sm font-medium text-[var(--text-primary)] outline-none transition focus:border-[var(--accent-primary)] focus:bg-white"
+            className="ui-input"
           />
         </label>
 
         {entries.length ? (
-          <div className="flex flex-wrap gap-3">
+          <div className="ui-chip-row ui-closing-navigator__entries">
             {entries.map((entry) => (
               <a
                 key={entry.href}
                 href={entry.href}
-                className="inline-flex items-center rounded-full border border-[var(--border-default)] bg-white px-4 py-2 text-[0.72rem] font-black uppercase tracking-[0.18em] text-[var(--text-primary)] transition hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary-strong)]"
+                className="ui-closing-navigator__entry"
               >
                 {entry.label}
-                <span className="ml-2 rounded-full bg-[var(--surface-panel)] px-2 py-0.5 text-[0.64rem] text-[var(--text-muted)]">{entry.count}</span>
+                <span className="ui-closing-navigator__entry-count">{entry.count}</span>
               </a>
             ))}
           </div>
@@ -246,7 +246,7 @@ function ClosingCollections({ collections = [] }) {
             <p>
               <strong>{collection.title}</strong>
               {collection.items?.length ? (
-                <span className="ml-3 inline-flex rounded-full border border-[var(--border-default)] bg-[var(--surface-panel)] px-3 py-1 text-[0.68rem] font-black uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                <span className="ui-closing-collection__count">
                   {collection.items.length} Elemente
                 </span>
               ) : null}
@@ -255,16 +255,16 @@ function ClosingCollections({ collections = [] }) {
           {collection.description ? <p>{collection.description}</p> : null}
         </div>
       ) : null}
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="ui-closing-collection-grid">
         {collection.items.map((item, itemIndex) => (
-          <SurfaceCard key={getActionItemKey(item, itemIndex)} tone={collection.collectionKind === 'books' ? 'soft' : 'default'} className="h-full">
+          <SurfaceCard key={getActionItemKey(item, itemIndex)} tone={collection.collectionKind === 'books' ? 'soft' : 'default'} className="ui-closing-collection-card">
             <MetaTags items={item.meta} />
             {item.age || item.type ? <p className="ui-fact-card__label">{item.age || item.type}</p> : null}
             <h3 className="ui-card__title">{item.title}</h3>
             {item.author ? <p className="ui-card__copy">{item.author}</p> : null}
             {item.provider ? <p className="ui-card__copy">{item.provider}</p> : null}
             {item.description ? <p className="ui-card__copy">{item.description}</p> : null}
-            {item.assetMeta ? <p className="mt-4 text-[0.68rem] font-medium uppercase tracking-[0.16em] text-[var(--text-muted)]">{item.assetMeta}</p> : null}
+            {item.assetMeta ? <p className="ui-closing-item__meta">{item.assetMeta}</p> : null}
             <ClosingActionButton item={item} defaultLabel={item.kind === 'download' ? 'Material herunterladen' : 'Ressource öffnen'} />
           </SurfaceCard>
         ))}
@@ -283,16 +283,16 @@ function ClosingRelatedLinks({ relatedLinks, relatedLinksId }) {
         {relatedLinks.title ? (
           <p>
             <strong>{relatedLinks.title}</strong>
-            <span className="ml-3 inline-flex rounded-full border border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] bg-[var(--surface-note)] px-3 py-1 text-[0.68rem] font-black uppercase tracking-[0.16em] text-[var(--accent-primary-strong)]">
+            <span className="ui-closing-related-links__count">
               {relatedLinks.items.length} Anschlusswege
             </span>
           </p>
         ) : null}
         {relatedLinks.description ? <p>{relatedLinks.description}</p> : null}
       </div>
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="ui-card-grid ui-card-grid--3">
         {relatedLinks.items.map((item, itemIndex) => (
-          <SurfaceCard key={getActionItemKey(item, itemIndex)} tone="soft" className="h-full">
+          <SurfaceCard key={getActionItemKey(item, itemIndex)} tone="soft" className="ui-closing-collection-card">
             <MetaTags items={item.meta} tone="accent" />
             <h3 className="ui-card__title">{item.title}</h3>
             {item.description ? <p className="ui-card__copy">{item.description}</p> : null}
@@ -309,10 +309,10 @@ function ClosingNotes({ notes }) {
 
   return (
     <div className="ui-stack ui-stack--tight no-print">
-      <div className="rounded-[2rem] border border-[color-mix(in_srgb,var(--accent-primary)_18%,white_82%)] bg-[var(--surface-note)] p-6 md:p-7">
+      <div className="ui-closing-notes">
         <div className="ui-stack ui-stack--tight">
           {notes.map((note) => (
-            <p key={note} className="m-0 text-sm leading-relaxed md:text-[0.98rem]">
+            <p key={note} className="ui-closing-note">
               {note}
             </p>
           ))}
@@ -330,20 +330,20 @@ function ClosingReferences({ references }) {
       <div className="ui-stack ui-stack--loose">
         <div className="ui-stack ui-stack--tight">
           {references.eyebrow ? <Eyebrow>{references.eyebrow}</Eyebrow> : null}
-          <h2 className="ui-hero__title" style={{ fontSize: 'clamp(1.75rem, 2.6vw, 2.75rem)' }}>
+          <h2 className="ui-hero__title ui-closing-references__title">
             {references.title}
           </h2>
           <RichCopy paragraphs={references.paragraphs} />
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="ui-card-grid ui-card-grid--2">
           {references.items?.map((item) => (
-            <div key={`${item.author}-${item.title}`} className="rounded-[1.75rem] border border-[var(--border-default)] bg-white p-5">
+            <div key={`${item.author}-${item.title}`} className="ui-closing-reference-card">
               <p className="ui-fact-card__label">{item.author}</p>
               <h3 className="ui-card__title">{item.title}</h3>
               {item.publisher ? <p className="ui-card__copy">{item.publisher}</p> : null}
               {item.link ? (
-                <p className="mt-5 text-sm font-black text-[var(--accent-primary-strong)]">
+                <p className="ui-closing-reference-card__action">
                   <a href={item.link} target="_blank" rel="noreferrer">
                     Quelle öffnen
                   </a>
@@ -433,8 +433,8 @@ export default function ClosingSection({ section, sectionId, surface = 'plain', 
           <ClosingCollections collections={filteredCollections} />
           <ClosingRelatedLinks relatedLinks={filteredRelatedLinks} relatedLinksId={relatedLinksId} />
           {normalizedQuery && resultCount === 0 ? (
-            <div className="rounded-[1.75rem] border border-dashed border-[var(--border-default)] bg-[var(--surface-panel)] p-6 no-print">
-              <p className="m-0 text-sm font-medium leading-relaxed text-[var(--text-secondary)]">
+            <div className="ui-closing-empty-state no-print">
+              <p className="ui-closing-empty-state__copy">
                 Für <strong>{query}</strong> wurden in den aktuellen Materialien und Anschlusswegen keine Treffer gefunden. Versuchen Sie einen allgemeineren Begriff.
               </p>
             </div>
