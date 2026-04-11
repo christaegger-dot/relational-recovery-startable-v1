@@ -346,6 +346,7 @@ function ClosingReferences({ references }) {
 
 export default function ClosingSection({ section, sectionId, surface = 'plain', className = '' }) {
   const [query, setQuery] = useState('');
+  const hasPrintView = Boolean(section?.printView);
 
   const normalizedQuery = normalizeSearchText(query);
   const relatedLinksId = `${section?.id || sectionId || 'closing'}-related-links`;
@@ -410,7 +411,7 @@ export default function ClosingSection({ section, sectionId, surface = 'plain', 
   return (
     <>
       <Section id={section.id || sectionId} spacing="tight" surface={surface} className={className}>
-        <div className="ui-stack ui-stack--loose">
+        <div className={hasPrintView ? 'ui-stack ui-stack--loose no-print' : 'ui-stack ui-stack--loose'}>
           <ClosingHeader section={section} />
           <ClosingPrimaryActions items={section.primaryActions} />
           {(totalCount || navigatorEntries.length) ? (

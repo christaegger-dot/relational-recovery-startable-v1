@@ -545,19 +545,23 @@ export default function ToolboxPageTemplate({
   closingSection,
   scoreStatusId = 'assessment-score-status',
 }) {
+  const hasPrintView = Boolean(closingSection?.printView);
+
   return (
     <div className="ui-stack">
-      <Container width="wide">
-        <PageHero {...hero} headingId={pageHeadingId} />
-      </Container>
-      <AssessmentPanel assessment={assessment} scoreStatusId={scoreStatusId} />
-      <PathwaySection pathway={pathway} />
-      <ScoreBandsSection scoreBands={scoreBands} />
-      <TriageSection triage={triage} />
-      <PracticeBlocksSection practice={practice} />
-      {clusters.map((cluster) => (
-        <ClusterSection key={cluster.id} cluster={cluster} />
-      ))}
+      <div className={hasPrintView ? 'ui-stack no-print' : 'ui-stack'}>
+        <Container width="wide">
+          <PageHero {...hero} headingId={pageHeadingId} />
+        </Container>
+        <AssessmentPanel assessment={assessment} scoreStatusId={scoreStatusId} />
+        <PathwaySection pathway={pathway} />
+        <ScoreBandsSection scoreBands={scoreBands} />
+        <TriageSection triage={triage} />
+        <PracticeBlocksSection practice={practice} />
+        {clusters.map((cluster) => (
+          <ClusterSection key={cluster.id} cluster={cluster} />
+        ))}
+      </div>
       <ResourcesSection closingSection={closingSection} />
     </div>
   );
