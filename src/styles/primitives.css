@@ -602,6 +602,76 @@
   gap: 1rem;
 }
 
+.learning-flow-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.learning-flow-card {
+  height: 100%;
+}
+
+.learning-flow-card__label {
+  margin-top: 1rem;
+}
+
+.learning-flow-card__title {
+  margin-top: 0.75rem;
+}
+
+.learning-modules-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+}
+
+.learning-module-card {
+  height: 100%;
+}
+
+.learning-module-card__inner {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.learning-module-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1.5rem;
+}
+
+.learning-module-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.learning-module-quiz__legend {
+  margin: 0 0 1.25rem;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.learning-module-quiz__options {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.learning-module-quiz__option {
+  display: block;
+  cursor: pointer;
+}
+
 .ui-choice-card {
   display: flex;
   align-items: center;

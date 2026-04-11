@@ -31,14 +31,14 @@ function LearningFlowSection({ sequence }) {
         </div>
 
         {sequence.steps?.length ? (
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="learning-flow-grid">
             {sequence.steps.map((step, index) => (
-              <SurfaceCard key={step.title} tone={step.tone || 'default'} className="h-full">
+              <SurfaceCard key={step.title} tone={step.tone || 'default'} className="learning-flow-card">
                 <div className="ui-badge ui-badge--soft">
                   Schritt {index + 1}
                 </div>
-                {step.label ? <p className="ui-fact-card__label mt-4">{step.label}</p> : null}
-                <h3 className="ui-card__title mt-3">{step.title}</h3>
+                {step.label ? <p className="ui-fact-card__label learning-flow-card__label">{step.label}</p> : null}
+                <h3 className="ui-card__title learning-flow-card__title">{step.title}</h3>
                 <p className="ui-card__copy">{step.copy}</p>
               </SurfaceCard>
             ))}
@@ -53,15 +53,15 @@ function ModuleCard({ module }) {
   const feedbackId = `${module.id}-quiz-feedback`;
 
   return (
-    <SurfaceCard tone={module.completed ? 'soft' : 'default'} className="h-full no-print">
-      <div className="flex h-full flex-col gap-6">
-        <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[var(--border-subtle)] pb-6">
+    <SurfaceCard tone={module.completed ? 'soft' : 'default'} className="learning-module-card no-print">
+      <div className="learning-module-card__inner">
+        <div className="learning-module-card__header">
           <div className="ui-stack ui-stack--compact">
             <p className="ui-fact-card__label">{module.kicker}</p>
             <h3 className="ui-card__title">{module.title}</h3>
             {module.description ? <p className="ui-card__copy">{module.description}</p> : null}
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="learning-module-card__meta">
             {module.duration ? <span className="ui-badge">{module.duration}</span> : null}
             {module.completed ? (
               <div className="ui-badge ui-badge--soft">
@@ -81,14 +81,14 @@ function ModuleCard({ module }) {
             <Brain size={16} /> Reflexionsfrage
           </div>
           <fieldset aria-describedby={module.result ? feedbackId : undefined}>
-            <legend className="mb-5 text-sm font-bold leading-relaxed text-[var(--text-primary)]">{module.quiz}</legend>
-            <div className="grid gap-3">
+            <legend className="learning-module-quiz__legend">{module.quiz}</legend>
+            <div className="learning-module-quiz__options">
               {module.quizOptions.map((option, idx) => {
                 const isSelected = module.result?.answerIdx === idx;
                 const isCorrect = idx === module.correctQuizIdx;
 
                 return (
-                  <label key={option} className="block cursor-pointer">
+                  <label key={option} className="learning-module-quiz__option">
                     <input
                       type="radio"
                       name={`${module.id}-quiz`}
@@ -160,7 +160,7 @@ function LearningModulesSection({ modulesSection }) {
           ) : null}
         </div>
 
-        <div className="grid gap-4 xl:grid-cols-2">
+        <div className="learning-modules-grid">
           {modulesSection.items.map((module) => (
             <ModuleCard key={module.id} module={module} />
           ))}
