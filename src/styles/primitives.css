@@ -357,6 +357,10 @@
   gap: var(--space-6);
 }
 
+.ui-anchor-offset-target {
+  scroll-margin-top: 7rem;
+}
+
 .ui-copy {
   max-width: var(--content-width-copy);
 }

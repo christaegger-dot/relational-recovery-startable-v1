@@ -238,7 +238,7 @@ function ClosingCollections({ collections = [] }) {
   if (!collections.length) return null;
 
   return collections.map((collection, index) => (
-    <div key={collection.id || collection.eyebrow || collection.title} id={getCollectionAnchorId(collection, index)} className="ui-stack ui-stack--tight no-print scroll-mt-28">
+    <div key={collection.id || collection.eyebrow || collection.title} id={getCollectionAnchorId(collection, index)} className="ui-stack ui-stack--tight no-print ui-anchor-offset-target">
       {collection.eyebrow ? <Eyebrow>{collection.eyebrow}</Eyebrow> : null}
       {collection.title || collection.description ? (
         <div className="ui-copy">
@@ -277,7 +277,7 @@ function ClosingRelatedLinks({ relatedLinks, relatedLinksId }) {
   if (!relatedLinks?.items?.length) return null;
 
   return (
-    <div id={relatedLinksId} className="ui-stack ui-stack--tight no-print scroll-mt-28">
+    <div id={relatedLinksId} className="ui-stack ui-stack--tight no-print ui-anchor-offset-target">
       {relatedLinks.eyebrow ? <Eyebrow>{relatedLinks.eyebrow}</Eyebrow> : null}
       <div className="ui-copy">
         {relatedLinks.title ? (
