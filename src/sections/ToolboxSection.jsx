@@ -528,9 +528,9 @@ export default function ToolboxSection({
   );
 
   const toolboxPrintView = (
-    <div className="bg-white text-slate-950">
-      <div className="mx-auto flex w-full max-w-[840px] flex-col gap-8 p-8 text-[12px] leading-relaxed">
-        <header className="rounded-[1.5rem] border border-slate-300 bg-white p-6">
+    <div className="toolbox-print-view bg-white text-slate-950">
+      <div className="mx-auto flex w-full max-w-[840px] flex-col gap-6 p-6 text-[12px] leading-relaxed">
+        <header className="toolbox-print-block rounded-[1.5rem] border border-slate-300 bg-white p-6">
           <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Relational Recovery · Toolbox Arbeitsansicht</p>
           <h1 className="mt-3 text-[2rem] font-black leading-tight text-slate-950">Orientierung, Schutz und nächste Schritte</h1>
           <p className="mt-3 m-0 text-sm text-slate-700">
@@ -538,8 +538,8 @@ export default function ToolboxSection({
           </p>
         </header>
 
-        <section className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-[1.25rem] border border-slate-300 p-5">
+        <section className="toolbox-print-section toolbox-print-grid-two gap-4">
+          <div className="toolbox-print-block rounded-[1.25rem] border border-slate-300 p-5">
             <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Kurzlage</p>
             <div className="mt-4 space-y-3">
               <div>
@@ -553,11 +553,11 @@ export default function ToolboxSection({
             </div>
           </div>
 
-          <div className="rounded-[1.25rem] border border-slate-300 p-5">
+          <div className="toolbox-print-block rounded-[1.25rem] border border-slate-300 p-5">
             <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Sofort-Triage</p>
             <div className="mt-4 space-y-3">
               {triagePrompts.map((prompt, index) => (
-                <div key={prompt.id} className="rounded-xl border border-slate-300 px-4 py-3">
+                <div key={prompt.id} className="toolbox-print-block rounded-xl border border-slate-300 px-4 py-3">
                   <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.16em] text-slate-500">Frage {index + 1}</p>
                   <p className="mt-1 mb-2 font-semibold text-slate-900">{prompt.question}</p>
                   <div className="flex gap-4 text-sm text-slate-700">
@@ -570,11 +570,11 @@ export default function ToolboxSection({
           </div>
         </section>
 
-        <section className="rounded-[1.25rem] border border-slate-300 p-5 break-before-page">
+        <section className="toolbox-print-section toolbox-print-section-compact rounded-[1.25rem] border border-slate-300 p-5">
           <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Krisenvorsorge und Kinder-Schutzteil</p>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <div className="toolbox-print-grid-two mt-4 gap-4">
             {SAFETY_PLAN_TEMPLATE_FIELDS.map((field) => (
-              <div key={field.title} className="rounded-xl border border-slate-300 p-4">
+              <div key={field.title} className="toolbox-print-block rounded-xl border border-slate-300 p-4">
                 <p className="m-0 font-bold text-slate-900">{field.title}</p>
                 <p className="mt-1 mb-3 text-sm text-slate-600">{field.hint}</p>
                 <div className="h-24 rounded-lg border border-slate-300 bg-white" />
@@ -583,17 +583,17 @@ export default function ToolboxSection({
           </div>
         </section>
 
-        <section className="rounded-[1.25rem] border border-slate-300 p-5">
+        <section className="toolbox-print-section rounded-[1.25rem] border border-slate-300 p-5">
           <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.18em] text-slate-500">Nächste verlässliche Schritte</p>
-          <div className="mt-4 grid gap-3 md:grid-cols-2">
+          <div className="toolbox-print-grid-two mt-4 gap-3">
             {SAFETY_PLAN_POINTS.map((item, index) => (
-              <div key={item} className="rounded-xl border border-slate-300 px-4 py-3">
+              <div key={item} className="toolbox-print-block rounded-xl border border-slate-300 px-4 py-3">
                 <p className="m-0 text-[0.72rem] font-black uppercase tracking-[0.16em] text-slate-500">Baustein {index + 1}</p>
                 <p className="mt-1 m-0 font-semibold text-slate-900">{item}</p>
               </div>
             ))}
           </div>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <div className="toolbox-print-grid-two toolbox-print-followup-grid mt-4 gap-4">
             <div>
               <p className="m-0 font-bold text-slate-900">Zuständigkeit / nächste Kontaktaufnahme</p>
               <div className="mt-2 h-20 rounded-xl border border-slate-300 bg-white" />

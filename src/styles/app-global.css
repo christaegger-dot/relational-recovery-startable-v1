@@ -91,4 +91,92 @@
   .print-only {
     display: block !important;
   }
+
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  .print-shell {
+    color: #0f172a;
+  }
+
+  .print-shell .toolbox-print-view {
+    background: #fff !important;
+  }
+
+  .print-shell .toolbox-print-view > div {
+    max-width: none !important;
+    gap: 0.8rem !important;
+    padding: 0 !important;
+    font-size: 10.5px !important;
+    line-height: 1.35 !important;
+  }
+
+  .print-shell .toolbox-print-section {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .print-shell .toolbox-print-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-shell .toolbox-print-section + .toolbox-print-section {
+    margin-top: 0.1rem;
+  }
+
+  .print-shell .toolbox-print-section-compact {
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  .print-shell .toolbox-print-grid-two {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: start !important;
+    gap: 0.6rem !important;
+  }
+
+  .print-shell .toolbox-print-grid-two > * {
+    align-self: start !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .print-shell .toolbox-print-view .toolbox-print-section,
+  .print-shell .toolbox-print-view .toolbox-print-block {
+    box-sizing: border-box;
+  }
+
+  .print-shell .toolbox-print-view .toolbox-print-section {
+    padding: 0.9rem !important;
+  }
+
+  .print-shell .toolbox-print-view .toolbox-print-block {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  .print-shell .toolbox-print-followup-grid {
+    margin-top: 0.55rem !important;
+  }
+
+  .print-shell .toolbox-print-view .h-24 {
+    height: 3.2rem !important;
+  }
+
+  .print-shell .toolbox-print-view .h-20 {
+    height: 2.6rem !important;
+  }
+
+  .print-shell .toolbox-print-view .h-16 {
+    height: 2rem !important;
+  }
 }
