@@ -60,6 +60,8 @@ export default function ToolboxSection({
   acuteCrisisSectionRef,
   safetyPlanSectionRef,
   childProtectionSectionRef,
+  addictionSectionRef,
+  rightsSectionRef,
   onJumpToPrioritySection,
 }) {
   const [triageAnswers, setTriageAnswers] = useState({});
@@ -469,6 +471,7 @@ export default function ToolboxSection({
       },
       {
         id: 'addiction',
+        sectionRef: addictionSectionRef,
         eyebrow: 'Sucht und Komorbidität',
         titlePrefix: 'Substanzkonsum und psychische Symptome',
         titleAccent: 'gemeinsam betrachten',
@@ -495,6 +498,7 @@ export default function ToolboxSection({
       },
       {
         id: 'rights',
+        sectionRef: rightsSectionRef,
         eyebrow: 'Rolle und Rechte',
         titlePrefix: 'Schweigepflicht, Rückmeldung und',
         titleAccent: 'pragmatische Orientierung',
@@ -515,6 +519,8 @@ export default function ToolboxSection({
     [
       acuteCrisisSectionRef,
       childProtectionSectionRef,
+      addictionSectionRef,
+      rightsSectionRef,
       onDownloadCrisisPlan,
       onPrint,
       safetyPlanSectionRef,

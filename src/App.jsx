@@ -70,6 +70,8 @@ export default function App() {
   const acuteCrisisSectionRef = useRef(null);
   const safetyPlanSectionRef = useRef(null);
   const childProtectionSectionRef = useRef(null);
+  const addictionSectionRef = useRef(null);
+  const rightsSectionRef = useRef(null);
   const mobileMenuButtonRef = useRef(null);
   const firstMobileNavItemRef = useRef(null);
   const mobileMenuContainerRef = useRef(null);
@@ -187,6 +189,8 @@ export default function App() {
       'acute-crisis': acuteCrisisSectionRef,
       'safety-plan': safetyPlanSectionRef,
       'child-protection': childProtectionSectionRef,
+      addiction: addictionSectionRef,
+      rights: rightsSectionRef,
     };
 
     const targetRef = refMap[pendingPriorityFocus];
@@ -204,7 +208,7 @@ export default function App() {
     });
 
     setPendingPriorityFocus(null);
-  }, [activeTab, pendingPriorityFocus]);
+  }, [activeTab, pendingPriorityFocus, acuteCrisisSectionRef, safetyPlanSectionRef, childProtectionSectionRef, addictionSectionRef, rightsSectionRef]);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -728,6 +732,8 @@ Aktueller Assessment-Score: ${score.risk}
               acuteCrisisSectionRef={acuteCrisisSectionRef}
               safetyPlanSectionRef={safetyPlanSectionRef}
               childProtectionSectionRef={childProtectionSectionRef}
+              addictionSectionRef={addictionSectionRef}
+              rightsSectionRef={rightsSectionRef}
               onJumpToPrioritySection={openPriorityToolboxSection}
             />
           )}
