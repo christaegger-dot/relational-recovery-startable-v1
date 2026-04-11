@@ -120,11 +120,11 @@ export default function Header({
 
       {mobileMenuOpen && (
         <>
-          <div className="ui-mobile-backdrop lg:hidden" aria-hidden="true" onClick={closeMobileMenu} />
+          <div className="ui-mobile-backdrop" aria-hidden="true" onClick={closeMobileMenu} />
           <div
             ref={mobileMenuContainerRef}
             id="mobile-nav"
-            className="ui-mobile-dialog lg:hidden"
+            className="ui-mobile-dialog"
             role="dialog"
             aria-modal="true"
             aria-labelledby="mobile-nav-title"
