@@ -391,4 +391,204 @@ Die folgenden 14 konkreten Textstellen sind Meta-Sprache ohne Endnutzer-Informat
 
 ---
 
-*Phase 1b abgeschlossen. Warte auf Freigabe für Phase 2 (Diagnose und vier Optionen).*
+## Phase 2 -- Diagnose und Optionen
+
+### 2.1 Gesamtbild
+
+#### Substanz vs. Rahmen
+
+82% des Textvolumens (~11'000 Wörter) sind substanzieller Endnutzer-Text. Die ursprünglich erwogene **Option D** ("Erst Substanz, dann Architektur") entfällt damit -- die Inhalte sind vorhanden, das Problem liegt nicht in fehlender Substanz, sondern in den Rahmentexten.
+
+#### Wo sitzt das Problem?
+
+Die 18% Meta-Text (~2'400 Wörter) verteilen sich nicht gleichmässig. Sie konzentrieren sich auf **Rahmentexte** -- also genau die Stellen, die Nutzer:innen als erstes lesen: Hero-Leads, Section-Descriptions, Eyebrows, Aside-Copies. Die eigentlichen Fach- und Praxisinhalte darunter sind fast durchgehend hochwertig.
+
+#### Korrelation Tonbrüche ↔ Meta-Text
+
+**Ja, die Korrelation ist stark.** Die beiden Templates mit den stärksten Tonbrüchen (Grundlagen, Netzwerk) sind genau die, bei denen warmer Endnutzer-Content in Meta-Rahmentexten steckt. Bei Grundlagen: warme Ich-FAQs eingerahmt von "Die neue Glossar-Seite führt einen statisch-redaktionellen Wissensbereich in die Seitentyp-Architektur ein". Bei Netzwerk: Du-Leitfragen eingerahmt von "Das neue Seitentyp-System trennt Suchlogik, Fachstellenverzeichnis und Netzwerkkarte sauber voneinander".
+
+Die Tonbrüche sind also kein Zielgruppen-Problem, sondern ein **Rahmentext-Problem**. Sobald die Meta-Texte durch endnutzerorientierte Texte ersetzt werden, verschwinden die meisten Tonbrüche.
+
+#### Erkennbares Muster
+
+| Bereich | Ton | Zielgruppe | Qualität |
+|---|---|---|---|
+| Toolbox, Vignetten, Evidence | Fachlich-klinisch, konsistent | Fachpersonen | Hoch |
+| Grundlagen FAQ-Inhalte | Warm, empathisch, Ich-Perspektive | Angehörige/Eltern | Hoch |
+| Netzwerk Fachstellen + Karte | Sachlich + warm (Leitfragen) | Gemischt | Hoch |
+| **Rahmentexte überall** | Meta-architektonisch | Niemand | **Fremdkörper** |
+
+---
+
+### 2.2 Drei Architektur-Optionen
+
+---
+
+#### Option A -- Bewusste Mischform
+
+**Beschreibung:** Eine gemeinsame Seite für alle Nutzer:innen. Pro Template wird eine Primärzielgruppe deklariert und dezent sichtbar gemacht (z.B. ein "Für wen?"-Badge). Tonalität wird pro Template vereinheitlicht, aber unterschiedlich: Fachsprache in der Toolbox, Alltagssprache in Grundlagen. Die Startseite bleibt ein gemeinsamer Einstieg.
+
+**Startseite bei Option A:** Die Startseite behält eine gemeinsame Ansprache, aber die Section "Vertrauen und Orientierung" (Section 3) wird zum Zielgruppen-Wegweiser ausgebaut: "Wenn Sie als Fachperson priorisieren müssen → Toolbox" / "Wenn Sie als Angehörige:r Orientierung suchen → Grundlagen".
+
+**Vorteile:**
+- Geringster struktureller Eingriff
+- Nutzt die bestehende Stärke: die meisten Inhalte sind bereits zielgruppenspezifisch geschrieben
+- Kein Routing-Umbau nötig
+- Angehörige und Fachpersonen sehen das gesamte Angebot
+
+**Nachteile:**
+- Angehörige landen weiterhin auf einer überwiegend fachsprachlichen Seite
+- "Badges" lösen das Orientierungsproblem nicht wirklich -- Nutzer:innen müssen trotzdem alle Tabs durchgehen
+- Die Grundlagen-FAQ steht isoliert als einziges wirklich elternnahes Angebot
+
+**Aufwand:** S-M
+
+**Hot-Spot-Bewertung Option A:**
+
+| Template | Konkreter Eingriff | Schreibaufwand | Struktureller Eingriff |
+|---|---|---|---|
+| **HomeLanding** | Meta-Texte in Sections 1-2 durch endnutzerorientierte Beschreibungen ersetzen. Section 3 zum Zielgruppen-Wegweiser ausbauen. | ~200 Wörter neu | Gering (nur Textfelder) |
+| **Lernmodule** | `sequence.description` und `modulesSection` Meta-Texte ersetzen. Badge "Für Fachpersonen" ergänzen. | ~150 Wörter neu | Gering (nur Textfelder + 1 Metadatum) |
+| **Netzwerk** | Hero-Lead und Directory-Intro-Absatz 2 ersetzen. Badge "Für alle" ergänzen. | ~100 Wörter neu | Gering |
+| **Glossar** | GLOSSARY_INTRO.description ersetzen. Badge "Für Fachpersonen" ergänzen. | ~50 Wörter neu | Minimal |
+
+---
+
+#### Option B -- Geteilte Einstiege, geteilte Pfade
+
+**Beschreibung:** Die Startseite erhält zwei klare Einstiege ("Ich begleite Familien als Fachperson" / "Ich bin selbst betroffen oder angehörig"). Dahinter teilweise dieselben Inhalte, aber mit unterschiedlichen Einstiegstexten, Navigation-Highlighting oder Akzentuierungen. Die Navigation zeigt ggf. nur die für die gewählte Rolle relevanten Tabs oder hebt sie hervor.
+
+**Startseite bei Option B:** Die Startseite wird zum Entscheidungspunkt mit zwei gleich prominenten Kacheln: "Fachpersonen → Toolbox, Evidenz, Vignetten, Lernmodule" und "Betroffene & Angehörige → Grundlagen, Netzwerk, Glossar" -- jeweils mit einer kurzen, warmen Einleitung.
+
+**Vorteile:**
+- Klarste Orientierung für beide Zielgruppen
+- Angehörige werden nicht mit Fachsprache konfrontiert, bevor sie Orientierung finden
+- Ermöglicht unterschiedliche Tonalität pro Pfad
+
+**Nachteile:**
+- Höchster Implementierungsaufwand (Navigation, State, ggf. URL-Routing)
+- Erzwingt eine Entscheidung, die manche Nutzer:innen nicht treffen wollen oder können (Fachpersonen, die selbst betroffen sind; Angehörige mit Fachwissen)
+- Grundlagen, Netzwerk und Glossar müssten als "Angehörigen-Templates" neu gerahmt werden, obwohl sie auch Fachpersonen nutzen
+- Doppelter Schreibaufwand für Meta-Text-Templates: jede Variante braucht eigene Rahmentexte
+- Blockiert bis Routing-Audit abgeschlossen ist
+
+**Aufwand:** L
+
+**Hot-Spot-Bewertung Option B:**
+
+| Template | Konkreter Eingriff | Schreibaufwand | Struktureller Eingriff |
+|---|---|---|---|
+| **HomeLanding** | Komplett neu: zwei Einstiegskacheln statt drei Content-Sections. Gesamte inline-Daten umschreiben. | ~400 Wörter neu | Hoch (JSX-Struktur, Navigation-State) |
+| **Lernmodule** | Meta-Texte ersetzen + eigene Intro-Variante für Angehörigen-Pfad falls über Grundlagen verlinkt. | ~200 Wörter neu | Mittel (bedingter Rahmentext) |
+| **Netzwerk** | Hero/Intro in zwei Varianten: Fachperson ("Triage und Versorgungslage") vs. Angehörige ("Wer kann helfen?"). | ~200 Wörter neu | Mittel (Pfad-abhängiger Rahmentext) |
+| **Glossar** | Intro-Variante für Angehörige ("Begriffe, die Ihnen begegnen könnten"). | ~100 Wörter neu | Mittel |
+
+---
+
+#### Option C -- Fokussierung auf eine Primärzielgruppe
+
+**Beschreibung:** Die Seite entscheidet sich für **Fachpersonen** als Hauptzielgruppe (entspricht dem Ist-Zustand bei 6/8 Templates). Grundlagen und Netzwerk werden entweder auf Fachpersonen-Ton umgeschrieben oder als "Materialien für die Arbeit mit Angehörigen" gerahmt ("Diesen Text können Sie Angehörigen zeigen" / "Diese Leitfragen können Sie im Gespräch nutzen"). Angehörige sind eingeladen, die Seite zu nutzen, aber sie wird nicht für sie optimiert.
+
+**Startseite bei Option C:** Die Startseite adressiert Fachpersonen direkt: "Dieses Portal unterstützt Sie bei der Begleitung von Familien mit psychischer Belastung" -- mit einem sekundären Hinweis: "Für betroffene Angehörige: Die Grundlagen- und Netzwerkseite enthält auch direkt nutzbare Orientierung."
+
+**Vorteile:**
+- Konsistenteste Tonalität über alle Templates
+- Geringster Schreibaufwand bei Grundlagen und Netzwerk (Rahmentext umformulieren statt Inhalt neu schreiben)
+- Die bestehenden Ich-FAQs in Grundlagen können als "Gesprächshilfe für die Arbeit mit Angehörigen" gerahmt werden -- der Inhalt bleibt, nur die Rahmung ändert sich
+- Klare Identität: "Schweizer Fachportal" wird eingelöst
+- Meta-Tags und Hero stimmen bereits mit dieser Option überein
+
+**Nachteile:**
+- Angehörige, die eigenständig auf die Seite kommen, fühlen sich möglicherweise nicht angesprochen
+- Die warmen Grundlagen-FAQs verlieren durch die Fachpersonen-Rahmung etwas von ihrer direkten Ansprache
+- Die Du-Leitfragen in der Netzwerkkarte müssten auf Sie umgestellt oder als "Übung für das Gespräch" gerahmt werden
+- Mission der PUK-Angehörigenarbeit wird verengt, wenn Angehörige nur "mitgemeint" statt direkt adressiert werden
+
+**Aufwand:** S
+
+**Hot-Spot-Bewertung Option C:**
+
+| Template | Konkreter Eingriff | Schreibaufwand | Struktureller Eingriff |
+|---|---|---|---|
+| **HomeLanding** | Meta-Texte durch Fachpersonen-adressierte Texte ersetzen. Section 3 "Vertrauen" leicht umformulieren. | ~200 Wörter neu | Gering (nur Textfelder) |
+| **Lernmodule** | Meta-Texte ersetzen. Kein Zielgruppen-Konflikt (ist bereits Fachpersonen-orientiert). | ~150 Wörter neu | Minimal |
+| **Netzwerk** | Hero/Intro ersetzen. Du-Leitfragen als "Übung für das Gespräch mit Angehörigen" rahmen. | ~120 Wörter neu | Gering (Rahmentext + 1 Satz Kontextualisierung) |
+| **Glossar** | GLOSSARY_INTRO.description ersetzen. Kein Konflikt. | ~50 Wörter neu | Minimal |
+
+---
+
+### 2.2.1 HomeLanding als Sonderfall
+
+Die Startseite ist der Ort, an dem die Optionen-Wahl am sichtbarsten wird. Bei 45% Meta-Anteil und fehlendem Zielgruppen-Routing ist sie gleichzeitig die grösste Baustelle und die grösste Chance.
+
+| Option | Wie die neue Startseite aussieht |
+|---|---|
+| **A** | Gemeinsamer Einstieg mit klarer Arbeitslogik ("Verstehen → Einschätzen → Handeln → Vernetzen") und einem expliziten Wegweiser-Block: "Wenn Sie als Fachperson..." / "Wenn Sie als Angehörige:r..." |
+| **B** | Zwei gleichwertige Einstiegskacheln ("Ich begleite Familien" / "Ich bin betroffen"), die in unterschiedliche Navigationspfade führen -- die heutigen drei Content-Sections entfallen komplett. |
+| **C** | Klare Fachpersonen-Adresse: "Dieses Portal unterstützt Sie bei der Begleitung von Familien mit psychischer Belastung" -- mit einem sekundären, warmen Hinweis für Angehörige, die eigenständig hier gelandet sind. |
+
+---
+
+### 2.3 Empfehlung
+
+**Empfohlene Option: A -- Bewusste Mischform.**
+
+Begründung entlang der vier Bewertungsachsen:
+
+**1. Aufwand vs. Nutzen:**
+Option A erfordert ~500 Wörter neue Rahmentexte und minimale strukturelle Eingriffe. Option C wäre noch schlanker (~520 Wörter), verengt aber die Reichweite. Option B erfordert das Drei- bis Vierfache an Aufwand und blockiert bis zum Routing-Audit.
+
+**2. Entlastung der Folge-Audits:**
+Option A schafft pro Template eine deklarierte Primärzielgruppe, an der sich Sprach-Audit (06) und Visual-Audit (08) orientieren können. Weder Routing noch Komponentenstruktur müssen vorher geändert werden. Alle Folge-Audits können sofort starten.
+
+**3. Risiko einer nicht tragfähigen Architektur:**
+Option A ist die flexibelste: Wenn sich nach Audit 06 (Sprache) herausstellt, dass die Mischform nicht funktioniert, kann immer noch auf C (Fokussierung) oder B (geteilte Pfade) gewechselt werden. Option C oder B vorab festzulegen wäre eine schwerere Festlegung mit weniger Datenbasis.
+
+**4. Kohärenz mit der Mission:**
+Die Fachstelle Angehörigenarbeit der PUK adressiert sowohl Fachpersonen als auch Betroffene/Angehörige. Option A bildet diese Doppelfunktion am ehrlichsten ab. Option C würde die Angehörigen-Reichweite einschränken, Option B würde sie überbetonen (nur 1 von 8 Templates adressiert heute primär Angehörige).
+
+**Zusammengefasst:** Option A ist die ehrlichste Abbildung des Ist-Zustands, erfordert den geringsten Eingriff bei maximalem Klärungsgewinn, und hält alle Türen offen für spätere Vertiefung.
+
+---
+
+### 2.4 Implikationen für Folge-Audits
+
+| Folge-Audit | Implikation bei Option A |
+|---|---|
+| **03 KESB/Kindesschutz** | Unabhängig von der Zielgruppen-Option. Die KESB-Formulierungen müssen für Fachpersonen korrekt und für Angehörige nicht angstauslösend sein -- das ist bei der Mischform sogar wichtiger als bei reiner Fokussierung. Kann sofort starten. |
+| **04 Evidence** | Evidence ist bereits konsistent fachpersonen-orientiert (90% endnutzer). Kein Zielgruppen-Konflikt. Kann sofort starten. |
+| **05 Vignetten** | Vignetten sind konsistent fachpersonen-orientiert. Die Stigma-Befunde (Phase 1b) sind zielgruppenunabhängig. Kann sofort starten. |
+| **06 Sprache** | Profitiert am stärksten von Option A: Mit deklarierten Primärzielgruppen pro Template kann das Sprach-Audit Anrede, Fachbegriffsdichte und Ton gezielt pro Template harmonisieren statt projektweite Einheitlichkeit zu erzwingen. Meta-Texte M1-M14 werden als erste Priorität behandelt. |
+| **07 Glossar** | Der Glossar ist bereits konsistent fachsprachlich. Die Intro-Description (M10) wird im Sprach-Audit ersetzt. Kein Zielgruppen-Konflikt. |
+| **08 Visual** | Bei Option A: visuelle Differenzierung pro Zielgruppe möglich aber nicht zwingend (z.B. wärmere Farbtöne für Grundlagen, kühlere für Toolbox). Die Entscheidung darüber fällt im Visual-Audit. |
+| **10 Routing** | Option A erfordert kein Routing-Redesign. Die flache Tab-Navigation bleibt. Falls später auf Option B gewechselt wird, wird das Routing-Audit relevanter. |
+
+---
+
+### 2.5 Anrede-Vorschlag (Diskussionsgrundlage)
+
+#### Empfehlung: Sie als Standard, Ich in Eltern-/Angehörigen-Perspektivtexten
+
+| Kontext | Anrede | Begründung |
+|---|---|---|
+| **Fachpersonen-Templates** (Toolbox, Evidenz, Vignetten, Learning, Glossar) | **Sie** | Respektvoll-professionell, passt zum "Schweizer Fachportal"-Anspruch. Bereits in Vignetten durchgehend verwendet. |
+| **Angehörigen-Template** (Grundlagen FAQ-Fragen) | **Ich** | Simuliert die Innenperspektive Betroffener. Ist die grösste Stärke der Grundlagen-FAQs und sollte erhalten bleiben. |
+| **Angehörigen-Template** (Grundlagen FAQ-Antworten) | **Sie** | Wechsel auf Du wäre inkonsistent mit dem Rest der Seite. Sie hält professionelle Wärme ohne Anbiederung. |
+| **Netzwerk-Leitfragen** | **Sie** statt Du | Die Du-Form in den Netzwerkkarten-Leitfragen bricht mit dem Rest der Seite. Vorschlag: "Wer gehört zu Ihrer Kernfamilie?" statt "Wer gehört zu deiner Kernfamilie?". Alternativ: Du beibehalten und als "Übung für das Gespräch mit Kindern/Jugendlichen" rahmen. |
+| **Kinder-Botschaften** (Evidenz, Psychoedukation) | **Du** | "Du bist nicht schuld" ist ein direktes Zitat an Kinder. Muss Du bleiben. |
+
+#### Beispiele
+
+| Heute | Vorschlag |
+|---|---|
+| "Wer gehört zu **deiner** Kernfamilie?" | "Wer gehört zu **Ihrer** Kernfamilie?" |
+| "Bin **ich** schuld daran?" (FAQ-Frage) | Bleibt: "Bin **ich** schuld daran?" |
+| "Was **Sie** beobachten..." (FAQ-Antwort) | Bleibt: "Was **Sie** beobachten..." |
+| "**Du** bist nicht schuld." (Kinderbotschaft) | Bleibt: "**Du** bist nicht schuld." |
+| Unpersönlich: "Die Inhalte sind als Abfolge gedacht" | → "**Sie** finden hier eine fachliche Abfolge: verstehen, einschätzen, handeln, vernetzen." |
+
+Dieser Vorschlag wird im Sprach-Audit (06) verbindlich gemacht oder verworfen. Er dient hier nur als Diskussionsgrundlage.
+
+---
+
+*Phase 2 abgeschlossen. Warte auf Entscheidung der Auftraggeberin, welche Option umgesetzt wird, bevor Phase 3 startet.*
