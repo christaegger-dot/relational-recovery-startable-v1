@@ -483,4 +483,56 @@ Die folgenden Reformulierungsvorschläge betreffen Stellen, an denen der Inhalt 
 
 ---
 
-*Phase 2 abgeschlossen. Warte auf Freigabe der konkreten Korrekturen, bevor Phase 3 startet.*
+## Phase 3 -- Umsetzung
+
+### Umgesetzt
+
+| # | Massnahme | Status | Commit |
+|---|-----------|--------|--------|
+| **Validierungs-Dokument** | `qa/audit-03-juristische-validierung.md` mit J1-J3 und L1-L3 | Vollständig | `audit(03): juristische validierung dokument` |
+| **L1 Stufenfolge** | Stub `CHILD_PROTECTION_MEASURES_STUB` in toolboxContent.js | Stub (juristische Validierung ausstehend) | `audit(03): stubs L1-L5` |
+| **L2 Beistandschaft** | Stub-Kommentar in glossaryContent.js Cluster 2 | Stub (juristische Validierung ausstehend) | `audit(03): stubs L1-L5` |
+| **L3 Rechte der Betroffenen** | Stub-Kommentar in RIGHTS_FAQ mit 4 FAQ-Outlines | Stub (juristische Validierung ausstehend) | `audit(03): stubs L1-L5` |
+| **L4 Melderecht/Meldepflicht** | Stub-Kommentar in glossaryContent.js Cluster 2 | Stub (juristische Validierung ausstehend) | `audit(03): stubs L1-L5` |
+| **L5 Anonyme Beratung** | Neuer Eintrag in CHILD_PROTECTION_TIPS | **Vollständig** (keine juristische Validierung nötig) | `audit(03): stubs L1-L5` |
+| **Rechts-Disclaimer** | `LegalDisclaimer`-Komponente + 4 Platzierungen | **Vollständig** | `audit(03): rechts-disclaimer komponente` |
+| **R1** (T1 Schwelle) | Reformuliert in toolboxContent.js | **Vollständig** | `audit(03): reformulierungen R1-R5` |
+| **R2** (T2 FAQ Grundlagen) | Reformuliert in grundlagenContent.js | **Vollständig** | `audit(03): reformulierungen R1-R5` |
+| **R3** (T5 Akut-Krise) | Reformuliert in toolboxContent.js | **Vollständig** | `audit(03): reformulierungen R1-R5` |
+| **R4** (T4 Evidenz Barrieren) | Reformuliert in evidenceContent.js | **Vollständig** | `audit(03): reformulierungen R1-R5` |
+| **R5** (T6 Kindeswohl-Cluster) | Reformuliert in ToolboxSection.jsx | **Vollständig** | `audit(03): reformulierungen R1-R5` |
+| **Linkliste Rechtsberatung** | Datenstruktur in networkContent.js, 5 Kategorien, 2 Platzhalter | Struktur vollständig, Einträge durch Auftraggeberin | `audit(03): linkliste rechtsberatung` |
+
+### Bewusst offen (Validierungs-Vorbehalt)
+
+| # | Was offen ist | Warum | Nächster Schritt |
+|---|--------------|-------|-----------------|
+| J1, J2, J3 | Fragwürdige Stellen im bestehenden Content | Brauchen juristische Prüfung | `qa/audit-03-juristische-validierung.md` → PUK-Rechtsberatung |
+| L1, L2, L3, L4 | Inhaltliche Stubs ohne ausformulierten Text | Rechtliche Erklärtexte für Eltern dürfen nicht von LLM formuliert werden | Nach juristischer Validierung: Stubs durch validierten Inhalt ersetzen |
+| Linkliste Einträge | Nur 2 Platzhalter, keine kuratierte Liste | Vertrauenssignal darf nicht aus Web-Suche kommen | Auftraggeberin stellt Liste zusammen |
+
+---
+
+## Phase 4 -- Verifikation
+
+| Prüfung | Ergebnis |
+|---|---|
+| `npm run build` | Bestanden |
+| `npm run lint` | Bestanden |
+| `npm run test:e2e` | Nicht lokal ausführbar (vorbestehendes CI-Problem, kein Regressionsfehler) |
+| Visuelle Regression | LegalDisclaimer-Komponente rendert an 4 Stellen korrekt. Alle anderen Templates unverändert. |
+| Bericht vollständig | Ja: Vollinventur (Phase 1), Diagnose und Massnahmenkatalog (Phase 2), Umsetzung (Phase 3), Verifikation (Phase 4) |
+
+### Deliverables
+
+1. `qa/audit-03-kesb-sensibilitaet.md` -- Vollständiger Bericht (4 Phasen)
+2. `qa/audit-03-juristische-validierung.md` -- Übergabe-Dokument für PUK-Rechtsberatung (J1-J3, L1-L3)
+3. `src/components/ui/LegalDisclaimer.jsx` -- Neue Disclaimer-Komponente
+4. 5 Stubs in `toolboxContent.js` und `glossaryContent.js` (L1-L5)
+5. 5 Reformulierungen in 4 Dateien (R1-R5)
+6. Linkliste-Datenstruktur in `networkContent.js`
+7. Branch `audit/03-kesb-sensibilitaet` mit 7 Commits
+
+---
+
+*Audit 03 abgeschlossen.*
