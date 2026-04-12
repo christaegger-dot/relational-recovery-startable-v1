@@ -1,5 +1,6 @@
 // Design note: This file preserves the application's information architecture while the visual language is shifted toward a warm editorial interface with calmer surfaces, serif-led hierarchy and lower-arousal accents.
 import React, { lazy, Suspense, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import DOMPurify from 'dompurify';
 import './styles/app-global.css';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import Header from './components/Header';
@@ -135,7 +136,7 @@ function ToolboxPrintPage() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      <main className="print-shell" dangerouslySetInnerHTML={{ __html: payload.html }} />
+      <main className="print-shell" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(payload.html) }} />
     </div>
   );
 }
