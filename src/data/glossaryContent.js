@@ -71,22 +71,22 @@ export const GLOSSARY_GROUPS = [
         practice:
           'Im Portal meint Triage nicht nur Dringlichkeit, sondern auch Passung zwischen Bedarf, Sicherheitslage und regionalen Hilfen.',
       },
-      // STUB L2: Beistandschaft (Art. 308 ZGB)
-      // INHALT AUSSTEHEND – juristische Validierung erforderlich, siehe qa/audit-03-juristische-validierung.md
-      // Geschätzter Umfang: ~80 Wörter
-      // Outline:
-      //   - Definition: Erziehungsbeistandschaft als häufigste KESB-Massnahme
-      //   - Kern: Beistand unterstützt Familie, Sorgerecht bleibt bei Eltern
-      //   - Abgrenzung: keine Bestrafung, kein Vorzeichen für Fremdplatzierung
-      //   - Praxisbezug: Was macht ein Beistand konkret?
-
-      // STUB L4: Melderecht vs. Meldepflicht (Art. 314c vs. 314d ZGB)
-      // INHALT AUSSTEHEND – juristische Validierung erforderlich, siehe qa/audit-03-juristische-validierung.md
-      // Geschätzter Umfang: ~60 Wörter
-      // Outline:
-      //   - Melderecht (Art. 314c): gilt für alle Personen
-      //   - Meldepflicht (Art. 314d): gilt für bestimmte Fachpersonen
-      //   - Kantonale Unterschiede beachten
+      // L2: Beistandschaft (Art. 308 ZGB) – Quelle: Faktenbasis Abschnitt 2
+      {
+        term: 'Beistandschaft (Art. 308 ZGB)',
+        definition:
+          'Die häufigste Kindesschutzmassnahme. Die KESB ernennt eine Fachperson, die die Familie in bestimmten Bereichen unterstützt -- etwa bei Schule, Gesundheit, Alltagsorganisation oder der Koordination von Hilfen. Das Sorgerecht bleibt bei den Eltern. Im Kanton Zürich wird die Beistandschaft in der Regel durch spezialisierte Fachpersonen der kjz (Kinder- und Jugendhilfezentren) geführt.',
+        practice:
+          'Beistandschaft ist keine Bestrafung und kein automatisches Vorzeichen für eine Fremdplatzierung. Sie ist ein unterstützendes Angebot, das in verschiedenen Abstufungen möglich ist: von beratender Begleitung (Abs. 1) über besondere Befugnisse (Abs. 2) bis zur Einschränkung der elterlichen Sorge in einem bestimmten Bereich (Abs. 3). Für Eltern entstehen im Kanton Zürich in der Regel keine Kosten.',
+      },
+      // L4: Melderecht vs. Meldepflicht – Quelle: Faktenbasis Abschnitt 4
+      {
+        term: 'Melderecht und Meldepflicht (Art. 314c / 314d ZGB)',
+        definition:
+          'Das Melderecht (Art. 314c ZGB) erlaubt jeder Person, der KESB eine Gefährdung eines Kindes zu melden. Berufsgeheimnisträgerinnen und -träger (z.B. Ärztinnen, Psychologen) sind meldeberechtigt, wenn die Meldung im Interesse des Kindes liegt -- sie müssen eine Interessenabwägung vornehmen. Die Meldepflicht (Art. 314d ZGB) betrifft bestimmte Fachpersonen, die nicht dem Berufsgeheimnis unterstehen und regelmässig mit Kindern arbeiten.',
+        practice:
+          'Wichtig für die Praxis: Ärztinnen und Ärzte in öffentlichen Kliniken sind trotz amtlicher Tätigkeit in der Regel meldeberechtigt, nicht meldepflichtig, weil sie dem strafrechtlichen Berufsgeheimnis (Art. 321 StGB) unterstehen. Die Kantone können weitere Meldepflichten vorsehen (Art. 314d Abs. 3 ZGB).',
+      },
     ],
   },
   {
