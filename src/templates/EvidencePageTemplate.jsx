@@ -1,7 +1,7 @@
 import Container from '../components/ui/Container';
-import Eyebrow from '../components/ui/Eyebrow';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
+import SectionHeader from '../components/ui/SectionHeader';
 import SurfaceCard from '../components/ui/SurfaceCard';
 import ClosingSection from '../components/closing/ClosingSection';
 
@@ -91,37 +91,14 @@ function ChapterOverview({ chapterOverview }) {
   return (
     <Section spacing="tight" surface="subtle" className="no-print">
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            {chapterOverview.eyebrow ? <Eyebrow>{chapterOverview.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title ui-section-title">
-              {chapterOverview.title}{' '}
-              {chapterOverview.accent ? <span className="ui-hero__accent">{chapterOverview.accent}</span> : null}
-            </h2>
-            <div className="ui-copy">
-              <p>{chapterOverview.description}</p>
-            </div>
-          </div>
-
-          {chapterOverview.aside ? (
-            <SurfaceCard as="aside" tone="default">
-              {chapterOverview.aside.label ? (
-                <p className="ui-fact-card__label">{chapterOverview.aside.label}</p>
-              ) : null}
-              {chapterOverview.aside.title ? <h3 className="ui-card__title">{chapterOverview.aside.title}</h3> : null}
-              {chapterOverview.aside.copy ? <p className="ui-card__copy">{chapterOverview.aside.copy}</p> : null}
-              {chapterOverview.aside.badges?.length ? (
-                <div className="ui-badge-row ui-editorial-card__action">
-                  {chapterOverview.aside.badges.map((badge) => (
-                    <span key={badge} className="ui-badge">
-                      {badge}
-                    </span>
-                  ))}
-                </div>
-              ) : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={chapterOverview.eyebrow}
+          title={chapterOverview.title}
+          titleAccent={chapterOverview.accent}
+          description={chapterOverview.description}
+          aside={chapterOverview.aside}
+          asideTone="default"
+        />
 
         {chapterOverview.items?.length ? (
           <div className="ui-card-grid ui-card-grid--5">
@@ -149,24 +126,13 @@ function ZoneSection({ zone }) {
       className={zone.className || 'no-print'}
     >
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            {zone.eyebrow ? <Eyebrow>{zone.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title ui-section-title">
-              {zone.title} {zone.accent ? <span className="ui-hero__accent">{zone.accent}</span> : null}
-            </h2>
-            <RichCopy paragraphs={zone.paragraphs} />
-          </div>
-
-          {zone.aside ? (
-            <SurfaceCard as="aside" tone={zone.aside.tone || 'soft'}>
-              {zone.aside.label ? <p className="ui-fact-card__label">{zone.aside.label}</p> : null}
-              {zone.aside.title ? <h3 className="ui-card__title">{zone.aside.title}</h3> : null}
-              {zone.aside.copy ? <p className="ui-card__copy">{zone.aside.copy}</p> : null}
-              {zone.aside.note ? <p className="ui-card__copy">{zone.aside.note}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={zone.eyebrow}
+          title={zone.title}
+          titleAccent={zone.accent}
+          paragraphs={zone.paragraphs}
+          aside={zone.aside}
+        />
 
         {zone.highlightList ? (
           <BulletList items={zone.highlightList.items} tone={zone.highlightList.tone} icon={zone.highlightList.icon} />
@@ -207,7 +173,7 @@ function MaterialsSection({ closingSection }) {
 
 export default function EvidencePageTemplate({ hero, pageHeadingId, chapterOverview, zones = [], closingSection }) {
   return (
-    <article className="no-print">
+    <article>
       <Section as="header" spacing="wide" surface="plain" className="no-print">
         <Container width="default">
           <PageHero {...hero} headingId={pageHeadingId} />

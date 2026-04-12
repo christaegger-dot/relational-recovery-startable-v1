@@ -4,6 +4,7 @@ import Eyebrow from '../components/ui/Eyebrow';
 import Button from '../components/ui/Button';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
+import SectionHeader from '../components/ui/SectionHeader';
 import SurfaceCard from '../components/ui/SurfaceCard';
 import ClosingSection from '../components/closing/ClosingSection';
 
@@ -103,25 +104,14 @@ function PathwaySection({ pathway }) {
   return (
     <Section spacing="tight" surface="subtle" className="no-print">
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            <Eyebrow>{pathway.eyebrow}</Eyebrow>
-            <h2 className="ui-hero__title ui-section-title">
-              {pathway.titlePrefix} <span className="ui-hero__accent">{pathway.titleAccent}</span>
-            </h2>
-            <div className="ui-copy">
-              <p>{pathway.description}</p>
-            </div>
-          </div>
-          {pathway.aside ? (
-            <SurfaceCard as="aside" tone="default">
-              {pathway.aside.label ? <p className="ui-fact-card__label">{pathway.aside.label}</p> : null}
-              {pathway.aside.title ? <h3 className="ui-card__title">{pathway.aside.title}</h3> : null}
-              {pathway.aside.copy ? <p className="ui-card__copy">{pathway.aside.copy}</p> : null}
-              {pathway.aside.note ? <p className="ui-card__copy">{pathway.aside.note}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={pathway.eyebrow}
+          titlePrefix={pathway.titlePrefix}
+          titleAccent={pathway.titleAccent}
+          description={pathway.description}
+          aside={pathway.aside}
+          asideTone="default"
+        />
 
         {pathway.steps?.length ? (
           <div className="ui-card--outline ui-toolbox-panel">
@@ -201,23 +191,13 @@ function TriageSection({ triage }) {
   return (
     <Section spacing="tight" surface="plain" className="no-print">
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            <Eyebrow>{triage.eyebrow}</Eyebrow>
-            <h2 className="ui-hero__title ui-section-title">
-              {triage.titlePrefix} <span className="ui-hero__accent">{triage.titleAccent}</span>
-            </h2>
-            <div className="ui-copy">
-              <p>{triage.description}</p>
-            </div>
-          </div>
-          {triage.aside ? (
-            <SurfaceCard as="aside" tone="soft">
-              {triage.aside.label ? <p className="ui-fact-card__label">{triage.aside.label}</p> : null}
-              {triage.aside.copy ? <p className="ui-card__copy">{triage.aside.copy}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={triage.eyebrow}
+          titlePrefix={triage.titlePrefix}
+          titleAccent={triage.titleAccent}
+          description={triage.description}
+          aside={triage.aside}
+        />
 
         <div className="ui-card-grid">
           {triage.prompts.map((prompt, index) => (
@@ -297,23 +277,14 @@ function PracticeBlocksSection({ practice }) {
   return (
     <Section spacing="tight" surface="subtle" className="no-print">
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            <Eyebrow>{practice.eyebrow}</Eyebrow>
-            <h2 className="ui-hero__title ui-section-title">
-              {practice.titlePrefix} <span className="ui-hero__accent">{practice.titleAccent}</span>
-            </h2>
-            <div className="ui-copy">
-              <p>{practice.description}</p>
-            </div>
-          </div>
-          {practice.aside ? (
-            <SurfaceCard as="aside" tone="default">
-              {practice.aside.label ? <p className="ui-fact-card__label">{practice.aside.label}</p> : null}
-              {practice.aside.copy ? <p className="ui-card__copy">{practice.aside.copy}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={practice.eyebrow}
+          titlePrefix={practice.titlePrefix}
+          titleAccent={practice.titleAccent}
+          description={practice.description}
+          aside={practice.aside}
+          asideTone="default"
+        />
 
         <div className="ui-chip-row" role="group" aria-label={practice.filterAriaLabel}>
           {practice.filters.map((filter) => (
@@ -369,45 +340,16 @@ function ClusterSection({ cluster }) {
       tabIndex={cluster.tabIndex ?? -1}
     >
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            {cluster.eyebrow ? <Eyebrow>{cluster.eyebrow}</Eyebrow> : null}
-            {cluster.title ? (
-              <h2 className="ui-hero__title ui-section-title">
-                {cluster.titlePrefix ? <>{cluster.titlePrefix} </> : null}
-                {cluster.titleAccent ? <span className="ui-hero__accent">{cluster.titleAccent}</span> : cluster.title}
-              </h2>
-            ) : null}
-            {cluster.description ? (
-              <div className="ui-copy">
-                {Array.isArray(cluster.description) ? (
-                  cluster.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
-                ) : (
-                  <p>{cluster.description}</p>
-                )}
-              </div>
-            ) : null}
-          </div>
-          {cluster.aside ? (
-            <SurfaceCard as="aside" tone={cluster.aside.tone || 'accent'}>
-              {cluster.aside.label ? <p className="ui-fact-card__label">{cluster.aside.label}</p> : null}
-              {cluster.aside.title ? <h3 className="ui-card__title">{cluster.aside.title}</h3> : null}
-              {cluster.aside.copy ? <p className="ui-card__copy">{cluster.aside.copy}</p> : null}
-              {cluster.aside.items?.length ? (
-                <div className="ui-stack ui-stack--tight ui-card__section--spaced">
-                  {cluster.aside.items.map((item, index) => (
-                    <div key={`${cluster.id}-aside-${index}`} className="ui-bullet-panel__item">
-                      {item.icon ? (
-                        <span className="ui-bullet-panel__marker ui-toolbox-inline-icon">{item.icon}</span>
-                      ) : null}
-                      <p className="ui-bullet-panel__copy">{item.text}</p>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={cluster.eyebrow}
+          title={cluster.title}
+          titlePrefix={cluster.titlePrefix}
+          titleAccent={cluster.titleAccent}
+          description={!Array.isArray(cluster.description) ? cluster.description : undefined}
+          paragraphs={Array.isArray(cluster.description) ? cluster.description : undefined}
+          aside={cluster.aside}
+          asideTone="accent"
+        />
 
         {cluster.actions?.length ? (
           <div className="ui-button-row">

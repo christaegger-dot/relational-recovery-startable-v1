@@ -1,15 +1,19 @@
+import { forwardRef } from 'react';
 import Container from './Container';
 
-export default function Section({
-  as: Tag = 'section',
-  width = 'default',
-  spacing = 'standard',
-  surface = 'plain',
-  inset = true,
-  className = '',
-  children,
-  ...props
-}) {
+const Section = forwardRef(function Section(
+  {
+    as: Tag = 'section',
+    width = 'default',
+    spacing = 'standard',
+    surface = 'plain',
+    inset = true,
+    className = '',
+    children,
+    ...props
+  },
+  ref,
+) {
   const spacingClass =
     spacing === 'tight' || spacing === 'compact'
       ? 'ui-section ui-section--tight'
@@ -29,8 +33,10 @@ export default function Section({
   const content = inset ? <div className={surfaceClass}>{children}</div> : children;
 
   return (
-    <Tag className={sectionClasses} {...props}>
+    <Tag ref={ref} className={sectionClasses} {...props}>
       <Container width={width}>{content}</Container>
     </Tag>
   );
-}
+});
+
+export default Section;

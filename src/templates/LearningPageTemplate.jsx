@@ -1,8 +1,8 @@
 import { Brain, Check, Circle } from 'lucide-react';
 import Container from '../components/ui/Container';
-import Eyebrow from '../components/ui/Eyebrow';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
+import SectionHeader from '../components/ui/SectionHeader';
 import SurfaceCard from '../components/ui/SurfaceCard';
 
 function LearningFlowSection({ sequence }) {
@@ -11,25 +11,13 @@ function LearningFlowSection({ sequence }) {
   return (
     <Section spacing="tight" surface={sequence.surface || 'subtle'} className="no-print">
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            {sequence.eyebrow ? <Eyebrow>{sequence.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title ui-section-title">
-              {sequence.titlePrefix}{' '}
-              {sequence.titleAccent ? <span className="ui-hero__accent">{sequence.titleAccent}</span> : null}
-            </h2>
-            <div className="ui-copy">
-              <p>{sequence.description}</p>
-            </div>
-          </div>
-          {sequence.aside ? (
-            <SurfaceCard as="aside" tone={sequence.aside.tone || 'soft'}>
-              {sequence.aside.label ? <p className="ui-fact-card__label">{sequence.aside.label}</p> : null}
-              {sequence.aside.title ? <h3 className="ui-card__title">{sequence.aside.title}</h3> : null}
-              {sequence.aside.copy ? <p className="ui-card__copy">{sequence.aside.copy}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={sequence.eyebrow}
+          titlePrefix={sequence.titlePrefix}
+          titleAccent={sequence.titleAccent}
+          description={sequence.description}
+          aside={sequence.aside}
+        />
 
         {sequence.steps?.length ? (
           <div className="learning-flow-grid">
@@ -139,27 +127,14 @@ function LearningModulesSection({ modulesSection }) {
   return (
     <Section spacing="tight" surface={modulesSection.surface || 'plain'} className="no-print">
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            {modulesSection.eyebrow ? <Eyebrow>{modulesSection.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title ui-section-title">
-              {modulesSection.titlePrefix}{' '}
-              {modulesSection.titleAccent ? (
-                <span className="ui-hero__accent">{modulesSection.titleAccent}</span>
-              ) : null}
-            </h2>
-            <div className="ui-copy">
-              <p>{modulesSection.description}</p>
-            </div>
-          </div>
-          {modulesSection.aside ? (
-            <SurfaceCard as="aside" tone={modulesSection.aside.tone || 'default'}>
-              {modulesSection.aside.label ? <p className="ui-fact-card__label">{modulesSection.aside.label}</p> : null}
-              {modulesSection.aside.value ? <p className="ui-fact-card__value">{modulesSection.aside.value}</p> : null}
-              {modulesSection.aside.copy ? <p className="ui-fact-card__note">{modulesSection.aside.copy}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={modulesSection.eyebrow}
+          titlePrefix={modulesSection.titlePrefix}
+          titleAccent={modulesSection.titleAccent}
+          description={modulesSection.description}
+          aside={modulesSection.aside}
+          asideTone="default"
+        />
 
         <div className="learning-modules-grid">
           {modulesSection.items.map((module) => (

@@ -1,8 +1,8 @@
 import Button from '../components/ui/Button';
 import Container from '../components/ui/Container';
-import Eyebrow from '../components/ui/Eyebrow';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
+import SectionHeader from '../components/ui/SectionHeader';
 import SurfaceCard from '../components/ui/SurfaceCard';
 
 function ContentSection({ section }) {
@@ -10,42 +10,31 @@ function ContentSection({ section }) {
     <Section spacing={section.spacing || 'tight'} surface={section.surface || 'plain'}>
       <div className="ui-stack ui-stack--loose">
         {(section.eyebrow || section.title || section.description || section.aside || section.actions?.length) && (
-          <div className="ui-split">
-            <div className="ui-stack ui-stack--tight">
-              {section.eyebrow ? <Eyebrow>{section.eyebrow}</Eyebrow> : null}
-              {section.title ? <h2 className="ui-hero__title ui-section-title">{section.title}</h2> : null}
-              {section.description ? (
-                <div className="ui-copy">
-                  <p>{section.description}</p>
-                </div>
-              ) : null}
-              {section.actions?.length ? (
-                <div className="ui-button-row">
-                  {section.actions.map((action) => (
-                    <Button
-                      key={action.label}
-                      as={action.href ? 'a' : 'button'}
-                      href={action.href}
-                      onClick={action.onClick}
-                      variant={action.variant || 'secondary'}
-                      target={action.target}
-                      rel={action.rel}
-                    >
-                      {action.label}
-                      {action.icon ? <action.icon size={16} /> : null}
-                    </Button>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-            {section.aside ? (
-              <SurfaceCard as="aside" tone={section.aside.tone || 'soft'}>
-                {section.aside.label ? <p className="ui-fact-card__label">{section.aside.label}</p> : null}
-                {section.aside.title ? <h3 className="ui-card__title">{section.aside.title}</h3> : null}
-                {section.aside.copy ? <p className="ui-card__copy">{section.aside.copy}</p> : null}
-              </SurfaceCard>
+          <SectionHeader
+            eyebrow={section.eyebrow}
+            title={section.title}
+            description={section.description}
+            aside={section.aside}
+          >
+            {section.actions?.length ? (
+              <div className="ui-button-row">
+                {section.actions.map((action) => (
+                  <Button
+                    key={action.label}
+                    as={action.href ? 'a' : 'button'}
+                    href={action.href}
+                    onClick={action.onClick}
+                    variant={action.variant || 'secondary'}
+                    target={action.target}
+                    rel={action.rel}
+                  >
+                    {action.label}
+                    {action.icon ? <action.icon size={16} /> : null}
+                  </Button>
+                ))}
+              </div>
             ) : null}
-          </div>
+          </SectionHeader>
         )}
 
         {section.cards?.length ? (

@@ -4,6 +4,7 @@ import Container from '../components/ui/Container';
 import Eyebrow from '../components/ui/Eyebrow';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
+import SectionHeader from '../components/ui/SectionHeader';
 import SurfaceCard from '../components/ui/SurfaceCard';
 
 function FilterToolbar({
@@ -113,27 +114,13 @@ function ResourceDirectorySection({ directory }) {
       className="no-print"
     >
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            {intro?.eyebrow ? <Eyebrow>{intro.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title ui-section-title">
-              {intro?.title} {intro?.accent ? <span className="ui-hero__accent">{intro.accent}</span> : null}
-            </h2>
-            <div className="ui-copy">
-              {intro?.paragraphs?.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-          </div>
-
-          {intro?.aside ? (
-            <SurfaceCard as="aside" tone={intro.aside.tone || 'soft'}>
-              {intro.aside.label ? <p className="ui-fact-card__label">{intro.aside.label}</p> : null}
-              {intro.aside.title ? <h3 className="ui-card__title">{intro.aside.title}</h3> : null}
-              {intro.aside.copy ? <p className="ui-card__copy">{intro.aside.copy}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={intro?.eyebrow}
+          title={intro?.title}
+          titleAccent={intro?.accent}
+          paragraphs={intro?.paragraphs}
+          aside={intro?.aside}
+        />
 
         <FilterToolbar
           filters={filters}
@@ -293,27 +280,14 @@ function NetworkMapSection({ mapping }) {
       className="no-print"
     >
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            {intro?.eyebrow ? <Eyebrow>{intro.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title ui-section-title">
-              {intro?.title} {intro?.accent ? <span className="ui-hero__accent">{intro.accent}</span> : null}
-            </h2>
-            <div className="ui-copy">
-              {intro?.paragraphs?.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-          </div>
-
-          {intro?.aside ? (
-            <SurfaceCard as="aside" tone={intro.aside.tone || 'default'}>
-              {intro.aside.label ? <p className="ui-fact-card__label">{intro.aside.label}</p> : null}
-              {intro.aside.title ? <h3 className="ui-card__title">{intro.aside.title}</h3> : null}
-              {intro.aside.copy ? <p className="ui-card__copy">{intro.aside.copy}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={intro?.eyebrow}
+          title={intro?.title}
+          titleAccent={intro?.accent}
+          paragraphs={intro?.paragraphs}
+          aside={intro?.aside}
+          asideTone="default"
+        />
 
         <div className="ui-network-steps-grid">
           {steps.map((step, index) => (
