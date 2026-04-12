@@ -131,6 +131,7 @@ export const GRUNDLAGEN_CLUSTERS = [
   },
   {
     id: 'grundlagen-zusammenarbeit',
+    legalDisclaimer: true,
     eyebrow: 'Cluster 3',
     title: 'Zusammenarbeit, Mitsprache und der nächste sinnvolle Schritt',
     description:

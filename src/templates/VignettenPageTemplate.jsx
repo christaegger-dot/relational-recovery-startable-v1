@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Container from '../components/ui/Container';
 import Eyebrow from '../components/ui/Eyebrow';
+import LegalDisclaimer from '../components/ui/LegalDisclaimer';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
 import SectionHeader from '../components/ui/SectionHeader';
@@ -163,6 +164,9 @@ export default function VignettenPageTemplate({ hero, pageHeadingId, caseStudy, 
       <Container width="wide">
         <PageHero {...hero} headingId={pageHeadingId} />
       </Container>
+      <Section spacing="tight" surface="plain" className="no-print">
+        <LegalDisclaimer text="Die Trainingsfälle zeigen zugespitzte Situationen mit rechtlichen Bezügen (KESB, Melderecht). Im Arbeitsalltag gibt es häufig mehr Spielraum und Abstufungen. Die Darstellung dient der fachlichen Reflexion und ersetzt keine Rechtsberatung." />
+      </Section>
       <VignettenCaseSection caseStudy={caseStudy} />
       <VignettenDecisionSection decision={decision} />
       <VignettenNavigationSection navigation={navigation} />

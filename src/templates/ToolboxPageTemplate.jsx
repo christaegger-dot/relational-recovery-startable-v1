@@ -2,6 +2,7 @@ import { ChevronRight } from 'lucide-react';
 import Container from '../components/ui/Container';
 import Eyebrow from '../components/ui/Eyebrow';
 import Button from '../components/ui/Button';
+import LegalDisclaimer from '../components/ui/LegalDisclaimer';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
 import SectionHeader from '../components/ui/SectionHeader';
@@ -481,6 +482,10 @@ function ClusterSection({ cluster }) {
               </div>
             ) : null}
           </div>
+        ) : null}
+
+        {cluster.legalDisclaimer ? (
+          <LegalDisclaimer showCantonalNote={cluster.legalDisclaimerCantonal} />
         ) : null}
       </div>
     </Section>

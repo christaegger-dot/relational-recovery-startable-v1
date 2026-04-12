@@ -449,6 +449,8 @@ export default function ToolboxSection({
       {
         id: 'child-protection',
         sectionRef: childProtectionSectionRef,
+        legalDisclaimer: true,
+        legalDisclaimerCantonal: true,
         eyebrow: 'Kindeswohl',
         titlePrefix: 'Wann freiwillige Hilfe reicht und wann',
         titleAccent: 'Schutzschwellen enger werden',
@@ -505,6 +507,7 @@ export default function ToolboxSection({
       {
         id: 'rights',
         sectionRef: rightsSectionRef,
+        legalDisclaimer: true,
         eyebrow: 'Rolle und Rechte',
         titlePrefix: 'Schweigepflicht, Rückmeldung und',
         titleAccent: 'pragmatische Orientierung',
