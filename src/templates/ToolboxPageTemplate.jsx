@@ -226,7 +226,7 @@ function TriageSection({ triage }) {
               </div>
 
               {prompt.recommendation ? (
-                <div className={`ui-toolbox-feedback ui-editorial-card__action ${prompt.recommendation.className}`}>
+                <div role="status" aria-live="polite" className={`ui-toolbox-feedback ui-editorial-card__action ${prompt.recommendation.className}`}>
                   <div className="ui-note-panel__label">Einordnung</div>
                   <h4 className="ui-toolbox-feedback__title">{prompt.recommendation.title}</h4>
                   <p className="ui-toolbox-feedback__copy">{prompt.recommendation.text}</p>
@@ -518,7 +518,7 @@ export default function ToolboxPageTemplate({
   const heroTitleText = [hero?.title, hero?.accent].filter(Boolean).join(' ').trim();
 
   return (
-    <div className="ui-stack" role="region" aria-labelledby={pageHeadingId}>
+    <div className="ui-stack">
       <div className="ui-stack">
         <Container width="wide">
           {hero?.actions?.length ? (

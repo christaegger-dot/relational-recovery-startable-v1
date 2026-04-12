@@ -6,13 +6,14 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     host: '0.0.0.0',
-    allowedHosts: true,
+    allowedHosts: ['localhost'],
   },
   preview: {
     host: '0.0.0.0',
-    allowedHosts: true,
+    allowedHosts: ['localhost'],
   },
   build: {
+    sourcemap: false,
     target: 'es2020',
     rollupOptions: {
       output: {

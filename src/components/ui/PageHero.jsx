@@ -44,7 +44,7 @@ export default function PageHero({
             id={headingId}
             tabIndex={-1}
             aria-label={headingAriaLabel || (accent ? `${title} ${accent}` : undefined)}
-            className="ui-hero__title focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 focus-visible:ring-offset-4 focus-visible:ring-offset-white"
+            className="ui-hero__title"
           >
             {title} {accent ? <span className="ui-hero__accent">{accent}</span> : null}
           </h1>
