@@ -3,7 +3,7 @@ import path from 'node:path';
 import { chromium } from 'playwright-core';
 
 const baseUrl = process.argv[2] || 'http://127.0.0.1:5173';
-const outDir = process.argv[3] || '/home/ubuntu/rr-live-fix/qa-artifacts';
+const outDir = process.argv[3] || path.join(import.meta.dirname, '..', 'qa-artifacts');
 
 const breakpoints = [
   { name: 'mobile-375', width: 375, height: 2200, mobileMenu: true },
@@ -77,7 +77,7 @@ async function captureBreakpoint(browser, config) {
 }
 
 const browser = await chromium.launch({
-  executablePath: '/usr/bin/chromium',
+  executablePath: process.env.CHROMIUM_PATH || '/usr/bin/chromium',
   headless: true,
   args: ['--no-sandbox', '--disable-dev-shm-usage'],
 });
