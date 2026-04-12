@@ -246,4 +246,149 @@ Die folgenden Beobachtungen gehören nicht in diesen Audit, werden aber für sp�
 
 ---
 
-*Phase 1 abgeschlossen. Warte auf Freigabe für Phase 2 (Diagnose und Optionen).*
+## Phase 1b -- Inventur-Nachtrag: Endnutzer- vs. Meta-Text
+
+### 1b.1 Klassifizierung pro Template
+
+| # | Seite (Template) | Kategorie | Anteil E/M | Wörter gesamt | Wörter Endnutzer | Wörter Meta |
+|---|---|---|---|---|---|---|
+| 1 | **HomeLanding** | gemischt | 55/45 | ~450 | ~250 | ~200 |
+| 2 | **Lernmodule** | gemischt | 40/60 | ~550 | ~220 | ~330 |
+| 3 | **Vignetten** | endnutzer | 90/10 | ~500 | ~450 | ~50 |
+| 4 | **Glossar** | gemischt | 75/25 | ~950 | ~710 | ~240 |
+| 5 | **Grundlagen** | endnutzer | 95/5 | ~1800 | ~1710 | ~90 |
+| 6 | **Evidenz** | endnutzer | 90/10 | ~4500 | ~4050 | ~450 |
+| 7 | **Toolbox** | endnutzer | 85/15 | ~3200 | ~2720 | ~480 |
+| 8 | **Netzwerk** | gemischt | 60/40 | ~1400 | ~840 | ~560 |
+| 9 | **AppShell** | endnutzer | 95/5 | ~80 | ~76 | ~4 |
+
+#### Detailbelege
+
+**HomeLandingTemplate (gemischt 55/45)**
+
+| Feld | Kat. | Beispiel (max 15 W.) | Quelle |
+|---|---|---|---|
+| hero.lead | endnutzer | "Interaktive Fachressourcen fuer die Begleitung von Eltern..." | HomeLandingTemplate.jsx |
+| sections[0].description | meta | "Das Seitentemplate uebersetzt diese Logik in wiederverwendbare, editoriale Bausteine." | HomeLandingTemplate.jsx |
+| sections[1].title | meta | "Die Startseite wird zur operativen Schaltflaeche des neuen Systems." | HomeLandingTemplate.jsx |
+| sections[1].aside.label | meta | "Rebuild-Nutzen" | HomeLandingTemplate.jsx |
+| sections[2].cards[0].copy | endnutzer | "Geeignet, wenn Familiendynamik, kindliche Perspektive... eingeordnet werden sollen." | HomeLandingTemplate.jsx |
+
+**Lernmodule / ElearningSection (gemischt 40/60) -- stärkster Meta-Anteil**
+
+| Feld | Kat. | Beispiel | Quelle |
+|---|---|---|---|
+| sequence.description | meta | "Die neue Seitenstruktur uebersetzt die bisherige Elearning-Sektion in eine wiederverwendbare Learning-Architektur." | ElearningSection.jsx |
+| modulesSection.description | meta | "Der Modulbereich trennt wiederkehrende Struktur von konkreten Inhalten." | ElearningSection.jsx |
+| E_MODULES[0].storyboard | endnutzer | "Emotionale Barrieren als biologische Stressreaktion validieren..." | learningContent.js |
+| E_MODULES[1].quiz | endnutzer | "Warum koennen Metaphern hilfreich sein?" | learningContent.js |
+
+**Glossar (gemischt 75/25)**
+
+| Feld | Kat. | Beispiel | Quelle |
+|---|---|---|---|
+| GLOSSARY_INTRO.description | meta | "Die neue Glossar-Seite fuehrt einen statisch-redaktionellen Wissensbereich in die Seitentyp-Architektur ein." | glossaryContent.js |
+| GLOSSARY_GROUPS[0].terms[0].definition | endnutzer | "Ein Arbeitsverstaendnis, das Erholung nicht nur als individuelle Symptomveraenderung versteht..." | glossaryContent.js |
+
+**Netzwerk (gemischt 60/40)**
+
+| Feld | Kat. | Beispiel | Quelle |
+|---|---|---|---|
+| hero.lead | meta | "Das neue Seitentyp-System trennt dabei Suchlogik, Fachstellenverzeichnis und Netzwerkkarte sauber voneinander." | NetworkSection.jsx |
+| directory.intro.paragraphs[1] | meta | "Die neue Seitenarchitektur loest das bisher monolithische Layout in einen wiederverwendbaren Directory-Baustein auf." | NetworkSection.jsx |
+| RESOURCE_DATA[*] | endnutzer | 16 Fachstellen mit Beschreibungen und Links | networkContent.js |
+| NETWORK_MAP_QUESTIONS | endnutzer | "Wer gehoert zu deiner Kernfamilie?" | networkContent.js |
+
+**Grundlagen (endnutzer 95/5)**
+
+| Feld | Kat. | Beispiel | Quelle |
+|---|---|---|---|
+| GRUNDLAGEN_INTRO.eyebrow | meta | "Arbeitslogik" | grundlagenContent.js |
+| FAQ Cluster 1-3 (alle) | endnutzer | "Bin ich schuld daran, dass es der anderen Person schlechter geht?" | grundlagenContent.js |
+
+**Evidenz (endnutzer 90/10)**
+
+| Feld | Kat. | Beispiel | Quelle |
+|---|---|---|---|
+| INTERVENTION_PROGRAM_POINTS[2] | meta-Anflug | "Fuer die Website reicht eine kompakte Einordnung..." | evidenceContent.js |
+| Alle 35+ Daten-Exports | endnutzer | Durchgehend fachlich hochwertig | evidenceContent.js |
+
+**Toolbox (endnutzer 85/15)**
+
+| Feld | Kat. | Beispiel | Quelle |
+|---|---|---|---|
+| pathway.description | meta | "Die Toolbox fuehrt nicht linear durch Textbloecke, sondern ueber eine klare klinische Reihenfolge..." | ToolboxSection.jsx |
+| ACUTE_CRISIS_STEPS[0] | endnutzer | "Suizidgedanken oder akute Gefaehrdung ruhig und direkt ansprechen." | toolboxContent.js |
+
+---
+
+### 1b.2 Aggregierte Sicht
+
+| Kategorie | Anzahl Templates | Geschätzte Wörter | Anteil am Gesamttext |
+|---|---|---|---|
+| **Reine Endnutzer-Templates** (>85%) | 5 (Grundlagen, Evidenz, Toolbox, Vignetten, AppShell) | ~10'006 | ~75% |
+| **Gemischte Templates** (25-60% Meta) | 4 (HomeLanding, Lernmodule, Glossar, Netzwerk) | ~3'350 | ~25% |
+| **Reine Meta-Templates** (>70% Meta) | 0 | -- | -- |
+
+| Textkategorie | Geschätzte Wörter | Anteil |
+|---|---|---|
+| **Endnutzer-Text** | ~11'026 | ~82% |
+| **Meta-Text** | ~2'404 | ~18% |
+| **Gesamt** | ~13'430 | 100% |
+
+**Kein Template ist zu 100% Meta-Text.** Selbst die Lernmodule-Seite (schwerster Fall, 60% Meta) enthält wertvolle endnutzer-taugliche Modulinhalte. Das Problem ist nicht, dass Templates leer sind, sondern dass ihre **Rahmentexte** (Hero-Leads, Section-Descriptions, Eyebrows, Aside-Copies) über die Seite selbst statt über den Inhalt sprechen.
+
+---
+
+### 1b.3 Systematisches Verzeichnis der Meta-Text-Stellen
+
+Die folgenden 14 konkreten Textstellen sind Meta-Sprache ohne Endnutzer-Informationswert:
+
+| # | Textstelle (gekürzt) | Quelle | Marker-Typ |
+|---|---|---|---|
+| M1 | "Das Seitentemplate uebersetzt diese Logik in wiederverwendbare, editoriale Bausteine." | HomeLanding sections[0].description | Template-Beschreibung |
+| M2 | "Die Startseite wird zur operativen Schaltflaeche des neuen Systems." | HomeLanding sections[1].title | Rebuild-Sprache |
+| M3 | "...fuehrt die Landingpage jetzt gezielt in jene Seitentypen, die bereits im Rebuild tragfaehig angelegt sind." | HomeLanding sections[1].description | Rebuild-Sprache |
+| M4 | "Rebuild-Nutzen" | HomeLanding sections[1].aside.label | Meta-Label |
+| M5 | "Wenn Einstiege bereits im Template modelliert sind..." | HomeLanding sections[1].aside.copy | Template-Beschreibung |
+| M6 | "Die Startseite markiert jetzt auch fachliche Rollen klarer." | HomeLanding sections[2].title | Meta-Beschreibung |
+| M7 | "Die neue Seitenstruktur uebersetzt die bisherige Elearning-Sektion in eine wiederverwendbare Learning-Architektur." | ElearningSection sequence.description | Architektur-Beschreibung |
+| M8 | "Die Inhalte sind jetzt als eigener Seitentyp organisiert." | ElearningSection modulesSection.title | Seitentyp-Beschreibung |
+| M9 | "Der Modulbereich trennt wiederkehrende Struktur von konkreten Inhalten..." | ElearningSection modulesSection.description | Architektur-Beschreibung |
+| M10 | "Die neue Glossar-Seite fuehrt einen statisch-redaktionellen Wissensbereich in die Seitentyp-Architektur ein." | glossaryContent.js GLOSSARY_INTRO.description | Seitentyp-Architektur |
+| M11 | "Das neue Seitentyp-System trennt dabei Suchlogik, Fachstellenverzeichnis und Netzwerkkarte sauber voneinander." | NetworkSection hero.lead | Seitentyp-System |
+| M12 | "Die neue Seitenarchitektur loest das bisher monolithische Layout in einen wiederverwendbaren Directory-Baustein auf." | NetworkSection directory.intro.paragraphs[1] | Architektur-Beschreibung |
+| M13 | "Didaktische Logik" (Eyebrow) | ElearningSection sequence.eyebrow | Meta-Jargon als Label |
+| M14 | "Arbeitslogik" (Eyebrow, 4x verwendet) | GLOSSARY_INTRO, GRUNDLAGEN_INTRO, HomeLanding, ToolboxSection | Pattern: Meta-Label |
+
+---
+
+### 1b.4 Findings für andere Audits
+
+#### Audit 03 (KESB/Kindesschutz)
+
+| Stelle | Befund | Quelle |
+|---|---|---|
+| "Proaktive Gefaehrdungsmeldung (KESB)" als Antwortoption | "Proaktiv" koennte als empfohlenes Vorgehen missverstanden werden; Vignettenlogik stuft es als "verfruehtes" Vorgehen ein | learningContent.js, VIGNETTEN[0].options[0] |
+| "Gefaehrdungsmeldung an die KESB (Melderecht nach Art. 314c ZGB)" | Korrekte Rechtsreferenz | learningContent.js, VIGNETTEN[1].options[0] |
+| "Eine besorgte Person muss eine Gefaehrdung nicht beweisen." | Fachlich korrekt, steht aber isoliert und koennte als Aufforderung zu Meldungen gelesen werden | toolboxContent.js, CHILD_PROTECTION_THRESHOLDS[2] |
+| "Aengste vor KESB, Bewertung oder Sorgerechtsverlust ansprechbar machen" | "Sorgerechtsverlust" ist emotional geladen und kann stigmatisierend wirken | evidenceContent.js, HELP_BARRIER_PRACTICE_POINTS[0] |
+
+#### Audit 05 (Vignetten)
+
+| Stelle | Befund | Quelle |
+|---|---|---|
+| "Herr S. (40)...verweigert dem Kind seit 24 Stunden Nahrung aufgrund wahnhafter Befuerchtungen" | "Verweigert" impliziert Intention (Agentivität), nicht Symptomfolge. Besser: "Das Kind hat seit 24 Stunden keine Nahrung erhalten" | learningContent.js, VIGNETTEN[1].description |
+| "Kinder als Hochrisikogruppe" (Panel-Titel) | Epidemiologisch korrekt, als Überschrift potenziell stigmatisierend | evidenceContent.js, CHILD_EXPERIENCE_PANELS[0].title |
+
+#### Audit 06 (Sprache)
+
+| Stelle | Befund | Quelle |
+|---|---|---|
+| "Aeussere Ebene" mit grossem Ae | Inkonsistent mit Schweizer ss-Schreibung (korrekt wäre "Äussere" oder "äussere") | NetworkPageTemplate.jsx |
+| "nicht paternalistisch" in Hero-Stats | Gutes Signal, aber Formulierung selbst leicht paternalistisch im Ton | grundlagenContent.js, GRUNDLAGEN_HERO.stats |
+| Meta-Texte M1-M14 | Müssen im Sprach-Audit als erste Priorität behandelt werden | Siehe Verzeichnis oben |
+
+---
+
+*Phase 1b abgeschlossen. Warte auf Freigabe für Phase 2 (Diagnose und vier Optionen).*
