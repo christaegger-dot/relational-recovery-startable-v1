@@ -12,6 +12,30 @@ import {
 import NetworkPageTemplate from '../templates/NetworkPageTemplate';
 import { getPageHeadingId } from '../utils/appHelpers';
 
+const LENS_SUMMARY = {
+  gap: 'Die Karte macht sichtbar, wo Mitwissende, Betreuung oder formelle Absicherung noch fehlen.',
+  private: 'Im Fokus stehen tragende persönliche Beziehungen und emotionale Nähe im Alltag.',
+  support: 'Im Fokus stehen alltagsnahe Stützen wie Schule, Betreuung und entlastende Aussenbezüge.',
+  formal: 'Im Fokus stehen professionelle Kontakte und institutionelle Mitverantwortung.',
+  all: 'Das Gesamtbild verbindet private, unterstützende, formelle und noch fehlende Netzwerkbausteine.',
+};
+
+const LENS_NEXT_STEP = {
+  gap: 'Nächster Schritt: fehlende Mitwissende, Kinderbetreuung und formelle Absicherung zuerst konkret benennen.',
+  private: 'Nächster Schritt: klären, wer wirklich informiert ist und in belasteten Phasen kurzfristig mittragen kann.',
+  support: 'Nächster Schritt: Tagesstruktur, Schule, Betreuung und entlastende Aussenkontakte verbindlicher verankern.',
+  formal: 'Nächster Schritt: Zuständigkeiten, Erreichbarkeit und Rückmeldewege mit Fachstellen konkretisieren.',
+  all: 'Nächster Schritt: Mischung, Lücken und Erreichbarkeit gemeinsam lesen und daraus konkrete Absprachen ableiten.',
+};
+
+const NODE_COUNTS = NETWORK_MAP_TEMPLATE_NODES.reduce(
+  (acc, node) => {
+    if (node.tone in acc) acc[node.tone] += 1;
+    return acc;
+  },
+  { private: 0, support: 0, formal: 0, gap: 0 }
+);
+
 export default function NetworkSection({ searchTerm, setSearchTerm, activeResourceFilter, setActiveResourceFilter }) {
   const [networkLens, setNetworkLens] = useState('all');
 
@@ -134,48 +158,30 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
     counts: [
       {
         label: 'Privat',
-        value: String(NETWORK_MAP_TEMPLATE_NODES.filter((node) => node.tone === 'private').length),
+        value: String(NODE_COUNTS.private),
         note: 'emotionale Nähe und Alltag',
         tone: 'soft',
       },
       {
         label: 'Alltag',
-        value: String(NETWORK_MAP_TEMPLATE_NODES.filter((node) => node.tone === 'support').length),
+        value: String(NODE_COUNTS.support),
         note: 'Schule, Betreuung, Aussenkontakte',
         tone: 'soft',
       },
       {
         label: 'Formal',
-        value: String(NETWORK_MAP_TEMPLATE_NODES.filter((node) => node.tone === 'formal').length),
+        value: String(NODE_COUNTS.formal),
         note: 'professionelle und institutionelle Kontakte',
       },
       {
         label: 'Lücken',
-        value: String(NETWORK_MAP_TEMPLATE_NODES.filter((node) => node.tone === 'gap').length),
+        value: String(NODE_COUNTS.gap),
         note: 'fehlende Mitwissende oder Absicherung',
         tone: 'soft',
       },
     ],
-    lensSummary:
-      networkLens === 'gap'
-        ? 'Die Karte macht sichtbar, wo Mitwissende, Betreuung oder formelle Absicherung noch fehlen.'
-        : networkLens === 'private'
-          ? 'Im Fokus stehen tragende persönliche Beziehungen und emotionale Nähe im Alltag.'
-          : networkLens === 'support'
-            ? 'Im Fokus stehen alltagsnahe Stützen wie Schule, Betreuung und entlastende Aussenbezüge.'
-            : networkLens === 'formal'
-              ? 'Im Fokus stehen professionelle Kontakte und institutionelle Mitverantwortung.'
-              : 'Das Gesamtbild verbindet private, unterstützende, formelle und noch fehlende Netzwerkbausteine.',
-    nextStepText:
-      networkLens === 'gap'
-        ? 'Nächster Schritt: fehlende Mitwissende, Kinderbetreuung und formelle Absicherung zuerst konkret benennen.'
-        : networkLens === 'private'
-          ? 'Nächster Schritt: klären, wer wirklich informiert ist und in belasteten Phasen kurzfristig mittragen kann.'
-          : networkLens === 'support'
-            ? 'Nächster Schritt: Tagesstruktur, Schule, Betreuung und entlastende Aussenkontakte verbindlicher verankern.'
-            : networkLens === 'formal'
-              ? 'Nächster Schritt: Zuständigkeiten, Erreichbarkeit und Rückmeldewege mit Fachstellen konkretisieren.'
-              : 'Nächster Schritt: Mischung, Lücken und Erreichbarkeit gemeinsam lesen und daraus konkrete Absprachen ableiten.',
+    lensSummary: LENS_SUMMARY[networkLens] ?? LENS_SUMMARY.all,
+    nextStepText: LENS_NEXT_STEP[networkLens] ?? LENS_NEXT_STEP.all,
   };
 
   return <NetworkPageTemplate hero={hero} pageHeadingId={getPageHeadingId('netzwerk')} directory={directory} mapping={mapping} />;

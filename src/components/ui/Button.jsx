@@ -1,3 +1,12 @@
+const VARIANT_CLASSES = {
+  primary: 'ui-button ui-button--primary',
+  secondary: 'ui-button ui-button--secondary',
+  subtle: 'ui-button ui-button--subtle',
+  ghost: 'ui-button ui-button--ghost',
+  danger: 'ui-button ui-button--danger',
+  emergency: 'ui-button ui-button--emergency',
+};
+
 export default function Button({
   as,
   href,
@@ -7,18 +16,7 @@ export default function Button({
   type = 'button',
   ...props
 }) {
-  const variantClass =
-    variant === 'secondary'
-      ? 'ui-button ui-button--secondary'
-      : variant === 'subtle'
-        ? 'ui-button ui-button--subtle'
-        : variant === 'ghost'
-          ? 'ui-button ui-button--ghost'
-          : variant === 'danger'
-            ? 'ui-button ui-button--danger'
-            : variant === 'emergency'
-              ? 'ui-button ui-button--emergency'
-              : 'ui-button ui-button--primary';
+  const variantClass = VARIANT_CLASSES[variant] ?? VARIANT_CLASSES.primary;
 
   const classes = [variantClass, className].filter(Boolean).join(' ');
   const Tag = as || (href ? 'a' : 'button');

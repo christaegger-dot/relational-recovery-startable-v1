@@ -209,28 +209,18 @@ export const getInitialAppState = (storageKey) => {
   };
 };
 
-export const getPageHeadingId = (tab) => {
-  switch (tab) {
-    case 'start':
-      return 'page-heading-start';
-    case 'lernmodule':
-      return 'page-heading-lernmodule';
-    case 'vignetten':
-      return 'page-heading-vignetten';
-    case 'toolbox':
-      return 'page-heading-toolbox';
-    case 'netzwerk':
-      return 'page-heading-netzwerk';
-    case 'evidenz':
-      return 'page-heading-evidenz';
-    case 'glossar':
-      return 'page-heading-glossar';
-    case 'grundlagen':
-      return 'page-heading-grundlagen';
-    default:
-      return 'page-heading-start';
-  }
+const PAGE_HEADING_IDS = {
+  start: 'page-heading-start',
+  lernmodule: 'page-heading-lernmodule',
+  vignetten: 'page-heading-vignetten',
+  toolbox: 'page-heading-toolbox',
+  netzwerk: 'page-heading-netzwerk',
+  evidenz: 'page-heading-evidenz',
+  glossar: 'page-heading-glossar',
+  grundlagen: 'page-heading-grundlagen',
 };
+
+export const getPageHeadingId = (tab) => PAGE_HEADING_IDS[tab] ?? 'page-heading-start';
 
 
 export const getRiskLabel = (risk) => {
