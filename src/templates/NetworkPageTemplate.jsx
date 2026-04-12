@@ -193,7 +193,7 @@ function ResourceDirectorySection({ directory }) {
 
 function MapLensButtons({ lenses = [], activeLens, onLensChange }) {
   return (
-    <div className="ui-chip-row">
+    <div className="ui-chip-row" role="group" aria-label="Netzwerkkarte Lesart wählen">
       {lenses.map((lens) => {
         const isActive = activeLens === lens.id;
 
@@ -356,10 +356,10 @@ function NetworkMapSection({ mapping }) {
 
             <div className="ui-network-map-shell">
               <div>
-                <div className="ui-card--outline ui-network-map-stage is-desktop">
-                  <div className="ui-network-map-center-shell" />
-                  <div className="ui-network-map-center-orbit" />
-                  <div className="ui-network-map-ring" />
+                <div className="ui-card--outline ui-network-map-stage is-desktop" role="img" aria-label="Netzwerkkarte: visuelle Darstellung der Bezugspersonen rund um Kind und Familie">
+                  <div className="ui-network-map-center-shell" aria-hidden="true" />
+                  <div className="ui-network-map-center-orbit" aria-hidden="true" />
+                  <div className="ui-network-map-ring" aria-hidden="true" />
 
                   <div className="ui-network-map-center">
                     <div>

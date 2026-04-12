@@ -49,7 +49,7 @@ const Header = memo(function Header({
             RR
           </div>
           <div className="ui-brand__copy">
-            <h1 className="ui-brand__title">Relational Recovery</h1>
+            <span className="ui-brand__title">Relational Recovery</span>
             <p className="ui-kicker ui-brand__meta">Schweizer Fachportal</p>
           </div>
         </button>

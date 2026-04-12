@@ -315,7 +315,7 @@ function PracticeBlocksSection({ practice }) {
           ) : null}
         </div>
 
-        <div className="ui-chip-row" aria-label={practice.filterAriaLabel}>
+        <div className="ui-chip-row" role="group" aria-label={practice.filterAriaLabel}>
           {practice.filters.map((filter) => (
             <Button
               key={filter.id}
