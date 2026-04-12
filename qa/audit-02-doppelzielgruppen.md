@@ -629,3 +629,40 @@ Auf einen dezenten visuellen Marker (z.B. Eyebrow "Für Fachpersonen") wurde in 
 ### 3.3 Keine inhaltlichen Änderungen
 
 Keine Texte wurden umgeschrieben, keine Meta-Stellen angefasst, keine Anredeformen geändert. Die 14 inventarisierten Meta-Stellen (M1-M14) und die Anrede-Harmonisierung werden als Arbeitspakete an Audit 06 (Sprache) übergeben.
+
+---
+
+## Phase 4 -- Verifikation
+
+| Prüfung | Ergebnis |
+|---|---|
+| `npm run build` | Bestanden. Build in 783ms, keine Fehler. |
+| `npm run lint` | Bestanden. Keine ESLint-Fehler. |
+| `npm run test:e2e` | **Nicht lokal ausführbar.** Vorbestehendes Problem: `playwright.config.js` enthält einen hartkodierten Chromium-Pfad (`/opt/pw-browsers/chromium-1194/chrome-linux/chrome`), der nur auf dem CI-System existiert. Kein Regressionsfehler -- alle 29 Tests scheitern am Browser-Launch, nicht an Testlogik. Bereits als Befund 2.2 im Best-Practices-Audit dokumentiert. |
+| Visuelle Regression | Keine. Die einzige Code-Änderung (`primaryAudience`-Felder in `TAB_ITEMS`) hat keinen Einfluss auf das Rendering -- die Felder werden von keiner Komponente gelesen. |
+| Bericht vollständig | Ja: Inventur (Phase 1), Inventur-Nachtrag (Phase 1b), Diagnose und drei Optionen (Phase 2), Strategische Entscheidung, Umsetzung (Phase 3), Verifikation (Phase 4). |
+
+### Zusammenfassung der Deliverables
+
+1. `qa/audit-02-doppelzielgruppen.md` -- vollständiger Bericht mit allen Phasen
+2. `src/data/appShellContent.js` -- `primaryAudience`-Metadaten in allen 8 `TAB_ITEMS`
+3. Branch `audit/02-doppelzielgruppen` mit sauberer Commit-Historie:
+   - `audit(02): inventur doppelzielgruppen`
+   - `audit(02): inventur-nachtrag endnutzer vs meta`
+   - `audit(02): diagnose und drei optionen`
+   - `audit(02): primaryAudience fuer alle templates`
+   - `audit(02): bericht phase 3 -- strategische entscheidung und umsetzung`
+   - `audit(02): verifikation und abschluss`
+
+### Übergabe an Folge-Audits
+
+| Folge-Audit | Übergabeartefakt |
+|---|---|
+| **03 KESB** | 4 inventarisierte rechtlich sensible Stellen (Phase 1b, Abschnitt 1b.4) |
+| **05 Vignetten** | 2 inventarisierte Stigma-Risiken (Phase 1b, Abschnitt 1b.4) |
+| **06 Sprache** | 14 Meta-Text-Stellen (M1-M14), Anrede-Vorschlag inkl. Mikro-Ergänzung, primaryAudience-Zuordnungen |
+| **08 Visual** | Visueller Zielgruppen-Marker als Ticket (in Phase 3 bewusst aufgeschoben) |
+
+---
+
+*Audit 02 abgeschlossen.*
