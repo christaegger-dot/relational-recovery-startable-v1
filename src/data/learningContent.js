@@ -15,10 +15,10 @@ export const VIGNETTEN = [
       },
       {
         id: 'opt2',
-        label: 'Installation einer SPF (sorgerechtswahrend)',
+        label: 'Sozialpädagogische Familienbegleitung (SPF) als freiwillige Hilfe',
         isCorrect: true,
         feedback:
-          'Korrekt. Dieser Ansatz entlastet das Familiensystem, schützt das Kind und erhält die elterliche Autonomie so weit wie möglich.',
+          'Korrekt. Eine SPF entlastet das Familiensystem und schützt das Kind, ohne in die elterliche Sorge einzugreifen. SPF ist kein eigener ZGB-Massnahmetyp, sondern eine ambulante Hilfe, die freiwillig oder über Art. 307/308 ZGB begleitet werden kann. Im Kanton Zürich ist sie für Eltern grundsätzlich kostenlos.',
       },
     ],
   },
@@ -34,7 +34,7 @@ export const VIGNETTEN = [
         label: 'Gefährdungsmeldung an die KESB (Melderecht nach Art. 314c ZGB)',
         isCorrect: true,
         feedback:
-          'Korrekt. Wenn der Dialog zur Sicherung des Kindeswohls nicht ausreicht, braucht es eine unmittelbare Sicherung von Schutz und Versorgung. Art. 314c ZGB beschreibt dabei das Melderecht, nicht die eigentliche Schutzmassnahme.',
+          'Korrekt. In dieser zugespitzten Situation reicht der Dialog zur Sicherung des Kindeswohls nicht aus. Art. 314c ZGB regelt das Melderecht -- die Meldung selbst ist noch keine Massnahme. Was danach geschieht, richtet sich nach Art. 307-310 ZGB: Die KESB prüft die Situation und trifft verhältnismässige Massnahmen. Die häufigste ist die Beistandschaft (Art. 308), nicht die Fremdplatzierung.',
       },
       {
         id: 'opt2',
