@@ -149,9 +149,32 @@ Dieses Dokument ist die Übergabe an die menschliche juristische Validierung. Es
 
 ---
 
-## Nächste Schritte
+## Status: Validiert (12.04.2026)
 
-1. Dieses Dokument an die PUK-Rechtsberatung oder eine Familienrechts-Anwältin übergeben
-2. Pro Stelle/Lücke die Antwort dokumentieren (kann direkt in dieses Dokument eingetragen werden)
-3. Nach Validierung: Stubs in den Daten-Dateien durch validierten Inhalt ersetzen
-4. Erneuter Review der Reformulierungen R1-R5 im Licht der juristischen Rückmeldungen
+Juristische Faktenbasis mit 50 Quellen von der Auftraggeberin übergeben.
+Alle Stubs (L1-L5) und fragwürdigen Stellen (J1-J3) konnten auf dieser
+Grundlage inhaltlich gefüllt bzw. korrigiert werden.
+
+Siehe `qa/juristische-faktenbasis-kindesschutz.md` für das Referenzdokument.
+
+### Umgesetzte Korrekturen
+
+| Stelle | Korrektur | Quelle (Faktenbasis-Abschnitt) |
+|---|---|---|
+| J1 (SPF) | "sorgerechtswahrend" → "freiwillige Hilfe", SPF aufgelöst | Abschnitt 6 |
+| J2 (Art. 314c Scope) | Bestätigt: Klinikmitarbeitende = meldeberechtigt | Abschnitt 4 |
+| J3 (Einzige Rechtsgrundlage) | Feedback erweitert um Stufenfolge und Beistandschaft | Abschnitte 1, 4, 7 |
+| L1 (Stufenfolge) | 4 Stufen mit KOKES-Statistik und Quellenangaben | Abschnitt 1 |
+| L2 (Beistandschaft) | Glossareintrag mit Abs. 1/2/3 und ZH-Praxis | Abschnitt 2 |
+| L3 (Rechte) | 4 FAQs: Selbstmeldung, Akteneinsicht, Beschwerde, Rechtsbeistand | Abschnitt 3 |
+| L4 (Melderecht/Meldepflicht) | Glossareintrag mit Art. 314c/314d und Art. 321 StGB | Abschnitt 4 |
+
+### Verbleibende "zu validieren"-Punkte aus der Faktenbasis
+
+Die folgenden Punkte sind in der Faktenbasis als "zu validieren" markiert. Sie betreffen Feinheiten, die für den aktuellen Portaltext nicht kritisch sind, aber bei einer späteren Vertiefung geprüft werden sollten:
+
+1. Ob die KOKES-Bestandsstatistik als Häufigkeitsargument in vereinfachter Form tragfähig ist
+2. Ob Art. 308 Abs. 3 (Beschränkung der Sorge) in vereinfachten Portaltexten erwähnt werden soll
+3. Welche PUK-Berufsgruppen direkte Berufsgeheimnisträger vs. Hilfspersonen sind
+4. Ob Art. 453 ZGB im Portaltext erwähnt werden soll
+5. Zürcher Rechtsmittelzug (Bezirksrat → Obergericht) angesichts möglicher Änderungen

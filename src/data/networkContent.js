@@ -249,21 +249,38 @@ export const LEGAL_COUNSELING_CATEGORIES = [
 ];
 
 export const LEGAL_COUNSELING_RESOURCES = [
-  // Kuratierte Liste folgt. Die folgenden 2 Einträge sind Platzhalter.
+  // Quelle: Juristische Faktenbasis Abschnitte 2, 3, 5
   {
     name: 'Pro Mente Sana',
     category: 'psychosozial',
-    info: 'Kostenlose Beratung zu psychosozialen und rechtlichen Fragen.',
+    info: 'Kostenlose Beratung zu psychosozialen und rechtlichen Fragen im Kindes- und Erwachsenenschutz. Unabhängig von Kanton und Institution.',
     phone: '0848 800 858',
     link: 'https://www.promentesana.ch',
-    _status: 'PLACEHOLDER',
   },
   {
     name: 'Pro Juventute Elternberatung',
     category: 'elternberatung',
-    info: 'Kostenlose, anonyme Beratung für Eltern.',
+    info: 'Kostenlose, anonyme Beratung für Eltern, 24/7 erreichbar. Niederschwellige psychosoziale Orientierung, nicht primär rechtsberatend.',
     phone: '058 261 61 61',
-    link: 'https://www.projuventute.ch',
-    _status: 'PLACEHOLDER',
+    link: 'https://www.projuventute.ch/de/elternberatung',
+  },
+  {
+    name: 'kjz Kanton Zürich -- Einzelfallberatung Kindesschutz',
+    category: 'elternberatung',
+    info: 'Anonyme Fallberatung in Kindesschutzfragen für Fachpersonen und Angehörige. 14 Standorte im Kanton Zürich. Die Anonymität der Betroffenen wird gewahrt.',
+    link: 'https://www.zh.ch/de/familie/angebote-fuer-familien-mit-kindern/kinder-und-jugendhilfezentren.html',
+  },
+  {
+    name: 'Verfahren und Rechtsschutz bei der KESB (Stadt Zürich)',
+    category: 'rechtspflege',
+    info: 'Offizielle Information zu Verfahrensrechten, Akteneinsicht, Beschwerde und unentgeltlicher Rechtspflege im KESB-Verfahren.',
+    link: 'https://www.stadt-zuerich.ch/de/lebenslagen/kindes-und-erwachsenenschutz/verfahren-rechtsschutz.html',
+  },
+  {
+    name: '147 -- Beratung für Kinder und Jugendliche',
+    category: 'elternberatung',
+    info: 'Kostenloses und vertrauliches Angebot von Pro Juventute für Kinder und Jugendliche. Auch per Chat und SMS erreichbar.',
+    phone: '147',
+    link: 'https://www.147.ch/',
   },
 ];
