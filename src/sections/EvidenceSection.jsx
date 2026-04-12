@@ -129,17 +129,17 @@ export default function EvidenceSection({ downloadResources = [] }) {
       badges: ['Kapitel 1 Relevanz', 'Kapitel 2 Psychoedukation', 'Kapitel 3 Elternarbeit', 'Kapitel 4 Vernetzung', 'Kapitel 5 Materialien'],
     },
     items: [
-      { id: 'evidence-understand', label: '1 Verstehen', note: 'Relevanz, Elternschaft, Familiensystem, kindliches Erleben' },
-      { id: 'evidence-psychoeducation', label: '2 Mit Kindern sprechen', note: 'Vorbereitung, Alterslogik, Schwierigkeitspunkte und Praxis' },
-      { id: 'evidence-parentwork', label: '3 Mit Eltern arbeiten', note: 'Barrieren, Kooperation, Scham und alltagsnahe Entlastung' },
-      { id: 'evidence-interventions', label: '4 Handeln und vernetzen', note: 'Unterstützungsangebote, klinische Schritte und nächste Interventionen' },
-      { id: 'evidence-materials', label: '5 Materialien', note: 'Downloads, Literatur, Medien und externe Hilfen' },
+      { id: 'evidenz-verstehen', label: '1 Verstehen', note: 'Relevanz, Elternschaft, Familiensystem, kindliches Erleben' },
+      { id: 'evidenz-mit-kindern-sprechen', label: '2 Mit Kindern sprechen', note: 'Vorbereitung, Alterslogik, Schwierigkeitspunkte und Praxis' },
+      { id: 'evidenz-mit-eltern-arbeiten', label: '3 Mit Eltern arbeiten', note: 'Barrieren, Kooperation, Scham und alltagsnahe Entlastung' },
+      { id: 'evidenz-handeln-und-vernetzen', label: '4 Handeln und vernetzen', note: 'Unterstützungsangebote, klinische Schritte und nächste Interventionen' },
+      { id: 'evidenz-materialien', label: '5 Materialien', note: 'Downloads, Literatur, Medien und externe Hilfen' },
     ],
   };
 
   const zones = [
     {
-      id: 'evidence-understand',
+      id: 'evidenz-verstehen',
       eyebrow: 'Kapitel 1',
       title: 'Warum das Thema',
       accent: 'früh in die Behandlung gehört',
@@ -186,7 +186,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       },
     },
     {
-      id: 'evidence-psychoeducation',
+      id: 'evidenz-mit-kindern-sprechen',
       eyebrow: 'Kapitel 2',
       title: 'Mit Kindern sprechen –',
       accent: 'klar, altersgerecht und entlastend',
@@ -233,7 +233,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       },
     },
     {
-      id: 'evidence-parentwork',
+      id: 'evidenz-mit-eltern-arbeiten',
       eyebrow: 'Kapitel 3',
       title: 'Mit Eltern arbeiten –',
       accent: 'respektvoll, transparent und alltagsnah',
@@ -281,7 +281,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       },
     },
     {
-      id: 'evidence-interventions',
+      id: 'evidenz-handeln-und-vernetzen',
       eyebrow: 'Kapitel 4',
       title: 'Handeln und vernetzen –',
       accent: 'mit Schutzfaktoren, Angeboten und nächsten Schritten',
@@ -324,7 +324,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
   ];
 
   const closingSection = createClosingSectionModel({
-    id: 'evidence-materials',
+    id: 'evidenz-materialien',
     eyebrow: 'Kapitel 5',
     title: 'Materialien, Ressourcen und',
     accent: 'Weiterarbeit',
@@ -378,5 +378,5 @@ export default function EvidenceSection({ downloadResources = [] }) {
     notes: MEDIA_NOTES,
   });
 
-  return <EvidencePageTemplate hero={hero} pageHeadingId={getPageHeadingId('evidence')} chapterOverview={chapterOverview} zones={zones} closingSection={closingSection} />;
+  return <EvidencePageTemplate hero={hero} pageHeadingId={getPageHeadingId('evidenz')} chapterOverview={chapterOverview} zones={zones} closingSection={closingSection} />;
 }

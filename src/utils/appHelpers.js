@@ -17,10 +17,20 @@ const VIGNETTE_OPTION_IDS = new Map(
   VIGNETTEN.map((vignette) => [vignette.id, new Set(vignette.options.map((option) => option.id))])
 );
 const TAB_ALIASES = {
-  zuerich: 'network',
-  zaesur: 'evidence',
-  'network-map': 'network',
-  'network-directory': 'network',
+  home: 'start',
+  start: 'start',
+  elearning: 'lernmodule',
+  lernmodule: 'lernmodule',
+  evidence: 'evidenz',
+  evidenz: 'evidenz',
+  network: 'netzwerk',
+  netzwerk: 'netzwerk',
+  zuerich: 'netzwerk',
+  zaesur: 'evidenz',
+  'network-map': 'netzwerk',
+  'network-directory': 'netzwerk',
+  'netzwerk-karte': 'netzwerk',
+  'netzwerk-fachstellen': 'netzwerk',
 };
 
 export const safeParse = (key, fallback, validate) => {
@@ -83,16 +93,16 @@ export const isValidResourceFilter = (value) =>
 export const normalizeHashToTab = (hashValue) => {
   const cleaned = String(hashValue || '').replace(/^#/, '').trim().toLowerCase();
   const aliased = TAB_ALIASES[cleaned] ?? cleaned;
-  return TAB_ITEMS.some((item) => item.id === aliased) ? aliased : 'home';
+  return TAB_ITEMS.some((item) => item.id === aliased) ? aliased : 'start';
 };
 
 export const getInitialTab = () => {
-  if (typeof window === 'undefined') return 'home';
+  if (typeof window === 'undefined') return 'start';
   return normalizeHashToTab(window.location.hash);
 };
 
 export const getDefaultAppState = () => ({
-  activeTab: 'home',
+  activeTab: 'start',
   currentVignette: 0,
   selectedOption: DEFAULT_SELECTED_OPTION,
   searchTerm: '',
@@ -180,7 +190,7 @@ export const getInitialAppState = (storageKey) => {
 
   const rawHash = String(window.location.hash || '').replace(/^#/, '');
   const normalizedHash = normalizeHashToTab(rawHash);
-  const requestedTab = rawHash && normalizedHash !== 'home' ? normalizedHash : TAB_ITEMS.some((item) => item.id === rawHash) ? rawHash : null;
+  const requestedTab = rawHash && normalizedHash !== 'start' ? normalizedHash : TAB_ITEMS.some((item) => item.id === rawHash) ? rawHash : null;
   const storedAppState = safeParse(storageKey, null, (value) => isValidStoredAppState(value));
 
   if (storedAppState?.data) {
@@ -201,20 +211,20 @@ export const getInitialAppState = (storageKey) => {
 
 export const getPageHeadingId = (tab) => {
   switch (tab) {
-    case 'home':
-      return 'page-heading-home';
-    case 'elearning':
-      return 'page-heading-elearning';
+    case 'start':
+      return 'page-heading-start';
+    case 'lernmodule':
+      return 'page-heading-lernmodule';
     case 'vignetten':
       return 'page-heading-vignetten';
     case 'toolbox':
       return 'page-heading-toolbox';
-    case 'network':
-      return 'page-heading-network';
-    case 'evidence':
-      return 'page-heading-evidence';
+    case 'netzwerk':
+      return 'page-heading-netzwerk';
+    case 'evidenz':
+      return 'page-heading-evidenz';
     default:
-      return 'page-heading-home';
+      return 'page-heading-start';
   }
 };
 

@@ -192,7 +192,7 @@ function ZoneSection({ zone }) {
 function MaterialsSection({ closingSection }) {
   if (!closingSection) return null;
 
-  return <ClosingSection section={closingSection} sectionId="evidence-materials" surface="plain" className="no-print" />;
+  return <ClosingSection section={closingSection} sectionId="evidenz-materialien" surface="plain" className="no-print" />;
 }
 
 export default function EvidencePageTemplate({ hero, pageHeadingId, chapterOverview, zones = [], closingSection }) {

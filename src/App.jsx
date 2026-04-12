@@ -96,10 +96,16 @@ export default function App() {
   const [pendingSectionHash, setPendingSectionHash] = useState(() => {
     if (typeof window === 'undefined') return null;
     const rawHash = String(window.location.hash || '').replace(/^#/, '').trim().toLowerCase();
-    return ['network-map', 'network-directory'].includes(rawHash) ? rawHash : null;
+    const sectionAliasMap = {
+      'network-map': 'netzwerk-karte',
+      'network-directory': 'netzwerk-fachstellen',
+      'netzwerk-karte': 'netzwerk-karte',
+      'netzwerk-fachstellen': 'netzwerk-fachstellen',
+    };
+    return sectionAliasMap[rawHash] ?? null;
   });
   const mainContentRef = useRef(null);
-  const navigationFocusTargetRef = useRef(initialAppState.activeTab === 'home' ? 'none' : 'heading');
+  const navigationFocusTargetRef = useRef(initialAppState.activeTab === 'start' ? 'none' : 'heading');
   const skipLinkActivatedRef = useRef(false);
   const hasProcessedInitialFocusRef = useRef(false);
   const skipLinkRef = useRef(null);
@@ -173,12 +179,18 @@ export default function App() {
     if (!rawHash || rawHash === 'main-content') return null;
 
     const normalizedHash = normalizeHashToTab(rawHash);
-    return normalizedHash === 'home' && rawHash !== 'home' ? null : normalizedHash;
+    return normalizedHash === 'start' && rawHash !== 'start' ? null : normalizedHash;
   };
 
   const getSectionHashTarget = (hashValue) => {
     const cleaned = String(hashValue || '').replace(/^#/, '').trim().toLowerCase();
-    return ['network-map', 'network-directory'].includes(cleaned) ? cleaned : null;
+    const sectionAliasMap = {
+      'network-map': 'netzwerk-karte',
+      'network-directory': 'netzwerk-fachstellen',
+      'netzwerk-karte': 'netzwerk-karte',
+      'netzwerk-fachstellen': 'netzwerk-fachstellen',
+    };
+    return sectionAliasMap[cleaned] ?? null;
   };
 
   const navigateToTab = (nextTab, options = {}) => {
@@ -191,7 +203,7 @@ export default function App() {
     if (typeof window !== 'undefined') {
       const explicitTabHash = getExplicitTabHash();
       if (explicitTabHash && explicitTabHash !== activeTab) {
-        navigationFocusTargetRef.current = explicitTabHash === 'home' ? 'none' : 'heading';
+        navigationFocusTargetRef.current = explicitTabHash === 'start' ? 'none' : 'heading';
         setActiveTab(explicitTabHash);
         return undefined;
       }
@@ -211,7 +223,7 @@ export default function App() {
     const focusTarget = navigationFocusTargetRef.current;
     if (!hasProcessedInitialFocusRef.current) {
       hasProcessedInitialFocusRef.current = true;
-      if (activeTab === 'home') {
+      if (activeTab === 'start') {
         navigationFocusTargetRef.current = 'none';
         return undefined;
       }
@@ -890,16 +902,16 @@ Aktueller Assessment-Score: ${score.risk}
         className="flex-grow max-w-7xl mx-auto w-full px-4 md:px-6 py-8 md:py-10 outline-none page-enter"
       >
         <Suspense fallback={<SectionLoadingFallback />}>
-          {activeTab === 'home' && (
+          {activeTab === 'start' && (
             <HomeLandingTemplate
               setActiveTab={navigateToTab}
               progressPercent={progressPercent}
               completedModules={completedModules}
-              pageHeadingId={getPageHeadingId('home')}
+              pageHeadingId={getPageHeadingId('start')}
             />
           )}
 
-          {activeTab === 'elearning' && (
+          {activeTab === 'lernmodule' && (
             <ElearningSection quizState={quizState} onAnswer={handleQuizAnswer} completedModules={completedModules} />
           )}
 
@@ -938,7 +950,7 @@ Aktueller Assessment-Score: ${score.risk}
             />
           )}
 
-          {activeTab === 'network' && (
+          {activeTab === 'netzwerk' && (
             <NetworkSection
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
@@ -947,7 +959,7 @@ Aktueller Assessment-Score: ${score.risk}
             />
           )}
 
-          {activeTab === 'evidence' && <EvidenceSection downloadResources={downloadResources} />}
+          {activeTab === 'evidenz' && <EvidenceSection downloadResources={downloadResources} />}
         </Suspense>
       </main>
 
