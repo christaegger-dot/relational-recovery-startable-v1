@@ -4,6 +4,67 @@ import { ChevronRight, ClipboardCheck, ExternalLink, GraduationCap, HeartHandsha
 import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
 import { E_MODULE_COUNT, HOME_REFERENCE_COUNT, NETWORK_RESOURCE_COUNT, VIGNETTE_COUNT } from '../data/appShellContent';
 
+const overviewCards = [
+  { label: 'Module', val: E_MODULE_COUNT, desc: 'kompakte Lernbausteine', icon: GraduationCap, tab: 'lernmodule' },
+  { label: 'Trainingsfälle', val: VIGNETTE_COUNT, desc: 'für Fallreflexion und Dialog', icon: HeartHandshake, tab: 'vignetten' },
+  { label: 'Netzwerkstellen', val: NETWORK_RESOURCE_COUNT, desc: 'für Triage und Entlastung', icon: MapPin, tab: 'netzwerk' },
+  { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library, tab: 'evidenz' },
+];
+
+const dashboardRoutes = [
+  {
+    title: 'Wenn du verstehen willst, was in der Familie passiert',
+    desc: 'Belastung, Schutzfaktoren, Elternrolle und kindliche Perspektive fachlich einordnen.',
+    target: 'evidenz',
+    cta: 'Zu Evidenz',
+    icon: Library,
+  },
+  {
+    title: 'Wenn du entscheiden musst, was jetzt prioritär ist',
+    desc: 'Assessment, Krisenlogik, Sicherheitsplan und Schutzfragen schrittweise durchgehen.',
+    target: 'toolbox',
+    cta: 'Zur Toolbox',
+    icon: ClipboardCheck,
+  },
+  {
+    title: 'Wenn du triagieren oder weitervermitteln willst',
+    desc: 'Offizielle Stellen, Entlastung, Kinderangebote und regionale Hilfen gezielt finden.',
+    target: 'netzwerk',
+    cta: 'Zum Netzwerk',
+    icon: MapPin,
+  },
+  {
+    title: 'Wenn du üben oder im Team reflektieren willst',
+    desc: 'Mit Lernmodulen und Vignetten Sprache, Einschätzung und Falllogik trainieren.',
+    target: 'vignetten',
+    cta: 'Zum Training',
+    icon: HeartHandshake,
+  },
+];
+
+const pathwaySteps = [
+  {
+    label: 'Verstehen',
+    title: 'Familiendynamik einordnen',
+    desc: 'Elternrolle, Belastung, kindliche Perspektive und Schutzfaktoren gemeinsam betrachten.',
+  },
+  {
+    label: 'Einschätzen',
+    title: 'Risiken und Ressourcen gewichten',
+    desc: 'Krise, Entlastung, Parentifizierung, Routinen und verfügbare Bezugspersonen klären.',
+  },
+  {
+    label: 'Handeln',
+    title: 'Nächste Schritte konkret machen',
+    desc: 'Psychoedukation, Krisenplan, Gesprächsführung und schriftliche Absprachen alltagstauglich übersetzen.',
+  },
+  {
+    label: 'Vernetzen',
+    title: 'Hilfen erreichbar machen',
+    desc: 'Offizielle Stellen, Beratung, Kinderangebote und Entlastung passend zur Lage aktivieren.',
+  },
+];
+
 export default function HomeSection({ activeTab, setActiveTab, progressPercent, completedModules }) {
   const progressSummaryItems = useMemo(
     () => [
@@ -25,67 +86,6 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
     ],
     [completedModules.length, progressPercent],
   );
-
-  const overviewCards = [
-    { label: 'Module', val: E_MODULE_COUNT, desc: 'kompakte Lernbausteine', icon: GraduationCap, tab: 'lernmodule' },
-    { label: 'Trainingsfälle', val: VIGNETTE_COUNT, desc: 'für Fallreflexion und Dialog', icon: HeartHandshake, tab: 'vignetten' },
-    { label: 'Netzwerkstellen', val: NETWORK_RESOURCE_COUNT, desc: 'für Triage und Entlastung', icon: MapPin, tab: 'netzwerk' },
-    { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library, tab: 'evidenz' },
-  ];
-
-  const dashboardRoutes = [
-    {
-      title: 'Wenn du verstehen willst, was in der Familie passiert',
-      desc: 'Belastung, Schutzfaktoren, Elternrolle und kindliche Perspektive fachlich einordnen.',
-      target: 'evidenz',
-      cta: 'Zu Evidenz',
-      icon: Library,
-    },
-    {
-      title: 'Wenn du entscheiden musst, was jetzt prioritär ist',
-      desc: 'Assessment, Krisenlogik, Sicherheitsplan und Schutzfragen schrittweise durchgehen.',
-      target: 'toolbox',
-      cta: 'Zur Toolbox',
-      icon: ClipboardCheck,
-    },
-    {
-      title: 'Wenn du triagieren oder weitervermitteln willst',
-      desc: 'Offizielle Stellen, Entlastung, Kinderangebote und regionale Hilfen gezielt finden.',
-      target: 'netzwerk',
-      cta: 'Zum Netzwerk',
-      icon: MapPin,
-    },
-    {
-      title: 'Wenn du üben oder im Team reflektieren willst',
-      desc: 'Mit Lernmodulen und Vignetten Sprache, Einschätzung und Falllogik trainieren.',
-      target: 'vignetten',
-      cta: 'Zum Training',
-      icon: HeartHandshake,
-    },
-  ];
-
-  const pathwaySteps = [
-    {
-      label: 'Verstehen',
-      title: 'Familiendynamik einordnen',
-      desc: 'Elternrolle, Belastung, kindliche Perspektive und Schutzfaktoren gemeinsam betrachten.',
-    },
-    {
-      label: 'Einschätzen',
-      title: 'Risiken und Ressourcen gewichten',
-      desc: 'Krise, Entlastung, Parentifizierung, Routinen und verfügbare Bezugspersonen klären.',
-    },
-    {
-      label: 'Handeln',
-      title: 'Nächste Schritte konkret machen',
-      desc: 'Psychoedukation, Krisenplan, Gesprächsführung und schriftliche Absprachen alltagstauglich übersetzen.',
-    },
-    {
-      label: 'Vernetzen',
-      title: 'Hilfen erreichbar machen',
-      desc: 'Offizielle Stellen, Beratung, Kinderangebote und Entlastung passend zur Lage aktivieren.',
-    },
-  ];
 
   return (
     <article className="home-section no-print">

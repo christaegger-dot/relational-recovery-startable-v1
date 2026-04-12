@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
 import { E_MODULES } from '../data/learningContent';
 import LearningPageTemplate from '../templates/LearningPageTemplate';
@@ -71,6 +72,25 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
     ],
   };
 
+  const moduleItems = useMemo(
+    () =>
+      E_MODULES.map((mod) => ({
+        id: mod.id,
+        kicker: 'Lernmodul',
+        title: mod.title,
+        description: 'Kompakter Lernimpuls für Sprache, Wahrnehmung und systemische Einordnung im Begleitalltag.',
+        duration: mod.duration,
+        storyboard: mod.storyboard,
+        quiz: mod.quiz,
+        quizOptions: mod.quizOptions,
+        correctQuizIdx: mod.correctQuizIdx,
+        result: quizState[mod.id],
+        completed: completedModules.includes(mod.id),
+        onAnswer,
+      })),
+    [quizState, completedModules, onAnswer],
+  );
+
   const modulesSection = {
     eyebrow: 'Lernmodule',
     titlePrefix: 'Die Inhalte sind jetzt als',
@@ -86,20 +106,7 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
           : `Noch offen: ${Math.max(totalCount - completedCount, 0)} Modul${totalCount - completedCount === 1 ? '' : 'e'} für den nächsten Lernschritt.`,
       tone: completedCount === totalCount ? 'soft' : 'default',
     },
-    items: E_MODULES.map((mod) => ({
-      id: mod.id,
-      kicker: 'Lernmodul',
-      title: mod.title,
-      description: 'Kompakter Lernimpuls für Sprache, Wahrnehmung und systemische Einordnung im Begleitalltag.',
-      duration: mod.duration,
-      storyboard: mod.storyboard,
-      quiz: mod.quiz,
-      quizOptions: mod.quizOptions,
-      correctQuizIdx: mod.correctQuizIdx,
-      result: quizState[mod.id],
-      completed: completedModules.includes(mod.id),
-      onAnswer,
-    })),
+    items: moduleItems,
   };
 
   return <LearningPageTemplate hero={hero} pageHeadingId={getPageHeadingId('lernmodule')} sequence={sequence} modulesSection={modulesSection} />;
