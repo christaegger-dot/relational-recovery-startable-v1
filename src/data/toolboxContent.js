@@ -183,14 +183,27 @@ export const RIGHTS_FAQ = [
     answer:
       'Die Angehörigenberatung der PUK Zürich und Pro Mente Sana bieten Orientierung auf unterschiedlichen Ebenen. Pro Mente Sana berät kostenlos zu psychosozialen und rechtlichen Fragen.',
   },
-  // STUB L3: Rechte der Betroffenen – 4 neue FAQ-Fragen
-  // INHALT AUSSTEHEND – juristische Validierung erforderlich, siehe qa/audit-03-juristische-validierung.md
-  // Geschätzter Umfang: ~200 Wörter (4 × ~50 Wörter)
-  // Outline:
-  //   - "Kann ich mich selbst an die KESB wenden?" (Selbstmeldung, ZGB Art. 314 Abs. 1)
-  //   - "Habe ich Recht auf Akteneinsicht?" (ZGB Art. 449b)
-  //   - "Kann ich gegen einen KESB-Entscheid vorgehen?" (ZGB Art. 450, 30-Tage-Frist prüfen)
-  //   - "Habe ich Anspruch auf Rechtsbeistand?" (BV Art. 29 Abs. 3)
+  // L3: Rechte der Betroffenen – Quelle: Faktenbasis Abschnitt 3
+  {
+    question: 'Kann ich mich selbst an die KESB wenden?',
+    answer:
+      'Ja. Eine Selbstmeldung ist möglich und wird in der Praxis als präventive Option genutzt. Die KESB prüft dann, ob und welche Unterstützung sinnvoll ist. Eine Selbstmeldung ist kein Eingeständnis von Versagen, sondern zeigt Verantwortungsbereitschaft.',
+  },
+  {
+    question: 'Habe ich Recht auf Akteneinsicht?',
+    answer:
+      'Ja. Betroffene haben grundsätzlich Recht auf Einsicht in ihre KESB-Akten (Art. 449b ZGB). Dieses Recht besteht primär im laufenden Verfahren und ist Teil des rechtlichen Gehörs. In Ausnahmefällen kann die Einsicht eingeschränkt werden, wenn überwiegende Interessen dagegen sprechen.',
+  },
+  {
+    question: 'Kann ich gegen einen KESB-Entscheid vorgehen?',
+    answer:
+      'Ja. KESB-Entscheide können innert 30 Tagen angefochten werden (Art. 450 ZGB). Im Kanton Zürich geht die Beschwerde in der Regel an den Bezirksrat, danach ans Obergericht. Bei bestimmten Unterbringungsentscheiden gelten Sonderwege.',
+  },
+  {
+    question: 'Habe ich Anspruch auf einen Rechtsbeistand?',
+    answer:
+      'Ja. Bei Bedürftigkeit besteht Anspruch auf unentgeltliche Rechtspflege und gegebenenfalls einen unentgeltlichen Rechtsbeistand (Art. 29 Abs. 3 BV). Pro Mente Sana (0848 800 858) berät kostenlos zu rechtlichen Fragen im Kindes- und Erwachsenenschutz.',
+  },
 ];
 
 export const PRACTICE_BLOCK_FILTERS = [
