@@ -4,9 +4,9 @@ import { RESOURCE_DATA } from './networkContent';
 import { LITERATUR } from './evidenceContent';
 
 export const TAB_ITEMS = [
-  { id: 'home', label: 'Start', icon: LayoutDashboard, footerNote: 'Dashboard und Orientierung', priority: 'primary' },
+  { id: 'start', label: 'Start', icon: LayoutDashboard, footerNote: 'Dashboard und Orientierung', priority: 'primary' },
   {
-    id: 'elearning',
+    id: 'lernmodule',
     label: 'Lernmodule',
     icon: GraduationCap,
     footerNote: 'Kurzformate für Fachpraxis',
@@ -34,7 +34,7 @@ export const TAB_ITEMS = [
     priority: 'primary',
   },
   {
-    id: 'evidence',
+    id: 'evidenz',
     label: 'Evidenz',
     icon: Activity,
     footerNote: 'Grundlagen, Vertiefung, Materialien',
@@ -48,7 +48,7 @@ export const TAB_ITEMS = [
     priority: 'primary',
   },
   {
-    id: 'network',
+    id: 'netzwerk',
     label: 'Netzwerk',
     icon: MapPin,
     footerNote: 'Hilfen, Stellen, Weitervermittlung',

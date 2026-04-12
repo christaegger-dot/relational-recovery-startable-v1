@@ -102,5 +102,5 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
     })),
   };
 
-  return <LearningPageTemplate hero={hero} pageHeadingId={getPageHeadingId('elearning')} sequence={sequence} modulesSection={modulesSection} />;
+  return <LearningPageTemplate hero={hero} pageHeadingId={getPageHeadingId('lernmodule')} sequence={sequence} modulesSection={modulesSection} />;
 }

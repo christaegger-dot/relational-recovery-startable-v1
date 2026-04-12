@@ -27,17 +27,17 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
   );
 
   const overviewCards = [
-    { label: 'Module', val: E_MODULE_COUNT, desc: 'kompakte Lernbausteine', icon: GraduationCap, tab: 'elearning' },
+    { label: 'Module', val: E_MODULE_COUNT, desc: 'kompakte Lernbausteine', icon: GraduationCap, tab: 'lernmodule' },
     { label: 'Trainingsfälle', val: VIGNETTE_COUNT, desc: 'für Fallreflexion und Dialog', icon: HeartHandshake, tab: 'vignetten' },
-    { label: 'Netzwerkstellen', val: NETWORK_RESOURCE_COUNT, desc: 'für Triage und Entlastung', icon: MapPin, tab: 'network' },
-    { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library, tab: 'evidence' },
+    { label: 'Netzwerkstellen', val: NETWORK_RESOURCE_COUNT, desc: 'für Triage und Entlastung', icon: MapPin, tab: 'netzwerk' },
+    { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library, tab: 'evidenz' },
   ];
 
   const dashboardRoutes = [
     {
       title: 'Wenn du verstehen willst, was in der Familie passiert',
       desc: 'Belastung, Schutzfaktoren, Elternrolle und kindliche Perspektive fachlich einordnen.',
-      target: 'evidence',
+      target: 'evidenz',
       cta: 'Zu Evidenz',
       icon: Library,
     },
@@ -51,7 +51,7 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
     {
       title: 'Wenn du triagieren oder weitervermitteln willst',
       desc: 'Offizielle Stellen, Entlastung, Kinderangebote und regionale Hilfen gezielt finden.',
-      target: 'network',
+      target: 'netzwerk',
       cta: 'Zum Netzwerk',
       icon: MapPin,
     },
@@ -96,7 +96,7 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
               <div className="ui-eyebrow">Systemische Orientierung</div>
 
               <div className="home-hero-main__title-wrap">
-                <h2 id="page-heading-home" tabIndex={-1} className="home-hero-main__title">
+                <h2 id="page-heading-start" tabIndex={-1} className="home-hero-main__title">
                   Begleitung ist <span className="ui-hero__accent">Beziehungsarbeit</span>.
                 </h2>
                 <p className="home-hero-main__lead">
@@ -107,7 +107,7 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
             </div>
 
             <div className="ui-button-row">
-              <button type="button" onClick={() => setActiveTab('elearning')} className="ui-button ui-button--primary">
+              <button type="button" onClick={() => setActiveTab('lernmodule')} className="ui-button ui-button--primary">
                 Falllogik trainieren <ChevronRight size={18} />
               </button>
               <button type="button" onClick={() => setActiveTab('toolbox')} className="ui-button ui-button--secondary">
@@ -142,7 +142,7 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
                 </p>
               </div>
               <div className="ui-button-row">
-                <button type="button" onClick={() => setActiveTab('network')} className="ui-button ui-button--secondary">
+                <button type="button" onClick={() => setActiveTab('netzwerk')} className="ui-button ui-button--secondary">
                   Zum Netzwerkbereich mit PUK-Angeboten
                 </button>
                 <a

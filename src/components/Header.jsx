@@ -22,7 +22,7 @@ export default function Header({
   };
 
   const handleHomeClick = () => {
-    setActiveTab('home', { focusTarget: 'heading' });
+    setActiveTab('start', { focusTarget: 'heading' });
     closeMobileMenu();
   };
 
