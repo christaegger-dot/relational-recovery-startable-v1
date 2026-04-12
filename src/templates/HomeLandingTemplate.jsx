@@ -18,7 +18,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
     actions: [
       {
         label: 'Falllogik trainieren',
-        onClick: () => setActiveTab('elearning', { focusTarget: 'heading' }),
+        onClick: () => setActiveTab('lernmodule', { focusTarget: 'heading' }),
         variant: 'primary',
         icon: ChevronRight,
       },
@@ -74,7 +74,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
       actions: [
         {
           label: 'Zum Evidenzteil',
-          onClick: () => setActiveTab('evidence', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('evidenz', { focusTarget: 'heading' }),
           variant: 'secondary',
         },
         {
@@ -88,7 +88,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           label: 'Verstehen',
           title: 'Familiendynamik einordnen',
           copy: 'Elternrolle, Belastung, kindliche Perspektive und Schutzfaktoren gemeinsam betrachten.',
-          onClick: () => setActiveTab('evidence', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('evidenz', { focusTarget: 'heading' }),
           actionLabel: 'Zum Wissensbereich',
         },
         {
@@ -109,7 +109,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           label: 'Vernetzen',
           title: 'Hilfen erreichbar machen',
           copy: 'Offizielle Stellen, Beratungsangebote und regionale Hilfen passend zur Lage aktivieren.',
-          onClick: () => setActiveTab('network', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('netzwerk', { focusTarget: 'heading' }),
           actionLabel: 'Zum Netzwerk',
         },
       ],
@@ -132,7 +132,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           title: 'Mit Lernmodulen üben',
           copy: `${E_MODULE_COUNT} kompakte Lerneinheiten helfen, Sprache, Falllogik und Gesprächsorientierung schrittweise aufzubauen.`,
           tone: 'soft',
-          onClick: () => setActiveTab('elearning', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('lernmodule', { focusTarget: 'heading' }),
           actionLabel: 'Zum E-Learning',
         },
         {
@@ -140,14 +140,14 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           title: 'Familiendynamik vertiefen',
           copy: `Der Evidenzbereich bündelt aktuell ${HOME_REFERENCE_COUNT} kuratierte Einstiegspunkte, Materialien und Referenzen in einer ruhigeren Leselogik.`,
           tone: 'accent',
-          onClick: () => setActiveTab('evidence', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('evidenz', { focusTarget: 'heading' }),
           actionLabel: 'Zum Evidenzteil',
         },
         {
           label: 'Versorgung',
           title: 'Regionale Hilfen aufrufen',
           copy: `${NETWORK_RESOURCE_COUNT} Netzwerkstellen unterstützen bei Triage, Entlastung und der Weitervermittlung an passende Angebote.`,
-          onClick: () => setActiveTab('network', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('netzwerk', { focusTarget: 'heading' }),
           actionLabel: 'Zum Netzwerk',
         },
         {
@@ -175,7 +175,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           label: 'Wenn Sie zuerst verstehen möchten',
           title: 'Im Evidenzbereich beginnen',
           copy: 'Geeignet, wenn Familiendynamik, kindliche Perspektive, Psychoedukation oder Schutzfaktoren zunächst fachlich eingeordnet werden sollen.',
-          onClick: () => setActiveTab('evidence', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('evidenz', { focusTarget: 'heading' }),
           actionLabel: 'Wissensseite öffnen',
         },
         {
@@ -189,7 +189,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           label: 'Wenn Sie üben oder lehren möchten',
           title: 'Lernmodule und Vignetten kombinieren',
           copy: 'Geeignet für Selbststudium, Weiterbildung oder Teams, die Sprache und Falllogik anhand konkreter Situationen vertiefen möchten.',
-          onClick: () => setActiveTab('elearning', { focusTarget: 'heading' }),
+          onClick: () => setActiveTab('lernmodule', { focusTarget: 'heading' }),
           actionLabel: 'Zum Training',
         },
       ],

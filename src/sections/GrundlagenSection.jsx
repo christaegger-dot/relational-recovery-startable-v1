@@ -72,7 +72,7 @@ export default function GrundlagenSection({ sharedDownloadResources = [], onNavi
           description: 'Wenn aus Orientierung eine konkrete Fachstelle, regionale Hilfe oder Weitervermittlung werden soll.',
           meta: ['Versorgung', 'Weitervermittlung'],
           actionLabel: 'Zum Netzwerk wechseln',
-          onClick: () => onNavigateToTab('network', { focusTarget: 'heading' }),
+          onClick: () => onNavigateToTab('netzwerk', { focusTarget: 'heading' }),
         },
       ],
     },

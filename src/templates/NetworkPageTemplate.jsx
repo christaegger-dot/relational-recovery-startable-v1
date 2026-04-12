@@ -79,7 +79,7 @@ function ResourceDirectorySection({ directory }) {
   const { intro, filters, activeFilter, onFilterChange, searchTerm, onSearchChange, onReset, searchStatusText, filterStatusText, resources = [] } = directory;
 
   return (
-    <Section id={directory.id || 'network-directory'} spacing="tight" surface={directory.surface || 'plain'} className="no-print">
+    <Section id={directory.id || 'netzwerk-fachstellen'} spacing="tight" surface={directory.surface || 'plain'} className="no-print">
       <div className="ui-stack ui-stack--loose">
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
@@ -256,7 +256,7 @@ function NetworkMapSection({ mapping }) {
   const highlightedNode = visibleNodes[0] ?? null;
 
   return (
-    <Section id={mapping.id || 'network-map'} spacing="tight" surface={mapping.surface || 'subtle'} className="no-print">
+    <Section id={mapping.id || 'netzwerk-karte'} spacing="tight" surface={mapping.surface || 'subtle'} className="no-print">
       <div className="ui-stack ui-stack--loose">
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">

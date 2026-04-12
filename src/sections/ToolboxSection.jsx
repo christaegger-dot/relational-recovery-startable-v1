@@ -166,7 +166,7 @@ export default function ToolboxSection({
       },
     },
     {
-      id: 'network',
+      id: 'netzwerk',
       question: 'Gibt es mindestens eine mitwissende Bezugsperson oder Fachstelle, die kurzfristig mittragen kann?',
       yes: {
         title: 'Kooperation aktiv nutzen',

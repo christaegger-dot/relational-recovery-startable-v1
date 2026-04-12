@@ -54,8 +54,8 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
     asideCopy:
       'Der Bereich bleibt bewusst Zürich-zentriert: offizielle Krisenwege, Familienberatung, Kinder- und Jugendangebote sowie längerfristige Entlastung in und um Zürich werden durch wenige nationale Stellen für Orientierung und Rechtefragen ergänzt.',
     actions: [
-      { label: 'Zu den Fachstellen', href: '#network-directory', icon: Search },
-      { label: 'Zur Netzwerkkarte', href: '#network-map', icon: MapPin, variant: 'ghost' },
+      { label: 'Zu den Fachstellen', href: '#netzwerk-fachstellen', icon: Search },
+      { label: 'Zur Netzwerkkarte', href: '#netzwerk-karte', icon: MapPin, variant: 'ghost' },
     ],
     stats: [
       {
@@ -77,7 +77,7 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
   };
 
   const directory = {
-    id: 'network-directory',
+    id: 'netzwerk-fachstellen',
     intro: {
       eyebrow: 'Fachstellenverzeichnis',
       title: 'Schneller in die',
@@ -108,7 +108,7 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
   };
 
   const mapping = {
-    id: 'network-map',
+    id: 'netzwerk-karte',
     intro: {
       eyebrow: 'Arbeitskarte',
       title: 'Netzwerke als',
@@ -178,5 +178,5 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
               : 'Nächster Schritt: Mischung, Lücken und Erreichbarkeit gemeinsam lesen und daraus konkrete Absprachen ableiten.',
   };
 
-  return <NetworkPageTemplate hero={hero} pageHeadingId={getPageHeadingId('network')} directory={directory} mapping={mapping} />;
+  return <NetworkPageTemplate hero={hero} pageHeadingId={getPageHeadingId('netzwerk')} directory={directory} mapping={mapping} />;
 }
