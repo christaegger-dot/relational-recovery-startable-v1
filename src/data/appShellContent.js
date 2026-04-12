@@ -1,7 +1,7 @@
 import { Activity, BookOpenText, CircleHelp, ClipboardCheck, GraduationCap, HeartHandshake, LayoutDashboard, MapPin } from 'lucide-react';
 import { E_MODULES, VIGNETTEN } from './learningContent';
 import { RESOURCE_DATA } from './networkContent';
-import { LITERATUR } from './evidenceContent';
+import { LITERATUR, MEDIA_BOOKS, MEDIA_DIGITAL, SUPPORT_OFFERS } from './evidenceContent';
 
 export const TAB_ITEMS = [
   { id: 'start', label: 'Start', icon: LayoutDashboard, footerNote: 'Dashboard und Orientierung', priority: 'primary' },
@@ -71,4 +71,4 @@ export const DEFAULT_QUIZ_STATE = {};
 export const E_MODULE_COUNT = E_MODULES.length;
 export const VIGNETTE_COUNT = VIGNETTEN.length;
 export const NETWORK_RESOURCE_COUNT = RESOURCE_DATA.length;
-export const HOME_REFERENCE_COUNT = LITERATUR.length;
+export const HOME_REFERENCE_COUNT = LITERATUR.length + MEDIA_BOOKS.length + MEDIA_DIGITAL.length + SUPPORT_OFFERS.length;

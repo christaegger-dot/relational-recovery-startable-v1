@@ -1,5 +1,5 @@
 // Design note: This file preserves the application's information architecture while the visual language is shifted toward a warm editorial interface with calmer surfaces, serif-led hierarchy and lower-arousal accents.
-import React, { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { lazy, Suspense, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import './styles/app-global.css';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import Header from './components/Header';
@@ -34,7 +34,124 @@ const ToolboxSection = lazy(() => import('./sections/ToolboxSection'));
 const NetworkSection = lazy(() => import('./sections/NetworkSection'));
 const EvidenceSection = lazy(() => import('./sections/EvidenceSection'));
 
-function SectionLoadingFallback() {
+const TOOLBOX_PRINT_STORAGE_KEY = 'rr-toolbox-print-payload';
+
+const SECTION_ALIAS_MAP = {
+  'network-map': 'netzwerk-karte',
+  'network-directory': 'netzwerk-fachstellen',
+  'netzwerk-karte': 'netzwerk-karte',
+  'netzwerk-fachstellen': 'netzwerk-fachstellen',
+};
+
+function getToolboxPrintMode() {
+  if (typeof window === 'undefined') return false;
+  return new URLSearchParams(window.location.search).get('print') === 'toolbox';
+}
+
+function readToolboxPrintPayload() {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    const raw = window.localStorage.getItem(TOOLBOX_PRINT_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed.html !== 'string' || !parsed.html.trim()) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function storeToolboxPrintPayload(payload) {
+  if (typeof window === 'undefined') return false;
+
+  try {
+    window.localStorage.setItem(
+      TOOLBOX_PRINT_STORAGE_KEY,
+      JSON.stringify({
+        title: payload.title,
+        html: payload.html,
+        updatedAt: Date.now(),
+      })
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function openIsolatedPrintView({ contentSelector, title }) {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return false;
+
+  const printNode = document.querySelector(contentSelector);
+  if (!printNode) return false;
+
+  const stored = storeToolboxPrintPayload({
+    title,
+    html: printNode.outerHTML,
+  });
+  if (!stored) return false;
+
+  const printUrl = new URL(window.location.href);
+  printUrl.searchParams.set('print', 'toolbox');
+  printUrl.searchParams.set('ts', String(Date.now()));
+
+  const printWindow = window.open(printUrl.toString(), '_blank');
+  if (!printWindow) return false;
+
+  if (typeof printWindow.focus === 'function') {
+    window.setTimeout(() => printWindow.focus(), 150);
+  }
+
+  return true;
+}
+
+function ToolboxPrintPage() {
+  const payload = useMemo(() => readToolboxPrintPayload(), []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+
+    const timer = window.setTimeout(() => {
+      window.focus();
+      window.print();
+    }, 400);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  if (!payload?.html) {
+    return (
+      <div className="min-h-screen bg-white px-6 py-10 text-slate-900">
+        <main className="mx-auto max-w-3xl">
+          <h1 className="text-2xl font-semibold">Druckansicht konnte nicht geladen werden</h1>
+          <p className="mt-4 text-base leading-relaxed text-slate-700">
+            Bitte dieses Fenster schliessen und die Arbeitsansicht noch einmal direkt aus der Toolbox starten.
+          </p>
+        </main>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-white text-slate-900">
+      <main className="print-shell" dangerouslySetInnerHTML={{ __html: payload.html }} />
+    </div>
+  );
+}
+
+function handleToolboxPrint() {
+  const opened = openIsolatedPrintView({
+    contentSelector: '#toolbox-next-steps .print-only',
+    title: 'Relational Recovery – Toolbox Arbeitsansicht',
+  });
+
+  if (!opened) {
+    window.print();
+  }
+}
+
+const SectionLoadingFallback = memo(function SectionLoadingFallback() {
   return (
     <section className="rounded-[3rem] border border-slate-200 bg-white px-8 py-12 shadow-sm md:px-12 md:py-16">
       <div className="max-w-2xl">
@@ -45,7 +162,7 @@ function SectionLoadingFallback() {
       </div>
     </section>
   );
-}
+});
 
 function getFocusableElements(container) {
   if (!container || typeof container.querySelectorAll !== 'function') return [];
@@ -79,13 +196,7 @@ export default function App() {
   const [pendingSectionHash, setPendingSectionHash] = useState(() => {
     if (typeof window === 'undefined') return null;
     const rawHash = String(window.location.hash || '').replace(/^#/, '').trim().toLowerCase();
-    const sectionAliasMap = {
-      'network-map': 'netzwerk-karte',
-      'network-directory': 'netzwerk-fachstellen',
-      'netzwerk-karte': 'netzwerk-karte',
-      'netzwerk-fachstellen': 'netzwerk-fachstellen',
-    };
-    return sectionAliasMap[rawHash] ?? null;
+    return SECTION_ALIAS_MAP[rawHash] ?? null;
   });
   const mainContentRef = useRef(null);
   const navigationFocusTargetRef = useRef(initialAppState.activeTab === 'start' ? 'none' : 'heading');
@@ -176,20 +287,14 @@ export default function App() {
 
   const getSectionHashTarget = (hashValue) => {
     const cleaned = String(hashValue || '').replace(/^#/, '').trim().toLowerCase();
-    const sectionAliasMap = {
-      'network-map': 'netzwerk-karte',
-      'network-directory': 'netzwerk-fachstellen',
-      'netzwerk-karte': 'netzwerk-karte',
-      'netzwerk-fachstellen': 'netzwerk-fachstellen',
-    };
-    return sectionAliasMap[cleaned] ?? null;
+    return SECTION_ALIAS_MAP[cleaned] ?? null;
   };
 
-  const navigateToTab = (nextTab, options = {}) => {
+  const navigateToTab = useCallback((nextTab, options = {}) => {
     const { focusTarget = 'heading' } = options;
     navigationFocusTargetRef.current = focusTarget;
     setActiveTab((prev) => (prev === nextTab ? prev : nextTab));
-  };
+  }, []);
 
   useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
@@ -380,11 +485,7 @@ export default function App() {
       const container = mobileMenuContainerRef.current;
       if (!container) return;
 
-      const focusableElements = Array.from(
-        container.querySelectorAll(
-          'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        )
-      ).filter((element) => element.offsetParent !== null);
+      const focusableElements = getFocusableElements(container);
 
       if (!focusableElements.length) return;
 
@@ -498,7 +599,7 @@ export default function App() {
 
   const progressPercent = E_MODULE_COUNT ? Math.round((completedModules.length / E_MODULE_COUNT) * 100) : 0;
 
-  const handleQuizAnswer = (modId, answerIdx, correctIdx) => {
+  const handleQuizAnswer = useCallback((modId, answerIdx, correctIdx) => {
     setQuizState((prev) => ({
       ...prev,
       [modId]: { answerIdx, isCorrect: answerIdx === correctIdx },
@@ -509,9 +610,9 @@ export default function App() {
     } else {
       setCompletedModules((prev) => prev.filter((id) => id !== modId));
     }
-  };
+  }, []);
 
-  const handleScoreChange = (itemId) => {
+  const handleScoreChange = useCallback((itemId) => {
     setScore((prev) => {
       const checked = prev.checked.includes(itemId)
         ? prev.checked.filter((entry) => entry !== itemId)
@@ -520,23 +621,23 @@ export default function App() {
       const risk = ASSESSMENT_ITEMS.filter((item) => checked.includes(item.id)).reduce((sum, item) => sum + item.val, 0);
       return { risk, checked };
     });
-  };
+  }, []);
 
-  const openPriorityToolboxSection = (section) => {
+  const openPriorityToolboxSection = useCallback((section) => {
     navigateToTab('toolbox', { focusTarget: 'heading' });
     setPendingPriorityFocus(section);
-  };
+  }, [navigateToTab]);
 
-  const handleEmergencyAccess = () => {
+  const handleEmergencyAccess = useCallback(() => {
     openPriorityToolboxSection('acute-crisis');
-  };
+  }, [openPriorityToolboxSection]);
 
-  const clearSession = () => {
+  const clearSession = useCallback(() => {
     setIsResetting(true);
 
     const resetState = getDefaultAppState();
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       try {
         publishAppState(resetState);
       } catch {
@@ -546,14 +647,14 @@ export default function App() {
       applyAppState(resetState);
       setIsResetting(false);
     }, 250);
-  };
+  }, []);
 
-  const handleSelectVignetteOption = (vignetteId, optionId) => {
+  const handleSelectVignetteOption = useCallback((vignetteId, optionId) => {
     setSelectedOption((prev) => ({
       ...prev,
       [vignetteId]: optionId,
     }));
-  };
+  }, []);
 
   const handleDownloadCrisisPlan = useCallback(() => {
     const sections = SAFETY_PLAN_TEMPLATE_FIELDS.map(
@@ -940,7 +1041,6 @@ Aktueller Assessment-Score: ${score.risk}
 
           {activeTab === 'toolbox' && (
             <ToolboxSection
-              pageHeadingId={getPageHeadingId('toolbox')}
               score={score}
               onToggleAssessment={handleScoreChange}
               onResetAssessment={() => setScore(DEFAULT_SCORE)}

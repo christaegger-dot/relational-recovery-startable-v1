@@ -88,7 +88,7 @@ function ModuleCard({ module }) {
                 const isCorrect = idx === module.correctQuizIdx;
 
                 return (
-                  <label key={option} className="learning-module-quiz__option">
+                  <label key={idx} className="learning-module-quiz__option">
                     <input
                       type="radio"
                       name={`${module.id}-quiz`}

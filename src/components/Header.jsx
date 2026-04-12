@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { AlertTriangle, Check, Menu, Trash2, X } from 'lucide-react';
 import { TAB_ITEMS } from '../data/appShellContent';
 import Button from './ui/Button';
 
-export default function Header({
+const Header = memo(function Header({
   activeTab,
   setActiveTab,
   onReset,
@@ -186,4 +187,6 @@ export default function Header({
       )}
     </header>
   );
-}
+});
+
+export default Header;

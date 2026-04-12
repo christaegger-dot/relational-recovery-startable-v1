@@ -1,12 +1,11 @@
+const TONE_CLASSES = {
+  soft: 'ui-card ui-card--soft',
+  accent: 'ui-card ui-card--accent',
+  strong: 'ui-card ui-card--strong',
+};
+
 export default function SurfaceCard({ as: Tag = 'article', tone = 'default', className = '', children, ...props }) {
-  const toneClass =
-    tone === 'soft'
-      ? 'ui-card ui-card--soft'
-      : tone === 'accent'
-        ? 'ui-card ui-card--accent'
-        : tone === 'strong'
-          ? 'ui-card ui-card--strong'
-          : 'ui-card';
+  const toneClass = TONE_CLASSES[tone] ?? 'ui-card';
 
   const classes = [toneClass, className].filter(Boolean).join(' ');
 

@@ -51,6 +51,122 @@ function mapScoreBandTone(tone) {
   return TOOLBOX_SCORE_BAND_CLASSNAMES[tone] || 'ui-toolbox-band--neutral';
 }
 
+const PATHWAY_STEPS = [
+  {
+    label: 'Orientieren',
+    title: 'Belastung kurz einordnen',
+    desc: 'Welche Faktoren sind aktuell sichtbar, und wo braucht es sofort mehr Aufmerksamkeit?',
+  },
+  {
+    label: 'Sichern',
+    title: 'Akute Risiken zuerst klären',
+    desc: 'Selbstgefährdung, Kindersicherheit, Versorgung und erreichbare Sofortkontakte priorisieren.',
+  },
+  {
+    label: 'Planen',
+    title: 'Krisenvorsorge schriftlich machen',
+    desc: 'Warnzeichen, Betreuung, Kontaktkette und Übergaben für belastete Phasen festhalten.',
+  },
+  {
+    label: 'Kooperieren',
+    title: 'Freiwillige Hilfe oder Abklärung',
+    desc: 'Mit Familie, Netzwerk und Fachstellen den nächsten tragfähigen Schritt bestimmen.',
+  },
+];
+
+const SCORE_BANDS = [
+  {
+    label: '0–2',
+    title: 'tragende Ressourcen genauer sichtbar machen',
+    className: mapScoreBandTone('supportive'),
+  },
+  {
+    label: '3–6',
+    title: 'vertiefte Begleitung und Krisenvorsorge prüfen',
+    className: mapScoreBandTone('caution'),
+  },
+  {
+    label: '7+',
+    title: 'Schutz, Sicherung und formelle Abklärung mitdenken',
+    className: mapScoreBandTone('danger'),
+  },
+];
+
+const TRIAGE_PROMPTS = [
+  {
+    id: 'acute-danger',
+    question: 'Gibt es Hinweise auf akute Selbstgefährdung, Fremdgefährdung oder unmittelbare Unsicherheit für Kinder?',
+    yes: {
+      title: 'Akute Sicherheit sofort priorisieren',
+      text: 'Notruf, Krisendienst oder offizielle Notfallwege gehen vor längerer Abklärung. Kinderbetreuung und Aufsicht sofort mitdenken.',
+      target: 'acute-crisis',
+      targetLabel: 'Zur Akut-Krise',
+      className: mapRecommendationTone('danger'),
+    },
+    no: {
+      title: 'Akute Gefährdung aktuell nicht im Vordergrund',
+      text: 'Die Einschätzung kann ruhiger in Richtung Krisenvorsorge, Alltag und Kooperation weitergeführt werden.',
+      target: 'safety-plan',
+      targetLabel: 'Zum Sicherheitsplan',
+      className: mapRecommendationTone('supportive'),
+    },
+  },
+  {
+    id: 'care-gap',
+    question: 'Sind Aufsicht, Tagesstruktur, Versorgung oder verlässliche Betreuung der Kinder derzeit brüchig?',
+    yes: {
+      title: 'Schutz und Entlastung konkret prüfen',
+      text: 'Wenn Grundversorgung oder Aufsicht nicht verlässlich sind, braucht es rasch konkrete Hilfe und gegebenenfalls eine Kindesschutzabklärung.',
+      target: 'child-protection',
+      targetLabel: 'Zum Kindeswohl',
+      className: mapRecommendationTone('caution'),
+    },
+    no: {
+      title: 'Versorgung wirkt aktuell tragfähig',
+      text: 'Dann lohnt es sich, tragende Routinen und Schutzfaktoren sichtbar zu halten und nicht nur auf Risiken zu fokussieren.',
+      target: 'safety-plan',
+      targetLabel: 'Schutzfaktoren absichern',
+      className: mapRecommendationTone('supportive'),
+    },
+  },
+  {
+    id: 'crisis-plan',
+    question: 'Gibt es bereits einen besprochenen Krisen- oder Sicherheitsplan mit Kinder-Schutzteil?',
+    yes: {
+      title: 'Bestehende Absprachen aktualisieren',
+      text: 'Vorhandene Pläne sind hilfreich, wenn sie überprüft, mit Kontakten ergänzt und in stabileren Phasen gemeinsam geübt werden.',
+      target: 'safety-plan',
+      targetLabel: 'Plan überprüfen',
+      className: mapRecommendationTone('neutral'),
+    },
+    no: {
+      title: 'Krisenvorsorge schriftlich machen',
+      text: 'Ein kurzer Plan zu Warnzeichen, Kinderbetreuung, Kontaktkette und sicheren Orten entlastet in belasteten Phasen deutlich.',
+      target: 'safety-plan',
+      targetLabel: 'Plan anlegen',
+      className: mapRecommendationTone('supportive'),
+    },
+  },
+  {
+    id: 'netzwerk',
+    question: 'Gibt es mindestens eine mitwissende Bezugsperson oder Fachstelle, die kurzfristig mittragen kann?',
+    yes: {
+      title: 'Kooperation aktiv nutzen',
+      text: 'Bestehende Unterstützung sollte konkret in Absprachen, Übergaben und Rückmeldewegen eingebunden werden.',
+      target: 'safety-plan',
+      targetLabel: 'Kooperation konkretisieren',
+      className: mapRecommendationTone('neutral'),
+    },
+    no: {
+      title: 'Netzwerk rasch erweitern',
+      text: 'Fehlende Mitwissende erhöhen die Belastung. Jetzt sind niedrigschwellige Hilfen, Bezugspersonen und Fachstellen besonders wichtig.',
+      target: 'child-protection',
+      targetLabel: 'Unterstützung prüfen',
+      className: mapRecommendationTone('caution'),
+    },
+  },
+];
+
 export default function ToolboxSection({
   pageHeadingId,
   score,
@@ -70,123 +186,7 @@ export default function ToolboxSection({
 
   const assessmentLiveText = `Aktueller Assessment-Score: ${score.risk}. ${getRiskLabel(score.risk)}. Der Score dient nur als Orientierungshilfe.`;
 
-  const pathwaySteps = [
-    {
-      label: 'Orientieren',
-      title: 'Belastung kurz einordnen',
-      desc: 'Welche Faktoren sind aktuell sichtbar, und wo braucht es sofort mehr Aufmerksamkeit?',
-    },
-    {
-      label: 'Sichern',
-      title: 'Akute Risiken zuerst klären',
-      desc: 'Selbstgefährdung, Kindersicherheit, Versorgung und erreichbare Sofortkontakte priorisieren.',
-    },
-    {
-      label: 'Planen',
-      title: 'Krisenvorsorge schriftlich machen',
-      desc: 'Warnzeichen, Betreuung, Kontaktkette und Übergaben für belastete Phasen festhalten.',
-    },
-    {
-      label: 'Kooperieren',
-      title: 'Freiwillige Hilfe oder Abklärung',
-      desc: 'Mit Familie, Netzwerk und Fachstellen den nächsten tragfähigen Schritt bestimmen.',
-    },
-  ];
-
-  const scoreBands = [
-    {
-      label: '0–2',
-      title: 'tragende Ressourcen genauer sichtbar machen',
-      className: mapScoreBandTone('supportive'),
-    },
-    {
-      label: '3–6',
-      title: 'vertiefte Begleitung und Krisenvorsorge prüfen',
-      className: mapScoreBandTone('caution'),
-    },
-    {
-      label: '7+',
-      title: 'Schutz, Sicherung und formelle Abklärung mitdenken',
-      className: mapScoreBandTone('danger'),
-    },
-  ];
-
-  const triagePrompts = [
-    {
-      id: 'acute-danger',
-      question: 'Gibt es Hinweise auf akute Selbstgefährdung, Fremdgefährdung oder unmittelbare Unsicherheit für Kinder?',
-      yes: {
-        title: 'Akute Sicherheit sofort priorisieren',
-        text: 'Notruf, Krisendienst oder offizielle Notfallwege gehen vor längerer Abklärung. Kinderbetreuung und Aufsicht sofort mitdenken.',
-        target: 'acute-crisis',
-        targetLabel: 'Zur Akut-Krise',
-        className: mapRecommendationTone('danger'),
-      },
-      no: {
-        title: 'Akute Gefährdung aktuell nicht im Vordergrund',
-        text: 'Die Einschätzung kann ruhiger in Richtung Krisenvorsorge, Alltag und Kooperation weitergeführt werden.',
-        target: 'safety-plan',
-        targetLabel: 'Zum Sicherheitsplan',
-        className: mapRecommendationTone('supportive'),
-      },
-    },
-    {
-      id: 'care-gap',
-      question: 'Sind Aufsicht, Tagesstruktur, Versorgung oder verlässliche Betreuung der Kinder derzeit brüchig?',
-      yes: {
-        title: 'Schutz und Entlastung konkret prüfen',
-        text: 'Wenn Grundversorgung oder Aufsicht nicht verlässlich sind, braucht es rasch konkrete Hilfe und gegebenenfalls eine Kindesschutzabklärung.',
-        target: 'child-protection',
-        targetLabel: 'Zum Kindeswohl',
-        className: mapRecommendationTone('caution'),
-      },
-      no: {
-        title: 'Versorgung wirkt aktuell tragfähig',
-        text: 'Dann lohnt es sich, tragende Routinen und Schutzfaktoren sichtbar zu halten und nicht nur auf Risiken zu fokussieren.',
-        target: 'safety-plan',
-        targetLabel: 'Schutzfaktoren absichern',
-        className: mapRecommendationTone('supportive'),
-      },
-    },
-    {
-      id: 'crisis-plan',
-      question: 'Gibt es bereits einen besprochenen Krisen- oder Sicherheitsplan mit Kinder-Schutzteil?',
-      yes: {
-        title: 'Bestehende Absprachen aktualisieren',
-        text: 'Vorhandene Pläne sind hilfreich, wenn sie überprüft, mit Kontakten ergänzt und in stabileren Phasen gemeinsam geübt werden.',
-        target: 'safety-plan',
-        targetLabel: 'Plan überprüfen',
-        className: mapRecommendationTone('neutral'),
-      },
-      no: {
-        title: 'Krisenvorsorge schriftlich machen',
-        text: 'Ein kurzer Plan zu Warnzeichen, Kinderbetreuung, Kontaktkette und sicheren Orten entlastet in belasteten Phasen deutlich.',
-        target: 'safety-plan',
-        targetLabel: 'Plan anlegen',
-        className: mapRecommendationTone('supportive'),
-      },
-    },
-    {
-      id: 'netzwerk',
-      question: 'Gibt es mindestens eine mitwissende Bezugsperson oder Fachstelle, die kurzfristig mittragen kann?',
-      yes: {
-        title: 'Kooperation aktiv nutzen',
-        text: 'Bestehende Unterstützung sollte konkret in Absprachen, Übergaben und Rückmeldewegen eingebunden werden.',
-        target: 'safety-plan',
-        targetLabel: 'Kooperation konkretisieren',
-        className: mapRecommendationTone('neutral'),
-      },
-      no: {
-        title: 'Netzwerk rasch erweitern',
-        text: 'Fehlende Mitwissende erhöhen die Belastung. Jetzt sind niedrigschwellige Hilfen, Bezugspersonen und Fachstellen besonders wichtig.',
-        target: 'child-protection',
-        targetLabel: 'Unterstützung prüfen',
-        className: mapRecommendationTone('caution'),
-      },
-    },
-  ];
-
-  const answeredPrompts = triagePrompts.filter((prompt) => triageAnswers[prompt.id]);
+  const answeredPrompts = TRIAGE_PROMPTS.filter((prompt) => triageAnswers[prompt.id]);
   const triagePriorities = answeredPrompts.map((prompt) => prompt[triageAnswers[prompt.id]]);
   const primaryPriority =
     triagePriorities.find((item) => item.target === 'acute-crisis') ||
@@ -213,7 +213,7 @@ export default function ToolboxSection({
   const triageSummaryText =
     answeredCount === 0
       ? 'Noch keine Fragen beantwortet. Die Triage startet mit akuter Sicherheit und endet bei Kooperation und Absicherung.'
-      : `${answeredCount} von ${triagePrompts.length} Fragen beantwortet. Die aktuell wichtigste Spur ist ${primaryPriority?.title?.toLowerCase() ?? 'noch offen'}.`;
+      : `${answeredCount} von ${TRIAGE_PROMPTS.length} Fragen beantwortet. Die aktuell wichtigste Spur ist ${primaryPriority?.title?.toLowerCase() ?? 'noch offen'}.`;
 
   const hero = {
     eyebrow: 'Klinische Orientierung',
@@ -292,14 +292,14 @@ export default function ToolboxSection({
       copy:
         'In akuten oder hoch belasteten Lagen helfen kurze Entscheidungen, sichtbare Prioritäten und konkrete Anschlusswege mehr als grosse Informationsmengen.',
     },
-    steps: pathwaySteps,
+    steps: PATHWAY_STEPS,
   };
 
   const scoreBandSection = {
     eyebrow: 'Einordnung',
     description:
       'Die Werte markieren keine Diagnose. Sie helfen lediglich dabei, die Aufmerksamkeit zwischen tragenden Ressourcen, vertiefter Begleitung und möglichem Schutzbedarf zu gewichten.',
-    items: scoreBands,
+    items: SCORE_BANDS,
     aside: {
       label: 'Interpretation',
       copy:
@@ -317,7 +317,7 @@ export default function ToolboxSection({
       label: 'Hinweis',
       copy: 'Mehrere positive Hinweise können gleichzeitig bestehen. Die Seite priorisiert deshalb akute Sicherheit vor Schutzschwellen und diese wiederum vor allgemeiner Krisenvorsorge.',
     },
-    prompts: triagePrompts.map((prompt) => ({
+    prompts: TRIAGE_PROMPTS.map((prompt) => ({
       id: prompt.id,
       question: prompt.question,
       currentAnswer: triageAnswers[prompt.id],
@@ -567,7 +567,7 @@ export default function ToolboxSection({
           <div className="toolbox-print-block toolbox-print-card">
             <p className="toolbox-print-kicker">Sofort-Triage</p>
             <div className="toolbox-print-stack">
-              {triagePrompts.map((prompt, index) => (
+              {TRIAGE_PROMPTS.map((prompt, index) => (
                 <div key={prompt.id} className="toolbox-print-block toolbox-print-card toolbox-print-card--compact">
                   <p className="toolbox-print-kicker toolbox-print-kicker--compact">Frage {index + 1}</p>
                   <p className="toolbox-print-question">{prompt.question}</p>

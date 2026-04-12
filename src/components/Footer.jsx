@@ -1,13 +1,18 @@
 // Design note: Editorial footer with warm layered panels, serif brand close, and calmer navigation rhythm that extends the paper-like interface language.
+import { memo, useMemo } from 'react';
 import { ArrowUpRight, Library, ShieldCheck, Users } from 'lucide-react';
 import { TAB_ITEMS } from '../data/appShellContent';
 
-export default function Footer({ onNavigateToTab }) {
-  const footerRoutes = TAB_ITEMS.filter((route) => route.priority === 'primary').map((route) => ({
-    label: route.label,
-    tab: route.id,
-    note: route.footerNote,
-  }));
+const Footer = memo(function Footer({ onNavigateToTab }) {
+  const footerRoutes = useMemo(
+    () =>
+      TAB_ITEMS.filter((route) => route.priority === 'primary').map((route) => ({
+        label: route.label,
+        tab: route.id,
+        note: route.footerNote,
+      })),
+    []
+  );
 
   return (
     <footer className="footer-shell no-print" role="contentinfo">
@@ -93,4 +98,6 @@ export default function Footer({ onNavigateToTab }) {
       </div>
     </footer>
   );
-}
+});
+
+export default Footer;

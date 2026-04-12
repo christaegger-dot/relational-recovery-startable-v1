@@ -10,8 +10,8 @@ function RichCopy({ description, paragraphs = [] }) {
   return (
     <div className="ui-copy">
       {description ? <p>{description}</p> : null}
-      {paragraphs.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
+      {paragraphs.map((paragraph, i) => (
+        <p key={i}>{paragraph}</p>
       ))}
     </div>
   );
@@ -25,8 +25,8 @@ function MetaTags({ items = [], tone = 'default' }) {
 
   return (
     <div className="ui-badge-row ui-closing-tags">
-      {items.map((tag) => (
-        <span key={tag} className={className}>
+      {items.map((tag, i) => (
+        <span key={i} className={className}>
           {tag}
         </span>
       ))}
@@ -69,8 +69,8 @@ function ClosingHeader({ section }) {
           {section.aside.copy ? <p className="ui-card__copy">{section.aside.copy}</p> : null}
           {section.aside.points?.length ? (
             <div className="ui-card__section--spaced ui-stack ui-stack--tight">
-              {section.aside.points.map((item) => (
-                <div key={item} className="ui-bullet-panel__item">
+              {section.aside.points.map((item, i) => (
+                <div key={i} className="ui-bullet-panel__item">
                   <span className="ui-bullet-panel__dot" />
                   <p className="ui-bullet-panel__copy">{item}</p>
                 </div>
@@ -99,8 +99,8 @@ function ClosingPrimaryActions({ items = [] }) {
           {item.description ? <p className="ui-closing-action__copy">{item.description}</p> : null}
           {item.meta?.length ? (
             <div className="ui-badge-row ui-closing-action__meta">
-              {item.meta.map((tag) => (
-                <span key={tag} className="ui-badge ui-badge--subtle">
+              {item.meta.map((tag, i) => (
+                <span key={i} className="ui-badge ui-badge--subtle">
                   {tag}
                 </span>
               ))}
@@ -176,7 +176,7 @@ function getCollectionAnchorId(collection, index) {
 }
 
 function getActionItemKey(item, index) {
-  return item.id || item.href || item.link || item.title || `closing-item-${index + 1}`;
+  return item.id || item.href || item.title || `closing-item-${index + 1}`;
 }
 
 function ClosingNavigator({ entries = [], query, setQuery, totalCount, resultCount }) {
@@ -311,8 +311,8 @@ function ClosingNotes({ notes }) {
     <div className="ui-stack ui-stack--tight no-print">
       <div className="ui-closing-notes">
         <div className="ui-stack ui-stack--tight">
-          {notes.map((note) => (
-            <p key={note} className="ui-closing-note">
+          {notes.map((note, i) => (
+            <p key={i} className="ui-closing-note">
               {note}
             </p>
           ))}
