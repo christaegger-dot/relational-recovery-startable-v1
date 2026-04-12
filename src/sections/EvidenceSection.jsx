@@ -1,4 +1,3 @@
-import React from 'react';
 import EvidencePageTemplate from '../templates/EvidencePageTemplate';
 import {
   ABOUT_THIS_WEBSITE_POINTS,
@@ -47,13 +46,6 @@ function panelCards(items = []) {
     title: item.title || item.name,
     text: item.text || item.description || item.focus || item.publisher || '',
     note: item.highlight || item.note || item.audience || item.category || null,
-  }));
-}
-
-function listToCards(items = []) {
-  return items.map((item, index) => ({
-    label: `Punkt ${index + 1}`,
-    text: item,
   }));
 }
 
@@ -124,15 +116,36 @@ export default function EvidenceSection({ downloadResources = [] }) {
     aside: {
       label: 'Orientierung',
       title: 'Vom Verstehen zum Handeln',
-      copy:
-        'Jeder Abschnitt übersetzt Forschung, Erfahrungswissen und Versorgungsperspektive in eine kompakte Arbeitslogik für Alltag, Diagnostik, Gespräch und Vernetzung.',
-      badges: ['Kapitel 1 Relevanz', 'Kapitel 2 Psychoedukation', 'Kapitel 3 Elternarbeit', 'Kapitel 4 Vernetzung', 'Kapitel 5 Materialien'],
+      copy: 'Jeder Abschnitt übersetzt Forschung, Erfahrungswissen und Versorgungsperspektive in eine kompakte Arbeitslogik für Alltag, Diagnostik, Gespräch und Vernetzung.',
+      badges: [
+        'Kapitel 1 Relevanz',
+        'Kapitel 2 Psychoedukation',
+        'Kapitel 3 Elternarbeit',
+        'Kapitel 4 Vernetzung',
+        'Kapitel 5 Materialien',
+      ],
     },
     items: [
-      { id: 'evidenz-verstehen', label: '1 Verstehen', note: 'Relevanz, Elternschaft, Familiensystem, kindliches Erleben' },
-      { id: 'evidenz-mit-kindern-sprechen', label: '2 Mit Kindern sprechen', note: 'Vorbereitung, Alterslogik, Schwierigkeitspunkte und Praxis' },
-      { id: 'evidenz-mit-eltern-arbeiten', label: '3 Mit Eltern arbeiten', note: 'Barrieren, Kooperation, Scham und alltagsnahe Entlastung' },
-      { id: 'evidenz-handeln-und-vernetzen', label: '4 Handeln und vernetzen', note: 'Unterstützungsangebote, klinische Schritte und nächste Interventionen' },
+      {
+        id: 'evidenz-verstehen',
+        label: '1 Verstehen',
+        note: 'Relevanz, Elternschaft, Familiensystem, kindliches Erleben',
+      },
+      {
+        id: 'evidenz-mit-kindern-sprechen',
+        label: '2 Mit Kindern sprechen',
+        note: 'Vorbereitung, Alterslogik, Schwierigkeitspunkte und Praxis',
+      },
+      {
+        id: 'evidenz-mit-eltern-arbeiten',
+        label: '3 Mit Eltern arbeiten',
+        note: 'Barrieren, Kooperation, Scham und alltagsnahe Entlastung',
+      },
+      {
+        id: 'evidenz-handeln-und-vernetzen',
+        label: '4 Handeln und vernetzen',
+        note: 'Unterstützungsangebote, klinische Schritte und nächste Interventionen',
+      },
       { id: 'evidenz-materialien', label: '5 Materialien', note: 'Downloads, Literatur, Medien und externe Hilfen' },
     ],
   };
@@ -147,8 +160,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       aside: {
         label: 'Versorgungsperspektive',
         title: 'Elternschaft ist kein Nebenthema.',
-        copy:
-          'Wenn psychische Belastung den Familienalltag, die Erreichbarkeit von Erwachsenen und die kindliche Orientierung mitprägt, muss Elternschaft früh in Anamnese, Behandlung und Austrittsplanung sichtbar werden.',
+        copy: 'Wenn psychische Belastung den Familienalltag, die Erreichbarkeit von Erwachsenen und die kindliche Orientierung mitprägt, muss Elternschaft früh in Anamnese, Behandlung und Austrittsplanung sichtbar werden.',
       },
       metrics: RELEVANCE_STATS.map((item) => ({
         label: item.label,
@@ -181,8 +193,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       ],
       cardColumns: 'three',
       callout: {
-        text:
-          'Für die Praxis zählt weniger eine abstrakte Diagnose als die Frage, wie verlässlich Alltag, Kommunikation, Beziehung und Schutzfaktoren aktuell tatsächlich funktionieren.',
+        text: 'Für die Praxis zählt weniger eine abstrakte Diagnose als die Frage, wie verlässlich Alltag, Kommunikation, Beziehung und Schutzfaktoren aktuell tatsächlich funktionieren.',
       },
     },
     {
@@ -197,8 +208,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       aside: {
         label: 'Leitidee',
         title: 'Verstehbare Sprache schützt.',
-        copy:
-          'Kinder brauchen keine perfekte Erklärung, sondern eine stimmige, wiederholbare und entwicklungsangemessene Sprache dafür, was sich zuhause verändert und was verlässlich bleibt.',
+        copy: 'Kinder brauchen keine perfekte Erklärung, sondern eine stimmige, wiederholbare und entwicklungsangemessene Sprache dafür, was sich zuhause verändert und was verlässlich bleibt.',
       },
       highlightList: {
         tone: 'soft',
@@ -208,17 +218,23 @@ export default function EvidenceSection({ downloadResources = [] }) {
         {
           label: 'Alterslogik',
           title: 'Je jünger das Kind, desto wichtiger sind Sicherheit, Wiederholung und konkrete Alltagssprache.',
-          paragraphs: ['Die Gesprächsführung orientiert sich am Entwicklungsstand des Kindes. Die vorhandenen Altersgruppen helfen, den Schwerpunkt jeweils zwischen Sicherheit, Erklärung, Mitbestimmung und Nachfragen auszubalancieren.'],
+          paragraphs: [
+            'Die Gesprächsführung orientiert sich am Entwicklungsstand des Kindes. Die vorhandenen Altersgruppen helfen, den Schwerpunkt jeweils zwischen Sicherheit, Erklärung, Mitbestimmung und Nachfragen auszubalancieren.',
+          ],
         },
         {
           label: 'Settings',
           title: 'Gespräche können unterschiedlich gerahmt werden – entscheidend ist die Passung.',
-          paragraphs: ['Manchmal sprechen Eltern selbst mit Unterstützung, manchmal ist ein gemeinsames Familiengespräch sinnvoll. Wichtig ist, dass Vorbereitung, Verantwortung und Nachsorge geklärt sind.'],
+          paragraphs: [
+            'Manchmal sprechen Eltern selbst mit Unterstützung, manchmal ist ein gemeinsames Familiengespräch sinnvoll. Wichtig ist, dass Vorbereitung, Verantwortung und Nachsorge geklärt sind.',
+          ],
         },
         {
           label: 'Schwierige Momente',
           title: 'Stockungen, Abbrüche oder viele Fragen sind kein Scheitern.',
-          paragraphs: ['Schwierigkeiten im Gespräch sind oft Ausdruck von Schutz, Loyalität oder Überforderung. Sie brauchen Wiederanknüpfen statt Druck.'],
+          paragraphs: [
+            'Schwierigkeiten im Gespräch sind oft Ausdruck von Schutz, Loyalität oder Überforderung. Sie brauchen Wiederanknüpfen statt Druck.',
+          ],
         },
       ],
       cards: [
@@ -228,8 +244,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       ],
       cardColumns: 'three',
       callout: {
-        text:
-          'Die Kernbotschaften bleiben über Altersstufen hinweg konstant: Du bist nicht schuld. Du bist nicht allein. Erwachsene kümmern sich.',
+        text: 'Die Kernbotschaften bleiben über Altersstufen hinweg konstant: Du bist nicht schuld. Du bist nicht allein. Erwachsene kümmern sich.',
       },
     },
     {
@@ -244,8 +259,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       aside: {
         label: 'Kooperation',
         title: 'Ambivalenz ist normal und bearbeitbar.',
-        copy:
-          'Gelingende Zusammenarbeit entlastet, benennt Ängste offen und stärkt die Elternrolle, statt Eltern nur durch Risikobrillen zu betrachten.',
+        copy: 'Gelingende Zusammenarbeit entlastet, benennt Ängste offen und stärkt die Elternrolle, statt Eltern nur durch Risikobrillen zu betrachten.',
       },
       highlightList: {
         tone: 'soft',
@@ -261,12 +275,16 @@ export default function EvidenceSection({ downloadResources = [] }) {
         {
           label: 'Gesprächseinstieg',
           title: 'Gute Kooperation beginnt mit Anlass, Anliegen, Auftrag und Abmachungen.',
-          paragraphs: ['Die Vier-A-Logik schafft Orientierung und verhindert, dass Gespräche diffus bleiben. Sie übersetzt Respekt in eine klare Gesprächsstruktur.'],
+          paragraphs: [
+            'Die Vier-A-Logik schafft Orientierung und verhindert, dass Gespräche diffus bleiben. Sie übersetzt Respekt in eine klare Gesprächsstruktur.',
+          ],
         },
         {
           label: 'Alltagshilfe',
           title: 'Nicht alles stabilisieren wollen – zuerst das Verlässlichste sichern.',
-          paragraphs: ['Im Alltag helfen kleine, wiederholbare Schritte oft mehr als grosse Appelle. Versorgung, Übergaben, Schlaf, Essen und Entlastung haben Priorität.'],
+          paragraphs: [
+            'Im Alltag helfen kleine, wiederholbare Schritte oft mehr als grosse Appelle. Versorgung, Übergaben, Schlaf, Essen und Entlastung haben Priorität.',
+          ],
         },
       ],
       cards: [
@@ -276,8 +294,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       ],
       cardColumns: 'three',
       callout: {
-        text:
-          'Der fachliche Fokus liegt nicht auf moralischer Bewertung, sondern auf der Frage, wie Eltern konkret entlastet und in ihrer Rolle handlungsfähig gehalten werden können.',
+        text: 'Der fachliche Fokus liegt nicht auf moralischer Bewertung, sondern auf der Frage, wie Eltern konkret entlastet und in ihrer Rolle handlungsfähig gehalten werden können.',
       },
     },
     {
@@ -292,8 +309,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       aside: {
         label: 'Systemlogik',
         title: 'Schutz entsteht durch Kombination.',
-        copy:
-          'Tragfähig werden Unterstützungsprozesse dann, wenn offizielle Hilfen, private Bezugspersonen und konkrete Alltagsschritte aufeinander bezogen werden.',
+        copy: 'Tragfähig werden Unterstützungsprozesse dann, wenn offizielle Hilfen, private Bezugspersonen und konkrete Alltagsschritte aufeinander bezogen werden.',
       },
       highlightList: {
         tone: 'soft',
@@ -308,17 +324,15 @@ export default function EvidenceSection({ downloadResources = [] }) {
         {
           label: 'Unterstützungslandschaft',
           title: 'Angebote gewinnen an Wirkung, wenn sie nach Funktion und Zugänglichkeit sortiert werden.',
-          paragraphs: ['Für Angehörige, Kinder, Eltern und Fachpersonen ist nicht nur das Vorhandensein von Hilfen entscheidend, sondern die schnelle Übersetzbarkeit in einen konkreten nächsten Schritt.'],
+          paragraphs: [
+            'Für Angehörige, Kinder, Eltern und Fachpersonen ist nicht nur das Vorhandensein von Hilfen entscheidend, sondern die schnelle Übersetzbarkeit in einen konkreten nächsten Schritt.',
+          ],
         },
       ],
-      cards: [
-        ...panelCards(CLINICAL_PRACTICE_PANELS),
-        ...supportOfferCards(SUPPORT_OFFERS),
-      ],
+      cards: [...panelCards(CLINICAL_PRACTICE_PANELS), ...supportOfferCards(SUPPORT_OFFERS)],
       cardColumns: 'three',
       callout: {
-        text:
-          'Die offizielle Angehörigenberatung der PUK Zürich bleibt im Zürcher Kontext eine zentrale Anlaufstelle, besonders wenn Elternschaft, psychische Belastung und kindliche Mitbetroffenheit gemeinsam in den Blick kommen.',
+        text: 'Die offizielle Angehörigenberatung der PUK Zürich bleibt im Zürcher Kontext eine zentrale Anlaufstelle, besonders wenn Elternschaft, psychische Belastung und kindliche Mitbetroffenheit gemeinsam in den Blick kommen.',
       },
     },
   ];
@@ -335,8 +349,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
     aside: {
       label: 'Hinweis',
       title: 'Orientierung statt Ersatz für Beratung',
-      copy:
-        'Downloads und Medien schaffen Sprache, Struktur und Gesprächsanlässe. Sie ersetzen jedoch keine fachliche Beurteilung, kein Krisenmanagement und keine institutionelle Beratung.',
+      copy: 'Downloads und Medien schaffen Sprache, Struktur und Gesprächsanlässe. Sie ersetzen jedoch keine fachliche Beurteilung, kein Krisenmanagement und keine institutionelle Beratung.',
     },
     primaryActions: downloadResources.map((item) => ({
       title: item.title,
@@ -378,5 +391,13 @@ export default function EvidenceSection({ downloadResources = [] }) {
     notes: MEDIA_NOTES,
   });
 
-  return <EvidencePageTemplate hero={hero} pageHeadingId={getPageHeadingId('evidenz')} chapterOverview={chapterOverview} zones={zones} closingSection={closingSection} />;
+  return (
+    <EvidencePageTemplate
+      hero={hero}
+      pageHeadingId={getPageHeadingId('evidenz')}
+      chapterOverview={chapterOverview}
+      zones={zones}
+      closingSection={closingSection}
+    />
+  );
 }

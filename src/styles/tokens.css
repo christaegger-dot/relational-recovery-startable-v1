@@ -41,8 +41,8 @@
   --focus-outline-radius: 0.875rem;
 
   /* Typography tokens */
-  --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Source Serif 4", Georgia, serif;
+  --font-body: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Source Serif 4', Georgia, serif;
 
   --font-size-2xs: 0.6875rem;
   --font-size-xs: 0.75rem;

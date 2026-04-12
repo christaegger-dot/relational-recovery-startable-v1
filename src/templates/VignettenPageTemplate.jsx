@@ -61,7 +61,13 @@ function DecisionOption({ option, index, isActive, onSelect }) {
 
   return (
     <label className="ui-choice-control">
-      <input type="radio" name={option.groupName} className="ui-visually-hidden" checked={isActive} onChange={onSelect} />
+      <input
+        type="radio"
+        name={option.groupName}
+        className="ui-visually-hidden"
+        checked={isActive}
+        onChange={onSelect}
+      />
       <span className={toneClass}>
         <span className="ui-choice-card__body">
           <span className="ui-choice-card__stack">
@@ -163,12 +169,7 @@ function VignettenNavigationSection({ navigation }) {
             >
               <ChevronLeft size={16} /> {navigation.previousLabel}
             </Button>
-            <Button
-              type="button"
-              onClick={navigation.onNext}
-              disabled={navigation.disableNext}
-              variant="primary"
-            >
+            <Button type="button" onClick={navigation.onNext} disabled={navigation.disableNext} variant="primary">
               {navigation.nextLabel} <ChevronRight size={16} />
             </Button>
           </div>

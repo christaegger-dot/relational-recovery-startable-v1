@@ -1,4 +1,3 @@
-import React from 'react';
 import VignettenPageTemplate from '../templates/VignettenPageTemplate';
 import { VIGNETTEN } from '../data/learningContent';
 import { getPageHeadingId } from '../utils/appHelpers';
@@ -16,8 +15,7 @@ export default function VignettenSection({ currentIndex, setCurrentIndex, select
     eyebrow: 'Fallreflexion',
     title: 'Training mit',
     accent: 'Vignetten',
-    lead:
-      'Kurze Fallsituationen zur Reflexion zwischen Schutz, Kooperation und systemischer Entlastung. Die Darstellung bleibt bewusst fachlich und abwägend statt dramatisch.',
+    lead: 'Kurze Fallsituationen zur Reflexion zwischen Schutz, Kooperation und systemischer Entlastung. Die Darstellung bleibt bewusst fachlich und abwägend statt dramatisch.',
     asideTitle: 'Format',
     asideCopy:
       'Ein Fall, zwei Optionen, direkte fachliche Rückmeldung. Gedacht als Gesprächsimpuls, nicht als Prüfung.',
@@ -93,5 +91,13 @@ export default function VignettenSection({ currentIndex, setCurrentIndex, select
     onNext: () => setCurrentIndex((prev) => Math.min(prev + 1, VIGNETTEN.length - 1)),
   };
 
-  return <VignettenPageTemplate hero={hero} pageHeadingId={getPageHeadingId('vignetten')} caseStudy={caseStudy} decision={decision} navigation={navigation} />;
+  return (
+    <VignettenPageTemplate
+      hero={hero}
+      pageHeadingId={getPageHeadingId('vignetten')}
+      caseStudy={caseStudy}
+      decision={decision}
+      navigation={navigation}
+    />
+  );
 }

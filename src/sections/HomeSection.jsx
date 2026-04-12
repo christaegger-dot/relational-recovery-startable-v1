@@ -1,13 +1,33 @@
 // Design note: Editorial landing composition with warm paper panels, serif-led hierarchy, quieter cards, and high whitespace while preserving the original information architecture.
 import { useMemo } from 'react';
-import { ChevronRight, ClipboardCheck, ExternalLink, GraduationCap, HeartHandshake, Library, MapPin } from 'lucide-react';
+import {
+  ChevronRight,
+  ClipboardCheck,
+  ExternalLink,
+  GraduationCap,
+  HeartHandshake,
+  Library,
+  MapPin,
+} from 'lucide-react';
 import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
 import { E_MODULE_COUNT, HOME_REFERENCE_COUNT, NETWORK_RESOURCE_COUNT, VIGNETTE_COUNT } from '../data/appShellContent';
 
 const overviewCards = [
   { label: 'Module', val: E_MODULE_COUNT, desc: 'kompakte Lernbausteine', icon: GraduationCap, tab: 'lernmodule' },
-  { label: 'Trainingsfälle', val: VIGNETTE_COUNT, desc: 'für Fallreflexion und Dialog', icon: HeartHandshake, tab: 'vignetten' },
-  { label: 'Netzwerkstellen', val: NETWORK_RESOURCE_COUNT, desc: 'für Triage und Entlastung', icon: MapPin, tab: 'netzwerk' },
+  {
+    label: 'Trainingsfälle',
+    val: VIGNETTE_COUNT,
+    desc: 'für Fallreflexion und Dialog',
+    icon: HeartHandshake,
+    tab: 'vignetten',
+  },
+  {
+    label: 'Netzwerkstellen',
+    val: NETWORK_RESOURCE_COUNT,
+    desc: 'für Triage und Entlastung',
+    icon: MapPin,
+    tab: 'netzwerk',
+  },
   { label: 'Referenzen', val: HOME_REFERENCE_COUNT, desc: 'für fachliche Vertiefung', icon: Library, tab: 'evidenz' },
 ];
 
@@ -84,7 +104,7 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
         note: 'orientierender Lernstand',
       },
     ],
-    [completedModules.length, progressPercent],
+    [completedModules.length, progressPercent]
   );
 
   return (
@@ -118,8 +138,8 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
             <div className="ui-note-panel home-hero-main__progress-note">
               <div className="ui-note-panel__label">Lernstand</div>
               <p className="ui-note-panel__copy">
-                {completedModules.length} von {E_MODULE_COUNT} Lernmodulen bearbeitet. Das Dashboard unten führt direkt zu den
-                nächsten Arbeitsbereichen.
+                {completedModules.length} von {E_MODULE_COUNT} Lernmodulen bearbeitet. Das Dashboard unten führt direkt
+                zu den nächsten Arbeitsbereichen.
               </p>
             </div>
 
@@ -136,13 +156,18 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
               <div className="ui-note-panel__label">Wichtiger Hinweis zur Einordnung</div>
               <div className="ui-copy">
                 <p>
-                  Diese Website ist ein ergänzendes psychoedukatives Informationsangebot im Themenfeld Angehörigenarbeit,
-                  psychisch belastete Elternschaft und Kinder psychisch erkrankter Eltern. Für offizielle Informationen und Beratung
-                  bleibt die Angehörigenberatung der PUK Zürich die zentrale Anlaufstelle.
+                  Diese Website ist ein ergänzendes psychoedukatives Informationsangebot im Themenfeld
+                  Angehörigenarbeit, psychisch belastete Elternschaft und Kinder psychisch erkrankter Eltern. Für
+                  offizielle Informationen und Beratung bleibt die Angehörigenberatung der PUK Zürich die zentrale
+                  Anlaufstelle.
                 </p>
               </div>
               <div className="ui-button-row">
-                <button type="button" onClick={() => setActiveTab('netzwerk')} className="ui-button ui-button--secondary">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('netzwerk')}
+                  className="ui-button ui-button--secondary"
+                >
                   Zum Netzwerkbereich mit PUK-Angeboten
                 </button>
                 <a
@@ -185,10 +210,15 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
 
           <div className="home-progress-panel__footer">
             <p className="home-progress-panel__copy">
-              Die Fortschrittsansicht bleibt bewusst ruhig und textbasiert, damit Orientierung wichtiger ist als reine UI-Inszenierung.
+              Die Fortschrittsansicht bleibt bewusst ruhig und textbasiert, damit Orientierung wichtiger ist als reine
+              UI-Inszenierung.
             </p>
             {activeTab !== 'vignetten' && (
-              <button type="button" onClick={() => setActiveTab('vignetten')} className="ui-button ui-button--secondary">
+              <button
+                type="button"
+                onClick={() => setActiveTab('vignetten')}
+                className="ui-button ui-button--secondary"
+              >
                 Zu den Trainingsfällen <ChevronRight size={14} />
               </button>
             )}
@@ -204,14 +234,16 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
               Ein möglicher <span className="ui-hero__accent">Arbeitsweg</span> durch die Website.
             </h3>
             <p className="home-feature-panel__lead">
-              Die Inhalte sind nicht als lose Sammlung gedacht, sondern als fachliche Abfolge: erst verstehen, dann einschätzen,
-              daraus konkrete Schritte ableiten und passende Hilfen vernetzen. Das Diagramm bündelt diese Logik auf einer Seite.
+              Die Inhalte sind nicht als lose Sammlung gedacht, sondern als fachliche Abfolge: erst verstehen, dann
+              einschätzen, daraus konkrete Schritte ableiten und passende Hilfen vernetzen. Das Diagramm bündelt diese
+              Logik auf einer Seite.
             </p>
           </div>
           <aside className="ui-note-panel home-support-panel">
             <div className="ui-note-panel__label">Einordnung</div>
             <p className="ui-note-panel__copy">
-              Kein starres Schema, sondern eine ruhige fachliche Leitstruktur für Orientierung, Triage und Gesprächsplanung.
+              Kein starres Schema, sondern eine ruhige fachliche Leitstruktur für Orientierung, Triage und
+              Gesprächsplanung.
             </p>
           </aside>
         </div>
@@ -241,8 +273,8 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
 
           <div className="ui-note-panel ui-note-panel--muted home-pathway-summary">
             <p className="ui-note-panel__copy">
-              Leitidee: Gute Begleitung verbindet systemisches Verstehen, pragmatische Einschätzung, klare nächste Schritte und
-              aktivierte Unterstützung statt isolierter Einzelentscheidungen.
+              Leitidee: Gute Begleitung verbindet systemisches Verstehen, pragmatische Einschätzung, klare nächste
+              Schritte und aktivierte Unterstützung statt isolierter Einzelentscheidungen.
             </p>
           </div>
         </div>
@@ -256,8 +288,8 @@ export default function HomeSection({ activeTab, setActiveTab, progressPercent, 
               Einstieg nach <span className="ui-hero__accent">Fachfrage</span> statt nach Menüpunkt.
             </h3>
             <p className="home-feature-panel__lead">
-              Die Startseite funktioniert am besten, wenn typische Praxisanliegen direkt in den passenden Bereich führen. Die Karten
-              unten übersetzen häufige Arbeitsfragen in klare Einstiegswege.
+              Die Startseite funktioniert am besten, wenn typische Praxisanliegen direkt in den passenden Bereich
+              führen. Die Karten unten übersetzen häufige Arbeitsfragen in klare Einstiegswege.
             </p>
           </div>
           <aside className="ui-note-panel home-support-panel">

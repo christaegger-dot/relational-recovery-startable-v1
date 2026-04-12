@@ -63,7 +63,11 @@ export const E_MODULES = [
     duration: '4 Min.',
     storyboard: 'Mit kindgerechter Sprache Schuldgefühle entlasten und Gesprächsfähigkeit stärken.',
     quiz: 'Warum können Metaphern hilfreich sein?',
-    quizOptions: ['Um die Wahrheit zu verbergen', 'Um altersgerechte Sprache zu schaffen', 'Um den Klinikaufenthalt zu verlängern'],
+    quizOptions: [
+      'Um die Wahrheit zu verbergen',
+      'Um altersgerechte Sprache zu schaffen',
+      'Um den Klinikaufenthalt zu verlängern',
+    ],
     correctQuizIdx: 1,
   },
 ];

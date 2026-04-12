@@ -33,9 +33,7 @@ function GrundlagenCluster({ cluster }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {cluster.eyebrow ? <Eyebrow>{cluster.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title ui-section-title">
-              {cluster.title}
-            </h2>
+            <h2 className="ui-hero__title ui-section-title">{cluster.title}</h2>
             {cluster.description ? (
               <div className="ui-copy">
                 <p>{cluster.description}</p>
@@ -74,7 +72,14 @@ export default function GrundlagenPageTemplate({ hero, pageHeadingId, intro, clu
       {clusters.map((cluster) => (
         <GrundlagenCluster key={cluster.id} cluster={cluster} />
       ))}
-      {closingSection ? <ClosingSection section={closingSection} sectionId="grundlagen-materials" surface="plain" className="no-print" /> : null}
+      {closingSection ? (
+        <ClosingSection
+          section={closingSection}
+          sectionId="grundlagen-materials"
+          surface="plain"
+          className="no-print"
+        />
+      ) : null}
     </div>
   );
 }

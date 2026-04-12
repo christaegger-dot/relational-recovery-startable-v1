@@ -5,7 +5,9 @@ import { getPageHeadingId } from '../utils/appHelpers';
 
 function mapGrundlagenDownloads(sharedDownloadResources = []) {
   return sharedDownloadResources
-    .filter((item) => ['Gesprächsleitfaden für Fachpersonen', 'Psychoedukations-Hilfe', 'Schutzfaktoren-Check'].includes(item.title))
+    .filter((item) =>
+      ['Gesprächsleitfaden für Fachpersonen', 'Psychoedukations-Hilfe', 'Schutzfaktoren-Check'].includes(item.title)
+    )
     .map((item) => ({
       ...item,
       kind: 'download',
@@ -27,8 +29,7 @@ export default function GrundlagenSection({ sharedDownloadResources = [], onNavi
     aside: {
       label: 'Arbeitslogik',
       title: 'Von FAQ zu handhabbaren Schritten',
-      copy:
-        'Wenn eine Frage hängen bleibt, hilft oft kein weiteres Lesen, sondern ein kleines Arbeitsmittel oder der Wechsel in den nächsten passenden Seitentyp.',
+      copy: 'Wenn eine Frage hängen bleibt, hilft oft kein weiteres Lesen, sondern ein kleines Arbeitsmittel oder der Wechsel in den nächsten passenden Seitentyp.',
       tone: 'soft',
     },
     collections: mapGrundlagenDownloads(sharedDownloadResources).length
@@ -53,7 +54,8 @@ export default function GrundlagenSection({ sharedDownloadResources = [], onNavi
         {
           kind: 'navigation',
           title: 'Toolbox',
-          description: 'Wenn Antworten in Priorisierung, Sicherheitsplanung oder konkrete nächste Schritte übersetzt werden müssen.',
+          description:
+            'Wenn Antworten in Priorisierung, Sicherheitsplanung oder konkrete nächste Schritte übersetzt werden müssen.',
           meta: ['Arbeitsmodus', 'Nächste Schritte'],
           actionLabel: 'Zur Toolbox wechseln',
           onClick: () => onNavigateToTab('toolbox', { focusTarget: 'heading' }),
@@ -61,7 +63,8 @@ export default function GrundlagenSection({ sharedDownloadResources = [], onNavi
         {
           kind: 'navigation',
           title: 'Glossar',
-          description: 'Wenn Begriffe wie Parentifizierung, Schweigepflicht oder Kindesperspektive zuerst sprachlich geklärt werden sollen.',
+          description:
+            'Wenn Begriffe wie Parentifizierung, Schweigepflicht oder Kindesperspektive zuerst sprachlich geklärt werden sollen.',
           meta: ['Begriffe', 'Einordnung'],
           actionLabel: 'Zum Glossar wechseln',
           onClick: () => onNavigateToTab('glossar', { focusTarget: 'heading' }),
@@ -69,7 +72,8 @@ export default function GrundlagenSection({ sharedDownloadResources = [], onNavi
         {
           kind: 'navigation',
           title: 'Netzwerk',
-          description: 'Wenn aus Orientierung eine konkrete Fachstelle, regionale Hilfe oder Weitervermittlung werden soll.',
+          description:
+            'Wenn aus Orientierung eine konkrete Fachstelle, regionale Hilfe oder Weitervermittlung werden soll.',
           meta: ['Versorgung', 'Weitervermittlung'],
           actionLabel: 'Zum Netzwerk wechseln',
           onClick: () => onNavigateToTab('netzwerk', { focusTarget: 'heading' }),
@@ -78,5 +82,13 @@ export default function GrundlagenSection({ sharedDownloadResources = [], onNavi
     },
   });
 
-  return <GrundlagenPageTemplate hero={GRUNDLAGEN_HERO} pageHeadingId={getPageHeadingId('grundlagen')} intro={GRUNDLAGEN_INTRO} clusters={GRUNDLAGEN_CLUSTERS} closingSection={closingSection} />;
+  return (
+    <GrundlagenPageTemplate
+      hero={GRUNDLAGEN_HERO}
+      pageHeadingId={getPageHeadingId('grundlagen')}
+      intro={GRUNDLAGEN_INTRO}
+      clusters={GRUNDLAGEN_CLUSTERS}
+      closingSection={closingSection}
+    />
+  );
 }

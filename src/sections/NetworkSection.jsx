@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { MapPin, Search } from 'lucide-react';
 import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
 import {
@@ -59,19 +59,18 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
     : `${filteredResources.length} Fachstellen werden angezeigt.`;
 
   const filterStatusText =
-    activeResourceFilter === 'all'
-      ? 'Es werden alle Fachstellen angezeigt.'
-      : `Filter aktiv: ${activeResourceFilter}.`;
+    activeResourceFilter === 'all' ? 'Es werden alle Fachstellen angezeigt.' : `Filter aktiv: ${activeResourceFilter}.`;
 
   const activeLens = NETWORK_MAP_LENSES.find((lens) => lens.id === networkLens) ?? NETWORK_MAP_LENSES[0];
-  const visibleMapNodes = NETWORK_MAP_TEMPLATE_NODES.filter((node) => networkLens === 'all' || node.tone === networkLens);
+  const visibleMapNodes = NETWORK_MAP_TEMPLATE_NODES.filter(
+    (node) => networkLens === 'all' || node.tone === networkLens
+  );
 
   const hero = {
     eyebrow: 'Triage und Support',
     title: 'Netzwerk in',
     accent: 'Zürich und schweizweit lesen.',
-    lead:
-      'Die Seite verbindet zürich-zentrierte Krisenwege, Familienberatung, Kinder- und Jugendangebote sowie wenige schweizweite Ergänzungen. Das neue Seitentyp-System trennt dabei Suchlogik, Fachstellenverzeichnis und Netzwerkkarte sauber voneinander.',
+    lead: 'Die Seite verbindet zürich-zentrierte Krisenwege, Familienberatung, Kinder- und Jugendangebote sowie wenige schweizweite Ergänzungen. Das neue Seitentyp-System trennt dabei Suchlogik, Fachstellenverzeichnis und Netzwerkkarte sauber voneinander.',
     image: heroIllustration,
     imageAlt: 'Illustration eines Familiensystems mit Beziehungslinien und ruhiger Orientierung',
     asideTitle: 'Einordnung',
@@ -184,5 +183,12 @@ export default function NetworkSection({ searchTerm, setSearchTerm, activeResour
     nextStepText: LENS_NEXT_STEP[networkLens] ?? LENS_NEXT_STEP.all,
   };
 
-  return <NetworkPageTemplate hero={hero} pageHeadingId={getPageHeadingId('netzwerk')} directory={directory} mapping={mapping} />;
+  return (
+    <NetworkPageTemplate
+      hero={hero}
+      pageHeadingId={getPageHeadingId('netzwerk')}
+      directory={directory}
+      mapping={mapping}
+    />
+  );
 }

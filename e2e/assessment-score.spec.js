@@ -29,9 +29,7 @@ test.describe('Assessment Score', () => {
     await checkboxFor(page, ITEMS[0].label).check({ force: true });
 
     await expect(page.locator('.ui-toolbox-score')).toHaveText(String(ITEMS[0].val));
-    await expect(page.locator('#assessment-score-status')).toContainText(
-      `Aktueller Assessment-Score: ${ITEMS[0].val}`
-    );
+    await expect(page.locator('#assessment-score-status')).toContainText(`Aktueller Assessment-Score: ${ITEMS[0].val}`);
   });
 
   test('unchecking an item decreases the score', async ({ page }) => {
@@ -39,9 +37,7 @@ test.describe('Assessment Score', () => {
     await expect(page.locator('.ui-toolbox-score')).toHaveText(String(ITEMS[0].val));
 
     await checkboxFor(page, ITEMS[0].label).uncheck({ force: true });
-    await expect(page.locator('#assessment-score-status')).toContainText(
-      'Aktueller Assessment-Score: 0'
-    );
+    await expect(page.locator('#assessment-score-status')).toContainText('Aktueller Assessment-Score: 0');
   });
 
   test('risk band transitions: supportive → caution → danger', async ({ page }) => {
@@ -72,9 +68,7 @@ test.describe('Assessment Score', () => {
     }
 
     await expect(page.locator('.ui-toolbox-score')).toHaveText('10');
-    await expect(page.locator('#assessment-score-status')).toContainText(
-      'Hinweis auf Schutzabklärung'
-    );
+    await expect(page.locator('#assessment-score-status')).toContainText('Hinweis auf Schutzabklärung');
   });
 
   test('reset button clears score and unchecks all items', async ({ page }) => {
@@ -85,9 +79,7 @@ test.describe('Assessment Score', () => {
 
     await page.locator('button', { hasText: 'Assessment zurücksetzen' }).click();
 
-    await expect(page.locator('#assessment-score-status')).toContainText(
-      'Aktueller Assessment-Score: 0'
-    );
+    await expect(page.locator('#assessment-score-status')).toContainText('Aktueller Assessment-Score: 0');
 
     const checkboxes = page.locator('fieldset.ui-toolbox-checklist input[type="checkbox"]');
     const count = await checkboxes.count();
@@ -113,10 +105,14 @@ test.describe('Assessment Score', () => {
     await expect(page.locator('.ui-toolbox-score')).toHaveText('5');
 
     // Navigate away and back using hash (reliable, layout-independent)
-    await page.evaluate(() => { window.location.hash = '#start'; });
+    await page.evaluate(() => {
+      window.location.hash = '#start';
+    });
     await expect(page.locator('#page-heading-start')).toBeVisible();
 
-    await page.evaluate(() => { window.location.hash = '#toolbox'; });
+    await page.evaluate(() => {
+      window.location.hash = '#toolbox';
+    });
     await page.waitForSelector('fieldset.ui-toolbox-checklist');
 
     await expect(page.locator('.ui-toolbox-score')).toHaveText('5');

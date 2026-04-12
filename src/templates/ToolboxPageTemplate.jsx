@@ -16,9 +16,7 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             <Eyebrow>{assessment.eyebrow}</Eyebrow>
-            <h2 className="ui-hero__title ui-section-title">
-              {assessment.title}
-            </h2>
+            <h2 className="ui-hero__title ui-section-title">{assessment.title}</h2>
             <div className="ui-copy">
               <p>{assessment.description}</p>
               {assessment.note ? <p>{assessment.note}</p> : null}
@@ -26,17 +24,25 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
           </div>
           {assessment.scoreAside ? (
             <SurfaceCard as="aside" tone="soft">
-              {assessment.scoreAside.label ? <p className="ui-fact-card__label">{assessment.scoreAside.label}</p> : null}
-              {assessment.scoreAside.value ? (
-                <p className="ui-toolbox-score">{assessment.scoreAside.value}</p>
+              {assessment.scoreAside.label ? (
+                <p className="ui-fact-card__label">{assessment.scoreAside.label}</p>
               ) : null}
+              {assessment.scoreAside.value ? <p className="ui-toolbox-score">{assessment.scoreAside.value}</p> : null}
               {assessment.scoreAside.badge ? (
-                <div className={`ui-toolbox-status-badge ui-toolbox-status-badge--spaced ${assessment.scoreAside.badgeClassName || ''}`}>
+                <div
+                  className={`ui-toolbox-status-badge ui-toolbox-status-badge--spaced ${assessment.scoreAside.badgeClassName || ''}`}
+                >
                   {assessment.scoreAside.badge}
                 </div>
               ) : null}
               {assessment.scoreAside.liveText ? (
-                <p id={scoreStatusId} role="status" aria-live="polite" aria-atomic="true" className="ui-visually-hidden">
+                <p
+                  id={scoreStatusId}
+                  role="status"
+                  aria-live="polite"
+                  aria-atomic="true"
+                  className="ui-visually-hidden"
+                >
                   {assessment.scoreAside.liveText}
                 </p>
               ) : null}
@@ -68,12 +74,13 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
                       key={item.id}
                       className={`ui-card--interactive ui-toolbox-check ${checked ? 'ui-toolbox-check--checked' : ''}`}
                     >
-                      <input type="checkbox" className="ui-visually-hidden" checked={checked} onChange={item.onChange} />
-                      <div
-                        className="ui-toolbox-check__box"
-                      >
-                        {item.checkIcon}
-                      </div>
+                      <input
+                        type="checkbox"
+                        className="ui-visually-hidden"
+                        checked={checked}
+                        onChange={item.onChange}
+                      />
+                      <div className="ui-toolbox-check__box">{item.checkIcon}</div>
                       <div className="ui-toolbox-check__content">
                         <span className="ui-toolbox-check__label">{item.label}</span>
                         {item.meta ? <span className="ui-toolbox-check__meta">{item.meta}</span> : null}
@@ -123,9 +130,7 @@ function PathwaySection({ pathway }) {
                 <div key={step.label} className="ui-toolbox-step">
                   <SurfaceCard tone="soft" className="ui-card--full-height">
                     <div className="ui-toolbox-step__header">
-                      <div className="ui-chip ui-chip--active ui-toolbox-step__chip">
-                        Schritt {index + 1}
-                      </div>
+                      <div className="ui-chip ui-chip--active ui-toolbox-step__chip">Schritt {index + 1}</div>
                       <div className="ui-toolbox-kicker ui-toolbox-step__label">{step.label}</div>
                     </div>
                     <div className="ui-toolbox-step__divider" />
@@ -245,7 +250,11 @@ function TriageSection({ triage }) {
                   <div className="ui-note-panel__label">Einordnung</div>
                   <h4 className="ui-toolbox-feedback__title">{prompt.recommendation.title}</h4>
                   <p className="ui-toolbox-feedback__copy">{prompt.recommendation.text}</p>
-                  <Button variant="secondary" className="ui-editorial-card__action" onClick={() => prompt.recommendation.onJump(prompt.recommendation.target)}>
+                  <Button
+                    variant="secondary"
+                    className="ui-editorial-card__action"
+                    onClick={() => prompt.recommendation.onJump(prompt.recommendation.target)}
+                  >
                     {prompt.recommendation.targetLabel}
                     <ChevronRight size={14} />
                   </Button>
@@ -267,7 +276,11 @@ function TriageSection({ triage }) {
             <div className="ui-note-panel__label">Aktuell wichtigste Spur</div>
             <h3 className="ui-toolbox-priority__title">{triage.primaryPriority.title}</h3>
             <p className="ui-toolbox-priority__copy">{triage.primaryPriority.text}</p>
-            <Button variant="secondary" className="ui-editorial-card__action" onClick={() => triage.primaryPriority.onJump(triage.primaryPriority.target)}>
+            <Button
+              variant="secondary"
+              className="ui-editorial-card__action"
+              onClick={() => triage.primaryPriority.onJump(triage.primaryPriority.target)}
+            >
               {triage.primaryPriority.targetLabel}
               <ChevronRight size={14} />
             </Button>
@@ -309,8 +322,8 @@ function PracticeBlocksSection({ practice }) {
               variant={filter.active ? 'primary' : 'secondary'}
               onClick={filter.onSelect}
               aria-pressed={filter.active}
-                className="ui-button--compact"
-              >
+              className="ui-button--compact"
+            >
               {filter.label}
             </Button>
           ))}
@@ -321,17 +334,18 @@ function PracticeBlocksSection({ practice }) {
             <SurfaceCard key={item.title} tone="default">
               <div className="ui-chip-row">
                 {item.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="ui-toolbox-tag"
-                  >
+                  <span key={tag} className="ui-toolbox-tag">
                     {tag}
                   </span>
                 ))}
               </div>
               <h3 className="ui-card__title ui-editorial-card__action">{item.title}</h3>
               <p className="ui-card__copy">{item.text}</p>
-              <Button variant="secondary" className="ui-editorial-card__action" onClick={() => item.onJump(item.target)}>
+              <Button
+                variant="secondary"
+                className="ui-editorial-card__action"
+                onClick={() => item.onJump(item.target)}
+              >
                 {item.targetLabel}
                 <ChevronRight size={14} />
               </Button>
@@ -366,9 +380,11 @@ function ClusterSection({ cluster }) {
             ) : null}
             {cluster.description ? (
               <div className="ui-copy">
-                {Array.isArray(cluster.description)
-                  ? cluster.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
-                  : <p>{cluster.description}</p>}
+                {Array.isArray(cluster.description) ? (
+                  cluster.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
+                ) : (
+                  <p>{cluster.description}</p>
+                )}
               </div>
             ) : null}
           </div>
@@ -381,7 +397,9 @@ function ClusterSection({ cluster }) {
                 <div className="ui-stack ui-stack--tight ui-card__section--spaced">
                   {cluster.aside.items.map((item, index) => (
                     <div key={`${cluster.id}-aside-${index}`} className="ui-bullet-panel__item">
-                      {item.icon ? <span className="ui-bullet-panel__marker ui-toolbox-inline-icon">{item.icon}</span> : null}
+                      {item.icon ? (
+                        <span className="ui-bullet-panel__marker ui-toolbox-inline-icon">{item.icon}</span>
+                      ) : null}
                       <p className="ui-bullet-panel__copy">{item.text}</p>
                     </div>
                   ))}
@@ -429,10 +447,14 @@ function ClusterSection({ cluster }) {
                 className={`ui-card--outline ui-toolbox-list-card ${item.className || 'ui-toolbox-list-card--default'}`}
               >
                 <div className="ui-bullet-panel__item">
-                  {item.icon ? <span className="ui-bullet-panel__marker ui-toolbox-inline-icon">{item.icon}</span> : null}
+                  {item.icon ? (
+                    <span className="ui-bullet-panel__marker ui-toolbox-inline-icon">{item.icon}</span>
+                  ) : null}
                   <div>
                     {item.title ? <h3 className="ui-card__title">{item.title}</h3> : null}
-                    {item.text ? <p className={item.title ? 'ui-card__copy' : 'ui-bullet-panel__copy'}>{item.text}</p> : null}
+                    {item.text ? (
+                      <p className={item.title ? 'ui-card__copy' : 'ui-bullet-panel__copy'}>{item.text}</p>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -447,27 +469,32 @@ function ClusterSection({ cluster }) {
                 key={item.title}
                 className={`ui-toolbox-disclosure-group ui-card--outline ui-card--interactive ui-toolbox-disclosure ${item.className || ''}`}
               >
-                <summary
-                  className="ui-toolbox-disclosure__summary"
-                  aria-label={item.summaryAriaLabel || item.title}
-                >
+                <summary className="ui-toolbox-disclosure__summary" aria-label={item.summaryAriaLabel || item.title}>
                   <div className="ui-bullet-panel__item">
-                    {item.icon ? <span className="ui-bullet-panel__marker ui-toolbox-inline-icon">{item.icon}</span> : null}
+                    {item.icon ? (
+                      <span className="ui-bullet-panel__marker ui-toolbox-inline-icon">{item.icon}</span>
+                    ) : null}
                     <div>
                       <span className="ui-card__title ui-display-block">{item.title}</span>
                       {item.meta ? <p className="ui-fact-card__label ui-editorial-card__action">{item.meta}</p> : null}
                     </div>
                   </div>
-                  <span className="ui-toolbox-disclosure__toggle">
-                    +
-                  </span>
+                  <span className="ui-toolbox-disclosure__toggle">+</span>
                 </summary>
                 <div className="ui-copy ui-toolbox-disclosure__content">
-                  {Array.isArray(item.content)
-                    ? item.content.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
-                    : <p>{item.content}</p>}
+                  {Array.isArray(item.content) ? (
+                    item.content.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
+                  ) : (
+                    <p>{item.content}</p>
+                  )}
                   {item.href ? (
-                    <Button variant="secondary" className="ui-editorial-card__action" href={item.href} target={item.target} rel={item.rel}>
+                    <Button
+                      variant="secondary"
+                      className="ui-editorial-card__action"
+                      href={item.href}
+                      target={item.target}
+                      rel={item.rel}
+                    >
                       {item.actionLabel || 'Mehr anzeigen'}
                       {item.actionIcon}
                     </Button>
@@ -482,10 +509,16 @@ function ClusterSection({ cluster }) {
           <div className="ui-card--outline ui-toolbox-template">
             <div className="ui-toolbox-template__header">
               <div>
-                {cluster.templateMeta?.label ? <p className="ui-toolbox-template__label">{cluster.templateMeta.label}</p> : null}
-                {cluster.templateMeta?.title ? <h3 className="ui-card__title ui-toolbox-template__title">{cluster.templateMeta.title}</h3> : null}
+                {cluster.templateMeta?.label ? (
+                  <p className="ui-toolbox-template__label">{cluster.templateMeta.label}</p>
+                ) : null}
+                {cluster.templateMeta?.title ? (
+                  <h3 className="ui-card__title ui-toolbox-template__title">{cluster.templateMeta.title}</h3>
+                ) : null}
               </div>
-              {cluster.templateMeta?.meta ? <p className="ui-toolbox-template__meta">{cluster.templateMeta.meta}</p> : null}
+              {cluster.templateMeta?.meta ? (
+                <p className="ui-toolbox-template__meta">{cluster.templateMeta.meta}</p>
+              ) : null}
             </div>
             <div className="ui-toolbox-template__grid">
               {cluster.templateFields.map((field) => (
@@ -528,7 +561,6 @@ function ResourcesSection({ closingSection }) {
   );
 }
 
-
 export default function ToolboxPageTemplate({
   hero,
   pageHeadingId,
@@ -557,10 +589,15 @@ export default function ToolboxPageTemplate({
                     {heroTitleText || 'Orientierung, Schutz und nächste Schritte'}
                   </h2>
                   <p className="ui-card__copy">
-                    Die wichtigsten Arbeitsaktionen der Toolbox sind hier zusätzlich direkt erreichbar, damit Tastatur- und Screenreader-Nutzung ohne Umwege in den zentralen Handlungsbereich gelangen.
+                    Die wichtigsten Arbeitsaktionen der Toolbox sind hier zusätzlich direkt erreichbar, damit Tastatur-
+                    und Screenreader-Nutzung ohne Umwege in den zentralen Handlungsbereich gelangen.
                   </p>
                 </div>
-                <div className="ui-button-row ui-toolbox-quick-access__actions" role="group" aria-label="Primäre Toolbox-Aktionen">
+                <div
+                  className="ui-button-row ui-toolbox-quick-access__actions"
+                  role="group"
+                  aria-label="Primäre Toolbox-Aktionen"
+                >
                   {hero.actions.map((action) => (
                     <Button
                       key={`quick-${action.label}`}

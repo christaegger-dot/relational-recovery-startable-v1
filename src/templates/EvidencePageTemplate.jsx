@@ -1,4 +1,3 @@
-import Button from '../components/ui/Button';
 import Container from '../components/ui/Container';
 import Eyebrow from '../components/ui/Eyebrow';
 import PageHero from '../components/ui/PageHero';
@@ -106,7 +105,9 @@ function ChapterOverview({ chapterOverview }) {
 
           {chapterOverview.aside ? (
             <SurfaceCard as="aside" tone="default">
-              {chapterOverview.aside.label ? <p className="ui-fact-card__label">{chapterOverview.aside.label}</p> : null}
+              {chapterOverview.aside.label ? (
+                <p className="ui-fact-card__label">{chapterOverview.aside.label}</p>
+              ) : null}
               {chapterOverview.aside.title ? <h3 className="ui-card__title">{chapterOverview.aside.title}</h3> : null}
               {chapterOverview.aside.copy ? <p className="ui-card__copy">{chapterOverview.aside.copy}</p> : null}
               {chapterOverview.aside.badges?.length ? (
@@ -141,7 +142,12 @@ function ZoneSection({ zone }) {
   if (!zone) return null;
 
   return (
-    <Section id={zone.id} spacing={zone.spacing || 'tight'} surface={zone.surface || 'plain'} className={zone.className || 'no-print'}>
+    <Section
+      id={zone.id}
+      spacing={zone.spacing || 'tight'}
+      surface={zone.surface || 'plain'}
+      className={zone.className || 'no-print'}
+    >
       <div className="ui-stack ui-stack--loose">
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
@@ -162,7 +168,9 @@ function ZoneSection({ zone }) {
           ) : null}
         </div>
 
-        {zone.highlightList ? <BulletList items={zone.highlightList.items} tone={zone.highlightList.tone} icon={zone.highlightList.icon} /> : null}
+        {zone.highlightList ? (
+          <BulletList items={zone.highlightList.items} tone={zone.highlightList.tone} icon={zone.highlightList.icon} />
+        ) : null}
         {zone.metrics?.length ? <MetricGrid items={zone.metrics} /> : null}
         {zone.cards?.length ? <CardGrid items={zone.cards} columns={zone.cardColumns} tone={zone.cardTone} /> : null}
 
@@ -192,7 +200,9 @@ function ZoneSection({ zone }) {
 function MaterialsSection({ closingSection }) {
   if (!closingSection) return null;
 
-  return <ClosingSection section={closingSection} sectionId="evidenz-materialien" surface="plain" className="no-print" />;
+  return (
+    <ClosingSection section={closingSection} sectionId="evidenz-materialien" surface="plain" className="no-print" />
+  );
 }
 
 export default function EvidencePageTemplate({ hero, pageHeadingId, chapterOverview, zones = [], closingSection }) {

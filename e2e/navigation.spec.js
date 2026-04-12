@@ -18,7 +18,9 @@ const TABS = [
 // and verify the handler wiring separately.
 
 async function navigateViaHash(page, tabId) {
-  await page.evaluate((id) => { window.location.hash = `#${id}`; }, tabId);
+  await page.evaluate((id) => {
+    window.location.hash = `#${id}`;
+  }, tabId);
 }
 
 test.describe('Tab Navigation', () => {
@@ -45,12 +47,15 @@ test.describe('Tab Navigation', () => {
   test('active tab button has aria-current="page"', async ({ page }) => {
     await navigateViaHash(page, 'toolbox');
 
-    await expect(
-      page.locator('nav.ui-nav--desktop button', { hasText: 'Toolbox' })
-    ).toHaveAttribute('aria-current', 'page');
+    await expect(page.locator('nav.ui-nav--desktop button', { hasText: 'Toolbox' })).toHaveAttribute(
+      'aria-current',
+      'page'
+    );
 
     // Inactive tab should NOT have aria-current attribute
-    const ariaCurrent = await page.locator('nav.ui-nav--desktop button', { hasText: 'Start' }).getAttribute('aria-current');
+    const ariaCurrent = await page
+      .locator('nav.ui-nav--desktop button', { hasText: 'Start' })
+      .getAttribute('aria-current');
     expect(ariaCurrent).toBeNull();
   });
 
@@ -81,8 +86,8 @@ test.describe('Tab Navigation', () => {
     // Verify each nav button has a React onClick that calls navigateToTab
     const result = await page.evaluate(() => {
       const buttons = document.querySelectorAll('nav.ui-nav--desktop button');
-      return Array.from(buttons).map(btn => {
-        const propsKey = Object.keys(btn).find(k => k.startsWith('__reactProps$'));
+      return Array.from(buttons).map((btn) => {
+        const propsKey = Object.keys(btn).find((k) => k.startsWith('__reactProps$'));
         return {
           text: btn.textContent.trim(),
           hasOnClick: propsKey ? typeof btn[propsKey].onClick === 'function' : false,
@@ -138,7 +143,9 @@ test.describe('Hash Routing', () => {
 
   test('hashchange event triggers tab switch', async ({ page }) => {
     await page.goto('/');
-    await page.evaluate(() => { window.location.hash = '#glossar'; });
+    await page.evaluate(() => {
+      window.location.hash = '#glossar';
+    });
     const activeBtn = page.locator('nav.ui-nav--desktop button.is-active');
     await expect(activeBtn).toContainText('Glossar');
   });
@@ -151,8 +158,8 @@ test.describe('Logo / Home Navigation', () => {
     await expect(page).toHaveURL(/#glossar/);
 
     // Verify logo button has correct onClick wired, then navigate via hash
-    const hasHandler = await page.locator('button.ui-brand').evaluate(btn => {
-      const propsKey = Object.keys(btn).find(k => k.startsWith('__reactProps$'));
+    const hasHandler = await page.locator('button.ui-brand').evaluate((btn) => {
+      const propsKey = Object.keys(btn).find((k) => k.startsWith('__reactProps$'));
       return propsKey ? typeof btn[propsKey].onClick === 'function' : false;
     });
     expect(hasHandler).toBe(true);
@@ -175,8 +182,8 @@ test.describe('Emergency Access', () => {
     await expect(emergencyBtn).toBeVisible();
 
     // Verify it has a click handler
-    const hasHandler = await emergencyBtn.evaluate(btn => {
-      const propsKey = Object.keys(btn).find(k => k.startsWith('__reactProps$'));
+    const hasHandler = await emergencyBtn.evaluate((btn) => {
+      const propsKey = Object.keys(btn).find((k) => k.startsWith('__reactProps$'));
       return propsKey ? typeof btn[propsKey].onClick === 'function' : false;
     });
     expect(hasHandler).toBe(true);
@@ -194,7 +201,10 @@ test.describe('Session Reset', () => {
     await page.waitForSelector('fieldset.ui-toolbox-checklist');
 
     // Check an assessment item
-    const checkbox = page.locator('label').filter({ hasText: 'Ungeplanter Eintritt / Krise' }).locator('input[type="checkbox"]');
+    const checkbox = page
+      .locator('label')
+      .filter({ hasText: 'Ungeplanter Eintritt / Krise' })
+      .locator('input[type="checkbox"]');
     await checkbox.check({ force: true });
     await expect(page.locator('.ui-toolbox-score')).toHaveText('2');
 
@@ -210,9 +220,7 @@ test.describe('Session Reset', () => {
     await navigateViaHash(page, 'toolbox');
     await page.waitForSelector('fieldset.ui-toolbox-checklist');
 
-    await expect(page.locator('#assessment-score-status')).toContainText(
-      'Aktueller Assessment-Score: 0'
-    );
+    await expect(page.locator('#assessment-score-status')).toContainText('Aktueller Assessment-Score: 0');
   });
 });
 
