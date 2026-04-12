@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
+import heroIllustration from '../assets/relational-recovery-hero-v3-web.webp';
 import { E_MODULES } from '../data/learningContent';
 import LearningPageTemplate from '../templates/LearningPageTemplate';
 import { getPageHeadingId } from '../utils/appHelpers';

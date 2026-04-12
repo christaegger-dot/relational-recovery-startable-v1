@@ -86,7 +86,7 @@ export default function PageHero({
         <div className="ui-hero__media">
           {image ? (
             <div className="ui-hero__figure">
-              <img src={image} alt={imageAlt || ''} />
+              <img src={image} alt={imageAlt || ''} width={1200} height={800} />
             </div>
           ) : null}
 

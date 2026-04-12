@@ -1,5 +1,5 @@
 import { ChevronRight, ExternalLink } from 'lucide-react';
-import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
+import heroIllustration from '../assets/relational-recovery-hero-v3-web.webp';
 import EditorialPageTemplate from './EditorialPageTemplate';
 import { E_MODULE_COUNT, HOME_REFERENCE_COUNT, NETWORK_RESOURCE_COUNT, VIGNETTE_COUNT } from '../data/appShellContent';
 import { useAppState } from '../context/useAppState';
