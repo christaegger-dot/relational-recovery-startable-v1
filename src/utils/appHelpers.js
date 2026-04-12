@@ -99,11 +99,6 @@ export const normalizeHashToTab = (hashValue) => {
 
 const normalizeTabId = (value) => normalizeHashToTab(String(value || '').replace(/^#/, ''));
 
-export const getInitialTab = () => {
-  if (typeof window === 'undefined') return 'start';
-  return normalizeHashToTab(window.location.hash);
-};
-
 export const getDefaultAppState = () => ({
   activeTab: 'start',
   currentVignette: 0,
@@ -182,8 +177,7 @@ export const isValidStoredAppState = (value) =>
   value &&
   typeof value === 'object' &&
   typeof value.version === 'number' &&
-  value.version >= 1 &&
-  value.version <= APP_STATE_VERSION &&
+  value.version === APP_STATE_VERSION &&
   typeof value.updatedAt === 'number' &&
   typeof value.sourceId === 'string' &&
   value.data &&

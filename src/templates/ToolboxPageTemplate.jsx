@@ -572,13 +572,12 @@ export default function ToolboxPageTemplate({
   clusters = [],
   closingSection,
   scoreStatusId,
-  hasPrintView = false,
 }) {
   const heroTitleText = [hero?.title, hero?.accent].filter(Boolean).join(' ').trim();
 
   return (
     <div className="ui-stack" role="region" aria-labelledby={pageHeadingId}>
-      <div className={hasPrintView ? 'ui-stack no-print' : 'ui-stack'}>
+      <div className="ui-stack">
         <Container width="wide">
           {hero?.actions?.length ? (
             <Section spacing="tight" surface="plain" className="no-print">
