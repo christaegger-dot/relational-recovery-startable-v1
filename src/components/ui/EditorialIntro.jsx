@@ -1,5 +1,5 @@
-import Eyebrow from './Eyebrow';
 import Section from './Section';
+import SectionHeader from './SectionHeader';
 import SurfaceCard from './SurfaceCard';
 
 export default function EditorialIntro({ intro }) {
@@ -8,24 +8,12 @@ export default function EditorialIntro({ intro }) {
   return (
     <Section spacing="tight" surface="plain">
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            {intro.eyebrow ? <Eyebrow>{intro.eyebrow}</Eyebrow> : null}
-            {intro.title ? <h2 className="ui-hero__title ui-section-title">{intro.title}</h2> : null}
-            {intro.description ? (
-              <div className="ui-copy">
-                <p>{intro.description}</p>
-              </div>
-            ) : null}
-          </div>
-          {intro.aside ? (
-            <SurfaceCard as="aside" tone={intro.aside.tone || 'soft'}>
-              {intro.aside.label ? <p className="ui-fact-card__label">{intro.aside.label}</p> : null}
-              {intro.aside.title ? <h3 className="ui-card__title">{intro.aside.title}</h3> : null}
-              {intro.aside.copy ? <p className="ui-card__copy">{intro.aside.copy}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={intro.eyebrow}
+          title={intro.title}
+          description={intro.description}
+          aside={intro.aside}
+        />
 
         {intro.cards?.length ? (
           <div className="ui-fact-grid">

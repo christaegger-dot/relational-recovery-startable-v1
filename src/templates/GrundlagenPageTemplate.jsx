@@ -2,10 +2,9 @@ import ClosingSection from '../components/closing/ClosingSection';
 import EditorialIndex from '../components/ui/EditorialIndex';
 import EditorialIntro from '../components/ui/EditorialIntro';
 import Container from '../components/ui/Container';
-import Eyebrow from '../components/ui/Eyebrow';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
-import SurfaceCard from '../components/ui/SurfaceCard';
+import SectionHeader from '../components/ui/SectionHeader';
 
 function GrundlagenFaqItem({ item, index }) {
   return (
@@ -30,24 +29,12 @@ function GrundlagenCluster({ cluster }) {
   return (
     <Section spacing="tight" surface={cluster.surface || 'plain'}>
       <div id={cluster.id} className="ui-stack ui-stack--loose ui-section-anchor-offset">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            {cluster.eyebrow ? <Eyebrow>{cluster.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title ui-section-title">{cluster.title}</h2>
-            {cluster.description ? (
-              <div className="ui-copy">
-                <p>{cluster.description}</p>
-              </div>
-            ) : null}
-          </div>
-          {cluster.aside ? (
-            <SurfaceCard as="aside" tone={cluster.aside.tone || 'soft'}>
-              {cluster.aside.label ? <p className="ui-fact-card__label">{cluster.aside.label}</p> : null}
-              {cluster.aside.title ? <h3 className="ui-card__title">{cluster.aside.title}</h3> : null}
-              {cluster.aside.copy ? <p className="ui-card__copy">{cluster.aside.copy}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={cluster.eyebrow}
+          title={cluster.title}
+          description={cluster.description}
+          aside={cluster.aside}
+        />
 
         {cluster.faqs?.length ? (
           <div className="grundlagen-faq-grid">

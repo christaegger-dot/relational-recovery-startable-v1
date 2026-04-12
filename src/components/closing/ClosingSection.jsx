@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import Button from '../ui/Button';
 import Eyebrow from '../ui/Eyebrow';
 import Section from '../ui/Section';
+import SectionHeader from '../ui/SectionHeader';
 import SurfaceCard from '../ui/SurfaceCard';
 
 function RichCopy({ description, paragraphs = [] }) {
@@ -36,49 +37,25 @@ function MetaTags({ items = [], tone = 'default' }) {
 function ClosingHeader({ section }) {
   if (!section) return null;
 
-  return (
-    <div className="ui-split">
-      <div className="ui-stack ui-stack--tight">
-        {section.eyebrow ? <Eyebrow>{section.eyebrow}</Eyebrow> : null}
-        <h2
-          className={[
-            'ui-hero__title',
-            'ui-closing-header__title',
-            section.headingTransform === 'uppercase' ? 'ui-closing-header__title--uppercase' : '',
-            section.headingLetterSpacing === '0.12em' ? 'ui-closing-header__title--tracked' : '',
-          ]
-            .filter(Boolean)
-            .join(' ')}
-        >
-          {section.title}
-          {section.accent ? (
-            <>
-              {' '}
-              <span className="ui-hero__accent">{section.accent}</span>
-            </>
-          ) : null}
-        </h2>
-        <RichCopy description={section.description} paragraphs={section.paragraphs} />
-      </div>
+  const headingClassName = [
+    'ui-hero__title',
+    'ui-closing-header__title',
+    section.headingTransform === 'uppercase' ? 'ui-closing-header__title--uppercase' : '',
+    section.headingLetterSpacing === '0.12em' ? 'ui-closing-header__title--tracked' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-      {section.aside ? (
-        <SurfaceCard as="aside" tone={section.aside.tone || 'soft'}>
-          {section.aside.label ? <p className="ui-fact-card__label">{section.aside.label}</p> : null}
-          {section.aside.title ? <h3 className="ui-card__title">{section.aside.title}</h3> : null}
-          {section.aside.copy ? <p className="ui-card__copy">{section.aside.copy}</p> : null}
-          {section.aside.points?.length ? (
-            <div className="ui-card__section--spaced ui-stack ui-stack--tight">
-              {section.aside.points.map((item, i) => (
-                <div key={i} className="ui-bullet-panel__item">
-                  <span className="ui-bullet-panel__dot" />
-                  <p className="ui-bullet-panel__copy">{item}</p>
-                </div>
-              ))}
-            </div>
-          ) : null}
-        </SurfaceCard>
-      ) : null}
-    </div>
+  return (
+    <SectionHeader
+      eyebrow={section.eyebrow}
+      title={section.title}
+      titleAccent={section.accent}
+      description={section.description}
+      paragraphs={section.paragraphs}
+      aside={section.aside}
+      headingClassName={headingClassName}
+    />
   );
 }
 

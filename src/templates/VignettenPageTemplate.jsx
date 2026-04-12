@@ -4,6 +4,7 @@ import Container from '../components/ui/Container';
 import Eyebrow from '../components/ui/Eyebrow';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
+import SectionHeader from '../components/ui/SectionHeader';
 import SurfaceCard from '../components/ui/SurfaceCard';
 
 function VignettenCaseSection({ caseStudy }) {
@@ -12,25 +13,13 @@ function VignettenCaseSection({ caseStudy }) {
   return (
     <Section spacing="tight" surface={caseStudy.surface || 'plain'} className="no-print">
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            {caseStudy.eyebrow ? <Eyebrow>{caseStudy.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title ui-section-title">
-              {caseStudy.titlePrefix}{' '}
-              {caseStudy.titleAccent ? <span className="ui-hero__accent">{caseStudy.titleAccent}</span> : null}
-            </h2>
-            <div className="ui-copy">
-              <p>{caseStudy.description}</p>
-            </div>
-          </div>
-          {caseStudy.aside ? (
-            <SurfaceCard as="aside" tone={caseStudy.aside.tone || 'soft'}>
-              {caseStudy.aside.label ? <p className="ui-fact-card__label">{caseStudy.aside.label}</p> : null}
-              {caseStudy.aside.value ? <p className="ui-fact-card__value">{caseStudy.aside.value}</p> : null}
-              {caseStudy.aside.copy ? <p className="ui-fact-card__note">{caseStudy.aside.copy}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={caseStudy.eyebrow}
+          titlePrefix={caseStudy.titlePrefix}
+          titleAccent={caseStudy.titleAccent}
+          description={caseStudy.description}
+          aside={caseStudy.aside}
+        />
 
         <SurfaceCard tone={caseStudy.cardTone || 'default'} className="no-print">
           <div className="ui-card__header">
@@ -87,25 +76,14 @@ function VignettenDecisionSection({ decision }) {
   return (
     <Section spacing="tight" surface={decision.surface || 'subtle'} className="no-print">
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-split">
-          <div className="ui-stack ui-stack--tight">
-            {decision.eyebrow ? <Eyebrow>{decision.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title ui-section-title">
-              {decision.titlePrefix}{' '}
-              {decision.titleAccent ? <span className="ui-hero__accent">{decision.titleAccent}</span> : null}
-            </h2>
-            <div className="ui-copy">
-              <p>{decision.description}</p>
-            </div>
-          </div>
-          {decision.aside ? (
-            <SurfaceCard as="aside" tone={decision.aside.tone || 'default'}>
-              {decision.aside.label ? <p className="ui-fact-card__label">{decision.aside.label}</p> : null}
-              {decision.aside.title ? <h3 className="ui-card__title">{decision.aside.title}</h3> : null}
-              {decision.aside.copy ? <p className="ui-card__copy">{decision.aside.copy}</p> : null}
-            </SurfaceCard>
-          ) : null}
-        </div>
+        <SectionHeader
+          eyebrow={decision.eyebrow}
+          titlePrefix={decision.titlePrefix}
+          titleAccent={decision.titleAccent}
+          description={decision.description}
+          aside={decision.aside}
+          asideTone="default"
+        />
 
         <SurfaceCard tone={decision.cardTone || 'default'} className="no-print">
           <fieldset aria-describedby={decision.feedback ? decision.feedback.id : undefined}>

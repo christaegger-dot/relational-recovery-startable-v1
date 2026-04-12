@@ -167,41 +167,8 @@ export const COLLABORATION_FOUR_AS = [
   'Abmachungen: Was ist unser nächster Schritt, und wer übernimmt was?',
 ];
 
-export const FAMILY_WISHES_PANELS = [
-  {
-    title: 'Was Eltern häufig wünschen',
-    text: 'Viele Eltern suchen Unterstützung beim Erklären der Erkrankung gegenüber den Kindern, bei Erziehungsfragen, bei der Reduktion elterlicher Belastung, bei Betreuungsorganisation und bei Austausch mit anderen Betroffenen.',
-  },
-  {
-    title: 'Was Kinder häufig wünschen',
-    text: 'Kinder wünschen sich vor allem verständliche Informationen über die Erkrankung, einen Ort für Sorgen und Fragen, mehr Normalität im Alltag und eine Reduktion von Stigma und Geheimhaltung.',
-  },
-];
 
-export const FAMILY_WISHES_POINTS = [
-  'Hilfebedarf verändert sich mit dem Alter der Kinder: bei jüngeren Kindern stehen Alltag, Erziehung und emotionale Unterstützung stärker im Vordergrund, bei Jugendlichen häufiger Beziehungsgestaltung und Autonomiefragen.',
-  'Viele Eltern erleben alltagspraktische Entlastung als ebenso wichtig wie Psychotherapie oder Beratung.',
-  'Wenn Fachpersonen zuerst nach konkreten Anliegen fragen, wird Unterstützung oft anschlussfähiger als bei vorschnell vorgegebenen Lösungen.',
-];
 
-export const PARENT_SELF_HELP_PANELS = [
-  {
-    title: 'Weniger, aber verlässlich',
-    text: 'Kinder brauchen nicht perfekte Eltern, sondern möglichst verlässliche Orientierung. Wenn gerade wenig Kraft da ist, helfen kleine, wiedererkennbare Dinge oft mehr als grosse Vorhaben: ein kurzer Gruss am Morgen, ein gemeinsames Abendritual oder eine klare Absprache für den Nachmittag.',
-  },
-  {
-    title: 'Kurz und ehrlich sprechen',
-    text: 'Kinder spüren meist, dass etwas anders ist. Eine kurze, einfache Erklärung ist oft entlastender als Schweigen: zum Beispiel, dass Mama oder Papa gerade krank, erschöpft oder schneller gereizt ist und dass andere Erwachsene mithelfen.',
-  },
-  {
-    title: 'Hilfe früh organisieren',
-    text: 'Unterstützung ist kein Zeichen von Versagen. Wenn Einkaufen, Aufstehen, Übergaben, Hausaufgaben oder Termine zu viel werden, ist es oft sinnvoll, früh eine Bezugsperson, Familienhilfe, Beratung oder Entlastung einzubeziehen.',
-  },
-  {
-    title: 'Krisen vorher absprechen',
-    text: 'Besonders entlastend ist ein einfacher Plan für belastete Phasen: Wer übernimmt die Kinder? Wen rufe ich zuerst an? Was sage ich der Schule oder Kita? Was muss sicher versorgt werden? Solche Absprachen helfen, bevor es akut wird.',
-  },
-];
 
 export const PARENT_SELF_HELP_POINTS = [
   'Im Alltag zuerst das Wichtigste sichern: Nahrung, Aufsicht, Schlaf, Übergaben und eine ruhige Information an das Kind.',
@@ -297,56 +264,9 @@ export const CHILD_EXPERIENCE_PRACTICE_POINTS = [
   'kindliche Perspektive in Krisenplanung, Entlastung und Gesprächsführung mitdenken',
 ];
 
-export const FAMILY_RESILIENCE_PANELS = [
-  {
-    title: 'Verlässliche Bezugspersonen',
-    text: 'Eine stabile, emotional sichere Bindung zu mindestens einer verlässlichen erwachsenen Bezugsperson wirkt im Familiensystem oft wie ein Schutzanker. Das kann der andere Elternteil sein, aber auch eine Grossmutter, ein Grossvater, ein Pate oder eine andere tragfähige Person im nahen Umfeld.',
-  },
-  {
-    title: 'Regeln, Rituale und Alltag',
-    text: 'Klare Abläufe, wiederkehrende Rituale und ein möglichst vorhersehbarer Alltag geben Familien Halt. Gerade bei psychischer Belastung helfen überschaubare Routinen, Verlässlichkeit zu spüren und Spannungen im Zusammenleben zu reduzieren.',
-  },
-  {
-    title: 'Offene, altersgerechte Kommunikation',
-    text: 'Wenn in der Familie benannt werden darf, dass es einem Elternteil psychisch schlecht geht, sinken Verunsicherung und falsche Selbstzuschreibungen. Ehrliche, kindgerechte Gespräche schaffen Orientierung und entlasten Beziehungen.',
-  },
-  {
-    title: 'Erlaubnis, Hilfe anzunehmen',
-    text: 'Familiäre Resilienz entsteht auch dort, wo Eltern ihren Kindern und sich selbst erlauben, Unterstützung von aussen anzunehmen. Das mindert Isolation, erweitert das Netz und entlastet die Familie als Ganzes.',
-  },
-];
 
-export const FAMILY_RESILIENCE_POINTS = [
-  'Familiäre Resilienz entsteht nicht aus Perfektion, sondern aus tragfähigen Beziehungen, Struktur und ansprechbarer Unterstützung.',
-  'Gerade in belasteten Phasen sind Wärme, Verlässlichkeit und benennbare Zuständigkeiten oft wichtiger als ideale Lösungen.',
-  'Auch Unterstützung von aussen gehört zur familiären Schutzebene, wenn sie das System stabilisiert und nicht beschämt.',
-];
 
-export const CHILD_PROTECTION_PANELS = [
-  {
-    title: 'Selbstwirksamkeit und Problemlösen',
-    text: 'Kinder profitieren, wenn sie erleben, dass sie schwierige Situationen nicht allein tragen müssen, aber dennoch handlungsfähig sind. Ein positives Selbstkonzept und realistische Selbstwirksamkeit helfen, Belastungen besser einzuordnen.',
-  },
-  {
-    title: 'Temperament und Flexibilität',
-    text: 'Ein zugängliches Temperament, soziale Offenheit und emotionale Flexibilität können helfen, Belastungen abzufedern. Diese Eigenschaften ersetzen jedoch keine Schutzbeziehungen, sondern entfalten ihre Wirkung erst im Zusammenspiel mit einem tragfähigen Umfeld.',
-  },
-  {
-    title: 'Kognitive und sprachliche Ressourcen',
-    text: 'Gute Problemlösefähigkeit, altersangemessenes Verstehen und die Möglichkeit, innere Zustände in Worte zu fassen, erleichtern die Verarbeitung belastender Erfahrungen. Wissen und Sprache können Angst, Schuld und Ohnmacht deutlich reduzieren.',
-  },
-  {
-    title: 'Aktive Bewältigung',
-    text: 'Kinder werden gestärkt, wenn sie Unterstützung suchen dürfen, positive Beziehungen ausserhalb der Kernfamilie erleben und in Schule oder Freizeit Zugehörigkeit finden. Schutz entsteht oft aus mehreren kleinen, tragenden Erfahrungen.',
-  },
-];
 
-export const PROTECTION_PRACTICE_POINTS = [
-  'zuerst Schutzfaktoren im Familiensystem erfassen: Bezugspersonen, Routinen, Gesprächskultur und Entlastung von aussen',
-  'danach kindbezogene Stärken betrachten, ohne Kindern zu viel Verantwortung für ihre eigene Stabilisierung zuzuschreiben',
-  'familiäre und kindbezogene Schutzfaktoren immer zusammendenken statt gegeneinander auszuspielen',
-  'Schutzfaktoren konkret machen: Wer ist da, was gibt Halt, was kann im Alltag verlässlich bleiben?',
-];
 
 export const PSYCHOEDUCATION_BENEFITS = [
   'Wissen reduziert kindliche Schuldgefühle und falsche Selbstzuschreibungen.',
@@ -377,24 +297,6 @@ export const PSYCHOEDUCATION_AGE_GROUPS = [
   },
 ];
 
-export const PHRASE_GUIDES = [
-  {
-    title: 'Depression',
-    text: '„Mama oder Papa ist im Moment nicht einfach nur traurig, sondern krank. Diese Krankheit nimmt Energie, macht vieles schwer und verändert, wie jemand fühlt oder reagiert. Du bist daran nicht schuld.“',
-  },
-  {
-    title: 'Angststörung',
-    text: '„Die Angst ist bei Mama oder Papa gerade so gross, dass sich vieles gefährlicher anfühlt, als es von aussen aussieht. Das ist eine Krankheit und nicht deine Aufgabe, sie wegzumachen.“',
-  },
-  {
-    title: 'Psychose / Schizophrenie',
-    text: '„Manchmal nimmt Mama oder Papa Dinge wahr oder deutet sie anders, als andere Menschen es tun. Das kann sehr verwirrend sein. Dafür gibt es Hilfe, und Erwachsene kümmern sich darum.“',
-  },
-  {
-    title: 'Manie',
-    text: '„Manchmal ist Mama oder Papa so voller Energie und Gedanken, dass fast alles gleichzeitig passiert. Dann wirkt vieles sehr schnell, laut oder durcheinander. Auch das gehört zu einer Krankheit.“',
-  },
-];
 
 export const PSYCHOEDUCATION_PRACTICE_POINTS = [
   'einfach, ehrlich und entlastend sprechen – nicht beschönigen, aber auch nicht überfordern',
@@ -501,34 +403,8 @@ export const CLINICAL_PRACTICE_POINTS = [
   'Krisen- und Übergangssituationen brauchen schriftliche, einfache und alltagstaugliche Absprachen statt nur guter Absichten.',
 ];
 
-export const CLINICAL_PRACTICE_STEPS = [
-  'Elternschaft und aktuelle Sorgearrangements bei Aufnahme oder Erstkontakt systematisch erheben',
-  'mit Familie und Netzwerk konkrete Bezugspersonen, Zuständigkeiten und erreichbare Hilfen benennen',
-  'Krisenplan und Kommunikationswege schriftlich festhalten und für Kinder verständlich übersetzen',
-  'bei Rollenumkehr gezielt Erwachsene stärken statt Kinder still weiter mittragen zu lassen',
-];
 
-export const MENTALIZATION_PANELS = [
-  {
-    title: 'Mentalisieren als Kernprozess',
-    text: 'Mentalisieren meint, über eigene und fremde Gedanken, Gefühle, Bedürfnisse und Absichten nachdenken zu können. Gerade in belasteten Familien unterstützt diese Fähigkeit dabei, Verhalten weniger vorschnell und mehr verstehend einzuordnen.',
-  },
-  {
-    title: 'Haltung der Fachperson',
-    text: 'Eine mentalisierende Haltung nimmt die Realität des Gegenübers empathisch ernst, arbeitet mit einer Haltung des Nicht-Wissens und bleibt neugierig statt vorschnell sicher.',
-  },
-  {
-    title: 'Familienorientierte Interventionen',
-    text: 'Neben Psychoedukation gehören begleitende Familientherapie, bindungsbezogene Interventionen, Förderung familiärer Kommunikation und Aktivierung sozialer Ressourcen zu den zentralen evidenzbasierten Basisinterventionen.',
-  },
-];
 
-export const MENTALIZATION_REFLECTIVE_QUESTIONS = [
-  'Was ist in dieser Situation in Ihnen vorgegangen?',
-  'Wie glauben Sie, hat sich Ihr Kind in diesem Moment gefühlt?',
-  'Was könnte Ihr Kind dazu gebracht haben, so zu reagieren?',
-  'Was hätte Ihnen geholfen, in dieser Situation ruhiger oder gelassener zu bleiben?',
-];
 
 export const INTERVENTION_PROGRAM_POINTS = [
   'Familienorientierte Interventionen wirken besonders dann plausibel, wenn sie nicht nur Symptome, sondern Kommunikation, Beziehung, Alltag und soziale Ressourcen gemeinsam betrachten.',
@@ -613,12 +489,6 @@ export const SUPPORT_OFFERS = [
   },
 ];
 
-export const SUPPORT_OFFER_NOTES = [
-  'Nicht jede Familie braucht sofort ein spezialisiertes Angebot. Oft ist schon eine erste Orientierung, eine Triage oder ein entlastendes Gespräch ein sinnvoller Einstieg.',
-  'Hilfreich ist die Unterscheidung zwischen Akutunterstützung, längerfristiger Begleitung, Kinderangeboten, Suchtberatung und Selbsthilfe für Angehörige.',
-  'Die Übersicht ist bewusst zürich-zentriert angelegt und wird nur punktuell durch schweizweite Stellen ergänzt, wenn diese für Orientierung oder Rechtefragen besonders hilfreich sind.',
-  'Angebote wirken besonders gut, wenn sie zum Alter der Kinder, zur aktuellen Krisenlage, zur Belastbarkeit der Familie und zu sprachlichen oder sozialen Barrieren passen.',
-];
 
 export const PUK_CONTEXT_POINTS = [
   'Diese Website ist ein ergänzendes psychoedukatives Informationsangebot und keine offizielle Unterseite der PUK Zürich.',
@@ -704,68 +574,6 @@ export const MEDIA_NOTES = [
   'Bücher und digitale Ressourcen wirken oft am besten als Gesprächseinstieg, nicht als alleinige Lösung.',
 ];
 
-export const DIAGNOSIS_PROFILES = [
-  {
-    id: 'depression',
-    title: 'Depression',
-    accent: 'bg-emerald-50 border-emerald-100 text-emerald-900',
-    shortLabel: 'Rückzug & Erschöpfung',
-    description:
-      'Bei depressiven Erkrankungen stehen häufig Antriebsmangel, Freudlosigkeit, emotionale Leere und Rückzug im Vordergrund. Für Kinder kann das so wirken, als sei Mutter oder Vater plötzlich weit weg, weniger ansprechbar oder kaum noch verfügbar.',
-    bullets: [
-      'verminderte Feinfühligkeit und verzögerte Reaktion auf kindliche Signale',
-      'weniger positive Resonanz, Lob und gemeinsame Aktivität',
-      'inkonsistente Alltagsstruktur durch Erschöpfung, Gereiztheit oder Überforderung',
-    ],
-    practice:
-      'Wichtig sind Entlastung, eine Sprache ohne Schuldzuweisung und konkrete Hilfen für Kontakt, Tagesstruktur und verlässliche Bezugspersonen.',
-  },
-  {
-    id: 'anxiety',
-    title: 'Angststörungen',
-    accent: 'bg-amber-50 border-amber-100 text-amber-900',
-    shortLabel: 'Überbehütung & Alarmmodus',
-    description:
-      'Bei Angststörungen steht oft nicht Rückzug, sondern erhöhte Wachsamkeit im Vordergrund. Eltern wollen ihr Kind schützen, vermitteln dabei aber manchmal ungewollt, dass die Welt gefährlich und schwer kontrollierbar ist.',
-    bullets: [
-      'übermässige Behütung und eingeschränkte Autonomieentwicklung',
-      'emotionale Ansteckung: Kinder übernehmen die gespannte Grundstimmung',
-      'dirigierendes Eingreifen kann Exploration und Selbstvertrauen hemmen',
-    ],
-    practice:
-      'Hilfreich sind validierende Gespräche, kleine Schritte zu mehr Autonomie und die gemeinsame Unterscheidung zwischen realer Gefahr und krankheitsbedingter Alarmreaktion.',
-  },
-  {
-    id: 'psychosis',
-    title: 'Psychosen / Schizophrenie',
-    accent: 'bg-rose-50 border-rose-100 text-rose-900',
-    shortLabel: 'Realitätsbezug & Schutz',
-    description:
-      'Bei psychotischem Erleben können Wahrnehmung, Denken und Beziehungsdeutung stark verändert sein. Für Kinder ist das oft desorientierend, besonders wenn sie in Wahninhalte oder massive Verunsicherung hineingezogen werden.',
-    bullets: [
-      'unberechenbare Situationen und Irritation durch veränderte Realitätswahrnehmung',
-      'erhöhtes Risiko für Versorgungslücken in akuten Krisen',
-      'häufig besonders wichtiger Bedarf an klaren Schutz- und Notfallabsprachen',
-    ],
-    practice:
-      'Im Vordergrund stehen kindliche Sicherheit, klare Zuständigkeiten, Krisenpläne und ein nüchterner, respektvoller Umgang mit akuten Schutzfragen.',
-  },
-  {
-    id: 'personality',
-    title: 'Persönlichkeitsstörungen',
-    accent: 'bg-sky-50 border-sky-100 text-sky-900',
-    shortLabel: 'Instabilität & Bindungsstress',
-    description:
-      'Bei ausgeprägten Persönlichkeitsstörungen, insbesondere bei hoher Impulsivität und instabilen Beziehungen, erleben Kinder oft starke Spannungen, abrupte Wechsel und wenig Vorhersagbarkeit im Alltag.',
-    bullets: [
-      'rasche Beziehungsumschwünge und hohe emotionale Intensität',
-      'Belastung durch wiederkehrende Konflikte, Trennungen oder Grenzunsicherheit',
-      'erhöhtes Risiko für Loyalitätskonflikte und emotionale Überforderung',
-    ],
-    practice:
-      'Wichtig sind stabile Aussenstrukturen, klare Grenzen, entlastende Gespräche mit Kindern und eine sorgfältige Beobachtung von Rollenumkehr und Parentifizierung.',
-  },
-];
 
 export const CROSS_DIAGNOSIS_POINTS = [
   'Nicht jede psychische Erkrankung führt automatisch zu einer Kindeswohlgefährdung. Entscheidend ist, wie stark Symptome den Alltag, die Verlässlichkeit und die Versorgung beeinflussen.',
@@ -773,54 +581,4 @@ export const CROSS_DIAGNOSIS_POINTS = [
   'Die Praxis braucht deshalb keine vereinfachenden Urteile, sondern eine differenzierte Einschätzung nach Symptombelastung, Ressourcen, Schutzfaktoren und Netzwerk.',
 ];
 
-export const EVIDENCE_PROFILE_ROWS = [
-  {
-    dimension: 'Affektivität',
-    value: '2/5',
-    meaning: 'stärker beeinträchtigt',
-    note: 'Emotionale Resonanz und Ansprechbarkeit können phasenweise deutlich reduziert sein.',
-  },
-  {
-    dimension: 'Struktur',
-    value: '3/5',
-    meaning: 'mittel stabil',
-    note: 'Routinen sind teilweise tragend, brauchen in Krisen aber zusätzliche Unterstützung.',
-  },
-  {
-    dimension: 'Grenzen',
-    value: '4/5',
-    meaning: 'eher tragfähig',
-    note: 'Rollen und Zuständigkeiten können oft benannt werden, geraten unter Belastung aber unter Druck.',
-  },
-  {
-    dimension: 'Autonomie',
-    value: '4/5',
-    meaning: 'eher tragfähig',
-    note: 'Eigenständigkeit und Entwicklungsschritte sind meist möglich, wenn Entlastung mitgedacht wird.',
-  },
-  {
-    dimension: 'Mentalisierung',
-    value: '3/5',
-    meaning: 'mittel stabil',
-    note: 'Das Verstehen innerer Zustände gelingt teilweise gut, bricht in Krisen aber schneller ein.',
-  },
-];
 
-export const PRACTICE_PILLARS = [
-  {
-    title: 'Elternrolle ansprechen',
-    text: 'Die Elternschaft gehört früh ins Gespräch, auch wenn sie zunächst nur knapp benannt werden kann.',
-  },
-  {
-    title: 'Belastung von Kindern prüfen',
-    text: 'Nicht nur Risiko, sondern auch Schutzfaktoren, Bezugspersonen und Routinen systematisch erfassen.',
-  },
-  {
-    title: 'Entlastung konkret organisieren',
-    text: 'Praktische Hilfe, Betreuung, Schule und Tagesstruktur möglichst früh koordinieren.',
-  },
-  {
-    title: 'Schutz und Kooperation verbinden',
-    text: 'Wenn Gefährdung besteht, Schutz klar benennen und zugleich die Beziehung nicht unnötig abbrechen.',
-  },
-];
