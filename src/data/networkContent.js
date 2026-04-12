@@ -236,3 +236,34 @@ export const NETWORK_MAP_TEMPLATE_NODES = [
     desktopLeft: '12%',
   },
 ];
+
+// Rechtsberatungs-Linkliste (Audit 03)
+// Kategorien und Struktur stehen, Einträge werden von der Auftraggeberin kuratiert.
+// Kuratierte Liste folgt – Platzhalter-Einträge markiert.
+export const LEGAL_COUNSELING_CATEGORIES = [
+  { id: 'psychosozial', label: 'Unabhängige psychosoziale Rechtsberatung' },
+  { id: 'ombudsstelle', label: 'Ombudsstelle Kindesschutz' },
+  { id: 'rechtspflege', label: 'Unentgeltliche Rechtspflege' },
+  { id: 'elternberatung', label: 'Elternberatung Kindesschutz' },
+  { id: 'angehoerige', label: 'Angehörigen-spezifische Rechtsberatung' },
+];
+
+export const LEGAL_COUNSELING_RESOURCES = [
+  // Kuratierte Liste folgt. Die folgenden 2 Einträge sind Platzhalter.
+  {
+    name: 'Pro Mente Sana',
+    category: 'psychosozial',
+    info: 'Kostenlose Beratung zu psychosozialen und rechtlichen Fragen.',
+    phone: '0848 800 858',
+    link: 'https://www.promentesana.ch',
+    _status: 'PLACEHOLDER',
+  },
+  {
+    name: 'Pro Juventute Elternberatung',
+    category: 'elternberatung',
+    info: 'Kostenlose, anonyme Beratung für Eltern.',
+    phone: '058 261 61 61',
+    link: 'https://www.projuventute.ch',
+    _status: 'PLACEHOLDER',
+  },
+];

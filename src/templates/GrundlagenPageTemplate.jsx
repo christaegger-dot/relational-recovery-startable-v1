@@ -2,6 +2,7 @@ import ClosingSection from '../components/closing/ClosingSection';
 import EditorialIndex from '../components/ui/EditorialIndex';
 import EditorialIntro from '../components/ui/EditorialIntro';
 import Container from '../components/ui/Container';
+import LegalDisclaimer from '../components/ui/LegalDisclaimer';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
 import SectionHeader from '../components/ui/SectionHeader';
@@ -43,6 +44,8 @@ function GrundlagenCluster({ cluster }) {
             ))}
           </div>
         ) : null}
+
+        {cluster.legalDisclaimer ? <LegalDisclaimer /> : null}
       </div>
     </Section>
   );

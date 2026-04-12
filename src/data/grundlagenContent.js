@@ -131,6 +131,7 @@ export const GRUNDLAGEN_CLUSTERS = [
   },
   {
     id: 'grundlagen-zusammenarbeit',
+    legalDisclaimer: true,
     eyebrow: 'Cluster 3',
     title: 'Zusammenarbeit, Mitsprache und der nächste sinnvolle Schritt',
     description:
@@ -160,7 +161,7 @@ export const GRUNDLAGEN_CLUSTERS = [
       {
         question: 'Wann sollte ich nicht mehr nur abwarten?',
         answer:
-          'Wenn Sicherheit, Versorgung von Kindern, deutliche Desorganisation, Suizidalität, schwere Eskalationen oder anhaltende Überforderung im Raum stehen, ist reines Hoffen meist zu wenig. Dann braucht es mindestens Rücksprache, Mitteilung an eine zuständige Stelle oder im Notfall unmittelbare Krisenhilfe.',
+          'Wenn Sicherheit, Versorgung von Kindern, deutliche Desorganisation, Suizidalität, schwere Eskalationen oder anhaltende Überforderung im Raum stehen, ist reines Hoffen meist zu wenig. Dann braucht es mindestens Rücksprache mit einer Fachstelle wie dem kjz, der Angehörigenberatung oder im Notfall sofortige Krisenhilfe (144 / 147).',
       },
     ],
   },
