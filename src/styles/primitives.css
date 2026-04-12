@@ -567,7 +567,6 @@
   font-family: var(--font-body);
   font-size: var(--font-size-md);
   line-height: 1.4;
-  outline: none;
   transition:
     border-color var(--motion-fast) ease,
     background-color var(--motion-fast) ease,
@@ -579,6 +578,7 @@
 }
 
 .ui-input:focus {
+  outline: 3px solid transparent;
   border-color: color-mix(in srgb, var(--accent-primary) 32%, white 68%);
   background: var(--surface-note);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-primary-soft) 45%, white 55%);
@@ -599,7 +599,7 @@
 }
 
 .ui-card--interactive:focus-visible {
-  outline: none;
+  outline: 3px solid transparent;
   border-color: color-mix(in srgb, var(--accent-primary) 30%, white 70%);
   box-shadow:
     0 0 0 4px color-mix(in srgb, var(--accent-primary-soft) 45%, white 55%),
@@ -2730,6 +2730,19 @@
   .ui-button:hover,
   .ui-chip:hover,
   .ui-card--interactive:hover {
+    transform: none;
+  }
+
+  .page-enter {
+    animation: none;
+  }
+
+  .haptic-btn {
+    transition: none;
+  }
+
+  .haptic-btn:hover,
+  .haptic-btn:active {
     transform: none;
   }
 }

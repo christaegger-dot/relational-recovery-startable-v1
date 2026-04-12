@@ -342,7 +342,7 @@ function ClosingReferences({ references }) {
               {item.publisher ? <p className="ui-card__copy">{item.publisher}</p> : null}
               {item.link ? (
                 <p className="ui-closing-reference-card__action">
-                  <a href={item.link} target="_blank" rel="noreferrer">
+                  <a href={item.link} target="_blank" rel="noopener noreferrer">
                     Quelle öffnen
                   </a>
                 </p>

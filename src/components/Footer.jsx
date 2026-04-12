@@ -17,7 +17,7 @@ const Footer = memo(function Footer() {
   );
 
   return (
-    <footer className="footer-shell no-print" role="contentinfo">
+    <footer className="footer-shell no-print">
       <div className="footer-shell__inner">
         <div className="footer-grid">
           <div className="footer-panel footer-panel--brand">

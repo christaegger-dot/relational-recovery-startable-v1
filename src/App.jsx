@@ -20,7 +20,8 @@ const EvidenceSection = lazy(() => import('./sections/EvidenceSection'));
 
 const SectionLoadingFallback = function SectionLoadingFallback() {
   return (
-    <section className="rounded-[3rem] border border-slate-200 bg-white px-8 py-12 shadow-sm md:px-12 md:py-16">
+    <section aria-busy="true" aria-label="Inhalt wird geladen" className="rounded-[3rem] border border-slate-200 bg-white px-8 py-12 shadow-sm md:px-12 md:py-16">
+      <p className="ui-visually-hidden">Inhalt wird geladen…</p>
       <div className="max-w-2xl">
         <div className="mb-5 h-2 w-20 rounded-full bg-emerald-100" />
         <div className="mb-4 h-8 w-64 rounded-full bg-slate-100" />

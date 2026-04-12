@@ -42,7 +42,7 @@ const Header = memo(function Header({
         <button
           type="button"
           onClick={handleHomeClick}
-          className="ui-brand focus-visible:outline-none"
+          className="ui-brand"
           aria-label="Zur Startseite wechseln"
         >
           <div className="ui-brand__mark" aria-hidden="true">
