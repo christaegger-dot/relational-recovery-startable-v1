@@ -71,6 +71,22 @@ export const GLOSSARY_GROUPS = [
         practice:
           'Im Portal meint Triage nicht nur Dringlichkeit, sondern auch Passung zwischen Bedarf, Sicherheitslage und regionalen Hilfen.',
       },
+      // STUB L2: Beistandschaft (Art. 308 ZGB)
+      // INHALT AUSSTEHEND – juristische Validierung erforderlich, siehe qa/audit-03-juristische-validierung.md
+      // Geschätzter Umfang: ~80 Wörter
+      // Outline:
+      //   - Definition: Erziehungsbeistandschaft als häufigste KESB-Massnahme
+      //   - Kern: Beistand unterstützt Familie, Sorgerecht bleibt bei Eltern
+      //   - Abgrenzung: keine Bestrafung, kein Vorzeichen für Fremdplatzierung
+      //   - Praxisbezug: Was macht ein Beistand konkret?
+
+      // STUB L4: Melderecht vs. Meldepflicht (Art. 314c vs. 314d ZGB)
+      // INHALT AUSSTEHEND – juristische Validierung erforderlich, siehe qa/audit-03-juristische-validierung.md
+      // Geschätzter Umfang: ~60 Wörter
+      // Outline:
+      //   - Melderecht (Art. 314c): gilt für alle Personen
+      //   - Meldepflicht (Art. 314d): gilt für bestimmte Fachpersonen
+      //   - Kantonale Unterschiede beachten
     ],
   },
   {

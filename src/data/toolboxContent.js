@@ -94,7 +94,33 @@ export const CHILD_PROTECTION_TIPS = [
   'Bei Unsicherheit zuerst fachlich rückfragen – etwa beim kjz oder einer offiziellen Beratungsstelle.',
   'Leitfrage für den Alltag: Sind Sicherheit, Nahrung, Aufsicht und Schutz auch morgen verlässlich gewährleistet?',
   'Nach einer Meldung weiter kooperieren: Schutz und Beziehung müssen nicht gegeneinander ausgespielt werden.',
+  'Vor einer Meldung können Sie sich anonym beraten lassen -- etwa bei Pro Mente Sana (0848 800 858) oder beim kjz.',
 ];
+
+// STUB L1: Stufenfolge der Kindesschutzmassnahmen (Art. 307-310 ZGB)
+// INHALT AUSSTEHEND – juristische Validierung erforderlich, siehe qa/audit-03-juristische-validierung.md
+// Vorgesehene Platzierung: Toolbox-Cluster "Kindeswohl", als eigene Karte nach CHILD_PROTECTION_THRESHOLDS
+// Geschätzter Umfang: ~150-200 Wörter
+// Outline:
+//   1. Ermahnung und Weisung (Art. 307 Abs. 3) – Sorgerecht bleibt
+//   2. Beistandschaft (Art. 308) – häufigste Massnahme, Sorgerecht bleibt
+//   3. Aufhebung Aufenthaltsbestimmungsrecht (Art. 310) – Fremdplatzierung, Sorgerecht bleibt
+//   4. Sorgerechtsentzug (Art. 311/312) – schwerste Massnahme, in der Praxis selten
+export const CHILD_PROTECTION_MEASURES_STUB = {
+  _status: 'STUB_PENDING_LEGAL_REVIEW',
+  _see: 'qa/audit-03-juristische-validierung.md',
+  title: 'Was nach einer Meldung passieren kann',
+  steps: [
+    { article: 'Art. 307 Abs. 3', label: 'Ermahnung und Weisung', description: '' },
+    { article: 'Art. 308', label: 'Beistandschaft', description: '' },
+    { article: 'Art. 310', label: 'Aufhebung Aufenthaltsbestimmungsrecht', description: '' },
+    { article: 'Art. 311/312', label: 'Sorgerechtsentzug', description: '' },
+  ],
+};
+
+// STUB L5: Anonyme Beratung vor einer Meldung
+// Direkt umsetzbar (keine juristische Validierung nötig)
+// Wird in Phase 3 als Ergänzung zu CHILD_PROTECTION_TIPS eingefügt
 
 export const ADDICTION_PANELS = [
   {
@@ -139,6 +165,14 @@ export const RIGHTS_FAQ = [
     answer:
       'Die Angehörigenberatung der PUK Zürich und Pro Mente Sana bieten Orientierung auf unterschiedlichen Ebenen. Pro Mente Sana berät kostenlos zu psychosozialen und rechtlichen Fragen.',
   },
+  // STUB L3: Rechte der Betroffenen – 4 neue FAQ-Fragen
+  // INHALT AUSSTEHEND – juristische Validierung erforderlich, siehe qa/audit-03-juristische-validierung.md
+  // Geschätzter Umfang: ~200 Wörter (4 × ~50 Wörter)
+  // Outline:
+  //   - "Kann ich mich selbst an die KESB wenden?" (Selbstmeldung, ZGB Art. 314 Abs. 1)
+  //   - "Habe ich Recht auf Akteneinsicht?" (ZGB Art. 449b)
+  //   - "Kann ich gegen einen KESB-Entscheid vorgehen?" (ZGB Art. 450, 30-Tage-Frist prüfen)
+  //   - "Habe ich Anspruch auf Rechtsbeistand?" (BV Art. 29 Abs. 3)
 ];
 
 export const PRACTICE_BLOCK_FILTERS = [
