@@ -706,9 +706,7 @@ Aktueller Assessment-Score: ${score.risk}
         className="flex-grow max-w-7xl mx-auto w-full px-4 md:px-6 py-8 md:py-10 outline-none page-enter"
       >
         <Suspense fallback={<SectionLoadingFallback />}>
-          {activeTab === 'start' && (
-            <HomeLandingTemplate pageHeadingId={getPageHeadingId('start')} />
-          )}
+          {activeTab === 'start' && <HomeLandingTemplate pageHeadingId={getPageHeadingId('start')} />}
 
           {activeTab === 'lernmodule' && <ElearningSection />}
 
@@ -716,9 +714,7 @@ Aktueller Assessment-Score: ${score.risk}
 
           {activeTab === 'glossar' && <GlossarSection />}
 
-          {activeTab === 'grundlagen' && (
-            <GrundlagenSection sharedDownloadResources={downloadResources} />
-          )}
+          {activeTab === 'grundlagen' && <GrundlagenSection sharedDownloadResources={downloadResources} />}
 
           {activeTab === 'toolbox' && (
             <ToolboxSection

@@ -1,10 +1,5 @@
 import { createContext, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import {
-  APP_BROADCAST_CHANNEL,
-  APP_STATE_VERSION,
-  DEFAULT_SCORE,
-  STORAGE_KEYS,
-} from '../data/appShellContent';
+import { APP_BROADCAST_CHANNEL, APP_STATE_VERSION, DEFAULT_SCORE, STORAGE_KEYS } from '../data/appShellContent';
 import { ASSESSMENT_ITEMS } from '../data/learningContent';
 import {
   getDefaultAppState,
@@ -167,7 +162,17 @@ export function AppStateProvider({ children }) {
       score,
       completedModules,
     }),
-    [activeTab, currentVignette, selectedOption, searchTerm, activeResourceFilter, quizState, showSafeNote, score, completedModules]
+    [
+      activeTab,
+      currentVignette,
+      selectedOption,
+      searchTerm,
+      activeResourceFilter,
+      quizState,
+      showSafeNote,
+      score,
+      completedModules,
+    ]
   );
 
   // BroadcastChannel + cross-tab storage sync
@@ -183,18 +188,12 @@ export function AppStateProvider({ children }) {
       if (payload.updatedAt <= latestAppliedTimestampRef.current) return;
 
       // Preserve the current tab if it was explicitly set via URL hash
-      const rawHash = typeof window !== 'undefined'
-        ? String(window.location.hash || '').replace(/^#/, '')
-        : '';
+      const rawHash = typeof window !== 'undefined' ? String(window.location.hash || '').replace(/^#/, '') : '';
       const explicitTabHash = rawHash && rawHash !== 'main-content' ? rawHash : null;
 
       latestAppliedTimestampRef.current = payload.updatedAt;
       skipNextPersistRef.current = true;
-      applyAppStateRef.current(
-        explicitTabHash
-          ? { ...payload.data, activeTab: explicitTabHash }
-          : payload.data
-      );
+      applyAppStateRef.current(explicitTabHash ? { ...payload.data, activeTab: explicitTabHash } : payload.data);
     };
 
     const handleStorage = (event) => {
@@ -265,11 +264,27 @@ export function AppStateProvider({ children }) {
       resetAppState,
     }),
     [
-      activeTab, currentVignette, selectedOption, searchTerm, activeResourceFilter,
-      quizState, showSafeNote, score, completedModules, isResetting,
-      navigate, setActiveTab, setCurrentVignette, setSearchTerm, setActiveResourceFilter,
-      setShowSafeNote, handleQuizAnswer, handleScoreChange, resetScore,
-      handleSelectVignetteOption, resetAppState,
+      activeTab,
+      currentVignette,
+      selectedOption,
+      searchTerm,
+      activeResourceFilter,
+      quizState,
+      showSafeNote,
+      score,
+      completedModules,
+      isResetting,
+      navigate,
+      setActiveTab,
+      setCurrentVignette,
+      setSearchTerm,
+      setActiveResourceFilter,
+      setShowSafeNote,
+      handleQuizAnswer,
+      handleScoreChange,
+      resetScore,
+      handleSelectVignetteOption,
+      resetAppState,
     ]
   );
 

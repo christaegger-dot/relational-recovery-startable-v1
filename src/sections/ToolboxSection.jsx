@@ -168,7 +168,6 @@ const TRIAGE_PROMPTS = [
   },
 ];
 
-
 export default function ToolboxSection({
   onPrint,
   onDownloadCrisisPlan,

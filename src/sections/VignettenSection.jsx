@@ -4,7 +4,12 @@ import { getPageHeadingId } from '../utils/appHelpers';
 import { useAppState } from '../context/useAppState';
 
 export default function VignettenSection() {
-  const { currentVignette: currentIndex, setCurrentVignette: setCurrentIndex, selectedOption, handleSelectVignetteOption: onSelectOption } = useAppState();
+  const {
+    currentVignette: currentIndex,
+    setCurrentVignette: setCurrentIndex,
+    selectedOption,
+    handleSelectVignetteOption: onSelectOption,
+  } = useAppState();
   const vignette = VIGNETTEN[currentIndex];
 
   if (!vignette) return null;
