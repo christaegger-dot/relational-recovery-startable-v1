@@ -32,7 +32,7 @@ export default function Button({
   }
 
   return (
-    <Tag className={classes} type={type} {...props}>
+    <Tag className={classes} {...(Tag === 'button' ? { type } : {})} {...props}>
       {children}
     </Tag>
   );
