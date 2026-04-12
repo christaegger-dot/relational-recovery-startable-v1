@@ -97,11 +97,7 @@ export const normalizeHashToTab = (hashValue) => {
   return TAB_ITEMS.some((item) => item.id === aliased) ? aliased : 'start';
 };
 
-const normalizeTabId = (value) => {
-  const cleaned = String(value || '').trim().toLowerCase();
-  const aliased = TAB_ALIASES[cleaned] ?? cleaned;
-  return TAB_ITEMS.some((item) => item.id === aliased) ? aliased : 'start';
-};
+const normalizeTabId = (value) => normalizeHashToTab(String(value || '').replace(/^#/, ''));
 
 export const getInitialTab = () => {
   if (typeof window === 'undefined') return 'start';
