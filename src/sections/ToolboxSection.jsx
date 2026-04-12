@@ -455,8 +455,8 @@ export default function ToolboxSection({
         titlePrefix: 'Wann freiwillige Hilfe reicht und wann',
         titleAccent: 'Schutzschwellen enger werden',
         description: [
-          'Nicht jede hohe Belastung verlangt sofort eine formelle Meldung. Entscheidend ist, ob Aufsicht, Sicherheit, Nahrung, medizinische Versorgung und Schutz vor Gewalt verlässlich gewährleistet sind.',
-          'Wenn das nicht mehr tragfähig erscheint, braucht es eine vertiefte fachliche Klärung und gegebenenfalls eine Kindesschutzabklärung.',
+          'Nicht jede hohe Belastung verlangt sofort eine formelle Meldung. Als Orientierung dient die Frage: Sind Aufsicht, Sicherheit, Nahrung und Schutz aktuell gewährleistet?',
+          'Wenn Zweifel bestehen, ist der erste Schritt oft ein vertrauliches Gespräch mit einer Beratungsstelle. Eine vertiefte fachliche Klärung und gegebenenfalls eine Kindesschutzabklärung kommen erst danach.',
         ],
         aside: {
           label: 'Arbeitsfokus',

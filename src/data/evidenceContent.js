@@ -349,7 +349,7 @@ export const HELP_BARRIER_PANELS = [
   },
   {
     title: 'Angst vor Eingriffen',
-    text: 'Eine zentrale Hürde ist die Sorge, Hilfe könnte automatisch zu Kontrolle, Meldungen oder zum Verlust von Einfluss auf die Kinder führen. Gerade die Angst vor behördlichen Eingriffen kann Familien davon abhalten, früh Unterstützung anzunehmen.',
+    text: 'Eine zentrale Hürde ist die Sorge, Hilfe könnte automatisch zu Kontrolle oder Meldungen führen. In der Praxis sind die meisten Kindesschutzmassnahmen unterstützend, nicht trennend. Trotzdem kann die Angst vor behördlichen Eingriffen Familien davon abhalten, früh Unterstützung anzunehmen.',
   },
   {
     title: 'Symptome erschweren Hilfe',

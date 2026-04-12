@@ -1,7 +1,7 @@
 export const ACUTE_CRISIS_STEPS = [
   'Suizidgedanken oder akute Gefährdung ruhig und direkt ansprechen.',
   'Bei akuter Lebensgefahr sofort 144 wählen und nicht erst lange erklären.',
-  'Kinder und andere abhängige Personen sofort in Sicherheit bringen.',
+  'Sicherstellen, dass Kinder und andere abhängige Personen versorgt und beaufsichtigt sind.',
   'Parallel eine Vertrauensperson oder professionelle Stelle dazuholen.',
 ];
 
@@ -81,7 +81,7 @@ export const CHILD_PROTECTION_THRESHOLDS = [
   },
   {
     title: 'Wann es enger wird',
-    text: 'Wenn Nahrung, Aufsicht, medizinische Versorgung, Sicherheit oder Schutz vor Gewalt nicht verlässlich gewährleistet sind, braucht es eine vertiefte Kindesschutzabklärung.',
+    text: 'Wenn Nahrung, Aufsicht, medizinische Versorgung, Sicherheit oder Schutz vor Gewalt über längere Zeit nicht verlässlich gewährleistet werden können, ist eine fachliche Einschätzung sinnvoll -- oft zuerst über das kjz oder eine Beratungsstelle.',
   },
   {
     title: 'Was eine Meldung bedeutet',
