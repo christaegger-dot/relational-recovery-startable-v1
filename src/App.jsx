@@ -1,6 +1,7 @@
 import { lazy, Suspense, useCallback, useRef } from 'react';
 import './styles/app-global.css';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
+import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomeLandingTemplate from './templates/HomeLandingTemplate';
@@ -208,6 +209,7 @@ export default function App() {
         tabIndex={-1}
         className="flex-grow max-w-7xl mx-auto w-full px-4 md:px-6 py-8 md:py-10 outline-none page-enter"
       >
+        <ErrorBoundary>
         <Suspense fallback={<SectionLoadingFallback />}>
           {activeTab === 'start' && (
             <HomeLandingTemplate pageHeadingId={getPageHeadingId('start')} />
@@ -240,6 +242,7 @@ export default function App() {
 
           {activeTab === 'evidenz' && <EvidenceSection downloadResources={downloadResources} />}
         </Suspense>
+        </ErrorBoundary>
       </main>
 
       <Footer />

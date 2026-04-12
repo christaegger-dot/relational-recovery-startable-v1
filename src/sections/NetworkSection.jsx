@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { MapPin, Search } from 'lucide-react';
-import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
+import heroIllustration from '../assets/relational-recovery-hero-v3-web.webp';
 import {
   NETWORK_FILTERS,
   NETWORK_MAP_LENSES,
