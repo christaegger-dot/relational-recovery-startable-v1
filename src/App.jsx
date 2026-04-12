@@ -202,7 +202,6 @@ export default function App() {
   const navigationFocusTargetRef = useRef(initialAppState.activeTab === 'start' ? 'none' : 'heading');
   const skipLinkActivatedRef = useRef(false);
   const hasProcessedInitialFocusRef = useRef(false);
-  const skipLinkRef = useRef(null);
   const acuteCrisisSectionRef = useRef(null);
   const safetyPlanSectionRef = useRef(null);
   const childProtectionSectionRef = useRef(null);
@@ -214,24 +213,29 @@ export default function App() {
   const tabInstanceIdRef = useRef(
     typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `tab-${Date.now()}-${Math.random().toString(16).slice(2)}`
   );
-  const latestAppliedTimestampRef = useRef(0);
+  const latestAppliedTimestampRef = useRef(null);
+  if (latestAppliedTimestampRef.current === null) {
+    let ts = 0;
+    if (typeof window !== 'undefined') {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_KEYS.appState);
+        const parsed = raw ? JSON.parse(raw) : null;
+        if (typeof parsed?.updatedAt === 'number') ts = parsed.updatedAt;
+      } catch {
+        // ignore storage read errors
+      }
+    }
+    latestAppliedTimestampRef.current = ts;
+  }
   const skipNextPersistRef = useRef(false);
   const broadcastChannelRef = useRef(null);
 
   const [score, setScore] = useState(initialAppState.score);
   const [completedModules, setCompletedModules] = useState(initialAppState.completedModules);
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const storedAppState = safeParse(STORAGE_KEYS.appState, null, (value) => isValidStoredAppState(value));
-    if (storedAppState?.updatedAt) {
-      latestAppliedTimestampRef.current = storedAppState.updatedAt;
-    }
-  }, []);
-
   const applyAppState = (nextState, options = {}) => {
     const normalized = normalizeAppStateData(nextState);
-    const { preserveSearchTerm = false } = options;
+    const { preserveSearchTerm = false, closeMobileMenu = true } = options;
 
     navigationFocusTargetRef.current = 'none';
     setActiveTab(normalized.activeTab);
@@ -245,8 +249,13 @@ export default function App() {
     setShowSafeNote(normalized.showSafeNote);
     setScore(normalized.score);
     setCompletedModules(normalized.completedModules);
-    setMobileMenuOpen(false);
+    if (closeMobileMenu) {
+      setMobileMenuOpen(false);
+    }
   };
+
+  const applyAppStateRef = useRef(applyAppState);
+  applyAppStateRef.current = applyAppState;
 
   const publishAppState = (nextState) => {
     if (typeof window === 'undefined') return;
@@ -453,7 +462,7 @@ export default function App() {
     });
 
     setPendingPriorityFocus(null);
-  }, [activeTab, pendingPriorityFocus, acuteCrisisSectionRef, safetyPlanSectionRef, childProtectionSectionRef, addictionSectionRef, rightsSectionRef]);
+  }, [activeTab, pendingPriorityFocus]);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -483,6 +492,12 @@ export default function App() {
       const first = focusableElements[0];
       const last = focusableElements[focusableElements.length - 1];
       const active = document.activeElement;
+
+      if (!container.contains(active)) {
+        event.preventDefault();
+        first.focus();
+        return;
+      }
 
       if (event.shiftKey) {
         if (active === first) {
@@ -530,13 +545,14 @@ export default function App() {
 
       latestAppliedTimestampRef.current = payload.updatedAt;
       skipNextPersistRef.current = true;
-      applyAppState(
+      applyAppStateRef.current(
         explicitTabHash
           ? {
               ...payload.data,
               activeTab: explicitTabHash,
             }
-          : payload.data
+          : payload.data,
+        { closeMobileMenu: false }
       );
     };
 
@@ -622,7 +638,11 @@ export default function App() {
     const resetState = getDefaultAppState();
 
     window.setTimeout(() => {
-      publishAppState(resetState);
+      try {
+        publishAppState(resetState);
+      } catch {
+        // continue with local reset even if persistence fails
+      }
       skipNextPersistRef.current = true;
       applyAppState(resetState);
       setIsResetting(false);
@@ -636,7 +656,7 @@ export default function App() {
     }));
   }, []);
 
-  const handleDownloadCrisisPlan = () => {
+  const handleDownloadCrisisPlan = useCallback(() => {
     const sections = SAFETY_PLAN_TEMPLATE_FIELDS.map(
       (field, index) => `${index + 1}. ${field.title}
 Leitfrage: ${field.hint}
@@ -660,7 +680,7 @@ Leitfrage: Was wird bis zum naechsten Kontakt konkret vereinbart?
 -
 `;
     downloadTextFile('krisenplan-vorlage.txt', template);
-  };
+  }, [score.risk]);
 
   const handleDownloadConversationGuide = () => {
     const template = `Gesprächsleitfaden für Fachpersonen
@@ -843,7 +863,12 @@ Aktueller Assessment-Score: ${score.risk}
     downloadTextFile('krisenplan-kompakt.txt', template);
   };
 
-  const isToolboxPrintMode = getToolboxPrintMode();
+  const handleToolboxPrint = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    window.requestAnimationFrame(() => {
+      window.print();
+    });
+  }, []);
 
   const downloadResources = [
     {
@@ -883,14 +908,9 @@ Aktueller Assessment-Score: ${score.risk}
     },
   ];
 
-  if (isToolboxPrintMode) {
-    return <ToolboxPrintPage />;
-  }
-
   return (
     <div className="min-h-screen bg-[#f6efe7] flex flex-col font-sans text-stone-900 overflow-x-hidden selection:bg-[#ead8c3] selection:text-[#5f3c2d]">
       <a
-        ref={skipLinkRef}
         href="#main-content"
         className="skip-link"
         onClick={(event) => {

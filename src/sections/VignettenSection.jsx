@@ -5,6 +5,9 @@ import { getPageHeadingId } from '../utils/appHelpers';
 
 export default function VignettenSection({ currentIndex, setCurrentIndex, selectedOption, onSelectOption }) {
   const vignette = VIGNETTEN[currentIndex];
+
+  if (!vignette) return null;
+
   const selectedId = selectedOption[vignette.id];
   const selected = vignette.options.find((option) => option.id === selectedId) ?? null;
   const feedbackId = `${vignette.id}-feedback`;
@@ -26,7 +29,7 @@ export default function VignettenSection({ currentIndex, setCurrentIndex, select
       },
       {
         label: 'Bearbeitungsstand',
-        value: `${Object.keys(selectedOption).length}`,
+        value: `${Object.keys(selectedOption).filter((id) => VIGNETTEN.some((v) => v.id === id)).length}`,
         note: 'Fälle mit gewählter Option',
       },
     ],

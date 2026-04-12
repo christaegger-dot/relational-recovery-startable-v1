@@ -62,6 +62,7 @@ export const isValidScore = (value) => {
     value &&
     typeof value === 'object' &&
     typeof value.risk === 'number' &&
+    !Number.isNaN(value.risk) &&
     Array.isArray(value.checked) &&
     value.checked.every((entry) => typeof entry === 'string')
   );
@@ -95,6 +96,8 @@ export const normalizeHashToTab = (hashValue) => {
   const aliased = TAB_ALIASES[cleaned] ?? cleaned;
   return TAB_ITEMS.some((item) => item.id === aliased) ? aliased : 'start';
 };
+
+const normalizeTabId = (value) => normalizeHashToTab(String(value || '').replace(/^#/, ''));
 
 export const getInitialTab = () => {
   if (typeof window === 'undefined') return 'start';
@@ -155,7 +158,7 @@ export const normalizeAppStateData = (value) => {
   const source = value && typeof value === 'object' ? value : {};
 
   return {
-    activeTab: normalizeHashToTab(source.activeTab),
+    activeTab: normalizeTabId(source.activeTab),
     currentVignette:
       Number.isInteger(source.currentVignette) && source.currentVignette >= 0 && source.currentVignette < VIGNETTEN.length
         ? source.currentVignette
@@ -189,8 +192,9 @@ export const getInitialAppState = (storageKey) => {
   if (typeof window === 'undefined') return defaults;
 
   const rawHash = String(window.location.hash || '').replace(/^#/, '');
-  const normalizedHash = normalizeHashToTab(rawHash);
-  const requestedTab = rawHash && normalizedHash !== 'start' ? normalizedHash : null;
+  const rawHashLower = rawHash.toLowerCase();
+  const normalizedHash = normalizeHashToTab(rawHashLower);
+  const requestedTab = rawHash && normalizedHash !== 'start' ? normalizedHash : TAB_ITEMS.some((item) => item.id === rawHashLower) ? rawHashLower : null;
   const storedAppState = safeParse(storageKey, null, (value) => isValidStoredAppState(value));
 
   if (storedAppState?.data) {
@@ -221,6 +225,7 @@ const PAGE_HEADING_IDS = {
 };
 
 export const getPageHeadingId = (tab) => PAGE_HEADING_IDS[tab] ?? 'page-heading-start';
+
 
 
 export const getRiskLabel = (risk) => {
