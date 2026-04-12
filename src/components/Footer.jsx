@@ -22,7 +22,7 @@ const Footer = memo(function Footer() {
         <div className="footer-grid">
           <div className="footer-panel footer-panel--brand">
             <div className="footer-brand-badge">
-              <Library size={14} />
+              <Library size={14} aria-hidden="true" />
               Fachportal Zürich
             </div>
             <h2 className="footer-brand-title">
@@ -48,7 +48,7 @@ const Footer = memo(function Footer() {
             </div>
           </div>
 
-          <div className="footer-panel footer-panel--nav">
+          <nav className="footer-panel footer-panel--nav" aria-label="Fusszeilen-Navigation">
             <div className="footer-kicker">Bereiche</div>
             <div className="footer-nav-list">
               {footerRoutes.map((route) => (
@@ -62,24 +62,24 @@ const Footer = memo(function Footer() {
                     <div className="footer-nav-link__title">{route.label}</div>
                     <p className="footer-nav-link__copy">{route.note}</p>
                   </div>
-                  <ArrowUpRight size={16} className="footer-nav-link__icon" />
+                  <ArrowUpRight size={16} className="footer-nav-link__icon" aria-hidden="true" />
                 </button>
               ))}
             </div>
-          </div>
+          </nav>
 
           <div className="footer-panel footer-panel--framework">
             <div className="footer-kicker footer-kicker--inverse">Arbeitsrahmen</div>
             <div className="footer-framework-list">
               <div className="footer-framework-item">
-                <ShieldCheck size={18} className="footer-framework-item__icon" />
+                <ShieldCheck size={18} className="footer-framework-item__icon" aria-hidden="true" />
                 <p className="footer-framework-item__copy">
                   Zentrale Orientierung für Fachpersonen mit Fokus auf Einordnung, Triage, Gesprächsführung und
                   regionale Weitervermittlung.
                 </p>
               </div>
               <div className="footer-framework-item">
-                <Users size={18} className="footer-framework-item__icon" />
+                <Users size={18} className="footer-framework-item__icon" aria-hidden="true" />
                 <p className="footer-framework-item__copy">
                   Arbeitsstände bleiben lokal im Browser und können jederzeit zurückgesetzt oder neu aufgebaut werden.
                 </p>

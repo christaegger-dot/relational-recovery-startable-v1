@@ -99,6 +99,21 @@
   box-shadow: var(--shadow-focus);
 }
 
+.ui-disclosure-card__summary:focus-visible,
+.ui-toolbox-disclosure__summary:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-focus);
+}
+
+.ui-choice-card:focus-within {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-focus);
+}
+
 .print-only {
   display: none;
 }

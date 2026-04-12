@@ -648,7 +648,7 @@ Aktueller Assessment-Score: ${score.risk}
         <div className="relative z-[100] border-b border-[#4b392f] bg-[linear-gradient(180deg,#3f322b,#2d241f)] px-3 py-3 text-[#f6efe7] no-print">
           <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-2 md:flex-row md:items-center md:px-6">
             <div className="flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#eadfce]">
-              <ShieldCheck size={16} className="shrink-0 text-[#f0c786]" />
+              <ShieldCheck size={16} className="shrink-0 text-[#f0c786]" aria-hidden="true" />
               <span>
                 Lokale Speicherung im Browser • auf gemeinsam genutzten Geräten nach der Nutzung zurücksetzen • keine
                 serverseitige Falldokumentation in dieser Ansicht
@@ -658,6 +658,7 @@ Aktueller Assessment-Score: ${score.risk}
               type="button"
               onClick={() => setShowSafeNote(false)}
               className="haptic-btn rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#f0c786] transition-colors hover:bg-white/10 hover:text-white"
+              aria-label="Datenschutzhinweis schliessen"
             >
               Schliessen
             </button>
@@ -680,8 +681,9 @@ Aktueller Assessment-Score: ${score.risk}
             type="button"
             onClick={handleEmergencyAccess}
             className="haptic-btn inline-flex items-center gap-2 rounded-full border border-[#dec2b2] bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#8d3f32] shadow-[0_10px_24px_rgba(141,63,50,0.06)] transition-colors hover:bg-[#fff0e6]"
+            aria-label="Zu Notfallinformationen wechseln"
           >
-            <AlertTriangle size={14} />
+            <AlertTriangle size={14} aria-hidden="true" />
             Zu Notfallinformationen
           </button>
         </div>
