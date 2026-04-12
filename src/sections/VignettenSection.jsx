@@ -1,8 +1,10 @@
 import VignettenPageTemplate from '../templates/VignettenPageTemplate';
 import { VIGNETTEN } from '../data/learningContent';
 import { getPageHeadingId } from '../utils/appHelpers';
+import { useAppState } from '../context/useAppState';
 
-export default function VignettenSection({ currentIndex, setCurrentIndex, selectedOption, onSelectOption }) {
+export default function VignettenSection() {
+  const { currentVignette: currentIndex, setCurrentVignette: setCurrentIndex, selectedOption, handleSelectVignetteOption: onSelectOption } = useAppState();
   const vignette = VIGNETTEN[currentIndex];
 
   if (!vignette) return null;

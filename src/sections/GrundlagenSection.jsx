@@ -2,6 +2,7 @@ import GrundlagenPageTemplate from '../templates/GrundlagenPageTemplate';
 import { GRUNDLAGEN_CLUSTERS, GRUNDLAGEN_HERO, GRUNDLAGEN_INTRO } from '../data/grundlagenContent';
 import { createClosingSectionModel } from '../utils/closingModel';
 import { getPageHeadingId } from '../utils/appHelpers';
+import { useAppState } from '../context/useAppState';
 
 function mapGrundlagenDownloads(sharedDownloadResources = []) {
   return sharedDownloadResources
@@ -14,7 +15,8 @@ function mapGrundlagenDownloads(sharedDownloadResources = []) {
     }));
 }
 
-export default function GrundlagenSection({ sharedDownloadResources = [], onNavigateToTab = () => {} }) {
+export default function GrundlagenSection({ sharedDownloadResources = [] }) {
+  const { navigate: onNavigateToTab } = useAppState();
   const closingSection = createClosingSectionModel({
     id: 'grundlagen-materials',
     eyebrow: 'Weiterarbeiten',
