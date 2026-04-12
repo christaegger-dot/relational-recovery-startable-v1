@@ -2,8 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright-core');
 
-const OUT_DIR = '/home/ubuntu/rr-live-fix/qa/mobile-artifacts';
-const BASE_URL = 'https://5173-iqwo6k8xgw8jt9sev422q-e09a7634.us2.manus.computer/#network';
+const OUT_DIR = path.join(__dirname, 'mobile-artifacts');
+// Current section IDs: #netzwerk-fachstellen (directory), #netzwerk-karte (map)
+const BASE_URL = (process.env.BASE_URL || 'http://localhost:5173') + '/#netzwerk';
 
 async function ensureDir(dir) {
   await fs.promises.mkdir(dir, { recursive: true });
@@ -51,6 +52,7 @@ async function visibleTexts(locator, limit = 10) {
   const browser = await chromium.launch({
     executablePath: '/usr/bin/chromium',
     headless: true,
+    args: ['--no-sandbox', '--disable-dev-shm-usage'],
   });
 
   const context = await browser.newContext({
@@ -93,8 +95,9 @@ async function visibleTexts(locator, limit = 10) {
     result.checks.layout_initial = await collectLayoutMetrics(page);
     result.screenshots.hero = await screenshot(page, 'network-mobile-hero.png');
 
-    const directorySection = page.locator('#network-directory');
-    const mapSection = page.locator('#network-map');
+    // Updated IDs: current app uses #netzwerk-fachstellen and #netzwerk-karte
+    const directorySection = page.locator('#netzwerk-fachstellen');
+    const mapSection = page.locator('#netzwerk-karte');
 
     await step('directory_visible', async () => {
       await directorySection.scrollIntoViewIfNeeded();

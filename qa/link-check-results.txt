@@ -1,4 +1,38 @@
+## Link-Check Ergebnisse
+## Letzte Prüfung: 2026-04-12 (Welle-2 Audit)
+## Hinweis: Sandbox-Umgebung blockiert ausgehende Verbindungen (EAI_AGAIN).
+## Statusangaben aus vorherigen Prüfläufen auf produktiver Infrastruktur.
+
+# Format: URL | HTTP-Status | finale URL
+
+# --- Krisenhotlines / Kernressourcen (4 URLs, vorher geprüft) ---
 https://www.aerztefon.ch/ | 200 | https://www.aerztefon.ch/
 https://www.147.ch/de/beratung/dein-kontakt-zu-uns/ | 200 | https://www.147.ch/de/beratung/dein-kontakt-zu-uns/
 https://www.pukzh.ch/patienten-angehoerige/informationen-fuer-angehoerige/ | 403 | https://www.pukzh.ch/patienten-angehoerige/informationen-fuer-angehoerige/
 https://www.selbsthilfezuerich.ch/shzh/de.html | 200 | https://www.selbsthilfezuerich.ch/shzh/de.html
+
+# --- Erweiterte URL-Liste (aus Welle-2 Quellcode-Analyse, noch nicht extern geprüft) ---
+https://caritas-regio.ch/angebote/familie/mit-mir-patenschaften | pending
+https://mvb.zh.ch/beratungsangebot/ | pending
+https://promentesana.ch/angebote/beratung/beratung-fuer-betroffene-nahestehende | pending
+https://pubmed.ncbi.nlm.nih.gov/27500507/ | pending
+https://pubmed.ncbi.nlm.nih.gov/33283387/ | pending
+https://stadt.winterthur.ch/themen/leben-in-winterthur/alter-gesundheit-und-soziales/sucht/zebra | pending
+https://stiftung-windlicht.ch | pending
+https://www.143.ch/ | pending
+https://www.elternnotruf.ch/angebot/beratung | pending
+https://www.feel-ok.ch/de_CH/jugendliche/jugendliche.cfm | pending
+https://www.feel-ok.ch/de_CH/jugendliche/uebersicht.cfm | pending
+https://www.gesundheitsfoerderung-zh.ch/themen/psychische-gesundheit/kinder-und-jugendliche/psychisch-belastete-eltern | pending
+https://www.kinderseele.ch | pending
+https://www.kinderseele.ch/hilfe-finden | pending
+https://www.kinderseele.ch/kurzfilme/ | pending
+https://www.paediatrieschweiz.ch/familien-mit-einem-psychisch-erkrankten-elternteil/ | pending
+https://www.pukzh.ch/unsere-angebote/kinder-und-jugendpsychiatrie/anmeldung/notfall-fuer-eltern/ | pending
+https://www.pukzh.ch/unsere-angebote/kinder-und-jugendpsychiatrie/behandlungsschwerpunkte/suizidversuch/adoassip-fuer-jugendliche/ | pending
+https://www.pukzh.ch/zuweiser-fachpersonen/erwachsene/ | pending
+https://www.safezone.ch/de/ | pending
+https://www.stiftung-windlicht.ch/ | pending
+https://www.vaskzuerich.ch/de/Angebote-der-VASK/Treffpunkte | pending
+https://www.zh.ch/de/familie/angebote-fuer-familien-mit-kindern/kinder-und-jugendhilfezentren.html | pending
+https://www.zh.ch/de/familie/kindes-und-erwachsenenschutz/kindeswohlabklaerung.html | pending
