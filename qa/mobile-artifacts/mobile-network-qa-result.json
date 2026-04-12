@@ -1,5 +1,5 @@
 {
-  "url": "https://5173-iqwo6k8xgw8jt9sev422q-e09a7634.us2.manus.computer/#network",
+  "url": "http://localhost:5173/#netzwerk",
   "viewport": {
     "width": 375,
     "height": 812
@@ -10,7 +10,7 @@
       "clientWidth": 375,
       "scrollWidth": 375,
       "hasHorizontalOverflow": false,
-      "hash": "#network",
+      "hash": "#netzwerk",
       "documentTitle": "Relational Recovery"
     },
     "directory_visible": {
@@ -83,50 +83,50 @@
       "clientWidth": 375,
       "scrollWidth": 375,
       "hasHorizontalOverflow": false,
-      "hash": "#network",
+      "hash": "#netzwerk",
       "documentTitle": "Relational Recovery"
     }
   },
   "screenshots": {
-    "hero": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-hero.png",
-    "directory": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-directory.png",
-    "filter": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-filter.png",
-    "search": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-search-147.png",
-    "map_overview": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-map-overview.png",
-    "map_fachstellen": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-map-fachstellen.png",
-    "map_luecken": "/home/ubuntu/rr-live-fix/qa/mobile-artifacts/network-mobile-map-luecken.png"
+    "hero": "/home/runner/work/relational-recovery-startable-v1/relational-recovery-startable-v1/qa/mobile-artifacts/network-mobile-hero.png",
+    "directory": "/home/runner/work/relational-recovery-startable-v1/relational-recovery-startable-v1/qa/mobile-artifacts/network-mobile-directory.png",
+    "filter": "/home/runner/work/relational-recovery-startable-v1/relational-recovery-startable-v1/qa/mobile-artifacts/network-mobile-filter.png",
+    "search": "/home/runner/work/relational-recovery-startable-v1/relational-recovery-startable-v1/qa/mobile-artifacts/network-mobile-search-147.png",
+    "map_overview": "/home/runner/work/relational-recovery-startable-v1/relational-recovery-startable-v1/qa/mobile-artifacts/network-mobile-map-overview.png",
+    "map_fachstellen": "/home/runner/work/relational-recovery-startable-v1/relational-recovery-startable-v1/qa/mobile-artifacts/network-mobile-map-fachstellen.png",
+    "map_luecken": "/home/runner/work/relational-recovery-startable-v1/relational-recovery-startable-v1/qa/mobile-artifacts/network-mobile-map-luecken.png"
   },
-  "timestamp": "2026-04-11T12:18:30.201Z",
+  "timestamp": "2026-04-12T09:33:52.977Z",
   "steps": [
     {
       "name": "directory_visible",
       "status": "passed",
-      "at": "2026-04-11T12:18:34.428Z"
+      "at": "2026-04-12T09:33:56.751Z"
     },
     {
       "name": "filter_interaction",
       "status": "passed",
-      "at": "2026-04-11T12:18:35.424Z"
+      "at": "2026-04-12T09:33:57.651Z"
     },
     {
       "name": "search_interaction",
       "status": "passed",
-      "at": "2026-04-11T12:18:37.166Z"
+      "at": "2026-04-12T09:33:59.301Z"
     },
     {
       "name": "map_visible",
       "status": "passed",
-      "at": "2026-04-11T12:18:38.282Z"
+      "at": "2026-04-12T09:34:00.355Z"
     },
     {
       "name": "map_lens_fachstellen",
       "status": "passed",
-      "at": "2026-04-11T12:18:39.229Z"
+      "at": "2026-04-12T09:34:01.243Z"
     },
     {
       "name": "map_lens_luecken",
       "status": "passed",
-      "at": "2026-04-11T12:18:40.184Z"
+      "at": "2026-04-12T09:34:02.139Z"
     }
   ]
 }

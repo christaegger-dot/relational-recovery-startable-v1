@@ -1,41 +1,90 @@
 {
-  "timestamp": "2026-04-11T12:20:12.076Z",
+  "timestamp": "2026-04-12T09:35:59.401Z",
   "checks": {
     "direct_network": {
       "label": "direct_network",
-      "hash": "#network",
+      "hash": "#netzwerk",
       "title": "Relational Recovery",
       "heading": "Relational Recovery",
       "directoryPresent": true,
       "mapPresent": true,
-      "activeElementText": "Netzwerk in Zürich und schweizweit lesen."
-    },
-    "after_click_map_anchor": {
-      "label": "after_click_map_anchor",
-      "hash": "#home",
-      "title": "Relational Recovery",
-      "heading": "Relational Recovery",
-      "directoryPresent": false,
-      "mapPresent": false,
-      "activeElementText": "Begleitung ist Beziehungsarbeit."
+      "directoryVisible": false,
+      "mapVisible": false,
+      "legacyDirectoryPresent": false,
+      "legacyMapPresent": false,
+      "activeElementText": "Netzwerk in Zürich und schweizweit lesen.",
+      "scrollY": 0
     },
     "direct_network_map": {
       "label": "direct_network_map",
       "hash": "#network-map",
       "title": "Relational Recovery",
       "heading": "Relational Recovery",
-      "directoryPresent": false,
-      "mapPresent": false,
-      "activeElementText": "Begleitung ist Beziehungsarbeit."
+      "directoryPresent": true,
+      "mapPresent": true,
+      "directoryVisible": true,
+      "mapVisible": true,
+      "legacyDirectoryPresent": false,
+      "legacyMapPresent": false,
+      "activeElementText": "Netzwerk in Zürich und schweizweit lesen.",
+      "scrollY": 4203
     },
     "direct_network_directory": {
       "label": "direct_network_directory",
       "hash": "#network-directory",
       "title": "Relational Recovery",
       "heading": "Relational Recovery",
-      "directoryPresent": false,
-      "mapPresent": false,
-      "activeElementText": "Begleitung ist Beziehungsarbeit."
+      "directoryPresent": true,
+      "mapPresent": true,
+      "directoryVisible": true,
+      "mapVisible": false,
+      "legacyDirectoryPresent": false,
+      "legacyMapPresent": false,
+      "activeElementText": "Netzwerk in Zürich und schweizweit lesen.",
+      "scrollY": 1200
+    },
+    "after_click_map_anchor": {
+      "label": "after_click_map_anchor",
+      "hash": "#netzwerk-karte",
+      "title": "Relational Recovery",
+      "heading": "Relational Recovery",
+      "directoryPresent": true,
+      "mapPresent": true,
+      "directoryVisible": true,
+      "mapVisible": true,
+      "legacyDirectoryPresent": false,
+      "legacyMapPresent": false,
+      "activeElementText": "Zum Inhalt springenLokale Speicherung im Browser • auf gemeinsam genutzten Geräten nach der Nutzung zurücksetzen • keine",
+      "scrollY": 4203
+    },
+    "direct_netzwerk_karte": {
+      "label": "direct_netzwerk_karte",
+      "hash": "#netzwerk-karte",
+      "title": "Relational Recovery",
+      "heading": "Relational Recovery",
+      "directoryPresent": true,
+      "mapPresent": true,
+      "directoryVisible": true,
+      "mapVisible": true,
+      "legacyDirectoryPresent": false,
+      "legacyMapPresent": false,
+      "activeElementText": "Zum Inhalt springenLokale Speicherung im Browser • auf gemeinsam genutzten Geräten nach der Nutzung zurücksetzen • keine",
+      "scrollY": 4203
+    },
+    "direct_netzwerk_fachstellen": {
+      "label": "direct_netzwerk_fachstellen",
+      "hash": "#netzwerk-fachstellen",
+      "title": "Relational Recovery",
+      "heading": "Relational Recovery",
+      "directoryPresent": true,
+      "mapPresent": true,
+      "directoryVisible": true,
+      "mapVisible": false,
+      "legacyDirectoryPresent": false,
+      "legacyMapPresent": false,
+      "activeElementText": "Zum Inhalt springenLokale Speicherung im Browser • auf gemeinsam genutzten Geräten nach der Nutzung zurücksetzen • keine",
+      "scrollY": 1200
     }
-  }
+  },
+  "notes": "IDs updated: network-directory→netzwerk-fachstellen, network-map→netzwerk-karte"
 }
