@@ -293,7 +293,12 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background-color var(--motion-fast) ease, color var(--motion-fast) ease, border-color var(--motion-fast) ease, transform var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
+  transition:
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    transform var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
   cursor: pointer;
 }
 
@@ -455,7 +460,12 @@
   letter-spacing: 0.18em;
   line-height: 1;
   text-transform: uppercase;
-  transition: background-color var(--motion-fast) ease, color var(--motion-fast) ease, border-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease, transform var(--motion-fast) ease;
+  transition:
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
 }
 
 .ui-chip:hover {
@@ -558,7 +568,10 @@
   font-size: var(--font-size-md);
   line-height: 1.4;
   outline: none;
-  transition: border-color var(--motion-fast) ease, background-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
+  transition:
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
 }
 
 .ui-input::placeholder {
@@ -572,7 +585,11 @@
 }
 
 .ui-card--interactive {
-  transition: transform var(--motion-fast) ease, border-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease, background-color var(--motion-fast) ease;
+  transition:
+    transform var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
 }
 
 .ui-card--interactive:hover {
@@ -584,7 +601,9 @@
 .ui-card--interactive:focus-visible {
   outline: none;
   border-color: color-mix(in srgb, var(--accent-primary) 30%, white 70%);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-primary-soft) 45%, white 55%), var(--shadow-card);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--accent-primary-soft) 45%, white 55%),
+    var(--shadow-card);
 }
 
 .ui-card--outline {
@@ -632,7 +651,11 @@
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--text-muted);
-  transition: transform var(--motion-fast) ease, border-color var(--motion-fast) ease, background-color var(--motion-fast) ease, color var(--motion-fast) ease;
+  transition:
+    transform var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease;
 }
 
 .ui-disclosure-card[open] .ui-disclosure-card__toggle {
@@ -734,7 +757,11 @@
   font-weight: 700;
   line-height: 1.5;
   text-align: left;
-  transition: border-color var(--motion-fast) ease, background-color var(--motion-fast) ease, color var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
+  transition:
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
 }
 
 .ui-choice-card:hover {
@@ -787,7 +814,7 @@
 }
 
 .ui-hero-shell {
-order: 1px solid var(--border-subtle);
+  order: 1px solid var(--border-subtle);
   border-radius: calc(var(--radius-2xl) + 0.25rem);
   background: var(--surface-hero);
   box-shadow: var(--shadow-card);
@@ -981,7 +1008,10 @@ order: 1px solid var(--border-subtle);
   border-radius: var(--radius-2xl);
   border: 2px solid var(--border-default);
   padding: 2rem;
-  transition: transform var(--motion-fast) ease, border-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
+  transition:
+    transform var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
 }
 
 .ui-closing-action:hover .ui-closing-action__preview {
@@ -1112,7 +1142,10 @@ order: 1px solid var(--border-subtle);
   letter-spacing: 0.18em;
   line-height: 1;
   text-transform: uppercase;
-  transition: border-color var(--motion-fast) ease, color var(--motion-fast) ease, transform var(--motion-fast) ease;
+  transition:
+    border-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
 }
 
 .ui-closing-navigator__entry:hover {
@@ -1253,7 +1286,9 @@ order: 1px solid var(--border-subtle);
   font-weight: 800;
   letter-spacing: 0.08em;
   box-shadow: var(--shadow-soft);
-  transition: transform var(--motion-fast) var(--motion-curve-standard), background-color var(--motion-standard) ease;
+  transition:
+    transform var(--motion-fast) var(--motion-curve-standard),
+    background-color var(--motion-standard) ease;
 }
 
 .ui-brand:hover .ui-brand__mark {
@@ -1291,9 +1326,15 @@ order: 1px solid var(--border-subtle);
   justify-self: center;
   border: 1px solid color-mix(in srgb, var(--border-default) 76%, white 24%);
   border-radius: var(--radius-pill);
-  background: linear-gradient(180deg, color-mix(in srgb, white 88%, transparent), color-mix(in srgb, var(--surface-muted) 80%, transparent));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, white 88%, transparent),
+    color-mix(in srgb, var(--surface-muted) 80%, transparent)
+  );
   padding: 0.35rem;
-  box-shadow: inset 0 1px 0 color-mix(in srgb, white 80%, transparent), 0 10px 24px rgba(76, 55, 39, 0.04);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 80%, transparent),
+    0 10px 24px rgba(76, 55, 39, 0.04);
 }
 
 .ui-nav__item {
@@ -1312,7 +1353,12 @@ order: 1px solid var(--border-subtle);
   letter-spacing: var(--letter-spacing-label);
   line-height: 1;
   text-transform: uppercase;
-  transition: background-color var(--motion-standard) ease, color var(--motion-standard) ease, border-color var(--motion-standard) ease, box-shadow var(--motion-standard) ease, transform var(--motion-fast) var(--motion-curve-standard);
+  transition:
+    background-color var(--motion-standard) ease,
+    color var(--motion-standard) ease,
+    border-color var(--motion-standard) ease,
+    box-shadow var(--motion-standard) ease,
+    transform var(--motion-fast) var(--motion-curve-standard);
 }
 
 .ui-nav__item:hover {
@@ -1527,7 +1573,11 @@ order: 1px solid var(--border-subtle);
   padding: 1.25rem;
   background: var(--surface-app);
   cursor: pointer;
-  transition: border-color var(--motion-fast) ease, background-color var(--motion-fast) ease, transform var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
+  transition:
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    transform var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
 }
 
 .ui-toolbox-check:hover {
@@ -1551,7 +1601,10 @@ order: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   background: white;
   color: transparent;
-  transition: border-color var(--motion-fast) ease, background-color var(--motion-fast) ease, color var(--motion-fast) ease;
+  transition:
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease;
 }
 
 .ui-toolbox-check--checked .ui-toolbox-check__box {
@@ -2127,7 +2180,6 @@ order: 1px solid var(--border-subtle);
     grid-template-columns: minmax(0, 1.2fr) minmax(17rem, 0.8fr);
   }
 }
-
 
 @media (min-width: 64rem) {
   .ui-card-grid--4 {
@@ -3330,7 +3382,11 @@ order: 1px solid var(--border-subtle);
   padding: 1rem;
   color: inherit;
   text-align: left;
-  transition: border-color var(--motion-fast) ease, background-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease, transform var(--motion-fast) ease;
+  transition:
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
 }
 
 .footer-nav-link:hover {

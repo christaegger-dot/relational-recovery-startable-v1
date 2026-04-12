@@ -13,9 +13,7 @@ function GlossarGroup({ group }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {group.eyebrow ? <Eyebrow>{group.eyebrow}</Eyebrow> : null}
-            <h2 className="ui-hero__title ui-section-title">
-              {group.title}
-            </h2>
+            <h2 className="ui-hero__title ui-section-title">{group.title}</h2>
             {group.description ? (
               <div className="ui-copy">
                 <p>{group.description}</p>

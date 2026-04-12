@@ -13,8 +13,7 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
     eyebrow: 'Fachliche Kurzformate',
     title: 'Lernen in',
     accent: 'ruhigen Fachsequenzen.',
-    lead:
-      'Kompakte Module für Gesprächsführung, Sprache und Einschätzung im Klinikalltag. Jedes Modul führt von einer Leitidee zu einer einzelnen Reflexionsfrage und bleibt damit näher an Fallarbeit als an prüfungsartigem Wissenstest.',
+    lead: 'Kompakte Module für Gesprächsführung, Sprache und Einschätzung im Klinikalltag. Jedes Modul führt von einer Leitidee zu einer einzelnen Reflexionsfrage und bleibt damit näher an Fallarbeit als an prüfungsartigem Wissenstest.',
     image: heroIllustration,
     imageAlt: 'Illustration eines Familiensystems mit Beziehungslinien und ruhiger Orientierung',
     asideTitle: 'Zuletzt geprüft',
@@ -88,7 +87,7 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
         completed: completedModules.includes(mod.id),
         onAnswer,
       })),
-    [quizState, completedModules, onAnswer],
+    [quizState, completedModules, onAnswer]
   );
 
   const modulesSection = {
@@ -109,5 +108,12 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
     items: moduleItems,
   };
 
-  return <LearningPageTemplate hero={hero} pageHeadingId={getPageHeadingId('lernmodule')} sequence={sequence} modulesSection={modulesSection} />;
+  return (
+    <LearningPageTemplate
+      hero={hero}
+      pageHeadingId={getPageHeadingId('lernmodule')}
+      sequence={sequence}
+      modulesSection={modulesSection}
+    />
+  );
 }

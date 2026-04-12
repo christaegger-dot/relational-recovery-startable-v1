@@ -77,18 +77,15 @@ export const SAFETY_PLAN_TEMPLATE_FIELDS = [
 export const CHILD_PROTECTION_THRESHOLDS = [
   {
     title: 'Freiwillige Hilfe zuerst',
-    text:
-      'Wenn Sicherheit und Grundversorgung aktuell gewährleistet sind, ist freiwillige Unterstützung oft der erste sinnvolle Schritt – zum Beispiel über das kjz, Familienberatung oder konkrete Entlastung im Alltag.',
+    text: 'Wenn Sicherheit und Grundversorgung aktuell gewährleistet sind, ist freiwillige Unterstützung oft der erste sinnvolle Schritt – zum Beispiel über das kjz, Familienberatung oder konkrete Entlastung im Alltag.',
   },
   {
     title: 'Wann es enger wird',
-    text:
-      'Wenn Nahrung, Aufsicht, medizinische Versorgung, Sicherheit oder Schutz vor Gewalt nicht verlässlich gewährleistet sind, braucht es eine vertiefte Kindesschutzabklärung.',
+    text: 'Wenn Nahrung, Aufsicht, medizinische Versorgung, Sicherheit oder Schutz vor Gewalt nicht verlässlich gewährleistet sind, braucht es eine vertiefte Kindesschutzabklärung.',
   },
   {
     title: 'Was eine Meldung bedeutet',
-    text:
-      'Eine besorgte Person muss eine Gefährdung nicht beweisen. Die Prüfung und Kindeswohlabklärung ist Aufgabe der KESB oder der beauftragten Fachstellen.',
+    text: 'Eine besorgte Person muss eine Gefährdung nicht beweisen. Die Prüfung und Kindeswohlabklärung ist Aufgabe der KESB oder der beauftragten Fachstellen.',
   },
 ];
 
@@ -102,18 +99,15 @@ export const CHILD_PROTECTION_TIPS = [
 export const ADDICTION_PANELS = [
   {
     title: 'Psychische Erkrankung und Substanzkonsum zusammen denken',
-    text:
-      'Alkohol, Medikamente, Cannabis oder andere Substanzen können psychische Symptome verstärken, Krisen verschärfen und Behandlung erschweren. Für Familien ist wichtig, Moral und Sicherheit auseinanderzuhalten.',
+    text: 'Alkohol, Medikamente, Cannabis oder andere Substanzen können psychische Symptome verstärken, Krisen verschärfen und Behandlung erschweren. Für Familien ist wichtig, Moral und Sicherheit auseinanderzuhalten.',
   },
   {
     title: 'Grenzen ohne Beschämung',
-    text:
-      'Hilfreich sind klare Sicherheitsregeln: keine Kinderbetreuung unter starkem Einfluss, kein Fahren unter Einfluss, keine Beschaffung von Substanzen. Gleichzeitig sollten Hilfewege offen bleiben.',
+    text: 'Hilfreich sind klare Sicherheitsregeln: keine Kinderbetreuung unter starkem Einfluss, kein Fahren unter Einfluss, keine Beschaffung von Substanzen. Gleichzeitig sollten Hilfewege offen bleiben.',
   },
   {
     title: 'Niederschwelliger Einstieg',
-    text:
-      'Gerade bei Scham, Rückzug oder Ambivalenz kann anonyme Online-Beratung ein realistischer erster Schritt sein – auch für Angehörige und Nahestehende.',
+    text: 'Gerade bei Scham, Rückzug oder Ambivalenz kann anonyme Online-Beratung ein realistischer erster Schritt sein – auch für Angehörige und Nahestehende.',
   },
 ];
 

@@ -5,3 +5,4 @@ dist
 output
 tmp/
 pnpm-lock.yaml
+test-results/

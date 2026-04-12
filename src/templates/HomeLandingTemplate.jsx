@@ -8,8 +8,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
     eyebrow: 'Systemische Orientierung',
     title: 'Begleitung ist',
     accent: 'Beziehungsarbeit.',
-    lead:
-      'Interaktive Fachressourcen für die Begleitung von Eltern mit psychischer Belastung – mit Training, systemischer Orientierung, Krisenhilfe, Netzwerk und printfähigen Arbeitshilfen.',
+    lead: 'Interaktive Fachressourcen für die Begleitung von Eltern mit psychischer Belastung – mit Training, systemischer Orientierung, Krisenhilfe, Netzwerk und printfähigen Arbeitshilfen.',
     image: heroIllustration,
     imageAlt: 'Minimalistische Illustration eines Familiensystems mit Nähe, Distanz und Unterstützung',
     asideTitle: 'Wichtiger Hinweis zur Einordnung',

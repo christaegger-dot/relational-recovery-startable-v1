@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   AlertTriangle,
   Check,
@@ -242,8 +242,7 @@ export default function ToolboxSection({
     aside: {
       label: 'Arbeitslogik',
       title: 'Sicherheit zuerst, dann Struktur, dann Kooperation',
-      copy:
-        'Die Seite priorisiert zuerst akute Risiken, danach Versorgung und Kinder-Schutzteil und erst anschliessend die längerfristige Zusammenarbeit mit Netzwerk und Fachstellen.',
+      copy: 'Die Seite priorisiert zuerst akute Risiken, danach Versorgung und Kinder-Schutzteil und erst anschliessend die längerfristige Zusammenarbeit mit Netzwerk und Fachstellen.',
       tone: 'soft',
     },
   };
@@ -253,8 +252,7 @@ export default function ToolboxSection({
     title: 'Belastung orientierend einschätzen',
     description:
       'Die Faktoren dienen als klinische Gesprächshilfe. Sie helfen, relevante Belastungshinweise sichtbar zu machen und daraus Schutz-, Vorsorge- oder Unterstützungsbedarfe abzuleiten.',
-    note:
-      'Das Instrument ersetzt keine fachliche Gesamtbeurteilung und ist bewusst auf beobachtbare Alltagshinweise fokussiert.',
+    note: 'Das Instrument ersetzt keine fachliche Gesamtbeurteilung und ist bewusst auf beobachtbare Alltagshinweise fokussiert.',
     scoreAside: {
       label: 'Orientierender Hinweis',
       value: score.risk,
@@ -289,8 +287,7 @@ export default function ToolboxSection({
     aside: {
       label: 'Warum diese Reihenfolge?',
       title: 'Niedriger kognitiver Druck in angespannten Situationen',
-      copy:
-        'In akuten oder hoch belasteten Lagen helfen kurze Entscheidungen, sichtbare Prioritäten und konkrete Anschlusswege mehr als grosse Informationsmengen.',
+      copy: 'In akuten oder hoch belasteten Lagen helfen kurze Entscheidungen, sichtbare Prioritäten und konkrete Anschlusswege mehr als grosse Informationsmengen.',
     },
     steps: PATHWAY_STEPS,
   };
@@ -302,8 +299,7 @@ export default function ToolboxSection({
     items: SCORE_BANDS,
     aside: {
       label: 'Interpretation',
-      copy:
-        'Auch niedrige Werte können bei einzelnen hoch relevanten Ereignissen dringlich sein. Umgekehrt bedeuten höhere Werte vor allem: genauer hinschauen, absichern, kooperieren.',
+      copy: 'Auch niedrige Werte können bei einzelnen hoch relevanten Ereignissen dringlich sein. Umgekehrt bedeuten höhere Werte vor allem: genauer hinschauen, absichern, kooperieren.',
     },
   };
 
@@ -545,7 +541,8 @@ export default function ToolboxSection({
           <p className="toolbox-print-kicker">Relational Recovery · Toolbox Arbeitsansicht</p>
           <h1 className="toolbox-print-title">Orientierung, Schutz und nächste Schritte</h1>
           <p className="toolbox-print-lead">
-            Kompakte Gesprächs- und Protokollansicht für akute Belastung, Krisenvorsorge und nächste verlässliche Schritte.
+            Kompakte Gesprächs- und Protokollansicht für akute Belastung, Krisenvorsorge und nächste verlässliche
+            Schritte.
           </p>
         </header>
 
@@ -585,7 +582,10 @@ export default function ToolboxSection({
           <p className="toolbox-print-kicker">Krisenvorsorge und Kinder-Schutzteil</p>
           <div className="toolbox-print-grid-two toolbox-print-grid-two--top-spaced">
             {SAFETY_PLAN_TEMPLATE_FIELDS.map((field) => (
-              <div key={field.title} className="toolbox-print-block toolbox-print-card toolbox-print-card--compact toolbox-print-card--field">
+              <div
+                key={field.title}
+                className="toolbox-print-block toolbox-print-card toolbox-print-card--compact toolbox-print-card--field"
+              >
                 <p className="toolbox-print-label">{field.title}</p>
                 <p className="toolbox-print-hint">{field.hint}</p>
                 <div className="toolbox-print-field toolbox-print-field--large" />
@@ -641,7 +641,8 @@ export default function ToolboxSection({
       {
         kind: 'download',
         title: 'Krisenplan als Textvorlage',
-        description: 'Bearbeitbare Kurzvorlage für Warnzeichen, Kontaktkette, Kinderbetreuung, sichere Orte und nächste Schritte.',
+        description:
+          'Bearbeitbare Kurzvorlage für Warnzeichen, Kontaktkette, Kinderbetreuung, sichere Orte und nächste Schritte.',
         meta: ['TXT editierbar', 'Krise / Vorsorge'],
         actionLabel: 'Vorlage herunterladen',
         ariaLabel: 'Krisenplan als Textvorlage aus der Toolbox herunterladen',

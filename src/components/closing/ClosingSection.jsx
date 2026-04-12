@@ -20,8 +20,7 @@ function RichCopy({ description, paragraphs = [] }) {
 function MetaTags({ items = [], tone = 'default' }) {
   if (!items.length) return null;
 
-  const className =
-    tone === 'accent' ? 'ui-closing-tag ui-closing-tag--accent' : 'ui-closing-tag';
+  const className = tone === 'accent' ? 'ui-closing-tag ui-closing-tag--accent' : 'ui-closing-tag';
 
   return (
     <div className="ui-badge-row ui-closing-tags">
@@ -89,12 +88,14 @@ function ClosingPrimaryActions({ items = [] }) {
   return (
     <div className="ui-closing-actions-grid no-print">
       {items.map((item) => (
-        <button key={item.title} type="button" className="ui-closing-action" onClick={item.onClick} aria-label={item.ariaLabel || item.title}>
-          <div
-            className={`ui-closing-action__preview ${item.previewClassName || ''}`}
-          >
-            {item.preview}
-          </div>
+        <button
+          key={item.title}
+          type="button"
+          className="ui-closing-action"
+          onClick={item.onClick}
+          aria-label={item.ariaLabel || item.title}
+        >
+          <div className={`ui-closing-action__preview ${item.previewClassName || ''}`}>{item.preview}</div>
           <h3 className="ui-closing-action__title">{item.title}</h3>
           {item.description ? <p className="ui-closing-action__copy">{item.description}</p> : null}
           {item.meta?.length ? (
@@ -120,7 +121,16 @@ function ClosingPrimaryActions({ items = [] }) {
 function ClosingActionButton({ item, defaultLabel }) {
   if (item.href) {
     return (
-      <Button as="a" href={item.href} className="ui-editorial-card__action" variant="secondary" target={item.target} rel={item.rel} download={item.kind === 'download'} aria-label={item.ariaLabel || item.actionLabel || defaultLabel}>
+      <Button
+        as="a"
+        href={item.href}
+        className="ui-editorial-card__action"
+        variant="secondary"
+        target={item.target}
+        rel={item.rel}
+        download={item.kind === 'download'}
+        aria-label={item.ariaLabel || item.actionLabel || defaultLabel}
+      >
         {item.actionLabel || defaultLabel}
       </Button>
     );
@@ -128,7 +138,12 @@ function ClosingActionButton({ item, defaultLabel }) {
 
   if (item.onClick) {
     return (
-      <Button className="ui-editorial-card__action" variant="secondary" onClick={item.onClick} aria-label={item.ariaLabel || item.actionLabel || defaultLabel}>
+      <Button
+        className="ui-editorial-card__action"
+        variant="secondary"
+        onClick={item.onClick}
+        aria-label={item.ariaLabel || item.actionLabel || defaultLabel}
+      >
         {item.actionLabel || defaultLabel}
       </Button>
     );
@@ -138,7 +153,9 @@ function ClosingActionButton({ item, defaultLabel }) {
 }
 
 function normalizeSearchText(value) {
-  return String(value || '').trim().toLowerCase();
+  return String(value || '')
+    .trim()
+    .toLowerCase();
 }
 
 function getActionSearchText(item = {}) {
@@ -193,14 +210,17 @@ function ClosingNavigator({ entries = [], query, setQuery, totalCount, resultCou
                 <strong>Materialien und Anschlusswege gezielt scannen.</strong>
               </p>
               <p>
-                Die Abschlusszone lässt sich jetzt über einen kleinen Index und eine inhaltsnahe Suche schneller lesen. Die Suche prüft Materialtitel,
-                Beschreibungen, Metadaten und Aktionslabels über alle sichtbaren Sammlungen hinweg.
+                Die Abschlusszone lässt sich jetzt über einen kleinen Index und eine inhaltsnahe Suche schneller lesen.
+                Die Suche prüft Materialtitel, Beschreibungen, Metadaten und Aktionslabels über alle sichtbaren
+                Sammlungen hinweg.
               </p>
             </div>
           </div>
           <div className="ui-closing-navigator__stat">
             <div className="ui-closing-navigator__stat-label">Treffer</div>
-            <div className="ui-closing-navigator__stat-value">{resultCount}/{totalCount}</div>
+            <div className="ui-closing-navigator__stat-value">
+              {resultCount}/{totalCount}
+            </div>
           </div>
         </div>
 
@@ -218,11 +238,7 @@ function ClosingNavigator({ entries = [], query, setQuery, totalCount, resultCou
         {entries.length ? (
           <div className="ui-chip-row ui-closing-navigator__entries">
             {entries.map((entry) => (
-              <a
-                key={entry.href}
-                href={entry.href}
-                className="ui-closing-navigator__entry"
-              >
+              <a key={entry.href} href={entry.href} className="ui-closing-navigator__entry">
                 {entry.label}
                 <span className="ui-closing-navigator__entry-count">{entry.count}</span>
               </a>
@@ -238,7 +254,11 @@ function ClosingCollections({ collections = [] }) {
   if (!collections.length) return null;
 
   return collections.map((collection, index) => (
-    <div key={collection.id || collection.eyebrow || collection.title} id={getCollectionAnchorId(collection, index)} className="ui-stack ui-stack--tight no-print ui-anchor-offset-target">
+    <div
+      key={collection.id || collection.eyebrow || collection.title}
+      id={getCollectionAnchorId(collection, index)}
+      className="ui-stack ui-stack--tight no-print ui-anchor-offset-target"
+    >
       {collection.eyebrow ? <Eyebrow>{collection.eyebrow}</Eyebrow> : null}
       {collection.title || collection.description ? (
         <div className="ui-copy">
@@ -246,9 +266,7 @@ function ClosingCollections({ collections = [] }) {
             <p>
               <strong>{collection.title}</strong>
               {collection.items?.length ? (
-                <span className="ui-closing-collection__count">
-                  {collection.items.length} Elemente
-                </span>
+                <span className="ui-closing-collection__count">{collection.items.length} Elemente</span>
               ) : null}
             </p>
           ) : null}
@@ -257,7 +275,11 @@ function ClosingCollections({ collections = [] }) {
       ) : null}
       <div className="ui-closing-collection-grid">
         {collection.items.map((item, itemIndex) => (
-          <SurfaceCard key={getActionItemKey(item, itemIndex)} tone={collection.collectionKind === 'books' ? 'soft' : 'default'} className="ui-closing-collection-card">
+          <SurfaceCard
+            key={getActionItemKey(item, itemIndex)}
+            tone={collection.collectionKind === 'books' ? 'soft' : 'default'}
+            className="ui-closing-collection-card"
+          >
             <MetaTags items={item.meta} />
             {item.age || item.type ? <p className="ui-fact-card__label">{item.age || item.type}</p> : null}
             <h3 className="ui-card__title">{item.title}</h3>
@@ -265,7 +287,10 @@ function ClosingCollections({ collections = [] }) {
             {item.provider ? <p className="ui-card__copy">{item.provider}</p> : null}
             {item.description ? <p className="ui-card__copy">{item.description}</p> : null}
             {item.assetMeta ? <p className="ui-closing-item__meta">{item.assetMeta}</p> : null}
-            <ClosingActionButton item={item} defaultLabel={item.kind === 'download' ? 'Material herunterladen' : 'Ressource öffnen'} />
+            <ClosingActionButton
+              item={item}
+              defaultLabel={item.kind === 'download' ? 'Material herunterladen' : 'Ressource öffnen'}
+            />
           </SurfaceCard>
         ))}
       </div>
@@ -283,9 +308,7 @@ function ClosingRelatedLinks({ relatedLinks, relatedLinksId }) {
         {relatedLinks.title ? (
           <p>
             <strong>{relatedLinks.title}</strong>
-            <span className="ui-closing-related-links__count">
-              {relatedLinks.items.length} Anschlusswege
-            </span>
+            <span className="ui-closing-related-links__count">{relatedLinks.items.length} Anschlusswege</span>
           </p>
         ) : null}
         {relatedLinks.description ? <p>{relatedLinks.description}</p> : null}
@@ -330,9 +353,7 @@ function ClosingReferences({ references }) {
       <div className="ui-stack ui-stack--loose">
         <div className="ui-stack ui-stack--tight">
           {references.eyebrow ? <Eyebrow>{references.eyebrow}</Eyebrow> : null}
-          <h2 className="ui-hero__title ui-closing-references__title">
-            {references.title}
-          </h2>
+          <h2 className="ui-hero__title ui-closing-references__title">{references.title}</h2>
           <RichCopy paragraphs={references.paragraphs} />
         </div>
 
@@ -427,15 +448,22 @@ export default function ClosingSection({ section, sectionId, surface = 'plain', 
         <div className={hasPrintView ? 'ui-stack ui-stack--loose no-print' : 'ui-stack ui-stack--loose'}>
           <ClosingHeader section={section} />
           <ClosingPrimaryActions items={section.primaryActions} />
-          {(totalCount || navigatorEntries.length) ? (
-            <ClosingNavigator entries={navigatorEntries} query={query} setQuery={setQuery} totalCount={totalCount} resultCount={resultCount} />
+          {totalCount || navigatorEntries.length ? (
+            <ClosingNavigator
+              entries={navigatorEntries}
+              query={query}
+              setQuery={setQuery}
+              totalCount={totalCount}
+              resultCount={resultCount}
+            />
           ) : null}
           <ClosingCollections collections={filteredCollections} />
           <ClosingRelatedLinks relatedLinks={filteredRelatedLinks} relatedLinksId={relatedLinksId} />
           {normalizedQuery && resultCount === 0 ? (
             <div className="ui-closing-empty-state no-print">
               <p className="ui-closing-empty-state__copy">
-                Für <strong>{query}</strong> wurden in den aktuellen Materialien und Anschlusswegen keine Treffer gefunden. Versuchen Sie einen allgemeineren Begriff.
+                Für <strong>{query}</strong> wurden in den aktuellen Materialien und Anschlusswegen keine Treffer
+                gefunden. Versuchen Sie einen allgemeineren Begriff.
               </p>
             </div>
           ) : null}

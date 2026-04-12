@@ -2,8 +2,7 @@ export const GLOSSARY_HERO = {
   eyebrow: 'Redaktioneller Wissensbereich',
   title: 'Begriffe für',
   accent: 'ruhige fachliche Orientierung.',
-  lead:
-    'Das Glossar sammelt zentrale Begriffe aus relationaler Recovery, Kindesschutz, Angehörigenarbeit und Netzwerkpraxis in einer einheitlichen Sprache. Es soll Fachpersonen helfen, schneller zwischen Einordnung, Gespräch und Weitervermittlung zu wechseln.',
+  lead: 'Das Glossar sammelt zentrale Begriffe aus relationaler Recovery, Kindesschutz, Angehörigenarbeit und Netzwerkpraxis in einer einheitlichen Sprache. Es soll Fachpersonen helfen, schneller zwischen Einordnung, Gespräch und Weitervermittlung zu wechseln.',
   asideTitle: 'Nutzungshinweis',
   asideCopy:
     'Die Einträge sind als knappe Arbeitsdefinitionen für Praxis, Teamgespräch und Orientierung im Versorgungsalltag formuliert. Sie ersetzen keine institutionellen Richtlinien oder juristische Fachberatung.',
@@ -34,8 +33,7 @@ export const GLOSSARY_INTRO = {
   aside: {
     label: 'Ziel',
     title: 'Gemeinsame Sprache entlastet',
-    copy:
-      'Wenn Teams dieselben Kernbegriffe ähnlich verwenden, werden Fallbesprechungen ruhiger, Rückfragen klarer und Überleitungen zwischen Fachstellen verständlicher.',
+    copy: 'Wenn Teams dieselben Kernbegriffe ähnlich verwenden, werden Fallbesprechungen ruhiger, Rückfragen klarer und Überleitungen zwischen Fachstellen verständlicher.',
     tone: 'soft',
   },
   cards: [

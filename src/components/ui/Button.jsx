@@ -7,15 +7,7 @@ const VARIANT_CLASSES = {
   emergency: 'ui-button ui-button--emergency',
 };
 
-export default function Button({
-  as,
-  href,
-  variant = 'primary',
-  className = '',
-  children,
-  type = 'button',
-  ...props
-}) {
+export default function Button({ as, href, variant = 'primary', className = '', children, type = 'button', ...props }) {
   const variantClass = VARIANT_CLASSES[variant] ?? VARIANT_CLASSES.primary;
 
   const classes = [variantClass, className].filter(Boolean).join(' ');

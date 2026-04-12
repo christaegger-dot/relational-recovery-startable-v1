@@ -15,7 +15,8 @@ function LearningFlowSection({ sequence }) {
           <div className="ui-stack ui-stack--tight">
             {sequence.eyebrow ? <Eyebrow>{sequence.eyebrow}</Eyebrow> : null}
             <h2 className="ui-hero__title ui-section-title">
-              {sequence.titlePrefix} {sequence.titleAccent ? <span className="ui-hero__accent">{sequence.titleAccent}</span> : null}
+              {sequence.titlePrefix}{' '}
+              {sequence.titleAccent ? <span className="ui-hero__accent">{sequence.titleAccent}</span> : null}
             </h2>
             <div className="ui-copy">
               <p>{sequence.description}</p>
@@ -34,9 +35,7 @@ function LearningFlowSection({ sequence }) {
           <div className="learning-flow-grid">
             {sequence.steps.map((step, index) => (
               <SurfaceCard key={step.title} tone={step.tone || 'default'} className="learning-flow-card">
-                <div className="ui-badge ui-badge--soft">
-                  Schritt {index + 1}
-                </div>
+                <div className="ui-badge ui-badge--soft">Schritt {index + 1}</div>
                 {step.label ? <p className="ui-fact-card__label learning-flow-card__label">{step.label}</p> : null}
                 <h3 className="ui-card__title learning-flow-card__title">{step.title}</h3>
                 <p className="ui-card__copy">{step.copy}</p>
@@ -145,7 +144,9 @@ function LearningModulesSection({ modulesSection }) {
             {modulesSection.eyebrow ? <Eyebrow>{modulesSection.eyebrow}</Eyebrow> : null}
             <h2 className="ui-hero__title ui-section-title">
               {modulesSection.titlePrefix}{' '}
-              {modulesSection.titleAccent ? <span className="ui-hero__accent">{modulesSection.titleAccent}</span> : null}
+              {modulesSection.titleAccent ? (
+                <span className="ui-hero__accent">{modulesSection.titleAccent}</span>
+              ) : null}
             </h2>
             <div className="ui-copy">
               <p>{modulesSection.description}</p>

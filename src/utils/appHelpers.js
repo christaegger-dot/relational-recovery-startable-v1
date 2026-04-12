@@ -82,17 +82,17 @@ export const isValidQuizState = (value) =>
   !Array.isArray(value) &&
   Object.values(value).every(
     (entry) =>
-      entry &&
-      typeof entry === 'object' &&
-      typeof entry.answerIdx === 'number' &&
-      typeof entry.isCorrect === 'boolean'
+      entry && typeof entry === 'object' && typeof entry.answerIdx === 'number' && typeof entry.isCorrect === 'boolean'
   );
 
 export const isValidResourceFilter = (value) =>
   typeof value === 'string' && NETWORK_FILTERS.some((filter) => filter.id === value);
 
 export const normalizeHashToTab = (hashValue) => {
-  const cleaned = String(hashValue || '').replace(/^#/, '').trim().toLowerCase();
+  const cleaned = String(hashValue || '')
+    .replace(/^#/, '')
+    .trim()
+    .toLowerCase();
   const aliased = TAB_ALIASES[cleaned] ?? cleaned;
   return TAB_ITEMS.some((item) => item.id === aliased) ? aliased : 'start';
 };
@@ -146,7 +146,8 @@ const normalizeQuizStateData = (value) => {
     Object.entries(value).flatMap(([moduleId, entry]) => {
       const module = MODULE_BY_ID.get(moduleId);
       if (!module) return [];
-      if (!Number.isInteger(entry.answerIdx) || entry.answerIdx < 0 || entry.answerIdx >= module.quizOptions.length) return [];
+      if (!Number.isInteger(entry.answerIdx) || entry.answerIdx < 0 || entry.answerIdx >= module.quizOptions.length)
+        return [];
 
       return [[moduleId, { answerIdx: entry.answerIdx, isCorrect: entry.answerIdx === module.correctQuizIdx }]];
     })
@@ -160,7 +161,9 @@ export const normalizeAppStateData = (value) => {
   return {
     activeTab: normalizeTabId(source.activeTab),
     currentVignette:
-      Number.isInteger(source.currentVignette) && source.currentVignette >= 0 && source.currentVignette < VIGNETTEN.length
+      Number.isInteger(source.currentVignette) &&
+      source.currentVignette >= 0 &&
+      source.currentVignette < VIGNETTEN.length
         ? source.currentVignette
         : defaults.currentVignette,
     selectedOption: normalizeSelectedOptionData(source.selectedOption),
@@ -194,7 +197,12 @@ export const getInitialAppState = (storageKey) => {
   const rawHash = String(window.location.hash || '').replace(/^#/, '');
   const rawHashLower = rawHash.toLowerCase();
   const normalizedHash = normalizeHashToTab(rawHashLower);
-  const requestedTab = rawHash && normalizedHash !== 'start' ? normalizedHash : TAB_ITEMS.some((item) => item.id === rawHashLower) ? rawHashLower : null;
+  const requestedTab =
+    rawHash && normalizedHash !== 'start'
+      ? normalizedHash
+      : TAB_ITEMS.some((item) => item.id === rawHashLower)
+        ? rawHashLower
+        : null;
   const storedAppState = safeParse(storageKey, null, (value) => isValidStoredAppState(value));
 
   if (storedAppState?.data) {
@@ -225,8 +233,6 @@ const PAGE_HEADING_IDS = {
 };
 
 export const getPageHeadingId = (tab) => PAGE_HEADING_IDS[tab] ?? 'page-heading-start';
-
-
 
 export const getRiskLabel = (risk) => {
   if (risk >= 7) return 'Hinweis auf Schutzabklärung';

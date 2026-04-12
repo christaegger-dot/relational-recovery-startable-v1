@@ -1,6 +1,5 @@
 // Design note: This file preserves the application's information architecture while the visual language is shifted toward a warm editorial interface with calmer surfaces, serif-led hierarchy and lower-arousal accents.
-import React, { lazy, Suspense, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import DOMPurify from 'dompurify';
+import { lazy, Suspense, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import './styles/app-global.css';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import Header from './components/Header';
@@ -24,7 +23,6 @@ import {
   normalizeAppStateData,
   normalizeHashToTab,
   safeLocalStorageSet,
-  safeParse,
 } from './utils/appHelpers';
 
 const ElearningSection = lazy(() => import('./sections/ElearningSection'));
@@ -35,122 +33,12 @@ const ToolboxSection = lazy(() => import('./sections/ToolboxSection'));
 const NetworkSection = lazy(() => import('./sections/NetworkSection'));
 const EvidenceSection = lazy(() => import('./sections/EvidenceSection'));
 
-const TOOLBOX_PRINT_STORAGE_KEY = 'rr-toolbox-print-payload';
-
 const SECTION_ALIAS_MAP = {
   'network-map': 'netzwerk-karte',
   'network-directory': 'netzwerk-fachstellen',
   'netzwerk-karte': 'netzwerk-karte',
   'netzwerk-fachstellen': 'netzwerk-fachstellen',
 };
-
-function getToolboxPrintMode() {
-  if (typeof window === 'undefined') return false;
-  return new URLSearchParams(window.location.search).get('print') === 'toolbox';
-}
-
-function readToolboxPrintPayload() {
-  if (typeof window === 'undefined') return null;
-
-  try {
-    const raw = window.localStorage.getItem(TOOLBOX_PRINT_STORAGE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (!parsed || typeof parsed.html !== 'string' || !parsed.html.trim()) return null;
-    return parsed;
-  } catch {
-    return null;
-  }
-}
-
-function storeToolboxPrintPayload(payload) {
-  if (typeof window === 'undefined') return false;
-
-  try {
-    window.localStorage.setItem(
-      TOOLBOX_PRINT_STORAGE_KEY,
-      JSON.stringify({
-        title: payload.title,
-        html: payload.html,
-        updatedAt: Date.now(),
-      })
-    );
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function openIsolatedPrintView({ contentSelector, title }) {
-  if (typeof window === 'undefined' || typeof document === 'undefined') return false;
-
-  const printNode = document.querySelector(contentSelector);
-  if (!printNode) return false;
-
-  const stored = storeToolboxPrintPayload({
-    title,
-    html: printNode.outerHTML,
-  });
-  if (!stored) return false;
-
-  const printUrl = new URL(window.location.href);
-  printUrl.searchParams.set('print', 'toolbox');
-  printUrl.searchParams.set('ts', String(Date.now()));
-
-  const printWindow = window.open(printUrl.toString(), '_blank');
-  if (!printWindow) return false;
-
-  if (typeof printWindow.focus === 'function') {
-    window.setTimeout(() => printWindow.focus(), 150);
-  }
-
-  return true;
-}
-
-function ToolboxPrintPage() {
-  const payload = useMemo(() => readToolboxPrintPayload(), []);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return undefined;
-
-    const timer = window.setTimeout(() => {
-      window.focus();
-      window.print();
-    }, 400);
-
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  if (!payload?.html) {
-    return (
-      <div className="min-h-screen bg-white px-6 py-10 text-slate-900">
-        <main className="mx-auto max-w-3xl">
-          <h1 className="text-2xl font-semibold">Druckansicht konnte nicht geladen werden</h1>
-          <p className="mt-4 text-base leading-relaxed text-slate-700">
-            Bitte dieses Fenster schliessen und die Arbeitsansicht noch einmal direkt aus der Toolbox starten.
-          </p>
-        </main>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <main className="print-shell" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(payload.html) }} />
-    </div>
-  );
-}
-
-function handleToolboxPrint() {
-  const opened = openIsolatedPrintView({
-    contentSelector: '#toolbox-next-steps .print-only',
-    title: 'Relational Recovery – Toolbox Arbeitsansicht',
-  });
-
-  if (!opened) {
-    window.print();
-  }
-}
 
 const SectionLoadingFallback = memo(function SectionLoadingFallback() {
   return (
@@ -172,7 +60,12 @@ function getFocusableElements(container) {
     container.querySelectorAll(
       'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])'
     )
-  ).filter((element) => !element.hasAttribute('disabled') && element.getAttribute('aria-hidden') !== 'true' && element.offsetParent !== null);
+  ).filter(
+    (element) =>
+      !element.hasAttribute('disabled') &&
+      element.getAttribute('aria-hidden') !== 'true' &&
+      element.offsetParent !== null
+  );
 }
 
 export default function App() {
@@ -196,7 +89,10 @@ export default function App() {
   const [pendingPriorityFocus, setPendingPriorityFocus] = useState(null);
   const [pendingSectionHash, setPendingSectionHash] = useState(() => {
     if (typeof window === 'undefined') return null;
-    const rawHash = String(window.location.hash || '').replace(/^#/, '').trim().toLowerCase();
+    const rawHash = String(window.location.hash || '')
+      .replace(/^#/, '')
+      .trim()
+      .toLowerCase();
     return SECTION_ALIAS_MAP[rawHash] ?? null;
   });
   const mainContentRef = useRef(null);
@@ -212,7 +108,9 @@ export default function App() {
   const firstMobileNavItemRef = useRef(null);
   const mobileMenuContainerRef = useRef(null);
   const tabInstanceIdRef = useRef(
-    typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `tab-${Date.now()}-${Math.random().toString(16).slice(2)}`
+    typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
+      : `tab-${Date.now()}-${Math.random().toString(16).slice(2)}`
   );
   const latestAppliedTimestampRef = useRef(null);
   if (latestAppliedTimestampRef.current === null) {
@@ -287,7 +185,10 @@ export default function App() {
   };
 
   const getSectionHashTarget = (hashValue) => {
-    const cleaned = String(hashValue || '').replace(/^#/, '').trim().toLowerCase();
+    const cleaned = String(hashValue || '')
+      .replace(/^#/, '')
+      .trim()
+      .toLowerCase();
     return SECTION_ALIAS_MAP[cleaned] ?? null;
   };
 
@@ -306,9 +207,13 @@ export default function App() {
         return undefined;
       }
 
-      const rawHash = String(window.location.hash || '').replace(/^#/, '').trim().toLowerCase();
+      const rawHash = String(window.location.hash || '')
+        .replace(/^#/, '')
+        .trim()
+        .toLowerCase();
       const currentHashTab = rawHash ? normalizeHashToTab(rawHash) : null;
-      const shouldPreserveSectionHash = rawHash && rawHash !== activeTab && currentHashTab === activeTab && getSectionHashTarget(rawHash);
+      const shouldPreserveSectionHash =
+        rawHash && rawHash !== activeTab && currentHashTab === activeTab && getSectionHashTarget(rawHash);
 
       const nextHash = `#${activeTab}`;
       if (!shouldPreserveSectionHash && window.location.hash !== nextHash) {
@@ -375,7 +280,6 @@ export default function App() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-
 
     const handleHashChange = () => {
       const rawHash = String(window.location.hash || '').replace(/^#/, '');
@@ -527,7 +431,17 @@ export default function App() {
       score,
       completedModules,
     }),
-    [activeTab, currentVignette, selectedOption, searchTerm, activeResourceFilter, quizState, showSafeNote, score, completedModules]
+    [
+      activeTab,
+      currentVignette,
+      selectedOption,
+      searchTerm,
+      activeResourceFilter,
+      quizState,
+      showSafeNote,
+      score,
+      completedModules,
+    ]
   );
 
   useEffect(() => {
@@ -619,15 +533,21 @@ export default function App() {
         ? prev.checked.filter((entry) => entry !== itemId)
         : [...prev.checked, itemId];
 
-      const risk = ASSESSMENT_ITEMS.filter((item) => checked.includes(item.id)).reduce((sum, item) => sum + item.val, 0);
+      const risk = ASSESSMENT_ITEMS.filter((item) => checked.includes(item.id)).reduce(
+        (sum, item) => sum + item.val,
+        0
+      );
       return { risk, checked };
     });
   }, []);
 
-  const openPriorityToolboxSection = useCallback((section) => {
-    navigateToTab('toolbox', { focusTarget: 'heading' });
-    setPendingPriorityFocus(section);
-  }, [navigateToTab]);
+  const openPriorityToolboxSection = useCallback(
+    (section) => {
+      navigateToTab('toolbox', { focusTarget: 'heading' });
+      setPendingPriorityFocus(section);
+    },
+    [navigateToTab]
+  );
 
   const handleEmergencyAccess = useCallback(() => {
     openPriorityToolboxSection('acute-crisis');
@@ -874,21 +794,24 @@ Aktueller Assessment-Score: ${score.risk}
   const downloadResources = [
     {
       title: 'Gesprächsleitfaden für Fachpersonen',
-      description: 'Kurzblatt für Erstgespräch, Verlaufsgespräch oder Supervision mit Fokus auf Elternrolle, Versorgung, Netzwerk und nächsten Schritt.',
+      description:
+        'Kurzblatt für Erstgespräch, Verlaufsgespräch oder Supervision mit Fokus auf Elternrolle, Versorgung, Netzwerk und nächsten Schritt.',
       meta: ['TXT editierbar', 'Gespräch / Supervision'],
       actionLabel: 'Leitfaden herunterladen',
       onDownload: handleDownloadConversationGuide,
     },
     {
       title: 'Netzwerkkarte als Arbeitsvorlage',
-      description: 'Strukturierte Vorlage für private Kontakte, Alltagsstützen, Fachstellen, Mitwissende und Versorgungslücken.',
+      description:
+        'Strukturierte Vorlage für private Kontakte, Alltagsstützen, Fachstellen, Mitwissende und Versorgungslücken.',
       meta: ['TXT editierbar', 'Vernetzung / Mapping'],
       actionLabel: 'Netzwerkkarte herunterladen',
       onDownload: handleDownloadNetworkMap,
     },
     {
       title: 'Psychoedukations-Hilfe',
-      description: 'Kurzhilfe für Fachpersonen zum Sprechen mit Kindern über die psychische Erkrankung eines Elternteils.',
+      description:
+        'Kurzhilfe für Fachpersonen zum Sprechen mit Kindern über die psychische Erkrankung eines Elternteils.',
       meta: ['TXT editierbar', 'Gespräch mit Kindern'],
       actionLabel: 'Kurzhilfe herunterladen',
       onDownload: handleDownloadPsychoeducationGuide,
@@ -957,7 +880,10 @@ Aktueller Assessment-Score: ${score.risk}
           <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-2 md:flex-row md:items-center md:px-6">
             <div className="flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#eadfce]">
               <ShieldCheck size={16} className="shrink-0 text-[#f0c786]" />
-              <span>Lokale Speicherung im Browser • auf gemeinsam genutzten Geräten nach der Nutzung zurücksetzen • keine serverseitige Falldokumentation in dieser Ansicht</span>
+              <span>
+                Lokale Speicherung im Browser • auf gemeinsam genutzten Geräten nach der Nutzung zurücksetzen • keine
+                serverseitige Falldokumentation in dieser Ansicht
+              </span>
             </div>
             <button
               type="button"
@@ -973,9 +899,13 @@ Aktueller Assessment-Score: ${score.risk}
       <div className="no-print border-b border-[#e4cbbb] bg-[linear-gradient(180deg,#fff6ee,#f4e4d6)]">
         <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-4 py-3 md:flex-row md:items-center md:px-6">
           <div className="text-sm leading-relaxed text-[#6d342c]">
-            <span className="mr-3 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#9a4b3c]">Akute Krise</span>
-            Bei akuter Lebensgefahr: <span className="font-extrabold">144</span>. Im Kanton Zürich bei nicht lebensbedrohlichen Situationen:
-            <span className="font-extrabold"> AERZTEFON 0800 33 66 55</span>. Für Jugendliche ist <span className="font-extrabold">147 telefonisch</span> der schnellste Weg.
+            <span className="mr-3 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#9a4b3c]">
+              Akute Krise
+            </span>
+            Bei akuter Lebensgefahr: <span className="font-extrabold">144</span>. Im Kanton Zürich bei nicht
+            lebensbedrohlichen Situationen:
+            <span className="font-extrabold"> AERZTEFON 0800 33 66 55</span>. Für Jugendliche ist{' '}
+            <span className="font-extrabold">147 telefonisch</span> der schnellste Weg.
           </div>
           <button
             type="button"
@@ -1034,10 +964,7 @@ Aktueller Assessment-Score: ${score.risk}
           {activeTab === 'glossar' && <GlossarSection />}
 
           {activeTab === 'grundlagen' && (
-            <GrundlagenSection
-              sharedDownloadResources={downloadResources}
-              onNavigateToTab={navigateToTab}
-            />
+            <GrundlagenSection sharedDownloadResources={downloadResources} onNavigateToTab={navigateToTab} />
           )}
 
           {activeTab === 'toolbox' && (

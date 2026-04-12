@@ -2,8 +2,7 @@ export const GRUNDLAGEN_HERO = {
   eyebrow: 'Redaktioneller Wissensbereich',
   title: 'Häufige Fragen für',
   accent: 'ruhigere Orientierung im Alltag.',
-  lead:
-    'Der Grundlagenbereich beantwortet typische Fragen von Angehörigen und Fachpersonen in einer klaren, entlastenden Sprache. Er soll Unsicherheit reduzieren, Begriffe in Alltagssituationen übersetzen und den Blick auf nächste Schritte öffnen.',
+  lead: 'Der Grundlagenbereich beantwortet typische Fragen von Angehörigen und Fachpersonen in einer klaren, entlastenden Sprache. Er soll Unsicherheit reduzieren, Begriffe in Alltagssituationen übersetzen und den Blick auf nächste Schritte öffnen.',
   asideTitle: 'Einordnung',
   asideCopy:
     'Die Antworten ersetzen keine individuelle klinische, rechtliche oder kindesschutzbezogene Beurteilung. Sie dienen als tragfähige Erstorientierung für Gespräch, Reflexion und Weitervermittlung.',
@@ -34,8 +33,7 @@ export const GRUNDLAGEN_INTRO = {
   aside: {
     label: 'Warum das hilft',
     title: 'Fragen sind oft der erste Zugang zu Orientierung',
-    copy:
-      'Viele Angehörige suchen nicht zuerst nach Theorie, sondern nach einer Antwort auf das, was sie im Moment beschäftigt. Ein FAQ-orientierter Grundlagenbereich holt genau dort ab und führt dann weiter in Sprache, Einordnung und Handlungsoptionen.',
+    copy: 'Viele Angehörige suchen nicht zuerst nach Theorie, sondern nach einer Antwort auf das, was sie im Moment beschäftigt. Ein FAQ-orientierter Grundlagenbereich holt genau dort ab und führt dann weiter in Sprache, Einordnung und Handlungsoptionen.',
     tone: 'soft',
   },
   cards: [
@@ -70,8 +68,7 @@ export const GRUNDLAGEN_CLUSTERS = [
     aside: {
       label: 'Merksatz',
       title: 'Verstehen entlastet, ohne Probleme kleinzureden',
-      copy:
-        'Eine ruhigere Einordnung bedeutet nicht, dass Belastung unwichtig ist. Sie schafft vielmehr die Voraussetzung dafür, wieder handlungsfähig zu werden.',
+      copy: 'Eine ruhigere Einordnung bedeutet nicht, dass Belastung unwichtig ist. Sie schafft vielmehr die Voraussetzung dafür, wieder handlungsfähig zu werden.',
       tone: 'soft',
     },
     faqs: [
@@ -106,8 +103,7 @@ export const GRUNDLAGEN_CLUSTERS = [
     aside: {
       label: 'Merksatz',
       title: 'Grenzen sind kein Beziehungsabbruch',
-      copy:
-        'Eine Grenze kann Beziehung schützen, wenn sie Klarheit schafft, Überforderung vermindert und Verantwortung wieder nachvollziehbar verteilt.',
+      copy: 'Eine Grenze kann Beziehung schützen, wenn sie Klarheit schafft, Überforderung vermindert und Verantwortung wieder nachvollziehbar verteilt.',
       tone: 'soft',
     },
     faqs: [
@@ -142,8 +138,7 @@ export const GRUNDLAGEN_CLUSTERS = [
     aside: {
       label: 'Merksatz',
       title: 'Nicht alles lösen, aber den nächsten Schritt klären',
-      copy:
-        'In komplexen Situationen entsteht Orientierung oft nicht durch die perfekte Gesamtlösung, sondern durch einen realistischen nächsten Kontakt, eine benannte Fachstelle oder eine klarere gemeinsame Sprache.',
+      copy: 'In komplexen Situationen entsteht Orientierung oft nicht durch die perfekte Gesamtlösung, sondern durch einen realistischen nächsten Kontakt, eine benannte Fachstelle oder eine klarere gemeinsame Sprache.',
       tone: 'soft',
     },
     faqs: [

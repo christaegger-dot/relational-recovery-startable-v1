@@ -6,7 +6,16 @@ import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
 import SurfaceCard from '../components/ui/SurfaceCard';
 
-function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm, onSearchChange, onReset, searchStatusText, filterStatusText }) {
+function FilterToolbar({
+  filters = [],
+  activeFilter,
+  onFilterChange,
+  searchTerm,
+  onSearchChange,
+  onReset,
+  searchStatusText,
+  filterStatusText,
+}) {
   return (
     <div className="ui-network-toolbar">
       <div className="ui-stack ui-stack--tight">
@@ -14,7 +23,8 @@ function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm,
           <Eyebrow>Filter</Eyebrow>
           <div className="ui-copy">
             <p>
-              Die Filter gruppieren Krisenwege, jugendbezogene Angebote, Entlastung und offizielle Stellen, damit je nach Lage schneller priorisiert werden kann.
+              Die Filter gruppieren Krisenwege, jugendbezogene Angebote, Entlastung und offizielle Stellen, damit je
+              nach Lage schneller priorisiert werden kann.
             </p>
           </div>
         </div>
@@ -60,7 +70,13 @@ function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm,
             className="ui-input ui-network-search__input"
           />
         </div>
-        <p id="network-resource-search-status" role="status" aria-live="polite" aria-atomic="true" className="ui-visually-hidden">
+        <p
+          id="network-resource-search-status"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          className="ui-visually-hidden"
+        >
           {searchStatusText}
         </p>
         {(searchTerm.trim() || activeFilter !== 'all') && (
@@ -76,10 +92,26 @@ function FilterToolbar({ filters = [], activeFilter, onFilterChange, searchTerm,
 function ResourceDirectorySection({ directory }) {
   if (!directory) return null;
 
-  const { intro, filters, activeFilter, onFilterChange, searchTerm, onSearchChange, onReset, searchStatusText, filterStatusText, resources = [] } = directory;
+  const {
+    intro,
+    filters,
+    activeFilter,
+    onFilterChange,
+    searchTerm,
+    onSearchChange,
+    onReset,
+    searchStatusText,
+    filterStatusText,
+    resources = [],
+  } = directory;
 
   return (
-    <Section id={directory.id || 'netzwerk-fachstellen'} spacing="tight" surface={directory.surface || 'plain'} className="no-print">
+    <Section
+      id={directory.id || 'netzwerk-fachstellen'}
+      spacing="tight"
+      surface={directory.surface || 'plain'}
+      className="no-print"
+    >
       <div className="ui-stack ui-stack--loose">
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
@@ -143,7 +175,10 @@ function ResourceDirectorySection({ directory }) {
               <div>
                 <p className="ui-fact-card__label">Keine Treffer</p>
                 <h3 className="ui-card__title">Zur aktuellen Kombination wurden keine Fachstellen gefunden.</h3>
-                <p className="ui-card__copy">Prüfen Sie Schreibweise, entfernen Sie einzelne Filter oder setzen Sie Suche und Auswahl gemeinsam zurück.</p>
+                <p className="ui-card__copy">
+                  Prüfen Sie Schreibweise, entfernen Sie einzelne Filter oder setzen Sie Suche und Auswahl gemeinsam
+                  zurück.
+                </p>
               </div>
               <Button type="button" onClick={onReset} variant="secondary">
                 <XCircle size={16} /> Zurücksetzen
@@ -252,11 +287,28 @@ function MobileMapNode({ node, highlighted }) {
 function NetworkMapSection({ mapping }) {
   if (!mapping) return null;
 
-  const { intro, steps = [], questions = [], lenses = [], activeLensId, onLensChange, visibleNodes = [], activeLens, counts = [], lensSummary, nextStepText } = mapping;
+  const {
+    intro,
+    steps = [],
+    questions = [],
+    lenses = [],
+    activeLensId,
+    onLensChange,
+    visibleNodes = [],
+    activeLens,
+    counts = [],
+    lensSummary,
+    nextStepText,
+  } = mapping;
   const highlightedNode = visibleNodes[0] ?? null;
 
   return (
-    <Section id={mapping.id || 'netzwerk-karte'} spacing="tight" surface={mapping.surface || 'subtle'} className="no-print">
+    <Section
+      id={mapping.id || 'netzwerk-karte'}
+      spacing="tight"
+      surface={mapping.surface || 'subtle'}
+      className="no-print"
+    >
       <div className="ui-stack ui-stack--loose">
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
@@ -295,7 +347,8 @@ function NetworkMapSection({ mapping }) {
               <div>
                 <p className="ui-fact-card__label">Nutzbare Netzwerkkarte</p>
                 <p className="ui-card__copy">
-                  Die Mitte steht für das Kind oder die Familie. Über die Linsen lässt sich prüfen, ob privates Umfeld, Alltagsstützen, Fachstellen und Versorgungslücken ausreichend sichtbar werden.
+                  Die Mitte steht für das Kind oder die Familie. Über die Linsen lässt sich prüfen, ob privates Umfeld,
+                  Alltagsstützen, Fachstellen und Versorgungslücken ausreichend sichtbar werden.
                 </p>
               </div>
               <MapLensButtons lenses={lenses} activeLens={activeLensId} onLensChange={onLensChange} />
@@ -380,7 +433,8 @@ function NetworkMapSection({ mapping }) {
           <SurfaceCard tone="default">
             <p className="ui-fact-card__label">Arbeitsauswertung</p>
             <p className="ui-card__copy">
-              Die Karte wird am nützlichsten, wenn nach dem Visualisieren drei Fragen folgen: Wer trägt schon? Wo ist die Lage brüchig? Was muss als Nächstes konkret abgesprochen werden?
+              Die Karte wird am nützlichsten, wenn nach dem Visualisieren drei Fragen folgen: Wer trägt schon? Wo ist
+              die Lage brüchig? Was muss als Nächstes konkret abgesprochen werden?
             </p>
           </SurfaceCard>
           <SurfaceCard tone="soft">
@@ -395,7 +449,11 @@ function NetworkMapSection({ mapping }) {
 
         <div className="ui-network-node-grid">
           {visibleNodes.map((node) => (
-            <SurfaceCard key={node.label} tone={node.tone === 'gap' ? 'soft' : 'default'} className="ui-card--full-height">
+            <SurfaceCard
+              key={node.label}
+              tone={node.tone === 'gap' ? 'soft' : 'default'}
+              className="ui-card--full-height"
+            >
               <p className="ui-fact-card__label">
                 {node.zone === 'near'
                   ? 'Nahe Ebene'

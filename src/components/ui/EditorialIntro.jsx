@@ -11,11 +11,7 @@ export default function EditorialIntro({ intro }) {
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">
             {intro.eyebrow ? <Eyebrow>{intro.eyebrow}</Eyebrow> : null}
-            {intro.title ? (
-              <h2 className="ui-hero__title ui-section-title">
-                {intro.title}
-              </h2>
-            ) : null}
+            {intro.title ? <h2 className="ui-hero__title ui-section-title">{intro.title}</h2> : null}
             {intro.description ? (
               <div className="ui-copy">
                 <p>{intro.description}</p>
