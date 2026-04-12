@@ -13,13 +13,14 @@ import { RESOURCE_DATA } from './networkContent';
 import { LITERATUR, MEDIA_BOOKS, MEDIA_DIGITAL, SUPPORT_OFFERS } from './evidenceContent';
 
 export const TAB_ITEMS = [
-  { id: 'start', label: 'Start', icon: LayoutDashboard, footerNote: 'Dashboard und Orientierung', priority: 'primary' },
+  { id: 'start', label: 'Start', icon: LayoutDashboard, footerNote: 'Dashboard und Orientierung', priority: 'primary', primaryAudience: 'beide' },
   {
     id: 'lernmodule',
     label: 'Lernmodule',
     icon: GraduationCap,
     footerNote: 'Kurzformate für Fachpraxis',
     priority: 'primary',
+    primaryAudience: 'fachpersonen',
   },
   {
     id: 'vignetten',
@@ -27,6 +28,7 @@ export const TAB_ITEMS = [
     icon: HeartHandshake,
     footerNote: 'Fallreflexion und Dialog',
     priority: 'primary',
+    primaryAudience: 'fachpersonen',
   },
   {
     id: 'glossar',
@@ -34,6 +36,7 @@ export const TAB_ITEMS = [
     icon: BookOpenText,
     footerNote: 'Begriffe, Konzepte und Sprache',
     priority: 'primary',
+    primaryAudience: 'fachpersonen',
   },
   {
     id: 'grundlagen',
@@ -41,6 +44,7 @@ export const TAB_ITEMS = [
     icon: CircleHelp,
     footerNote: 'FAQ, Einordnung und Orientierung',
     priority: 'primary',
+    primaryAudience: 'angehoerige',
   },
   {
     id: 'evidenz',
@@ -48,6 +52,7 @@ export const TAB_ITEMS = [
     icon: Activity,
     footerNote: 'Grundlagen, Vertiefung, Materialien',
     priority: 'primary',
+    primaryAudience: 'fachpersonen',
   },
   {
     id: 'toolbox',
@@ -55,6 +60,7 @@ export const TAB_ITEMS = [
     icon: ClipboardCheck,
     footerNote: 'Triage, Schutz, nächste Schritte',
     priority: 'primary',
+    primaryAudience: 'fachpersonen',
   },
   {
     id: 'netzwerk',
@@ -62,6 +68,7 @@ export const TAB_ITEMS = [
     icon: MapPin,
     footerNote: 'Hilfen, Stellen, Weitervermittlung',
     priority: 'primary',
+    primaryAudience: 'beide',
   },
 ];
 
