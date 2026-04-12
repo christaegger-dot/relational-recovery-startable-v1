@@ -589,6 +589,43 @@ Die Fachstelle Angehörigenarbeit der PUK adressiert sowohl Fachpersonen als auc
 
 Dieser Vorschlag wird im Sprach-Audit (06) verbindlich gemacht oder verworfen. Er dient hier nur als Diskussionsgrundlage.
 
+#### Mikro-Ergänzung: Ich-Form in Eltern-O-Tönen
+
+Die Ich-Form gilt nicht nur in Eltern-Perspektivtexten als Adressat, sondern auch in **Eltern-O-Tönen und FAQ-Fragen, in denen Eltern als sprechendes Subjekt auftreten**. Typisches Beispiel: "Bin ich eine schlechte Mutter?" oder "Woran merke ich, dass ich zu viel trage?". Diese Stellen simulieren die Innenperspektive Betroffener und sind bewusst in der Ich-Form gehalten. Die Abgrenzung: Ich-Form markiert das *Erleben* der Betroffenen, Sie-Form markiert die *Antwort* der Fachpersonen oder des Portals. Diese Ergänzung wird in Audit 06 verbindlich.
+
 ---
 
-*Phase 2 abgeschlossen. Warte auf Entscheidung der Auftraggeberin, welche Option umgesetzt wird, bevor Phase 3 startet.*
+## Strategische Entscheidung
+
+**Gewählte Option: A -- Bewusste Mischform.**
+
+Die Entscheidung ist begründet durch drei Faktoren: (1) Der Ist-Zustand von 6 Fachpersonen-Templates, 1 Angehörigen-Template und 1 gemischtem Template wird ehrlich abgebildet statt künstlich vereinheitlicht. (2) Die Doppelmission der PUK-Angehörigenarbeit -- Fachpersonen befähigen und Angehörige orientieren -- bleibt sichtbar. (3) Alle Folge-Audits können sofort starten, und die Tür für eine spätere Vertiefung in Richtung Option B (geteilte Pfade) bleibt offen, falls sich nach dem Sprach- und Visual-Audit zeigt, dass die Mischform nicht trägt.
+
+---
+
+## Phase 3 -- Umsetzung
+
+### 3.1 primaryAudience-Metadaten
+
+Alle 8 Templates haben in `src/data/appShellContent.js` → `TAB_ITEMS` ein `primaryAudience`-Feld erhalten:
+
+| Tab-ID | primaryAudience | Begründung |
+|---|---|---|
+| `start` | `beide` | Startseite mit Wegweiser-Funktion für beide Zielgruppen |
+| `lernmodule` | `fachpersonen` | "Klinikalltag", "Supervision", "Fallarbeit" |
+| `vignetten` | `fachpersonen` | Art. 314c ZGB, KESB, SPF -- reines Fachvokabular |
+| `glossar` | `fachpersonen` | Explizit: "soll Fachpersonen helfen" |
+| `grundlagen` | `angehoerige` | Einziges Template mit Ich-Perspektive und Alltagssprache |
+| `evidenz` | `fachpersonen` | Klinischer Kontext: Anamnese, Austrittsplanung, stationärer Rahmen |
+| `toolbox` | `fachpersonen` | Fachsprachlich dichtestes Template: Assessment, Triage, Gefährdungsmeldung |
+| `netzwerk` | `beide` | Fachstellenverzeichnis (Fachpersonen) + Du-Leitfragen der Netzwerkkarte (Angehörige) |
+
+Die Zuordnung liegt zentral in `TAB_ITEMS` und ist damit für alle Folge-Audits maschinenlesbar referenzierbar.
+
+### 3.2 Visueller Marker
+
+Auf einen dezenten visuellen Marker (z.B. Eyebrow "Für Fachpersonen") wurde in dieser Phase bewusst verzichtet. Die bestehende Komponentenstruktur (`SectionHeader`, `PageHero`) unterstützt zwar Eyebrows, aber die inhaltliche Formulierung der Marker sollte erst nach dem Sprach-Audit (06) festgelegt werden, um Doppelarbeit zu vermeiden. Die Implementierung wird in Audit 08 (Visual) als Ticket eingeplant.
+
+### 3.3 Keine inhaltlichen Änderungen
+
+Keine Texte wurden umgeschrieben, keine Meta-Stellen angefasst, keine Anredeformen geändert. Die 14 inventarisierten Meta-Stellen (M1-M14) und die Anrede-Harmonisierung werden als Arbeitspakete an Audit 06 (Sprache) übergeben.
