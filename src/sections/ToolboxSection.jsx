@@ -25,7 +25,7 @@ import {
   SAFETY_PLAN_TEMPLATE_FIELDS,
 } from '../data/toolboxContent';
 import { ASSESSMENT_ITEMS } from '../data/learningContent';
-import { getRiskLabel, getRiskTone } from '../utils/appHelpers';
+import { getPageHeadingId, getRiskLabel, getRiskTone } from '../utils/appHelpers';
 import { createClosingSectionModel } from '../utils/closingModel';
 
 const SCORE_STATUS_ID = 'assessment-score-status';
@@ -168,7 +168,6 @@ const TRIAGE_PROMPTS = [
 ];
 
 export default function ToolboxSection({
-  pageHeadingId,
   score,
   onToggleAssessment,
   onResetAssessment,
@@ -181,6 +180,7 @@ export default function ToolboxSection({
   rightsSectionRef,
   onJumpToPrioritySection,
 }) {
+  const pageHeadingId = getPageHeadingId('toolbox');
   const [triageAnswers, setTriageAnswers] = useState({});
   const [activePracticeFilter, setActivePracticeFilter] = useState('all');
 
