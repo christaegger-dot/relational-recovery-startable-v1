@@ -25,7 +25,7 @@ import {
   SAFETY_PLAN_TEMPLATE_FIELDS,
 } from '../data/toolboxContent';
 import { ASSESSMENT_ITEMS } from '../data/learningContent';
-import { getPageHeadingId, getRiskLabel, getRiskTone } from '../utils/appHelpers';
+import { getRiskLabel, getRiskTone } from '../utils/appHelpers';
 import { createClosingSectionModel } from '../utils/closingModel';
 
 const SCORE_STATUS_ID = 'assessment-score-status';
@@ -52,6 +52,7 @@ function mapScoreBandTone(tone) {
 }
 
 export default function ToolboxSection({
+  pageHeadingId,
   score,
   onToggleAssessment,
   onResetAssessment,
@@ -194,10 +195,15 @@ export default function ToolboxSection({
     null;
 
   const setTriageAnswer = (id, answer) => {
-    setTriageAnswers((current) => ({
-      ...current,
-      [id]: current[id] === answer ? undefined : answer,
-    }));
+    setTriageAnswers((current) => {
+      const next = { ...current };
+      if (next[id] === answer) {
+        delete next[id];
+      } else {
+        next[id] = answer;
+      }
+      return next;
+    });
   };
 
   const filteredPracticeBlocks = PRACTICE_BLOCKS.filter(
@@ -526,9 +532,9 @@ export default function ToolboxSection({
       childProtectionSectionRef,
       addictionSectionRef,
       rightsSectionRef,
+      safetyPlanSectionRef,
       onDownloadCrisisPlan,
       onPrint,
-      safetyPlanSectionRef,
     ]
   );
 
@@ -658,7 +664,7 @@ export default function ToolboxSection({
   return (
     <ToolboxPageTemplate
       hero={hero}
-      pageHeadingId={getPageHeadingId('toolbox')}
+      pageHeadingId={pageHeadingId}
       assessment={assessment}
       scoreStatusId={SCORE_STATUS_ID}
       pathway={pathway}
