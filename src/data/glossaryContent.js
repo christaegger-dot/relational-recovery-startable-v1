@@ -1,63 +1,3 @@
-export const GLOSSARY_HERO = {
-  eyebrow: 'Redaktioneller Wissensbereich',
-  title: 'Begriffe für',
-  accent: 'ruhige fachliche Orientierung.',
-  lead: 'Das Glossar sammelt zentrale Begriffe aus relationaler Recovery, Kindesschutz, Angehörigenarbeit und Netzwerkpraxis in einer einheitlichen Sprache. Es soll Fachpersonen helfen, schneller zwischen Einordnung, Gespräch und Weitervermittlung zu wechseln.',
-  asideTitle: 'Nutzungshinweis',
-  asideCopy:
-    'Die Einträge sind als knappe Arbeitsdefinitionen für Praxis, Teamgespräch und Orientierung im Versorgungsalltag formuliert. Sie ersetzen keine institutionellen Richtlinien oder juristische Fachberatung.',
-  stats: [
-    {
-      label: 'Begriffe',
-      value: '12',
-      note: 'kompakte Arbeitsdefinitionen für Praxis und Teamreflexion',
-    },
-    {
-      label: 'Cluster',
-      value: '3',
-      note: 'Sprache, Schutz und Zusammenarbeit im Versorgungssystem',
-    },
-    {
-      label: 'Format',
-      value: 'Kurz',
-      note: 'definiert, eingeordnet und auf Anwendung bezogen',
-    },
-  ],
-};
-
-export const GLOSSARY_INTRO = {
-  eyebrow: 'Arbeitslogik',
-  title: 'Das Glossar ordnet Sprache entlang von Versorgung, Risiko und Beziehung.',
-  description:
-    'Die neue Glossar-Seite führt einen statisch-redaktionellen Wissensbereich in die Seitentyp-Architektur ein. Statt verstreuter Begriffe werden hier tragende Ausdrücke gebündelt, knapp beschrieben und direkt an typische Handlungssituationen im Arbeitsalltag angeschlossen.',
-  aside: {
-    label: 'Ziel',
-    title: 'Gemeinsame Sprache entlastet',
-    copy: 'Wenn Teams dieselben Kernbegriffe ähnlich verwenden, werden Fallbesprechungen ruhiger, Rückfragen klarer und Überleitungen zwischen Fachstellen verständlicher.',
-    tone: 'soft',
-  },
-  cards: [
-    {
-      label: 'Cluster 1',
-      title: 'Sprache im Kontakt',
-      copy: 'Begriffe für Beziehung, Gespräch und alltagsnahe Einordnung psychischer Belastung.',
-      meta: 'relevant für Erstkontakt, Verlauf und Psychoedukation',
-    },
-    {
-      label: 'Cluster 2',
-      title: 'Schutz und Risiko',
-      copy: 'Begriffe für Gefährdungseinschätzung, Belastungssignale und Handlungsgrenzen.',
-      meta: 'relevant für Triage, Schutzplanung und Schwellenentscheidungen',
-    },
-    {
-      label: 'Cluster 3',
-      title: 'Netzwerk und Koordination',
-      copy: 'Begriffe für Zusammenarbeit, Übergaben und verbindliche Weitervermittlung.',
-      meta: 'relevant für Zusammenarbeit zwischen Klinik, Gemeinde und Hilfesystem',
-    },
-  ],
-};
-
 export const GLOSSARY_GROUPS = [
   {
     id: 'glossar-sprache',
@@ -171,3 +111,65 @@ export const GLOSSARY_GROUPS = [
     ],
   },
 ];
+
+const totalTerms = GLOSSARY_GROUPS.reduce((sum, group) => sum + group.terms.length, 0);
+
+export const GLOSSARY_HERO = {
+  eyebrow: 'Redaktioneller Wissensbereich',
+  title: 'Begriffe für',
+  accent: 'ruhige fachliche Orientierung.',
+  lead: 'Das Glossar sammelt zentrale Begriffe aus relationaler Recovery, Kindesschutz, Angehörigenarbeit und Netzwerkpraxis in einer einheitlichen Sprache. Es soll Fachpersonen helfen, schneller zwischen Einordnung, Gespräch und Weitervermittlung zu wechseln.',
+  asideTitle: 'Nutzungshinweis',
+  asideCopy:
+    'Die Einträge sind als knappe Arbeitsdefinitionen für Praxis, Teamgespräch und Orientierung im Versorgungsalltag formuliert. Sie ersetzen keine institutionellen Richtlinien oder juristische Fachberatung.',
+  stats: [
+    {
+      label: 'Begriffe',
+      value: String(totalTerms),
+      note: 'kompakte Arbeitsdefinitionen für Praxis und Teamreflexion',
+    },
+    {
+      label: 'Cluster',
+      value: String(GLOSSARY_GROUPS.length),
+      note: 'Sprache, Schutz und Zusammenarbeit im Versorgungssystem',
+    },
+    {
+      label: 'Format',
+      value: 'Kurz',
+      note: 'definiert, eingeordnet und auf Anwendung bezogen',
+    },
+  ],
+};
+
+export const GLOSSARY_INTRO = {
+  eyebrow: 'Arbeitslogik',
+  title: 'Das Glossar ordnet Sprache entlang von Versorgung, Risiko und Beziehung.',
+  description:
+    'Die neue Glossar-Seite führt einen statisch-redaktionellen Wissensbereich in die Seitentyp-Architektur ein. Statt verstreuter Begriffe werden hier tragende Ausdrücke gebündelt, knapp beschrieben und direkt an typische Handlungssituationen im Arbeitsalltag angeschlossen.',
+  aside: {
+    label: 'Ziel',
+    title: 'Gemeinsame Sprache entlastet',
+    copy: 'Wenn Teams dieselben Kernbegriffe ähnlich verwenden, werden Fallbesprechungen ruhiger, Rückfragen klarer und Überleitungen zwischen Fachstellen verständlicher.',
+    tone: 'soft',
+  },
+  cards: [
+    {
+      label: 'Cluster 1',
+      title: 'Sprache im Kontakt',
+      copy: 'Begriffe für Beziehung, Gespräch und alltagsnahe Einordnung psychischer Belastung.',
+      meta: 'relevant für Erstkontakt, Verlauf und Psychoedukation',
+    },
+    {
+      label: 'Cluster 2',
+      title: 'Schutz und Risiko',
+      copy: 'Begriffe für Gefährdungseinschätzung, Belastungssignale und Handlungsgrenzen.',
+      meta: 'relevant für Triage, Schutzplanung und Schwellenentscheidungen',
+    },
+    {
+      label: 'Cluster 3',
+      title: 'Netzwerk und Koordination',
+      copy: 'Begriffe für Zusammenarbeit, Übergaben und verbindliche Weitervermittlung.',
+      meta: 'relevant für Zusammenarbeit zwischen Klinik, Gemeinde und Hilfesystem',
+    },
+  ],
+};

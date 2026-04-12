@@ -3,8 +3,6 @@
 @import 'tw-animate-css';
 @import './styles/primitives.css';
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -34,21 +32,11 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 :root {
   --primary: var(--accent-primary);
   --primary-foreground: var(--text-inverse);
-  --sidebar-primary: var(--accent-primary);
-  --sidebar-primary-foreground: var(--text-inverse);
   --chart-1: var(--accent-primary);
   --chart-2: var(--accent-warning);
   --chart-3: var(--accent-secondary);
@@ -72,47 +60,6 @@
   --border: var(--border-default);
   --input: color-mix(in srgb, var(--border-default) 84%, white 16%);
   --ring: var(--focus-ring);
-  --sidebar: color-mix(in srgb, var(--surface-app) 90%, var(--surface-page) 10%);
-  --sidebar-foreground: var(--text-primary);
-  --sidebar-accent: var(--surface-accent-soft);
-  --sidebar-accent-foreground: var(--text-primary);
-  --sidebar-border: var(--border-default);
-  --sidebar-ring: var(--focus-ring);
-}
-
-.dark {
-  --primary: #eb8a3e;
-  --primary-foreground: #201711;
-  --sidebar-primary: #eb8a3e;
-  --sidebar-primary-foreground: #201711;
-  --background: #201711;
-  --foreground: #f7efe6;
-  --card: rgba(48, 33, 24, 0.88);
-  --card-foreground: #f7efe6;
-  --popover: #302118;
-  --popover-foreground: #f7efe6;
-  --secondary: #3d2a20;
-  --secondary-foreground: #f2e5d7;
-  --muted: #3a2a23;
-  --muted-foreground: #d7c1ae;
-  --accent: #47392b;
-  --accent-foreground: #f9f1e8;
-  --destructive: #ed5752;
-  --destructive-foreground: #fff8f6;
-  --border: rgba(255, 243, 230, 0.14);
-  --input: rgba(255, 243, 230, 0.16);
-  --ring: #eb8a3e;
-  --chart-1: #eb8a3e;
-  --chart-2: #d24136;
-  --chart-3: #a1be95;
-  --chart-4: #92aac7;
-  --chart-5: #f1f3ce;
-  --sidebar: #261a14;
-  --sidebar-foreground: #f7efe6;
-  --sidebar-accent: #47392b;
-  --sidebar-accent-foreground: #f9f1e8;
-  --sidebar-border: rgba(255, 243, 230, 0.14);
-  --sidebar-ring: #eb8a3e;
 }
 
 @layer base {

@@ -227,25 +227,8 @@ function getNodeToneClass(tone) {
   }
 }
 
-function getNodePositionKey(label) {
-  switch (label) {
-    case 'Partner:in':
-      return 'partner-in';
-    case 'Grosseltern':
-      return 'grosseltern';
-    case 'Schule / Kita':
-      return 'schule-kita';
-    case 'Freund:in des Kindes':
-      return 'freund-in-des-kindes';
-    case 'PUK / kjz':
-      return 'puk-kjz';
-    case 'Kinderbetreuung im Notfall':
-      return 'kinderbetreuung-im-notfall';
-    case 'Mitwissende Vertrauensperson':
-      return 'mitwissende-vertrauensperson';
-    default:
-      return null;
-  }
+function getNodePositionKey(node) {
+  return node.positionKey ?? null;
 }
 
 function MapNode({ node, highlighted }) {
@@ -255,7 +238,7 @@ function MapNode({ node, highlighted }) {
         'ui-network-map-node',
         'ui-network-map-node--desktop',
         getNodeToneClass(node.tone),
-        getNodePositionKey(node.label) ? `ui-network-map-node--${getNodePositionKey(node.label)}` : '',
+        getNodePositionKey(node) ? `ui-network-map-node--${getNodePositionKey(node)}` : '',
         highlighted ? 'ui-network-map-node--highlighted' : '',
       ]
         .filter(Boolean)
@@ -273,7 +256,7 @@ function MobileMapNode({ node, highlighted }) {
         'ui-network-map-node',
         'ui-network-map-node--mobile',
         getNodeToneClass(node.tone),
-        getNodePositionKey(node.label) ? `ui-network-map-node--mobile-${getNodePositionKey(node.label)}` : '',
+        getNodePositionKey(node) ? `ui-network-map-node--mobile-${getNodePositionKey(node)}` : '',
         highlighted ? 'ui-network-map-node--highlighted' : '',
       ]
         .filter(Boolean)

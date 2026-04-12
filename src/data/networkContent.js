@@ -160,6 +160,7 @@ export const NETWORK_MAP_LENSES = [
 export const NETWORK_MAP_TEMPLATE_NODES = [
   {
     label: 'Partner:in',
+    positionKey: 'partner-in',
     tone: 'private',
     zone: 'near',
     detail: 'Oft wichtigste Person für Alltag, Mitwissen und frühe Krisenwahrnehmung.',
@@ -170,6 +171,7 @@ export const NETWORK_MAP_TEMPLATE_NODES = [
   },
   {
     label: 'Grosseltern',
+    positionKey: 'grosseltern',
     tone: 'private',
     zone: 'mid',
     detail: 'Kann Betreuung, Entlastung oder emotionale Stabilität mittragen.',
@@ -180,6 +182,7 @@ export const NETWORK_MAP_TEMPLATE_NODES = [
   },
   {
     label: 'Schule / Kita',
+    positionKey: 'schule-kita',
     tone: 'support',
     zone: 'mid',
     detail: 'Wichtig für Tagesstruktur, Rückmeldungen und abgestimmte Beobachtung.',
@@ -190,6 +193,7 @@ export const NETWORK_MAP_TEMPLATE_NODES = [
   },
   {
     label: 'Freund:in des Kindes',
+    positionKey: 'freund-in-des-kindes',
     tone: 'support',
     zone: 'outer',
     detail: 'Zeigt soziale Einbindung und entlastende Außenbezüge für das Kind.',
@@ -200,6 +204,7 @@ export const NETWORK_MAP_TEMPLATE_NODES = [
   },
   {
     label: 'PUK / kjz',
+    positionKey: 'puk-kjz',
     tone: 'formal',
     zone: 'outer',
     detail: 'Steht für klinische oder jugendhilfliche Mitverantwortung im Netzwerk.',
@@ -210,6 +215,7 @@ export const NETWORK_MAP_TEMPLATE_NODES = [
   },
   {
     label: 'Kinderbetreuung im Notfall',
+    positionKey: 'kinderbetreuung-im-notfall',
     tone: 'gap',
     zone: 'gap',
     detail: 'Wenn hier niemand benannt werden kann, ist die Krisenvorsorge lückenhaft.',
@@ -220,6 +226,7 @@ export const NETWORK_MAP_TEMPLATE_NODES = [
   },
   {
     label: 'Mitwissende Vertrauensperson',
+    positionKey: 'mitwissende-vertrauensperson',
     tone: 'gap',
     zone: 'gap',
     detail: 'Fehlt eine informierte Person, steigt die Belastung oft deutlich an.',

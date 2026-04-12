@@ -1,5 +1,5 @@
 // Design note: This file preserves the application's information architecture while the visual language is shifted toward a warm editorial interface with calmer surfaces, serif-led hierarchy and lower-arousal accents.
-import { lazy, Suspense, memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import './styles/app-global.css';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import Header from './components/Header';
@@ -24,7 +24,7 @@ const SECTION_ALIAS_MAP = {
   'netzwerk-fachstellen': 'netzwerk-fachstellen',
 };
 
-const SectionLoadingFallback = memo(function SectionLoadingFallback() {
+const SectionLoadingFallback = function SectionLoadingFallback() {
   return (
     <section className="rounded-[3rem] border border-slate-200 bg-white px-8 py-12 shadow-sm md:px-12 md:py-16">
       <div className="max-w-2xl">
@@ -35,7 +35,7 @@ const SectionLoadingFallback = memo(function SectionLoadingFallback() {
       </div>
     </section>
   );
-});
+};
 
 function getFocusableElements(container) {
   if (!container || typeof container.querySelectorAll !== 'function') return [];
@@ -372,7 +372,7 @@ Leitfrage: Was wird bis zum naechsten Kontakt konkret vereinbart?
     downloadTextFile('krisenplan-vorlage.txt', template);
   }, [score.risk]);
 
-  const handleDownloadConversationGuide = () => {
+  const handleDownloadConversationGuide = useCallback(() => {
     const template = `Gesprächsleitfaden für Fachpersonen
 
 Einsatz: Erstgespräch, Verlaufsgespräch, Supervision
@@ -410,9 +410,9 @@ Hinweis: Kurz halten, beobachtbar bleiben, nächste Schritte konkretisieren.
 `;
 
     downloadTextFile('gespraechsleitfaden-fachpersonen.txt', template);
-  };
+  }, [score.risk]);
 
-  const handleDownloadNetworkMap = () => {
+  const handleDownloadNetworkMap = useCallback(() => {
     const template = `Netzwerkkarte - Arbeitsvorlage
 
 Ziel: Tragende Kontakte, Fachstellen und Versorgungslücken sichtbar machen.
@@ -452,9 +452,9 @@ Ziel: Tragende Kontakte, Fachstellen und Versorgungslücken sichtbar machen.
 `;
 
     downloadTextFile('netzwerkkarte-vorlage.txt', template);
-  };
+  }, []);
 
-  const handleDownloadPsychoeducationGuide = () => {
+  const handleDownloadPsychoeducationGuide = useCallback(() => {
     const template = `Mit Kindern über die psychische Erkrankung eines Elternteils sprechen
 
 Kurzhilfe für Fachpersonen
@@ -488,9 +488,9 @@ Kurzhilfe für Fachpersonen
 `;
 
     downloadTextFile('psychoedukation-mit-kindern-sprechen.txt', template);
-  };
+  }, []);
 
-  const handleDownloadProtectionChecklist = () => {
+  const handleDownloadProtectionChecklist = useCallback(() => {
     const template = `Schutzfaktoren-Check und Versorgungsübersicht
 
 Einsatz: Fallreflexion, Verlaufsbeobachtung, Supervision
@@ -523,9 +523,9 @@ Aktueller Assessment-Score: ${score.risk}
 `;
 
     downloadTextFile('schutzfaktoren-check.txt', template);
-  };
+  }, [score.risk]);
 
-  const handleDownloadCompactCrisisSheet = () => {
+  const handleDownloadCompactCrisisSheet = useCallback(() => {
     const template = `Krisenplan kompakt
 
 Kurzblatt für Gespräch, Mitgabe oder Supervision
@@ -551,7 +551,7 @@ Aktueller Assessment-Score: ${score.risk}
 `;
 
     downloadTextFile('krisenplan-kompakt.txt', template);
-  };
+  }, [score.risk]);
 
   const handleToolboxPrint = useCallback(() => {
     if (typeof window === 'undefined') return;
@@ -560,7 +560,7 @@ Aktueller Assessment-Score: ${score.risk}
     });
   }, []);
 
-  const downloadResources = [
+  const downloadResources = useMemo(() => [
     {
       title: 'Gesprächsleitfaden für Fachpersonen',
       description:
@@ -599,7 +599,7 @@ Aktueller Assessment-Score: ${score.risk}
       actionLabel: 'Kurzvorlage herunterladen',
       onDownload: handleDownloadCompactCrisisSheet,
     },
-  ];
+  ], [handleDownloadConversationGuide, handleDownloadNetworkMap, handleDownloadPsychoeducationGuide, handleDownloadProtectionChecklist, handleDownloadCompactCrisisSheet]);
 
   return (
     <div className="min-h-screen bg-[#f6efe7] flex flex-col font-sans text-stone-900 overflow-x-hidden selection:bg-[#ead8c3] selection:text-[#5f3c2d]">
