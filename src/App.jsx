@@ -601,6 +601,8 @@ export default function App() {
 
     if (answerIdx === correctIdx) {
       setCompletedModules((prev) => (prev.includes(modId) ? prev : [...prev, modId]));
+    } else {
+      setCompletedModules((prev) => prev.filter((id) => id !== modId));
     }
   };
 
@@ -629,7 +631,7 @@ export default function App() {
 
     const resetState = getDefaultAppState();
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       publishAppState(resetState);
       skipNextPersistRef.current = true;
       applyAppState(resetState);
@@ -1029,7 +1031,6 @@ Aktueller Assessment-Score: ${score.risk}
 
           {activeTab === 'toolbox' && (
             <ToolboxSection
-              pageHeadingId={getPageHeadingId('toolbox')}
               score={score}
               onToggleAssessment={handleScoreChange}
               onResetAssessment={() => setScore(DEFAULT_SCORE)}

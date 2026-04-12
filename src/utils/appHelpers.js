@@ -50,7 +50,7 @@ export const safeLocalStorageSet = (key, value) => {
   if (typeof window === 'undefined') return false;
 
   try {
-    window.localStorage.setItem(key, value);
+    window.localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value));
     return true;
   } catch {
     return false;
@@ -161,7 +161,7 @@ export const normalizeAppStateData = (value) => {
         ? source.currentVignette
         : defaults.currentVignette,
     selectedOption: normalizeSelectedOptionData(source.selectedOption),
-    searchTerm: typeof source.searchTerm === 'string' ? source.searchTerm.trimStart() : defaults.searchTerm,
+    searchTerm: typeof source.searchTerm === 'string' ? source.searchTerm.trim() : defaults.searchTerm,
     activeResourceFilter: isValidResourceFilter(source.activeResourceFilter)
       ? source.activeResourceFilter
       : defaults.activeResourceFilter,
@@ -190,7 +190,7 @@ export const getInitialAppState = (storageKey) => {
 
   const rawHash = String(window.location.hash || '').replace(/^#/, '');
   const normalizedHash = normalizeHashToTab(rawHash);
-  const requestedTab = rawHash && normalizedHash !== 'start' ? normalizedHash : TAB_ITEMS.some((item) => item.id === rawHash) ? rawHash : null;
+  const requestedTab = rawHash && normalizedHash !== 'start' ? normalizedHash : null;
   const storedAppState = safeParse(storageKey, null, (value) => isValidStoredAppState(value));
 
   if (storedAppState?.data) {
@@ -223,6 +223,10 @@ export const getPageHeadingId = (tab) => {
       return 'page-heading-netzwerk';
     case 'evidenz':
       return 'page-heading-evidenz';
+    case 'glossar':
+      return 'page-heading-glossar';
+    case 'grundlagen':
+      return 'page-heading-grundlagen';
     default:
       return 'page-heading-start';
   }
