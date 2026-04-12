@@ -1,20 +1,114 @@
 // Design note: This file preserves the application's information architecture while the visual language is shifted toward a warm editorial interface with calmer surfaces, serif-led hierarchy and lower-arousal accents.
 import React, { lazy, Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
+const TOOLBOX_PRINT_STORAGE_KEY = 'rr-toolbox-print-payload';
+
 function getToolboxPrintMode() {
-  return false;
+  if (typeof window === 'undefined') return false;
+  return new URLSearchParams(window.location.search).get('print') === 'toolbox';
+}
+
+function readToolboxPrintPayload() {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    const raw = window.localStorage.getItem(TOOLBOX_PRINT_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed.html !== 'string' || !parsed.html.trim()) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function storeToolboxPrintPayload(payload) {
+  if (typeof window === 'undefined') return false;
+
+  try {
+    window.localStorage.setItem(
+      TOOLBOX_PRINT_STORAGE_KEY,
+      JSON.stringify({
+        title: payload.title,
+        html: payload.html,
+        updatedAt: Date.now(),
+      })
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function openIsolatedPrintView({ contentSelector, title }) {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return false;
+
+  const printNode = document.querySelector(contentSelector);
+  if (!printNode) return false;
+
+  const stored = storeToolboxPrintPayload({
+    title,
+    html: printNode.outerHTML,
+  });
+  if (!stored) return false;
+
+  const printUrl = new URL(window.location.href);
+  printUrl.searchParams.set('print', 'toolbox');
+  printUrl.searchParams.set('ts', String(Date.now()));
+
+  const printWindow = window.open(printUrl.toString(), '_blank');
+  if (!printWindow) return false;
+
+  if (typeof printWindow.focus === 'function') {
+    window.setTimeout(() => printWindow.focus(), 150);
+  }
+
+  return true;
 }
 
 function ToolboxPrintPage() {
-  return null;
+  const payload = useMemo(() => readToolboxPrintPayload(), []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+
+    const timer = window.setTimeout(() => {
+      window.focus();
+      window.print();
+    }, 400);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  if (!payload?.html) {
+    return (
+      <div className="min-h-screen bg-white px-6 py-10 text-slate-900">
+        <main className="mx-auto max-w-3xl">
+          <h1 className="text-2xl font-semibold">Druckansicht konnte nicht geladen werden</h1>
+          <p className="mt-4 text-base leading-relaxed text-slate-700">
+            Bitte dieses Fenster schliessen und die Arbeitsansicht noch einmal direkt aus der Toolbox starten.
+          </p>
+        </main>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-white text-slate-900">
+      <main className="print-shell" dangerouslySetInnerHTML={{ __html: payload.html }} />
+    </div>
+  );
 }
 
 function handleToolboxPrint() {
-  if (typeof window === 'undefined') return;
-
-  window.requestAnimationFrame(() => {
-    window.print();
+  const opened = openIsolatedPrintView({
+    contentSelector: '#toolbox-next-steps .print-only',
+    title: 'Relational Recovery – Toolbox Arbeitsansicht',
   });
+
+  if (!opened) {
+    window.print();
+  }
 }
 
 import './styles/app-global.css';
