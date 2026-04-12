@@ -97,30 +97,48 @@ export const CHILD_PROTECTION_TIPS = [
   'Vor einer Meldung können Sie sich anonym beraten lassen -- etwa bei Pro Mente Sana (0848 800 858) oder beim kjz.',
 ];
 
-// STUB L1: Stufenfolge der Kindesschutzmassnahmen (Art. 307-310 ZGB)
-// INHALT AUSSTEHEND – juristische Validierung erforderlich, siehe qa/audit-03-juristische-validierung.md
-// Vorgesehene Platzierung: Toolbox-Cluster "Kindeswohl", als eigene Karte nach CHILD_PROTECTION_THRESHOLDS
-// Geschätzter Umfang: ~150-200 Wörter
-// Outline:
-//   1. Ermahnung und Weisung (Art. 307 Abs. 3) – Sorgerecht bleibt
-//   2. Beistandschaft (Art. 308) – häufigste Massnahme, Sorgerecht bleibt
-//   3. Aufhebung Aufenthaltsbestimmungsrecht (Art. 310) – Fremdplatzierung, Sorgerecht bleibt
-//   4. Sorgerechtsentzug (Art. 311/312) – schwerste Massnahme, in der Praxis selten
-export const CHILD_PROTECTION_MEASURES_STUB = {
-  _status: 'STUB_PENDING_LEGAL_REVIEW',
-  _see: 'qa/audit-03-juristische-validierung.md',
-  title: 'Was nach einer Meldung passieren kann',
-  steps: [
-    { article: 'Art. 307 Abs. 3', label: 'Ermahnung und Weisung', description: '' },
-    { article: 'Art. 308', label: 'Beistandschaft', description: '' },
-    { article: 'Art. 310', label: 'Aufhebung Aufenthaltsbestimmungsrecht', description: '' },
-    { article: 'Art. 311/312', label: 'Sorgerechtsentzug', description: '' },
-  ],
-};
+// L1: Verhältnismässige Eskalationslogik (Art. 307-310 ZGB)
+// Quelle: Juristische Faktenbasis Abschnitt 1, KOKES 2024, Fedlex
+// Keine starre Reihenfolge, sondern verhältnismässige Abstufung. In akuten
+// Situationen kann unmittelbar eine stärkere Massnahme nötig sein.
+export const CHILD_PROTECTION_MEASURES = [
+  {
+    article: 'Art. 307 Abs. 3 ZGB',
+    label: 'Ermahnung und Weisung',
+    description:
+      'Die KESB kann Eltern ermahnen oder ihnen Weisungen erteilen -- zum Beispiel eine Erziehungsberatung wahrzunehmen oder bestimmte Absprachen einzuhalten. Das Sorgerecht bleibt vollständig bei den Eltern.',
+    tone: 'mildest',
+  },
+  {
+    article: 'Art. 308 ZGB',
+    label: 'Beistandschaft',
+    description:
+      'Die häufigste Kindesschutzmassnahme. Eine Fachperson unterstützt die Familie in bestimmten Bereichen -- etwa bei Schule, Gesundheit oder Organisation von Hilfen. Das Sorgerecht bleibt bei den Eltern. Im Kanton Zürich sind das spezialisierte Fachpersonen der kjz.',
+    tone: 'frequent',
+    stat: 'Im Kanton Zürich betreffen rund 86% aller Kindesschutzmassnahmen eine Beistandschaft (KOKES 2024).',
+  },
+  {
+    article: 'Art. 310 ZGB',
+    label: 'Aufhebung des Aufenthaltsbestimmungsrechts',
+    description:
+      'Das Kind wird ausserhalb der Familie untergebracht. Die Eltern behalten das Sorgerecht, können aber nicht mehr bestimmen, wo das Kind lebt. Diese Massnahme ist nur zulässig, wenn der Gefährdung nicht anders begegnet werden kann (ultima ratio).',
+    tone: 'severe',
+  },
+  {
+    article: 'Art. 311/312 ZGB',
+    label: 'Entzug der elterlichen Sorge',
+    description:
+      'Die schwerste Massnahme, nur bei Aussichtslosigkeit. In der Praxis selten. Im Kanton Zürich betreffen weniger als 9% der Kindesschutzmassnahmen eine Aufhebung des Aufenthaltsbestimmungsrechts oder weitergehende Eingriffe.',
+    tone: 'ultima-ratio',
+  },
+];
 
-// STUB L5: Anonyme Beratung vor einer Meldung
-// Direkt umsetzbar (keine juristische Validierung nötig)
-// Wird in Phase 3 als Ergänzung zu CHILD_PROTECTION_TIPS eingefügt
+export const CHILD_PROTECTION_MEASURES_CONTEXT = {
+  title: 'Was nach einer Meldung passieren kann',
+  lead: 'Nicht jede Meldung führt zu einer Massnahme. Im Kanton Zürich enden rund zwei Drittel der Meldungen mit einer Abklärung, Beratung oder ohne behördliche Anordnung. Wenn die KESB tätig wird, gilt das Verhältnismässigkeitsprinzip: so viel wie nötig, so wenig wie möglich.',
+  note: 'Diese Übersicht zeigt die gesetzliche Abstufung, keine starre Reihenfolge. In akuten Situationen kann unmittelbar eine stärkere Massnahme nötig sein.',
+  source: 'KOKES Jahresstatistik 2024, Kanton Zürich; ZGB Art. 307-312; BV Art. 5 Abs. 2',
+};
 
 export const ADDICTION_PANELS = [
   {
