@@ -2,28 +2,27 @@ import { memo } from 'react';
 import { AlertTriangle, Check, Menu, Trash2, X } from 'lucide-react';
 import { TAB_ITEMS } from '../data/appShellContent';
 import Button from './ui/Button';
+import { useAppState } from '../context/useAppState';
 
 const Header = memo(function Header({
-  activeTab,
-  setActiveTab,
-  onReset,
-  isResetting,
   mobileMenuOpen,
-  setMobileMenuOpen,
+  openMobileMenu,
+  closeMobileMenu,
   mobileMenuButtonRef,
   firstMobileNavItemRef,
   mobileMenuContainerRef,
   onEmergencyAccess,
+  onReset,
 }) {
-  const closeMobileMenu = () => setMobileMenuOpen(false);
+  const { activeTab, navigate, isResetting } = useAppState();
 
   const handleNavigate = (tabId) => {
-    setActiveTab(tabId, { focusTarget: 'heading' });
+    navigate(tabId, { focusTarget: 'heading' });
     closeMobileMenu();
   };
 
   const handleHomeClick = () => {
-    setActiveTab('start', { focusTarget: 'heading' });
+    navigate('start', { focusTarget: 'heading' });
     closeMobileMenu();
   };
 
@@ -107,7 +106,7 @@ const Header = memo(function Header({
             ref={mobileMenuButtonRef}
             type="button"
             className="ui-mobile-toggle haptic-btn"
-            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            onClick={() => (mobileMenuOpen ? closeMobileMenu() : openMobileMenu())}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav"
             aria-haspopup="dialog"

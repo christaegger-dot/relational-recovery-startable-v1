@@ -11,6 +11,7 @@ import {
 } from '../data/networkContent';
 import NetworkPageTemplate from '../templates/NetworkPageTemplate';
 import { getPageHeadingId } from '../utils/appHelpers';
+import { useAppState } from '../context/useAppState';
 
 const LENS_SUMMARY = {
   gap: 'Die Karte macht sichtbar, wo Mitwissende, Betreuung oder formelle Absicherung noch fehlen.',
@@ -36,7 +37,8 @@ const NODE_COUNTS = NETWORK_MAP_TEMPLATE_NODES.reduce(
   { private: 0, support: 0, formal: 0, gap: 0 }
 );
 
-export default function NetworkSection({ searchTerm, setSearchTerm, activeResourceFilter, setActiveResourceFilter }) {
+export default function NetworkSection() {
+  const { searchTerm, setSearchTerm, activeResourceFilter, setActiveResourceFilter } = useAppState();
   const [networkLens, setNetworkLens] = useState('all');
 
   const filteredResources = useMemo(() => {

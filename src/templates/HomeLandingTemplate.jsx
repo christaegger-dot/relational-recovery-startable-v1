@@ -2,8 +2,11 @@ import { ChevronRight, ExternalLink } from 'lucide-react';
 import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
 import EditorialPageTemplate from './EditorialPageTemplate';
 import { E_MODULE_COUNT, HOME_REFERENCE_COUNT, NETWORK_RESOURCE_COUNT, VIGNETTE_COUNT } from '../data/appShellContent';
+import { useAppState } from '../context/useAppState';
 
-export default function HomeLandingTemplate({ setActiveTab, progressPercent, completedModules, pageHeadingId }) {
+export default function HomeLandingTemplate({ pageHeadingId }) {
+  const { navigate, completedModules } = useAppState();
+  const progressPercent = E_MODULE_COUNT ? Math.round((completedModules.length / E_MODULE_COUNT) * 100) : 0;
   const hero = {
     eyebrow: 'Systemische Orientierung',
     title: 'Begleitung ist',
@@ -17,13 +20,13 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
     actions: [
       {
         label: 'Falllogik trainieren',
-        onClick: () => setActiveTab('lernmodule', { focusTarget: 'heading' }),
+        onClick: () => navigate('lernmodule', { focusTarget: 'heading' }),
         variant: 'primary',
         icon: ChevronRight,
       },
       {
         label: 'Prioritäten klären',
-        onClick: () => setActiveTab('toolbox', { focusTarget: 'heading' }),
+        onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
         variant: 'secondary',
       },
       {
@@ -73,12 +76,12 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
       actions: [
         {
           label: 'Zum Evidenzteil',
-          onClick: () => setActiveTab('evidenz', { focusTarget: 'heading' }),
+          onClick: () => navigate('evidenz', { focusTarget: 'heading' }),
           variant: 'secondary',
         },
         {
           label: 'Zur Toolbox',
-          onClick: () => setActiveTab('toolbox', { focusTarget: 'heading' }),
+          onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
           variant: 'secondary',
         },
       ],
@@ -87,28 +90,28 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           label: 'Verstehen',
           title: 'Familiendynamik einordnen',
           copy: 'Elternrolle, Belastung, kindliche Perspektive und Schutzfaktoren gemeinsam betrachten.',
-          onClick: () => setActiveTab('evidenz', { focusTarget: 'heading' }),
+          onClick: () => navigate('evidenz', { focusTarget: 'heading' }),
           actionLabel: 'Zum Wissensbereich',
         },
         {
           label: 'Einschätzen',
           title: 'Risiken und Ressourcen gewichten',
           copy: 'Krise, Entlastung, Parentifizierung, Routinen und verfügbare Bezugspersonen zusammenführen.',
-          onClick: () => setActiveTab('toolbox', { focusTarget: 'heading' }),
+          onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
           actionLabel: 'Zur Priorisierung',
         },
         {
           label: 'Handeln',
           title: 'Nächste Schritte konkret machen',
           copy: 'Psychoedukation, Sicherheitsplanung und Gesprächsführung in den Alltag übersetzen.',
-          onClick: () => setActiveTab('toolbox', { focusTarget: 'heading' }),
+          onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
           actionLabel: 'Zu den Arbeitsinstrumenten',
         },
         {
           label: 'Vernetzen',
           title: 'Hilfen erreichbar machen',
           copy: 'Offizielle Stellen, Beratungsangebote und regionale Hilfen passend zur Lage aktivieren.',
-          onClick: () => setActiveTab('netzwerk', { focusTarget: 'heading' }),
+          onClick: () => navigate('netzwerk', { focusTarget: 'heading' }),
           actionLabel: 'Zum Netzwerk',
         },
       ],
@@ -131,7 +134,7 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           title: 'Mit Lernmodulen üben',
           copy: `${E_MODULE_COUNT} kompakte Lerneinheiten helfen, Sprache, Falllogik und Gesprächsorientierung schrittweise aufzubauen.`,
           tone: 'soft',
-          onClick: () => setActiveTab('lernmodule', { focusTarget: 'heading' }),
+          onClick: () => navigate('lernmodule', { focusTarget: 'heading' }),
           actionLabel: 'Zum E-Learning',
         },
         {
@@ -139,21 +142,21 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           title: 'Familiendynamik vertiefen',
           copy: `Der Evidenzbereich bündelt aktuell ${HOME_REFERENCE_COUNT} kuratierte Einstiegspunkte, Materialien und Referenzen in einer ruhigeren Leselogik.`,
           tone: 'accent',
-          onClick: () => setActiveTab('evidenz', { focusTarget: 'heading' }),
+          onClick: () => navigate('evidenz', { focusTarget: 'heading' }),
           actionLabel: 'Zum Evidenzteil',
         },
         {
           label: 'Versorgung',
           title: 'Regionale Hilfen aufrufen',
           copy: `${NETWORK_RESOURCE_COUNT} Netzwerkstellen unterstützen bei Triage, Entlastung und der Weitervermittlung an passende Angebote.`,
-          onClick: () => setActiveTab('netzwerk', { focusTarget: 'heading' }),
+          onClick: () => navigate('netzwerk', { focusTarget: 'heading' }),
           actionLabel: 'Zum Netzwerk',
         },
         {
           label: 'Fallarbeit',
           title: 'Dialoge und Entscheidungssituationen reflektieren',
           copy: `${VIGNETTE_COUNT} Trainingsfälle machen Belastungsdynamiken, Sprache und nächste Schritte konkreter als rein abstrakte Wissensvermittlung.`,
-          onClick: () => setActiveTab('vignetten', { focusTarget: 'heading' }),
+          onClick: () => navigate('vignetten', { focusTarget: 'heading' }),
           actionLabel: 'Zu den Vignetten',
         },
       ],
@@ -174,21 +177,21 @@ export default function HomeLandingTemplate({ setActiveTab, progressPercent, com
           label: 'Wenn Sie zuerst verstehen möchten',
           title: 'Im Evidenzbereich beginnen',
           copy: 'Geeignet, wenn Familiendynamik, kindliche Perspektive, Psychoedukation oder Schutzfaktoren zunächst fachlich eingeordnet werden sollen.',
-          onClick: () => setActiveTab('evidenz', { focusTarget: 'heading' }),
+          onClick: () => navigate('evidenz', { focusTarget: 'heading' }),
           actionLabel: 'Wissensseite öffnen',
         },
         {
           label: 'Wenn Sie rasch priorisieren müssen',
           title: 'Mit der Toolbox starten',
           copy: 'Geeignet, wenn akute Belastung, Sicherheitsfragen, Kindeswohl oder nächste Schritte im Vordergrund stehen.',
-          onClick: () => setActiveTab('toolbox', { focusTarget: 'heading' }),
+          onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
           actionLabel: 'Toolbox öffnen',
         },
         {
           label: 'Wenn Sie üben oder lehren möchten',
           title: 'Lernmodule und Vignetten kombinieren',
           copy: 'Geeignet für Selbststudium, Weiterbildung oder Teams, die Sprache und Falllogik anhand konkreter Situationen vertiefen möchten.',
-          onClick: () => setActiveTab('lernmodule', { focusTarget: 'heading' }),
+          onClick: () => navigate('lernmodule', { focusTarget: 'heading' }),
           actionLabel: 'Zum Training',
         },
       ],

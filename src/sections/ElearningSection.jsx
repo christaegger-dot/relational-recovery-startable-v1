@@ -3,8 +3,10 @@ import heroIllustration from '../assets/relational-recovery-hero-v3-web.png';
 import { E_MODULES } from '../data/learningContent';
 import LearningPageTemplate from '../templates/LearningPageTemplate';
 import { getPageHeadingId } from '../utils/appHelpers';
+import { useAppState } from '../context/useAppState';
 
-export default function ElearningSection({ quizState, onAnswer, completedModules }) {
+export default function ElearningSection() {
+  const { quizState, completedModules, handleQuizAnswer } = useAppState();
   const completedCount = completedModules.length;
   const totalCount = E_MODULES.length;
   const progressPercent = totalCount ? Math.round((completedCount / totalCount) * 100) : 0;
@@ -85,9 +87,9 @@ export default function ElearningSection({ quizState, onAnswer, completedModules
         correctQuizIdx: mod.correctQuizIdx,
         result: quizState[mod.id],
         completed: completedModules.includes(mod.id),
-        onAnswer,
+        onAnswer: handleQuizAnswer,
       })),
-    [quizState, completedModules, onAnswer]
+    [quizState, completedModules, handleQuizAnswer]
   );
 
   const modulesSection = {

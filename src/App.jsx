@@ -1,29 +1,13 @@
 // Design note: This file preserves the application's information architecture while the visual language is shifted toward a warm editorial interface with calmer surfaces, serif-led hierarchy and lower-arousal accents.
-import { lazy, Suspense, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import './styles/app-global.css';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomeLandingTemplate from './templates/HomeLandingTemplate';
-import {
-  APP_BROADCAST_CHANNEL,
-  APP_STATE_VERSION,
-  DEFAULT_SCORE,
-  E_MODULE_COUNT,
-  STORAGE_KEYS,
-} from './data/appShellContent';
-import { ASSESSMENT_ITEMS } from './data/learningContent';
 import { SAFETY_PLAN_TEMPLATE_FIELDS } from './data/toolboxContent';
-import {
-  downloadTextFile,
-  getInitialAppState,
-  getDefaultAppState,
-  getPageHeadingId,
-  isValidStoredAppState,
-  normalizeAppStateData,
-  normalizeHashToTab,
-  safeLocalStorageSet,
-} from './utils/appHelpers';
+import { downloadTextFile, getPageHeadingId, normalizeHashToTab } from './utils/appHelpers';
+import { useAppState } from './context/useAppState';
 
 const ElearningSection = lazy(() => import('./sections/ElearningSection'));
 const VignettenSection = lazy(() => import('./sections/VignettenSection'));
@@ -69,23 +53,39 @@ function getFocusableElements(container) {
 }
 
 export default function App() {
-  const initialAppStateRef = useRef(null);
+  const {
+    activeTab,
+    setActiveTab,
+    navigate,
+    showSafeNote,
+    setShowSafeNote,
+    score,
+    navigationFocusTargetRef,
+    resetAppState,
+  } = useAppState();
+
   const focusFrameRef = useRef(null);
+  const mainContentRef = useRef(null);
+  const skipLinkActivatedRef = useRef(false);
+  const hasProcessedInitialFocusRef = useRef(false);
 
-  if (!initialAppStateRef.current) {
-    initialAppStateRef.current = getInitialAppState(STORAGE_KEYS.appState);
-  }
+  // Toolbox section refs
+  const acuteCrisisSectionRef = useRef(null);
+  const safetyPlanSectionRef = useRef(null);
+  const childProtectionSectionRef = useRef(null);
+  const addictionSectionRef = useRef(null);
+  const rightsSectionRef = useRef(null);
 
-  const initialAppState = initialAppStateRef.current;
-  const [activeTab, setActiveTab] = useState(initialAppState.activeTab);
-  const [currentVignette, setCurrentVignette] = useState(initialAppState.currentVignette);
-  const [selectedOption, setSelectedOption] = useState(initialAppState.selectedOption);
-  const [searchTerm, setSearchTerm] = useState(initialAppState.searchTerm);
-  const [activeResourceFilter, setActiveResourceFilter] = useState(initialAppState.activeResourceFilter);
-  const [quizState, setQuizState] = useState(initialAppState.quizState);
-  const [showSafeNote, setShowSafeNote] = useState(initialAppState.showSafeNote);
-  const [isResetting, setIsResetting] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // Mobile menu: keyed by activeTab so it auto-closes on navigation without setState in effect
+  const [mobileMenuOpenForTab, setMobileMenuOpenForTab] = useState(null);
+  const mobileMenuOpen = mobileMenuOpenForTab === activeTab;
+  const openMobileMenu = useCallback(() => setMobileMenuOpenForTab(activeTab), [activeTab]);
+  const closeMobileMenu = useCallback(() => setMobileMenuOpenForTab(null), []);
+  const mobileMenuButtonRef = useRef(null);
+  const firstMobileNavItemRef = useRef(null);
+  const mobileMenuContainerRef = useRef(null);
+
+  // Pending focus/scroll targets driven by navigation
   const [pendingPriorityFocus, setPendingPriorityFocus] = useState(null);
   const [pendingSectionHash, setPendingSectionHash] = useState(() => {
     if (typeof window === 'undefined') return null;
@@ -95,91 +95,11 @@ export default function App() {
       .toLowerCase();
     return SECTION_ALIAS_MAP[rawHash] ?? null;
   });
-  const mainContentRef = useRef(null);
-  const navigationFocusTargetRef = useRef(initialAppState.activeTab === 'start' ? 'none' : 'heading');
-  const skipLinkActivatedRef = useRef(false);
-  const hasProcessedInitialFocusRef = useRef(false);
-  const acuteCrisisSectionRef = useRef(null);
-  const safetyPlanSectionRef = useRef(null);
-  const childProtectionSectionRef = useRef(null);
-  const addictionSectionRef = useRef(null);
-  const rightsSectionRef = useRef(null);
-  const mobileMenuButtonRef = useRef(null);
-  const firstMobileNavItemRef = useRef(null);
-  const mobileMenuContainerRef = useRef(null);
-  const tabInstanceIdRef = useRef(
-    typeof crypto !== 'undefined' && crypto.randomUUID
-      ? crypto.randomUUID()
-      : `tab-${Date.now()}-${Math.random().toString(16).slice(2)}`
-  );
-  const latestAppliedTimestampRef = useRef(null);
-  if (latestAppliedTimestampRef.current === null) {
-    let ts = 0;
-    if (typeof window !== 'undefined') {
-      try {
-        const raw = window.localStorage.getItem(STORAGE_KEYS.appState);
-        const parsed = raw ? JSON.parse(raw) : null;
-        if (typeof parsed?.updatedAt === 'number') ts = parsed.updatedAt;
-      } catch {
-        // ignore storage read errors
-      }
-    }
-    latestAppliedTimestampRef.current = ts;
-  }
-  const skipNextPersistRef = useRef(false);
-  const broadcastChannelRef = useRef(null);
-
-  const [score, setScore] = useState(initialAppState.score);
-  const [completedModules, setCompletedModules] = useState(initialAppState.completedModules);
-
-  const applyAppState = (nextState, options = {}) => {
-    const normalized = normalizeAppStateData(nextState);
-    const { preserveSearchTerm = false, closeMobileMenu = true } = options;
-
-    navigationFocusTargetRef.current = 'none';
-    setActiveTab(normalized.activeTab);
-    setCurrentVignette(normalized.currentVignette);
-    setSelectedOption(normalized.selectedOption);
-    if (!preserveSearchTerm) {
-      setSearchTerm(normalized.searchTerm);
-    }
-    setActiveResourceFilter(normalized.activeResourceFilter);
-    setQuizState(normalized.quizState);
-    setShowSafeNote(normalized.showSafeNote);
-    setScore(normalized.score);
-    setCompletedModules(normalized.completedModules);
-    if (closeMobileMenu) {
-      setMobileMenuOpen(false);
-    }
-  };
-
-  const applyAppStateRef = useRef(applyAppState);
-  applyAppStateRef.current = applyAppState;
-
-  const publishAppState = (nextState) => {
-    if (typeof window === 'undefined') return;
-
-    const payload = {
-      version: APP_STATE_VERSION,
-      updatedAt: Date.now(),
-      sourceId: tabInstanceIdRef.current,
-      data: normalizeAppStateData(nextState),
-    };
-
-    latestAppliedTimestampRef.current = payload.updatedAt;
-    safeLocalStorageSet(STORAGE_KEYS.appState, JSON.stringify(payload));
-
-    if (broadcastChannelRef.current) {
-      broadcastChannelRef.current.postMessage(payload);
-    }
-  };
 
   const getExplicitTabHash = () => {
     if (typeof window === 'undefined') return null;
-
     const rawHash = String(window.location.hash || '').replace(/^#/, '');
     if (!rawHash || rawHash === 'main-content') return null;
-
     const normalizedHash = normalizeHashToTab(rawHash);
     return normalizedHash === 'start' && rawHash !== 'start' ? null : normalizedHash;
   };
@@ -191,12 +111,6 @@ export default function App() {
       .toLowerCase();
     return SECTION_ALIAS_MAP[cleaned] ?? null;
   };
-
-  const navigateToTab = useCallback((nextTab, options = {}) => {
-    const { focusTarget = 'heading' } = options;
-    navigationFocusTargetRef.current = focusTarget;
-    setActiveTab((prev) => (prev === nextTab ? prev : nextTab));
-  }, []);
 
   useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
@@ -220,8 +134,6 @@ export default function App() {
         window.location.hash = nextHash;
       }
     }
-
-    setMobileMenuOpen(false);
 
     const focusTarget = navigationFocusTargetRef.current;
     if (!hasProcessedInitialFocusRef.current) {
@@ -276,6 +188,8 @@ export default function App() {
         focusFrameRef.current = null;
       }
     };
+    // navigationFocusTargetRef and setActiveTab are stable (ref object and state setter)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   useEffect(() => {
@@ -306,6 +220,8 @@ export default function App() {
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
+    // navigationFocusTargetRef and setActiveTab are stable (ref object and state setter)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -378,7 +294,7 @@ export default function App() {
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
-        setMobileMenuOpen(false);
+        closeMobileMenu();
         window.requestAnimationFrame(() => {
           mobileMenuButtonRef.current?.focus();
         });
@@ -417,165 +333,19 @@ export default function App() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [mobileMenuOpen]);
-
-  const persistedAppState = useMemo(
-    () => ({
-      activeTab,
-      currentVignette,
-      selectedOption,
-      searchTerm,
-      activeResourceFilter,
-      quizState,
-      showSafeNote,
-      score,
-      completedModules,
-    }),
-    [
-      activeTab,
-      currentVignette,
-      selectedOption,
-      searchTerm,
-      activeResourceFilter,
-      quizState,
-      showSafeNote,
-      score,
-      completedModules,
-    ]
-  );
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    if (!broadcastChannelRef.current && 'BroadcastChannel' in window) {
-      broadcastChannelRef.current = new BroadcastChannel(APP_BROADCAST_CHANNEL);
-    }
-
-    const applyIncomingPayload = (payload) => {
-      if (!isValidStoredAppState(payload)) return;
-      if (payload.sourceId === tabInstanceIdRef.current) return;
-      if (payload.updatedAt <= latestAppliedTimestampRef.current) return;
-
-      const explicitTabHash = getExplicitTabHash();
-
-      latestAppliedTimestampRef.current = payload.updatedAt;
-      skipNextPersistRef.current = true;
-      applyAppStateRef.current(
-        explicitTabHash
-          ? {
-              ...payload.data,
-              activeTab: explicitTabHash,
-            }
-          : payload.data,
-        { closeMobileMenu: false }
-      );
-    };
-
-    const handleStorage = (event) => {
-      if (event.storageArea !== window.localStorage) return;
-      if (event.key !== STORAGE_KEYS.appState || !event.newValue) return;
-
-      try {
-        applyIncomingPayload(JSON.parse(event.newValue));
-      } catch {
-        // ignore invalid sync payloads
-      }
-    };
-
-    const handleBroadcast = (event) => {
-      applyIncomingPayload(event.data);
-    };
-
-    window.addEventListener('storage', handleStorage);
-    if (broadcastChannelRef.current) {
-      broadcastChannelRef.current.addEventListener('message', handleBroadcast);
-    }
-
-    return () => {
-      window.removeEventListener('storage', handleStorage);
-      if (broadcastChannelRef.current) {
-        broadcastChannelRef.current.removeEventListener('message', handleBroadcast);
-        broadcastChannelRef.current.close();
-        broadcastChannelRef.current = null;
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    if (skipNextPersistRef.current) {
-      skipNextPersistRef.current = false;
-      return;
-    }
-
-    publishAppState(persistedAppState);
-  }, [persistedAppState]);
-
-  const progressPercent = E_MODULE_COUNT ? Math.round((completedModules.length / E_MODULE_COUNT) * 100) : 0;
-
-  const handleQuizAnswer = useCallback((modId, answerIdx, correctIdx) => {
-    setQuizState((prev) => ({
-      ...prev,
-      [modId]: { answerIdx, isCorrect: answerIdx === correctIdx },
-    }));
-
-    if (answerIdx === correctIdx) {
-      setCompletedModules((prev) => (prev.includes(modId) ? prev : [...prev, modId]));
-    } else {
-      setCompletedModules((prev) => prev.filter((id) => id !== modId));
-    }
-  }, []);
-
-  const handleScoreChange = useCallback((itemId) => {
-    setScore((prev) => {
-      const checked = prev.checked.includes(itemId)
-        ? prev.checked.filter((entry) => entry !== itemId)
-        : [...prev.checked, itemId];
-
-      const risk = ASSESSMENT_ITEMS.filter((item) => checked.includes(item.id)).reduce(
-        (sum, item) => sum + item.val,
-        0
-      );
-      return { risk, checked };
-    });
-  }, []);
+  }, [mobileMenuOpen, closeMobileMenu]);
 
   const openPriorityToolboxSection = useCallback(
     (section) => {
-      navigateToTab('toolbox', { focusTarget: 'heading' });
+      navigate('toolbox', { focusTarget: 'heading' });
       setPendingPriorityFocus(section);
     },
-    [navigateToTab]
+    [navigate]
   );
 
   const handleEmergencyAccess = useCallback(() => {
     openPriorityToolboxSection('acute-crisis');
   }, [openPriorityToolboxSection]);
-
-  const clearSession = useCallback(() => {
-    setIsResetting(true);
-
-    const resetState = getDefaultAppState();
-
-    window.setTimeout(() => {
-      try {
-        publishAppState(resetState);
-      } catch {
-        // continue with local reset even if persistence fails
-      }
-      skipNextPersistRef.current = true;
-      applyAppState(resetState);
-      setIsResetting(false);
-    }, 250);
-  }, []);
-
-  const handleSelectVignetteOption = useCallback((vignetteId, optionId) => {
-    setSelectedOption((prev) => ({
-      ...prev,
-      [vignetteId]: optionId,
-    }));
-  }, []);
 
   const handleDownloadCrisisPlan = useCallback(() => {
     const sections = SAFETY_PLAN_TEMPLATE_FIELDS.map(
@@ -596,7 +366,6 @@ Hinweis: Diese Vorlage speichert nichts automatisch und ersetzt keine fachliche 
 ${sections}
 Naechster gemeinsamer Schritt
 Leitfrage: Was wird bis zum naechsten Kontakt konkret vereinbart?
--
 -
 -
 `;
@@ -919,16 +688,14 @@ Aktueller Assessment-Score: ${score.risk}
       </div>
 
       <Header
-        activeTab={activeTab}
-        setActiveTab={navigateToTab}
-        onReset={clearSession}
-        isResetting={isResetting}
         mobileMenuOpen={mobileMenuOpen}
-        setMobileMenuOpen={setMobileMenuOpen}
+        openMobileMenu={openMobileMenu}
+        closeMobileMenu={closeMobileMenu}
         mobileMenuButtonRef={mobileMenuButtonRef}
         firstMobileNavItemRef={firstMobileNavItemRef}
         mobileMenuContainerRef={mobileMenuContainerRef}
         onEmergencyAccess={handleEmergencyAccess}
+        onReset={resetAppState}
       />
 
       <main
@@ -940,38 +707,21 @@ Aktueller Assessment-Score: ${score.risk}
       >
         <Suspense fallback={<SectionLoadingFallback />}>
           {activeTab === 'start' && (
-            <HomeLandingTemplate
-              setActiveTab={navigateToTab}
-              progressPercent={progressPercent}
-              completedModules={completedModules}
-              pageHeadingId={getPageHeadingId('start')}
-            />
+            <HomeLandingTemplate pageHeadingId={getPageHeadingId('start')} />
           )}
 
-          {activeTab === 'lernmodule' && (
-            <ElearningSection quizState={quizState} onAnswer={handleQuizAnswer} completedModules={completedModules} />
-          )}
+          {activeTab === 'lernmodule' && <ElearningSection />}
 
-          {activeTab === 'vignetten' && (
-            <VignettenSection
-              currentIndex={currentVignette}
-              setCurrentIndex={setCurrentVignette}
-              selectedOption={selectedOption}
-              onSelectOption={handleSelectVignetteOption}
-            />
-          )}
+          {activeTab === 'vignetten' && <VignettenSection />}
 
           {activeTab === 'glossar' && <GlossarSection />}
 
           {activeTab === 'grundlagen' && (
-            <GrundlagenSection sharedDownloadResources={downloadResources} onNavigateToTab={navigateToTab} />
+            <GrundlagenSection sharedDownloadResources={downloadResources} />
           )}
 
           {activeTab === 'toolbox' && (
             <ToolboxSection
-              score={score}
-              onToggleAssessment={handleScoreChange}
-              onResetAssessment={() => setScore(DEFAULT_SCORE)}
               onPrint={handleToolboxPrint}
               onDownloadCrisisPlan={handleDownloadCrisisPlan}
               acuteCrisisSectionRef={acuteCrisisSectionRef}
@@ -983,20 +733,13 @@ Aktueller Assessment-Score: ${score.risk}
             />
           )}
 
-          {activeTab === 'netzwerk' && (
-            <NetworkSection
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              activeResourceFilter={activeResourceFilter}
-              setActiveResourceFilter={setActiveResourceFilter}
-            />
-          )}
+          {activeTab === 'netzwerk' && <NetworkSection />}
 
           {activeTab === 'evidenz' && <EvidenceSection downloadResources={downloadResources} />}
         </Suspense>
       </main>
 
-      <Footer onNavigateToTab={navigateToTab} />
+      <Footer />
     </div>
   );
 }

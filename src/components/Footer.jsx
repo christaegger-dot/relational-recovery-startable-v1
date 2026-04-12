@@ -2,8 +2,10 @@
 import { memo, useMemo } from 'react';
 import { ArrowUpRight, Library, ShieldCheck, Users } from 'lucide-react';
 import { TAB_ITEMS } from '../data/appShellContent';
+import { useAppState } from '../context/useAppState';
 
-const Footer = memo(function Footer({ onNavigateToTab }) {
+const Footer = memo(function Footer() {
+  const { navigate } = useAppState();
   const footerRoutes = useMemo(
     () =>
       TAB_ITEMS.filter((route) => route.priority === 'primary').map((route) => ({
@@ -53,7 +55,7 @@ const Footer = memo(function Footer({ onNavigateToTab }) {
                 <button
                   key={route.tab}
                   type="button"
-                  onClick={() => onNavigateToTab?.(route.tab, { focusTarget: 'heading' })}
+                  onClick={() => navigate(route.tab, { focusTarget: 'heading' })}
                   className="footer-nav-link"
                 >
                   <div className="footer-nav-link__body">

@@ -27,6 +27,7 @@ import {
 import { ASSESSMENT_ITEMS } from '../data/learningContent';
 import { getPageHeadingId, getRiskLabel, getRiskTone } from '../utils/appHelpers';
 import { createClosingSectionModel } from '../utils/closingModel';
+import { useAppState } from '../context/useAppState';
 
 const SCORE_STATUS_ID = 'assessment-score-status';
 
@@ -167,10 +168,8 @@ const TRIAGE_PROMPTS = [
   },
 ];
 
+
 export default function ToolboxSection({
-  score,
-  onToggleAssessment,
-  onResetAssessment,
   onPrint,
   onDownloadCrisisPlan,
   acuteCrisisSectionRef,
@@ -180,6 +179,7 @@ export default function ToolboxSection({
   rightsSectionRef,
   onJumpToPrioritySection,
 }) {
+  const { score, handleScoreChange: onToggleAssessment, resetScore: onResetAssessment } = useAppState();
   const pageHeadingId = getPageHeadingId('toolbox');
   const [triageAnswers, setTriageAnswers] = useState({});
   const [activePracticeFilter, setActivePracticeFilter] = useState('all');
