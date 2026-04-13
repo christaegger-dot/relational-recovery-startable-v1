@@ -64,10 +64,10 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
 
   const sections = [
     {
-      eyebrow: 'Arbeitslogik',
-      title: 'Ein ruhiger, fachlich klarer Weg durch die Website.',
+      eyebrow: 'Orientierung',
+      title: 'Ein ruhiger, fachlich klarer Weg durch die Inhalte.',
       description:
-        'Die Inhalte sind als Abfolge gedacht: zuerst verstehen, dann einschätzen, daraus konkrete Schritte ableiten und schliesslich passende Hilfen erreichbar machen. Das Seitentemplate übersetzt diese Logik in wiederverwendbare, editoriale Bausteine.',
+        'Die Inhalte folgen einer Abfolge: zuerst verstehen, dann einschätzen, daraus konkrete Schritte ableiten und passende Hilfen finden.',
       aside: {
         label: 'Einordnung',
         title: 'Kein starres Schema',
@@ -118,14 +118,14 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
     },
     {
       eyebrow: 'Direkte Einstiege',
-      title: 'Die Startseite wird zur operativen Schaltfläche des neuen Systems.',
+      title: 'Von hier aus erreichen Sie alle Bereiche direkt.',
       description:
-        'Statt nur auf Bereiche hinzuweisen, führt die Landingpage jetzt gezielt in jene Seitentypen, die bereits im Rebuild tragfähig angelegt sind. So wird die Startseite selbst zum Navigationsmuster für spätere Themen- oder Unterseiten.',
+        'Jeder Bereich ist direkt erreichbar -- mit kurzer Beschreibung, was Sie dort finden und wann er besonders hilfreich ist.',
       surface: 'subtle',
       aside: {
-        label: 'Rebuild-Nutzen',
-        title: 'Navigation und Architektur greifen ineinander',
-        copy: 'Wenn Einstiege bereits im Template modelliert sind, muss die Orientierung nicht später über Sondermodule nachgerüstet werden.',
+        label: 'Warum diese Struktur',
+        title: 'Schnelle Orientierung auch beim ersten Besuch',
+        copy: 'Die klare Gliederung hilft, sich auch bei erstem Besuch schnell zurechtzufinden.',
         tone: 'default',
       },
       cards: [
@@ -163,9 +163,9 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
     },
     {
       eyebrow: 'Vertrauen und Orientierung',
-      title: 'Die Startseite markiert jetzt auch fachliche Rollen klarer.',
+      title: 'Wofür ist dieses Angebot gedacht -- und was passt zu Ihrem Anliegen?',
       description:
-        'Für sensible Themen braucht es nicht nur Funktionen, sondern auch erkennbare Einordnung. Die Landingpage benennt daher explizit, wofür das Angebot gedacht ist und welche nächsten Wege je nach Anliegen sinnvoll sind.',
+        'Für sensible Themen braucht es nicht nur Information, sondern auch erkennbare Einordnung. Hier erfahren Sie, wofür das Angebot gedacht ist und welche nächsten Wege je nach Anliegen sinnvoll sind.',
       aside: {
         label: 'Für wen gedacht',
         title: 'Psychoedukative Orientierung statt Ersatzversorgung',

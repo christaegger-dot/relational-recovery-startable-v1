@@ -72,7 +72,7 @@ export default function NetworkSection() {
     eyebrow: 'Triage und Support',
     title: 'Netzwerk in',
     accent: 'Zürich und schweizweit lesen.',
-    lead: 'Die Seite verbindet zürich-zentrierte Krisenwege, Familienberatung, Kinder- und Jugendangebote sowie wenige schweizweite Ergänzungen. Das neue Seitentyp-System trennt dabei Suchlogik, Fachstellenverzeichnis und Netzwerkkarte sauber voneinander.',
+    lead: 'Die Seite verbindet zürich-zentrierte Krisenwege, Familienberatung und Kinder- und Jugendangebote mit einzelnen schweizweiten Ergänzungen. Sie können nach Fachstellen suchen oder die Netzwerkkarte nutzen.',
     image: heroIllustration,
     imageAlt: 'Illustration eines Familiensystems mit Beziehungslinien und ruhiger Orientierung',
     asideTitle: 'Einordnung',
@@ -109,7 +109,7 @@ export default function NetworkSection() {
       accent: 'passende Unterstützung.',
       paragraphs: [
         'Das Verzeichnis verbindet offizielle Krisenwege, familienbezogene Beratung, spezialisierte Angebote für Kinder und Jugendliche sowie längerfristige Entlastung. Der Schwerpunkt liegt auf Zürich und Winterthur; einzelne schweizweite Stellen bleiben ergänzend sichtbar.',
-        'Die neue Seitenarchitektur löst das bisher monolithische Layout in einen wiederverwendbaren Directory-Baustein auf. Filter, Suche und Trefferlogik können damit künftig auch für weitere regionale Netzwerke genutzt werden.',
+        'Filter und Freitextsuche helfen, in akuten oder komplexen Situationen schnell die passende Fachstelle zu finden.',
       ],
       aside: {
         label: 'Orientierung',

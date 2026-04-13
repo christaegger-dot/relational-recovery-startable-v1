@@ -9,21 +9,21 @@ export const GLOSSARY_GROUPS = [
       {
         term: 'Relationale Recovery',
         definition:
-          'Ein Arbeitsverständnis, das Erholung nicht nur als individuelle Symptomveränderung versteht, sondern als Wiedergewinn von tragfähigen Beziehungen, Orientierung und Handlungsfähigkeit im sozialen Alltag.',
+          'Erholung bedeutet hier nicht nur weniger Symptome, sondern auch: tragfähige Beziehungen, Orientierung und Handlungsfähigkeit im Alltag zurückgewinnen.',
         practice:
           'Hilfreich, wenn Behandlung, Elternrolle und Umfeld zusammen gedacht werden müssen statt nur einzelne Symptome zu betrachten.',
       },
       {
         term: 'Psychisch belastete Elternschaft',
         definition:
-          'Eine familiäre Situation, in der psychische Symptome, Krisen oder langandauernde Instabilität die elterliche Verfügbarkeit, Alltagsstruktur oder Feinabstimmung mit dem Kind mitbeeinflussen können.',
+          'Wenn psychische Symptome, Krisen oder anhaltende Instabilität beeinflussen, wie verfügbar Eltern sind, wie der Alltag funktioniert oder wie gut sie auf ihr Kind eingehen können.',
         practice:
           'Der Begriff vermeidet schnelle Schuldzuschreibungen und öffnet den Blick auf Belastung, Ressourcen und Unterstützungsbedarf zugleich.',
       },
       {
         term: 'Psychoedukation',
         definition:
-          'Strukturierte, verständliche Vermittlung von Wissen über Symptome, Belastungsdynamiken, Schutzfaktoren und Hilfemöglichkeiten für Betroffene, Angehörige oder Fachpersonen.',
+          'Wissen über Symptome, Belastungen, Schutzfaktoren und Hilfemöglichkeiten verständlich und strukturiert vermitteln -- für Betroffene, Angehörige oder Fachpersonen.',
         practice:
           'Besonders hilfreich, wenn Unsicherheit reduziert und ein gemeinsamer Begriffsrahmen für weitere Schritte aufgebaut werden soll.',
       },
@@ -41,12 +41,12 @@ export const GLOSSARY_GROUPS = [
     eyebrow: 'Cluster 2',
     title: 'Schutz, Risiko und fachliche Schwellen',
     description:
-      'Diese Begriffe strukturieren Situationen, in denen Fachpersonen zwischen Beobachtung, Unterstützung und formeller Schutzabklärung unterscheiden müssen. Sie schaffen eine gemeinsame Sprache für begründete Entscheidungen.',
+      'Diese Begriffe helfen Fachpersonen, zwischen Beobachten, Unterstützen und formeller Schutzabklärung zu unterscheiden. Sie schaffen eine gemeinsame Sprache für begründete Entscheidungen.',
     terms: [
       {
         term: 'Kindeswohl',
         definition:
-          'Zusammenfassender Begriff für Bedingungen, unter denen ein Kind hinreichend sicher, entwicklungsförderlich und emotional tragfähig aufwachsen kann.',
+          'Die Bedingungen, unter denen ein Kind sicher aufwachsen, sich entwickeln und emotional getragen fühlen kann.',
         practice:
           'Nicht als abstrakter Endzustand denken, sondern als fortlaufende Frage nach Schutz, Bindung, Versorgung und Entwicklungsraum.',
       },
@@ -55,19 +55,19 @@ export const GLOSSARY_GROUPS = [
         definition:
           'Eine Situation, in der ernsthafte Hinweise bestehen, dass Schutz, Versorgung oder Entwicklung eines Kindes aktuell oder absehbar erheblich beeinträchtigt sind.',
         practice:
-          'Wichtig für die Schwelle zwischen beobachtender Sorge, vertiefter Klärung und formeller Einbeziehung von Schutzinstanzen.',
+          'Hilft bei der Frage: Reicht aufmerksame Beobachtung, braucht es eine vertiefte Klärung, oder muss eine Schutzstelle einbezogen werden?',
       },
       {
         term: 'Schutzfaktor',
         definition:
           'Ein stabilisierendes Element, das Belastung abfedern oder Risiken begrenzen kann, zum Beispiel eine verlässliche Bezugsperson, Tagesstruktur oder erreichbare Hilfe.',
         practice:
-          'Schutzfaktoren ersetzen Risiken nicht, sind aber entscheidend für differenzierte Triage und tragfähige Hilfeplanung.',
+          'Schutzfaktoren machen Risiken nicht ungeschehen, helfen aber einzuschätzen, welche Hilfe wirklich nötig ist.',
       },
       {
         term: 'Triage',
         definition:
-          'Geordnete fachliche Entscheidung darüber, welche Form von Unterstützung, Abklärung oder Weitervermittlung in einer Situation zuerst notwendig ist.',
+          'Fachlich begründet entscheiden, welche Hilfe, Abklärung oder Weitervermittlung in einer Situation zuerst nötig ist.',
         practice:
           'Im Portal meint Triage nicht nur Dringlichkeit, sondern auch Passung zwischen Bedarf, Sicherheitslage und regionalen Hilfen.',
       },
@@ -99,23 +99,23 @@ export const GLOSSARY_GROUPS = [
       {
         term: 'Angehörigenarbeit',
         definition:
-          'Geplante Einbeziehung von nahen Bezugspersonen in Information, Entlastung, Orientierung und kooperative Behandlungsgestaltung.',
+          'Nahe Bezugspersonen gezielt einbeziehen: informieren, entlasten, orientieren und die Behandlung gemeinsam gestalten.',
         practice:
-          'Nicht nur als Zusatzangebot verstehen, sondern als wichtigen Teil von Stabilisierung, Alltagstransfer und Früherkennung.',
+          'Nicht nur als Zusatz verstehen, sondern als wichtigen Teil davon, Stabilität zu stärken, Gelerntes in den Alltag zu bringen und Warnsignale früh zu erkennen.',
       },
       {
         term: 'Weitervermittlung',
         definition:
-          'Übergang von einer ersten Klärung oder Behandlungssituation in ein passendes, weiterführendes Unterstützungsangebot innerhalb des Hilfesystems.',
+          'Wenn nach einer ersten Klärung oder Behandlung die passende weiterführende Stelle gefunden und der Übergang organisiert wird.',
         practice:
           'Tragfaehig wird Weitervermittlung erst, wenn Ansprechpartner, Schwelle, Erreichbarkeit und nächster Schritt konkret benannt sind.',
       },
       {
         term: 'Netzwerkkarte',
         definition:
-          'Strukturierte Darstellung von Fachstellen, Rollen und möglichen Anschlusspfaden innerhalb eines regionalen Versorgungssystems.',
+          'Eine Übersicht, die zeigt, welche Fachstellen es gibt, wer wofür zuständig ist und wie Hilfewege in der Region zusammenhängen.',
         practice:
-          'Hilfreich bei der Frage, wer für Information, Abklärung, Entlastung oder Krisenintervention sinnvoll zuständig ist.',
+          'Hilft zu klären, wer informieren, abklären, entlasten oder in einer Krise eingreifen kann.',
       },
       {
         term: 'Kooperationsfenster',
@@ -158,10 +158,10 @@ export const GLOSSARY_HERO = {
 };
 
 export const GLOSSARY_INTRO = {
-  eyebrow: 'Arbeitslogik',
+  eyebrow: 'Aufbau',
   title: 'Das Glossar ordnet Sprache entlang von Versorgung, Risiko und Beziehung.',
   description:
-    'Die neue Glossar-Seite führt einen statisch-redaktionellen Wissensbereich in die Seitentyp-Architektur ein. Statt verstreuter Begriffe werden hier tragende Ausdrücke gebündelt, knapp beschrieben und direkt an typische Handlungssituationen im Arbeitsalltag angeschlossen.',
+    'Das Glossar bündelt zentrale Begriffe an einem Ort: knapp definiert und direkt auf typische Arbeitssituationen bezogen.',
   aside: {
     label: 'Ziel',
     title: 'Gemeinsame Sprache entlastet',

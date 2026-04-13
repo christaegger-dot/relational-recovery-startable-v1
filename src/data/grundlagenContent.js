@@ -26,7 +26,7 @@ export const GRUNDLAGEN_HERO = {
 };
 
 export const GRUNDLAGEN_INTRO = {
-  eyebrow: 'Arbeitslogik',
+  eyebrow: 'Aufbau',
   title: 'Der Bereich verbindet Grundlagenwissen mit häufigen Entscheidungsmomenten.',
   description:
     'Statt lose Antworten zu sammeln, ordnet die Seite wiederkehrende Fragen entlang typischer Belastungslagen. So entsteht ein Wissenspfad, der Begriffe, emotionale Entlastung und konkrete Orientierung miteinander verbindet.',
@@ -161,7 +161,7 @@ export const GRUNDLAGEN_CLUSTERS = [
       {
         question: 'Wann sollte ich nicht mehr nur abwarten?',
         answer:
-          'Wenn Sicherheit, Versorgung von Kindern, deutliche Desorganisation, Suizidalität, schwere Eskalationen oder anhaltende Überforderung im Raum stehen, ist reines Hoffen meist zu wenig. Dann braucht es mindestens Rücksprache mit einer Fachstelle wie dem kjz, der Angehörigenberatung oder im Notfall sofortige Krisenhilfe (144 / 147).',
+          'Wenn Sicherheit, Versorgung von Kindern, deutliche Auflösung von Routinen, Suizidalität, schwere Eskalationen oder anhaltende Überforderung im Raum stehen, ist reines Hoffen meist zu wenig. Dann braucht es mindestens Rücksprache mit einer Fachstelle wie dem kjz, der Angehörigenberatung oder im Notfall sofortige Krisenhilfe (144 / 147).',
       },
     ],
   },

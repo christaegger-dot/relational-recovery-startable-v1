@@ -131,7 +131,7 @@ export const RELEVANCE_POINTS = [
   'Psychische Erkrankungen betreffen nicht nur Einzelpersonen, sondern häufig ganze Familiensysteme. Sie verändern Beziehungen, Routinen und die Entwicklungschancen von Kindern.',
   "Für die Schweiz wird die Zahl betroffener Kinder und Jugendlicher unter 18 Jahren auf rund 300'000 geschätzt. Internationale Studien verorten den Anteil betroffener Minderjähriger bei 15 bis 23 Prozent (Leijdesdorff et al., 2017; Albermann & Müller, 2021).",
   'Gerade im stationären Kontext wird die Relevanz sichtbar: Rund 30 Prozent der Patientinnen und Patienten in der Erwachsenenpsychiatrie haben minderjährige Kinder (Plass & Wiegand-Grefe, 2012).',
-  'Elternschaft muss deshalb früh in Anamnese, Behandlungsplanung und Austrittsvorbereitung einbezogen werden – nicht als Zusatz, sondern als Kern guter Versorgung.',
+  'Elternschaft sollte deshalb von Anfang an mitgedacht werden: bei der Anamnese, bei der Planung der Behandlung und bei der Vorbereitung des Austritts.',
 ];
 
 // Sammelreferenz für E10-E17 (Elternerleben, Familiensystem, Psychoedukation) und E22-E23 (Diagnose/Gefährdung):
@@ -444,7 +444,7 @@ export const CLINICAL_PRACTICE_POINTS = [
 export const INTERVENTION_PROGRAM_POINTS = [
   'Familienorientierte Interventionen wirken besonders dann plausibel, wenn sie nicht nur Symptome, sondern Kommunikation, Beziehung, Alltag und soziale Ressourcen gemeinsam betrachten.',
   'Das Vortragsmaterial von Lenz verweist auf multimodale Programme wie Beardslee, CHIMPs, Kindergruppen und mentalisierungsorientierte Elternprogramme als anschlussfähige Interventionsmodelle.',
-  'Für die Website reicht eine kompakte Einordnung: Nicht jede Familie braucht dasselbe Format, aber viele profitieren von einer Kombination aus Psychoedukation, Familiengespräch, Entlastung und Ressourcenaktivierung.',
+  'Nicht jede Familie braucht dasselbe Format, aber viele profitieren davon, wenn Psychoedukation, Familiengespräche, Entlastung und die Stärkung vorhandener Ressourcen zusammenkommen.',
 ];
 
 export const SUPPORT_OFFERS = [
@@ -612,7 +612,7 @@ export const MEDIA_NOTES = [
 
 export const CROSS_DIAGNOSIS_POINTS = [
   'Nicht jede psychische Erkrankung führt automatisch zu einer Kindeswohlgefährdung. Entscheidend ist, wie stark Symptome den Alltag, die Verlässlichkeit und die Versorgung beeinflussen.',
-  'Für Kinder ist weniger die Diagnose als solche zentral als das konkrete Erleben: Erreichbarkeit, Vorhersagbarkeit, Sprache über die Erkrankung und verfügbare Unterstützung.',
+  'Für Kinder zählt weniger die Diagnose als das, was sie im Alltag erleben: Ist der Elternteil erreichbar? Ist der Alltag vorhersagbar? Wird über die Erkrankung gesprochen? Gibt es Unterstützung?',
   'Die Praxis braucht deshalb keine vereinfachenden Urteile, sondern eine differenzierte Einschätzung nach Symptombelastung, Ressourcen, Schutzfaktoren und Netzwerk.',
 ];
 

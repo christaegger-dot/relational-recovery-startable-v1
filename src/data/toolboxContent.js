@@ -172,12 +172,12 @@ export const ADDICTION_TIPS = [
 
 export const RIGHTS_FAQ = [
   {
-    question: 'Was dürfen Angehörige dem Behandlungsteam mitteilen?',
+    question: 'Was darf ich dem Behandlungsteam mitteilen?',
     answer:
       'Relevante Beobachtungen zu Alltag, Kindersicherheit, Krisenverlauf oder Versorgung dürfen Angehörige immer weitergeben. Schweigepflicht verhindert meist eher das Zurückmelden als das Zuhören.',
   },
   {
-    question: 'Was dürfen Teams ohne Einwilligung oft nicht zurückmelden?',
+    question: 'Was darf mir das Behandlungsteam ohne Einwilligung zurückmelden?',
     answer:
       'Ohne Zustimmung der betroffenen Person dürfen Teams meist keine detaillierten Behandlungsinformationen herausgeben. Trotzdem können sie Informationen aufnehmen und allgemeine Orientierung geben.',
   },
@@ -187,7 +187,7 @@ export const RIGHTS_FAQ = [
       'Sie hilft, Wünsche für Krisen oder Phasen eingeschränkter Urteilsfähigkeit früh festzuhalten – zum Beispiel zu Behandlung, Kontakten oder wichtigen Bezugspersonen.',
   },
   {
-    question: 'Wo gibt es unabhängige Beratung?',
+    question: 'Wo finde ich unabhängige Beratung?',
     answer:
       'Die Angehörigenberatung der PUK Zürich und Pro Mente Sana bieten Orientierung auf unterschiedlichen Ebenen. Pro Mente Sana berät kostenlos zu psychosozialen und rechtlichen Fragen.',
   },
