@@ -3001,30 +3001,6 @@
   text-transform: uppercase;
 }
 
-.footer-bottom__bars {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.footer-bottom__bar {
-  height: 0.25rem;
-}
-
-.footer-bottom__bar--primary {
-  width: 3rem;
-  background: #a55a42;
-}
-
-.footer-bottom__bar--secondary {
-  width: 2rem;
-  background: #c7a07e;
-}
-
-.footer-bottom__bar--tertiary {
-  width: 1rem;
-  background: color-mix(in srgb, white 85%, transparent 15%);
-}
-
 @media (min-width: 40rem) {
   .footer-stat-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -91,11 +91,6 @@ const Footer = memo(function Footer() {
 
         <div className="footer-bottom">
           <p className="footer-bottom__claim">Fachlich ruhig. Systemisch. Praxisnah.</p>
-          <div className="footer-bottom__bars" aria-hidden="true">
-            <div className="footer-bottom__bar footer-bottom__bar--primary" />
-            <div className="footer-bottom__bar footer-bottom__bar--secondary" />
-            <div className="footer-bottom__bar footer-bottom__bar--tertiary" />
-          </div>
         </div>
       </div>
     </footer>
