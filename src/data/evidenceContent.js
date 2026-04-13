@@ -428,7 +428,7 @@ export const CLINICAL_PRACTICE_PANELS = [
   },
   {
     title: 'Übergangsmanagement',
-    text: 'Die Zeit rund um Austritt und Rückkehr in den Alltag ist oft besonders sensibel. Gute Übergänge brauchen klare Absprachen, aktivierte Bezugspersonen und eine realistische Planung der ersten Tage zuhause.',
+    text: 'Die Zeit rund um Austritt und Rückkehr in den Alltag ist oft besonders sensibel. Gute Übergänge brauchen klare Absprachen, aktivierte Bezugspersonen und eine realistische Planung der ersten Tage zuhause. Das Kooperationsfenster -- der Moment, in dem Familie, Fachpersonen und Hilfestellen gleichzeitig erreichbar sind -- ist dann besonders wertvoll.',
   },
 ];
 
