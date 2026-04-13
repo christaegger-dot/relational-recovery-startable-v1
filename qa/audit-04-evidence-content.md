@@ -307,4 +307,74 @@ Das Fehlen jeglicher Inline-Zitation ist für ein Fachportal, das Fachpersonen a
 
 ---
 
-*Phase 2 abgeschlossen. Warte auf Freigabe für Phase 3.*
+## Phase 3 -- Umsetzung
+
+### Arbeitsblock 1: Zitations-Architektur
+
+`src/data/sourcesContent.js` neu angelegt mit 16 strukturierten Source-Objekten (6 CH, 10 international). Felder: id, author, year, title, journal, publisher, type, doi, link, chFocus. Dient als zentrales Quellen-Register für das gesamte Projekt.
+
+### Arbeitsblock 2: Claims mit Quellen verknüpft
+
+| Claim | Vorher | Nachher |
+|---|---|---|
+| E1 (18% CH) | Keine Quelle | `obsan-72-schuler-2016` |
+| E2/E3 (300'000 / 15-23%) | Teilquelle (pädiatrie schweiz) | `leijdesdorff-2017` + `albermann-mueller-2021` |
+| E4 (Elternschaft stationär) | Keine Quelle, 17-45% | `plass-wiegandgrefe-2012`, Wert auf ~30% |
+| E5 (53% Hilfebedarf) | Keine Quelle | `hoeller-2023` |
+| E6 (70% affektive Störungen) | Keine Quelle | `grube-dorn-2007` |
+| E18 (KS-Massnahmen unterstützend) | Keine Quelle | `kokes-statistik-2024` (intern via Audit 03) |
+| E10-E17, E22-E23 (Konsens) | Keine Quelle | `wiegand-grefe-plass-christl-2025` (Sammelreferenz) |
+
+### Arbeitsblock 3: Formulierungspräzisierungen
+
+| Claim | Vorher | Nachher | Begründung |
+|---|---|---|---|
+| E1 | "behandlungsbedürftige psychische Störung" | "erhöhte psychische Belastung (5% stark, 13% mittel)" | Obsan-Bericht verwendet Screening-Indikator, nicht Diagnose |
+| E4 | "17-45%" | "ca. 30%" | Synthetisierter Wert aus mehreren Studien, weniger irreführend |
+| E5 | "Hilfebedarf bezüglich ihrer Kinder" | "weiterer Unterstützungsbedarf" (breiter) | Höller et al. erfassen soziale Unterstützung allgemein |
+
+### Arbeitsblock 4: Bestandskorrekturen
+
+| Korrektur | Details |
+|---|---|
+| Krumm & Becker 2011 → Koopmann et al. 2025 | Titel-Match, aktuellstes Konsens-Paper |
+| Stauber et al. | Jahr 2020 ergänzt, Kanton Bern (nicht ZHAW) |
+| 3 Weblinks entfernt | Gesundheitsförderung ZH, PUK, iks → bereits in SUPPORT_OFFERS |
+| 7 neue Literatureinträge | Höller, Grube/Dorn, Leijdesdorff, Wiegand-Grefe 2024/2025, Albermann/Müller, Schuler/Obsan |
+
+### Darstellungs-Entscheidung E6
+
+**Gewählt: Isolierte Zahl beibehalten.** E6 steht als einzelner Wert in RELEVANCE_STATS, nicht eingebettet in einen Diagnose-Vergleich. Die vollständige Grube-Dorn-Tabelle (5 Diagnosegruppen mit Elternschaftsraten) wäre Over-Engineering. Die Tabelle wird als Option für spätere Vertiefung (z.B. in einem eigenen Diagnose-Kapitel) im Bericht notiert.
+
+### Bilanz
+
+| Metrik | Vorher (Phase 1) | Nachher (Phase 3) |
+|---|---|---|
+| Claims mit vollständiger Quelle | 0 | 11 |
+| Claims mit sourceIds | 0 | 8 (direkt) + Sammelreferenz für 12 |
+| Inline-Zitationen in Fliesstext | 0 | 2 (RELEVANCE_POINTS) |
+| Literatur-Einträge | 11 (4 ohne Jahr, 3 Weblinks) | 15 (alle mit Jahr, keine Weblinks) |
+| Source-Objekte in sourcesContent.js | -- | 16 |
+
+---
+
+## Phase 4 -- Verifikation
+
+| Prüfung | Ergebnis |
+|---|---|
+| `npm run build` | Bestanden |
+| `npm run lint` | Bestanden |
+| sourcesContent.js konsistent | Ja -- 16 Einträge, alle mit id, author, year (oder null bei Weblinks), type |
+| Keine verwaisten sourceIds | Ja -- alle referenzierten IDs existieren in SOURCES |
+| Bericht vollständig | Ja: Phase 1 (Inventur), Phase 2 (Diagnose + Recherche-Liste), Phase 3 (Umsetzung), Phase 4 (Verifikation) |
+
+### Offene Punkte für Folge-Audits / redaktionelle Tickets
+
+1. **Frontend-Darstellung der Quellen:** Superscript-Nummern, Aufklapp-Details, Literaturverzeichnis → Audit 08 (Visual)
+2. **E6 Diagnose-Vergleichstabelle:** Grube-Dorn-Daten für späteres Diagnose-Kapitel verfügbar
+3. **Obsan 2023 als Aktualisierungsoption:** Peter, Tuch & Schuler (2023) für aktuellere 18%-Zahl
+4. **CH-Datenlücke transparent machen:** Für E4, E5, E6 existieren keine Schweizer Primärstudien — deutschsprachige Evidenz als Proxy, im Methoden-Hinweis transparent kommunizieren
+
+---
+
+*Audit 04 abgeschlossen.*

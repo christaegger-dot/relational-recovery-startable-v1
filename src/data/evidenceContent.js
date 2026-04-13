@@ -5,9 +5,10 @@ export const LITERATUR = [
     publisher: 'Göttingen: Hogrefe.',
   },
   {
-    author: 'Krumm, S. & Becker, T. (2011)',
-    title: 'Elternschaft als Herausforderung für die Psychiatrie.',
-    publisher: 'Psychiatrische Praxis, 38.',
+    author: 'Koopmann, A. et al. (2025)',
+    title: 'Elternschaft und psychische Erkrankungen.',
+    publisher: 'Der Nervenarzt, 96(6), 597-599. DOI: 10.1007/s00115-024-01781-8',
+    link: 'https://pubmed.ncbi.nlm.nih.gov/39592511/',
   },
   {
     author: 'Plass, A. & Wiegand-Grefe, S. (2012)',
@@ -20,24 +21,7 @@ export const LITERATUR = [
     publisher: 'Sozialpädiatrie / DOI: 10.35190/d2021.4.5',
     link: 'https://www.paediatrieschweiz.ch/familien-mit-einem-psychisch-erkrankten-elternteil/',
   },
-  {
-    author: 'Gesundheitsförderung Kanton Zürich',
-    title: 'Psychisch belastete Eltern – Kinder und Jugendliche.',
-    publisher: 'Online-Informationsseite.',
-    link: 'https://www.gesundheitsfoerderung-zh.ch/themen/psychische-gesundheit/kinder-und-jugendliche/psychisch-belastete-eltern',
-  },
-  {
-    author: 'Psychiatrische Universitätsklinik Zürich',
-    title: 'Informationen für Angehörige.',
-    publisher: 'Offizielle Informationsseite.',
-    link: 'https://www.pukzh.ch/patienten-angehoerige/informationen-fuer-angehoerige/',
-  },
-  {
-    author: 'Institut Kinderseele Schweiz',
-    title: 'Hilfe finden.',
-    publisher: 'Online-Such- und Orientierungshilfe.',
-    link: 'https://www.kinderseele.ch/hilfe-finden',
-  },
+  // Weblinks (Gesundheitsförderung ZH, PUK, iks) nach SUPPORT_OFFERS verschoben -- siehe sourcesContent.js
   {
     author: 'Jones, M. et al. (2016)',
     title: 'Parents with mental illness - a qualitative study of identities and experiences with support services.',
@@ -51,57 +35,107 @@ export const LITERATUR = [
     link: 'https://pubmed.ncbi.nlm.nih.gov/33283387/',
   },
   {
-    author: 'Stauber, A., Nyffeler, C. & Gosteli, L.',
+    author: 'Stauber, A., Nyffeler, C. & Gosteli, L. (2020)',
     title: 'Psychisch kranke Eltern im Beratungskontext: Was stärkt psychisch kranke Eltern und deren Kinder?',
-    publisher: 'Praxisforschung Band 25.',
+    publisher: 'Praxisforschung der Erziehungsberatung des Kantons Bern, Band 25. Bern: Erziehungsberatung des Kantons Bern.',
+    link: 'https://www.eb.bkd.be.ch/content/dam/eb_bkd/bilder/de/themen/praxisforschung/eb-pf-band-25-psychisch-kranke-eltern-im-beratungskontext.pdf',
   },
   {
     author: 'Lenz, A. (2019)',
     title: 'Interventionen bei Kindern psychisch kranker Eltern: Grundlagen, Methoden und Strategien.',
     publisher: 'Kinderschutzkongress 2019, Zürich.',
   },
+  {
+    author: 'Höller, I. et al. (2023)',
+    title: 'Hilfsbedarf und soziale Unterstützung bei psychisch erkrankten Elternteilen mit minderjährigen Kindern.',
+    publisher: 'Psychiatrische Praxis, 50(1), 20-28. DOI: 10.1055/a-1704-6391',
+    link: 'https://pubmed.ncbi.nlm.nih.gov/35081630/',
+  },
+  {
+    author: 'Grube, M. & Dorn, A. (2007)',
+    title: 'Elternschaft bei psychisch Kranken.',
+    publisher: 'Psychiatrische Praxis, 34(2), 66-71. DOI: 10.1055/s-2006-940095',
+  },
+  {
+    author: 'Leijdesdorff, S. et al. (2017)',
+    title: 'Prevalence of psychopathology in children of parents with mental illness and/or addiction.',
+    publisher: 'Current Opinion in Psychiatry, 30(4), 312-317. DOI: 10.1097/YCO.0000000000000341',
+    link: 'https://pubmed.ncbi.nlm.nih.gov/28441171/',
+  },
+  {
+    author: 'Wiegand-Grefe, S. et al. (2024)',
+    title: 'Unterstützung für Familien mit einem psychisch erkrankten Elternteil.',
+    publisher: 'Der Nervenarzt, 95(1), 56-63. DOI: 10.1007/s00115-023-01584-3',
+    link: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10808136/',
+  },
+  {
+    author: 'Wiegand-Grefe, S. & Plass-Christl, A. (2025)',
+    title: 'Kinder psychisch kranker Eltern. Entwicklungsrisiken erkennen und behandeln (2. Auflage).',
+    publisher: 'Weinheim: Beltz.',
+    link: 'https://www.beltz.de/fachmedien/psychologie/produkte/details/54163-kinder-psychisch-kranker-eltern.html',
+  },
+  {
+    author: 'Albermann, K. & Müller, B. (2021)',
+    title: 'Kinder und Jugendliche aus Familien mit einem psychisch erkrankten Elternteil.',
+    publisher: 'Paediatrica, 32(4), 5. DOI: 10.35190/d2021.4.5',
+    link: 'https://cdn.paediatrieschweiz.ch/production/uploads/2021/11/32-4-2021_5_all.pdf',
+  },
+  {
+    author: 'Schuler, D. et al. (2016)',
+    title: 'Psychische Gesundheit in der Schweiz. Monitoring 2016.',
+    publisher: 'Obsan Bericht 72, Neuchâtel: Schweizerisches Gesundheitsobservatorium.',
+    link: 'https://www.obsan.admin.ch/sites/default/files/obsan_72_bericht_2.pdf',
+  },
 ];
 
 export const RELEVANCE_STATS = [
   {
-    label: 'Behandlungsbedürftige psychische Störungen',
+    label: 'Erhöhte psychische Belastung',
     value: '18 %',
-    note: 'Anteil der Bevölkerung in der Schweiz mit behandlungsbedürftiger psychischer Störung.',
+    note: 'Bei rund 18% der Schweizer Bevölkerung liegt eine erhöhte psychische Belastung vor (5% stark, 13% mittel), was auf das Vorliegen einer psychischen Störung hindeutet.',
+    sourceIds: ['obsan-72-schuler-2016'],
   },
   {
     label: 'Kinder und Jugendliche mit psychisch erkranktem Elternteil',
     value: "ca. 300'000",
-    note: 'Auf die Schweiz übertragene Grössenordnung für unter 18-Jährige gemäss pädiatrie schweiz (2021).',
+    note: 'Auf die Schweiz übertragene Grössenordnung für unter 18-Jährige (Hochrechnung basierend auf internationaler Prävalenz).',
+    sourceIds: ['albermann-mueller-2021', 'leijdesdorff-2017'],
   },
   {
     label: 'Anteil betroffener Minderjähriger',
     value: '15–23 %',
-    note: 'Internationale Prävalenzschätzung; von pädiatrie schweiz auf die Schweiz übertragen.',
+    note: 'Internationale Prävalenzschätzung aus einem narrativen Review.',
+    sourceIds: ['leijdesdorff-2017'],
   },
   {
     label: 'Elternschaft im stationären Kontext',
-    value: '17–45 %',
-    note: 'Anteil stationärer Patientinnen und Patienten in der Erwachsenenpsychiatrie mit minderjährigen Kindern.',
+    value: 'ca. 30 %',
+    note: 'Rund 30% der stationären psychiatrischen Patient:innen haben minderjährige Kinder (synthetisiert aus mehreren deutschsprachigen Studien).',
+    sourceIds: ['plass-wiegandgrefe-2012'],
   },
   {
     label: 'Zusätzlicher Hilfebedarf während des Aufenthalts',
     value: '53 %',
-    note: 'Anteil stationär behandelter Eltern mit zusätzlichem Hilfebedarf in Bezug auf ihre Kinder.',
+    note: 'In einer deutschen Stichprobe von 100 stationär behandelten psychisch erkrankten Eltern berichteten 53% einen weiteren Unterstützungsbedarf, obwohl 99% bereits Hilfeangebote in Anspruch genommen hatten.',
+    sourceIds: ['hoeller-2023'],
   },
   {
     label: 'Elternschaft bei affektiven Störungen',
     value: 'ca. 70 %',
-    note: 'Besonders hohe Elternschaftsrate im Vergleich zu anderen Diagnosegruppen.',
+    note: 'Besonders hohe Elternschaftsrate im Vergleich zu anderen Diagnosegruppen (z.B. ~47% bei Schizophrenien, ~18% bei hirnorganischen Erkrankungen).',
+    sourceIds: ['grube-dorn-2007'],
   },
 ];
 
 export const RELEVANCE_POINTS = [
   'Psychische Erkrankungen betreffen nicht nur Einzelpersonen, sondern häufig ganze Familiensysteme. Sie verändern Beziehungen, Routinen und die Entwicklungschancen von Kindern.',
-  "Für die Schweiz wird die Zahl betroffener Kinder und Jugendlicher unter 18 Jahren auf rund 300'000 geschätzt. Internationale Studien verorten den Anteil betroffener Minderjähriger grob bei 15 bis 23 Prozent.",
-  'Gerade im stationären Kontext wird die Relevanz sichtbar: Je nach Setting haben 17 bis 45 Prozent der Patientinnen und Patienten in der Erwachsenenpsychiatrie minderjährige Kinder.',
+  "Für die Schweiz wird die Zahl betroffener Kinder und Jugendlicher unter 18 Jahren auf rund 300'000 geschätzt. Internationale Studien verorten den Anteil betroffener Minderjähriger bei 15 bis 23 Prozent (Leijdesdorff et al., 2017; Albermann & Müller, 2021).",
+  'Gerade im stationären Kontext wird die Relevanz sichtbar: Rund 30 Prozent der Patientinnen und Patienten in der Erwachsenenpsychiatrie haben minderjährige Kinder (Plass & Wiegand-Grefe, 2012).',
   'Elternschaft muss deshalb früh in Anamnese, Behandlungsplanung und Austrittsvorbereitung einbezogen werden – nicht als Zusatz, sondern als Kern guter Versorgung.',
 ];
 
+// Sammelreferenz für E10-E17 (Elternerleben, Familiensystem, Psychoedukation) und E22-E23 (Diagnose/Gefährdung):
+// sourceIds: ['wiegand-grefe-plass-christl-2025'] -- Standardlehrbuch 2. Auflage
 export const PARENT_EXPERIENCE_PANELS = [
   {
     title: 'Elternschaft als Kraftquelle',
@@ -349,7 +383,8 @@ export const HELP_BARRIER_PANELS = [
   },
   {
     title: 'Angst vor Eingriffen',
-    text: 'Eine zentrale Hürde ist die Sorge, Hilfe könnte automatisch zu Kontrolle oder Meldungen führen. In der Praxis sind die meisten Kindesschutzmassnahmen unterstützend, nicht trennend. Trotzdem kann die Angst vor behördlichen Eingriffen Familien davon abhalten, früh Unterstützung anzunehmen.',
+    text: 'Eine zentrale Hürde ist die Sorge, Hilfe könnte automatisch zu Kontrolle oder Meldungen führen. In der Praxis sind die meisten Kindesschutzmassnahmen unterstützend, nicht trennend (im Kanton Zürich betreffen 86% aller Massnahmen eine Beistandschaft). Trotzdem kann die Angst vor behördlichen Eingriffen Familien davon abhalten, früh Unterstützung anzunehmen.',
+    sourceIds: ['kokes-statistik-2024'],
   },
   {
     title: 'Symptome erschweren Hilfe',
