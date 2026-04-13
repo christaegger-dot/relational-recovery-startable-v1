@@ -44,6 +44,13 @@ export const GLOSSARY_GROUPS = [
       'Diese Begriffe helfen Fachpersonen, zwischen Beobachten, Unterstützen und formeller Schutzabklärung zu unterscheiden. Sie schaffen eine gemeinsame Sprache für begründete Entscheidungen.',
     terms: [
       {
+        term: 'KESB (Kindes- und Erwachsenenschutzbehörde)',
+        definition:
+          'Die KESB ist die behördliche Stelle, die in der Schweiz für den Schutz von Kindern und schutzbedürftigen Erwachsenen zuständig ist. Sie wird tätig, wenn das Wohl eines Kindes gefährdet erscheint und die Eltern nicht selbst für Abhilfe sorgen können (Art. 307 ZGB). Im Kanton Zürich gibt es 13 KESB.',
+        practice:
+          'Nicht jede Meldung an die KESB führt zu einer Massnahme -- im Kanton Zürich enden rund zwei Drittel der Meldungen mit einer Abklärung, Beratung oder ohne behördliche Anordnung. Wenn die KESB tätig wird, ist die häufigste Massnahme die Beistandschaft (Art. 308 ZGB): eine Fachperson unterstützt die Familie, das Sorgerecht bleibt bei den Eltern. Eine Fremdplatzierung (Art. 310 ZGB) ist die Ausnahme, nicht die Regel.',
+      },
+      {
         term: 'Kindeswohl',
         definition:
           'Die Bedingungen, unter denen ein Kind sicher aufwachsen, sich entwickeln und emotional getragen fühlen kann.',
