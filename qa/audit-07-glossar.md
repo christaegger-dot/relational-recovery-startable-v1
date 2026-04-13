@@ -333,4 +333,87 @@ Falls die Recherche-Liste so kurz bleibt, kann sie direkt im Chat geklärt werde
 
 ---
 
-*Phase 2 abgeschlossen. Warte auf Freigabe und drei Entscheidungen: (1) Relational Recovery (Deutung A/B/C), (2) Verlinkungs-Option, (3) Kooperationsfenster ergänzen oder belassen.*
+### Entscheidungen der Auftraggeberin
+
+1. **Relational Recovery: Option B** — Glossar-Eintrag entfernt (bewusste Sprach-Vermeidung, Haltung wird durch das Schreiben eingelöst)
+2. **Verlinkungs-Option: Hybrid** — 4 zentrale Begriffe manuell verlinkt
+3. **Kooperationsfenster: Im Content ergänzt** (evidenceContent.js Übergangsmanagement)
+
+---
+
+## Phase 3 -- Umsetzung
+
+### Neue Glossar-Einträge
+
+| # | Begriff | Quelle | Cluster |
+|---|---|---|---|
+| 1 | **KESB** | Audit-03-Faktenbasis (Art. 307, KOKES 2024, Stadt ZH) | C2 Schutz |
+| 2 | **Parentifizierung** | evidenceContent.js CHILD_EXPERIENCE_PANELS[1] | C1 Sprache |
+| 3 | **Trialog** | Externe Recherche (Buck, Bock, Psychiatrie-Verlag) | C3 Netzwerk |
+| 4 | **Komorbidität** | Externe Recherche (ICD-11, Lehrbuch) | C2 Schutz |
+| 5 | **Loyalitätskonflikt** | evidenceContent.js CHILD_EXPERIENCE_PANELS[2] | C1 Sprache |
+| 6 | **Rollenumkehr** | evidenceContent.js CHILD_EXPERIENCE_PRACTICE_POINTS | C1 Sprache |
+| 7 | **Gefährdungsmeldung** | toolboxContent.js CHILD_PROTECTION_THRESHOLDS | C2 Schutz |
+| 8 | **SPF** | learningContent.js Vignetten-Feedback | C2 Schutz |
+
+### Entfernte Einträge
+
+| Begriff | Begründung |
+|---|---|
+| Relationale Recovery | Entscheidung Option B — bewusste Sprach-Vermeidung, toter Eintrag |
+
+### Content-Ergänzungen
+
+| Stelle | Ergänzung |
+|---|---|
+| evidenceContent.js Übergangsmanagement | "Kooperationsfenster" als Begriff im Fliesstext eingeführt |
+| glossaryContent.js Angehörigenarbeit practice | Differenzierung Angehörigenarbeit (Konzept) vs. Angehörigenberatung (Angebot) |
+
+### Verlinkungs-Architektur
+
+**Finale Auswahl: 4 Begriffe** (statt der vorgeschlagenen 5-8)
+
+| Begriff | Dateien | Begründung |
+|---|---|---|
+| KESB | 5 | Häufigster, angstbesetztester Begriff |
+| Parentifizierung | 3 | Zentrales Konzept, für Angehörige erklärungsbedürftig |
+| Gefährdungsmeldung | 3 | Handlungsbegriff, der Angst auslösen kann |
+| Beistandschaft | 2 | Entängstigungspotenzial |
+
+**Nicht verlinkt:** Trialog (1 Datei, Kontext genügt), Komorbidität (nur Eyebrow), Melderecht (im LegalDisclaimer erklärt), Kindeswohlgefährdung (selbsterklärend).
+
+**Begründung der Reduktion:** 4 statt 8 Begriffe, weil Lesefluss-Kosten bei >5 manuellen Links pro Sektion steigen und die 4 Begriffe genau die sind, bei denen Verlinkung echten Orientierungswert für Angehörige hat.
+
+**Frontend-Rendering:** Als Folge-Ticket dokumentiert (Audit 08 oder eigenes Ticket). Die Datenstruktur (`glossaryTermId`) ist vorbereitet.
+
+---
+
+## Phase 4 -- Verifikation
+
+| Prüfung | Ergebnis |
+|---|---|
+| `npm run build` | Bestanden |
+| `npm run lint` | Bestanden |
+| Glossar syntaktisch konsistent | Ja |
+| Bericht vollständig | Ja: Phase 1-4 |
+
+### Vorher/Nachher-Metriken
+
+| Metrik | Vorher | Nachher |
+|---|---|---|
+| Glossar-Einträge | 14 | **21** (+8 neue, -1 entfernt) |
+| Zwingende Lücken | 4 | **0** |
+| Empfehlenswerte Lücken | 5 | **1** (Schweigepflicht — als optional zurückgestellt) |
+| Tote Einträge (definiert, nie benutzt) | 2 | **0** (Recovery entfernt, Kooperationsfenster im Content) |
+| Inkonsistenzen | 2 | **0** |
+| Verlinkte Begriffe | 0 | **4** (Datenstruktur vorbereitet, Rendering-Ticket offen) |
+
+### Offene Punkte
+
+1. **Schweigepflicht**: Empfehlenswerte Lücke, zurückgestellt (Kontext erklärt den Begriff mit)
+2. **Frontend-Rendering für Glossar-Links**: Folge-Ticket (dezente Unterstreichung, kein Tooltip)
+3. **6 optionale Lücken**: Patientenverfügung, Intoxikation, Verhältnismässigkeit, Stigma, Prävalenz, Affektbarriere — können in einer späteren Erweiterung ergänzt werden
+
+---
+
+*Audit 07 abgeschlossen.*
