@@ -2961,12 +2961,6 @@
   gap: 1rem;
 }
 
-.footer-framework-item__icon {
-  margin-top: 0.25rem;
-  flex-shrink: 0;
-  color: #f0c786;
-}
-
 .footer-framework-item__copy {
   margin: 0;
   color: #f2e6d9;
