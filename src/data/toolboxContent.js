@@ -94,7 +94,8 @@ export const CHILD_PROTECTION_TIPS = [
   'Bei Unsicherheit zuerst fachlich rückfragen – etwa beim kjz oder einer offiziellen Beratungsstelle.',
   'Leitfrage für den Alltag: Sind Sicherheit, Nahrung, Aufsicht und Schutz auch morgen verlässlich gewährleistet?',
   'Nach einer Meldung weiter kooperieren: Schutz und Beziehung müssen nicht gegeneinander ausgespielt werden.',
-  'Vor einer Meldung können Sie sich anonym beraten lassen -- etwa bei Pro Mente Sana (0848 800 858) oder beim kjz.',
+  'Vor einer Meldung können Sie sich anonym beraten lassen -- etwa bei Pro Mente Sana (0848 800 858) oder beim kjz. Eine solche Vorab-Beratung ist rechtlich keine Meldung.',
+  'Wichtig: Eine spätere formelle Gefährdungsmeldung bleibt nicht automatisch anonym, auch wenn vorgängig anonym beraten wurde.',
 ];
 
 // L1: Verhältnismässige Eskalationslogik (Art. 307-310 ZGB)
@@ -102,6 +103,13 @@ export const CHILD_PROTECTION_TIPS = [
 // Keine starre Reihenfolge, sondern verhältnismässige Abstufung. In akuten
 // Situationen kann unmittelbar eine stärkere Massnahme nötig sein.
 export const CHILD_PROTECTION_MEASURES = [
+  {
+    article: 'Freiwilliger Rahmen',
+    label: 'Freiwillige Hilfen',
+    description:
+      'Bevor formelle Kindesschutzmassnahmen greifen, sind freiwillige Hilfen zu prüfen: Familienbegleitung (SPF), Erziehungsberatung über das kjz, Entlastungsangebote oder Zusammenarbeit mit Fachstellen. Auch kostenintensive Hilfen setzen nicht zwingend eine KESB-Massnahme voraus, wenn Eltern im freiwilligen Rahmen zuverlässig kooperieren.',
+    tone: 'voluntary',
+  },
   {
     article: 'Art. 307 Abs. 3 ZGB',
     label: 'Ermahnung und Weisung',
@@ -136,7 +144,7 @@ export const CHILD_PROTECTION_MEASURES = [
 export const CHILD_PROTECTION_MEASURES_CONTEXT = {
   title: 'Was nach einer Meldung passieren kann',
   lead: 'Nicht jede Meldung führt zu einer Massnahme. Im Kanton Zürich enden rund zwei Drittel der Meldungen mit einer Abklärung, Beratung oder ohne behördliche Anordnung. Wenn die KESB tätig wird, gilt das Verhältnismässigkeitsprinzip: so viel wie nötig, so wenig wie möglich.',
-  note: 'Diese Übersicht zeigt die gesetzliche Abstufung, keine starre Reihenfolge. In akuten Situationen kann unmittelbar eine stärkere Massnahme nötig sein.',
+  note: 'Diese Übersicht zeigt eine verhältnismässige Eskalationslogik, keine starre Reihenfolge. In akuten Situationen kann unmittelbar eine stärkere Massnahme nötig sein. Die KOKES-Zahlen sind eine Bestandsstatistik und kein Verfahrensfluss.',
   source: 'KOKES Jahresstatistik 2024, Kanton Zürich; ZGB Art. 307-312; BV Art. 5 Abs. 2',
 };
 

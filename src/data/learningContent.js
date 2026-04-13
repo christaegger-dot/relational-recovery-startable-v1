@@ -18,7 +18,7 @@ export const VIGNETTEN = [
         label: 'Sozialpädagogische Familienbegleitung (SPF) als freiwillige Hilfe',
         isCorrect: true,
         feedback:
-          'Korrekt. Eine SPF entlastet das Familiensystem und schützt das Kind, ohne in die elterliche Sorge einzugreifen. SPF ist kein eigener ZGB-Massnahmetyp, sondern eine ambulante Hilfe, die freiwillig oder über Art. 307/308 ZGB begleitet werden kann. Im Kanton Zürich ist sie für Eltern grundsätzlich kostenlos.',
+          'Korrekt. Eine SPF entlastet das Familiensystem und schützt das Kind. SPF ist kein eigener ZGB-Massnahmetyp, sondern eine ambulante Hilfe, die freiwillig oder über Art. 307/308 ZGB begleitet werden kann. In dieser Situation greift sie als freiwillige Hilfe ohne Einschränkung der elterlichen Sorge. Im Kanton Zürich ist SPF für Eltern grundsätzlich kostenlos.',
       },
     ],
   },
