@@ -162,4 +162,175 @@ Der Beistandschaft-Eintrag (G9) ist ein Vorbild: juristisch korrekt und trotzdem
 
 ---
 
-*Phase 1 abgeschlossen. Warte auf Freigabe für Phase 2 (Diagnose und Massnahmenkatalog).*
+## Phase 2 -- Diagnose und Massnahmenkatalog
+
+### Der KESB-Sonderfall
+
+KESB ist nicht einfach eine von vier Lücken, sondern die zentrale Einzellücke des gesamten Audits. 18 Vorkommen in 7 Dateien, innerhalb anderer Glossar-Einträge vorausgesetzt, für Angehörige angstbesetzt. Eine Leserin, die im Glossar "Beistandschaft" nachschlägt, stösst auf "KESB" — und findet keine Erklärung.
+
+Die Definition muss zwei Anforderungen gleichzeitig erfüllen: juristische Korrektheit (Audit-03-Faktenbasis) und Entängstigung (Mildeste-Mittel-Logik).
+
+**Entwurf KESB-Glossareintrag** (aus Audit-03-Quellen, keine Erfindung):
+
+```
+term: 'KESB (Kindes- und Erwachsenenschutzbehörde)'
+definition:
+  'Die KESB ist die behördliche Stelle, die in der Schweiz für den Schutz
+  von Kindern und schutzbedürftigen Erwachsenen zuständig ist. Sie wird
+  tätig, wenn das Wohl eines Kindes gefährdet erscheint und die Eltern
+  nicht selbst für Abhilfe sorgen können (Art. 307 ZGB). Im Kanton Zürich
+  gibt es 13 KESB.'
+practice:
+  'Wichtig zu wissen: Nicht jede Meldung an die KESB führt zu einer
+  Massnahme -- im Kanton Zürich enden rund zwei Drittel der Meldungen
+  mit einer Abklärung, Beratung oder ohne behördliche Anordnung. Wenn
+  die KESB tätig wird, ist die häufigste Massnahme die Beistandschaft
+  (Art. 308 ZGB): eine Fachperson unterstützt die Familie, das Sorgerecht
+  bleibt bei den Eltern. Eine Fremdplatzierung (Art. 310 ZGB) ist die
+  Ausnahme, nicht die Regel.'
+```
+
+**Quellen für jeden Definitionsbestandteil:**
+
+| Element | Audit-03-Quelle |
+|---|---|
+| Art. 307 ZGB als Grundnorm | Faktenbasis Abschnitt 1 |
+| 13 KESB im Kanton Zürich | Faktenbasis Abschnitt 1 (Praxisindikatoren) |
+| Zwei Drittel ohne Massnahme | Stadt Zürich 2024: 32% führen zu Massnahme → 68% nicht (Faktenbasis Abschnitt 1) |
+| Beistandschaft häufigste Massnahme | KOKES 2024: 86% in ZH (Faktenbasis Abschnitt 1) |
+| Art. 308, Art. 310 | Faktenbasis Abschnitt 1 |
+
+Cluster-Zuordnung: **C2 (Schutz, Risiko und fachliche Schwellen)** — direkt vor Beistandschaft, damit die Leserichtung stimmt (KESB → Beistandschaft → Melderecht).
+
+---
+
+### Der Relational-Recovery-Befund
+
+Drei Deutungen:
+
+**Deutung A: Arbeitstitel, soll ins Schreiben einfliessen.**
+Der Begriff ist inhaltlich tragend (die Glossar-Definition beschreibt ein konkretes fachliches Verständnis), wurde aber nie im Fliesstext eingeführt. Konsequenz: An 1-2 strategischen Stellen (HomeLanding-Lead, Evidenz-Einleitung) einführen.
+
+**Deutung B: Bewusst vermieden, zu voraussetzungsvoll.**
+"Recovery" ist ein Anglizismus, "relational" ein Fachbegriff. Für Angehörige schwer zugänglich. Konsequenz: Glossar-Eintrag entfernen.
+
+**Deutung C: Nur Label, kein Konzept.**
+Konsequenz: Glossar-Eintrag neutralisiert sich oder wird entfernt.
+
+**Einschätzung von Claude Code:** Deutung A ist am plausibelsten. Die bestehende Glossar-Definition beschreibt ein konkretes, fachlich gehaltvolles Konzept ("Erholung bedeutet hier nicht nur weniger Symptome, sondern auch: tragfähige Beziehungen, Orientierung und Handlungsfähigkeit im Alltag zurückgewinnen"). Das ist kein leeres Label, sondern ein inhaltliches Versprechen, das die gesamte Website einlöst, ohne es beim Namen zu nennen. Der HomeLanding-Lead wäre die natürliche Stelle, das nachzuholen.
+
+**Keine Empfehlung — Entscheidung bei der Auftraggeberin.**
+
+---
+
+### Verlinkungs-Entscheidung
+
+| Option | Aufwand | Wartbarkeit | Lesefluss | Risiko |
+|---|---|---|---|---|
+| **Automatisch** (Parser erkennt Glossar-Begriffe) | M-L | Hoch (neue Begriffe automatisch verlinkt) | Störend bei hoher Begriffsdichte (jeder 3. Fachbegriff markiert) | Fehlzuordnungen möglich |
+| **Manuell** (pro Vorkommen im Daten-Feld markiert) | M | Niedrig (jedes neue Vorkommen manuell) | Kontrolliert — nur wichtige Stellen | Vergessene Stellen |
+| **Hybrid** (zentrale Begriffe manuell, periphere nicht) | S-M | Mittel | **Bester Kompromiss** | Inkonsistenz: warum wird X verlinkt, Y nicht? |
+| **Keine** (Glossar als Stand-alone-Seite) | S | Hoch (nichts zu warten) | Kein Eingriff | Glossar bleibt unsichtbar für Lesende, die nicht selbst dorthin navigieren |
+
+**Empfehlung: Hybrid.** Die 5-8 zentralen Begriffe (KESB, Parentifizierung, Beistandschaft, Triage, Psychoedukation, Schutzfaktor) werden beim ersten Vorkommen pro Sektion manuell verlinkt. Alle übrigen Begriffe nicht. Das vermeidet Lesefluss-Störungen und stellt sicher, dass die wichtigsten Begriffe den Weg zum Glossar weisen.
+
+Technische Umsetzung: Ein neues Datenfeld `glossaryTermId` an den Stellen im Content, wo ein Begriff beim ersten Vorkommen verlinkt werden soll. Das Template rendert dann einen dezenten Link (z.B. gestrichelte Unterstreichung, kein eigenes Tooltip-Popup). Die Implementierung der Link-Komponente gehört allerdings in ein **eigenes Ticket**, nicht in dieses Audit — hier wird nur die Datenstruktur vorbereitet.
+
+---
+
+### Die zwei toten Glossar-Einträge
+
+**Relationale Recovery (G1):**
+Siehe "Der Relational-Recovery-Befund" oben. Empfehlung hängt von der strategischen Entscheidung ab. Bei Deutung A: im Content ergänzen. Bei B oder C: entfernen.
+
+**Kooperationsfenster (G14):**
+Der Begriff beschreibt ein nützliches Praxiskonzept ("der Moment, in dem alle Beteiligten erreichbar genug sind, um den nächsten Schritt zu vereinbaren"). Er wird aber im Content nie benutzt, weil die Texte dieses Konzept umschreiben, statt es zu benennen.
+
+**Empfehlung: Im Content ergänzen**, nicht entfernen. Der Begriff passt inhaltlich in die Toolbox (Krisenvorsorge, Netzwerkplanung) und in die Evidenz (Übergangsmanagement). 1-2 Stellen, wo der bestehende Text das Konzept bereits umschreibt, könnten den Begriff explizit verwenden. Das macht den Glossar-Eintrag lebendig.
+
+---
+
+### Kategorie A: Begriffsverwendungs-Harmonisierung
+
+Die 3 minor-Abweichungen:
+
+| Begriff | Problem | Empfehlung |
+|---|---|---|
+| "Psychisch belastete Elternschaft" | Im Fliesstext häufiger "psychisch belastete Eltern" (ohne -schaft) | **Belassen** — die Fliesstext-Variante ist natürlicher. Glossar-Term als kanonische Fachform, Fliesstext darf die Alltagsform verwenden. |
+| "Mentalisieren" | Nur 1x als "mentalisierungsorientiert" (Kompositum) | **Belassen** — Kompositum ist korrekte Ableitung, keine Inkonsistenz. |
+| "Angehörigenarbeit" vs. "Angehörigenberatung" | Werden nebeneinander verwendet | **Differenzieren**: Angehörigenarbeit = fachliches Konzept (Glossar), Angehörigenberatung = konkretes Angebot (z.B. PUK). Kurzen Hinweis im Glossar-Praxistext ergänzen. |
+
+Kein Harmonisierungsbedarf mit Fliesstext-Änderungen. Die Abweichungen sind Varianten, keine Inkonsistenzen.
+
+---
+
+### Kategorie B: Neue Glossar-Einträge
+
+#### Zwingende Einträge (P1)
+
+| Begriff | Aus bestehendem Content ableitbar? | Recherche nötig? |
+|---|---|---|
+| **KESB** | **Ja** — aus Audit-03-Faktenbasis vollständig | Nein |
+| **Parentifizierung** | **Ja** — evidenceContent.js CHILD_EXPERIENCE_PANELS[1] erklärt den Begriff ausführlich | Nein |
+| **Trialog** | **Teilweise** — wird in grundlagenContent.js erwähnt, aber nicht erklärt | Kurze Recherche |
+| **Komorbidität** | **Nein** — wird nur als Eyebrow verwendet, nirgends erklärt | Kurze Recherche |
+
+#### Empfehlenswerte Einträge (P2)
+
+| Begriff | Aus bestehendem Content ableitbar? |
+|---|---|
+| Loyalitätskonflikt | **Ja** — evidenceContent.js CHILD_EXPERIENCE_PANELS[2] erklärt ihn |
+| Rollenumkehr | **Ja** — evidenceContent.js erklärt den Zusammenhang mit Parentifizierung |
+| SPF | **Ja** — learningContent.js Vignette-Feedback + toolboxContent.js |
+| Schweigepflicht | **Teilweise** — toolboxContent.js RIGHTS_FAQ berührt das Thema |
+| Gefährdungsmeldung | **Ja** — toolboxContent.js CHILD_PROTECTION_THRESHOLDS |
+
+**Befund: Für 8 von 9 P1/P2-Begriffen kann die Definition aus dem bestehenden Content abgeleitet werden.** Nur Komorbidität und teilweise Trialog brauchen eine externe Mini-Recherche. Die Recherche-Liste wird sehr kurz.
+
+---
+
+### Priorisierung
+
+| Prio | Massnahme | Stellen |
+|---|---|---|
+| **P1** | KESB-Glossareintrag (Sonderfall) | 1 Eintrag, ausgearbeitet |
+| **P1** | Parentifizierung, Trialog, Komorbidität | 3 Einträge |
+| **P1** | Verlinkungs-Entscheidung | Architektonisch |
+| **P2** | 5 empfehlenswerte Einträge (Loyalitätskonflikt, Rollenumkehr, SPF, Schweigepflicht, Gefährdungsmeldung) | 5 Einträge |
+| **P2** | Kooperationsfenster im Content ergänzen | 1-2 Stellen |
+| **P2** | Angehörigenarbeit-Differenzierung im Glossar | 1 Praxistext-Ergänzung |
+| **P3** | Relational-Recovery-Entscheidung | Strategisch |
+| **P3** | Optionale Einträge (Patientenverfügung, Stigma, Prävalenz etc.) | 6 potenzielle Einträge |
+
+---
+
+### Recherche-Liste
+
+Nur 2 Begriffe brauchen externe Recherche:
+
+| Begriff | Frage | Prio |
+|---|---|---|
+| **Trialog** | Was ist die gängige deutschsprachige Arbeitsdefinition von "Trialog" im psychiatrischen Versorgungskontext? (Dreier-Gespräch Betroffene + Angehörige + Fachpersonen) | P1 |
+| **Komorbidität** | Was ist eine alltagstaugliche Definition für "Komorbidität" im Kontext psychische Erkrankung + Sucht? | P1 |
+
+Falls die Recherche-Liste so kurz bleibt, kann sie direkt im Chat geklärt werden statt in einer formalen Sitzung.
+
+---
+
+### Risikoeinschätzung
+
+**Vor Release zwingend:**
+1. **KESB-Glossareintrag** — der häufigste ungeklärte, angstbesetzteste Begriff. Ohne Glossar-Definition bleibt die Seite für Angehörige an ihrer empfindlichsten Stelle intransparent.
+2. **Parentifizierung** — zentrales Konzept der Kinderperspektive, prominent in Überschriften, nirgends erklärt.
+
+**Empfehlenswert:**
+3. Komorbidität und Trialog — als Eyebrow/Meta-Begriffe verwendet, ohne Erklärung.
+4. Verlinkungs-Architektur (Datenstruktur vorbereiten, Rendering-Komponente als Folge-Ticket).
+
+**Kann warten:**
+5. Die 5 empfehlenswerten Einträge — der Content erklärt sie kontextuell mit.
+6. Relational-Recovery-Entscheidung — ist strategisch, aber nicht release-blockierend.
+
+---
+
+*Phase 2 abgeschlossen. Warte auf Freigabe und drei Entscheidungen: (1) Relational Recovery (Deutung A/B/C), (2) Verlinkungs-Option, (3) Kooperationsfenster ergänzen oder belassen.*
