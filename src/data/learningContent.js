@@ -3,7 +3,7 @@ export const VIGNETTEN = [
     id: 'fall1',
     title: 'Fall 1: Begleitung bei depressiven Barrieren',
     description:
-      'Frau M. (32) wird aufgrund einer schweren depressiven Episode stationär begleitet. Sie sorgt für zwei Kinder. Ihr Partner zeigt Zeichen von chronischer Erschöpfung. Aktuell besteht eine starke affektive Barriere zu den Kindern.',
+      'Frau M. (Anfang 30) wird aufgrund einer depressiven Episode stationär begleitet. Sie sorgt für zwei Kinder. Ihr Partner ist anwesend und kooperationsbereit, zeigt aber Zeichen von Erschöpfung. Frau M. findet aktuell kaum emotionalen Zugang zu den Kindern. Die ältere Tochter (Schulkind) zeigt sich still und zurückhaltend.',
     status: 'Aufnahme / Woche 1',
     options: [
       {
