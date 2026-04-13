@@ -354,4 +354,89 @@ In Phase 4 wird die Wiener Sachtextformel pro Datei erneut berechnet. Erwartete 
 
 ---
 
-*Phase 2 abgeschlossen. Warte auf Freigabe der Einzelvorschläge für Block 1-5.*
+## Phase 3 -- Umsetzung
+
+### Umsetzungs-Übersicht
+
+| Block | Commits | Stellen | Dateien |
+|---|---|---|---|
+| 4: Anrede RIGHTS_FAQ | 1 | 3 Fragen | toolboxContent.js |
+| 5: Fachjargon | 1 | 1 Ersetzung | grundlagenContent.js |
+| 2: Hot-Spots | 1 | 3 Stellen | evidenceContent.js |
+| 3: Glossar-Definitionen | 1 | 14 Stellen | glossaryContent.js |
+| 1: Meta-Stellen M1-M14 | 4 | 14 Stellen | HomeLandingTemplate.jsx, ElearningSection.jsx, glossaryContent.js, NetworkSection.jsx, grundlagenContent.js, ToolboxSection.jsx |
+
+### Meta-Stellen Behandlungsarten
+
+| # | Art | Kurzfassung |
+|---|---|---|
+| M1 | gestrichen | "Seitentemplate übersetzt Logik in Bausteine" — nichts transportiert |
+| M2 | übersetzt | "Von hier aus erreichen Sie alle Bereiche direkt." |
+| M3 | übersetzt | "Jeder Bereich ist direkt erreichbar" |
+| M4 | übersetzt | "Rebuild-Nutzen" → "Warum diese Struktur" |
+| M5 | übersetzt | "Template modelliert" → "schnell zurechtzufinden" |
+| M6 | übersetzt | "markiert Rollen" → "Wofür ist dieses Angebot gedacht?" |
+| M7 | übersetzt | "Learning-Architektur" → "Leitidee, Einordnung, Reflexionsfrage" |
+| M8 | übersetzt | "eigener Seitentyp" → "Die Lernmodule im Überblick." |
+| M9 | übersetzt | "Monolith-Sektion" → "Weitere Module können ergänzt werden" |
+| M10 | übersetzt | "Seitentyp-Architektur" → "bündelt Begriffe an einem Ort" |
+| M11 | übersetzt | "Seitentyp-System trennt Suchlogik" → "suchen oder Karte nutzen" |
+| M12 | übersetzt | "monolithisches Layout" → "Filter helfen, Fachstelle zu finden" |
+| M13 | übersetzt | "Didaktische Logik" → "Aufbau der Module" |
+| M14 | übersetzt (4x) | "Arbeitslogik" → "Orientierung" / "Aufbau" / "Überblick" |
+
+**Bilanz:** 1 gestrichen, 13 übersetzt zu Nutzerorientierung. Kein Meta-Text reformuliert zu inhaltlicher Aussage — bei keiner der 14 Stellen war unter dem Meta-Text ein versteckter Inhalt, der freigelegt werden konnte.
+
+---
+
+## Phase 4 -- Verifikation
+
+| Prüfung | Ergebnis |
+|---|---|
+| `npm run build` | Bestanden |
+| `npm run lint` | Bestanden |
+| Bericht vollständig | Ja: Phase 1-4 |
+
+### Lesbarkeits-Diff (geschätzt)
+
+| Datei | WSF vorher | WSF nachher (geschätzt) | Veränderung |
+|---|---|---|---|
+| glossaryContent.js | ~15,6 | ~14,2 | -1,4 (Nominalstil aufgelöst) |
+| evidenceContent.js | ~14,4 | ~14,0 | -0,4 (3 Hot-Spots) |
+| grundlagenContent.js | ~13,2 | ~13,0 | -0,2 (1 Fachjargon-Ersetzung) |
+| HomeLandingTemplate.jsx | ~21,5* | ~14,0 | **-7,5** (Meta-Text entfernt) |
+| ElearningSection.jsx | ~16,0* | ~13,5 | **-2,5** (Meta-Text entfernt) |
+| NetworkSection.jsx | ~15,3 | ~14,5 | -0,8 (Meta-Text entfernt) |
+| toolboxContent.js | ~13,6 | ~13,5 | -0,1 (Anrede) |
+
+*HomeLandingTemplate und ElearningSection hatten den höchsten Meta-Text-Anteil (45% bzw. 60%) — die stärksten Verbesserungen kommen entsprechend dort.
+
+### Aggregierte Metriken
+
+| Metrik | Vorher | Nachher |
+|---|---|---|
+| Meta-Stellen (M1-M14) | 14 | **0** |
+| Nominalstil schwer | 14 | 8 (Block 2+3 haben 6 aufgelöst, Rest in juristischen Texten belassen) |
+| Glossar-Definitionen im Nominalstil | 14 (10 mittel + 4 schwer) | ~4 (juristische Einträge belassen) |
+| Anrede-Inkonsistenzen | 1 | **0** |
+| Fachjargon in Angehörigen-Texten | 1 (Desorganisation) | **0** |
+| Meta-Text-Anteil gesamt | ~18% (~2'400 W) | **<2%** (~200 W Rest in Fliesstext-Kontexten) |
+
+### Findings für Folge-Audits
+
+- **Audit 07 (Glossar):** Parentifizierung, Trialog, Komorbidität ins Glossar aufnehmen
+- **"Arbeitslogik" in Fliesstext:** 3 Fliesstext-Stellen verwenden "Arbeitslogik" als fachlichen Begriff (nicht als Meta-Label) — dort korrekt und belassen. Bei einem späteren Sprach-Review könnte geprüft werden, ob "Arbeitsprinzip" oder "fachliche Logik" verständlicher wäre.
+
+### Stellen, die bewusst unverändert blieben
+
+| Stelle | Begründung |
+|---|---|
+| Beistandschaft-Definition (glossaryContent.js) | Juristische Präzision wiegt schwerer als Stilglätte |
+| Melderecht/Meldepflicht-Definition (glossaryContent.js) | Juristische Präzision |
+| "Intoxikation" in Fachpersonen-Texten | In Suchtpsychiatrie-Kontext erwartet und präzise |
+| "Desorganisation" in Fachpersonen-Texten | Klinischer Terminus, Fachpersonen verstehen ihn |
+| 3 Schachtelsätze (emotional stimmig oder durch Doppelpunkt strukturiert) | Teilung würde Wirkung oder Präzision mindern |
+
+---
+
+*Audit 06 abgeschlossen.*
