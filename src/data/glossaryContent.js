@@ -77,7 +77,7 @@ export const GLOSSARY_GROUPS = [
         definition:
           'Die häufigste Kindesschutzmassnahme. Die KESB ernennt eine Fachperson, die die Familie in bestimmten Bereichen unterstützt -- etwa bei Schule, Gesundheit, Alltagsorganisation oder der Koordination von Hilfen. Das Sorgerecht bleibt bei den Eltern. Im Kanton Zürich wird die Beistandschaft in der Regel durch spezialisierte Fachpersonen der kjz (Kinder- und Jugendhilfezentren) geführt.',
         practice:
-          'Beistandschaft ist keine Bestrafung und kein automatisches Vorzeichen für eine Fremdplatzierung. Sie ist ein unterstützendes Angebot, das in verschiedenen Abstufungen möglich ist: von beratender Begleitung (Abs. 1) über besondere Befugnisse (Abs. 2) bis zur Einschränkung der elterlichen Sorge in einem bestimmten Bereich (Abs. 3). Für Eltern entstehen im Kanton Zürich in der Regel keine Kosten.',
+          'Beistandschaft ist keine Bestrafung und kein automatisches Vorzeichen für eine Fremdplatzierung. Die häufigste Form ist die beratende Begleitung (Abs. 1). Abs. 2 überträgt besondere Befugnisse, Abs. 3 kann die elterliche Sorge in einem bestimmten Bereich einschränken -- dieser Eingriff ist nicht automatisch Teil jeder Beistandschaft. Im Kanton Zürich führen die kjz (bzw. in der Stadt Zürich die Sozialen Dienste) die Mandate. Für Eltern entstehen in der Regel keine Kosten. Hinweis: Die Kindesschutz-Beistandschaft (Art. 308 ZGB) ist strikt von den Erwachsenenschutz-Beistandschaften (Art. 393 ff. ZGB) zu unterscheiden.',
       },
       // L4: Melderecht vs. Meldepflicht – Quelle: Faktenbasis Abschnitt 4
       {
@@ -85,7 +85,7 @@ export const GLOSSARY_GROUPS = [
         definition:
           'Das Melderecht (Art. 314c ZGB) erlaubt jeder Person, der KESB eine Gefährdung eines Kindes zu melden. Berufsgeheimnisträgerinnen und -träger (z.B. Ärztinnen, Psychologen) sind meldeberechtigt, wenn die Meldung im Interesse des Kindes liegt -- sie müssen eine Interessenabwägung vornehmen. Die Meldepflicht (Art. 314d ZGB) betrifft bestimmte Fachpersonen, die nicht dem Berufsgeheimnis unterstehen und regelmässig mit Kindern arbeiten.',
         practice:
-          'Wichtig für die Praxis: Ärztinnen und Ärzte in öffentlichen Kliniken sind trotz amtlicher Tätigkeit in der Regel meldeberechtigt, nicht meldepflichtig, weil sie dem strafrechtlichen Berufsgeheimnis (Art. 321 StGB) unterstehen. Die Kantone können weitere Meldepflichten vorsehen (Art. 314d Abs. 3 ZGB).',
+          'Wichtig für die Praxis: Ärztinnen und Ärzte in öffentlichen Kliniken sind trotz amtlicher Tätigkeit in der Regel meldeberechtigt, nicht meldepflichtig, weil sie dem strafrechtlichen Berufsgeheimnis (Art. 321 StGB) unterstehen. Hilfspersonen von Berufsgeheimnisträgerinnen und -trägern sind von diesem erweiterten Melderecht nicht erfasst. In schweren Gefährdungslagen besteht zusätzlich eine Mitteilungsberechtigung nach Art. 453 ZGB. Die Kantone können weitere Meldepflichten vorsehen (Art. 314d Abs. 3 ZGB).',
       },
     ],
   },
