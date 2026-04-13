@@ -814,7 +814,7 @@
 }
 
 .ui-hero-shell {
-  order: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-subtle);
   border-radius: calc(var(--radius-2xl) + 0.25rem);
   background: var(--surface-hero);
   box-shadow: var(--shadow-card);
