@@ -85,6 +85,13 @@ export const GLOSSARY_GROUPS = [
         practice:
           'Im Portal meint Triage nicht nur Dringlichkeit, sondern auch Passung zwischen Bedarf, Sicherheitslage und regionalen Hilfen.',
       },
+      {
+        term: 'Komorbidität',
+        definition:
+          'Wenn bei einer Person zwei oder mehr Erkrankungen gleichzeitig bestehen. Der Begriff beschreibt nur das gleichzeitige Auftreten und sagt nichts darüber aus, ob eine Erkrankung die andere ausgelöst hat.',
+        practice:
+          'Bei psychischen Erkrankungen ist Komorbidität häufig: zum Beispiel treten Depression und Angststörung oft gemeinsam auf, oder Sucht und Depression. Für die Behandlung bedeutet das, dass mehrere Erkrankungen zugleich berücksichtigt werden müssen.',
+      },
       // L2: Beistandschaft (Art. 308 ZGB) – Quelle: Faktenbasis Abschnitt 2
       {
         term: 'Beistandschaft (Art. 308 ZGB)',
