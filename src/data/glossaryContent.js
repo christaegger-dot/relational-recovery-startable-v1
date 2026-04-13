@@ -28,6 +28,13 @@ export const GLOSSARY_GROUPS = [
           'Besonders hilfreich, wenn Unsicherheit reduziert und ein gemeinsamer Begriffsrahmen für weitere Schritte aufgebaut werden soll.',
       },
       {
+        term: 'Parentifizierung',
+        definition:
+          'Wenn Kinder Aufgaben übernehmen, die eigentlich Erwachsene tragen sollten: den Elternteil trösten, auf Stimmungsschwankungen achten, sich um Geschwister kümmern oder den Haushalt organisieren. Das kann nach aussen kompetent wirken, ist innerlich aber oft überfordernd.',
+        practice:
+          'Im Gespräch aktiv nach stillem Mittragen, Sorgeverhalten und Verantwortungsübernahme von Kindern fragen. Zwischen altersangemessener Mithilfe und überfordernder Rollenumkehr unterscheiden.',
+      },
+      {
         term: 'Mentalisieren',
         definition:
           'Die Fähigkeit, eigenes und fremdes Verhalten als Ausdruck innerer Zustände wie Gefühle, Absichten, Stress oder Missverstehen zu begreifen.',
