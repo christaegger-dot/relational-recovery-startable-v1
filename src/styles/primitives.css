@@ -2537,6 +2537,24 @@
   gap: 0.75rem;
 }
 
+/* Netzwerkkarte: rechte Spalte ohne verschachtelte Karten (Audit 08).
+   Statt ui-card innerhalb der Karten-Panel-Hülle: leichte Divider-Blöcke. */
+.ui-network-map-side__block {
+  padding-block: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.ui-network-map-side__block:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.ui-network-map-count {
+  padding: 0.75rem;
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface-app) 70%, transparent 30%);
+}
+
 .ui-network-map-summary {
   margin-top: var(--space-5);
   border-radius: 1.5rem;
