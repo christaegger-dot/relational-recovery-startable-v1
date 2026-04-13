@@ -2947,7 +2947,7 @@
 .footer-nav-link__icon {
   margin-top: 0.25rem;
   flex-shrink: 0;
-  color: #8d3f32;
+  color: var(--accent-primary-strong);
 }
 
 .footer-framework-list {
