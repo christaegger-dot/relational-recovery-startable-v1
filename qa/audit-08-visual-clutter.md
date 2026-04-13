@@ -334,6 +334,76 @@ Keine. Alle Reduktionen sind verbesserungen, kein Release-Blocker. Audit 08 ist 
 1. **SectionHeader-Überarbeitung:** Option A (Validierung) oder Option B (Konvention + Aside-Indikator)?
 2. **Dot-Grid:** Dot-1 (entfernen) oder Dot-2 (abschwächen)?
 
+**Getroffene Entscheidungen:**
+- Entscheidung 1: **Option B** (Konvention + Aside-Indikator).
+- Entscheidung 2: **Dot-2** (abschwächen, nicht entfernen).
+
 ---
+
+## Phase 3 -- Umsetzung
+
+### Block-Übersicht (Commits in Reihenfolge)
+
+| # | Block | Commit | Deltas |
+|---|---|---|---|
+| 0 | Pre-Audit: CSS-Tippfehler | `c36f874 fix: ui-hero-shell border property typo` | 1 char |
+| 1 | SectionHeader: Konvention + Dev-Indikator | `fd455f5` | +18 |
+| 2a | Aside entfernen: HomeLanding | `feecb5f` | -2 Asides |
+| 2b | Aside entfernen: Evidence | `1ae22cf` | -4 Asides |
+| 2c | Aside entfernen: Toolbox | `6214057` | -8 Asides |
+| 2d | Aside entfernen: Network | `42da113` | -2 Asides |
+| 2e | Aside entfernen: glossaryContent | `9804a1f` | -1 Aside |
+| 2f | Aside entfernen: grundlagenContent | `3b4114a` | -1 Aside (Merksätze bleiben) |
+| 2g | Aside entfernen: ElearningSection | `b8e8499` | -1 Aside (Counter bleibt) |
+| 2h | Aside entfernen: VignettenSection | `407d21f` | -1 Aside (Counter bleibt) |
+| 3 | Card-in-Card Netzwerkkarte auflösen | `beb66ad` | -6 nested SurfaceCards |
+| 4 | HomeLanding: Section-Actions entfernen | `08e407a` | -2 CTAs |
+| 5 | Dot-Grid abschwächen (Dot-2) | `278c836` | opacity 0.45 → 0.18, blend-mode weg |
+| 6a | Footer: 3 Balken entfernen | `616df88` | -3 Bar-Elemente + Stilregeln |
+| 6b | Footer: 3 Icons entfernen | `995638f` | -3 Icons + ungenutzte CSS |
+| 7 | Hex-Migration `#8d3f32` | `601c299` | 3 Vorkommen auf Token |
+
+### Ausnahmen (Asides bewusst behalten)
+
+Regel aus Phase 2: "Einen Aside, dessen Inhalt tatsächlich nirgendwo sonst in der Sektion auftaucht, nicht entfernen."
+
+| Template | Aside | Grund |
+|---|---|---|
+| Toolbox | Assessment `scoreAside` | **Funktional:** Live-Score-Anzeige + Reset-Button |
+| Toolbox | ScoreBands `aside` | **Interpretation:** Eigenständige Einordnung, nicht in Description gespiegelt |
+| Toolbox | Hero `aside` | Überblick-Sequenz, wird in Pathway nicht expliziert gleich benannt |
+| Toolbox | Closing `aside` | Praxis-Merksatz zum Abschluss |
+| Evidence | Hero + ChapterOverview + Closing | Strukturelle Orientierung, distinct |
+| Network | Hero `asideTitle/asideCopy` | Wichtiger Disclaimer |
+| Grundlagen | 3 Cluster-Merksätze | Pädagogische Key-Takeaways, nicht in Description |
+| Elearning | `modulesSection.aside` | **Funktional:** Live-Bearbeitungsstand `X/Y` |
+| Vignetten | `caseStudy.aside` | **Funktional:** Fallzähler `Fall X von Y` |
+| HomeLanding | Section 3 `aside` | Eindeutiger psychoedukativer Disclaimer |
+
+### Gesamtbilanz Phase 3
+
+- **20 Asides entfernt** (von ursprünglich ~29), 9 als Ausnahme behalten.
+- **6 verschachtelte Karten** in Netzwerkkarte aufgelöst.
+- **2 redundante CTAs** entfernt (HomeLanding).
+- **3 Balken + 3 Icons** aus Footer entfernt.
+- **1 Hex-Wert** zu Token migriert (`#8d3f32` → `var(--accent-primary-strong)` / `var(--text-danger)`).
+- **Code-Delta:** 179 Zeilen entfernt, 47 Zeilen hinzugefügt (netto -132 Zeilen).
+
+---
+
+## Phase 4 -- Verifikation
+
+### Build & Lint
+
+- `npm run lint` → ✓ clean
+- `npm run build` → ✓ 285.31 kB index-bundle (vorher: 285.31 kB; keine Bundle-Regression)
+
+### E2E
+
+- `npm run test:e2e` scheitert an fehlendem Chromium-Binary in der lokalen Umgebung (`/opt/pw-browsers/chromium-1194/chrome-linux/chrome`). Die Fehler sind Umgebungs-Artefakte, keine Regressionen durch Audit-08-Änderungen. Empfehlung: Tests in CI oder mit `npx playwright install` lokal nachziehen.
+
+### Offene Arbeit für Audit 09
+
+Die 17 verbleibenden hardcoded Hex-Werte (u. a. `#f6efe7`, `#ead8c3`, `#5f3c2d`, `#dec2b2`, `#4b392f`, `#3f322b`, `#2d241f`, `#fff0e6`, `#e4cbbb`, `#fff6ee`, `#6d342c`, `#9a4b3c`, `#f0c786`, `#a55a42`, `#c7a07e`) benötigen neue Semantik-Tokens für Selection-States, Header-Gradient, Warm-Border und ErrorBoundary-Surface. Das ist der Scope von Audit 09.
 
 *Phase 2 abgeschlossen. Warte auf Freigabe und die beiden Entscheidungen.*
