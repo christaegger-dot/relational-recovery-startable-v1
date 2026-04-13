@@ -190,4 +190,168 @@ Die 14 Meta-Stellen M1-M14 sind automatisch die Top-14. Die weiteren 6 Hot-Spots
 
 ---
 
-*Phase 1 abgeschlossen. Warte auf Freigabe für Phase 2 (Diagnose und Reformulierungs-Strategie).*
+## Phase 2 -- Diagnose und Reformulierungs-Strategie
+
+### 2.1 Gesamtbild
+
+Die Texte sind erheblich besser als erwartet. Audit 06 ist kein flächendeckendes Reformulierungs-Audit, sondern ein **präziser Eingriff an ca. 40 konkret benennbaren Stellen**. Die Hauptarbeit konzentriert sich auf drei Orte: die 14 Meta-Stellen (schon vor Audit 06 bekannt), die Glossar-Definitionen (genrebedingt nominallastig), und 6 einzelne Nominalstil-Ausreisser.
+
+Kein systemisches Sprachproblem in den übrigen Dateien. evidenceContent.js, toolboxContent.js und grundlagenContent.js sind sprachlich sauber und brauchen keine flächendeckende Überarbeitung.
+
+---
+
+### 2.2 Block 1: Meta-Stellen M1-M14 — Vorher/Nachher
+
+| # | Vorher | Nachher |
+|---|---|---|
+| M1 | "Die Inhalte sind als Abfolge gedacht: zuerst verstehen, dann einschätzen, daraus konkrete Schritte ableiten und schliesslich passende Hilfen erreichbar machen. **Das Seitentemplate übersetzt diese Logik in wiederverwendbare, editoriale Bausteine.**" | "Die Inhalte folgen einer Abfolge: zuerst verstehen, dann einschätzen, daraus konkrete Schritte ableiten und passende Hilfen finden." |
+| M2 | "**Die Startseite wird zur operativen Schaltfläche des neuen Systems.**" | "Von hier aus erreichen Sie alle Bereiche direkt." |
+| M3 | "**Statt nur auf Bereiche hinzuweisen, führt die Landingpage jetzt gezielt in jene Seitentypen, die bereits im Rebuild tragfähig angelegt sind.** So wird die Startseite selbst zum Navigationsmuster für spätere Themen- oder Unterseiten." | "Jeder Bereich ist direkt erreichbar -- mit kurzer Beschreibung, was Sie dort finden und wann er besonders hilfreich ist." |
+| M4 | "**Rebuild-Nutzen**" (aside label) | "Warum diese Struktur" |
+| M5 | "**Wenn Einstiege bereits im Template modelliert sind, muss die Orientierung nicht später über Sondermodule nachgerüstet werden.**" | "Die klare Gliederung hilft, sich auch bei erstem Besuch schnell zurechtzufinden." |
+| M6 | "**Die Startseite markiert jetzt auch fachliche Rollen klarer.**" | "Wofür ist dieses Angebot gedacht -- und was passt zu Ihrem Anliegen?" |
+| M7 | "**Die neue Seitenstruktur übersetzt die bisherige Elearning-Sektion in eine wiederverwendbare Learning-Architektur.** Sie beginnt mit Einordnung und Orientierung, macht dann die didaktische Sequenz sichtbar und führt erst danach in die einzelnen Module." | "Jedes Modul beginnt mit einer fachlichen Leitidee, führt dann durch eine kurze Einordnung und schliesst mit einer Reflexionsfrage ab." |
+| M8 | "Die Inhalte sind jetzt als **eigener Seitentyp organisiert.**" | "Die Lernmodule im Überblick." |
+| M9 | "**Der Modulbereich trennt wiederkehrende Struktur von konkreten Inhalten.** Dadurch lassen sich künftige Lernbausteine, andere Themenfelder oder vertiefende Formate ohne neue Monolith-Sektion auf dieselbe Template-Logik aufsetzen." | "Weitere Module zu anderen Themen können jederzeit ergänzt werden. Das Format bleibt dabei gleich: Leitidee, Einordnung, Reflexionsfrage." |
+| M10 | "**Die neue Glossar-Seite führt einen statisch-redaktionellen Wissensbereich in die Seitentyp-Architektur ein.** Statt verstreuter Begriffe werden hier tragende Ausdrücke gebündelt, knapp beschrieben und direkt an typische Handlungssituationen im Arbeitsalltag angeschlossen." | "Das Glossar bündelt zentrale Begriffe an einem Ort: knapp definiert und direkt auf typische Arbeitssituationen bezogen." |
+| M11 | "Die Seite verbindet zürich-zentrierte Krisenwege, Familienberatung, Kinder- und Jugendangebote sowie wenige schweizweite Ergänzungen. **Das neue Seitentyp-System trennt dabei Suchlogik, Fachstellenverzeichnis und Netzwerkkarte sauber voneinander.**" | "Die Seite verbindet zürich-zentrierte Krisenwege, Familienberatung und Kinder- und Jugendangebote mit einzelnen schweizweiten Ergänzungen. Sie können nach Fachstellen suchen oder die Netzwerkkarte nutzen." |
+| M12 | "**Die neue Seitenarchitektur löst das bisher monolithische Layout in einen wiederverwendbaren Directory-Baustein auf.** Filter, Suche und Trefferlogik können damit künftig auch für weitere regionale Netzwerke genutzt werden." | "Filter und Freitextsuche helfen, in akuten oder komplexen Situationen schnell die passende Fachstelle zu finden." |
+| M13 | "**Didaktische Logik**" (Eyebrow) | "Aufbau der Module" |
+| M14 | "**Arbeitslogik**" (Eyebrow, 4x) | "Orientierung" (HomeLanding), "Aufbau" (Glossar, Grundlagen), "Überblick" (Toolbox) |
+
+---
+
+### 2.3 Block 2: Top-6 Hot-Spots (Nominalstil schwer) — Vorher/Nachher
+
+| # | Datei | Vorher | Nachher |
+|---|---|---|---|
+| H15 | glossaryContent.js (Triage) | "Geordnete fachliche Entscheidung darüber, welche Form von Unterstützung, Abklärung oder Weitervermittlung in einer Situation zuerst notwendig ist." | "Fachlich begründet entscheiden, welche Hilfe, Abklärung oder Weitervermittlung in einer Situation zuerst nötig ist." |
+| H16 | glossaryContent.js (Angehörigenarbeit) | "Geplante Einbeziehung von nahen Bezugspersonen in Information, Entlastung, Orientierung und kooperative Behandlungsgestaltung." | "Nahe Bezugspersonen gezielt einbeziehen: informieren, entlasten, orientieren und die Behandlung gemeinsam gestalten." |
+| H17 | evidenceContent.js (Interventionen) | "...viele profitieren von einer Kombination aus Psychoedukation, Familiengespräch, Entlastung und Ressourcenaktivierung." | "...viele profitieren davon, wenn Psychoedukation, Familiengespräche, Entlastung und die Stärkung vorhandener Ressourcen zusammenkommen." |
+| H19 | glossaryContent.js (Recovery) | "Ein Arbeitsverständnis, das Erholung nicht nur als individuelle Symptomveränderung versteht, sondern als Wiedergewinn von tragfähigen Beziehungen, Orientierung und Handlungsfähigkeit im sozialen Alltag." | "Erholung bedeutet hier nicht nur weniger Symptome, sondern auch: tragfähige Beziehungen, Orientierung und Handlungsfähigkeit im Alltag zurückgewinnen." |
+| H20 | evidenceContent.js (Elternschaft) | "Elternschaft muss deshalb früh in Anamnese, Behandlungsplanung und Austrittsvorbereitung einbezogen werden -- nicht als Zusatz, sondern als Kern guter Versorgung." | "Elternschaft sollte deshalb von Anfang an mitgedacht werden: bei der Anamnese, bei der Planung der Behandlung und bei der Vorbereitung des Austritts." |
+| H18 | glossaryContent.js (Netzwerkkarte practice) | "Hilfreich bei der Frage, wer für Information, Abklärung, Entlastung oder Krisenintervention sinnvoll zuständig ist." | "Hilft zu klären, wer informieren, abklären, entlasten oder in einer Krise eingreifen kann." |
+
+---
+
+### 2.4 Block 3: glossaryContent.js Nominalstil — Vorher/Nachher
+
+Alle 14 Glossar-Definitionen und Praxishinweise mit mittlerem oder schwerem Nominalstil. Die Beistandschaft- und Melderecht-Einträge (aus Audit 03) sind juristisch präzise und werden nur behutsam angepasst.
+
+| Term | Feld | Vorher (gekürzt) | Nachher |
+|---|---|---|---|
+| Psychisch belastete Elternschaft | definition | "Eine familiäre Situation, in der psychische Symptome, Krisen oder langandauernde Instabilität die elterliche Verfügbarkeit, Alltagsstruktur oder Feinabstimmung mit dem Kind mitbeeinflussen können." | "Wenn psychische Symptome, Krisen oder anhaltende Instabilität beeinflussen, wie verfügbar Eltern sind, wie der Alltag funktioniert oder wie gut sie auf ihr Kind eingehen können." |
+| Psychoedukation | definition | "Strukturierte, verständliche Vermittlung von Wissen über Symptome, Belastungsdynamiken, Schutzfaktoren und Hilfemöglichkeiten..." | "Wissen über Symptome, Belastungen, Schutzfaktoren und Hilfemöglichkeiten verständlich und strukturiert vermitteln..." |
+| Kindeswohl | definition | "Zusammenfassender Begriff für Bedingungen, unter denen ein Kind hinreichend sicher, entwicklungsförderlich und emotional tragfähig aufwachsen kann." | "Die Bedingungen, unter denen ein Kind sicher aufwachsen, sich entwickeln und emotional getragen fühlen kann." |
+| Kindeswohlgefährdung | practice | "Wichtig für die Schwelle zwischen beobachtender Sorge, vertiefter Klärung und formeller Einbeziehung von Schutzinstanzen." | "Hilft bei der Frage: Reicht aufmerksame Beobachtung, braucht es eine vertiefte Klärung, oder muss eine Schutzstelle einbezogen werden?" |
+| Schutzfaktor | practice | "Schutzfaktoren ersetzen Risiken nicht, sind aber entscheidend für differenzierte Triage und tragfähige Hilfeplanung." | "Schutzfaktoren machen Risiken nicht ungeschehen, helfen aber einzuschätzen, welche Hilfe wirklich nötig ist." |
+| Cluster 2 description | description | "Diese Begriffe strukturieren Situationen, in denen Fachpersonen zwischen Beobachtung, Unterstützung und formeller Schutzabklärung unterscheiden müssen." | "Diese Begriffe helfen Fachpersonen, zwischen Beobachten, Unterstützen und formeller Schutzabklärung zu unterscheiden." |
+| Weitervermittlung | definition | "Übergang von einer ersten Klärung oder Behandlungssituation in ein passendes, weiterführendes Unterstützungsangebot innerhalb des Hilfesystems." | "Wenn nach einer ersten Klärung oder Behandlung die passende weiterführende Stelle gefunden und der Übergang organisiert wird." |
+| Netzwerkkarte | definition | "Strukturierte Darstellung von Fachstellen, Rollen und möglichen Anschlusspfaden innerhalb eines regionalen Versorgungssystems." | "Eine Übersicht, die zeigt, welche Fachstellen es gibt, wer wofür zuständig ist und wie Hilfewege in der Region zusammenhängen." |
+| Kooperationsfenster | definition | "Praktischer Begriff für den Moment, in dem Familien, Fachpersonen und Hilfesystem gleichzeitig erreichbar genug sind, um einen nächsten Schritt verbindlich zu vereinbaren." | "Der Moment, in dem Familie, Fachpersonen und Hilfestellen gleichzeitig erreichbar genug sind, um einen konkreten nächsten Schritt zu vereinbaren." |
+| Angehörigenarbeit practice | practice | "Nicht nur als Zusatzangebot verstehen, sondern als wichtigen Teil von Stabilisierung, Alltagstransfer und Früherkennung." | "Nicht nur als Zusatz verstehen, sondern als wichtigen Teil davon, Stabilität zu stärken, Gelerntes in den Alltag zu bringen und Warnsignale früh zu erkennen." |
+
+Juristisch geprägte Einträge (Beistandschaft, Melderecht/Meldepflicht) werden **nicht** reformuliert — ihre Präzision wiegt schwerer als stilistische Glätte.
+
+---
+
+### 2.5 Block 4: RIGHTS_FAQ Anrede-Korrektur
+
+| # | Vorher | Nachher |
+|---|---|---|
+| Frage 1 | "Was dürfen Angehörige dem Behandlungsteam mitteilen?" | "Was darf ich dem Behandlungsteam mitteilen?" |
+| Frage 2 | "Was dürfen Teams ohne Einwilligung oft nicht zurückmelden?" | "Was darf mir das Behandlungsteam ohne Einwilligung zurückmelden?" |
+| Frage 4 | "Wo gibt es unabhängige Beratung?" | "Wo finde ich unabhängige Beratung?" |
+
+Frage 3 ("Wozu dient eine psychiatrische Patientenverfügung?") bleibt sachbezogen — Ich-Form wäre hier unnatürlich.
+
+---
+
+### 2.6 Block 5: Fachjargon-Ersetzungen
+
+#### "Desorganisation" (5 Fundstellen)
+
+| Fundstelle | Kontext |
+|---|---|
+| grundlagenContent.js | "...deutliche Desorganisation, Suizidalität, schwere Eskalationen..." |
+| toolboxContent.js (PRACTICE_BLOCKS) | "Suizidgedanken, Desorganisation, Intoxikation oder fehlende Aufsicht..." |
+| ToolboxSection.jsx (Cluster Akut-Krise) | "Wenn Zeitdruck, Intoxikation, Desorganisation oder akute Hoffnungslosigkeit..." |
+| useDownloadHandlers.js (Download-Template) | "Gibt es Anzeichen für Überforderung, Desorganisation oder Versorgungslücken?" |
+
+**Varianten:**
+1. "fehlende Alltagsstruktur" — verliert die Konnotation der akuten Auflösung, passt aber in Grundlagen-Kontext
+2. "chaotische Alltagslage" — umgangssprachlicher, trifft aber den Kern
+3. "Auflösung von Alltagsstrukturen" — präziser, aber selbst nominallastig
+
+**Empfehlung:** "Desorganisation" in Angehörigen-Texten (grundlagenContent.js) durch **"Auflösung von Routinen"** ersetzen. In Fachpersonen-Texten (Toolbox, ToolboxSection) **belassen** — dort ist der klinische Terminus präzise und erwartet.
+
+#### "Intoxikation" (3 Fundstellen)
+
+| Fundstelle | Kontext |
+|---|---|
+| toolboxContent.js (ADDICTION_TIPS) | "bei Intoxikation, Entzug oder Impulsivität..." |
+| toolboxContent.js (PRACTICE_BLOCKS) | "Suizidgedanken, Desorganisation, Intoxikation oder fehlende Aufsicht..." |
+| ToolboxSection.jsx (Cluster Akut-Krise) | "Wenn Zeitdruck, Intoxikation, Desorganisation oder akute Hoffnungslosigkeit..." |
+
+**Varianten:**
+1. "Rausch" — umgangssprachlich-verharmlosend, verliert die medizinische Ernsthaftigkeit
+2. "starker Substanzeinfluss" — neutral, weniger Fachsprache
+3. "akute Vergiftung" — medizinisch korrekt, aber dramatisierend
+
+**Empfehlung:** Alle 3 Fundstellen sind in Fachpersonen-Texten (Toolbox). "Intoxikation" dort **belassen** — Fachpersonen verstehen und erwarten den Terminus. Kein Angehörigen-Text betroffen.
+
+#### "Alltagstransfer" (1 Fundstelle)
+
+| Fundstelle | Kontext |
+|---|---|
+| glossaryContent.js (Angehörigenarbeit practice) | "...als wichtigen Teil von Stabilisierung, Alltagstransfer und Früherkennung." |
+
+**Varianten:**
+1. "Übertragung in den Alltag" — klar, aber sperrig in der Aufzählung
+2. "Gelerntes im Alltag umsetzen" — aktiv, verständlich
+3. "Alltagsanwendung" — kürzer, aber selbst Jargon
+
+**Empfehlung:** Wird durch Block 3 (Glossar-Nominalstil) bereits mit-reformuliert: "...Stabilität zu stärken, Gelerntes in den Alltag zu bringen und Warnsignale früh zu erkennen."
+
+---
+
+### 2.7 Findings für Audit 07 (Glossar-Konsistenz)
+
+Drei Begriffe, die ins Glossar aufgenommen werden sollten:
+1. **Parentifizierung** — prominent in evidenceContent.js, HomeLandingTemplate, GrundlagenSection
+2. **Trialog** — in grundlagenContent.js Cluster 3
+3. **Komorbidität** — als Eyebrow "Sucht und Komorbidität" in ToolboxSection.jsx
+
+Keine Glossar-Einträge in diesem Audit vorschlagen — das ist Aufgabe von Audit 07.
+
+---
+
+### 2.8 Reformulierungs-Prinzipien (für Phase 3)
+
+1. Nominalstil auflösen: Abstrakte -ung/-keit-Ketten in Verben umwandeln
+2. Meta-Stellen ersetzen: Beschreibungen der Seite durch Beschreibungen des Inhalts ersetzen
+3. Schachtelsätze nur teilen, wenn die Teilung den Inhalt klarer macht — nicht automatisch
+4. Floskeln: Nicht relevant (0 Treffer)
+5. Fachjargon: In Fachpersonen-Texten belassen, in Angehörigen-Texten wo möglich ersetzen
+6. Anrede: Konsequent Ich-Form in FAQ-Fragen, wo Angehörige als sprechendes Subjekt auftreten
+
+### 2.9 Was Phase 3 nicht darf
+
+- Keine neuen Fakten, Beispiele oder Zahlen
+- Kein Wechsel der Aussagerichtung ("kann" ≠ "sollte")
+- Keine Verkürzungen, die Bedeutung verlieren
+- Keine künstliche "Leichtigkeit" oder Stilisierungen
+- Kein Du wo Sie stehen soll
+- Juristische Präzision (Beistandschaft, Melderecht) hat Vorrang vor Stilglätte
+
+### 2.10 Lesbarkeits-Diff-Plan
+
+In Phase 4 wird die Wiener Sachtextformel pro Datei erneut berechnet. Erwartete Verschiebungen:
+- glossaryContent.js: WSF 15,6 → ~14,5 (durch aufgelösten Nominalstil)
+- HomeLandingTemplate.jsx: Meta-Text-Anteil fällt von 45% auf ~5%
+- ElearningSection.jsx: Meta-Text-Anteil fällt von 60% auf ~5%
+- Andere Dateien: minimal verändert
+
+---
+
+*Phase 2 abgeschlossen. Warte auf Freigabe der Einzelvorschläge für Block 1-5.*
