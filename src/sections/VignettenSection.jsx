@@ -17,10 +17,10 @@ export default function VignettenSection() {
     eyebrow: 'Fallreflexion',
     title: 'Training mit',
     accent: 'Vignetten',
-    lead: 'Kurze Fallsituationen zur Reflexion zwischen Schutz, Kooperation und systemischer Entlastung. Die Darstellung bleibt bewusst fachlich und abwägend statt dramatisch.',
+    lead: 'Kurze Fallprüfungen zur fachlichen Einschätzung von Entscheidungssituationen zwischen Schutz, Kooperation und systemischer Entlastung. Die Darstellung bleibt bewusst fachlich und abwägend.',
     asideTitle: 'Format',
     asideCopy:
-      'Ein Fall, zwei Optionen, direkte fachliche Rückmeldung. Gedacht als Gesprächsimpuls, nicht als Prüfung.',
+      'Ein Fall, zwei Optionen, direkte fachliche Rückmeldung. Ziel ist eine begründete Einschätzung, nicht ein Wissenstest.',
     stats: [
       {
         label: 'Aktueller Fall',
@@ -40,7 +40,7 @@ export default function VignettenSection() {
     titlePrefix: 'Aktueller',
     titleAccent: 'Kontext',
     description:
-      'Jede Vignette verdichtet eine typische Konstellation aus Klinik, Familie und Entscheidungsspielraum. Ziel ist nicht eine perfekte Antwort, sondern eine fachlich nachvollziehbare Priorisierung.',
+      'Jede Vignette verdichtet eine typische Entscheidungssituation aus Familie und Versorgungskontext. Ziel ist eine fachlich nachvollziehbare Einschätzung, nicht eine perfekte Antwort.',
     aside: {
       label: 'Status',
       value: `Fall ${currentIndex + 1} von ${VIGNETTEN.length}`,
