@@ -7,13 +7,6 @@ export const GLOSSARY_GROUPS = [
       'Diese Begriffe helfen, Belastung nicht nur zu benennen, sondern in eine ruhige, arbeitsfähige Sprache zu übersetzen. Sie sind für Gespräche besonders wichtig, in denen Scham, Ambivalenz oder Unsicherheit die Zusammenarbeit erschweren.',
     terms: [
       {
-        term: 'Relationale Recovery',
-        definition:
-          'Erholung bedeutet hier nicht nur weniger Symptome, sondern auch: tragfähige Beziehungen, Orientierung und Handlungsfähigkeit im Alltag zurückgewinnen.',
-        practice:
-          'Hilfreich, wenn Behandlung, Elternrolle und Umfeld zusammen gedacht werden müssen statt nur einzelne Symptome zu betrachten.',
-      },
-      {
         term: 'Psychisch belastete Elternschaft',
         definition:
           'Wenn psychische Symptome, Krisen oder anhaltende Instabilität beeinflussen, wie verfügbar Eltern sind, wie der Alltag funktioniert oder wie gut sie auf ihr Kind eingehen können.',
@@ -150,7 +143,7 @@ export const GLOSSARY_GROUPS = [
         definition:
           'Nahe Bezugspersonen gezielt einbeziehen: informieren, entlasten, orientieren und die Behandlung gemeinsam gestalten.',
         practice:
-          'Nicht nur als Zusatz verstehen, sondern als wichtigen Teil davon, Stabilität zu stärken, Gelerntes in den Alltag zu bringen und Warnsignale früh zu erkennen.',
+          'Nicht nur als Zusatz verstehen, sondern als wichtigen Teil davon, Stabilität zu stärken, Gelerntes in den Alltag zu bringen und Warnsignale früh zu erkennen. Angehörigenarbeit ist das Fachkonzept; Angehörigenberatung (z.B. bei der PUK Zürich) ist ein konkretes Angebot.',
       },
       {
         term: 'Weitervermittlung',
