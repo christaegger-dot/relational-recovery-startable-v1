@@ -1,6 +1,12 @@
 import Eyebrow from './Eyebrow';
 import AsideCard from './AsideCard';
 
+// Konvention (Audit 08): Maximal 3 Hierarchie-Ebenen pro Sektion.
+// Regel: eyebrow + title (mit optionalem titleAccent) + (description ODER paragraphs).
+// Der `aside` ist nur dann gerechtfertigt, wenn er einen echten Zusatzinhalt trägt,
+// der nicht durch die umliegenden Cards, Panels oder Listen abgedeckt wird.
+// Faustregel: Wenn der Aside nur eine Paraphrase der Description ist, weglassen.
+
 function RichCopy({ description, paragraphs }) {
   if (!description && (!paragraphs || !paragraphs.length)) return null;
 
@@ -28,6 +34,15 @@ export default function SectionHeader({
   children,
 }) {
   const hasTitle = title || titlePrefix || titleAccent;
+
+  // Dev-Indikator: Wenn alle optionalen Felder gleichzeitig aktiv sind,
+  // eine dezente Konsolen-Warnung ausgeben. Kein harter Fehler -- nur Anstupser.
+  if (import.meta.env?.DEV && eyebrow && hasTitle && (description || paragraphs) && aside) {
+    console.warn(
+      '[SectionHeader] Alle vier Felder aktiv (eyebrow, title, description/paragraphs, aside). ' +
+        'Konvention: maximal 3 Ebenen pro Sektion. Prüfen, ob der aside wirklich Zusatzinhalt trägt.',
+    );
+  }
 
   return (
     <div className="ui-split">
