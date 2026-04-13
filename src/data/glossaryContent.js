@@ -132,6 +132,13 @@ export const GLOSSARY_GROUPS = [
           'Hilft zu klären, wer informieren, abklären, entlasten oder in einer Krise eingreifen kann.',
       },
       {
+        term: 'Trialog',
+        definition:
+          'Ein gleichberechtigtes Gespräch zwischen drei Gruppen: Menschen mit psychiatrischer Erfahrung, Angehörigen und Fachpersonen. Die Idee entstand in den 1980er-Jahren aus der Psychiatrie-Erfahrenen-Bewegung und steht dafür, dass keine Perspektive wichtiger ist als die anderen.',
+        practice:
+          'In der Praxis finden Trialog-Gespräche in Seminaren, offenen Runden und Fachtagungen statt. Jede Gruppe bringt Wissen und Erfahrung ein, die die anderen nicht haben.',
+      },
+      {
         term: 'Kooperationsfenster',
         definition:
           'Praktischer Begriff für den Moment, in dem Familien, Fachpersonen und Hilfesystem gleichzeitig erreichbar genug sind, um einen nächsten Schritt verbindlich zu vereinbaren.',
