@@ -341,8 +341,8 @@ function NetworkMapSection({ mapping }) {
                 </div>
               </div>
 
-              <div className="ui-stack ui-stack--tight">
-                <SurfaceCard as="aside" tone="soft">
+              <div className="ui-stack ui-stack--tight ui-network-map-side">
+                <aside className="ui-network-map-side__block">
                   <p className="ui-fact-card__label">Aktive Lesart</p>
                   {activeLens?.label ? <h3 className="ui-card__title">{activeLens.label}</h3> : null}
                   {activeLens?.description ? <p className="ui-card__copy">{activeLens.description}</p> : null}
@@ -351,22 +351,22 @@ function NetworkMapSection({ mapping }) {
                       <p>{lensSummary}</p>
                     </div>
                   ) : null}
-                </SurfaceCard>
+                </aside>
 
                 <div className="ui-network-count-grid">
                   {counts.map((count) => (
-                    <SurfaceCard key={count.label} tone={count.tone || 'default'} className="ui-card--full-height">
+                    <div key={count.label} className="ui-network-map-count">
                       <p className="ui-fact-card__label">{count.label}</p>
                       <p className="ui-fact-card__value">{count.value}</p>
                       {count.note ? <p className="ui-fact-card__note">{count.note}</p> : null}
-                    </SurfaceCard>
+                    </div>
                   ))}
                 </div>
 
-                <SurfaceCard tone="default">
+                <div className="ui-network-map-side__block">
                   <p className="ui-fact-card__label">Nächster Schritt</p>
                   <p className="ui-card__copy">{nextStepText}</p>
-                </SurfaceCard>
+                </div>
               </div>
             </div>
           </SurfaceCard>

@@ -1,6 +1,6 @@
 // Design note: Editorial footer with warm layered panels, serif brand close, and calmer navigation rhythm that extends the paper-like interface language.
 import { memo, useMemo } from 'react';
-import { ArrowUpRight, Library, ShieldCheck, Users } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { TAB_ITEMS } from '../data/appShellContent';
 import { useAppState } from '../context/useAppState';
 
@@ -21,10 +21,7 @@ const Footer = memo(function Footer() {
       <div className="footer-shell__inner">
         <div className="footer-grid">
           <div className="footer-panel footer-panel--brand">
-            <div className="footer-brand-badge">
-              <Library size={14} aria-hidden="true" />
-              Fachportal Zürich
-            </div>
+            <div className="footer-brand-badge">Fachportal Zürich</div>
             <h2 className="footer-brand-title">
               Relational <br /> Recovery
             </h2>
@@ -72,14 +69,12 @@ const Footer = memo(function Footer() {
             <div className="footer-kicker footer-kicker--inverse">Arbeitsrahmen</div>
             <div className="footer-framework-list">
               <div className="footer-framework-item">
-                <ShieldCheck size={18} className="footer-framework-item__icon" aria-hidden="true" />
                 <p className="footer-framework-item__copy">
                   Zentrale Orientierung für Fachpersonen mit Fokus auf Einordnung, Triage, Gesprächsführung und
                   regionale Weitervermittlung.
                 </p>
               </div>
               <div className="footer-framework-item">
-                <Users size={18} className="footer-framework-item__icon" aria-hidden="true" />
                 <p className="footer-framework-item__copy">
                   Arbeitsstände bleiben lokal im Browser und können jederzeit zurückgesetzt oder neu aufgebaut werden.
                 </p>
@@ -91,11 +86,6 @@ const Footer = memo(function Footer() {
 
         <div className="footer-bottom">
           <p className="footer-bottom__claim">Fachlich ruhig. Systemisch. Praxisnah.</p>
-          <div className="footer-bottom__bars" aria-hidden="true">
-            <div className="footer-bottom__bar footer-bottom__bar--primary" />
-            <div className="footer-bottom__bar footer-bottom__bar--secondary" />
-            <div className="footer-bottom__bar footer-bottom__bar--tertiary" />
-          </div>
         </div>
       </div>
     </footer>

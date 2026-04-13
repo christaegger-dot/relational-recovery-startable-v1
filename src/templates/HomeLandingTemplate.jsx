@@ -68,23 +68,6 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
       title: 'Ein ruhiger, fachlich klarer Weg durch die Inhalte.',
       description:
         'Die Inhalte folgen einer Abfolge: zuerst verstehen, dann einschätzen, daraus konkrete Schritte ableiten und passende Hilfen finden.',
-      aside: {
-        label: 'Einordnung',
-        title: 'Kein starres Schema',
-        copy: 'Die Reihenfolge dient als Orientierung für Triage, Gesprächsplanung und psychoedukative Begleitung – nicht als lineares Pflichtprogramm.',
-      },
-      actions: [
-        {
-          label: 'Zum Evidenzteil',
-          onClick: () => navigate('evidenz', { focusTarget: 'heading' }),
-          variant: 'secondary',
-        },
-        {
-          label: 'Zur Toolbox',
-          onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
-          variant: 'secondary',
-        },
-      ],
       cards: [
         {
           label: 'Verstehen',
@@ -122,12 +105,6 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
       description:
         'Jeder Bereich ist direkt erreichbar -- mit kurzer Beschreibung, was Sie dort finden und wann er besonders hilfreich ist.',
       surface: 'subtle',
-      aside: {
-        label: 'Warum diese Struktur',
-        title: 'Schnelle Orientierung auch beim ersten Besuch',
-        copy: 'Die klare Gliederung hilft, sich auch bei erstem Besuch schnell zurechtzufinden.',
-        tone: 'default',
-      },
       cards: [
         {
           label: 'Training',

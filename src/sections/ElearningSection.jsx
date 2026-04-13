@@ -46,12 +46,6 @@ export default function ElearningSection() {
     titleAccent: 'klaren Lernbewegung.',
     description:
       'Jedes Modul beginnt mit einer fachlichen Leitidee, führt dann durch eine kurze Einordnung und schliesst mit einer Reflexionsfrage ab.',
-    aside: {
-      label: 'Einordnung',
-      title: 'Ruhig statt prüfungsartig',
-      copy: 'Das Format soll Denken, Sprache und fachliche Gewichtung stärken. Eine einzelne Reflexionsfrage reduziert Druck und hält den Fokus auf Anwendung im Arbeitsalltag.',
-      tone: 'soft',
-    },
     steps: [
       {
         label: 'Schritt 1',

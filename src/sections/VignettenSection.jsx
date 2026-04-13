@@ -59,12 +59,6 @@ export default function VignettenSection() {
     titleAccent: 'angezeigt',
     description:
       'Wählen Sie die Option, die in dieser Situation im Sinne von Schutz, Kooperation und systemischer Entlastung eher priorisiert wäre.',
-    aside: {
-      label: 'Arbeitsmodus',
-      title: 'Reflexion statt Prüfung',
-      copy: 'Die Rückmeldung dient der fachlichen Einordnung. Sie können Ihre Wahl jederzeit ändern.',
-      tone: 'default',
-    },
     question: 'Welche Option ist in dieser Situation fachlich eher angezeigt?',
     options: vignette.options.map((option) => ({
       ...option,

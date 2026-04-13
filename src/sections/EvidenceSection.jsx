@@ -111,8 +111,6 @@ export default function EvidenceSection({ downloadResources = [] }) {
     eyebrow: 'Kapitelübersicht',
     title: 'Die fachliche Grundlage für eine',
     accent: 'familienorientierte Praxis',
-    description:
-      'Die Evidenzseite ist entlang der klinischen Lernlogik aufgebaut: zuerst Relevanz und Familiensystem verstehen, dann Gesprächsführung mit Kindern und Eltern präzisieren und schliesslich Interventionen, Ressourcen und Materialien bündeln.',
     aside: {
       label: 'Orientierung',
       title: 'Vom Verstehen zum Handeln',
@@ -157,11 +155,6 @@ export default function EvidenceSection({ downloadResources = [] }) {
       title: 'Warum das Thema',
       accent: 'früh in die Behandlung gehört',
       paragraphs: RELEVANCE_POINTS,
-      aside: {
-        label: 'Versorgungsperspektive',
-        title: 'Elternschaft ist kein Nebenthema.',
-        copy: 'Wenn psychische Belastung den Familienalltag, die Erreichbarkeit von Erwachsenen und die kindliche Orientierung mitprägt, muss Elternschaft früh in Anamnese, Behandlung und Austrittsplanung sichtbar werden.',
-      },
       metrics: RELEVANCE_STATS.map((item) => ({
         label: item.label,
         value: item.value,
@@ -205,11 +198,6 @@ export default function EvidenceSection({ downloadResources = [] }) {
         'Psychoedukation hilft Kindern, Verhalten und Belastung eines Elternteils besser einzuordnen. Nicht das Wissen an sich überfordert, sondern meist die Sprachlosigkeit, Unsicherheit und Fantasie ohne Erklärung.',
         'Entscheidend ist eine Haltung, die ehrlich benennt, was los ist, ohne Kinder mit Erwachseneninhalten zu überladen. Gute Gespräche reduzieren Schuldgefühle, schaffen Orientierung und stärken Beziehung.',
       ],
-      aside: {
-        label: 'Leitidee',
-        title: 'Verstehbare Sprache schützt.',
-        copy: 'Kinder brauchen keine perfekte Erklärung, sondern eine stimmige, wiederholbare und entwicklungsangemessene Sprache dafür, was sich zuhause verändert und was verlässlich bleibt.',
-      },
       highlightList: {
         tone: 'soft',
         items: [...PSYCHOEDUCATION_BENEFITS, ...PSYCHOEDUCATION_PREPARATION_POINTS, ...PSYCHOEDUCATION_PRACTICE_POINTS],
@@ -256,11 +244,6 @@ export default function EvidenceSection({ downloadResources = [] }) {
         'Eltern suchen Hilfe oft nicht zu spät aus Gleichgültigkeit, sondern weil Scham, Erschöpfung, Angst vor Bewertung oder Sorge um Kontrolle den Zugang erschweren.',
         'Fachlich hilfreich sind transparente, kleine und nachvollziehbare Schritte: Was passiert zuerst? Wer macht was? Was bedeutet Hilfe konkret für den Alltag der Kinder und der Eltern?',
       ],
-      aside: {
-        label: 'Kooperation',
-        title: 'Ambivalenz ist normal und bearbeitbar.',
-        copy: 'Gelingende Zusammenarbeit entlastet, benennt Ängste offen und stärkt die Elternrolle, statt Eltern nur durch Risikobrillen zu betrachten.',
-      },
       highlightList: {
         tone: 'soft',
         items: [
@@ -306,11 +289,6 @@ export default function EvidenceSection({ downloadResources = [] }) {
         'Familienorientierte Unterstützung wirkt besonders dann plausibel, wenn sie Beziehung, Alltag, Information, Entlastung und soziale Ressourcen gemeinsam betrachtet.',
         'Nicht jede Familie braucht dieselbe Intervention. Hilfreich ist ein passender Mix aus Psychoedukation, Familiengespräch, Vernetzung, alltagsnaher Entlastung und klaren Zuständigkeiten in Belastungsspitzen.',
       ],
-      aside: {
-        label: 'Systemlogik',
-        title: 'Schutz entsteht durch Kombination.',
-        copy: 'Tragfähig werden Unterstützungsprozesse dann, wenn offizielle Hilfen, private Bezugspersonen und konkrete Alltagsschritte aufeinander bezogen werden.',
-      },
       highlightList: {
         tone: 'soft',
         items: [...INTERVENTION_PROGRAM_POINTS, ...PUK_CONTEXT_POINTS, ...ABOUT_THIS_WEBSITE_POINTS],

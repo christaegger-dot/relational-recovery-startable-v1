@@ -19,7 +19,7 @@ export default class ErrorBoundary extends Component {
     return (
       <section className="rounded-[2rem] border border-[#e4cbbb] bg-[#fff6ee] px-8 py-12 md:px-12 md:py-16">
         <div className="max-w-2xl mx-auto flex flex-col gap-6">
-          <div className="flex items-center gap-3 text-[#8d3f32]">
+          <div className="flex items-center gap-3 text-[var(--text-danger)]">
             <AlertTriangle size={24} aria-hidden="true" />
             <h2 className="text-lg font-bold">Ein Fehler ist aufgetreten</h2>
           </div>

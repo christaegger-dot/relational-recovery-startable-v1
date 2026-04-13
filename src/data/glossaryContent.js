@@ -211,12 +211,6 @@ export const GLOSSARY_INTRO = {
   title: 'Das Glossar ordnet Sprache entlang von Versorgung, Risiko und Beziehung.',
   description:
     'Das Glossar bündelt zentrale Begriffe an einem Ort: knapp definiert und direkt auf typische Arbeitssituationen bezogen.',
-  aside: {
-    label: 'Ziel',
-    title: 'Gemeinsame Sprache entlastet',
-    copy: 'Wenn Teams dieselben Kernbegriffe ähnlich verwenden, werden Fallbesprechungen ruhiger, Rückfragen klarer und Überleitungen zwischen Fachstellen verständlicher.',
-    tone: 'soft',
-  },
   cards: [
     {
       label: 'Cluster 1',
