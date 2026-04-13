@@ -32,10 +32,31 @@ export default class ErrorBoundary extends Component {
               Akute Krise
             </p>
             <p>
-              Bei akuter Lebensgefahr: <strong>144</strong>.
-              Im Kanton Zürich bei nicht lebensbedrohlichen Situationen:{' '}
-              <strong>AERZTEFON 0800 33 66 55</strong>.
-              Für Jugendliche: <strong>147 telefonisch</strong>.
+              Bei akuter Lebensgefahr:{' '}
+              <a
+                href="tel:144"
+                aria-label="Sanitätsnotruf 144 anrufen"
+                className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+              >
+                144
+              </a>
+              . Im Kanton Zürich bei nicht lebensbedrohlichen Situationen:{' '}
+              <a
+                href="tel:+41800336655"
+                aria-label="AERZTEFON 0800 33 66 55 anrufen"
+                className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+              >
+                AERZTEFON 0800 33 66 55
+              </a>
+              . Für Jugendliche:{' '}
+              <a
+                href="tel:147"
+                aria-label="Beratungstelefon 147 von Pro Juventute anrufen"
+                className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+              >
+                147
+              </a>
+              {' '}telefonisch.
             </p>
           </div>
           <button

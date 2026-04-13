@@ -174,10 +174,31 @@ export default function App() {
             <span className="mr-3 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#9a4b3c]">
               Akute Krise
             </span>
-            Bei akuter Lebensgefahr: <span className="font-extrabold">144</span>. Im Kanton Zürich bei nicht
-            lebensbedrohlichen Situationen:
-            <span className="font-extrabold"> AERZTEFON 0800 33 66 55</span>. Für Jugendliche ist{' '}
-            <span className="font-extrabold">147 telefonisch</span> der schnellste Weg.
+            Bei akuter Lebensgefahr:{' '}
+            <a
+              href="tel:144"
+              aria-label="Sanitätsnotruf 144 anrufen"
+              className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+            >
+              144
+            </a>
+            . Im Kanton Zürich bei nicht lebensbedrohlichen Situationen:{' '}
+            <a
+              href="tel:+41800336655"
+              aria-label="AERZTEFON 0800 33 66 55 anrufen"
+              className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+            >
+              AERZTEFON 0800 33 66 55
+            </a>
+            . Für Jugendliche ist{' '}
+            <a
+              href="tel:147"
+              aria-label="Beratungstelefon 147 von Pro Juventute anrufen"
+              className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+            >
+              147
+            </a>
+            {' '}telefonisch der schnellste Weg.
           </div>
           <button
             type="button"
