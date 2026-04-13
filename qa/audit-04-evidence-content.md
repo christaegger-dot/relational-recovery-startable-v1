@@ -289,7 +289,11 @@ Für den Kanton Zürich:
 
 **Beleg-Formulierung für Phase 3:** sourceId `kokes-2024`, bereits als Referenz in der juristischen Faktenbasis vorhanden. Die Aussage "die meisten sind unterstützend" ist durch 77-86% Beistandschaften quantitativ belegbar.
 
-**Status:** Kann in Phase 3 ohne externe Recherche geschlossen werden. Blaupause für Audit-übergreifende Quellennutzung.
+**Status:** Kann in Phase 3 ohne externe Recherche geschlossen werden.
+
+#### Audit-übergreifende Wiederverwendung
+
+E18 ist der erste dokumentierte Fall, in dem ein Audit ein Artefakt eines früheren Audits als Quellenbeleg nutzt: Audit 04 (Evidence) bedient sich an der juristischen Faktenbasis aus Audit 03 (KESB), konkret an der KOKES-Jahresstatistik 2024 mit ihren ZGB-Artikel-spezifischen Bestandszahlen. Das Muster ist übertragbar: Künftige Audits sollten vor einer externen Recherche prüfen, ob ein bereits abgeschlossenes Audit die benötigte Quelle bereits inventarisiert hat. Dafür ist entscheidend, dass jedes Audit seine Quellen mit maschinenlesbaren Identifikatoren versieht (hier: `kokes-2024`), die audit-übergreifend referenzierbar sind. Die in Abschnitt 2.3 vorgeschlagene `sourcesContent.js` wird damit zum zentralen Quellen-Register des gesamten Projekts, nicht nur des Evidence-Teils.
 
 ---
 
