@@ -1,5 +1,24 @@
 # Audit 09 -- Frontend-Richtlinien-Compliance-Audit
 
+## Nebenbefund, vorab behoben
+
+**R31 -- Telefonnummern nicht klickbar** war in der Phase-1-Inventur zunächst als Compliance-Verstoss unter den Hot-Spots geführt. Nach Rücksprache mit der Auftraggeberin wurde der Fund als funktionaler Defekt der Kern-Notfallfunktion klassifiziert und noch vor Phase 2 behoben -- ausserhalb der Audit-09-Phasenstruktur, analog zum CSS-Tippfehler-Fix vor Audit 08.
+
+**Fix-Commit:** `fix: tel-links fuer notfallnummern in emergency-banner und errorboundary`
+
+**Änderungen:**
+- `src/App.jsx` Emergency-Banner: `144`, `AERZTEFON 0800 33 66 55`, `147` als `<a href="tel:...">` statt `<span>`.
+- `src/components/ErrorBoundary.jsx` Notfallblock: dieselben drei Nummern als `tel:`-Links.
+- Pro Link ein `aria-label` mit vollem Kontext (Screenreader hören „Sanitätsnotruf 144 anrufen" statt nur „144").
+- Visueller Hinweis via Underline + `font-extrabold`, damit die Links als Links erkennbar sind.
+- AERZTEFON-Nummer als `tel:+41800336655` (Roaming-Robustheit); `144` und `147` als Kurzwahlen, die das Schweizer Mobilnetz direkt auflöst.
+
+**Begründung für Sofortfix:** Eine Care-Website, deren Notfallnummern im Akutmoment nicht antippbar sind, verletzt das zentrale Sicherheitsversprechen. Der Defekt hat Vorrang vor der weiteren Audit-Arbeit.
+
+**R31 in Phase 1 entsprechend angepasst:** Status von „nicht konform" auf „vorab behoben" gewechselt, nicht mehr im Hot-Spot-Set, Regel aber weiterhin in der Extraktion aufgeführt.
+
+---
+
 ## Phase 1 -- Inventur
 
 ### 1.0 Vorgehen
