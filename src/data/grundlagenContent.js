@@ -26,7 +26,7 @@ export const GRUNDLAGEN_HERO = {
 };
 
 export const GRUNDLAGEN_INTRO = {
-  eyebrow: 'Arbeitslogik',
+  eyebrow: 'Aufbau',
   title: 'Der Bereich verbindet Grundlagenwissen mit häufigen Entscheidungsmomenten.',
   description:
     'Statt lose Antworten zu sammeln, ordnet die Seite wiederkehrende Fragen entlang typischer Belastungslagen. So entsteht ein Wissenspfad, der Begriffe, emotionale Entlastung und konkrete Orientierung miteinander verbindet.',

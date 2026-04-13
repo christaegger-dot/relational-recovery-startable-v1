@@ -240,7 +240,7 @@ export default function ToolboxSection({
       },
     ],
     aside: {
-      label: 'Arbeitslogik',
+      label: 'Überblick',
       title: 'Sicherheit zuerst, dann Struktur, dann Kooperation',
       copy: 'Die Seite priorisiert zuerst akute Risiken, danach Versorgung und Kinder-Schutzteil und erst anschliessend die längerfristige Zusammenarbeit mit Netzwerk und Fachstellen.',
       tone: 'soft',
