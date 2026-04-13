@@ -200,4 +200,194 @@ Das Template (`VignettenPageTemplate.jsx`) rahmt sie als:
 
 ---
 
-*Phase 1 abgeschlossen. Warte auf Freigabe für Phase 2 (Diagnose und Massnahmenkatalog).*
+## Phase 2 -- Diagnose und Massnahmenkatalog
+
+### 2.0 Strategische Ausgangsfrage: Reichen zwei Vignetten?
+
+Bei n=2 trägt jede Vignette 50% der Repräsentations-Last. Jede Schlagseite wird zur 50%-Schlagseite. Die Geschlechterbalance (1/1) ist ein Zufallseffekt, kein Verdienst. Drei Szenarien:
+
+#### Szenario A: Bei zwei Vignetten bleiben
+
+| Dimension | Wert |
+|---|---|
+| **Aufwand** | S |
+| **Konsequenz** | V2 muss in jedem Fall gerettet werden, weil es keine Ausweichoption gibt. Keine Repräsentations-Breite erreichbar. |
+| **Risiken** | Zwei Vignetten für ein Fachportal wirken dünn. Die binäre richtig/falsch-Struktur lässt wenig Raum für die versprochene "Reflexion". |
+| **Voraussetzungen** | V1 reformulieren, V2 substanziell umschreiben. Kein redaktioneller Neuaufwand jenseits der Reparatur. |
+
+#### Szenario B: Ausbau auf vier Vignetten
+
+| Dimension | Wert |
+|---|---|
+| **Aufwand** | M (V1 reformulieren, V2 entfernen oder ersetzen, 2 neue Vignetten als Stubs → redaktionelle Ausarbeitung durch Auftraggeberin) |
+| **Konsequenz** | V2 kann ersetzt werden. Zwei neue Stubs schliessen Repräsentationslücken (z.B. ambulante Alltagssituation, Suchtkontext, Langzeitbegleitung). Echte Varianz wird möglich. |
+| **Risiken** | Redaktioneller Aufwand für 2 neue Vignetten liegt bei der Auftraggeberin, nicht bei Claude Code. Neue Vignetten dürfen keine LLM-Erfindungen sein — sie brauchen klinische Plausibilität und Sensibilität, die nur aus Praxiswissen kommen kann. |
+| **Voraussetzungen** | Auftraggeberin formuliert 2 neue Fallbeschreibungen. Claude Code liefert nur die Datenstruktur-Stubs und die Template-Anpassung. |
+
+#### Szenario C: Ausbau auf sechs oder mehr Vignetten
+
+| Dimension | Wert |
+|---|---|
+| **Aufwand** | L (4+ neue Vignetten, systematische Repräsentations-Matrix, ggf. Dramaturgie-Umbau) |
+| **Konsequenz** | Echte Fallvielfalt: Depression, Psychose, Sucht, Persönlichkeit, ambulant, stationär, Teenager, Kleinkind, Migration, Mehrfachbelastung. |
+| **Risiken** | Grösster Aufwand. Bindet erhebliche redaktionelle Kapazität. Gefahr der Überforderung, wenn die Qualität der Einzelvignetten nicht gehalten wird. |
+| **Voraussetzungen** | Redaktionelles Konzept mit systematischer Repräsentations-Matrix vorab. Alle Vignetten von der Auftraggeberin inhaltlich verantwortet. |
+
+**Keine Empfehlung.** Die Entscheidung liegt bei der Auftraggeberin und hängt von den verfügbaren redaktionellen Kapazitäten ab.
+
+---
+
+### 2.1 Diagnose
+
+#### V1: Strukturell intakt, braucht kosmetische Arbeit
+
+V1 ist im Kern rettbar. Die Fallkonstellation (Mutter mit Depression, Partner vorhanden, stationäre Aufnahme, SPF als Lösung) ist sinnvoll und zeigt einen realistischen Entscheidungsmoment. Die Probleme sind:
+- Exaktes Alter (32) → durch Range ersetzen
+- "Affektive Barriere" → verständlicher formulieren
+- Kinder als Personen unsichtbar → einen Satz zur kindlichen Perspektive ergänzen
+- Keine Ressource sichtbar → Partnerpräsenz als Ressource markieren
+
+**Kategorie: Reformulieren.**
+
+#### V2: Substanziell problematisch, Kern nicht kompatibel
+
+V2 hat drei überlagerte Probleme, die einzeln reformulierbar wären, in Kombination aber den Kern der Vignette betreffen:
+
+1. **Fachlich falsch:** "Verweigert Nahrung" ist ein Verb der Handlungsabsicht. Bei einer akuten Psychose ist die Handlungsfähigkeit eingeschränkt — das ist genau das, was die Episode definiert. Die Formulierung macht aus einem Symptom eine Willensentscheidung. Das ist nicht nur stigmatisierend, sondern **sachlich unzutreffend**.
+
+2. **Konzeptuell inkohärent:** Herr S. ist ein handlungsunfähiges Defizit-Objekt. Kein Beziehungsaspekt, keine Ressource, keine Entwicklungsmöglichkeit. Das ist das Gegenteil von "Relational Recovery".
+
+3. **Re-Identifikations-Risiko:** Alleinerziehender Vater + Psychose + Nahrungsverweigerung + Akutaufnahme ist eine so seltene Konstellation, dass sie in einem PUK-nahen Portal erkennbar sein könnte.
+
+Ein "Umschreiben" müsste alle drei Probleme lösen, was faktisch eine neue Vignette ergibt. Deshalb:
+
+**Kategorie: Entfernen und durch neue Vignette ersetzen** (bei Szenario B oder C) oder **substanziell umschreiben** (bei Szenario A, wenn keine neue Vignette möglich ist).
+
+---
+
+### 2.2 Dramaturgie und Framing
+
+Die Inventur hat eine Diskrepanz zwischen Rahmentext und Vignetten-Struktur festgestellt:
+
+| Rahmentext verspricht | Vignetten liefern |
+|---|---|
+| "Reflexion" | Binäre richtig/falsch-Entscheidung |
+| "Gesprächsimpuls" | Einzelarbeit mit sofortigem Feedback |
+| "Nicht als Prüfung" | Exakt eine korrekte Antwort mit Bewertung |
+| "Fachlich und abwägend" | Klare Eskalationslogik (SPF vs. KESB) |
+
+Zwei Optionen:
+
+#### Option D1: Rahmentext an die tatsächliche Funktion anpassen
+
+Der Rahmentext wird ehrlich: "Fallprüfungen zur Einschätzung von Entscheidungssituationen im Kindesschutz" statt "Reflexion und Gesprächsimpuls". Die Vignetten bleiben strukturell wie sie sind (binäre Entscheidung).
+
+| Pro | Contra |
+|---|---|
+| Geringster Aufwand | Das Versprechen von Reflexion war ein gutes Versprechen |
+| Ehrlich | Fallprüfungen haben einen engeren Lerneffekt als Gesprächsimpulse |
+
+#### Option D2: Vignetten an das Versprechen anpassen
+
+Die Vignetten werden als offene Gesprächsimpulse umgebaut: statt "richtig/falsch" werden mehrere fachlich vertretbare Optionen mit differenziertem Feedback angeboten. Keine einzige "korrekte" Antwort, sondern Abwägungen.
+
+| Pro | Contra |
+|---|---|
+| Entspricht dem Relational-Recovery-Geist (Komplexität statt Vereinfachung) | Substanzieller Umbau, jede Vignette braucht 3-4 Optionen statt 2 |
+| Fördert echte Reflexion | Fachlich anspruchsvoll: Optionen müssen alle vertretbar und unterscheidbar sein |
+
+**Keine Empfehlung.** Die Dramaturgie-Entscheidung hängt von der Zielgruppe (Fachpersonen in Ausbildung vs. erfahrene Fachpersonen) und vom gewünschten Lerneffekt ab.
+
+---
+
+### 2.3 Massnahmen pro Vignette
+
+#### V1: Reformulieren
+
+| Stelle | Vorher | Nachher (Vorschlag) |
+|---|---|---|
+| Alter | "Frau M. (32)" | "Frau M. (Anfang 30)" |
+| "affektive Barriere" | "starke affektive Barriere zu den Kindern" | "findet aktuell kaum emotionalen Zugang zu den Kindern" |
+| Kinder unsichtbar | (fehlt) | Einen Satz ergänzen: z.B. "Die ältere Tochter (Schulkind) zeigt sich still und zurückhaltend." |
+| Partner als Defizit | "Ihr Partner zeigt Zeichen von chronischer Erschöpfung" | "Ihr Partner ist anwesend und kooperationsbereit, zeigt aber Zeichen von Erschöpfung" |
+
+#### V2: Entfernen oder substanziell umschreiben
+
+**Bei Szenario A (Umschreiben):**
+
+| Stelle | Vorher | Nachher (Vorschlag) |
+|---|---|---|
+| Alter | "Herr S. (40)" | "Herr S. (um die 40)" |
+| "verweigert Nahrung" | "Er verweigert dem Kind seit 24 Stunden Nahrung aufgrund wahnhafter Befürchtungen" | "Das Kind hat seit dem Vortag keine regelmässige Mahlzeit erhalten. Herr S. ist aktuell nicht in der Lage, die Versorgung sicherzustellen." |
+| Keine Ressource | (fehlt) | "Eine Nachbarin hat die Situation bemerkt und sich gemeldet." |
+| Kind als Schutzobjekt | "dem Kind" | Alter/Geschlecht andeuten, Kind minimal als Person sichtbar machen |
+
+**Bei Szenario B oder C (Entfernen):**
+V2 ersatzlos entfernen und durch einen Stub mit klarer Markierung ersetzen: "NEUE VIGNETTE ERFORDERLICH — inhaltliche Ausarbeitung durch Auftraggeberin". Der Stub sollte die gewünschte Repräsentationslücke benennen (z.B. "ambulante Alltagssituation" oder "Sucht-Kontext").
+
+---
+
+### 2.4 Reformulierungs-Prinzipien
+
+Für alle Vignetten-Texte (bestehende und künftige):
+
+1. **Handlungs-Sprache statt Defizit-Sprache:** "findet aktuell kaum Zugang" statt "hat eine Barriere"; "ist nicht in der Lage" statt "verweigert"
+2. **Diagnose als Kontext:** "eine Frau, die wegen einer depressiven Episode begleitet wird" statt "die Depressive"
+3. **Kinder als Subjekte:** Mindestens ein Satz pro Vignette, der das Kind als Person sichtbar macht (Alter, Verhalten, Perspektive)
+4. **Ressourcen sichtbar machen:** Auch in schwierigen Situationen mindestens eine Ressource benennen (Partner, Nachbar:in, Fachperson, eigene Kooperationsbereitschaft)
+5. **Entwicklungsmöglichkeit andeuten:** Nicht durch Happy-End, sondern durch einen offenen Satz ("Die Frage ist, welcher nächste Schritt jetzt am meisten trägt.")
+6. **Symptom statt Absicht:** Bei psychotischem oder dissoziativem Erleben immer das Symptom als Ursache markieren, nie die Person als Akteurin der Einschränkung
+
+---
+
+### 2.5 Repräsentations-Lücken-Empfehlung
+
+**Vorbehalt:** Bei n=2 ist die Repräsentations-Matrix mathematisch unterinformativ. Aussagen über Schlagseiten sind nicht tragfähig. Die Matrix wird erst bei Szenario B oder C zum nützlichen Werkzeug.
+
+Falls Szenario B (4 Vignetten) gewählt wird, sollten die 2 neuen Vignetten idealerweise abdecken:
+
+| Lücke | Möglicher Fokus (Stichwort-Skizze, keine Ausarbeitung) |
+|---|---|
+| **Ambulante Alltagssituation** | Elternteil mit leichter-mittlerer Depression, ambulant behandelt, Alltags-Management, Schulkind, Frage: ab wann professionelle Entlastung? |
+| **Sucht-Kontext oder Langzeitbegleitung** | Elternteil mit Suchterkrankung und Komorbidität, oder: Langzeitbegleitung nach stationärem Aufenthalt, Rückkehr in den Alltag |
+
+---
+
+### 2.6 Anonymisierungs-Standard
+
+Vorschlag für alle bestehenden und künftigen Vignetten:
+
+| Detail | Regel |
+|---|---|
+| Name | Initial-Pseudonyme (Frau M., Herr S.) -- beibehalten |
+| Alter | **Alters-Range** statt exaktes Alter ("Anfang 30", "um die 40", "Mitte 20") |
+| Wohnort | Nie nennen |
+| Institution | Nie nennen ("wird stationär begleitet", nicht "wird in der PUK aufgenommen") |
+| Diagnose | Diagnosegruppe ja, spezifische Unterdiagnose nur wenn nötig |
+| Familiäre Details | Höchstens 2 identifizierende Details pro Vignette (z.B. Kinderzahl + Familienkonstellation, aber nicht + exaktes Alter + spezifische Symptombeschreibung) |
+| Zeitangaben | Keine exakten Zeitangaben ("seit dem Vortag" statt "seit 24 Stunden") |
+
+---
+
+### 2.7 Risikoeinschätzung
+
+**Vor Release zwingend:**
+
+1. **V2 "verweigert Nahrung"** muss korrigiert werden — egal welches Szenario. Die Formulierung ist fachlich falsch (Agentivität statt Symptom), stigmatisierend und birgt Re-Identifikations-Risiko. Wenn V2 beibehalten wird, muss sie substanziell umgeschrieben werden. Wenn Szenario B gewählt wird, kann sie ersetzt werden.
+
+2. **Exakte Altersangaben** in beiden Vignetten durch Ranges ersetzen.
+
+**Empfehlenswert, aber tolerierbar:**
+
+3. V1 "affektive Barriere" → verständlicher formulieren
+4. V1 Kinder als Personen sichtbar machen
+5. Dramaturgie-Diskrepanz (Rahmentext vs. Vignetten-Struktur) klären
+
+**Strategische Entscheidung (nicht Release-blockierend, aber richtungsweisend):**
+
+6. Szenario-Wahl (A/B/C)
+7. Dramaturgie-Wahl (D1/D2)
+
+---
+
+*Phase 2 abgeschlossen. Warte auf drei Entscheidungen der Auftraggeberin: (1) Szenario A, B oder C, (2) V2 umschreiben oder ersetzen, (3) Dramaturgie D1 oder D2.*
