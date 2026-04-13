@@ -158,10 +158,10 @@ export const GLOSSARY_HERO = {
 };
 
 export const GLOSSARY_INTRO = {
-  eyebrow: 'Arbeitslogik',
+  eyebrow: 'Aufbau',
   title: 'Das Glossar ordnet Sprache entlang von Versorgung, Risiko und Beziehung.',
   description:
-    'Die neue Glossar-Seite führt einen statisch-redaktionellen Wissensbereich in die Seitentyp-Architektur ein. Statt verstreuter Begriffe werden hier tragende Ausdrücke gebündelt, knapp beschrieben und direkt an typische Handlungssituationen im Arbeitsalltag angeschlossen.',
+    'Das Glossar bündelt zentrale Begriffe an einem Ort: knapp definiert und direkt auf typische Arbeitssituationen bezogen.',
   aside: {
     label: 'Ziel',
     title: 'Gemeinsame Sprache entlastet',
