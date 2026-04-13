@@ -390,4 +390,66 @@ Vorschlag für alle bestehenden und künftigen Vignetten:
 
 ---
 
-*Phase 2 abgeschlossen. Warte auf drei Entscheidungen der Auftraggeberin: (1) Szenario A, B oder C, (2) V2 umschreiben oder ersetzen, (3) Dramaturgie D1 oder D2.*
+### Entscheidungen der Auftraggeberin
+
+1. **Szenario B** (vier Vignetten) — V2 kann ersetzt werden, 2 neue Stubs schliessen Repräsentationslücken
+2. **V2 entfernen und durch Stub ersetzen** — "verweigert Nahrung" ist fachlich falsch, Kern inkohärent mit Relational Recovery
+3. **D1 jetzt, D2 als Zielbild** — Rahmentext ehrlich anpassen, neue Stubs als Gesprächsimpulse vorsehen
+
+---
+
+## Phase 3 -- Umsetzung
+
+### Arbeitsblock A: V1 Reformulierungen
+
+| Stelle | Vorher | Nachher |
+|---|---|---|
+| Alter | "Frau M. (32)" | "Frau M. (Anfang 30)" |
+| Schweregrad | "schweren depressiven Episode" | "depressiven Episode" |
+| Affektive Barriere | "starke affektive Barriere zu den Kindern" | "findet aktuell kaum emotionalen Zugang zu den Kindern" |
+| Partner | "zeigt Zeichen von chronischer Erschöpfung" | "ist anwesend und kooperationsbereit, zeigt aber Zeichen von Erschöpfung" |
+| Kind sichtbar | (fehlte) | "Die ältere Tochter (Schulkind) zeigt sich still und zurückhaltend." |
+
+### Arbeitsblock B+C: V2 entfernt + Stubs V2/V3 angelegt
+
+V2 (Herr S., Psychose, "verweigert Nahrung") vollständig entfernt. Zwei Stubs als Kommentare in `learningContent.js` angelegt (im Frontend nicht sichtbar):
+
+- **Stub V2:** Ambulante Alltagssituation — Repräsentationslücke "kein stationärer Akut-Moment"
+- **Stub V3:** Langzeitbegleitung — Repräsentationslücke "kein binärer Entscheidungsmoment"
+
+Beide markiert: "INHALT AUSSTEHEND", D2-Zielbild (Gesprächsimpuls), Anonymisierungs-Standard dokumentiert.
+
+### Arbeitsblock D: Rahmentext D1
+
+| Stelle | Vorher | Nachher |
+|---|---|---|
+| Hero-Lead | "Reflexion" | "Fallprüfungen zur fachlichen Einschätzung" |
+| Hero-Aside | "Gesprächsimpuls, nicht als Prüfung" | "begründete Einschätzung, nicht ein Wissenstest" |
+| CaseStudy | "Klinik, Familie und Entscheidungsspielraum" | "Entscheidungssituation aus Familie und Versorgungskontext" |
+
+### Arbeitsblock E: Anonymisierungs-Standard
+
+`qa/vignetten-anonymisierungsstandard.md` angelegt mit Pflichtregeln, Prinzip der kombinierten Verfremdung, Formulierungs-Prinzipien und D2-Zielbild.
+
+---
+
+## Phase 4 -- Verifikation
+
+| Prüfung | Ergebnis |
+|---|---|
+| `npm run build` | Bestanden |
+| `npm run lint` | Bestanden |
+| Stubs im Frontend nicht sichtbar | Ja -- als Kommentare angelegt |
+| Bericht vollständig | Ja: Phase 1-4 |
+
+### Offene Punkte (redaktionelle Tickets)
+
+1. **Stub V2 ausarbeiten** — ambulante Alltagssituation, D2-Format (Gesprächsimpuls)
+2. **Stub V3 ausarbeiten** — Langzeitbegleitung, D2-Format
+3. **V1 auf D2 umbauen** — sobald V2/V3 ausgearbeitet sind, auch V1 zu offenem Gesprächsimpuls erweitern
+4. **Rahmentext auf D2 aufwerten** — sobald alle Vignetten im Gesprächsimpuls-Format vorliegen
+5. **"Hochrisikogruppe" in evidenceContent.js** — Panel-Titel überarbeiten (nicht in diesem Audit, gehört zu Sprach-Audit oder Evidence-Review)
+
+---
+
+*Audit 05 abgeschlossen.*
