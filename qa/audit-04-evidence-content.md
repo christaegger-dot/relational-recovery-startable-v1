@@ -115,4 +115,192 @@ Die LITERATUR-Liste steht separat und ist mit keiner einzelnen Aussage direkt ve
 
 ---
 
-*Phase 1 abgeschlossen. Warte auf Freigabe für Phase 2 (Diagnose und Recherche-Liste).*
+## Phase 2 -- Diagnose und Recherche-Liste
+
+### 2.1 Diagnose
+
+#### Themenbereich-Schwächen
+
+| Themenbereich | Claims | Davon ohne Quelle | Davon "zu prüfen" | Bewertung |
+|---|---|---|---|---|
+| **Prävalenz / Statistiken** (RELEVANCE_STATS) | 6 | 4 | 6 | **Schwächster Bereich** -- jeder einzelne Wert braucht eine direkte Quelle |
+| Elternerleben (PARENT_*) | 5 | 4 | 0 | Fachlich solide, aber quellenarm |
+| Kindliches Erleben (CHILD_*) | 4 | 4 | 0 | Konsens-Aussagen, trotzdem Beleg wünschenswert |
+| Psychoedukation (PSYCHOEDUCATION_*) | 4 | 4 | 0 | Lehrbuch-Wissen, Quellenlücke akzeptabel |
+| Hilfebarrieren (HELP_BARRIER_*) | 1 | 1 | 1 | E18 intern belegbar (Audit 03) |
+| Interventionen (INTERVENTION_*) | 3 | 0 | 0 | Am besten belegt (Lenz-Verweis) |
+| Institutionell (PUK, SUPPORT) | 2 | 0 | 1 | E24 abhängig vom aktuellen Angebotsstand |
+
+#### Referenzen ohne Jahr -- eigene Kategorie
+
+Die folgenden 4 Literatur-Einträge haben **kein Erscheinungsjahr** und sind damit faktisch unbelegt, weil sie weder verifizierbar noch zeitlich einordbar sind:
+
+| # | Eintrag | Problem | Priorität |
+|---|---------|---------|-----------|
+| L5 | Gesundheitsförderung Kt. ZH -- Online-Informationsseite | Kein Jahr, kein Titel eines konkreten Dokuments. Ist das eine Webseite? Ein Faktenblatt? | P1 -- identifizieren |
+| L6 | PUK Zürich -- Informationen für Angehörige | Kein Jahr. Institutionelle Webseite, kein zitierfähiges Dokument. | P2 -- als Weblink kennzeichnen, nicht als Quelle |
+| L7 | Institut Kinderseele Schweiz -- Hilfe finden | Kein Jahr. Orientierungshilfe, kein Forschungsdokument. | P2 -- als Weblink kennzeichnen |
+| L10 | Stauber, A. et al. -- Praxisforschung Band 25 | Kein Jahr. Praxisforschungsband, aber ohne Jahr und Verlag nicht auffindbar. | P1 -- Jahr und Verlag identifizieren |
+
+**Empfehlung:** L5, L6, L7 sind keine Literatur-Referenzen im wissenschaftlichen Sinn, sondern Weblinks zu Institutionen. Sie sollten aus der LITERATUR-Liste entfernt und stattdessen in SUPPORT_OFFERS oder als separate `WEBLINKS`-Kategorie geführt werden. L10 braucht eine vollständige bibliographische Identifikation.
+
+#### Stilistische Inkonsistenzen im Quellen-Format
+
+| Problem | Beispiel | Häufigkeit |
+|---|---|---|
+| Autor-Format uneinheitlich | "Lenz, A. (2014)" vs. "pädiatrie schweiz (2021)" vs. "Jones, M. et al. (2016)" | Durchgehend |
+| Publisher vs. Journal ungetrennt | "Psychiatrische Praxis, 38." vs. "Göttingen: Hogrefe." vs. "Online-Informationsseite." | Durchgehend |
+| DOI manchmal im publisher-Feld | "Sozialpädiatrie / DOI: 10.35190/d2021.4.5" | 2x |
+| Link manchmal vorhanden, manchmal nicht | L1-L3 ohne Link, L4-L9 mit Link | ~50/50 |
+
+---
+
+### 2.2 Priorisierung
+
+#### P1 -- Vor Release zwingend
+
+| ID | Aussage | Warum P1 |
+|---|---------|---------|
+| E1 | 18% CH-Prävalenz | Zentrale Eingangsstatistik, kein Beleg, konkreter Wert |
+| E4 | 17-45% Elternschaft stationär | Enorme Spannbreite suggeriert Präzision, wo keine ist |
+| E5 | 53% Hilfebedarf stationär | Konkreter Prozentwert ohne Quelle |
+| E6 | ca. 70% Elternschaftsrate affektive Störungen | Konkreter Prozentwert ohne Quelle |
+| L10 | Stauber et al. ohne Jahr | Nicht verifizierbar, muss identifiziert werden |
+| L5 | Gesundheitsförderung ZH ohne Jahr | Muss als Weblink reklassifiziert oder identifiziert werden |
+
+#### P2 -- Empfehlenswert
+
+| ID | Aussage | Warum P2 |
+|---|---------|---------|
+| E2 | 300'000 Kinder CH | Hat Teil-Quelle (pädiatrie schweiz), aber indirekt |
+| E3 | 15-23% international | Hat Teil-Quelle, gängige Schätzung |
+| E18 | "Die meisten KS-Massnahmen unterstützend" | **Intern abgedeckt via Audit 03** (KOKES 2024) |
+| E24 | PUK-Beratung kostenlos | Institutionelle Angabe, Aktualität prüfen |
+| L2 | Krumm/Becker 2011 | Veralterungsrisiko bei Versorgungsforschung |
+| L6, L7 | Institutionelle Webseiten | Aus LITERATUR entfernen, als Weblinks führen |
+
+#### P3 -- Kann warten
+
+| ID | Aussage | Warum P3 |
+|---|---------|---------|
+| E10-E17 | Fachbehauptungen (Konsens) | Unauffällig, Lehrbuch-Niveau, Quellen wünschenswert aber nicht zwingend |
+| E19-E21 | Interventionsprogramme | Bereits teil-belegt über Lenz |
+| E22-E23 | Differenzierung Diagnose/Gefährdung | Konsens-Aussagen |
+| L1, L3, L8 | Ältere Standardwerke | Stabile Inhalte, Aktualisierung nice-to-have |
+
+---
+
+### 2.3 Zitations-Architektur
+
+#### Warum eine Architektur nötig ist
+
+Bei 0 von 23 Inline-Zitationen ist das Problem nicht "einzelne Lücken füllen", sondern "eine Zitations-Praxis etablieren, wo heute keine ist". Die LITERATUR-Liste steht als separater Export ohne Verbindung zu einzelnen Claims. Für Leser:innen (Fachpersonen) ist nicht erkennbar, auf welcher Grundlage eine Zahl basiert.
+
+#### Datenstruktur-Vorschlag
+
+**Option A: Source-IDs an Claims (empfohlen)**
+
+Jeder Daten-Export, der verifiable Claims enthält, erhält ein optionales `sourceIds`-Array:
+
+```js
+export const RELEVANCE_STATS = [
+  {
+    label: 'Behandlungsbedürftige psychische Störungen',
+    value: '18 %',
+    note: 'Anteil der Bevölkerung in der Schweiz...',
+    sourceIds: ['obsan-2023'],
+  },
+];
+```
+
+Die Quellen selbst werden in einer neuen Datei `src/data/sourcesContent.js` strukturiert:
+
+```js
+export const SOURCES = {
+  'obsan-2023': {
+    author: 'Schweizerisches Gesundheitsobservatorium (Obsan)',
+    year: 2023,
+    title: 'Psychische Gesundheit in der Schweiz',
+    type: 'report',
+    doi: null,
+    link: 'https://...',
+    chFocus: true,
+  },
+  'paediatrie-ch-2021': {
+    author: 'pädiatrie schweiz',
+    year: 2021,
+    title: 'Kinder und Jugendliche aus Familien mit...',
+    type: 'journal',
+    doi: '10.35190/d2021.4.5',
+    link: 'https://...',
+    chFocus: true,
+  },
+};
+```
+
+**Vorteile gegenüber Fliesstext-Zitaten:**
+1. **Maschinenlesbar**: Quellen können automatisch geprüft, sortiert und angezeigt werden
+2. **Deduplizierung**: Eine Quelle wird einmal definiert und kann von beliebig vielen Claims referenziert werden
+3. **CH-Fokus-Markierung**: `chFocus: true/false` ermöglicht Filterung nach Schweizer Evidenz
+4. **Aktualitäts-Tracking**: Automatische Altersberechnung aus `year`
+5. **Konsistenz**: Einheitliches Format statt der heutigen Mischung aus "Göttingen: Hogrefe" und "DOI: 10.35190/..."
+
+#### Visueller Darstellungs-Vorschlag
+
+**Im Frontend (Empfehlung für Audit 08 Visual):**
+
+1. **Superscript-Nummern** neben Claims, die auf Quellen verweisen: "18% der Bevölkerung¹"
+2. **Aufklapp-Details** pro Sektion: Ein diskreter "Quellen"-Button am Ende jeder Zone, der die referenzierten Quellen einblendet
+3. **Literaturverzeichnis** am Ende der Evidenz-Seite: Automatisch generiert aus allen referenzierten `sourceIds` der angezeigten Sektionen
+
+Das Frontend-Rendering wird in Phase 3 **nicht** gebaut -- nur die Datenstruktur. Die visuelle Umsetzung ist Sache von Audit 08.
+
+#### Migration der bestehenden 11 Literatur-Referenzen
+
+| Heutiger Eintrag | Neue ID | Typ im neuen Schema | Aktion |
+|---|---|---|---|
+| Lenz, A. (2014) | `lenz-2014` | book | Übernehmen |
+| Krumm & Becker (2011) | `krumm-becker-2011` | journal | Übernehmen, Veralterungsrisiko markieren |
+| Plass & Wiegand-Grefe (2012) | `plass-wiegandgrefe-2012` | book | Übernehmen |
+| pädiatrie schweiz (2021) | `paediatrie-ch-2021` | journal | Übernehmen, chFocus: true |
+| Gesundheitsförderung ZH | -- | **Weblink, nicht Quelle** | In SUPPORT_OFFERS oder WEBLINKS verschieben |
+| PUK Zürich | -- | **Weblink, nicht Quelle** | In SUPPORT_OFFERS verschieben (dort bereits vorhanden) |
+| Institut Kinderseele | -- | **Weblink, nicht Quelle** | In SUPPORT_OFFERS verschieben (dort bereits vorhanden) |
+| Jones et al. (2016) | `jones-2016` | journal | Übernehmen |
+| Reupert et al. (2021) | `reupert-2021` | journal | Übernehmen, chFocus: false |
+| Stauber et al. (o.J.) | -- | **Identifikation nötig** | In Recherche-Liste |
+| Lenz, A. (2019) | `lenz-2019` | conference | Übernehmen |
+
+**Ergebnis:** Von 11 Einträgen werden 7 migriert, 3 als Weblinks reklassifiziert, 1 muss erst identifiziert werden.
+
+---
+
+### 2.4 E18 als intern abgedeckter Claim
+
+**Aussage E18:** "In der Praxis sind die meisten Kindesschutzmassnahmen unterstützend, nicht trennend" (HELP_BARRIER_PANELS[1])
+
+**Interner Beleg (Audit 03):** Die KOKES-Jahresstatistik 2024 (Quelle: `qa/juristische-faktenbasis-kindesschutz.md`, Abschnitt 1) weist schweizweit aus:
+- 49'875 Kinder mit Kindesschutzmassnahmen total
+- 38'392 zu Art. 308 ZGB (Beistandschaft) = **77%**
+- 5'107 zu Art. 310 ZGB (Aufhebung Aufenthaltsbestimmungsrecht) = **10%**
+
+Für den Kanton Zürich:
+- 7'351 von 8'542 = Art. 308 = **86%**
+
+**Beleg-Formulierung für Phase 3:** sourceId `kokes-2024`, bereits als Referenz in der juristischen Faktenbasis vorhanden. Die Aussage "die meisten sind unterstützend" ist durch 77-86% Beistandschaften quantitativ belegbar.
+
+**Status:** Kann in Phase 3 ohne externe Recherche geschlossen werden. Blaupause für Audit-übergreifende Quellennutzung.
+
+---
+
+### 2.5 Risikoeinschätzung
+
+**Vor Release zwingend:**
+Die 6 P1-Stellen (E1, E4, E5, E6, L10, L5) müssen belegt oder als "Schätzung ohne Primärquelle" deklariert werden. 4 davon sind konkrete Prozentwerte auf der prominentesten Seite des Portals (Evidenz-Eingangsstatistiken).
+
+**Systemisches Risiko:**
+Das Fehlen jeglicher Inline-Zitation ist für ein Fachportal, das Fachpersonen adressiert, ein Glaubwürdigkeitsproblem. Fachpersonen erwarten nachvollziehbare Quellenangaben, insbesondere bei Statistiken. Die Zitations-Architektur (2.3) hat deshalb strategische Priorität.
+
+---
+
+*Phase 2 abgeschlossen. Warte auf Freigabe für Phase 3.*
