@@ -68,18 +68,6 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
       title: 'Ein ruhiger, fachlich klarer Weg durch die Inhalte.',
       description:
         'Die Inhalte folgen einer Abfolge: zuerst verstehen, dann einschätzen, daraus konkrete Schritte ableiten und passende Hilfen finden.',
-      actions: [
-        {
-          label: 'Zum Evidenzteil',
-          onClick: () => navigate('evidenz', { focusTarget: 'heading' }),
-          variant: 'secondary',
-        },
-        {
-          label: 'Zur Toolbox',
-          onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
-          variant: 'secondary',
-        },
-      ],
       cards: [
         {
           label: 'Verstehen',
