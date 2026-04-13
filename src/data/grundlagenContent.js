@@ -30,12 +30,6 @@ export const GRUNDLAGEN_INTRO = {
   title: 'Der Bereich verbindet Grundlagenwissen mit häufigen Entscheidungsmomenten.',
   description:
     'Statt lose Antworten zu sammeln, ordnet die Seite wiederkehrende Fragen entlang typischer Belastungslagen. So entsteht ein Wissenspfad, der Begriffe, emotionale Entlastung und konkrete Orientierung miteinander verbindet.',
-  aside: {
-    label: 'Warum das hilft',
-    title: 'Fragen sind oft der erste Zugang zu Orientierung',
-    copy: 'Viele Angehörige suchen nicht zuerst nach Theorie, sondern nach einer Antwort auf das, was sie im Moment beschäftigt. Ein FAQ-orientierter Grundlagenbereich holt genau dort ab und führt dann weiter in Sprache, Einordnung und Handlungsoptionen.',
-    tone: 'soft',
-  },
   cards: [
     {
       label: 'Cluster 1',
