@@ -41,11 +41,11 @@ export default function ElearningSection() {
   };
 
   const sequence = {
-    eyebrow: 'Didaktische Logik',
+    eyebrow: 'Aufbau der Module',
     titlePrefix: 'Jedes Modul folgt einer',
     titleAccent: 'klaren Lernbewegung.',
     description:
-      'Die neue Seitenstruktur übersetzt die bisherige Elearning-Sektion in eine wiederverwendbare Learning-Architektur. Sie beginnt mit Einordnung und Orientierung, macht dann die didaktische Sequenz sichtbar und führt erst danach in die einzelnen Module.',
+      'Jedes Modul beginnt mit einer fachlichen Leitidee, führt dann durch eine kurze Einordnung und schliesst mit einer Reflexionsfrage ab.',
     aside: {
       label: 'Einordnung',
       title: 'Ruhig statt prüfungsartig',
@@ -94,10 +94,10 @@ export default function ElearningSection() {
 
   const modulesSection = {
     eyebrow: 'Lernmodule',
-    titlePrefix: 'Die Inhalte sind jetzt als',
-    titleAccent: 'eigener Seitentyp organisiert.',
+    titlePrefix: 'Die Lernmodule im',
+    titleAccent: 'Überblick.',
     description:
-      'Der Modulbereich trennt wiederkehrende Struktur von konkreten Inhalten. Dadurch lassen sich künftige Lernbausteine, andere Themenfelder oder vertiefende Formate ohne neue Monolith-Sektion auf dieselbe Template-Logik aufsetzen.',
+      'Weitere Module zu anderen Themen können jederzeit ergänzt werden. Das Format bleibt dabei gleich: Leitidee, Einordnung, Reflexionsfrage.',
     aside: {
       label: 'Bearbeitungsstand',
       value: `${completedCount}/${totalCount}`,
