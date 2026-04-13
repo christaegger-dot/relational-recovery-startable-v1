@@ -35,6 +35,20 @@ export const GLOSSARY_GROUPS = [
           'Im Gespräch aktiv nach stillem Mittragen, Sorgeverhalten und Verantwortungsübernahme von Kindern fragen. Zwischen altersangemessener Mithilfe und überfordernder Rollenumkehr unterscheiden.',
       },
       {
+        term: 'Loyalitätskonflikt',
+        definition:
+          'Wenn Kinder den erkrankten Elternteil schützen wollen und gleichzeitig ihre eigene Not ausdrücken möchten. Hilfe zu suchen kann sich dann wie Verrat anfühlen.',
+        practice:
+          'Diese innere Zerrissenheit bindet viel Energie und macht offene Gespräche schwer. Im Kontakt mit Kindern aktiv ansprechbar machen, ohne Druck zu erzeugen.',
+      },
+      {
+        term: 'Rollenumkehr',
+        definition:
+          'Wenn Kinder Aufgaben und Verantwortung übernehmen, die eigentlich Erwachsene tragen sollten. Eng verwandt mit Parentifizierung, aber stärker auf die konkrete Verschiebung von Zuständigkeiten im Alltag bezogen.',
+        practice:
+          'Zwischen altersangemessener Mithilfe und überfordernder Rollenumkehr zu unterscheiden, ist eine der zentralen Fragen in der Arbeit mit belasteten Familien.',
+      },
+      {
         term: 'Mentalisieren',
         definition:
           'Die Fähigkeit, eigenes und fremdes Verhalten als Ausdruck innerer Zustände wie Gefühle, Absichten, Stress oder Missverstehen zu begreifen.',
@@ -84,6 +98,20 @@ export const GLOSSARY_GROUPS = [
           'Fachlich begründet entscheiden, welche Hilfe, Abklärung oder Weitervermittlung in einer Situation zuerst nötig ist.',
         practice:
           'Im Portal meint Triage nicht nur Dringlichkeit, sondern auch Passung zwischen Bedarf, Sicherheitslage und regionalen Hilfen.',
+      },
+      {
+        term: 'Gefährdungsmeldung',
+        definition:
+          'Eine Mitteilung an die KESB, dass ein Kind möglicherweise gefährdet ist. Die meldende Person muss die Gefährdung nicht beweisen -- die Prüfung und Abklärung ist Aufgabe der KESB oder der beauftragten Fachstellen.',
+        practice:
+          'Eine Gefährdungsmeldung ist kein Urteil und nicht dasselbe wie eine Massnahme. Vor einer formellen Meldung kann man sich anonym beraten lassen, zum Beispiel beim kjz oder bei Pro Mente Sana.',
+      },
+      {
+        term: 'SPF (Sozialpädagogische Familienbegleitung)',
+        definition:
+          'Eine ambulante Hilfe für Familien, bei der eine Fachperson die Familie im Alltag begleitet und unterstützt. SPF ist kein eigener Massnahmetyp im Gesetz, sondern wird freiwillig oder über Art. 307/308 ZGB begleitet.',
+        practice:
+          'Im Kanton Zürich ist SPF für Eltern grundsätzlich kostenlos. SPF kann sowohl freiwillig als auch behördlich angeordnet eingesetzt werden und setzt minimale Kooperationsbereitschaft voraus.',
       },
       {
         term: 'Komorbidität',
