@@ -284,11 +284,6 @@ export default function ToolboxSection({
       'Die Toolbox führt nicht linear durch Textblöcke, sondern über eine klare klinische Reihenfolge: zuerst orientieren, dann sichern, danach Krisenvorsorge schriftlich machen und schliesslich Kooperation verbindlich organisieren.',
     summary:
       'Die Reihenfolge schützt vor dem typischen Fehler, zu früh lange zu erklären, obwohl Sicherheit, Kinderbetreuung oder Mitwissende noch ungeklärt sind.',
-    aside: {
-      label: 'Warum diese Reihenfolge?',
-      title: 'Niedriger kognitiver Druck in angespannten Situationen',
-      copy: 'In akuten oder hoch belasteten Lagen helfen kurze Entscheidungen, sichtbare Prioritäten und konkrete Anschlusswege mehr als grosse Informationsmengen.',
-    },
     steps: PATHWAY_STEPS,
   };
 
@@ -309,10 +304,6 @@ export default function ToolboxSection({
     titleAccent: 'erste Priorisierung',
     description:
       'Die Ja/Nein-Fragen verdichten die klinische Lage rasch auf die nächste sinnvolle Spur. So entsteht eine sofort handhabbare Reihenfolge statt einer diffusen Sammelliste von Risiken.',
-    aside: {
-      label: 'Hinweis',
-      copy: 'Mehrere positive Hinweise können gleichzeitig bestehen. Die Seite priorisiert deshalb akute Sicherheit vor Schutzschwellen und diese wiederum vor allgemeiner Krisenvorsorge.',
-    },
     prompts: TRIAGE_PROMPTS.map((prompt) => ({
       id: prompt.id,
       question: prompt.question,
@@ -343,10 +334,6 @@ export default function ToolboxSection({
     titleAccent: 'konkrete Anschlusswege übersetzen',
     description:
       'Die Karten bündeln wiederkehrende klinische Situationen in kurze handlungsorientierte Einstiege. Sie verbinden Gesprächsführung, Schutzfokus und nächste Anlaufstellen.',
-    aside: {
-      label: 'Nutzung',
-      copy: 'Die Filter helfen, je nach Anlass rasch den passenden Arbeitsmodus zu finden – etwa Krise, Kinderschutz, Vernetzung oder Gespräch.',
-    },
     filterAriaLabel: 'Praxisblöcke filtern',
     filters: PRACTICE_BLOCK_FILTERS.map((filter) => ({
       ...filter,
@@ -371,12 +358,6 @@ export default function ToolboxSection({
           'Akute Selbstgefährdung, Fremdgefährdung oder unmittelbare Unsicherheit für Kinder gehen jedem längeren Gespräch vor.',
           'Die ersten Schritte sollen entlasten, strukturieren und Kinder sowie andere abhängige Personen sofort mitdenken.',
         ],
-        aside: {
-          label: 'Merksatz',
-          title: 'Nicht zuerst erklären, sondern sichern',
-          copy: 'Wenn Zeitdruck, Intoxikation, Desorganisation oder akute Hoffnungslosigkeit im Raum stehen, sind klare Notfallwege wichtiger als vertiefte Exploration.',
-          tone: 'accent',
-        },
         actions: [
           {
             label: 'Krisenplan herunterladen',
@@ -412,12 +393,6 @@ export default function ToolboxSection({
           'Ein schriftlicher Plan reduziert Entscheidungsdruck in belasteten Phasen und schafft eine gemeinsame Sprache für Warnzeichen, Kontakte und Übergaben.',
           'Besonders wichtig ist der Kinder-Schutzteil: Wer übernimmt Betreuung, Information und sichere Orte, wenn Symptome eskalieren?',
         ],
-        aside: {
-          label: 'Ziel',
-          title: 'Aus diffuser Sorge wird eine konkrete Abfolge',
-          copy: 'Der Plan muss kurz, mitwissend und alltagstauglich bleiben. Er hilft nur dann, wenn er in einer belasteten Situation tatsächlich verwendbar ist.',
-          tone: 'soft',
-        },
         actions: [
           {
             label: 'Krisenplan herunterladen',
@@ -458,12 +433,6 @@ export default function ToolboxSection({
           'Nicht jede hohe Belastung verlangt sofort eine formelle Meldung. Als Orientierung dient die Frage: Sind Aufsicht, Sicherheit, Nahrung und Schutz aktuell gewährleistet?',
           'Wenn Zweifel bestehen, ist der erste Schritt oft ein vertrauliches Gespräch mit einer Beratungsstelle. Eine vertiefte fachliche Klärung und gegebenenfalls eine Kindesschutzabklärung kommen erst danach.',
         ],
-        aside: {
-          label: 'Arbeitsfokus',
-          title: 'Beobachtbares vor Deutung',
-          copy: 'Für Schutzfragen sind konkrete Hinweise zu Versorgung, Aufsicht, Gewalt, Rückzug oder Krisenverlauf hilfreicher als vorschnelle diagnostische Zuschreibungen.',
-          tone: 'default',
-        },
         gridCards: CHILD_PROTECTION_THRESHOLDS.map((item) => ({
           label: 'Schwelle',
           title: item.title,
@@ -485,12 +454,6 @@ export default function ToolboxSection({
         titleAccent: 'gemeinsam betrachten',
         description:
           'Wenn psychische Erkrankung und Substanzkonsum zusammenkommen, steigen oft Sicherheitsrisiken, Impulsivität und Belastungen in der Kinderbetreuung. Darum braucht es klare Regeln ohne Beschämung.',
-        aside: {
-          label: 'Klinische Haltung',
-          title: 'Sicherheit statt Moral',
-          copy: 'Hilfreich ist eine nüchterne Sprache: Auswirkungen im Alltag benennen, konkrete Grenzen formulieren und Hilfewege offen halten.',
-          tone: 'soft',
-        },
         gridCards: ADDICTION_PANELS.map((panel) => ({
           label: 'Einordnung',
           title: panel.title,
@@ -513,12 +476,6 @@ export default function ToolboxSection({
         titleAccent: 'pragmatische Orientierung',
         description:
           'Angehörige und Fachpersonen verlieren in belasteten Situationen oft Zeit, weil unklar ist, was mitgeteilt werden darf und was nicht. Die FAQ bündeln die wichtigsten alltagsnahen Klärungen.',
-        aside: {
-          label: 'Kurzformel',
-          title: 'Mitteilen ist oft eher möglich als Rückmeldung erhalten',
-          copy: 'Beobachtungen zu Alltag, Krise oder Kindersicherheit dürfen in der Regel weitergegeben werden. Grenzen betreffen meist detaillierte Behandlungsinformationen.',
-          tone: 'default',
-        },
         disclosureItems: RIGHTS_FAQ.map((item) => ({
           title: item.question,
           summaryAriaLabel: `FAQ ${item.question}`,
