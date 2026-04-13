@@ -22,29 +22,23 @@ export const VIGNETTEN = [
       },
     ],
   },
-  {
-    id: 'fall2',
-    title: 'Fall 2: Unterstützung bei psychotischem Erleben',
-    description:
-      'Herr S. (40), alleinige elterliche Sorge, befindet sich in einer akuten psychotischen Krise. Er verweigert dem Kind seit 24 Stunden Nahrung aufgrund wahnhafter Befürchtungen. Dialogversuche zur freiwilligen Hilfe blieben ohne Ergebnis.',
-    status: 'Akutaufnahme',
-    options: [
-      {
-        id: 'opt1',
-        label: 'Gefährdungsmeldung an die KESB (Melderecht nach Art. 314c ZGB)',
-        isCorrect: true,
-        feedback:
-          'Korrekt. In dieser zugespitzten Situation reicht der Dialog zur Sicherung des Kindeswohls nicht aus. Art. 314c ZGB regelt das Melderecht -- die Meldung selbst ist noch keine Massnahme. Was danach geschieht, richtet sich nach Art. 307-310 ZGB: Die KESB prüft die Situation und trifft verhältnismässige Massnahmen. Die häufigste ist die Beistandschaft (Art. 308), nicht die Fremdplatzierung.',
-      },
-      {
-        id: 'opt2',
-        label: 'Abwarten der Medikamentenwirkung unter Beobachtung',
-        isCorrect: false,
-        feedback:
-          'Kritisch. Das unmittelbare Schutzbedürfnis des Kindes hat hier Vorrang. Reines Zuwarten genügt nicht.',
-      },
-    ],
-  },
+  // STUB V2: Neue Vignette – ambulante Alltagssituation
+  // INHALT AUSSTEHEND – redaktionelle Ausarbeitung durch Auftraggeberin erforderlich
+  // Zielbild: Gesprächsimpuls-Format (D2) mit mehreren vertretbaren Optionen
+  // Thematischer Schwerpunkt: Ambulanter Kontext, Alltagsmanagement, Frage "ab wann professionelle Entlastung?"
+  // Repräsentationslücke: Kein stationärer Akut-Moment, sondern Alltag mit Belastung
+  // Anonymisierungs-Standard: Alters-Range, max. 2 identifizierende Details, Pseudonym mit Initial
+  // Vorgänger V2 (Herr S., Psychose/Nahrungsverweigerung) entfernt wegen:
+  //   - fachlich falscher Handlungsbeschreibung ("verweigert" = Agentivität statt Symptom)
+  //   - Inkohärenz mit Relational Recovery (reines Defizit-Objekt)
+  //   - Re-Identifikations-Risiko (seltene Konstellation)
+
+  // STUB V3: Neue Vignette – Langzeitbegleitung
+  // INHALT AUSSTEHEND – redaktionelle Ausarbeitung durch Auftraggeberin erforderlich
+  // Zielbild: Gesprächsimpuls-Format (D2) mit mehreren vertretbaren Optionen
+  // Thematischer Schwerpunkt: Rückkehr in den Alltag nach stationärem Aufenthalt, Langzeitperspektive
+  // Repräsentationslücke: Kein binärer Entscheidungsmoment, sondern Begleitungsprozess
+  // Anonymisierungs-Standard: Alters-Range, max. 2 identifizierende Details, Pseudonym mit Initial
 ];
 
 export const E_MODULES = [
