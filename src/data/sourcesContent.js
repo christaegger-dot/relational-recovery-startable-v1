@@ -123,6 +123,25 @@ export const SOURCES = {
     link: 'https://www.beltz.de/fileadmin/beltz/leseproben/978-3-621-27914-7.pdf',
     chFocus: false,
   },
+  // TODO (Audit 12, redaktionelle Klaerung): Die LITERATUR-Liste zitierte unter
+  // demselben Autor:innen-Paar einen Stuttgart/Kohlhammer-Band mit abweichendem
+  // Titel ('Ursachen, Folgen und Hilfen fuer Kinder psychisch Kranker'). Bis
+  // zur Klaerung durch die Auftraggeberin wird dieser Band als separater
+  // Eintrag gefuehrt, damit keine Quelle vorschnell verloren geht. Vermutlich
+  // zwei verschiedene Werke. Siehe docs/content-pflege.md -> 'Offene
+  // redaktionelle Klaerungen'.
+  'plass-wiegandgrefe-2012-kohlhammer': {
+    id: 'plass-wiegandgrefe-2012-kohlhammer',
+    author: 'Plass, A. & Wiegand-Grefe, S.',
+    year: 2012,
+    title: 'Ursachen, Folgen und Hilfen für Kinder psychisch Kranker',
+    journal: null,
+    publisher: 'Stuttgart: Kohlhammer',
+    type: 'book',
+    doi: null,
+    link: null,
+    chFocus: false,
+  },
 
   'jones-2016': {
     id: 'jones-2016',

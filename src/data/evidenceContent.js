@@ -1,91 +1,27 @@
-export const LITERATUR = [
-  {
-    author: 'Lenz, A. (2014)',
-    title: 'Kinder psychisch kranker Eltern.',
-    publisher: 'Göttingen: Hogrefe.',
-  },
-  {
-    author: 'Koopmann, A. et al. (2025)',
-    title: 'Elternschaft und psychische Erkrankungen.',
-    publisher: 'Der Nervenarzt, 96(6), 597-599. DOI: 10.1007/s00115-024-01781-8',
-    link: 'https://pubmed.ncbi.nlm.nih.gov/39592511/',
-  },
-  {
-    author: 'Plass, A. & Wiegand-Grefe, S. (2012)',
-    title: 'Ursachen, Folgen und Hilfen für Kinder psychisch Kranker.',
-    publisher: 'Stuttgart: Kohlhammer.',
-  },
-  {
-    author: 'pädiatrie schweiz (2021)',
-    title: 'Kinder und Jugendliche aus Familien mit einem psychisch erkrankten Elternteil.',
-    publisher: 'Sozialpädiatrie / DOI: 10.35190/d2021.4.5',
-    link: 'https://www.paediatrieschweiz.ch/familien-mit-einem-psychisch-erkrankten-elternteil/',
-  },
-  // Weblinks (Gesundheitsförderung ZH, PUK, iks) nach SUPPORT_OFFERS verschoben -- siehe sourcesContent.js
-  {
-    author: 'Jones, M. et al. (2016)',
-    title: 'Parents with mental illness - a qualitative study of identities and experiences with support services.',
-    publisher: 'Journal of Psychiatric and Mental Health Nursing, 23(8), 471-478. DOI: 10.1111/jpm.12321',
-    link: 'https://pubmed.ncbi.nlm.nih.gov/27500507/',
-  },
-  {
-    author: 'Reupert, A. et al. (2021)',
-    title: 'Stigma in relation to families living with parental mental illness: An integrative review.',
-    publisher: 'International Journal of Mental Health Nursing, 30(1), 6-26. DOI: 10.1111/inm.12820',
-    link: 'https://pubmed.ncbi.nlm.nih.gov/33283387/',
-  },
-  {
-    author: 'Stauber, A., Nyffeler, C. & Gosteli, L. (2020)',
-    title: 'Psychisch kranke Eltern im Beratungskontext: Was stärkt psychisch kranke Eltern und deren Kinder?',
-    publisher: 'Praxisforschung der Erziehungsberatung des Kantons Bern, Band 25. Bern: Erziehungsberatung des Kantons Bern.',
-    link: 'https://www.eb.bkd.be.ch/content/dam/eb_bkd/bilder/de/themen/praxisforschung/eb-pf-band-25-psychisch-kranke-eltern-im-beratungskontext.pdf',
-  },
-  {
-    author: 'Lenz, A. (2019)',
-    title: 'Interventionen bei Kindern psychisch kranker Eltern: Grundlagen, Methoden und Strategien.',
-    publisher: 'Kinderschutzkongress 2019, Zürich.',
-  },
-  {
-    author: 'Höller, I. et al. (2023)',
-    title: 'Hilfsbedarf und soziale Unterstützung bei psychisch erkrankten Elternteilen mit minderjährigen Kindern.',
-    publisher: 'Psychiatrische Praxis, 50(1), 20-28. DOI: 10.1055/a-1704-6391',
-    link: 'https://pubmed.ncbi.nlm.nih.gov/35081630/',
-  },
-  {
-    author: 'Grube, M. & Dorn, A. (2007)',
-    title: 'Elternschaft bei psychisch Kranken.',
-    publisher: 'Psychiatrische Praxis, 34(2), 66-71. DOI: 10.1055/s-2006-940095',
-  },
-  {
-    author: 'Leijdesdorff, S. et al. (2017)',
-    title: 'Prevalence of psychopathology in children of parents with mental illness and/or addiction.',
-    publisher: 'Current Opinion in Psychiatry, 30(4), 312-317. DOI: 10.1097/YCO.0000000000000341',
-    link: 'https://pubmed.ncbi.nlm.nih.gov/28441171/',
-  },
-  {
-    author: 'Wiegand-Grefe, S. et al. (2024)',
-    title: 'Unterstützung für Familien mit einem psychisch erkrankten Elternteil.',
-    publisher: 'Der Nervenarzt, 95(1), 56-63. DOI: 10.1007/s00115-023-01584-3',
-    link: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10808136/',
-  },
-  {
-    author: 'Wiegand-Grefe, S. & Plass-Christl, A. (2025)',
-    title: 'Kinder psychisch kranker Eltern. Entwicklungsrisiken erkennen und behandeln (2. Auflage).',
-    publisher: 'Weinheim: Beltz.',
-    link: 'https://www.beltz.de/fachmedien/psychologie/produkte/details/54163-kinder-psychisch-kranker-eltern.html',
-  },
-  {
-    author: 'Albermann, K. & Müller, B. (2021)',
-    title: 'Kinder und Jugendliche aus Familien mit einem psychisch erkrankten Elternteil.',
-    publisher: 'Paediatrica, 32(4), 5. DOI: 10.35190/d2021.4.5',
-    link: 'https://cdn.paediatrieschweiz.ch/production/uploads/2021/11/32-4-2021_5_all.pdf',
-  },
-  {
-    author: 'Schuler, D. et al. (2016)',
-    title: 'Psychische Gesundheit in der Schweiz. Monitoring 2016.',
-    publisher: 'Obsan Bericht 72, Neuchâtel: Schweizerisches Gesundheitsobservatorium.',
-    link: 'https://www.obsan.admin.ch/sites/default/files/obsan_72_bericht_2.pdf',
-  },
+// Literatur-Anzeige-Reihenfolge als ID-Liste auf das zentrale SOURCES-Register
+// (Audit 04). Die ehemalige LITERATUR-Free-Text-Liste wurde in Audit 12 in diese
+// Form ueberfuehrt, damit Studien an einer Stelle gepflegt werden. Reihenfolge
+// entspricht der ursprungsgleichen Anzeige-Logik auf der Evidenz-Seite.
+//
+// Hinweis zur Albermann-/paediatrie-schweiz-Dublette: beide Einträge zeigten
+// auf dieselbe Paediatrica-Publikation (DOI 10.35190/d2021.4.5). Der doppelte
+// Eintrag wurde bereinigt; 'albermann-mueller-2021' steht hier einmal.
+/** @type {string[]} */
+export const LITERATUR_IDS = [
+  'lenz-2014',
+  'koopmann-2025',
+  'plass-wiegandgrefe-2012-kohlhammer',
+  'albermann-mueller-2021',
+  'jones-2016',
+  'reupert-2021',
+  'stauber-2020',
+  'lenz-2019',
+  'hoeller-2023',
+  'grube-dorn-2007',
+  'leijdesdorff-2017',
+  'wiegand-grefe-2024',
+  'wiegand-grefe-plass-christl-2025',
+  'obsan-72-schuler-2016',
 ];
 
 export const RELEVANCE_STATS = [
