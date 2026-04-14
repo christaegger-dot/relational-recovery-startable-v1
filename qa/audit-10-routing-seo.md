@@ -225,3 +225,397 @@ Das verschiebt das Audit-10-Problem: Das Hauptproblem ist **nicht** Routing (das
 ---
 
 **STOPP nach Phase 1.** Warte auf Freigabe für Phase 2 (Diagnose und Strategie-Optionen).
+
+---
+
+## Phase 2 -- Diagnose und Strategie-Optionen
+
+### 2.1 Gesamtbild
+
+Phase 1 hat das Audit-Problem verschoben. Die ursprünglich gleichgewichteten Baustellen „Routing" und „SEO" sind in der Realität ungleich gewichtet:
+
+- **Routing funktioniert.** Hash-Based-Routing mit 13 Aliases, Section-Deep-Links, Back-Button-Handling, Hash↔Tab-Synchronisation und Keyboard-Fokus-Management sind ausgereift implementiert. Der 2026-04-12 gespeicherte Playwright-Test bestätigt das auf allen Haupt-Aliases.
+- **SEO ist kaputt.** Initial-HTML ist 1,6 kB leerer Shell. Per-Route-Meta fehlen vollständig. Es gibt keine `sitemap.xml`, keine `robots.txt`, keine `canonical`-URLs, keine strukturierten Daten, kein `og:image`. Beim Teilen von `eltern-a.netlify.app/#toolbox` sieht der Social-Media-Crawler denselben OG-Title wie bei `/#start`.
+- **Crawler-Wirkung:** Googlebot (mit JS) sieht nach Initial-Rendern nur `HomeLandingTemplate`, weil alle anderen Sections `React.lazy()` sind und erst beim Tab-Wechsel geladen werden. Social-Crawler ohne JS sehen nichts ausser den statischen Meta-Tags aus `index.html`.
+
+**Risiko, wenn nichts geändert wird:** Die Seite ist für Empfehlungs-Traffic tragfähig (wer den Link kennt, kommt rein). Für organische Suche und Social-Sharing ist sie praktisch unsichtbar. Die Inhalte sind nach Audit 02-07 redaktionell fertig, aber nur von Eingeweihten findbar. Das ist für ein Fachportal, das Fachpersonen und Angehörige erreichen möchte, eine substantielle Lücke.
+
+**Konsequenz für die Optionen-Bewertung:** Jede Option, die die SEO-Baustelle nicht direkt adressiert, löst das Problem nicht. Jede Option, die nur die Routing-Seite anfasst, adressiert ein nicht-existierendes Problem.
+
+### 2.2 Fünf Strategie-Optionen
+
+#### Option 1 -- Minimal-Refactor: Per-Route-Meta in der bestehenden SPA
+
+**Was wird gemacht:**
+- Per-Route-Meta dynamisch via JS setzen (`document.title`, OG-Tags, `description`, `canonical`) in einem kleinen Hook, der auf `activeTab`-Änderungen reagiert.
+- Pro Tab ein Meta-Objekt (`title`, `description`, `ogImage`-optional) in `appShellContent.js` ergänzen -- in der Nähe der `TAB_ITEMS`.
+- Statische `public/sitemap.xml` und `public/robots.txt` hinzufügen (8 Tab-URLs mit Hash, plus die Hauptseite).
+- Statisches JSON-LD für `Organization` und evtl. `MedicalWebPage` in `index.html`.
+
+**Was bleibt unverändert:** Routing, Komponenten, Token-System, AppStateContext, useNavigationFocus, Build-System.
+
+**Was passiert mit Notfall-Funktionalität:** nichts. `tel:`-Links, Emergency-Banner, ErrorBoundary bleiben identisch.
+
+**Aufwand:** **S** (1-2 Arbeitstage)
+
+**SEO-Gewinn:**
+- **Mittel für JS-fähige Crawler** (Googlebot): Per-Route-Title und -Description werden wahrgenommen.
+- **Gering für Non-JS-Crawler** (Facebook, LinkedIn): Der Initial-HTML-Shell bleibt leer; OG-Scraping liefert statisch immer denselben Default.
+- **Hoch für Discovery-Infrastruktur**: sitemap + robots + JSON-LD = erstmals vorhanden.
+
+**Risiko:** sehr niedrig. Keine Architektur-Änderungen, keine Regression-Oberfläche.
+
+**Umkehrbarkeit/Erweiterbarkeit:** ✓ Perfekt. Option 1 ist der Einstieg zu allen anderen Optionen. Alle nachfolgenden Optionen können auf den Per-Route-Meta-Hook und die SEO-Artefakte aufbauen.
+
+---
+
+#### Option 2 -- Hash-zu-History-Migration
+
+**Nicht weiter auszuarbeiten.**
+
+Hash-Routing funktioniert technisch vollständig (siehe Phase 1, Section-Aliases, Back-Button, Tab-Refreshen). History-Routing würde die URL-Form von `/#netzwerk` zu `/netzwerk` ändern, aber das eigentliche Problem (leerer Shell für Crawler) nicht lösen -- Crawler bekommen weiterhin dasselbe 1,6 kB-Initial-HTML. Gleichzeitig zwingt History-Routing eine Netlify-SPA-Fallback-Konfiguration (`_redirects`) und bricht potentiell bestehende geteilte Hash-Links. **Aufwand ohne Nutzen-Gewinn.**
+
+---
+
+#### Option 3 -- Prerendering der bestehenden SPA
+
+**Was wird gemacht:**
+- Build-Plugin für Pre-Rendering in die Vite-Build-Pipeline einhängen. Drei realistische Kandidaten:
+  - `vite-plugin-ssr` / neuerdings `vike` -- ausgereiftes SPA+SSR-Plugin
+  - `vite-plugin-prerender` -- Puppeteer-basiert, rendert pro Route einmal
+  - `@prerenderer/prerenderer` mit Vite-Adapter
+- Pro Tab (8 Routen) wird zur Build-Zeit eine statische HTML-Datei erzeugt, die den gerenderten React-Output als Initial-HTML enthält -- inkl. Per-Route-Meta.
+- Hydration zur Laufzeit für Interaktivität.
+- Plus komplettes Option-1-Paket (Per-Route-Meta-Hook, sitemap, robots, JSON-LD).
+
+**Was bleibt unverändert:** Komponenten-Code, Token-System, AppStateContext, useNavigationFocus. React-Architektur bleibt.
+
+**Was ändert sich:** Build-System (Vite-Config erweitert), Netlify-Config (evtl. `_redirects` für neue statische Pfade, falls Prerendering URL-Pfade statt Hashes nutzt). Bei Hash-basiertem Prerendering bleibt die Netlify-Config gleich, aber Prerendering über Hash ist ungewöhnlich -- realistisch wechselt man gleichzeitig auf History-Routing, weil Prerendering-Tools Pfade erwarten.
+
+**Was passiert mit Notfall-Funktionalität:** Erhalt möglich, aber: Pre-Rendering führt das komplette JS im Headless-Browser aus. Die `tel:`-Links sind statisch im Markup, daher unkritisch. Der Emergency-Banner wird mit-gerendert; State-abhängige Elemente (z. B. `showSafeNote: true` per Default) sind im Initial-HTML sichtbar -- das ist akzeptabel.
+
+**Aufwand:** **M-L** (5-10 Arbeitstage)
+- Build-Plugin-Integration: 1-2 Tage
+- Pro-Route-Rendering-Setup: 1-2 Tage
+- Hydration-Mismatch-Debugging (AppStateContext initialisiert sich aus localStorage, `useLayoutEffect` liest `window.location.hash`): 2-3 Tage
+- Pro-Route-Meta-System + SEO-Artefakte: 1 Tag
+- Testen auf allen 8 Tabs + Deep-Links: 1-2 Tage
+
+**SEO-Gewinn:** **substanziell.** Crawler sehen pro Route vollständigen statischen Inhalt. OG-Scraping liefert pro Route die passenden Meta-Tags.
+
+**Risiken:**
+- Hydration-Mismatches zwischen Pre-Render und Client-State. Besonders kritisch: `AppStateContext` hydriert aus localStorage und hash, beides existiert beim Pre-Render nicht. Workaround: Pre-Render mit Default-State, Client hydriert darüber -- kann zu sichtbarem Content-Flash führen.
+- Build-Zeit-Wachstum (jeder Pre-Render ist ein Headless-Browser-Run). Bei 8 Routen moderat (~30-90 s zusätzlich), bei mehr Routen problematisch.
+- BroadcastChannel und localStorage-Zugriff in `AppStateContext` müssen SSR-sicher gemacht werden (`typeof window !== 'undefined'`-Guards -- die sind schon vorhanden, aber müssen vollständig sein).
+- Kleine Regressions-Oberfläche bei der Render-Pipeline-Änderung.
+
+**Umkehrbarkeit/Erweiterbarkeit:** ✓ Moderat. Prerendering kann bei Bedarf deaktiviert werden; Build-Config ist isoliert. Umstieg auf Astro (Option 4a) später bleibt möglich und ist sogar natürlicher, weil Astro dasselbe Konzept nativ löst.
+
+---
+
+#### Option 4a -- Migration auf Astro
+
+**Was wird gemacht:**
+- Astro als neues Build-Framework; Vite-Plugin bleibt indirekt (Astro baut auf Vite).
+- Pro Tab eine `.astro`-Seite unter `src/pages/`: `index.astro` (= `/start`), `toolbox.astro`, `netzwerk.astro`, usw.
+- Astro rendert alle Seiten statisch zur Build-Zeit.
+- React-Komponenten werden als **Islands** (`client:load`, `client:idle`, `client:visible`) erhalten. Interaktive Teile (Toolbox mit Score, Vignetten mit State, Network mit Filter) bleiben React, werden pro Island hydriert.
+- AppStateContext kann erhalten bleiben, muss aber für Cross-Page-State (State, der über mehrere Astro-Pages persistiert) angepasst werden -- entweder als einzelne Island am App-Root, oder via localStorage-Direktzugriff aus Vanilla-JS-Glue.
+- useNavigationFocus wird **obsolet** -- File-based Routing ersetzt Hash↔Tab-Sync; Fokus-Management muss pro Page-Load via einfachem Script gelöst werden (deutlich einfacher als der bestehende 230-Zeilen-Hook).
+- Tailwind v4 und Token-System bleiben 1:1.
+
+**Was bleibt unverändert:**
+- Token-System, `primitives.css`, `app-global.css`
+- Alle UI-Primitives (Button, SurfaceCard, SectionHeader, …)
+- Inhalt in `src/data/*.js` (als ESM-Module weiterhin importierbar in Astro)
+- Content-Struktur und Redaktions-Entscheide aus Audit 02-09
+- Notfall-Funktionalität (`tel:`-Links, Emergency-Banner, ErrorBoundary) wird 1:1 in das `<Layout>`-Template übernommen
+
+**Was ändert sich fundamental:**
+- Build-Pipeline (Vite-React → Astro)
+- Routing-Mechanismus (Hash-Router → File-based)
+- Navigation zwischen Seiten (SPA-Soft-Navigation → Multi-Page-Page-Loads, optional mit Astro View Transitions)
+- Deployment: Astro baut mehr statische HTML-Dateien, Netlify serviert sie direkt
+
+**Ehrliche Bewertung der fundamentalen Hot-Spots:**
+
+- **AppStateContext** (Komplexität fundamental bei Migration):
+  - BroadcastChannel-Cross-Tab-Sync: bleibt funktional, weil es browserseitig läuft -- muss aber in einer Vanilla-JS-Glue-Schicht oder als globale React-Island neu verdrahtet werden.
+  - localStorage-Persistenz: unkritisch, Browser-API.
+  - State-Sharing zwischen Pages: **hier wird es heikel.** Im SPA-Modell hält React-State den aktiven Tab zusammen. Im Astro-Multi-Page-Modell ist State zwischen Page-Loads standardmässig weg. Zwei Optionen: (a) Store als separates JS-Modul mit localStorage-Sync, das pro Page beim Mount initialisiert -- bedeutet: der Navigation State existiert zwischen Pages, aber UI-State pro Page startet frisch; (b) Als einzelne grosse Island, die das gesamte App-Shell umschliesst -- dann ist Astro effektiv nur ein Build-Tool-Wrapper, kein echtes Multi-Page-Framework.
+  - **Realistische Einschätzung:** AppStateContext als einzelne React-Island im Layout, die über alle Pages persistiert. Reduziert den SEO-Gewinn der Astro-Migration deutlich, weil die Initial-Hydration ähnlich teuer wird wie bei einer SPA.
+- **useNavigationFocus** (Komplexität fundamental bei Migration):
+  - Hash↔Tab-Sync: **obsolet**, weil Astro file-based routet. ✓ Reduktion der Komplexität.
+  - Section-Deep-Links (`#netzwerk-karte`, `#netzwerk-fachstellen`): bleiben als Standard-HTML-Anchors funktionsfähig.
+  - Keyboard-Fokus auf Page-Heading nach Navigation: muss neu implementiert werden, aber deutlich einfacher (~30 Zeilen Vanilla-JS).
+  - **Realistische Einschätzung:** Der Fokus-Mechanismus wird auf ~20-30 % der aktuellen Komplexität reduziert. ✓ Echter Gewinn.
+- **11 substanzielle interaktive Komponenten:**
+  - Toolbox (Score, Triage, Print-View): als grosse React-Island -- funktioniert, aber der gesamte Island-Code muss geladen werden, sobald die Toolbox-Page aufgerufen wird. Ähnliche Grösse wie heute.
+  - Vignetten, Network, Learning: gleich, pro Page eine Island mit interaktivem React.
+  - Glossar, Grundlagen, Evidenz: primär statisch, können als rein-statisches Astro-Template gerendert werden -- **hier ist der echte Gewinn**, weil diese Pages dann gar kein React-JS auf dem Client brauchen.
+
+**Aufwand:** **L** (10-15 Arbeitstage, realistisch eher 15-20 bei sauberem Test-Durchlauf)
+- Astro-Projekt-Setup mit Tailwind, Layouts: 1-2 Tage
+- Layout-Komponenten (`<Layout>`, Header, Footer, ErrorBoundary): 1-2 Tage
+- Pro statische Page-Migration (start, glossar, grundlagen, evidenz): 3-4 Tage
+- Interaktive Islands (toolbox, vignetten, netzwerk, lernmodule): 4-6 Tage
+- State-Management über Pages (AppStateContext als Layout-Island oder Vanilla-Store): 2-3 Tage
+- Fokus-Management, Section-Deep-Links, Back-Button-Testing: 1-2 Tage
+- SEO-Artefakte (Astro hat sitemap-Plugin, robots, JSON-LD via `<meta>`-Integration): 1 Tag
+- E2E-Regression-Testing auf allen 8 Pages: 2-3 Tage
+
+**SEO-Gewinn:** **maximal** für statische Pages (Glossar, Grundlagen, Evidenz, Start). **Substanziell** für interaktive Pages (Initial-HTML enthält Page-Shell vor Hydration).
+
+**Risiken:**
+- Langer Migrations-Sprint. Projekt ist 15-20 Tage in „halb-fertig"-Zustand; währenddessen keine Audits 11/12/13 sinnvoll.
+- State-Brücken-Design zwischen Pages ist nicht-trivial. Wenn ein Nutzer auf Toolbox den Score setzt und dann zu Netzwerk wechselt, erwartet er den Score beim Zurückwechseln -- das muss explizit über localStorage-Sync gelöst werden.
+- Astro-Ökosystem ist jünger als React-SPA-Patterns; mögliche Unebenheiten bei Tailwind v4 + Astro-Integration (Tailwind v4 ist ausserdem frisch, `@tailwindcss/vite` funktioniert in Astro, aber weniger erprobt).
+- Regressions-Oberfläche: 33 Komponenten × 8 Pages × Interaktive Zustände = breite Fläche für Feature-Verluste während der Migration.
+- Notfall-Funktionalität muss auf jeder einzelnen Page erneut verifiziert werden.
+
+**Umkehrbarkeit/Erweiterbarkeit:** ✗ Gering. Nach Astro-Migration ist zurück zu Vite-React aufwendig. Astro 5+ bleibt aber ein evolutionsfähiger Pfad; Hinzufügen weiterer Features ist günstig.
+
+---
+
+#### Option 4b -- Migration auf Eleventy (analog BipolarSite)
+
+**Was wird gemacht:**
+- Eleventy 2+ als Build-Framework, analog zu BipolarSite.
+- Pro Tab eine `.njk` oder `.md` mit Front-Matter-Meta.
+- File-based Routing.
+- **Keine React-Komponenten auf dem Client.** Interaktive Teile werden zu Vanilla JS oder Alpine.js umgeschrieben.
+- Tailwind v4 über Tailwind-CLI oder PostCSS (nicht mehr Vite-gekoppelt).
+- sitemap und robots via `sitemap.njk` und `robots.njk`, analog BipolarSite.
+
+**Was bleibt unverändert:**
+- Token-System, `primitives.css`, `app-global.css` (rein CSS, portabel)
+- Inhalt in `src/data/*.js` -- muss in Nunjucks-Templates oder JS-Data-Files übersetzt werden
+
+**Was ändert sich fundamental:**
+- Framework-Wechsel (React → Eleventy)
+- **Alle 11 substanziellen interaktiven Komponenten** müssen in Vanilla JS oder Alpine.js neu geschrieben werden
+- Build-System, Deployment-Prozess, Mental-Model
+
+**Ehrliche Bewertung der fundamentalen Hot-Spots:**
+
+- **AppStateContext** (Komplexität fundamental bei Migration):
+  - React-Context → Vanilla-JS-Store (z. B. custom Event-Emitter oder `nanostores`).
+  - BroadcastChannel-Sync: bleibt, in Vanilla JS.
+  - 9 State-Fields: jeder muss einzeln verdrahtet werden.
+  - Persistenz und Rehydration: muss analog zu React-Version implementiert werden.
+  - **Realistische Einschätzung:** ~300-400 Zeilen Vanilla-JS, deckt aber nicht dieselbe DX ab wie React-Context. Subscription-Management wird fragiler.
+- **useNavigationFocus**: obsolet wegen File-Routing, aber der Fokus-Trick nach Page-Load muss in Vanilla JS neu geschrieben werden. Deutlich einfacher (~30 Zeilen).
+- **11 substanzielle interaktive Komponenten:**
+  - Toolbox (Score, Triage, Print-View, Assessment-Items mit dynamischer Berechnung, Reset-State): **vollständiger Vanilla-JS-Rewrite.** Assessment-Score-Berechnung, Triage-Branching, Practice-Filter, Print-View -- alles muss ohne Framework zusammengehalten werden. Realistisch: ~800-1200 Zeilen Vanilla JS, wo heute ~600 Zeilen JSX stehen.
+  - Vignetten (Index, Selected-Option-Persistenz pro Vignette, Next/Prev): Vanilla-JS-Rewrite, ~300-400 Zeilen.
+  - Network (Filter, Suche, Karten-Lens, dynamische Node-Darstellung): das ist die anspruchsvollste Komponente. Filter + Suche + Map-Lens + Reflexion-Listen -- realistisch ~500-700 Zeilen Vanilla JS, anfällig für Event-Handler-Drift.
+  - Learning (Quiz-State pro Modul, Completed-Tracking): Vanilla-JS-Rewrite, ~300 Zeilen.
+  - Glossar, Grundlagen, Evidenz: können rein-statisch werden, das ist der einzige Gewinn.
+
+**Aufwand:** **XL** (20-35 Arbeitstage, realistisch 5-7 Kalenderwochen)
+- Eleventy-Projekt-Setup mit Tailwind-CLI: 1-2 Tage
+- Layout, Header, Footer, ErrorBoundary-Äquivalent: 2-3 Tage
+- Vanilla-JS-Store + Persistenz + BroadcastChannel: 2-3 Tage
+- Statische Pages (start, glossar, grundlagen, evidenz) als Nunjucks/Markdown: 3-4 Tage
+- Toolbox Vanilla-JS-Rewrite: 4-6 Tage
+- Vignetten Vanilla-JS-Rewrite: 2-3 Tage
+- Network Vanilla-JS-Rewrite: 3-4 Tage
+- Learning Vanilla-JS-Rewrite: 2-3 Tage
+- Fokus-Management, Deep-Links, Back-Button: 1-2 Tage
+- SEO-Artefakte: 1 Tag
+- E2E-Regression auf allen 8 Pages + interaktiven Flows: 3-4 Tage
+
+**SEO-Gewinn:** **maximal.** Jede Page ist vollständig statisch, kein JS-Rendering für Crawler nötig.
+
+**Risiken:**
+- **Höchster Migrations-Aufwand der ganzen Audit-Reihe.** Projekt wäre 5-7 Wochen in „halb-fertig"-Zustand.
+- **Feature-Verlust-Risiko real.** Ohne React-Komponenten-Struktur ist die Chance hoch, dass während des Rewrites subtile Features verloren gehen (Edge-Cases im Score, A11y-Details, Reduce-Motion-Guards pro Interaktion).
+- **DX-Regression.** Team verliert React-Ergonomie, muss alle Interaktionen manuell verdrahten. Jede zukünftige Feature-Änderung teurer.
+- **Inkonsistenz mit JavaScript-Konsum-Erwartung des Fach-Teams.** Wenn zukünftige Änderungen typischerweise inhaltlich sind (Audit 11: Print, Audit 12: Content-Wartbarkeit), ist Vanilla JS oft unpraktischer als React.
+- **Token-System-Übernahme trivial, aber alles andere nicht.**
+
+**Umkehrbarkeit/Erweiterbarkeit:** ✗ Sehr gering. Der Vanilla-JS-Code ist an Eleventy gebunden; Rückweg zu React bedeutet weiteren Rewrite. Feature-Hinzufügen ist teurer als in Astro oder in der aktuellen SPA.
+
+**Zur Symmetrie-Frage:** BipolarSite ist primär eine Lese-Site mit minimaler Interaktivität. Relational Recovery hat vier echte Mini-Apps (Toolbox, Vignetten, Network, Learning). **Die Schwester-Site-Symmetrie ist ein schwaches Argument**, weil die Interaktivitäts-Profile unterschiedlich sind.
+
+---
+
+#### Option 5 -- Hybrid: Per-Route-Meta + gezieltes Prerendering + SEO-Infrastruktur
+
+**Was wird gemacht:**
+- **Kern wie Option 1** (Per-Route-Meta-Hook, sitemap, robots, JSON-LD).
+- **Plus gezieltes Prerendering** nur dort, wo es den grössten Nutzen bringt:
+  - **Start-Route** (`HomeLandingTemplate`, nicht-lazy) wird zur Build-Zeit ins Initial-HTML geschrieben. OG-Scraping funktioniert für die meistgeteilte URL sofort.
+  - Optional: die 3-4 statischen Sub-Templates (Glossar, Grundlagen, Evidenz ohne interaktive Teile) ebenfalls pre-rendern -- wenn das technisch günstig ist.
+- **Plus volle SEO-Infrastruktur:**
+  - `public/sitemap.xml` -- statisch, 8 Tab-URLs
+  - `public/robots.txt` -- einfach, erlaubt Crawl
+  - `<link rel="canonical">` per-Route dynamisch
+  - JSON-LD `Organization` + `MedicalWebPage` im `index.html`
+  - `og:image` -- einmaliges Hero-Bild oder pro-Route-Variante
+  - Twitter-Card-Tags
+
+**Was bleibt unverändert:** Routing, alle Komponenten, Token-System, AppStateContext, useNavigationFocus, Build-System-Kern. Hash-Routing bleibt.
+
+**Was ändert sich:**
+- `index.html` erhält JSON-LD-Block.
+- `vite.config.js` bekommt ggf. ein schlankes Pre-Render-Plugin nur für Start-Route.
+- Neuer Hook `useDocumentMeta` (ca. 30-50 Zeilen) in `src/utils/`.
+- Neue Datei `src/data/routeMeta.js` mit `title`, `description`, `ogTitle`, `ogDescription` pro Tab.
+
+**Was passiert mit Notfall-Funktionalität:** nichts. Emergency-Banner ist Teil der Start-Route und wird beim Prerender mit-gerendert -- zusätzliche Sichtbarkeit ohne Funktionsverlust.
+
+**Aufwand:** **S-M** (3-5 Arbeitstage)
+- Per-Route-Meta-Hook + Meta-Datei: 0,5 Tage
+- sitemap/robots/canonical/JSON-LD: 0,5 Tage
+- Pre-Render-Plugin-Integration für Start-Route: 1-2 Tage
+- Optional: Pre-Render für statische Sub-Templates: 1-2 zusätzliche Tage
+- Testen: 0,5-1 Tag
+
+**SEO-Gewinn:**
+- **Hoch für die Start-Route** (OG-Scraping funktioniert, weil Initial-HTML echten Inhalt enthält).
+- **Mittel für alle anderen Routen** (JS-fähige Crawler sehen Per-Route-Meta und Page-Inhalt nach Hydration; Non-JS-Crawler sehen Standard-OG).
+- **Hoch für Discovery** (sitemap, robots, JSON-LD).
+- **Praktisch gelöst**: Das Kernproblem „Seite ist unsichtbar für Social-Media-Sharing" wird an der Stelle gelöst, wo es praktisch weh tut (geteilte Start-URL).
+
+**Risiken:**
+- Niedrig-mittel. Pre-Render-Plugin-Integration kann AppStateContext-Initialisierung stören (localStorage/hash-Zugriff in Headless-Browser). Workaround: `typeof window`-Guards konsequent ausbauen, Pre-Render mit Default-State.
+- Wenn die Sub-Template-Pre-Renderings auch verfolgt werden: React.lazy-Bundles müssen zur Build-Zeit auflösbar sein, und `activeTab`-State muss vor Render pro Route gesetzt werden können. Machbar, aber das ist der Kostentreiber in der Option.
+
+**Umkehrbarkeit/Erweiterbarkeit:** ✓ **Beste** aller Optionen. Alles an Option 5 ist additiv. Wenn später Option 3 (volles Prerendering) oder Option 4a (Astro-Migration) gewählt wird, ist die Per-Route-Meta-Struktur und die SEO-Infrastruktur 1:1 übertragbar. Option 5 ist ein valider End-Zustand **oder** eine gute Zwischenstation.
+
+**Migrationspfad nach Option 5:**
+- → Option 3: das bestehende Pre-Render-Plugin auf alle 8 Routes erweitern. Inkrementell.
+- → Option 4a (Astro): Per-Route-Meta-Datei (`routeMeta.js`) wird zu Frontmatter in `.astro`-Pages. JSON-LD und sitemap werden Astro-Plugins. Hook wird obsolet.
+
+---
+
+### 2.3 Empfehlung
+
+**Empfohlen: Option 5 (Hybrid).** In dieser Reihenfolge begründet:
+
+**(a) Welche Option löst das eigentliche Problem am direktesten?**
+
+Das eigentliche Problem ist dreifach:
+1. Social-Media-Scraping zeigt Standard-OG für alle Links.
+2. Suchmaschinen ohne JS-Rendering sehen leeren Shell.
+3. Keine Discovery-Infrastruktur (sitemap, robots, canonical, JSON-LD).
+
+- **Option 1** löst (1) teilweise (nur für JS-Scraper), (3) vollständig. Lässt (2) ungelöst.
+- **Option 5** löst (1) vollständig (Pre-Render der Start-Route füllt das Initial-HTML), (2) für die meistbetroffene Route, (3) vollständig.
+- **Option 3** löst alle drei vollständig.
+- **Option 4a** löst alle drei vollständig, aber mit Architektur-Kosten.
+- **Option 4b** löst alle drei vollständig, mit höchsten Architektur-Kosten.
+
+Option 5 ist die erste Stufe, die alle drei Probleme adressiert. Option 3 macht dasselbe für alle Routes, aber die meisten Routes werden nicht direkt geteilt -- Start und evtl. Toolbox/Netzwerk sind die realistischen Share-Kandidaten. Der Grenz-Nutzen von Option 3 über Option 5 ist gering, solange man die Schlüssel-Routes in Option 5 priorisiert.
+
+**(b) Welche Option hat das beste Aufwands-Nutzen-Verhältnis für ein release-fähiges Projekt?**
+
+| Option | Aufwand | SEO-Gewinn | Verhältnis |
+|---|---|---|---|
+| 1 | S (1-2 d) | mittel | gut |
+| 3 | M-L (5-10 d) | substanziell | mittelmässig |
+| 4a | L (15-20 d) | maximal | mässig |
+| 4b | XL (20-35 d) | maximal | schlecht |
+| **5** | **S-M (3-5 d)** | **hoch** | **sehr gut** |
+
+Option 5 ist die Option mit dem höchsten Nutzen pro Arbeitstag. Das Projekt ist nach Audits 02-09 inhaltlich release-fähig; es braucht keine Architektur-Neuaufstellung „nur um der Modernität willen".
+
+**(c) Welche Option ist umkehrbar/erweiterbar?**
+
+- Option 5 ist zu 100 % additiv. Alle nachfolgenden Wege (Option 3 oder 4a) können auf Option 5 aufbauen.
+- Option 1 ist fast zu 100 % additiv, liefert aber weniger.
+- Option 3 ist grossteils umkehrbar, weil das Prerender-Plugin deaktivierbar ist.
+- Option 4a/4b sind kaum umkehrbar; sie sind architektonische Einbahnstrassen.
+
+**Zusammengefasst:** Option 5 ist der **geringste Eingriff, der das tatsächliche Problem tatsächlich löst**, und er hält alle weiteren Architektur-Wege offen. Option 1 ist eine valide Fallback-Stufe, wenn Pre-Render-Integration unerwartet Probleme macht. Option 3 ist der nächste logische Schritt, wenn Option 5 ausgeschöpft und Bedarf für mehr da ist. Option 4a ist nur dann sinnvoll, wenn das Projekt langfristig stärker wachsen soll (mehr Routes, mehr Interaktivität, SSR-Features) -- eine Entscheidung, die nicht im Rahmen von Audit 10 fallen sollte. Option 4b ist für dieses Projekt die falsche Form (Interaktivitäts-Profil passt nicht zu rein-statischem Eleventy).
+
+### 2.4 Implikationen für Audits 11, 12, 13
+
+**Option 1:**
+- **Audit 11 (Print):** unverändert. Print-Views sind React-Komponenten, bleiben in SPA.
+- **Audit 12 (Content-Wartbarkeit):** unverändert. Content bleibt in `src/data/*.js`. Per-Route-Meta-Datei (`routeMeta.js`) wird als neue Content-Quelle im Audit betrachtet.
+- **Audit 13 (Wave-3-Verifikation):** unverändert. Dieselbe Architektur, dieselben E2E-Tests.
+
+**Option 3:**
+- **Audit 11:** minimal verändert. Print funktioniert weiterhin via `window.print()`; Pre-Rendering ändert daran nichts.
+- **Audit 12:** leicht verändert. Content-Dateien bleiben, aber Prerender-Zeit-Validierung der Inhalte wird relevant (keine Laufzeit-Abhängigkeit von Browser-APIs).
+- **Audit 13:** verändert. E2E-Tests müssen zusätzlich den Prerender-Output verifizieren (curl-ohne-JS).
+
+**Option 4a (Astro):**
+- **Audit 11:** **erheblich verändert.** Print-Views müssen pro Astro-Page implementiert werden; globale Print-Styles in CSS bleiben, aber Layout-Struktur ändert sich.
+- **Audit 12:** **substanziell verändert.** Content wandert von `src/data/*.js` zu Markdown-Files oder Frontmatter-Patterns -- oder bleibt als JS-Modul-Import in Astro-Pages.
+- **Audit 13:** **vollständig neu.** Neues Test-Setup für Astro, andere Playwright-Strategien (mehrere separate HTML-Dateien statt SPA).
+
+**Option 4b (Eleventy):**
+- **Audit 11:** **erheblich verändert.** Print-Ansichten als Vanilla-HTML/Nunjucks-Templates.
+- **Audit 12:** **fundamental verändert.** Content wandert zu Markdown oder Nunjucks-Data-Dateien; keine React-Komponenten mehr, die Inhalt strukturieren.
+- **Audit 13:** **vollständig neu.** Keine React-Architektur, andere Test-Strategien, weit weniger SPA-typische Probleme.
+
+**Option 5:**
+- **Audit 11:** unverändert. Print bleibt React-basiert; Pre-Render für Start-Route berührt Print nicht.
+- **Audit 12:** leicht verändert. Neue Content-Quelle `routeMeta.js` wird in Audit 12 mitgeprüft.
+- **Audit 13:** leicht verändert. E2E-Tests plus curl-Test für Start-Route-Initial-HTML.
+
+### 2.5 Risiko- und Aufwands-Zusammenfassung
+
+| Option | Aufwand | Risiko | SEO-Gewinn | Umkehrbar | Empfehlung |
+|---|---|---|---|---|---|
+| 1 | S (1-2 d) | sehr niedrig | mittel | vollständig | Fallback, wenn 5 blockiert |
+| 2 | -- | -- | -- | -- | verworfen |
+| 3 | M-L (5-10 d) | niedrig-mittel | substanziell | moderat | Erweiterungs-Pfad nach 5 |
+| 4a | L (15-20 d) | mittel | maximal | gering | wenn Projekt langfristig wächst |
+| 4b | XL (20-35 d) | hoch | maximal | sehr gering | nicht empfohlen |
+| **5** | **S-M (3-5 d)** | **niedrig** | **hoch** | **vollständig** | **empfohlen** |
+
+### 2.6 Was NICHT in Audit 10 behandelt wird
+
+Ausdrücklich:
+
+- **Inhaltliche Änderungen** an Texten, Tonalität, Orthographie. Das wurde in Audits 02, 06, 07 abgeschlossen.
+- **Visuelle Reduktion.** Audit 08 hat das erledigt.
+- **Farb-, Token-, Spacing-Compliance.** Audit 09 hat das erledigt.
+- **Komponenten-Refactoring innerhalb der bestehenden React-Architektur**, solange es nicht routing- oder SEO-relevant ist.
+- **A11y-Audits**, die nicht direkt mit Routing oder Meta-Tags zu tun haben. Fokus-Management nach Navigation ist drin, weil es routing-relevant ist.
+- **Performance-Audits** (Bundle-Splitting, Code-Reduktion, Asset-Optimierung). Werden nur dann berührt, wenn eine Option sie zwangsläufig verändert (z. B. Pre-Rendering).
+- **Print-Views.** Kommt in Audit 11.
+- **Content-Management-Struktur.** Kommt in Audit 12.
+
+### 2.7 Was die Auftraggeberin entscheiden muss, um Phase 3 zu starten
+
+**Wenn Option 5 gewählt wird (empfohlen):**
+
+1. **Pre-Render-Scope-Entscheidung:** Nur Start-Route pre-rendern, oder auch die drei statischen Sub-Templates (Glossar, Grundlagen, Evidenz)? Die Entscheidung beeinflusst Aufwand (S vs. M) und Grenz-Nutzen.
+2. **Pre-Render-Tool-Wahl:** Drei realistische Kandidaten, mit Trade-offs:
+   - `vite-plugin-ssr` bzw. `vike`: ausgereift, grosse Community, etwas schwergewichtig für reine Pre-Render-Zwecke.
+   - `vite-plugin-prerender` (falls noch gepflegt): schlank, Puppeteer-basiert, pro Route ein Headless-Browser-Run.
+   - **`@prerenderer/prerenderer`** (empfohlen): schlank, rein Pre-Render-fokussiert, ohne SSR-Overhead. Integration via Plugin, ~50 Zeilen Config.
+
+   Empfehlung: `@prerenderer/prerenderer` (vormals `prerender-spa-plugin`). Wenn die Auftraggeberin `vike` bevorzugt, weil es wachstumsfreundlicher ist, ist das auch ok -- erhöht den Aufwand um ~1-2 Tage.
+3. **OG-Image-Entscheidung:** Einheitliches Hero-Bild für alle OG-Tags, oder pro-Route-Variante (4-8 Bilder produzieren)? Fallback ohne Bild ist akzeptabel, aber ein Standard-Hero verbessert Social-Sharing deutlich.
+4. **JSON-LD-Typen:** Nur `Organization` (minimal), oder zusätzlich `MedicalWebPage` (fachportal-spezifisch)? `MedicalWebPage` ist Schema.org und valide für Fach-Portale; signalisiert Suchmaschinen die Ernsthaftigkeit.
+5. **`robots.txt`-Strenge:** Alles erlauben (`Disallow:` leer), oder bestimmte Routes ausschliessen (z. B. keine)? Empfehlung: alles erlauben, plus `Sitemap:`-Verweis.
+
+**Wenn Option 1 gewählt wird:**
+- Kein Pre-Render. Sonst dieselben Fragen wie 3, 4, 5 oben.
+
+**Wenn Option 3 gewählt wird:**
+- Pre-Render-Tool-Wahl (wie oben), aber für alle 8 Routes.
+- Umgang mit AppStateContext-Hydration-Mismatch: Default-State-Policy (immer starten mit `showSafeNote: true` und `activeTab: 'start'`, localStorage-Sync nach Hydration), oder nur Client-seitig hydrieren?
+- Build-Zeit-Budget: ist eine Build-Verlängerung von 30-90 s akzeptabel?
+
+**Wenn Option 4a gewählt wird:**
+- Braucht es vorher einen **Feasibility-Prototyp** mit einer einzelnen migrierten Komponente (vorschlagsweise Toolbox, weil anspruchsvollste Island)? Das ist bei einem 15-20-Tage-Sprint kein verschwendeter Zeit-Einsatz.
+- Tailwind-v4-Astro-Integration-Risiko: wie frisch ist das Zusammenspiel? (Tailwind v4 ist frisch, Astro unterstützt es, aber Produktions-Erfahrungen sind spärlich.)
+- AppStateContext-Strategie: Layout-Island (eine Insel über alle Pages) oder Vanilla-JS-Store mit localStorage-Sync?
+- Soll das Projekt in parallel zur Migration weiter Audits 11/12/13 erhalten, oder werden diese erst nach Migration gestartet?
+
+**Wenn Option 4b gewählt wird:**
+- **Feasibility-Prototyp obligatorisch.** Eine komplexe Komponente (z. B. Toolbox mit Score und Triage) in Vanilla JS + Alpine.js als Machbarkeits-Nachweis. Erst danach die Gesamt-Entscheidung.
+- Klare Akzeptanz, dass Audits 11/12/13 nach der Migration neu konzipiert werden müssen.
+- Explizite Entscheidung, dass das Projekt die DX-Regression akzeptiert.
+- Ehrliche Einschätzung, wer die Migration ausführt und testet (5-7 Kalenderwochen sind eine substanzielle Zeit-Bindung).
+
+---
+
+**STOPP nach Phase 2.** Warte auf Strategie-Entscheidung der Auftraggeberin.
