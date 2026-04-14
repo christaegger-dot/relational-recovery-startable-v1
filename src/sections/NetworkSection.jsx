@@ -7,8 +7,8 @@ import {
   NETWORK_MAP_QUESTIONS,
   NETWORK_MAP_STEPS,
   NETWORK_MAP_TEMPLATE_NODES,
-  RESOURCE_DATA,
 } from '../data/networkContent';
+import { FACHSTELLEN } from '../data/fachstellenContent';
 import NetworkPageTemplate from '../templates/NetworkPageTemplate';
 import { getPageHeadingId } from '../utils/appHelpers';
 import { useAppState } from '../context/useAppState';
@@ -44,11 +44,11 @@ export default function NetworkSection() {
   const filteredResources = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();
 
-    return RESOURCE_DATA.filter((resource) => {
+    return FACHSTELLEN.filter((resource) => {
       const matchesSearch =
         !query ||
         resource.name.toLowerCase().includes(query) ||
-        resource.info.toLowerCase().includes(query) ||
+        resource.description.toLowerCase().includes(query) ||
         resource.tags.some((tag) => tag.toLowerCase().includes(query));
 
       const matchesFilter = activeResourceFilter === 'all' || resource.tags.includes(activeResourceFilter);
@@ -85,7 +85,7 @@ export default function NetworkSection() {
     stats: [
       {
         label: 'Fachstellen',
-        value: String(RESOURCE_DATA.length),
+        value: String(FACHSTELLEN.length),
         note: 'kuratiert für Zürich plus einzelne schweizweite Ergänzungen',
       },
       {

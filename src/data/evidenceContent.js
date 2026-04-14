@@ -383,82 +383,9 @@ export const INTERVENTION_PROGRAM_POINTS = [
   'Nicht jede Familie braucht dasselbe Format, aber viele profitieren davon, wenn Psychoedukation, Familiengespräche, Entlastung und die Stärkung vorhandener Ressourcen zusammenkommen.',
 ];
 
-export const SUPPORT_OFFERS = [
-  {
-    name: 'PUK Zürich – offizielle Angehörigenberatung',
-    category: 'Offizielles Angebot',
-    audience: 'Angehörige, Eltern, Kinder, Fachpersonen',
-    description:
-      'Kostenlose und vertrauliche Beratung der Fachstelle Angehörigenarbeit für Angehörige und Bezugspersonen psychisch erkrankter Menschen, auch für psychisch erkrankte Eltern und deren minderjährige Kinder. Eine Beratung ist auch ohne Hospitalisation in der PUK möglich.',
-    link: 'https://www.pukzh.ch/patienten-angehoerige/informationen-fuer-angehoerige/',
-    official: true,
-    highlight: 'kostenlos · auch ohne PUK-Hospitalisation',
-  },
-  {
-    name: 'Institut Kinderseele Schweiz (iks)',
-    category: 'Schweizweite Kompetenzstelle',
-    audience: 'Familien, Fachpersonen, Schulen',
-    description:
-      'Nationale Anlaufstelle mit Beratung, Präventionsangeboten, Mediathek und Suchfunktion für Hilfen. Besonders hilfreich als erste Orientierung und für verständliche Materialien.',
-    link: 'https://www.kinderseele.ch',
-  },
-  {
-    name: 'Kinder- und Jugendhilfezentren (kjz)',
-    category: 'Kanton Zürich / kostenlose Beratung',
-    audience: 'Familien mit Kindern',
-    description:
-      'Flächendeckende Beratung im Kanton Zürich bei Erziehungsfragen, Belastungen und Krisen. Vertrauliche Unterstützung durch Fachpersonen in verschiedenen Regionen des Kantons.',
-    link: 'https://www.zh.ch/de/familie/angebote-fuer-familien-mit-kindern/kinder-und-jugendhilfezentren.html',
-  },
-  {
-    name: 'Stiftung Windlicht',
-    category: 'Kindergruppe',
-    audience: 'Kinder von 6 bis 14 Jahren',
-    description:
-      'Geschützter Raum in Winterthur und Zürich für Kinder psychisch erkrankter Eltern. Gruppentreffen sollen Entlastung, Zugehörigkeit und kindgerechte Stabilisierung ermöglichen.',
-    link: 'https://www.stiftung-windlicht.ch/',
-  },
-  {
-    name: 'Caritas «mit mir»-Patenschaften',
-    category: 'Entlastung im Alltag',
-    audience: 'Kinder und Familien',
-    description:
-      'Patenschaftsangebot mit verlässlichen erwachsenen Bezugspersonen ausserhalb der Familie. Kann Kinder entlasten und Eltern zusätzliche Luft im Alltag verschaffen.',
-    link: 'https://caritas-regio.ch/angebote/familie/mit-mir-patenschaften',
-  },
-  {
-    name: 'VASK Zürich',
-    category: 'Selbsthilfe / Angehörige',
-    audience: 'Angehörige und erwachsene Kinder',
-    description:
-      'Selbsthilfegruppen und Treffpunkte für Angehörige psychisch erkrankter Menschen. Besonders geeignet, wenn Austausch mit ähnlich Betroffenen im Vordergrund steht.',
-    link: 'https://www.vaskzuerich.ch/de/Angebote-der-VASK/Treffpunkte',
-  },
-  {
-    name: 'Elternnotruf',
-    category: 'Krisenberatung',
-    audience: 'Eltern in akuten Belastungssituationen',
-    description:
-      'Niederschwellige Beratung für Eltern in Krisen. Geeignet, wenn rasch Orientierung, Entlastung und erste nächste Schritte gebraucht werden.',
-    link: 'https://www.elternnotruf.ch/angebot/beratung',
-  },
-  {
-    name: 'Pro Mente Sana',
-    category: 'Schweizweite Orientierung / Rechte',
-    audience: 'Betroffene, Angehörige, Nahestehende',
-    description:
-      'Unabhängige psychosoziale und rechtliche Beratung für Betroffene und Angehörige. Besonders sinnvoll als ergänzende nationale Stelle für Rechtefragen und allgemeine Orientierung.',
-    link: 'https://promentesana.ch/angebote/beratung/beratung-fuer-betroffene-nahestehende',
-  },
-  {
-    name: 'Zebra Winterthur',
-    category: 'Suchtbelastete Familien',
-    audience: 'Kinder und Jugendliche',
-    description:
-      'Beratung für Kinder aus suchtbelasteten Familien. Wichtig, wenn psychische Belastung und Suchtthematik in der Familie zusammenkommen.',
-    link: 'https://stadt.winterthur.ch/themen/leben-in-winterthur/alter-gesundheit-und-soziales/sucht/zebra',
-  },
-];
+// SUPPORT_OFFERS wurde in Audit 12 zu FACHSTELLEN (src/data/fachstellenContent.js)
+// konsolidiert. Die Evidenz-Ansicht leitet ihre Teil-Liste ueber SUPPORT_OFFER_IDS
+// ab (dort definiert). Siehe docs/content-pflege.md.
 
 
 export const PUK_CONTEXT_POINTS = [

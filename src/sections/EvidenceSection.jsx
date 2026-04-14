@@ -35,9 +35,12 @@ import {
   PSYCHOEDUCATION_SETTINGS,
   RELEVANCE_POINTS,
   RELEVANCE_STATS,
-  SUPPORT_OFFERS,
 } from '../data/evidenceContent';
+import { FACHSTELLEN, SUPPORT_OFFER_IDS } from '../data/fachstellenContent';
 import { SOURCES } from '../data/sourcesContent';
+
+const FACHSTELLEN_BY_ID = Object.fromEntries(FACHSTELLEN.map((f) => [f.id, f]));
+const SUPPORT_OFFERS = SUPPORT_OFFER_IDS.map((id) => FACHSTELLEN_BY_ID[id]).filter(Boolean);
 import { createClosingSectionModel } from '../utils/closingModel';
 import { getPageHeadingId } from '../utils/appHelpers';
 

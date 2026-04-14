@@ -9,8 +9,8 @@ import {
   MapPin,
 } from 'lucide-react';
 import { E_MODULES, VIGNETTEN } from './learningContent';
-import { RESOURCE_DATA } from './networkContent';
-import { LITERATUR_IDS, MEDIA_BOOKS, MEDIA_DIGITAL, SUPPORT_OFFERS } from './evidenceContent';
+import { LITERATUR_IDS, MEDIA_BOOKS, MEDIA_DIGITAL } from './evidenceContent';
+import { FACHSTELLEN, SUPPORT_OFFER_IDS } from './fachstellenContent';
 
 /**
  * @typedef {('start'|'lernmodule'|'vignetten'|'glossar'|'grundlagen'|'evidenz'|'toolbox'|'netzwerk')} TabId
@@ -112,6 +112,6 @@ export const DEFAULT_QUIZ_STATE = {};
 
 export const E_MODULE_COUNT = E_MODULES.length;
 export const VIGNETTE_COUNT = VIGNETTEN.length;
-export const NETWORK_RESOURCE_COUNT = RESOURCE_DATA.length;
+export const NETWORK_RESOURCE_COUNT = FACHSTELLEN.length;
 export const HOME_REFERENCE_COUNT =
-  LITERATUR_IDS.length + MEDIA_BOOKS.length + MEDIA_DIGITAL.length + SUPPORT_OFFERS.length;
+  LITERATUR_IDS.length + MEDIA_BOOKS.length + MEDIA_DIGITAL.length + SUPPORT_OFFER_IDS.length;
