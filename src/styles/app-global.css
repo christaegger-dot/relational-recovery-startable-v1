@@ -107,23 +107,157 @@
   }
 }
 
+/* --------------------------------------------------------------------- *
+ * Print-Stylesheet (Audit 11)
+ * --------------------------------------------------------------------- *
+ * Ein einziger zentraler @media print-Block. Gliederung:
+ *   1. Screen-/Print-Switches (.no-print, .print-only, @page)
+ *   2. Basis-Typografie (feste Pt-Groessen, kein clamp())
+ *   3. Farb-Adjust fuer semantisch kritische Flaechen
+ *   4. Link-URL-Anzeige fuer externe Links
+ *   5. Page-Break-Verhalten
+ *   6. Interaktive Controls ausblenden
+ *   7. Layout-Details (Hero-Bild)
+ *   8. Notfall-Footer (P0, erscheint pro Druckseite)
+ *   9. Vignetten-Print-Hinweis (separate Regel, siehe audit(11))
+ * --------------------------------------------------------------------- */
 @media print {
+  /* 1. Switches --------------------------------------------------------- */
   .no-print {
     display: none !important;
   }
-
   .print-only {
     display: block !important;
   }
-
   @page {
     size: A4;
-    margin: 10mm;
+    /* Zusatz-Platz am Unterrand fuer den fixierten Notfall-Footer. */
+    margin: 12mm 14mm 22mm;
   }
 
-  html,
+  /* 2. Basis-Typografie ------------------------------------------------- */
+  html {
+    font-size: 11pt;
+    line-height: 1.45;
+    color: #000;
+  }
   body {
     background: #fff !important;
+    color: #000;
+  }
+  h1 {
+    font-size: 18pt;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-top: 0;
+  }
+  h2 {
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+  h3 {
+    font-size: 12pt;
+    line-height: 1.25;
+  }
+  p,
+  li {
+    font-size: 11pt;
+    color: #000;
   }
 
+  /* 3. Farb-Adjust fuer semantisch kritische Flaechen ------------------- *
+   * Die Toolbox-Baender (caution/danger) tragen den semantischen Hinweis
+   * ueber Farbe. Hier erzwingen, damit der Print die Bedeutung nicht
+   * verliert. Andere Surfaces bleiben beim Browser-Default (Tinte sparen).
+   */
+  .ui-toolbox-band--caution,
+  .ui-toolbox-band--danger,
+  .ui-toolbox-feedback--caution,
+  .ui-toolbox-feedback--danger {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* 4. Link-URL-Anzeige ------------------------------------------------- *
+   * Externe Links (nicht eltern-a.netlify.app) bekommen die URL als
+   * Klartext hinten angehaengt, damit Leser:innen den Link auf Papier
+   * nachvollziehen koennen. tel:-Links sind ausgenommen, weil der
+   * sichtbare Text bereits die Nummer ist.
+   */
+  a[href^="http"]:not([href*="eltern-a.netlify.app"])::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #333;
+    word-break: break-all;
+  }
+  a[href^="tel:"]::after {
+    content: none;
+  }
+
+  /* 5. Page-Break-Verhalten -------------------------------------------- *
+   * Headings sollen nicht am Seitenende einzeln stehen. Karten und
+   * Listen-Items nicht mitten durchbrechen.
+   */
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  .ui-card,
+  .ui-card-grid > *,
+  .ui-stack--loose > *,
+  .toolbox-print-card,
+  figure,
+  table,
+  pre {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  ul,
+  ol {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* 6. Interaktive Controls ausblenden --------------------------------- *
+   * Heuristik zusaetzlich zu .no-print: Accordion-Toggles, Filter-Chips
+   * und aehnliche reine Interaktions-Elemente ergeben auf Papier keinen
+   * Sinn.
+   */
+  button[aria-expanded],
+  .ui-chip[role="button"] {
+    display: none !important;
+  }
+
+  /* 7. Layout-Details -------------------------------------------------- */
+  .ui-hero__image,
+  .ui-hero img {
+    display: none !important;
+  }
+
+  /* 8. Notfall-Footer (P0) --------------------------------------------- *
+   * Die <PrintNotfallFooter />-Komponente rendert das Markup; diese
+   * Regel platziert den Block fixiert am Unterrand, sodass moderne
+   * Browser (Chrome, Firefox, Safari, Edge) ihn pro gedruckter Seite
+   * wiederholen. Keine tel:-Links, nur lesbare Zahlen.
+   */
+  .print-notfall-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 4mm 10mm;
+    border-top: 1pt solid #333;
+    font-size: 9pt;
+    font-weight: 700;
+    color: #000;
+    background: #fff;
+    text-align: center;
+  }
+  .print-notfall-footer p {
+    margin: 0;
+    font-size: 9pt;
+    letter-spacing: 0.02em;
+  }
 }

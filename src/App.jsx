@@ -4,6 +4,7 @@ import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import PrintNotfallFooter from './components/PrintNotfallFooter';
 import HomeLandingTemplate from './templates/HomeLandingTemplate';
 import { getPageHeadingId } from './utils/appHelpers';
 import { useAppState } from './context/useAppState';
@@ -270,6 +271,7 @@ export default function App() {
       </main>
 
       <Footer />
+      <PrintNotfallFooter />
     </div>
   );
 }
