@@ -2,6 +2,32 @@
 // Jeder Eintrag wird über seine ID von Claims in evidenceContent.js (und anderen Dateien)
 // via sourceIds[] referenziert. Quelle: Audit 04 Recherche-Ergebnisse.
 
+/**
+ * @typedef {('journal-article'|'book'|'report'|'weblink'|'editorial')} SourceType
+ */
+
+/**
+ * @typedef {Object} Source
+ * @property {string} id - Stabile ID, kebab-case. Konvention: nachname-jahr
+ *   oder leadwort-jahr. Wird aus evidenceContent.js via sourceIds[] referenziert.
+ * @property {string} author - Vollstaendige Autor:innen-Liste in Zitationsform.
+ * @property {number|null} year - Erscheinungsjahr; null wenn unbekannt (z.B.
+ *   bei fortlaufend aktualisierten Weblinks).
+ * @property {string} title - Titel der Arbeit.
+ * @property {string|null} journal - Zeitschriften-Angabe inkl. Jahrgang/Heft/
+ *   Seitenzahlen; null bei Buechern, Berichten, Weblinks.
+ * @property {string|null} publisher - Verlag oder herausgebende Institution;
+ *   null wenn durch journal/DOI ausreichend verankert.
+ * @property {SourceType} type - Publikationstyp.
+ * @property {string|null} doi - DOI ohne URL-Praefix (z.B. '10.1111/inm.12820');
+ *   null wenn keine DOI vergeben.
+ * @property {string|null} link - URL zur Quelle; null wenn nicht verfuegbar.
+ * @property {boolean} chFocus - true, wenn es sich um eine Schweizer
+ *   Primaer- oder Hauptquelle handelt (Audit-04-Pattern). Wichtig fuer die
+ *   Sortierung und Hervorhebung in der Evidenz-Ansicht.
+ */
+
+/** @type {Record<string, Source>} */
 export const SOURCES = {
   // === Schweizer Primärquellen ===
 
