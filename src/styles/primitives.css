@@ -287,7 +287,7 @@
   justify-content: center;
   gap: 0.625rem;
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
   font-weight: 800;
   line-height: 1;
   letter-spacing: 0.18em;
@@ -648,7 +648,7 @@
   border-radius: 999px;
   border: 1px solid var(--border-subtle);
   background: var(--surface-panel);
-  font-size: 1.125rem;
+  font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--text-muted);
   transition:
@@ -790,7 +790,7 @@
 .ui-choice-card__title {
   margin: 0;
   color: inherit;
-  font-size: 1rem;
+  font-size: var(--font-size-md);
   font-weight: 800;
   line-height: 1.35;
 }
@@ -893,7 +893,7 @@
 .ui-hero__aside-title {
   margin: 0;
   color: var(--text-primary);
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1305,7 +1305,7 @@
   margin: 0;
   color: var(--text-primary);
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: var(--font-size-md);
   font-weight: 700;
   letter-spacing: 0.18em;
   line-height: 1;
@@ -1832,7 +1832,7 @@
 .ui-toolbox-feedback__title {
   margin: var(--space-3) 0 0;
   color: var(--text-primary);
-  font-size: 1.125rem;
+  font-size: var(--font-size-lg);
   font-weight: 800;
   line-height: var(--line-height-tight);
 }
@@ -1919,7 +1919,7 @@
 .ui-toolbox-disclosure__toggle {
   margin-top: var(--space-1);
   color: var(--accent-primary-strong);
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -2024,7 +2024,7 @@
   flex-direction: column;
   gap: var(--space-5);
   padding: var(--space-5);
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
   line-height: 1.55;
 }
 
@@ -2973,7 +2973,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: var(--space-5);
   color: var(--footer-text-inverse-soft);
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
   font-weight: 500;
   line-height: 1.9;
 }
@@ -2988,7 +2988,7 @@
 .footer-bottom__claim {
   margin: 0;
   color: var(--footer-text-muted);
-  font-size: 0.6875rem;
+  font-size: var(--font-size-2xs);
   font-weight: 800;
   letter-spacing: 0.28em;
   line-height: 1.3;
