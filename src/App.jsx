@@ -104,7 +104,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#f6efe7] flex flex-col font-sans text-stone-900 overflow-x-hidden selection:bg-[var(--selection-background)] selection:text-[var(--selection-foreground)]">
+    <div className="min-h-screen bg-[var(--surface-subtle)] flex flex-col font-sans text-stone-900 overflow-x-hidden selection:bg-[var(--selection-background)] selection:text-[var(--selection-foreground)]">
       <a
         href="#main-content"
         className="skip-link"
