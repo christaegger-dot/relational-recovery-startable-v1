@@ -147,10 +147,10 @@ export default function App() {
       )}
 
       {showSafeNote && (
-        <div className="relative z-[100] border-b border-[#4b392f] bg-[linear-gradient(180deg,#3f322b,#2d241f)] px-3 py-3 text-[#f6efe7] no-print">
+        <div className="relative z-[100] border-b border-[var(--border-inverse)] bg-[linear-gradient(180deg,var(--surface-inverse-top),var(--surface-inverse-bottom))] px-3 py-3 text-[var(--text-inverse)] no-print">
           <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-2 md:flex-row md:items-center md:px-6">
-            <div className="flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#eadfce]">
-              <ShieldCheck size={16} className="shrink-0 text-[#f0c786]" aria-hidden="true" />
+            <div className="flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[var(--text-inverse-muted)]">
+              <ShieldCheck size={16} className="shrink-0 text-[var(--icon-warning-inverse)]" aria-hidden="true" />
               <span>
                 Lokale Speicherung im Browser • auf gemeinsam genutzten Geräten nach der Nutzung zurücksetzen • keine
                 serverseitige Falldokumentation in dieser Ansicht
@@ -159,7 +159,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => setShowSafeNote(false)}
-              className="haptic-btn rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#f0c786] transition-colors hover:bg-white/10 hover:text-white"
+              className="haptic-btn rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--icon-warning-inverse)] transition-colors hover:bg-white/10 hover:text-white"
               aria-label="Datenschutzhinweis schliessen"
             >
               Schliessen
