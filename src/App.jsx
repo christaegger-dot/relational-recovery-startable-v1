@@ -168,10 +168,10 @@ export default function App() {
         </div>
       )}
 
-      <div className="no-print border-b border-[#e4cbbb] bg-[linear-gradient(180deg,#fff6ee,#f4e4d6)]">
+      <div className="no-print border-b border-[var(--border-error-soft)] bg-[linear-gradient(180deg,var(--surface-error-soft),var(--surface-muted))]">
         <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-4 py-3 md:flex-row md:items-center md:px-6">
-          <div className="text-sm leading-relaxed text-[#6d342c]">
-            <span className="mr-3 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#9a4b3c]">
+          <div className="text-sm leading-relaxed text-[var(--text-danger-strong)]">
+            <span className="mr-3 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--text-danger-label)]">
               Akute Krise
             </span>
             Bei akuter Lebensgefahr:{' '}
@@ -203,7 +203,7 @@ export default function App() {
           <button
             type="button"
             onClick={handleEmergencyAccess}
-            className="haptic-btn inline-flex items-center gap-2 rounded-full border border-[#dec2b2] bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[var(--accent-primary-strong)] shadow-[0_10px_24px_rgba(141,63,50,0.06)] transition-colors hover:bg-[#fff0e6]"
+            className="haptic-btn inline-flex items-center gap-2 rounded-full border border-[var(--border-warm-soft)] bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[var(--accent-primary-strong)] shadow-[0_10px_24px_rgba(141,63,50,0.06)] transition-colors hover:bg-[var(--surface-hover-warm)]"
             aria-label="Zu Notfallinformationen wechseln"
           >
             <AlertTriangle size={14} aria-hidden="true" />
