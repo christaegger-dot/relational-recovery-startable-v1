@@ -499,3 +499,167 @@ Vorschlag:
 ---
 
 **STOPP nach Phase 2A.** Warte auf Freigabe der Einzelvorschläge, insbesondere der Vignetten-Entscheidung (V1 vs. V2).
+
+---
+
+# Teil B -- Audit 12: Content-Wartbarkeit
+
+## Phase 1B -- Inventur
+
+### 1B.1 Datei-Inventar `src/data/*.js`
+
+| Datei | Zeilen | Primärer Nutzer | Grob-Schema | Beeinflusst durch |
+|---|---|---|---|---|
+| `appShellContent.js` | 91 | App-Shell, Header, Footer | `TAB_ITEMS[]` mit `{id, label, icon, footerNote, priority, primaryAudience}` + STORAGE/VERSION-Konstanten | Audit 02 (primaryAudience) |
+| `evidenceContent.js` | 619 | EvidenceSection | **35 benannte Exports**, gemischt: Punkt-Listen, Panel-Arrays, Stats mit `sourceIds`, SUPPORT_OFFERS, MEDIA_BOOKS, MEDIA_DIGITAL | Audit 04 (sourceIds), Audit 06, 07 |
+| `glossaryContent.js` | 234 | GlossarSection | `GLOSSARY_GROUPS[]` mit clusters → terms `{term, definition, practice}`; HERO, INTRO | Audit 07 (Eintrags-Erweiterung auf 21) |
+| `grundlagenContent.js` | 162 | GrundlagenSection | `GRUNDLAGEN_CLUSTERS[]` → `faqs[]` `{question, answer}`; HERO, INTRO | Audit 06, 07 |
+| `learningContent.js` | 74 | ElearningSection, VignettenSection | `VIGNETTEN[]` `{id, title, description, status, options[]}`, `E_MODULES[]` `{id, title, duration, storyboard, quiz, quizOptions, correctQuizIdx}`, `ASSESSMENT_ITEMS[]` `{id, label, val}` | Audit 05 |
+| `networkContent.js` | 286 | NetworkSection | `RESOURCE_DATA[]` `{name, info, link, tags}`, NETWORK_FILTERS, MAP_NODES, MAP_LENSES, LEGAL_* | Audit 04 (Stubs) |
+| `routeMeta.js` | 104 | `useDocumentMeta` | `DEFAULT_META`, `ROUTE_META{start,lernmodule,...}`, Funktion `getRouteMeta()` | Audit 10 (neu) |
+| `sourcesContent.js` | 217 | Cross-Ref via `sourceIds[]` | `SOURCES{}`: 16 Einträge mit `{id, author, year, title, journal, publisher, type, doi, link, chFocus}` | Audit 04 (zentrales Quellen-Register) |
+| `toolboxContent.js` | 298 | ToolboxSection | ACUTE_CRISIS_STEPS/_CONTACTS, SAFETY_PLAN_POINTS/_TEMPLATE_FIELDS, CHILD_PROTECTION_*, ADDICTION_*, RIGHTS_FAQ, PRACTICE_BLOCKS | Audit 03, 04, 07 |
+
+**Summe**: 9 Dateien, 2085 Zeilen.
+
+### 1B.2 Schema-Konsistenz-Check
+
+**Innerhalb der Dateien:**
+
+| Datei | Befund |
+|---|---|
+| `sourcesContent.js` | ✓ vollständig konsistent: alle 16 SOURCES-Einträge haben exakt die 10 Felder mit `null`-Werten für fehlende Angaben |
+| `glossaryContent.js` | ✓ alle 21 Glossar-Terms haben `{term, definition, practice}` |
+| `appShellContent.js` | ✓ alle 8 TAB_ITEMS haben `{id, label, icon, footerNote, priority, primaryAudience}` |
+| `routeMeta.js` | ✓ alle 8 Route-Entries haben `{title, description, ogTitle, ogDescription}` |
+| `networkContent.js` RESOURCE_DATA | ✓ alle 16 Einträge haben `{name, info, link, tags}` |
+| `toolboxContent.js` | ≈ teilweise: SAFETY_PLAN_TEMPLATE_FIELDS hat `{title, hint}`, CHILD_PROTECTION_THRESHOLDS hat `{title, text}` (unterschiedliches Feld-Naming für gleiche Rolle). Konsistent innerhalb jedes Arrays, nicht zwischen ähnlichen Arrays. |
+| `learningContent.js` | ≈ **VIGNETTEN**: 1 echter Eintrag (`fall1`) plus 2 Stubs als Block-Kommentare (V2, V3). `VIGNETTEN.length === 1`. Schema des aktiven Eintrags konsistent. Die Stub-Kommentare sind menschenlesbare Platzhalter, nicht maschinenlesbare Einträge. |
+| `evidenceContent.js` | ≈ verschiedene Schemas pro Array (erwartbar bei 35 Exports mit unterschiedlichem Zweck), aber innerhalb jedes Arrays konsistent |
+| `grundlagenContent.js` | ✓ alle GRUNDLAGEN_CLUSTERS haben `id, eyebrow, title, description, faqs[]`; alle `faqs[]` haben `{question, answer}` |
+
+**Zwischen verwandten Dateien:**
+
+| Vergleich | Befund |
+|---|---|
+| `RESOURCE_DATA` (networkContent) vs. `SUPPORT_OFFERS` (evidenceContent) | **Schema-Divergenz.** Beide beschreiben Fachstellen-Angebote, nutzen aber unterschiedliche Feldnamen: `info` vs. `description`, `tags[]` vs. `category + audience`. Zusätzlich **inhaltliche Überlappung** (~8 Einträge kommen in beiden Arrays vor -- PUK, iks, Stiftung Windlicht, Caritas «mit mir», Pro Mente Sana, kjz, feel-ok.ch, Elternnotruf-Pendant). Unterschiedliche Beschreibungen derselben Angebote. |
+| `LITERATUR` (evidenceContent) vs. `SOURCES` (sourcesContent) | **Schema-Divergenz plus Dopplung.** `LITERATUR` hat `{author, title, publisher, link?}` als Free-Text-Liste (legacy). `SOURCES` hat das vollständige strukturierte Schema. Beide enthalten dieselben Studien, aber nur `SOURCES` ist über IDs referenzierbar. Das Audit-04-Pattern ist teilweise eingeführt: `RELEVANCE_STATS` nutzt `sourceIds`, `LITERATUR` nicht. |
+| `ACUTE_CRISIS_CONTACTS` (toolboxContent) vs. `RESOURCE_DATA` (networkContent) | **Schema-Divergenz.** ACUTE_CRISIS_CONTACTS: `{name, note, link}`. RESOURCE_DATA: `{name, info, link, tags}`. Gleiche Semantik (`note`=`info`), anderer Name. |
+
+### 1B.3 Cross-Reference-Integritäts-Check
+
+**Python-Scan der `sourceIds[]`-Referenzen aus `evidenceContent.js` gegen `SOURCES`-Keys in `sourcesContent.js`:**
+
+| Metrik | Wert |
+|---|---|
+| SOURCES-Einträge in sourcesContent.js | 16 |
+| Unique `sourceIds`-Referenzen in evidenceContent.js | 8 |
+| **Verwaiste Referenzen** (referenziert, aber nicht in SOURCES) | **0** |
+| SOURCES-Einträge ohne `sourceIds`-Referenz | **8 (50 %)** |
+
+Die 8 nicht formell referenzierten SOURCES-Einträge sind: `jones-2016`, `koopmann-2025`, `lenz-2014`, `lenz-2019`, `puk-angehoerigenarbeit`, `reupert-2021`, `stauber-2020`, `wiegand-grefe-2024`. Sie tauchen alle als **Free-Text-Einträge in LITERATUR** auf (inhaltlich genutzt), aber ohne ID-Brücke ins strukturierte Register.
+
+**Konsequenz:** Das Audit-04-Pattern (zentrales Quellen-Register + `sourceIds[]`-Referenzen) ist **halb implementiert**: 8 von 16 Studien sind formell verlinkt, 8 bleiben als LITERATUR-Paralleleinträge. Wer eine Studie ändert (z. B. neue Auflage, anderer Link), muss an zwei Stellen ändern -- redaktionelle Fussangel.
+
+**Weitere Cross-References:**
+
+| Referenz-Pattern | Befund |
+|---|---|
+| `glossaryId` oder Glossar-Verlinkungs-Marker | **keine gefunden.** Audit 07 hat 4 "vorbereitete Verlinkungen" erwähnt, aber im Code existiert kein Mechanismus dazu. Inline-Kommentare wie `// L2: Beistandschaft`, `// L4: Melderecht` zeigen Absicht, aber keine aktive Verlinkung. |
+| `primaryAudience`-Werte | konsistent: nur `"beide"`, `"fachpersonen"`, `"angehoerige"` in allen 8 TAB_ITEMS. Aber: **nirgends konsumiert.** Grep auf `primaryAudience` findet nur Vorkommen in `appShellContent.js`. Eingeführt durch Audit 02, aber aktuell reine Doku-Metadaten, kein Code-Konsum. |
+| `VIGNETTEN[].options[].isCorrect` | vorhanden in `fall1`. Durch VignettenSection konsumiert. ✓ |
+| `E_MODULES[].correctQuizIdx` | Integer-Index in `quizOptions[]`. Konsistent. ✓ |
+| `ASSESSMENT_ITEMS[].id` | Referenziert durch ToolboxSection (Score-Checked-Tracking). ✓ |
+
+### 1B.4 JSDoc-Typisierung
+
+**`grep` auf `@typedef|@param|@type|@returns` im gesamten `src/`:** Zero Treffer. JSDoc wird nirgends eingesetzt.
+
+Das ist eine saubere Ausgangslage für eine spätere Einführung -- keine halben Fragmente, keine inkonsistenten Annotations. Bei einer Einführung müssten die Schemas aus 1B.2 als Typedefs erfasst werden: `Source`, `GlossaryTerm`, `TabItem`, `RouteMeta`, `ResourceOffer`, `VignetteFall`, `EModule`, `AssessmentItem`, plus ggf. interne Hilfstypen.
+
+### 1B.5 Redaktionelle Fussangeln
+
+Pro Datei konkrete Stellen, die bei künftiger Pflege besonders fehleranfällig sind:
+
+**`sourcesContent.js`:**
+- Die ID `'foo-yyyy'` ist freie Konvention (nachname-jahr oder lead-lastword-year). Keine enforced Form. Bei neuen Einträgen könnte die Benennung abweichen und die `sourceIds[]`-Referenzen bräuchten Anpassung.
+- `chFocus: true/false` ist ein binärer Flag, der Audit-04-Semantik trägt. Bei neuen Einträgen vergessbar.
+- `doi`, `link`, `journal`, `publisher` mit `null` für fehlend: Muss konsistent `null` sein, nicht leerer String oder `undefined`. Aktuell sauber, aber eine leise Fussangel.
+
+**`evidenceContent.js`:**
+- **`LITERATUR`-Doppelpflege**: Wenn eine Studie in SOURCES aktualisiert wird, muss LITERATUR separat angepasst werden. Nichts erzwingt Konsistenz. Konkretes Risiko.
+- **`SUPPORT_OFFERS` vs. `RESOURCE_DATA` (networkContent)**: Bei Änderung einer Fachstellenbeschreibung an einer Stelle bleibt die andere unverändert. ~8 Überlappungs-Angebote.
+- Inline-Kommentar in Zeile 24: "Weblinks (...) nach SUPPORT_OFFERS verschoben -- siehe sourcesContent.js". Der Kommentar verweist ins falsche Register: verschoben wurde nach SUPPORT_OFFERS (evidenceContent.js selbst), nicht nach sourcesContent.js. **Kleiner Doku-Fehler.**
+
+**`glossaryContent.js`:**
+- Keine IDs pro Term. Verlinkung (Audit 07 als "vorbereitet") wäre ohne ID-Feld schwer robust.
+- Inline-Kommentare wie `// L2: Beistandschaft (Art. 308 ZGB) – Quelle: Faktenbasis Abschnitt 2` dokumentieren Audit-07-Herkunft, sind aber nicht maschinenlesbar.
+- Konvention "Begriff als String-Key, mit Klammer-Ergänzung für Abkürzungen" (z. B. `'KESB (Kindes- und Erwachsenenschutzbehörde)'`): Fussangel bei späterer Verlinkung, weil der Anker-Text komplex ist.
+
+**`learningContent.js`:**
+- **VIGNETTEN-Stubs als Block-Kommentare**, nicht als Daten-Einträge. `VIGNETTEN.length === 1`. Wer oberflächlich liest, könnte denken, es seien 3 Fälle vorgesehen. **UI zeigt aktuell korrekt "1".** Die Stubs sind redaktionell erwartet und mit Audit-05-Begründungen kommentiert, aber sie könnten beim Auffüllen leicht Schema-inkonsistent werden.
+- `correctQuizIdx` als Zahl (Index) statt ID ist fragil bei Umstrukturierung der `quizOptions[]`.
+
+**`networkContent.js`:**
+- Freie `tags[]`-Strings ohne zentrale Enumeration. Neue Tags können an einer Stelle entstehen und an anderer Stelle unbekannt bleiben. Filter greift nur auf explizit deklarierte Tags in `NETWORK_FILTERS` zu.
+- Keine IDs pro Ressource → bei Änderung einer Beschreibung muss der Eintrag per String-Match identifiziert werden.
+- Schema-Dopplung mit SUPPORT_OFFERS (siehe 1B.2).
+
+**`toolboxContent.js`:**
+- Arrays mit Free-Text-Strings (ACUTE_CRISIS_STEPS, SAFETY_PLAN_POINTS, CHILD_PROTECTION_TIPS, ADDICTION_TIPS, PARENT_SELF_HELP_POINTS): Keine IDs, Reihenfolge ist positions-stabil durch Array-Index. Ändern der Reihenfolge könnte Template-Logik beeinflussen, falls irgendwo ein Index genutzt wird.
+- `ACUTE_CRISIS_CONTACTS`: die Emergency-Nummer `144` hat `link: null` -- wäre konsistenter mit den anderen Contacts, wenn sie als `link: 'tel:144'` stünde (aktuell wird sie nur als Text gerendert). R31-Fix aus Audit 09 wirkt ausserhalb dieses Arrays.
+
+**`routeMeta.js`:**
+- **BASE_URL** hartkodiert auf `'https://eltern-a.netlify.app'`. Bei Domainwechsel zentrale Stelle, aber auch in `index.html` JSON-LD und in `public/robots.txt` und `public/sitemap.xml` -- **vier Stellen synchron zu halten.**
+- Felder pro Route-Entry optional (z. B. `ogImage` nicht explizit gesetzt → Fallback auf DEFAULT_META). Strukturierung funktioniert, aber bei Ergänzung neuer Felder kann Defaultierung leicht übersehen werden.
+
+**`appShellContent.js`:**
+- `primaryAudience` ist redaktionelle Metadaten ohne Code-Konsum. Pflege-Risiko: Feld wird bei neuen Tabs vergessen, niemand merkt es.
+- Icon-Imports aus `lucide-react` direkt in der Content-Datei → Refactoring-Fussangel, wenn die Icon-Bibliothek gewechselt würde.
+
+### 1B.6 Migrations-Option erwägen
+
+Keine Empfehlung, nur Darstellung:
+
+| Option | Vorteile | Nachteile |
+|---|---|---|
+| **Beibehalten als JS-Module** (Status quo) | Konsistenz mit Vite-Build; Typ-Inferenz via JSDoc möglich; Icons direkt importierbar; keine Migration nötig | Niederschwellige redaktionelle Pflege heikel (Nicht-Entwickler-Zielgruppe, JavaScript-Syntax); bei Syntaxfehler bricht der Build; Quotes-Escaping fehleranfällig |
+| **Markdown / MDX** | Niederschwellige Pflege; klassische Struktur für Content-lastige Seiten; MDX würde Komponenten weiter zulassen | Verlust strukturierter Felder (z. B. `sourceIds`, Score-IDs); neuer Build-Schritt; Migration von 2000 Zeilen substanzieller Aufwand; bricht die bestehende Section→Template→Content-Schicht aus Audit 09 |
+| **Strukturiertes JSON** mit Schema-Validierung | Schema-Validierbar z. B. via `ajv`, eindeutige Strukturen, maschinell prüfbar, hinter eine kleine Editor-Schicht setzbar | Verlust von Kommentaren (legales JSON lässt keine Kommentare zu); ESM-Import ist weniger bequem; JSON5 oder YAML wären realistischere Kandidaten; Icon-Imports müssten extern gelöst werden |
+| **Hybrid**: JS-Module behalten, aber JSDoc-Typisierung und Schema-Validierungs-Tests ergänzen | Niedrigschwellig; fügt Sicherheit hinzu ohne Migration; VSCode-Typ-Inferenz aktivierbar | Lösung ist additiv; nicht strukturell sauberer |
+
+**Einschätzung:** Die Dateien sind **grundsätzlich gesund**. Die Hauptprobleme (1B.2, 1B.3, 1B.5) sind **harmonisierbar ohne Migration** -- es handelt sich um Schema-Anpassungen, Doppelpflege-Auflösung und eine ID-Einführung für das Glossar. Eine vollständige Markdown- oder JSON-Migration würde mehr Aufwand erzeugen als die identifizierten Probleme rechtfertigen.
+
+### 1B.7 Gesamtbild
+
+**Statistik:**
+
+| Metrik | Wert |
+|---|---|
+| Datei-Anzahl | 9 |
+| Zeilen total | 2 085 |
+| Schema-Inkonsistenzen innerhalb einzelner Dateien | 2 (toolboxContent title/text vs title/hint; VIGNETTEN mit Stub-Kommentaren) |
+| Schema-Divergenzen zwischen verwandten Dateien | 3 (LITERATUR/SOURCES, RESOURCE_DATA/SUPPORT_OFFERS, ACUTE_CRISIS_CONTACTS/RESOURCE_DATA) |
+| Verwaiste Cross-References | **0** |
+| SOURCES-Einträge ohne formelle Referenz | **8 von 16 (50 %)** |
+| JSDoc-Abdeckung | **0 %** |
+| Redaktionelle Fussangeln identifiziert | **12** (querfelderweise, siehe 1B.5) |
+| Migrations-Einschätzung | **Beibehalten als JS-Module**, Nachpflege empfohlen |
+
+**Top-5-Hot-Spots:**
+
+1. **LITERATUR vs. SOURCES: 50 % Doppelpflege.** 8 Studien stehen in beiden Arrays, nur die SOURCES-Form ist über IDs referenzierbar. Die LITERATUR-Einträge bräuchten entweder eine Migration auf `sourceIds`-Basis oder eine klare Rollentrennung (LITERATUR = rein redaktionelle Display-Liste, SOURCES = Cross-Ref-Register).
+2. **RESOURCE_DATA vs. SUPPORT_OFFERS: 8 überlappende Fachstellen mit unterschiedlichen Schemas.** Bei Änderung einer Fachstellen-Beschreibung muss an zwei Stellen geändert werden, mit divergenten Feldnamen.
+3. **`primaryAudience` ist totes Metadatum.** Audit 02 hat es eingeführt, aber kein Code konsumiert es. Entweder aktivieren (Filter, Empfehlungs-Logik, Meta-Output) oder explizit als redaktionelle Dokumentation markieren.
+4. **Glossar-Verlinkung nicht formalisiert.** Audit 07 hat 4 Terme als "vorbereitete Verlinkungen" deklariert, aber der Code hat weder IDs pro Term noch einen Verlinkungs-Mechanismus. Die Absicht bleibt ungeerntet.
+5. **BASE_URL an vier Stellen synchron.** `routeMeta.js`, `index.html` (JSON-LD, canonical, OG-URL), `public/robots.txt`, `public/sitemap.xml`. Bei Domainwechsel leicht übersehbar.
+
+**Nicht-Hot-Spots (positiv):**
+- Cross-Reference-Integrität (0 verwaiste IDs).
+- Schema-Konsistenz innerhalb der meisten Dateien.
+- JSDoc-Start-Punkt ist sauber (0 %, nicht halbvolle Einzelfragmente).
+- Migrations-Option ist fachlich offen, aber nicht dringend.
+
+---
+
+**STOPP nach Phase 1B.** Warte auf Freigabe für Phase 2B (Diagnose und Massnahmenkatalog).
