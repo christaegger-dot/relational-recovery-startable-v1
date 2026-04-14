@@ -120,7 +120,13 @@ const Header = memo(function Header({
 
       {mobileMenuOpen && (
         <>
-          <div className="ui-mobile-backdrop" aria-hidden="true" onClick={closeMobileMenu} />
+          <button
+            type="button"
+            className="ui-mobile-backdrop"
+            aria-label="Menü schliessen"
+            tabIndex={-1}
+            onClick={closeMobileMenu}
+          />
           <div
             ref={mobileMenuContainerRef}
             id="mobile-nav"

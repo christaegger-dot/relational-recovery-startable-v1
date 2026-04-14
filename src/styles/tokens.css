@@ -7,7 +7,45 @@
   --surface-accent-soft: #f1f3ce; /* use with --text-primary or --text-secondary; not for inverse text */
   --surface-info-soft: #edf3f8; /* use with --text-primary for informational highlights */
   --surface-danger-soft: #fff1eb; /* use with --text-danger for urgent but low-arousal states */
-  --surface-elevated: rgba(255, 250, 246, 0.86);
+  --surface-elevated: rgba(255, 250, 246, 0.86); /* nur auf hellen Flächen mit Luminanz > 0.7; sonst --surface-app nutzen */
+
+  /* Inverse surfaces (dunkle Streifen wie Emergency-Banner). Gradient-Paar + Border-Partner. */
+  --surface-inverse-top: #3f322b;
+  --surface-inverse-bottom: #2d241f;
+  --border-inverse: #4b392f;
+
+  /* Error / Warn-Surfaces mit eigener Identität, nicht mit --surface-danger-soft verwechseln. */
+  --surface-error-soft: #fff6ee;
+  --border-error-soft: #e4cbbb;
+
+  /* Warm Interaction-States für helle Surfaces (Hover, sekundäre Border). */
+  --border-warm-soft: #dec2b2;
+  --surface-hover-warm: #fff0e6;
+
+  /* Toolbox-Band-Intensivfarben: eigene Stufe für Score-Feedback Caution/Danger.
+     Unterscheidet sich bewusst von --accent-warning/--accent-danger (Body-Gradient). */
+  --accent-warning-strong: #d97706;
+  --surface-warning-strong-soft: #fffbeb;
+  --accent-danger-strong: #c2410c;
+  --surface-danger-strong-soft: #fff7ed;
+
+  /* Footer-Identität: eigenes Mini-System mit Gradient, Inverse-Panel, mehrstufiger Text-Hierarchie. */
+  --footer-surface-top: #f5ede2;
+  --footer-surface-bottom: #eee2d4;
+  --footer-surface-inverse-top: #3d3128;
+  --footer-surface-inverse-bottom: #262019;
+  --footer-text-inverse-body: #f2e6d9;
+  --footer-badge-border: #e4d2c1;
+  --footer-badge-text: #7a4c35;
+  --footer-text-warm: #5a4a3f;
+  --footer-text-muted: #8a705f;
+  --footer-text-inverse: #fff7ef;
+  --footer-text-inverse-soft: #d9cabb;
+  --footer-text-inverse-strong: #332a24;
+
+  /* Selection-Paar: warmer Highlight statt Browser-Default. */
+  --selection-background: #ead8c3;
+  --selection-foreground: #5f3c2d;
 
   /* Text tokens */
   --text-primary: #2f2f28; /* AA+ on --surface-page, --surface-app, --surface-subtle and --surface-muted */
@@ -16,6 +54,10 @@
   --text-inverse: #fffaf6; /* for text on --accent-primary-strong and other dense dark accents */
   --text-link: #8d3f32; /* interactive text on light surfaces; target AA */
   --text-danger: #8d3f32; /* emergency and destructive messaging on soft danger surfaces */
+  --text-danger-strong: #6d342c; /* bodycopy auf Warn-Surfaces, etwas stärker als --text-danger */
+  --text-danger-label: #9a4b3c; /* Uppercase-Label auf Warn-Surfaces (Kicker, Meta) */
+  --text-inverse-muted: #eadfce; /* Gedämpfter Text auf --surface-inverse-*; Paarung zu --text-inverse */
+  --icon-warning-inverse: #f0c786; /* Warning-Icon auf --surface-inverse-*; --accent-warning ist auf Hell kalibriert */
 
   /* Border tokens */
   --border-subtle: #e6dacb;

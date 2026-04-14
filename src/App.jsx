@@ -104,7 +104,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#f6efe7] flex flex-col font-sans text-stone-900 overflow-x-hidden selection:bg-[#ead8c3] selection:text-[#5f3c2d]">
+    <div className="min-h-screen bg-[var(--surface-subtle)] flex flex-col font-sans text-stone-900 overflow-x-hidden selection:bg-[var(--selection-background)] selection:text-[var(--selection-foreground)]">
       <a
         href="#main-content"
         className="skip-link"
@@ -147,10 +147,10 @@ export default function App() {
       )}
 
       {showSafeNote && (
-        <div className="relative z-[100] border-b border-[#4b392f] bg-[linear-gradient(180deg,#3f322b,#2d241f)] px-3 py-3 text-[#f6efe7] no-print">
+        <div className="relative z-[100] border-b border-[var(--border-inverse)] bg-[linear-gradient(180deg,var(--surface-inverse-top),var(--surface-inverse-bottom))] px-3 py-3 text-[var(--text-inverse)] no-print">
           <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-2 md:flex-row md:items-center md:px-6">
-            <div className="flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#eadfce]">
-              <ShieldCheck size={16} className="shrink-0 text-[#f0c786]" aria-hidden="true" />
+            <div className="flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[var(--text-inverse-muted)]">
+              <ShieldCheck size={16} className="shrink-0 text-[var(--icon-warning-inverse)]" aria-hidden="true" />
               <span>
                 Lokale Speicherung im Browser • auf gemeinsam genutzten Geräten nach der Nutzung zurücksetzen • keine
                 serverseitige Falldokumentation in dieser Ansicht
@@ -159,7 +159,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => setShowSafeNote(false)}
-              className="haptic-btn rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#f0c786] transition-colors hover:bg-white/10 hover:text-white"
+              className="haptic-btn rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--icon-warning-inverse)] transition-colors hover:bg-white/10 hover:text-white"
               aria-label="Datenschutzhinweis schliessen"
             >
               Schliessen
@@ -168,21 +168,42 @@ export default function App() {
         </div>
       )}
 
-      <div className="no-print border-b border-[#e4cbbb] bg-[linear-gradient(180deg,#fff6ee,#f4e4d6)]">
+      <div className="no-print border-b border-[var(--border-error-soft)] bg-[linear-gradient(180deg,var(--surface-error-soft),var(--surface-muted))]">
         <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-4 py-3 md:flex-row md:items-center md:px-6">
-          <div className="text-sm leading-relaxed text-[#6d342c]">
-            <span className="mr-3 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#9a4b3c]">
+          <div className="text-sm leading-relaxed text-[var(--text-danger-strong)]">
+            <span className="mr-3 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--text-danger-label)]">
               Akute Krise
             </span>
-            Bei akuter Lebensgefahr: <span className="font-extrabold">144</span>. Im Kanton Zürich bei nicht
-            lebensbedrohlichen Situationen:
-            <span className="font-extrabold"> AERZTEFON 0800 33 66 55</span>. Für Jugendliche ist{' '}
-            <span className="font-extrabold">147 telefonisch</span> der schnellste Weg.
+            Bei akuter Lebensgefahr:{' '}
+            <a
+              href="tel:144"
+              aria-label="Sanitätsnotruf 144 anrufen"
+              className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+            >
+              144
+            </a>
+            . Im Kanton Zürich bei nicht lebensbedrohlichen Situationen:{' '}
+            <a
+              href="tel:+41800336655"
+              aria-label="AERZTEFON 0800 33 66 55 anrufen"
+              className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+            >
+              AERZTEFON 0800 33 66 55
+            </a>
+            . Für Jugendliche ist{' '}
+            <a
+              href="tel:147"
+              aria-label="Beratungstelefon 147 von Pro Juventute anrufen"
+              className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+            >
+              147
+            </a>
+            {' '}telefonisch der schnellste Weg.
           </div>
           <button
             type="button"
             onClick={handleEmergencyAccess}
-            className="haptic-btn inline-flex items-center gap-2 rounded-full border border-[#dec2b2] bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[var(--accent-primary-strong)] shadow-[0_10px_24px_rgba(141,63,50,0.06)] transition-colors hover:bg-[#fff0e6]"
+            className="haptic-btn inline-flex items-center gap-2 rounded-full border border-[var(--border-warm-soft)] bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[var(--accent-primary-strong)] shadow-[0_10px_24px_rgba(141,63,50,0.06)] transition-colors hover:bg-[var(--surface-hover-warm)]"
             aria-label="Zu Notfallinformationen wechseln"
           >
             <AlertTriangle size={14} aria-hidden="true" />

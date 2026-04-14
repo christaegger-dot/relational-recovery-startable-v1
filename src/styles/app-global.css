@@ -95,6 +95,18 @@
   display: none;
 }
 
+/* Reduced-Motion-Guard fuer die in dieser Datei definierten Transitions.
+   Ergaenzt die bestehenden Guards in primitives.css und index.css. */
+@media (prefers-reduced-motion: reduce) {
+  .skip-link,
+  .haptic-btn {
+    transition: none;
+  }
+  .page-enter {
+    animation: none;
+  }
+}
+
 @media print {
   .no-print {
     display: none !important;

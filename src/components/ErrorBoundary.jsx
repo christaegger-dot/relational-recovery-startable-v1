@@ -17,7 +17,7 @@ export default class ErrorBoundary extends Component {
     }
 
     return (
-      <section className="rounded-[2rem] border border-[#e4cbbb] bg-[#fff6ee] px-8 py-12 md:px-12 md:py-16">
+      <section className="rounded-[2rem] border border-[var(--border-error-soft)] bg-[var(--surface-error-soft)] px-8 py-12 md:px-12 md:py-16">
         <div className="max-w-2xl mx-auto flex flex-col gap-6">
           <div className="flex items-center gap-3 text-[var(--text-danger)]">
             <AlertTriangle size={24} aria-hidden="true" />
@@ -27,15 +27,36 @@ export default class ErrorBoundary extends Component {
             Dieser Bereich konnte nicht geladen werden. Bitte laden Sie die Seite neu.
             Falls das Problem bestehen bleibt, nutzen Sie die Notfallnummern unten.
           </p>
-          <div className="rounded-xl border border-[#dec2b2] bg-white/80 px-5 py-4 text-sm leading-relaxed text-[#6d342c]">
-            <p className="mb-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#9a4b3c]">
+          <div className="rounded-xl border border-[var(--border-warm-soft)] bg-white/80 px-5 py-4 text-sm leading-relaxed text-[var(--text-danger-strong)]">
+            <p className="mb-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--text-danger-label)]">
               Akute Krise
             </p>
             <p>
-              Bei akuter Lebensgefahr: <strong>144</strong>.
-              Im Kanton Zürich bei nicht lebensbedrohlichen Situationen:{' '}
-              <strong>AERZTEFON 0800 33 66 55</strong>.
-              Für Jugendliche: <strong>147 telefonisch</strong>.
+              Bei akuter Lebensgefahr:{' '}
+              <a
+                href="tel:144"
+                aria-label="Sanitätsnotruf 144 anrufen"
+                className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+              >
+                144
+              </a>
+              . Im Kanton Zürich bei nicht lebensbedrohlichen Situationen:{' '}
+              <a
+                href="tel:+41800336655"
+                aria-label="AERZTEFON 0800 33 66 55 anrufen"
+                className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+              >
+                AERZTEFON 0800 33 66 55
+              </a>
+              . Für Jugendliche:{' '}
+              <a
+                href="tel:147"
+                aria-label="Beratungstelefon 147 von Pro Juventute anrufen"
+                className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+              >
+                147
+              </a>
+              {' '}telefonisch.
             </p>
           </div>
           <button
