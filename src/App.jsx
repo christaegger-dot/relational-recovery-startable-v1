@@ -10,6 +10,7 @@ import { useAppState } from './context/useAppState';
 import useMobileMenu from './utils/useMobileMenu';
 import useNavigationFocus from './utils/useNavigationFocus';
 import useDownloadHandlers from './utils/useDownloadHandlers';
+import useDocumentMeta from './utils/useDocumentMeta';
 
 const ElearningSection = lazy(() => import('./sections/ElearningSection'));
 const VignettenSection = lazy(() => import('./sections/VignettenSection'));
@@ -70,6 +71,8 @@ export default function App() {
     firstMobileNavItemRef,
     mobileMenuContainerRef,
   } = useMobileMenu(activeTab);
+
+  useDocumentMeta(activeTab);
 
   const { skipLinkActivatedRef, setPendingPriorityFocus } = useNavigationFocus({
     activeTab,
