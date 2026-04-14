@@ -260,4 +260,30 @@
     font-size: 9pt;
     letter-spacing: 0.02em;
   }
+
+  /* 9. Vignetten-Print-Hinweis (V1 aus Audit 11) ------------------------ *
+   * Die Vignetten-Seite ist bewusst nicht druckbar. Der Hinweis erscheint
+   * zentral und ruhig auf der ansonsten leeren Druckseite.
+   */
+  .vignetten-print-notice {
+    max-width: 14cm;
+    margin: 4cm auto 0;
+    padding: 8mm 10mm;
+    border: 1pt solid #333;
+    text-align: left;
+  }
+  .vignetten-print-notice h1 {
+    margin: 0 0 4mm;
+    font-size: 14pt;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .vignetten-print-notice p {
+    margin: 0 0 3mm;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  .vignetten-print-notice p:last-child {
+    margin-bottom: 0;
+  }
 }

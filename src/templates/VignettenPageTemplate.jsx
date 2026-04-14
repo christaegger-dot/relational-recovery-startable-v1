@@ -158,12 +158,34 @@ function VignettenNavigationSection({ navigation }) {
   );
 }
 
+function VignettenPrintNotice() {
+  // Print-only-Hinweis (V1 aus Audit 11). Erscheint ausschliesslich im
+  // gedruckten Dokument, weil die Screen-Sections als .no-print markiert
+  // sind. Begruendung: Vignetten sind nach Audit 05 die heikelsten Inhalte
+  // und stehen in einem inhaltlichen Zusammenhang, der auf Papier nicht
+  // mitgeht.
+  return (
+    <aside className="print-only vignetten-print-notice" aria-hidden="true">
+      <h1>Diese Seite ist nicht zum Ausdrucken vorgesehen.</h1>
+      <p>
+        Diese Fallbeispiele sind ausschliesslich für die digitale Ansicht gedacht. Sie stehen in einem inhaltlichen
+        Zusammenhang, der auf Papier nicht mitgeht.
+      </p>
+      <p>
+        Für druckbare Arbeitshilfen finden Sie in der Toolbox konkrete Vorlagen (Krisenplan, Gesprächsleitfaden,
+        Netzwerkkarte).
+      </p>
+    </aside>
+  );
+}
+
 export default function VignettenPageTemplate({ hero, pageHeadingId, caseStudy, decision, navigation }) {
   return (
     <article className="ui-stack">
-      <Container width="wide">
+      <Container width="wide" className="no-print">
         <PageHero {...hero} headingId={pageHeadingId} />
       </Container>
+      <VignettenPrintNotice />
       <Section spacing="tight" surface="plain" className="no-print">
         <LegalDisclaimer text="Die Trainingsfälle zeigen zugespitzte Situationen mit rechtlichen Bezügen (KESB, Melderecht). Im Arbeitsalltag gibt es häufig mehr Spielraum und Abstufungen. Die Darstellung dient der fachlichen Reflexion und ersetzt keine Rechtsberatung." />
       </Section>
