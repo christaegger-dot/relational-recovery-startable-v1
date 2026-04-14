@@ -1749,13 +1749,13 @@
 }
 
 .ui-toolbox-band--caution {
-  border-color: color-mix(in srgb, #d97706 22%, white 78%);
-  background: color-mix(in srgb, #fffbeb 84%, white 16%);
+  border-color: color-mix(in srgb, var(--accent-warning-strong) 22%, white 78%);
+  background: color-mix(in srgb, var(--surface-warning-strong-soft) 84%, white 16%);
 }
 
 .ui-toolbox-band--danger {
-  border-color: color-mix(in srgb, #c2410c 22%, white 78%);
-  background: color-mix(in srgb, #fff7ed 86%, white 14%);
+  border-color: color-mix(in srgb, var(--accent-danger-strong) 22%, white 78%);
+  background: color-mix(in srgb, var(--surface-danger-strong-soft) 86%, white 14%);
 }
 
 .ui-toolbox-band--neutral {
@@ -1813,14 +1813,14 @@
 
 .ui-toolbox-feedback--caution,
 .ui-toolbox-priority.ui-toolbox-feedback--caution {
-  border-color: color-mix(in srgb, #d97706 22%, white 78%);
-  background: color-mix(in srgb, #fffbeb 84%, white 16%);
+  border-color: color-mix(in srgb, var(--accent-warning-strong) 22%, white 78%);
+  background: color-mix(in srgb, var(--surface-warning-strong-soft) 84%, white 16%);
 }
 
 .ui-toolbox-feedback--danger,
 .ui-toolbox-priority.ui-toolbox-feedback--danger {
-  border-color: color-mix(in srgb, #c2410c 22%, white 78%);
-  background: color-mix(in srgb, #fff7ed 86%, white 14%);
+  border-color: color-mix(in srgb, var(--accent-danger-strong) 22%, white 78%);
+  background: color-mix(in srgb, var(--surface-danger-strong-soft) 86%, white 14%);
 }
 
 .ui-toolbox-feedback--neutral,
