@@ -34,8 +34,8 @@
   --footer-surface-bottom: #eee2d4;
   --footer-surface-inverse-top: #3d3128;
   --footer-surface-inverse-bottom: #262019;
-  --footer-surface-hover: #f2e6d9;
-  --footer-badge-surface: #e4d2c1;
+  --footer-text-inverse-body: #f2e6d9;
+  --footer-badge-border: #e4d2c1;
   --footer-badge-text: #7a4c35;
   --footer-text-warm: #5a4a3f;
   --footer-text-muted: #8a705f;
