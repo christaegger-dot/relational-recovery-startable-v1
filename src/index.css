@@ -111,8 +111,8 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--accent-primary) 18%, white 82%);
-    color: var(--text-primary);
+    background: var(--selection-background);
+    color: var(--selection-foreground);
   }
 
   body::before {
