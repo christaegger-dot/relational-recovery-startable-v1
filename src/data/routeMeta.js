@@ -18,7 +18,9 @@
  *   der Root-URL, weil Fragment-URLs kein separater Crawler-Endpunkt sind.
  */
 
-export const BASE_URL = 'https://eltern-a.netlify.app';
+// Audit 12 / W4: Base-URL kommt ueber eine Vite-Environment-Variable. Der
+// Fallback sichert Dev- und Preview-Szenarien, in denen keine .env existiert.
+export const BASE_URL = import.meta.env.VITE_BASE_URL || 'https://eltern-a.netlify.app';
 
 const DEFAULT_TITLE = 'Relational Recovery – Schweizer Fachportal';
 const DEFAULT_DESCRIPTION =
