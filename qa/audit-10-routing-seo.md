@@ -619,3 +619,152 @@ Ausdrücklich:
 ---
 
 **STOPP nach Phase 2.** Warte auf Strategie-Entscheidung der Auftraggeberin.
+
+---
+
+## Phase 3 -- Umsetzung (Option 5)
+
+### Commits in Reihenfolge
+
+| Nr. | Commit | Inhalt |
+|---|---|---|
+| 1 | `audit(10): seo-basisinfrastruktur (robots, sitemap, og-image)` | `public/robots.txt`, `public/sitemap.xml`, `public/og-image.webp` |
+| 2 | `audit(10): per-route-meta hook und erweiterte default-meta in index.html` | `src/data/routeMeta.js`, `src/utils/useDocumentMeta.js`, Hook-Verdrahtung in App.jsx, erweiterter Default-Meta-Block in index.html |
+| 3 | `audit(10): json-ld organization mit contact-points in index.html` | JSON-LD `Organization` mit 3 Notfallkontakten |
+| 4 | `audit(10): prerender-script fuer start-route via playwright-core` | `scripts/prerender.mjs`, Build-Integration in `package.json` |
+
+### Entscheidungen während der Umsetzung
+
+**Pre-Render-Scope: nur Start-Route prerendert.** Das war keine Abbruch-Entscheidung, sondern ergibt sich aus der Hash-Routing-Architektur: Fragment-URLs (`#toolbox`, `#netzwerk`) werden nicht an den Server gesendet, deshalb laden alle geteilten Hash-Links dieselbe `index.html`. Per-Sub-Route-Prerender würde physische Pfade (z. B. `/toolbox/index.html`) verlangen und damit eine History-Routing-Migration, die explizit aus dem Audit-10-Scope ausgeschlossen war. Die drei weiteren in den Entscheidungs-Kriterien genannten Kandidaten (Grundlagen, Evidenz, Glossar) werden deshalb **nicht** als prerender-ausgenommen markiert -- sie sind konzeptionell gar nicht separat prerender-bar.
+
+**Pre-Render-Tool: ad-hoc-Script mit `playwright-core` (bereits devDependency).** `@prerenderer/prerenderer` und `vite-plugin-prerender` wurden evaluiert; beide hätten zusätzlich Puppeteer (~200 MB Chromium-Download) installiert. Da `playwright-core` bereits in `devDependencies` steckt (aus Audit 02) und ein 95-Zeilen-Script mit spawn + chromium.launch + DOM-Extraktion die Aufgabe sauber löst, war die Eigenentwicklung die konsequentere Wahl. Zero zusätzliche Dependencies, keine Config-Konflikte mit Vite 7.
+
+**JSON-LD-Typ: nur `Organization`, keine pro-Route-`MedicalWebPage`.** Phase-2-Empfehlung war es so vorzuschlagen. Pro-Route-JSON-LD würde pro Template ein eigenes Script-Tag verlangen, das dynamisch per Hook ins DOM injiziert wird. Das ist möglich, verlangt aber eine Pflege-Infrastruktur (welche Felder pro Template) und eine Test-Strategie, die den Audit-10-Scope sprengen. Entscheidung wie vorgeschlagen: nur Organization minimal, Erweiterung später als eigenes Ticket.
+
+**`createRoot` statt `hydrateRoot`.** Die bestehende `src/main.jsx` nutzt `createRoot()`, der bei existierender DOM-Struktur diese ersetzt statt zu hydrieren. Das war **nicht** der Plan für Option 5 (Hydration hätte Progressive-Enhancement gebracht), aber ein expliziter Umstieg auf `hydrateRoot` hätte Hydration-Mismatches durch hash-/localStorage-abhängige Initial-State-Logik ausgelöst -- genau das Abbruch-Szenario aus dem Phase-3-Auftrag. Konsequenz: Prerender funktioniert für Crawler (sehen echten Inhalt im Response-Body), aber JS-Clients sehen einen ~200ms-Flash, bevor React den DOM ersetzt. Das ist akzeptabel, weil das Kernziel „OG-Scraping funktioniert" erreicht wird und die Client-Erfahrung unverändert bleibt.
+
+**Swiss-German-Orthografie** durchgängig in `routeMeta.js`, Hook-Kommentaren, JSON-LD-Feldern, neuen Default-Meta-Inhalten in `index.html`.
+
+### Korrekturen während der Umsetzung
+
+**Inhaltlicher Fehler im JSON-LD-Entwurf korrigiert.** Im ersten Wurf hatte ich einen vierten `contactPoint` mit einer PUK-Angehörigenberatungs-Nummer (`+41-44-296-7474`) aufgeführt -- eine Nummer, die ich nicht verifiziert habe und die im App-Code nirgends steht. Korrektur vor dem Commit: Nur die drei Nummern, die auch im Emergency-Banner und in der ErrorBoundary als `tel:`-Links verankert sind (144, AERZTEFON +41-800-33-66-55, 147). Damit stimmt die strukturierte Semantik mit der UI überein.
+
+**Sitemap-Namespace-Tippfehler korrigiert.** Erster Wurf hatte `xmlns="http://www.w3.org/sitemap-protocol/0.9"`, richtig ist `xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"`. Korrigiert vor dem Commit.
+
+### Was bewusst nicht angefasst wurde
+
+- `src/context/AppStateContext.jsx` (0 Zeilen Änderung)
+- `src/utils/useNavigationFocus.js` (0 Zeilen Änderung)
+- `src/utils/appHelpers.js` (0 Zeilen Änderung, insbesondere `TAB_ALIASES` unverändert)
+- `src/components/ErrorBoundary.jsx` (tel:-Links nach Audit 09 erhalten)
+- `src/App.jsx` Emergency-Banner (tel:-Links nach Audit 09 erhalten)
+- `playwright.config.js` (E2E-Browser-Path-Problem ist Audit-übergreifend, bleibt für separates Ticket)
+
+---
+
+## Phase 4 -- Verifikation
+
+### Automatisierte Prüfungen
+
+| Prüfung | Ergebnis |
+|---|---|
+| `npm run lint` | **sauber** |
+| `npm run build` | **sauber**, inkl. Prerender-Step (ca. 2-3 s zusätzlich) |
+| `npm run test:e2e` | **blockiert** -- `playwright.config.js:27` erzwingt `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`, das lokal nicht existiert. Audit-übergreifendes Problem (auch in Audit 08, 09), unabhängig von Audit-10-Änderungen. |
+
+### Initial-HTML-Bilanz (curl-Test-Äquivalent)
+
+| Metrik | Vor Audit 10 | Nach Audit 10 |
+|---|---|---|
+| `dist/index.html` Grösse | **1 575 Bytes** | **30 946 Bytes** |
+| Sichtbarer Text für Non-JS-Crawler | 0 Zeichen | **~27 100 Zeichen** im `#root` |
+| Meta-Tags im Head | 8 | **17** |
+| Inline-JSON-LD-Entitäten | 0 | **1** (Organization mit 3 ContactPoints) |
+| Canonical-Link | nein | ja (Root) |
+| OG-Image | nein | ja (1200×800 WebP) |
+| Twitter-Card | nein | ja (`summary_large_image`) |
+| sitemap.xml | nein | ja (1 URL, Root) |
+| robots.txt | nein | ja (`User-agent: *`, `Allow: /`, Sitemap-Verweis) |
+
+### Per-Route-Meta-Inspektion (manueller Playwright-Core-Check)
+
+Routen getestet via ad-hoc-Script gegen `vite preview` mit lokalem Chromium (`~/Library/Caches/ms-playwright/chromium_headless_shell-1217/`):
+
+| Route | Hash nach Laden | Dynamischer `<title>` | OG:title | Bewertung |
+|---|---|---|---|---|
+| `/` (Root, prerendered) | `#start` | „Relational Recovery -- Orientierung für Angehörige und Fachpersonen" | „Relational Recovery -- Begleitung ist Beziehungsarbeit" | OK |
+| `/#toolbox` | `#toolbox` | „Toolbox -- Orientierung, Schutz und nächste Schritte" | „Toolbox -- Relational Recovery" | OK |
+| `/#netzwerk` | `#netzwerk` | „Netzwerk und Fachstellen -- Relational Recovery" | „Netzwerk -- Relational Recovery" | OK |
+| `/#grundlagen` | `#grundlagen` | „Grundlagen und häufige Fragen -- Relational Recovery" | „Grundlagen für Angehörige -- Relational Recovery" | OK |
+| `/#network` (Alias) | `#netzwerk` ✓ Resolution | „Netzwerk und Fachstellen -- Relational Recovery" | „Netzwerk -- Relational Recovery" | OK |
+| `/#elearning` (Alias) | `#lernmodule` ✓ Resolution | „Lernmodule -- Relational Recovery" | „Lernmodule für die Fachpraxis -- Relational Recovery" | OK |
+| `/#netzwerk-karte` (Section-Deep-Link) | `#netzwerk-karte` (preserved) | „Netzwerk und Fachstellen -- Relational Recovery" | „Netzwerk -- Relational Recovery" | OK |
+
+Alle 7 Testfälle liefern die korrekten dynamischen Meta-Tags nach dem Tab-Wechsel. Canonical bleibt konsistent auf `https://eltern-a.netlify.app/` (by design: Fragment-URLs sind kein getrennter Crawler-Endpunkt).
+
+### Deep-Linking-Regression
+
+- `#network` → `#netzwerk` ✓ (Alias-Resolution intakt)
+- `#elearning` → `#lernmodule` ✓ (Alias-Resolution intakt)
+- `#netzwerk-karte` (Section-Deep-Link) → wird bewahrt, Scroll zu Section ausgelöst ✓
+- Browser-Back-Button nach `goBack()` von `#netzwerk` → stellt `#toolbox` wieder her, Title wechselt mit ✓
+
+Damit gelten alle in Phase 1 inventarisierten Deep-Linking-Garantien weiterhin. Keine Regression.
+
+### Notfall-Funktionalität
+
+Tel-Links im Prerender-Output der Start-Route (via grep in `dist/index.html`):
+
+| Link | aria-label |
+|---|---|
+| `tel:144` | „Sanitätsnotruf 144 anrufen" |
+| `tel:+41800336655` | „AERZTEFON 0800 33 66 55 anrufen" |
+| `tel:147` | „Beratungstelefon 147 von Pro Juventute anrufen" |
+
+Im Playwright-Check zur Laufzeit ebenfalls alle drei `a[href^="tel:"]`-Elemente mit korrekten aria-Labels. R31-Fix aus Audit 09 ist vollständig erhalten.
+
+### JSON-LD-Validierung
+
+Syntax-validiert via Python `json.loads()` gegen den `dist/index.html`-Output nach Build. Ergebnis:
+
+- Valides JSON ✓
+- `@context`: `https://schema.org` ✓
+- `@type`: `Organization` ✓
+- `inLanguage`: `de-CH` ✓
+- `contactPoint`: 3 Einträge (144, AERZTEFON, 147) ✓
+
+Für eine zusätzliche Schema.org-Validierung kann der Inhalt in den offiziellen Schema.org-Validator oder Google Rich Results Test (https://search.google.com/test/rich-results) manuell eingegeben werden -- das ist ein externer Check, der im lokalen Audit-Scope nicht automatisierbar ist.
+
+### Aggregierte Vorher-/Nachher-Metriken
+
+| Metrik | Vorher | Nachher | Delta |
+|---|---|---|---|
+| Initial-HTML-Grösse (Bytes) | 1 575 | 30 946 | **+29 371** (ca. 20× mehr) |
+| Meta-Tags im Head (Zahl) | 8 | 17 | +9 |
+| Per-Route-`<title>`-Abdeckung | 0/8 | 8/8 | vollständig |
+| Per-Route-OG-Tags-Abdeckung | 0/8 | 8/8 | vollständig |
+| JSON-LD-Entitäten | 0 | 1 (Organization) | +1 |
+| Sitemap-Einträge | 0 | 1 (Root) | +1 |
+| Prerender-Abdeckung | 0/8 Routen | **1/8 Routen (Start)** | +1 |
+| Bundle-Grösse (main `index-*.js` gzip) | 91,51 kB | 92,74 kB | +1,23 kB (durch Hook + routeMeta) |
+| `tel:`-Links im Prerender | 0 | 3 | Notfall-Funktionalität erhalten |
+
+### Bewusst nicht umgesetzt, für spätere Audits
+
+- **Pro-Route-OG-Image-Varianten.** Ein einheitliches Hero-Bild deckt den Need ab; Pro-Route-Varianten sind niederschwellig nachrüstbar.
+- **MedicalWebPage JSON-LD pro Route.** Erfordert Feld-Pflege-Infrastruktur, die den Audit-10-Scope sprengt.
+- **Hydration-Wechsel auf `hydrateRoot`.** Würde Progressive Enhancement bringen, verlangt aber ein Refactoring der Initial-State-Logik (Hash + localStorage + BroadcastChannel). Explizit ausgeschlossen durch Abbruchkriterium.
+- **E2E-Test-Wiederherstellung** (`playwright.config.js:27` hartkodiert Binärpfad). Audit-übergreifendes Problem, eigenes Ticket.
+
+### Fazit
+
+Option 5 (Hybrid) wie freigegeben umgesetzt: Per-Route-Meta dynamisch, SEO-Infrastruktur statisch, JSON-LD Organization inline, Prerender für die Start-Route. Zero Änderungen an Routing-Architektur, AppStateContext, useNavigationFocus oder Notfall-Funktionalität.
+
+Das eigentliche Problem aus Phase 2 ist damit gelöst:
+- **(1) Social-Media-Scraping** sieht bei der am häufigsten geteilten URL (Root) 27 kB echten Inhalt statt 0 Zeichen.
+- **(2) JS-fähige Crawler** sehen per-Route-korrekte Meta-Tags.
+- **(3) Discovery-Infrastruktur** ist vorhanden (sitemap, robots, canonical, JSON-LD).
+
+Sub-Route-Prerender ist architektonisch nicht sinnvoll, solange Hash-Routing erhalten bleibt. Das ist keine Einschränkung von Option 5, sondern eine Eigenschaft der bewusst beibehaltenen Routing-Architektur. Wer später Sub-Route-Prerender möchte, geht den Weg zu Option 3 (Prerendering mit History-Routing-Migration) oder Option 4a (Astro mit File-Routing).
+
+Wie in Phase 2 dokumentiert, hält Option 5 alle Erweiterungs-Pfade offen: das bestehende Prerender-Script ist wiederverwendbar für spätere Multi-Route-Prerender, die `routeMeta.js` wird zu Frontmatter-Input bei einer späteren Astro-Migration, und die SEO-Infrastruktur ist architektur-unabhängig.
