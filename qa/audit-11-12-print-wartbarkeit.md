@@ -663,3 +663,419 @@ Keine Empfehlung, nur Darstellung:
 ---
 
 **STOPP nach Phase 1B.** Warte auf Freigabe für Phase 2B (Diagnose und Massnahmenkatalog).
+
+---
+
+## Phase 2B -- Diagnose und Massnahmenkatalog
+
+> **Fussnote zur Git-History:** Die Phase-2A-Commit-Message hatte versehentlich „sieben Vignetten nach Audit 05" angegeben. Tatsächlich ist **eine Vignette aktiv** (`fall1`) plus **zwei Audit-05-Stubs** (V2, V3) als Block-Kommentare. Die Entscheidung für V1 (Vignetten-Print-Hinweis statt druckbarer `printView`) bleibt davon unberührt, weil sie unabhängig von der Anzahl greift. Kein Force-Push, kein Rewrite -- nur diese Richtigstellung.
+
+### 2B.1 Gesamtbild
+
+Die Datenstruktur ist nach neun Audits **grundsätzlich gesund** (0 verwaiste Cross-References, 7 von 9 Dateien vollständig schema-konsistent in sich), aber sie zeigt drei erwartbare Entropie-Stellen:
+
+- **Doppelpflege** zwischen alten Free-Text-Listen und neuen strukturierten Registern (Audit-04-Pattern nur zur Hälfte implementiert).
+- **Tote Metadatenfelder** aus früheren Audits (`primaryAudience`, Glossar-Verlinkungs-Kommentare), die entweder aktiviert oder explizit als redaktionelle Doku gekennzeichnet gehören.
+- **Hartkodierte Konstanten** (BASE_URL), die sich über mehrere Dateien verteilen und bei späterem Domainwechsel zur Stolperfalle werden.
+
+Keine dieser Probleme verursacht einen nutzer-sichtbaren Defekt. Audit 12 hat deshalb **keine „vor Release zwingend"-Massnahmen**. Die Priorisierung weiter unten unterscheidet klar zwischen „empfehlenswert als Investition in die Zukunft der Seite" und „kann warten".
+
+Migrations-Fragestellung (Markdown/JSON) wird mit „Beibehalten als JS-Module plus Nachpflege" beantwortet -- die identifizierten Probleme sind ohne Migration lösbar. Eine Markdown-Migration würde zusätzlich die in Audit 09 etablierte Section → Template → Content-Schicht aufbrechen.
+
+### 2B.2 Sieben Massnahmen-Kategorien
+
+---
+
+#### W1a -- Schema-Harmonisierung: LITERATUR → SOURCES
+
+**Problem:** `evidenceContent.js` enthält eine `LITERATUR`-Liste mit 15 Free-Text-Einträgen. Das zentrale Register `SOURCES` in `sourcesContent.js` enthält 16 strukturierte Einträge. 8 Studien existieren in **beiden** Arrays mit unterschiedlichem Schema -- bei Änderungen müssen zwei Stellen synchron gehalten werden. Nur die SOURCES-Seite ist über `sourceIds[]` cross-ref-fähig.
+
+**Migrations-Plan:**
+
+- **Kanonisches Schema**: `SOURCES` (Audit-04-Pattern). Jeder neue oder bestehende Eintrag lebt mit `{id, author, year, title, journal, publisher, type, doi, link, chFocus}`.
+- **LITERATUR-Rolle neu definiert**: keine eigene Content-Liste, sondern abgeleitete Ansicht. Die bestehende `LITERATUR`-Konstante wird durch eine `LITERATUR_IDS = [...]`-Liste ersetzt, die IDs in der gewünschten Sortier-Reihenfolge listet. Template rendert über `LITERATUR_IDS.map(id => SOURCES[id])`.
+- **Zuordnungs-Tabelle** (LITERATUR-Einträge → SOURCES-IDs):
+
+| LITERATUR-Eintrag | existiert in SOURCES als | Massnahme |
+|---|---|---|
+| Lenz (2014) | `lenz-2014` | direkt verlinken |
+| Koopmann et al. (2025) | `koopmann-2025` | direkt verlinken |
+| Plass & Wiegand-Grefe (2012) | `plass-wiegandgrefe-2012` | direkt verlinken (aber Titel-Divergenz beachten, LITERATUR-Titel weicht von SOURCES-Titel ab) |
+| pädiatrie schweiz (2021) | `albermann-mueller-2021` | direkt verlinken |
+| Jones et al. (2016) | `jones-2016` | direkt verlinken |
+| Reupert et al. (2021) | `reupert-2021` | direkt verlinken |
+| Stauber et al. (2020) | `stauber-2020` | direkt verlinken |
+| Lenz (2019) | `lenz-2019` | direkt verlinken |
+| Höller et al. (2023) | `hoeller-2023` | direkt verlinken |
+| Grube & Dorn (2007) | `grube-dorn-2007` | direkt verlinken |
+| Leijdesdorff et al. (2017) | `leijdesdorff-2017` | direkt verlinken |
+| Wiegand-Grefe et al. (2024) | `wiegand-grefe-2024` | direkt verlinken |
+| Wiegand-Grefe & Plass-Christl (2025) | `wiegand-grefe-plass-christl-2025` | direkt verlinken |
+| Albermann & Müller (2021) | `albermann-mueller-2021` | **Dublette!** Identischer Eintrag wie "pädiatrie schweiz (2021)". Empfehlung: eine Referenz behalten, andere entfernen. |
+| Schuler et al. (2016) | `obsan-72-schuler-2016` | direkt verlinken |
+
+- **Titel-Divergenz bei Plass & Wiegand-Grefe (2012)**: LITERATUR sagt „Ursachen, Folgen und Hilfen für Kinder psychisch Kranker. Stuttgart: Kohlhammer." -- SOURCES sagt „Kinder psychisch kranker Eltern. Entwicklungsrisiken erkennen und behandeln. Weinheim: Beltz". Das sind **zwei verschiedene Bücher derselben Autorenschaft**. SOURCES-Eintrag referenziert den Weinheim-Band. Wenn der Stuttgart-Band weiterhin zitiert werden soll, braucht er einen eigenen SOURCES-Eintrag (z. B. `plass-wiegandgrefe-2012-kohlhammer`). **Manuelle Entscheidung der Auftraggeberin erforderlich.**
+- **Dublette Albermann/pädiatrie schweiz**: beide Einträge verweisen auf dieselbe Paediatrica-Veröffentlichung. Empfehlung: nur ein Eintrag in der abgeleiteten Liste.
+
+**Code-Anpassung:** `src/templates/EvidencePageTemplate.jsx` konsumiert `LITERATUR` (über `EvidenceSection.jsx`). Dort wird die Map-Funktion auf die neue abgeleitete Struktur umgestellt. Templates können pro Eintrag zusätzlich `DOI`, `type`, `chFocus` als UI-Information rendern, falls gewünscht.
+
+**Aufwand:** **M** (halber Tag)
+- Zuordnung manuell prüfen: 30 min
+- 1-2 neue SOURCES-Einträge bei unklaren Abbildungen: 15 min
+- LITERATUR-Array durch LITERATUR_IDS ersetzen: 15 min
+- Template-Anpassung: 30 min
+- Testen: 15 min
+
+**Risiko:** niedrig. Render-Ausgabe auf Evidenz-Seite muss visuell gleich bleiben.
+
+**Commit:** `audit(12): literatur auf sources-register ueberfuehren`
+
+---
+
+#### W1b -- Schema-Harmonisierung: RESOURCE_DATA + SUPPORT_OFFERS konsolidieren
+
+**Problem:** Zwei Arrays beschreiben Fachstellen-Angebote mit unterschiedlichen Schemas. `networkContent.js` hat `RESOURCE_DATA` (16 Einträge: `{name, info, link, tags}`), `evidenceContent.js` hat `SUPPORT_OFFERS` (9 Einträge: `{name, category, audience, description, link, official?, highlight?}`). Etwa 8 Angebote stehen in beiden Arrays (PUK, iks, Stiftung Windlicht, Caritas «mit mir», Pro Mente Sana, kjz, feel-ok.ch, Elternnotruf-Pendant).
+
+**Migrations-Plan:**
+
+- **Kanonisches Schema** in einer neuen zentralen Datei `src/data/fachstellenContent.js`:
+
+```js
+/**
+ * @typedef {Object} Fachstelle
+ * @property {string} id                 - kebab-case, stabil
+ * @property {string} name               - Anzeigename
+ * @property {string} description        - kurze Beschreibung (1-2 Saetze)
+ * @property {string} link               - URL
+ * @property {string[]} tags             - fuer Netzwerk-Filter; enum aus NETWORK_FILTERS
+ * @property {string=} audience          - Zielgruppen-Bezeichnung (optional, fuer Evidenz)
+ * @property {string=} category          - thematische Kategorie (optional, fuer Evidenz)
+ * @property {boolean=} official         - ist offizielle Stelle (optional)
+ * @property {string=} highlight         - Hervorhebungs-Badge (optional, z.B. "kostenlos")
+ */
+```
+
+- **Feld-Konsolidierung**: `info` → `description` (harmoniert auf Evidenz-Begriff, weil „Beschreibung" klarer ist als „info"). `category + audience` bleiben optional für Evidenz-Kontext. `tags[]` bleibt für Network-Filter.
+- **Einträge**: Beide Arrays werden in `FACHSTELLEN[]` zusammengeführt, mit stabilen IDs (`puk-angehoerigenberatung`, `iks`, `stiftung-windlicht`, etc.). Überlappende Einträge werden einmal geführt -- mit der Vereinigung beider Beschreibungen (vorzugsweise die aus SUPPORT_OFFERS, weil etwas ausführlicher; falls die Network-Beschreibung einen anderen Akzent trägt, als zusätzliches `audience`-Feld aufnehmen).
+- **Manuelle Zuordnungs-Entscheidungen** (pro überlappendes Paar kurzes redaktionelles Urteil):
+
+| Fachstelle | Network-Text | Evidenz-Text | Entscheidung |
+|---|---|---|---|
+| PUK Angehörigenberatung | „Offizielle und kostenlose..." | „Kostenlose und vertrauliche Beratung der Fachstelle..." | Evidenz-Text nehmen (ausführlicher). Tags aus Network. |
+| iks | „Schweizweite Fachstelle..." | „Nationale Anlaufstelle mit Beratung, Präventionsangeboten..." | Evidenz-Text. Tags aus Network. |
+| Stiftung Windlicht | „Geschützter Raum..." | „Geschützter Raum in Winterthur und Zürich..." | Evidenz-Text (enthält Ortsangabe). |
+| Caritas «mit mir» | „Patenschaftsangebot..." | „Patenschaftsangebot..." | praktisch identisch; Evidenz-Text nehmen. |
+| Pro Mente Sana | „Kostenlose psychosoziale..." | „Unabhängige psychosoziale..." | Evidenz-Text (betont „unabhängig"). |
+| kjz | „Erziehungsberatung..." | „Flächendeckende Beratung..." | Evidenz-Text. |
+| feel-ok.ch | „Schweizer Jugendportal..." | -- | nur Network, bleibt so. |
+| Elternnotruf | „143 – Die Dargebotene Hand" (Network) ≠ Elternnotruf (Evidenz) | -- | **Unterschiedliche Stellen.** 143 und Elternnotruf bleiben als zwei Einträge. |
+
+- **Code-Anpassung:**
+  - `NetworkSection.jsx` konsumiert `RESOURCE_DATA` → neu `FACHSTELLEN` mit denselben Feldern (`name`, `info`/`description` harmonisiert), Filter weiter über `tags[]`.
+  - `EvidenceSection.jsx` konsumiert `SUPPORT_OFFERS` → neu `FACHSTELLEN.filter(s => s.category)` oder explizite ID-Liste analog zur LITERATUR-Lösung. Evidenz-Render bleibt gleich, nutzt die optionalen Felder `category`, `audience`, `official`, `highlight`.
+
+**Aufwand:** **M-L** (ein Tag)
+- Zentrale `fachstellenContent.js` mit 20 Einträgen: 2 h
+- Ressourcen-IDs vergeben und Dubletten zusammenführen: 1 h
+- Feld-Namen harmonisieren: 30 min
+- `NetworkSection.jsx` + `EvidenceSection.jsx` + Templates anpassen: 1,5 h
+- Testen (Netzwerk-Filter, Evidenz-Render): 1 h
+- Puffer für Edge-Cases: 1 h
+
+**Risiko:** mittel. Die grössten Unsicherheiten sind die Tag-Migrations (Network-Filter darf nicht brechen) und die Evidenz-Darstellung (die eventuell spezifisches Styling für `official/highlight` hat).
+
+**Commit:** `audit(12): fachstellen zentral konsolidieren`
+
+---
+
+#### W2 -- `primaryAudience`-Entscheidung (strategische Frage)
+
+**Problem:** Das Metadatum aus Audit 02 ist konsistent gesetzt (alle 8 TAB_ITEMS), aber nirgends im Runtime-Code konsumiert. Es ist **dokumentierte Intention** aus Audit 06 Block 5 (z. B. „Desorganisation nur in Angehörigen-Texten"), aber bleibt aktuell unsichtbar für den Code.
+
+**Zwei Optionen:**
+
+**Option PA1 -- Als dokumentierte Intention belassen.**
+
+Keine Runtime-Änderung. Ein JSDoc-Kommentar am TAB_ITEMS-Schema erklärt Bedeutung und historische Verwendung:
+
+```js
+/**
+ * @typedef {Object} TabItem
+ * @property {'start'|'lernmodule'|'vignetten'|'glossar'|'grundlagen'|'evidenz'|'toolbox'|'netzwerk'} id
+ * @property {string} label
+ * @property {React.ComponentType} icon
+ * @property {string} footerNote
+ * @property {'primary'} priority
+ * @property {'fachpersonen'|'angehoerige'|'beide'} primaryAudience -
+ *   Redaktionelles Metadatum aus Audit 02. Dokumentiert die primaere
+ *   Zielgruppe eines Tabs. Wird aktuell nicht im Runtime konsumiert, aber
+ *   bei redaktionellen Entscheidungen (z.B. Fachjargon-Schwelle in Audit 06
+ *   Block 5) verwendet. Bei neuen Tabs setzen, damit die Konvention
+ *   lebendig bleibt.
+ */
+```
+
+**Aufwand:** 10 Minuten. Ein Commit-Teil von `audit(12): jsdoc-typen fuer tab-items und routemeta`.
+
+**Risiko:** null.
+
+**Option PA2 -- Ins Runtime-Verhalten integrieren.**
+
+Das Metadatum wird zu einem funktionalen Flag, z. B.:
+- Ein `data-primary-audience`-Attribut auf `<body>` oder `<main>`, das per CSS-Selektor Layout-Varianten erlaubt.
+- Eine Bedingung in `useDocumentMeta.js`, die pro Tab den `twitter:audience`-Tag setzt.
+- Ein Filter in HomeLanding, der die Direkte-Einstiege-Karten nach Audience gruppiert („Für Fachpersonen" / „Für Angehörige").
+
+**Aufwand:** **M** (halber bis ganzer Tag), weil jede dieser Nutzungen konkret definiert, designt und getestet werden muss.
+
+**Risiko:** mittel, weil jede neue Nutzung eine Design-Entscheidung ist und die Seite nach Audit 10 bereits release-fähig ist -- Runtime-Änderungen haben höhere Regressions-Oberfläche als reine Doku.
+
+**Empfehlung von Claude Code: PA1.** Drei Gründe:
+
+1. Die Seite ist inhaltlich release-fähig. PA2 würde neue Design-Entscheidungen einführen, die nicht durch ein konkretes Nutzer-Problem motiviert sind.
+2. PA1 kostet 10 Minuten, hält die Intention lebendig und ermöglicht PA2 jederzeit später, falls ein konkreter Anlass entsteht.
+3. Die historische Verwendung (Audit 06 Block 5) war redaktionell, nicht Runtime. Ein JSDoc-Kommentar ehrt diese Rolle präzise.
+
+**Commit:** Teil von W3a (JSDoc-Typen).
+
+---
+
+#### W3a -- JSDoc-Typen für fünf Schemas
+
+**Nicht Vollabdeckung**, sondern die fünf zentralen Schemas:
+
+| Typ | Datei | Zweck |
+|---|---|---|
+| `TabItem` | `appShellContent.js` | TAB_ITEMS-Einträge (inkl. primaryAudience-Kommentar aus PA1) |
+| `Source` | `sourcesContent.js` | SOURCES-Einträge |
+| `GlossaryTerm` | `glossaryContent.js` | Einzelne Glossar-Term-Einträge inkl. der neuen `id`-Felder aus W3b |
+| `Fachstelle` | `fachstellenContent.js` (neu aus W1b) | konsolidierte Fachstellen-Einträge |
+| `RouteMeta` | `routeMeta.js` | Per-Route-Meta-Einträge |
+
+Typen werden als `@typedef`-Blöcke an den Anfang der jeweiligen Datei gesetzt. Keine Tooling-Änderung (kein TypeScript-Compiler), aber VSCode und andere moderne Editoren nutzen die Typen automatisch für Autovervollständigung und Hover-Tooltips.
+
+**Aufwand:** **S** (2-3 h)
+- 5 Typ-Definitionen pro Datei: ca. 20-30 min
+- Zusätzlich pro Schema ein `@returns` oder `@param` an der wichtigsten Helfer-Funktion (`getRouteMeta`, `useAppState`-Getter): ca. 30-60 min
+- Verifikation durch VSCode (Hover-Tooltips anzeigen): 15 min
+
+**Risiko:** null. JSDoc ist rein kommentarisch, wird vom Build ignoriert.
+
+**Commits** (pro Schema einer oder in einem gebündelten Commit, je nach Präferenz):
+- `audit(12): jsdoc-typen fuer tab-items und routemeta`
+- `audit(12): jsdoc-typen fuer sources und glossar-terme`
+- `audit(12): jsdoc-typ fuer fachstellen`
+
+Empfehlung: drei Commits wie oben, weil jeder Commit auch inhaltliche Schema-Aspekte (PA1, W3b, W1b) anstösst.
+
+---
+
+#### W3b -- Glossar-Verlinkung minimal implementieren
+
+**Problem:** Audit 07 hat vier Terme (KESB, Parentifizierung, Trialog, Komorbidität) als „vorbereitet für Verlinkung" dokumentiert (Inline-Kommentare wie `// L2: Beistandschaft`, `// L4: Melderecht`). Aber: kein ID-Feld pro Term, kein Verlinkungs-Mechanismus.
+
+**Skizze der minimalen Implementierung:**
+
+1. **Glossar-Terme bekommen IDs.**
+
+```js
+{
+  id: 'kesb',
+  term: 'KESB (Kindes- und Erwachsenenschutzbehörde)',
+  definition: '...',
+  practice: '...',
+}
+```
+
+IDs: `kesb`, `parentifizierung`, `trialog`, `komorbiditaet` (kebab-case, swiss-german-tauglich, kein ß). Alle 21 Terme bekommen IDs, nicht nur die vier verlinkten -- das erlaubt spätere Erweiterung ohne Schema-Wechsel.
+
+2. **Kleine Helfer-Komponente** `<GlossarLink term="kesb">KESB</GlossarLink>`.
+
+```jsx
+// src/components/ui/GlossarLink.jsx
+import { useAppState } from '../../context/useAppState';
+
+export default function GlossarLink({ term, children }) {
+  const { navigate } = useAppState();
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    navigate('glossar', { focusTarget: 'heading' });
+    // Nach Navigation: Zielterm via hash oder focus highlighten.
+    // Hier Minimum: einfacher Fokus-Wechsel auf Glossar-Tab.
+  };
+
+  return (
+    <a
+      href={`#glossar-${term}`}
+      onClick={handleClick}
+      className="ui-glossar-link"
+      aria-label={`${children} im Glossar öffnen`}
+    >
+      {children}
+    </a>
+  );
+}
+```
+
+3. **Vier Verlinkungen im Fliesstext** (konkrete Stellen aus Audit 07):
+   - KESB: `toolboxContent.js` RIGHTS_FAQ, `glossaryContent.js` Gefährdungsmeldung-Term
+   - Parentifizierung: `evidenceContent.js` CHILD_EXPERIENCE-Bereich
+   - Trialog: `glossaryContent.js` Angehörigenarbeit-Term (cross-glossar)
+   - Komorbidität: `evidenceContent.js` CROSS_DIAGNOSIS_POINTS oder ToolboxSection `addiction`-Cluster
+
+Aber -- und hier stolpere ich über ein Design-Problem: Die Content-Dateien sind aktuell **reine Strings und Objekte**, kein JSX. Die vier Fliesstext-Stellen sind heute Plain-Text (`text: '... Parentifizierung ...'`). Um `<GlossarLink>` einzubetten, müssten diese Strings entweder zu JSX-Fragmenten werden (grosse Schema-Änderung) oder zu einem kleinen Markup-Parser mit Platzhaltern (`{glossar:parentifizierung|Parentifizierung}`) gerendert werden.
+
+**Das sprengt den Audit-12-Rahmen.** Die saubere Umsetzung verlangt entweder:
+- Template-weite JSX-Fragmente statt Strings in Content-Dateien (Architektur-Eingriff), oder
+- Einen kleinen Platzhalter-Parser in Templates, der `{glossar:id|Label}` zu `<GlossarLink>` auflöst (neue Utility, moderate Komplexität).
+
+**Aufwands-Einschätzung:**
+- Minimale Variante (IDs pro Term + `<GlossarLink>`-Komponente, aber noch keine eingebetteten Links): **S** (2-3 h)
+- Vollversion mit Platzhalter-Parser + 4 eingebetteten Links: **M-L** (ganzer Tag, plus Template-Tests)
+
+**Empfehlung:** **Teilschritt jetzt**, Vollversion vertagen.
+
+- **In Audit 12 umgesetzt**: IDs pro Term in `glossaryContent.js` + `<GlossarLink>`-Komponente (funktional, aber noch nicht in Fliesstexten eingebunden). Ein Commit: `audit(12): glossar-ids und glossarlink-komponente`.
+- **Vertagt als Follow-up-Ticket**: Platzhalter-Parser + 4 eingebettete Verlinkungen. Im Bericht dokumentiert als „Glossar-Verlinkung Teil 2: Inline-Integration in Fliesstexten". Das wäre ein eigenes kleines Audit oder redaktionelles Ticket.
+
+Falls die Auftraggeberin die Vollversion direkt in Audit 12 will, ist das machbar -- aber es verdoppelt den W3b-Aufwand und streift die in Audit 09 etablierte Schichtung.
+
+---
+
+#### W4 -- BASE_URL single source of truth
+
+**Problem:** Der String `'https://eltern-a.netlify.app'` steht in:
+- `src/data/routeMeta.js` (konstante `BASE_URL`)
+- `index.html` (JSON-LD, canonical, og:url, og:image -- insgesamt 5 Vorkommen)
+- `public/robots.txt` (Sitemap-Zeile)
+- `public/sitemap.xml` (loc-Element)
+
+**Lösungsansatz:** Build-Zeit-Injection.
+
+Vite unterstützt `define`-basierte Konstanten und `env`-Variablen. Zwei realistische Varianten:
+
+**Variante A -- `.env`-Datei mit `VITE_BASE_URL`.**
+
+```env
+# .env
+VITE_BASE_URL=https://eltern-a.netlify.app
+```
+
+- `routeMeta.js`: `export const BASE_URL = import.meta.env.VITE_BASE_URL;`
+- `index.html`: Vite unterstützt `%VITE_BASE_URL%`-Substitutionen in `index.html` bei Build-Zeit.
+- `public/robots.txt` und `public/sitemap.xml`: Statische Dateien, **kein** automatischer Env-Replace. Hier braucht es ein kleines Build-Script (z. B. in `scripts/replace-env.mjs`), das post-build über `dist/robots.txt` und `dist/sitemap.xml` geht und Platzhalter ersetzt. Oder: die Dateien werden direkt aus einem Template im Build-Schritt generiert.
+
+**Variante B -- zentrale `src/config.js` + statisches Copy-Script.**
+
+```js
+// src/config.js
+export const BASE_URL = 'https://eltern-a.netlify.app';
+```
+
+- `routeMeta.js`: importiert aus `./config.js`.
+- `index.html`: bleibt hartkodiert, aber bekommt einen Build-Schritt, der aus `src/config.js` die URL liest und in `dist/index.html` post-build ersetzt.
+- `public/robots.txt` + `public/sitemap.xml`: gleiches Post-Build-Script.
+
+**Empfehlung: Variante A mit Env-Variable.**
+
+Begründung: Bei späterem Staging/Preview-Deployment (z. B. `relational-recovery-staging.netlify.app`) braucht es ohnehin Env-basierte URL-Variation. Die Env-Variante ist skalierbar.
+
+**Aufwands-Einschätzung:**
+- `.env`-Datei + `routeMeta.js`-Anpassung: 15 min
+- `index.html` mit `%VITE_BASE_URL%`: 15 min  
+- Build-Script `scripts/replace-env.mjs` für robots/sitemap: 1 h
+- `package.json`-Build-Chain erweitern: 15 min
+- Testen + dokumentieren: 30 min
+
+**Gesamt: S (2-3 h)**
+
+**Risiko:** niedrig. Build-Chain wird länger (um einen Schritt), aber der Schritt ist isoliert und testbar.
+
+**Commit:** `audit(12): base-url als single source of truth via env`
+
+---
+
+#### W5 -- Redaktionelle Fussangeln: Gruppe A / B
+
+Die 12 Fussangeln aus 1B.5 in zwei Gruppen:
+
+**Gruppe A -- Durch Code lösbar (werden in W1a, W1b, W3a, W3b, W4 aufgefangen):**
+
+1. `LITERATUR`-Doppelpflege → W1a
+2. Inline-Kommentar-Fehler in evidenceContent.js Zeile 24 („nach sourcesContent.js") → W1a (Kommentar beim Refactor aktualisieren/entfernen)
+3. `SUPPORT_OFFERS` vs. `RESOURCE_DATA` Doppelpflege → W1b
+4. Glossar-Verlinkung ohne IDs → W3b
+5. Schema-Divergenz `ACUTE_CRISIS_CONTACTS` vs. `RESOURCE_DATA` → W1b (wird mitmigriert oder als bewusste Ausnahme im JSDoc dokumentiert)
+6. BASE_URL in vier Stellen → W4
+7. `primaryAudience` totes Metadatum → W2/PA1 (JSDoc-Kommentar)
+8. `correctQuizIdx` als Index statt ID → W3a (JSDoc-Kommentar, der die Index-Semantik dokumentiert und warnt vor Umsortierung)
+
+**Gruppe B -- Dokumentativ lösbar (gehen in `docs/content-pflege.md`):**
+
+9. SOURCES-ID-Konvention (Nachname-Jahr oder Leadwort-Jahr, unverbindlich)
+10. `doi`/`link`/`journal`/`publisher` müssen `null` sein, nicht leerer String / `undefined`
+11. VIGNETTEN-Stub-Block-Kommentare als menschenlesbare Platzhalter (nicht maschinenlesbare Einträge)
+12. `tags[]`-Strings ohne zentrale Enumeration (nur Network-Filter-Tags sind enforced; weitere Tags können an einer Stelle entstehen und sind an anderer Stelle unbekannt)
+
+**`docs/content-pflege.md`** wird ein kurzer Leitfaden von ca. 100-150 Zeilen, der folgende Abschnitte enthält:
+
+- Konventionen beim Hinzufügen einer neuen Quelle zu `SOURCES`
+- Umgang mit der `LITERATUR_IDS`-Liste (nach W1a)
+- Hinzufügen einer neuen Fachstelle zu `FACHSTELLEN` (nach W1b)
+- Glossar-Term-Pflege (IDs, Verlinkbarkeit)
+- VIGNETTEN-Stubs: Wie ausgefüllt werden und welches Schema gilt
+- `primaryAudience`-Konvention (mit Audit-02- und -06-Verweis)
+- Tag-Pflege in networkContent (Enumerationsdisziplin für Filter)
+- BASE_URL-Pflege nach W4
+
+**Aufwand:** **S** (2 h). **Risiko:** null (reine Dokumentation).
+
+**Commit:** `audit(12): docs content-pflege leitfaden`
+
+---
+
+### 2B.3 Migrations-Empfehlung (Gesamtbild)
+
+Audit 12 empfiehlt **Beibehalten als JS-Module**. Die identifizierten Probleme sind durch Schema-Harmonisierung (W1a, W1b), JSDoc-Typen (W3a), kleine Refaktorierung (W3b, W4) und einen Leitfaden (W5-Gruppe B) lösbar. Keine Markdown/MDX/JSON-Migration notwendig oder empfohlen.
+
+### 2B.4 Priorisierung
+
+**Wichtig:** Audit 12 hat keine „vor Release zwingend"-Massnahmen. Alle Probleme sind **Investitionen in die Zukunft der Seite**, keine Korrekturen bestehender Defekte. Die Seite funktioniert nach Audit 10 für Nutzer fehlerfrei.
+
+| Kategorie | Bezeichnung | Priorität | Aufwand | Begründung |
+|---|---|---|---|---|
+| **W1a** | LITERATUR → SOURCES | **empfehlenswert** | M (halber Tag) | Hoher Reibungsgewinn: löst 50 % Doppelpflege auf |
+| **W1b** | FACHSTELLEN konsolidieren | **empfehlenswert** | M-L (ganzer Tag) | Löst 8 überlappende Einträge auf; grösste Einzel-Arbeit |
+| **W2** | `primaryAudience` PA1 (JSDoc) | **empfehlenswert** | XS (10 min) | Metadatum wird aktiv genutzt gehalten ohne Runtime-Eingriff |
+| **W3a** | JSDoc-Typen für 5 Schemas | **empfehlenswert** | S (2-3 h) | VSCode-Autovervollständigung, Doku pro Schema |
+| **W3b** | Glossar-IDs + GlossarLink-Komponente (Teil 1) | **empfehlenswert** | S (2-3 h) | Aktiviert Audit-07-Absicht. Vollversion mit Inline-Platzhalter-Parser vertagt |
+| **W4** | BASE_URL single source of truth | **empfehlenswert** | S (2-3 h) | Kleiner, sauberer Refaktor |
+| **W5-A** | Fussangeln Gruppe A (Code-lösbar) | **empfehlenswert** (gekoppelt an W1-W4) | -- | Werden durch W1-W4 aufgefangen |
+| **W5-B** | `docs/content-pflege.md` | **kann warten** | S (2 h) | Leitfaden für spätere Pflege; blockiert keinen Release |
+
+**Gesamt-Aufwandsschätzung** aller W1-W4: ca. **3-4 Arbeitstage** bei sauberer Umsetzung.
+
+### 2B.5 Umsetzungs-Reihenfolge für Phase 3B (nach Freigabe)
+
+Vorschlag:
+
+1. **W4** (BASE_URL) zuerst, weil es isoliert ist und später andere Änderungen nicht verkompliziert.
+2. **W1a** (LITERATUR → SOURCES). Kleiner, klarer Schritt.
+3. **W1b** (FACHSTELLEN konsolidieren). Grösster Einzel-Schritt.
+4. **W3a** (JSDoc-Typen für 5 Schemas) inkl. W2/PA1. Nach W1a/W1b, damit die Typen die konsolidierten Schemas treffen.
+5. **W3b** (Glossar-IDs + Komponente, Teil 1).
+6. **W5-B** (docs/content-pflege.md) als Abschluss.
+
+### 2B.6 Was die Auftraggeberin entscheiden muss
+
+1. **E-W2**: **PA1 (JSDoc-Kommentar)** oder **PA2 (Runtime-Integration)**? Empfehlung: PA1.
+2. **E-W3b**: Glossar-Verlinkung in Audit 12 nur als **Teil 1** (IDs + Komponente) oder **Vollversion** mit Platzhalter-Parser und 4 eingebetteten Links? Empfehlung: Teil 1 in Audit 12, Vollversion vertagen.
+3. **E-W1a-Spezialfall**: `plass-wiegandgrefe-2012` -- LITERATUR zitiert den Stuttgart-Kohlhammer-Band, SOURCES den Weinheim-Beltz-Band. Soll der Stuttgart-Band einen eigenen SOURCES-Eintrag bekommen, oder in LITERATUR durch den Weinheim-Band ersetzt werden? (Redaktionelle Entscheidung, nicht von mir fällbar.)
+4. **E-W5-B**: `docs/content-pflege.md` in Audit 12 mit erzeugen oder als eigenes späteres Ticket?
+5. **E-W4-Variante**: Env-Variable (A, empfohlen) oder zentrale `src/config.js` (B)?
+6. **E-Bündelung**: Alle W1-W5 in Audit 12 umsetzen, oder W3b und/oder W5-B vertagen?
+
+---
+
+**STOPP nach Phase 2B.** Warte auf Freigabe der Einzelentscheidungen, speziell zu `primaryAudience` (PA1 oder PA2) und Glossar-Verlinkung (Inclusion als Teil 1 oder Vertagung komplett).
