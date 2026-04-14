@@ -25,10 +25,12 @@ Farben werden strikt über CSS Custom Properties (Tokens) gesteuert. Nie direkt 
 **Regeln:**
 
 - Neue Farben zuerst als Token definieren, dann referenzieren
-- Transparenz-Abstufungen statt neuer Hex-Werte (z. B. `--accent-faint`, `--accent-subtle`, `--accent-muted`, `--accent`, `--accent-strong`)
+- Farb-Abstufungen (Transparenz, Helligkeit, Sättigung) werden bevorzugt aus Tokens abgeleitet, nicht als neue Hex-Werte definiert. Zwei erlaubte Muster:
+  1. **Token-Familie mit Abstufungen** (z. B. `--accent-faint`, `--accent-subtle`, `--accent-muted`, `--accent`, `--accent-strong`)
+  2. **`color-mix()` mit Token als Basis**: `color-mix(in srgb, var(--accent-primary) 30%, white 70%)` ist zulässig, wenn die Basis ein Token ist. Nicht zulässig: `color-mix(in srgb, #d97706 …)` mit Hex-Basis. Für wiederholte Berechnungen (≥3 Vorkommen) lohnt sich ein vorberechnetes Token.
 - Jede Text-/Hintergrund-Kombination erfüllt mindestens WCAG AA (4.5:1 für normalen Text, 3:1 für großen Text)
-- Kontrastverhältnisse als Kommentar am Token dokumentieren (z. B. `/* 4.69:1 auf --surface, WCAG AA */`)
-- Signal-Farben (Warnung, Gefahr, Erfolg) sind reserviert für tatsächliche Signalisierung – nie als Dekoration
+- Kontrastverhältnisse als Kommentar am Token dokumentieren. Verbindliches Format: `/* <Ratio>:1 auf <Referenz-Surface>, WCAG <AA|AAA> */`, z. B. `/* 10.8:1 auf --surface-page, WCAG AAA */`. Pflicht für alle Text- und Accent-Tokens, die auf Hintergründen erscheinen. Optional für reine Surface-/Border-Tokens ohne Text-Bezug.
+- Signal-Farben (Warnung, Gefahr, Erfolg) sind reserviert für tatsächliche Signalisierung – nie als Dekoration. In der Praxis heißt das: `--accent-danger`, `--accent-warning`, ggf. `--accent-secondary` im Erfolgsfall; dekorative Nutzung in Card-Shadows, Hero-Hintergründen oder Divider-Elementen ist verboten.
 
 **Token-Semantik**: Tokens sollten nach *Funktion* benannt sein, nicht nach *Erscheinung*. `--text-primary` statt `--grey-900`, `--surface-elevated` statt `--white`. Das ermöglicht später Theme-Wechsel ohne Umbenennungen und macht den Intent im Code lesbar.
 
@@ -38,10 +40,10 @@ Farben werden strikt über CSS Custom Properties (Tokens) gesteuert. Nie direkt 
 
 ## Typografie
 
-- Eine Paarung Body-Font + Heading-Font. Nicht mehr. Jede weitere Schriftart braucht eine starke Begründung.
+- Eine Paarung Body-Font + Heading-Font ist der Regelfall. Ein dritter Brand-/Display-Font ist zulässig, wenn (1) er an genau einer Stelle eingesetzt wird (z. B. Brand-Title im Footer oder Hero), (2) er als eigener Token deklariert ist (`--font-display`), (3) die Begründung im Token-Kommentar festgehalten ist. Ein vierter Font ist nicht zulässig.
 - Schriftgrößen ausschließlich über Tokens, nie direkt als rem/px. Das erlaubt späteres Re-Scaling ohne Suche-und-Ersetze.
 - Zeilenhöhe für Fließtext großzügig (1.6–1.8). Lesbarkeit bei langen Texten ist wichtiger als Platzeffizienz.
-- Headings kontrollieren die Dokument-Outline – nicht nur die Optik. Heading-Levels (`h1`–`h6`) folgen der semantischen Hierarchie, nicht der visuellen Gewichtung. Für rein optische Anpassungen gibt es Klassen.
+- Headings kontrollieren die Dokument-Outline – nicht nur die Optik. Heading-Levels (`h1`–`h6`) folgen der semantischen Hierarchie, nicht der visuellen Gewichtung. Für rein optische Anpassungen gibt es Klassen. In der Praxis: `h1` genau einmal pro Seite (Page-Title), `h2` für Sections, `h3` für Sub-Sections/Cards; keine `h4` ohne echten Inhalts-Grund. Visuelle Anpassung ausschließlich über Klassen (`.ui-hero-title`, `.ui-section-title`), nie durch Heading-Level-Missbrauch.
 - Hierarchie-Sprünge sollten deutlich sein. Wenn Badge, Heading und Untertitel auf Mobile alle gleich viel Raum bekommen, verschwimmt die Hierarchie. Differenzierte Abstände (z. B. Badge eng an Heading, deutlicher Bruch zum Untertitel) sind oft wichtiger als differenzierte Schriftgrößen.
 
 ---
@@ -52,21 +54,29 @@ Eine feste Spacing-Skala, typischerweise in geometrischer Progression (z. B. 4�
 
 **Regeln:**
 
-- Hardcodierte Pixel- oder Rem-Werte sind technische Schuld. Ersetze sie durch Token-Referenzen.
+- Hardcodierte Pixel- oder Rem-Werte für Layout-, Sektion- und Komponenten-Hauptabstände sind technische Schuld. Ersetze sie durch Token-Referenzen aus der Spacing-Skala.
+- **Ausnahmen, die als Literal zulässig sind:** typografisch motivierte Werte, die an eine Schriftgröße gekoppelt sind (z. B. `padding-block: 0.875rem;` passt zu `--font-size-sm`); optische Feinjustierungen unter 0.25rem, wenn sie durch einen Inline-Kommentar begründet sind. Alle anderen Literalwerte werden zu Tokens.
 - Sektion-Abstände haben eigene Tokens (z. B. `--section-tight`, `--section-standard`, `--section-wide`), damit sie konsistent über Seitentypen hinweg greifen.
 - Maximale Content-Breiten als Tokens (z. B. `--content-width`, `--wide-width`) – nie mit Magic Numbers arbeiten.
-- Mobile-Breakpoints haben dieselben Anforderungen an Token-Nutzung wie Desktop. Hardcodes schleichen sich besonders gerne in `@media`-Blöcke ein.
+- Mobile-Breakpoints: Properties **innerhalb** der Media-Queries nutzen ausnahmslos Tokens. **Breakpoint-Werte selbst** (`48rem`, `64rem`) dürfen als Literale stehen, solange kein Breakpoint-Token-System existiert (`--breakpoint-sm`, `--breakpoint-md`). Sobald solche Tokens eingeführt sind, sind sie verpflichtend zu nutzen.
+- Responsive Breakpoints folgen der Tailwind-Konvention (`sm: 40rem`, `md: 48rem`, `lg: 64rem`, `xl: 80rem`, `2xl: 96rem`). Abweichende Werte werden als Token in `tokens.css` deklariert und hier als Ausnahme begründet.
 
 ---
 
 ## Komponenten-Hierarchie
 
-Ein durchgängiges Button-System in vier Stufen, definiert an einem zentralen Ort:
+Ein durchgängiges Button-System mit klar begrenzter Anzahl an Varianten. Vier Kern-Stufen sind der Regelfall:
 
 1. **Primary** – die eine Haupthandlung pro Bildschirm. Hohe visuelle Gewichtung.
 2. **Secondary** – unterstützende Handlungen. Klar erkennbar, aber nicht konkurrierend.
 3. **Danger** – destruktive oder irreversible Aktionen. Warnfarbe, bewusst seltener Einsatz.
-4. **Tertiary / Text-Link** – für nebensächliche oder inline-Aktionen.
+4. **Tertiary / Text-Link / Ghost / Subtle** – Sammelkategorie für nebensächliche und inline-Aktionen, optional in Abstufungen.
+
+**Zusätzliche Stufen sind zulässig**, wenn sie eine fachlich klare Rolle erfüllen, die keine der Kern-Stufen abdeckt (z. B. `Emergency` für Notfall-CTA in einer Care-Anwendung). Jede zusätzliche Stufe muss:
+
+1. im Button-Komponenten-Code mit einem Kommentar zur Begründung versehen sein,
+2. hier im Richtliniendokument oder in einem Design-Log aufgeführt sein,
+3. dieselbe Token-Basis nutzen wie die Kern-Stufen.
 
 **Gemeinsame Basis**: Alle Buttons teilen `font-family`, `font-size`, `padding`, `border-radius` und eine Mindest-Touch-Target-Größe von 44×44 px (WCAG 2.5.5).
 
@@ -78,13 +88,13 @@ Ein durchgängiges Button-System in vier Stufen, definiert an einem zentralen Or
 
 ## Barrierefreiheit – nicht optional
 
-- **Semantisches HTML vor ARIA.** `<nav>`, `<main>`, `<aside>`, `<details>`, `<button>` statt `div`-Suppe.
+- **Semantisches HTML vor ARIA.** `<nav>`, `<main>`, `<aside>`, `<details>`, `<button>` statt `div`-Suppe. In der Praxis: `<button>` für alles Click-bare, `<a href>` nur bei echter Navigation. `<div role="button">` ist verboten. Backdrop-Dismiss-Elemente werden als `<button>` implementiert, nicht als `<div onClick>`.
 - **Skip-Links** zum Hauptinhalt auf jeder Seite.
 - **ARIA nur wo nötig**: `aria-label` auf Navigation und ikonischen Buttons, `aria-expanded` auf Toggle-Buttons, `aria-live="polite"` auf dynamisch ersetzten Inhalten.
 - **Fokus-Indikatoren**: Jedes interaktive Element hat einen sichtbaren `:focus-visible`-Stil. Auf dunklen Hintergründen: hellere Variante. Standardbrowser-Outlines entfernen ist verboten, es sei denn, ein besserer ersetzt sie.
 - **Reduced Motion**: Alle Animationen hinter `@media (prefers-reduced-motion: reduce)` prüfen. IntersectionObserver-Reveals sofort auslösen, wenn Nutzer*innen reduzierte Bewegung bevorzugen.
 - **Touch-Targets**: Mindestens 44×44 px für alle interaktiven Elemente.
-- **Farbe als Information**: Farbe darf nie das einzige Signal sein. Icons, Text oder Form müssen die Information doppelt tragen.
+- **Farbe als Information**: Farbe darf nie das einzige Signal sein. Icons, Text oder Form müssen die Information doppelt tragen. Jeder Status (Error, Warning, Success, Info) trägt mindestens zwei Signale: Farbe + Icon ODER Farbe + Text-Label. Farbe allein (z. B. nur roter Rahmen ohne Icon/Label) ist verboten.
 - **Fokus-Management bei dynamischen Inhalten**: Wenn per JavaScript ein Bereich ersetzt wird (z. B. Quiz-Fragen, Wizard-Schritte), muss der Fokus aktiv auf das neue Element gesetzt werden. Sonst verlieren Keyboard- und Screen-Reader-Nutzer*innen die Orientierung.
 
 ---
@@ -103,7 +113,9 @@ Ein durchgängiges Button-System in vier Stufen, definiert an einem zentralen Or
 
 ## CSS-Architektur
 
-Eine flache Dateistruktur nach Verantwortungsbereichen, nicht nach Hierarchie oder Framework-Konvention:
+Eine flache Dateistruktur nach Verantwortungsbereichen. Die konkrete Aufteilung hängt vom Tooling ab.
+
+**Bei klassischen CSS-Projekten:**
 
 | Datei | Verantwortung |
 |---|---|
@@ -114,13 +126,28 @@ Eine flache Dateistruktur nach Verantwortungsbereichen, nicht nach Hierarchie od
 | `pages.css` oder thematisch | Seiten- oder feature-spezifische Styles |
 | `print.css` | Druck-Overrides |
 
-**Regeln:**
+**Bei Tailwind- oder Utility-First-Projekten:** Eine kleine Zahl gut benannter CSS-Dateien reicht, typischerweise:
+
+| Datei | Verantwortung |
+|---|---|
+| `tokens.css` | Custom Properties – keine Selektoren, keine Regeln |
+| `index.css` oder `globals.css` | Base-Defaults, globale Resets, Tailwind-Import, `::selection` |
+| `primitives.css` oder `components.css` | Wiederverwendbare Komponenten-Klassen (`.ui-*`-Namespace) |
+| `print.css` oder Print-Block in globals | Druck-Overrides zentralisiert an **einer** Stelle |
+
+**Gemeinsame Regeln, unabhängig vom Tool:**
 
 - Keine `!important`-Deklarationen außerhalb von Print-CSS. Wenn du Specificity-Probleme hast, ist das ein Symptom, nicht die Lösung.
-- Neue Styles gehören in die thematisch passende Datei, nicht ans Ende von `components.css`.
+- Neue Styles gehören in die thematisch passende Datei, nicht ans Ende der zuletzt geöffneten Datei.
+- Print-Styles werden an **genau einer** Stelle gebündelt, nicht über mehrere Dateien verstreut.
+- Datei-Größen über ~2000 Zeilen sind ein Hinweis auf fehlende Gliederung – entweder nach thematischen Sektionen kommentieren oder sauber aufteilen.
 - Lesbar formatierter Quellcode im Repo, Minifizierung beim Build.
 - Kommentare: Abschnittsüberschriften als Orientierung, Inline-Kommentare für nicht-offensichtliche Entscheidungen (Kontrast-Ratios, Browser-Workarounds, bewusste Abweichungen).
 - **Keine Override-Dateien.** Eine separate `overrides.css`, die nach allen anderen geladen wird, ist ein Warnsignal: Sie verschleiert Cascade-Drift und hinterlässt später tote Zwillinge, wenn jemand die Original-Regel ändert, aber die Override vergisst. Besser: Die Ursache der Spezifitäts-Probleme beheben.
+
+**Zusätzlich für Tailwind-Projekte:**
+
+- Tailwind Arbitrary Values (`bg-[…]`, `text-[…]`, `p-[…]`) sind nur zulässig, wenn sie auf Tokens referenzieren: `text-[var(--text-danger)]` ist ok, `bg-[#abc123]` oder `p-[12px]` nicht. Hex-Literale und rohe Zahlen als Arbitrary Values sind verboten und zu Tokens oder Utility-Klassen zu überführen.
 
 ---
 
@@ -139,6 +166,60 @@ Jedes Projekt hat Stellen, an denen Fehler besonders teuer sind. Bei einer Care-
 - Telefonnummern, Adressen und andere Kontaktdaten auf kritischen Pfaden sind klickbar (`tel:`, `mailto:`), nicht nur darstellend
 
 **Identifiziere die kritischen Pfade deines Projekts explizit.** Schreib sie auf, idealerweise in die `CONTRIBUTING.md` oder `README.md`. Alles, was diese Pfade berührt, verdient zusätzliche Reviews und hat keine Eile.
+
+---
+
+## Konventionen im Code
+
+Konventionen, die im Code konsistent umgesetzt werden und hier dokumentiert sind, damit sie nicht versehentlich durchbrochen werden. Neue Konventionen werden spätestens nach der dritten Wiederholung hier aufgenommen.
+
+### Hash-Navigation mit Focus-Management
+
+Navigation zwischen Hauptbereichen läuft über URL-Hashes (`#start`, `#toolbox`, …). Nach jedem Wechsel wird der Fokus explizit auf das Ziel-Heading gesetzt, damit Tastatur- und Screen-Reader-Nutzer nicht orientierungslos im neuen Abschnitt landen.
+
+Verankert in: `src/context/AppStateContext.jsx`, `src/utils/useNavigationFocus.js`, aufgerufen via `navigate(tab, { focusTarget: 'heading' })`.
+
+### Zentraler App-State via `AppStateContext`
+
+Globaler Client-State (aktiver Tab, Score, Assessment-Antworten, Vignetten-Index) lebt in einem React-Context mit localStorage-Persistenz (Key `rr_app_state_v5`). Hook `useAppState()` ist der einzige legitime Zugriff. Kein externes State-Management-Framework.
+
+Verankert in: `src/context/AppStateContext.jsx`, `src/context/useAppState.js`.
+
+### Schichtung Section → Template → Content
+
+Daten-orientierte Sections (`src/sections/*.jsx`) bauen View-Models aus Content-Dateien und reichen sie an reine Rendering-Templates (`src/templates/*.jsx`) weiter. Content liegt als statisches JS-Objekt in `src/data/*.js`. Keine Business-Logik im Template, keine Rendering-Details in der Section.
+
+Verankert in: z. B. `src/sections/VignettenSection.jsx` → `src/templates/VignettenPageTemplate.jsx` + `src/data/vignettenContent.js`.
+
+### `focusTarget: 'heading'` für Post-Navigation-Fokus
+
+Standard-Prop für alle `navigate()`-Aufrufe, die Keyboard-Fokus auf das Haupt-Heading der Zielseite setzt. Wenn nicht angegeben, wird der Fokus nicht verändert.
+
+Verankert in: `src/utils/useNavigationFocus.js`.
+
+### `.haptic-btn` Micro-Interaction-Klasse
+
+CSS-Klasse für taktiles Button-Feedback (Scale-Transform auf `:hover`, Scale-Reduktion auf `:active`). Standard-Interaction-Wrapper für primäre Click-Ziele.
+
+Verankert in: `src/styles/app-global.css` (Basis-Transition), `src/styles/primitives.css` (Reduce-Motion-Guard).
+
+### `.ui-visually-hidden` Utility
+
+Screen-Reader-only-Text mit Clip-Path-Technik. Standard-Pattern für redundante Labels, die visuell durch Icon + Kontext getragen werden, semantisch aber explizit sein müssen.
+
+Verankert in: `src/styles/primitives.css` (Klasse `.ui-visually-hidden`).
+
+### `aria-hidden="true"` auf dekorativen Icons + `aria-label` auf Button
+
+Dekorative Lucide-Icons in Buttons/Labels bekommen `aria-hidden="true"`, der begleitende Button hat ein explizites `aria-label` mit dem vollen Kontext. So bekommt der Screen-Reader den Intent ohne Icon-Rauschen.
+
+Verankert in: breites Muster, z. B. `src/App.jsx` (Emergency-Button), `src/components/Header.jsx` (Navigation).
+
+### `primaryAudience`-Metadaten pro Template
+
+Jeder Top-Level-Tab in `TAB_ITEMS` hat ein `primaryAudience`-Feld (`fachpersonen` / `angehoerige` / `beide`) aus Audit 02. Nicht für Routing, sondern für inhaltliche Orientierung und spätere Filter.
+
+Verankert in: `src/data/appShellContent.js`, eingeführt in Audit 02.
 
 ---
 
