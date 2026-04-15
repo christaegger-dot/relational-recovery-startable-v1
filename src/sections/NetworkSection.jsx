@@ -69,10 +69,10 @@ export default function NetworkSection() {
   );
 
   const hero = {
-    eyebrow: 'Triage und Support',
-    title: 'Netzwerk in',
-    accent: 'Zürich und schweizweit lesen.',
-    lead: 'Die Seite verbindet zürich-zentrierte Krisenwege, Familienberatung und Kinder- und Jugendangebote mit einzelnen schweizweiten Ergänzungen. Sie können nach Fachstellen suchen oder die Netzwerkkarte nutzen.',
+    eyebrow: 'Weitervermittlung und Triage',
+    title: 'Fachstellen für',
+    accent: 'Zürich und schweizweite Ergänzungen.',
+    lead: 'Fachstellenverzeichnis und Netzwerkkarte für die Arbeit mit Familien mit psychisch belasteten Eltern: Weitervermittlung, Triage und Entlastung. Schwerpunkt Kanton Zürich, ergänzt durch ausgewählte schweizweite Angebote.',
     image: heroIllustration,
     imageAlt: 'Illustration eines Familiensystems mit Beziehungslinien und ruhiger Orientierung',
     asideTitle: 'Einordnung',
