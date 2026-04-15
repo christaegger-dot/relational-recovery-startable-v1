@@ -1,17 +1,31 @@
 import { ChevronRight, ExternalLink } from 'lucide-react';
 import heroIllustration from '../assets/relational-recovery-hero-v3-web.webp';
 import EditorialPageTemplate from './EditorialPageTemplate';
-import { E_MODULE_COUNT, HOME_REFERENCE_COUNT, NETWORK_RESOURCE_COUNT, VIGNETTE_COUNT } from '../data/appShellContent';
+import { E_MODULE_COUNT, NETWORK_RESOURCE_COUNT, VIGNETTE_COUNT } from '../data/appShellContent';
 import { useAppState } from '../context/useAppState';
 
 export default function HomeLandingTemplate({ pageHeadingId }) {
   const { navigate, completedModules } = useAppState();
   const progressPercent = E_MODULE_COUNT ? Math.round((completedModules.length / E_MODULE_COUNT) * 100) : 0;
+
+  // Lernfortschritt-Stat nur anzeigen, sobald mindestens ein Modul bearbeitet wurde
+  // (0%-Signal fuer neue Nutzende weglassen, Audit-UX-Iteration).
+  const progressStat =
+    progressPercent > 0
+      ? [
+          {
+            label: 'Lernfortschritt',
+            value: `${progressPercent}%`,
+            note: `${completedModules.length} von ${E_MODULE_COUNT} Lernmodulen bearbeitet`,
+          },
+        ]
+      : [];
+
   const hero = {
     eyebrow: 'Systemische Orientierung',
-    title: 'Begleitung ist',
-    accent: 'Beziehungsarbeit.',
-    lead: 'Interaktive Fachressourcen für die Begleitung von Eltern mit psychischer Belastung – mit Training, systemischer Orientierung, Krisenhilfe, Netzwerk und printfähigen Arbeitshilfen.',
+    title: 'Wenn ein Elternteil',
+    accent: 'psychisch belastet ist.',
+    lead: 'Orientierung, Triage und Arbeitshilfen für Fachpersonen. FAQ und Einordnung für Angehörige. Krisenhilfe und regionale Netzwerkstellen für beide Zielgruppen.',
     image: heroIllustration,
     imageAlt: 'Minimalistische Illustration eines Familiensystems mit Nähe, Distanz und Unterstützung',
     asideTitle: 'Wichtiger Hinweis zur Einordnung',
@@ -19,14 +33,14 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
       'Dieses Angebot dient der psychoedukativen Orientierung. Für offizielle Informationen und Beratung bleibt die Angehörigenberatung der PUK Zürich die zentrale Anlaufstelle.',
     actions: [
       {
-        label: 'Falllogik trainieren',
-        onClick: () => navigate('lernmodule', { focusTarget: 'heading' }),
+        label: 'Prioritäten klären',
+        onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
         variant: 'primary',
         icon: ChevronRight,
       },
       {
-        label: 'Prioritäten klären',
-        onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
+        label: 'Hintergrund verstehen',
+        onClick: () => navigate('evidenz', { focusTarget: 'heading' }),
         variant: 'secondary',
       },
       {
@@ -39,11 +53,7 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
       },
     ],
     stats: [
-      {
-        label: 'Lernfortschritt',
-        value: `${progressPercent}%`,
-        note: `${completedModules.length} von ${E_MODULE_COUNT} Lernmodulen bearbeitet`,
-      },
+      ...progressStat,
       {
         label: 'Module',
         value: String(E_MODULE_COUNT),
@@ -62,7 +72,36 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
     ],
   };
 
+  // Startseite traegt genau zwei Orientierungs-Schichten:
+  // 1) Zielgruppen-Einstieg (Fachperson / Angehoerige) als sichtbare Doppelzielgruppen-Aufloesung
+  // 2) Phasen-Logik (Verstehen / Einschaetzen / Handeln / Vernetzen) als Haupt-Gliederung
+  // Die frueheren Bloecke "Direkte Einstiege" und "Vertrauen und Orientierung" wurden
+  // entfernt, weil sie dieselben Wege in anderer Form wiederholt haben.
   const sections = [
+    {
+      eyebrow: 'Zugang wählen',
+      title: 'Zwei Einstiege, je nach Rolle.',
+      description:
+        'Das Portal richtet sich an zwei Zielgruppen. Fachpersonen finden den Einstieg über Triage und Arbeitshilfen, Angehörige über eine Einordnung in verständlicher Sprache.',
+      cards: [
+        {
+          label: 'Für Fachpersonen',
+          title: 'Mit der Toolbox beginnen',
+          copy: 'Strukturierte Einschätzung, Krisenplan, Gesprächsleitfaden und Downloads für die direkte Fallarbeit — inklusive Sofort-Triage und Notfall-Kontakte.',
+          tone: 'accent',
+          onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
+          actionLabel: 'Zur Toolbox',
+        },
+        {
+          label: 'Für Angehörige',
+          title: 'Mit der Grundlagen-FAQ beginnen',
+          copy: 'Einordnung zu häufigen Fragen rund um psychische Belastung in der Familie, verständlich formuliert, mit Weiterverweisen auf offizielle Beratung.',
+          tone: 'soft',
+          onClick: () => navigate('grundlagen', { focusTarget: 'heading' }),
+          actionLabel: 'Zu den Grundlagen',
+        },
+      ],
+    },
     {
       eyebrow: 'Orientierung',
       title: 'Ein ruhiger, fachlich klarer Weg durch die Inhalte.',
@@ -96,80 +135,6 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
           copy: 'Offizielle Stellen, Beratungsangebote und regionale Hilfen passend zur Lage aktivieren.',
           onClick: () => navigate('netzwerk', { focusTarget: 'heading' }),
           actionLabel: 'Zum Netzwerk',
-        },
-      ],
-    },
-    {
-      eyebrow: 'Direkte Einstiege',
-      title: 'Von hier aus erreichen Sie alle Bereiche direkt.',
-      description:
-        'Jeder Bereich ist direkt erreichbar -- mit kurzer Beschreibung, was Sie dort finden und wann er besonders hilfreich ist.',
-      surface: 'subtle',
-      cards: [
-        {
-          label: 'Training',
-          title: 'Mit Lernmodulen üben',
-          copy: `${E_MODULE_COUNT} kompakte Lerneinheiten helfen, Sprache, Falllogik und Gesprächsorientierung schrittweise aufzubauen.`,
-          tone: 'soft',
-          onClick: () => navigate('lernmodule', { focusTarget: 'heading' }),
-          actionLabel: 'Zum E-Learning',
-        },
-        {
-          label: 'Wissensraum',
-          title: 'Familiendynamik vertiefen',
-          copy: `Der Evidenzbereich bündelt aktuell ${HOME_REFERENCE_COUNT} kuratierte Einstiegspunkte, Materialien und Referenzen in einer ruhigeren Leselogik.`,
-          tone: 'accent',
-          onClick: () => navigate('evidenz', { focusTarget: 'heading' }),
-          actionLabel: 'Zum Evidenzteil',
-        },
-        {
-          label: 'Versorgung',
-          title: 'Regionale Hilfen aufrufen',
-          copy: `${NETWORK_RESOURCE_COUNT} Netzwerkstellen unterstützen bei Triage, Entlastung und der Weitervermittlung an passende Angebote.`,
-          onClick: () => navigate('netzwerk', { focusTarget: 'heading' }),
-          actionLabel: 'Zum Netzwerk',
-        },
-        {
-          label: 'Fallarbeit',
-          title: 'Dialoge und Entscheidungssituationen reflektieren',
-          copy: `${VIGNETTE_COUNT} Trainingsfälle machen Belastungsdynamiken, Sprache und nächste Schritte konkreter als rein abstrakte Wissensvermittlung.`,
-          onClick: () => navigate('vignetten', { focusTarget: 'heading' }),
-          actionLabel: 'Zu den Vignetten',
-        },
-      ],
-    },
-    {
-      eyebrow: 'Vertrauen und Orientierung',
-      title: 'Wofür ist dieses Angebot gedacht -- und was passt zu Ihrem Anliegen?',
-      description:
-        'Für sensible Themen braucht es nicht nur Information, sondern auch erkennbare Einordnung. Hier erfahren Sie, wofür das Angebot gedacht ist und welche nächsten Wege je nach Anliegen sinnvoll sind.',
-      aside: {
-        label: 'Für wen gedacht',
-        title: 'Psychoedukative Orientierung statt Ersatzversorgung',
-        copy: 'Die Website unterstützt beim Verstehen, Strukturieren und Vorbereiten. Offizielle Beratung, Krisenhilfe und Behandlung bleiben eigenständige Versorgungsleistungen.',
-        tone: 'soft',
-      },
-      cards: [
-        {
-          label: 'Wenn Sie zuerst verstehen möchten',
-          title: 'Im Evidenzbereich beginnen',
-          copy: 'Geeignet, wenn Familiendynamik, kindliche Perspektive, Psychoedukation oder Schutzfaktoren zunächst fachlich eingeordnet werden sollen.',
-          onClick: () => navigate('evidenz', { focusTarget: 'heading' }),
-          actionLabel: 'Wissensseite öffnen',
-        },
-        {
-          label: 'Wenn Sie rasch priorisieren müssen',
-          title: 'Mit der Toolbox starten',
-          copy: 'Geeignet, wenn akute Belastung, Sicherheitsfragen, Kindeswohl oder nächste Schritte im Vordergrund stehen.',
-          onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
-          actionLabel: 'Toolbox öffnen',
-        },
-        {
-          label: 'Wenn Sie üben oder lehren möchten',
-          title: 'Lernmodule und Vignetten kombinieren',
-          copy: 'Geeignet für Selbststudium, Weiterbildung oder Teams, die Sprache und Falllogik anhand konkreter Situationen vertiefen möchten.',
-          onClick: () => navigate('lernmodule', { focusTarget: 'heading' }),
-          actionLabel: 'Zum Training',
         },
       ],
     },

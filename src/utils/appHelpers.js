@@ -31,6 +31,13 @@ const TAB_ALIASES = {
   'network-directory': 'netzwerk',
   'netzwerk-karte': 'netzwerk',
   'netzwerk-fachstellen': 'netzwerk',
+  // Nutzerseitig heisst die Sektion "Training" (Nav-Label + Section-Hero,
+  // siehe TAB_ITEMS und VignettenSection). Der interne Codename bleibt
+  // "vignetten" (Hash #vignetten, Dateinamen, Daten-Module), deshalb
+  // Alias fuer Deep-Links ueber den Nutzer-Namen.
+  training: 'vignetten',
+  trainingsfaelle: 'vignetten',
+  vignetten: 'vignetten',
 };
 
 export const safeParse = (key, fallback, validate) => {
