@@ -198,12 +198,12 @@
   }
 
   /* 4. Link-URL-Anzeige ------------------------------------------------- *
-   * Externe Links (nicht eltern-a.netlify.app) bekommen die URL als
+   * Externe Links (nicht eltern-angehoerige-fa.netlify.app) bekommen die URL als
    * Klartext hinten angehaengt, damit Leser:innen den Link auf Papier
    * nachvollziehen koennen. tel:-Links sind ausgenommen, weil der
    * sichtbare Text bereits die Nummer ist.
    */
-  a[href^="http"]:not([href*="eltern-a.netlify.app"])::after {
+  a[href^="http"]:not([href*="eltern-angehoerige-fa.netlify.app"])::after {
     content: " (" attr(href) ")";
     font-size: 9pt;
     color: #333;

@@ -27,3 +27,6 @@ npm-debug.log*
 
 # Build artifacts
 *.tgz
+
+# Local Netlify folder
+.netlify

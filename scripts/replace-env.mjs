@@ -45,7 +45,7 @@ async function main() {
   const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
   await loadDotenv(rootDir);
 
-  const baseUrl = process.env.VITE_BASE_URL || 'https://eltern-a.netlify.app';
+  const baseUrl = process.env.VITE_BASE_URL || 'https://eltern-angehoerige-fa.netlify.app';
   const distDir = path.join(rootDir, 'dist');
   const replacements = [['__VITE_BASE_URL__', baseUrl]];
 
