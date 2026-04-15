@@ -908,6 +908,41 @@
   color: var(--text-primary);
 }
 
+/* Schmaler Angehoerigen-Nebenpfad-Hinweis unter den Hero-Actions.
+   Ersatz fuer die frueher zweigliedrige Audience-Row (Audit-Phase-1,
+   Audience-Cut-Strategie: Fachpersonen-Fokus mit Angehoerigen als
+   markiertem Nebenpfad). */
+.ui-hero__audience-note {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.ui-hero__audience-note-prefix {
+  color: var(--text-muted);
+}
+
+.ui-hero__audience-note-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  color: var(--accent-primary-strong);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.ui-hero__audience-note-link:hover,
+.ui-hero__audience-note-link:focus-visible {
+  text-decoration-thickness: 2px;
+}
+
 .ui-hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -1433,6 +1468,38 @@
 
 .ui-nav__item svg {
   flex: none;
+}
+
+/* Dezenter Zielgruppen-Marker am Grundlagen-Tab. Sichtbar, aber optisch
+   nachgeordnet: weder eigene Nav-Ebene noch reine Farbtrennung. Default
+   aller Tabs ist Fachperson; nur Tabs mit explizitem Badge tragen das
+   Label (Audit-Phase-1, Audience-Cut-Strategie). */
+.ui-nav__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 22%, white 78%);
+  border-radius: var(--radius-pill);
+  background: var(--surface-note);
+  color: var(--accent-primary-strong);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ui-nav__item[aria-current='page'] .ui-nav__badge,
+.ui-nav__item.is-active .ui-nav__badge {
+  background: color-mix(in srgb, var(--surface-note) 82%, white 18%);
+  border-color: color-mix(in srgb, var(--surface-note) 60%, white 40%);
+}
+
+/* Im Mobile-Menue weiter Platz geben (Label-/Badge-Kombi bricht in 2 Zeilen). */
+.ui-nav--mobile .ui-nav__item {
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
 }
 
 .ui-header-actions {

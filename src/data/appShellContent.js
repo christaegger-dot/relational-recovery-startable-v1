@@ -71,6 +71,10 @@ export const TAB_ITEMS = [
     footerNote: 'FAQ, Einordnung und Orientierung',
     priority: 'primary',
     primaryAudience: 'angehoerige',
+    // Sichtbarer Zielgruppen-Marker in der Haupt-/Mobile-Nav: Grundlagen
+    // ist der einzige Angehoerigen-Nebenpfad im sonst fachpersonenorientierten
+    // Portal (Audit-Phase-1 Audience-Cut-Strategie).
+    audienceBadge: 'Für Angehörige',
   },
   {
     id: 'evidenz',

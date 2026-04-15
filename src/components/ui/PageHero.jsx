@@ -36,6 +36,7 @@ export default function PageHero({
   headingAriaLabel,
   audienceEntries = [],
   audienceLabel,
+  audienceNote,
 }) {
   return (
     <div className="ui-hero">
@@ -90,6 +91,34 @@ export default function PageHero({
                 </Button>
               ))}
             </div>
+          ) : null}
+
+          {audienceNote ? (
+            <p className="ui-hero__audience-note">
+              {audienceNote.prefix ? (
+                <span className="ui-hero__audience-note-prefix">{audienceNote.prefix}</span>
+              ) : null}
+              {audienceNote.href ? (
+                <a
+                  className="ui-hero__audience-note-link"
+                  href={audienceNote.href}
+                  target={audienceNote.target}
+                  rel={audienceNote.rel}
+                  aria-label={audienceNote.ariaLabel}
+                >
+                  {audienceNote.label}
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  className="ui-hero__audience-note-link"
+                  onClick={audienceNote.onClick}
+                  aria-label={audienceNote.ariaLabel}
+                >
+                  {audienceNote.label}
+                </button>
+              )}
+            </p>
           ) : null}
 
           {stats.length ? (

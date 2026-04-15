@@ -65,6 +65,7 @@ const Header = memo(function Header({
             >
               <item.icon size={14} strokeWidth={2.1} aria-hidden="true" />
               <span>{item.label}</span>
+              {item.audienceBadge ? <span className="ui-nav__badge">{item.audienceBadge}</span> : null}
             </button>
           ))}
         </nav>
@@ -183,6 +184,7 @@ const Header = memo(function Header({
                   >
                     <item.icon size={18} strokeWidth={2.1} aria-hidden="true" />
                     <span>{item.label}</span>
+                    {item.audienceBadge ? <span className="ui-nav__badge">{item.audienceBadge}</span> : null}
                   </button>
                 ))}
               </nav>
