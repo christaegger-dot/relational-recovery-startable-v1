@@ -1079,3 +1079,159 @@ Vorschlag:
 ---
 
 **STOPP nach Phase 2B.** Warte auf Freigabe der Einzelentscheidungen, speziell zu `primaryAudience` (PA1 oder PA2) und Glossar-Verlinkung (Inclusion als Teil 1 oder Vertagung komplett).
+
+---
+
+## Phase 3 -- Umsetzung
+
+### Commit-Übersicht (kombiniert Audit 11 und Audit 12)
+
+| Nr. | Commit | Block |
+|---|---|---|
+| 1 | `audit(11): basis print-css mit notfall-footer` | Audit 11 P0+P1 |
+| 2 | `audit(11): vignetten print-hinweis` | Audit 11 P2 V1 |
+| 3 | `audit(12): jsdoc-typen fuer tab-items und routemeta` | W3a (inkl. W2/PA1) |
+| 4 | `audit(12): jsdoc-typ fuer sources` | W3a |
+| 5 | `audit(12): sources konsolidiert literatur` | W1a |
+| 6 | `audit(12): fachstellen zusammengefuehrt` | W1b |
+| 7 | `audit(12): glossar-link infrastruktur` | W3b Teil 1 |
+| 8 | `audit(12): base-url single source of truth via env` | W4 |
+| 9 | `audit(12): content-pflege docs` | W5-B |
+
+Tatsächliche Reihenfolge nah am Vorschlag; Audit-11-Commits zuerst, dann Audit 12. `W3a` wurde in zwei Commits gesplittet (TabItem/RouteMeta, dann Source), damit jeder Commit nur eine zusammenhängende Typ-Einführung trägt.
+
+### Abweichungen vom Phase-2B-Plan
+
+**Albermann-Dublette bereinigt** wie freigegeben: LITERATUR hatte beide Einträge („Albermann & Müller 2021" und „pädiatrie schweiz 2021") -- identische Paediatrica-Publikation, jetzt einmal unter `albermann-mueller-2021`.
+
+**Plass-&-Wiegand-Grefe: beide temporär erhalten** wie freigegeben (Option 3). Neuer Eintrag `plass-wiegandgrefe-2012-kohlhammer` in `SOURCES` mit `TODO`-Kommentar. Eintrag in `docs/content-pflege.md` unter „Offene redaktionelle Klärungen".
+
+**Eine Umbenennung beim Konsolidieren**: Der Netzwerk-Filter `143 – Die Dargebotene Hand` und der Evidenz-Eintrag `Elternnotruf` waren ursprünglich in meinem Phase-2B-Mapping als dieselbe Stelle vermutet -- tatsächlich sind es zwei verschiedene Stellen (143 für Erwachsene-Krisenhilfe, Elternnotruf für Eltern-in-Krisen-Beratung). Beide bleiben als separate Einträge in `FACHSTELLEN`.
+
+**Cross-Reference sauber**: 0 verwaiste `sourceIds`, 0 verwaiste `SUPPORT_OFFER_IDS`, 0 verwaiste Glossar-IDs (alle 21 unique).
+
+### Bewusst nicht umgesetzt (Follow-up-Tickets)
+
+- **W3b Teil 2**: Fliesstext-Einbettung der vier Audit-07-Verlinkungen (KESB, Parentifizierung, Trialog, Komorbidität). Verlangt entweder JSX-Fragmente in Content-Dateien oder einen Platzhalter-Parser. Sprengt Audit-12-Rahmen; Entscheidung liegt bei der Auftraggeberin.
+- **Glossar-Section-Deep-Links**: Direkter URL-Aufruf `eltern-a.netlify.app/#glossar-kesb` resolved aktuell auf `start`, weil das Tab-Alias-System in `appHelpers.js:TAB_ALIASES` und das Section-Deep-Link-System in `useNavigationFocus.js:SECTION_ALIAS_MAP` nur registrierte Aliases kennen. Der Klick auf `<GlossarLink>` funktioniert korrekt, weil er `navigate('glossar')` aktiv auslöst. Ein vollständiges Anker-System würde pro Glossar-Term einen Alias-Eintrag verlangen -- gehört ebenfalls zu W3b Teil 2.
+- **Plass-&-Wiegand-Grefe-Klärung**: Zwei temporäre Einträge bleiben stehen, Klärung erfolgt redaktionell.
+- **Vollständige JSDoc-Abdeckung aller Dateien**: Nur die 5 zentralen Schemas sind typisiert (TabItem/RouteMeta/Source/Fachstelle/GlossaryTerm + GlossaryGroup).
+
+---
+
+## Phase 4 -- Gemeinsame Verifikation
+
+### Automatisierte Prüfungen
+
+| Prüfung | Ergebnis |
+|---|---|
+| `npm run lint` | **sauber** |
+| `npm run build` | **sauber**, inkl. replace-env und Prerender |
+| `npm run test:e2e` | weiterhin durch hartkodierten `executablePath` in `playwright.config.js:27` blockiert (Audit-übergreifend, seit Audit 08) |
+
+Build-Kette: `vite build && node scripts/replace-env.mjs && node scripts/prerender.mjs`. Alle drei Schritte liefen im finalen Build erfolgreich, Prerender auf 30 993 Bytes, Replace-Env ersetzt `__VITE_BASE_URL__` in robots.txt und sitemap.xml.
+
+### Audit-11-Verifikation (Print)
+
+Manueller Print-Media-Test via Playwright mit `page.emulateMedia({ media: 'print' })`:
+
+| Route | Notfall-Footer sichtbar? | Besonderheit |
+|---|---|---|
+| `/#start` (HomeLanding) | **ja** | Hero-Bild ausgeblendet (CSS-Regel), Notfall-Footer unten |
+| `/#toolbox` | **ja** | Zusätzlich `.toolbox-print-view` als print-only sichtbar |
+| `/#glossar` | **ja** | Glossar druckt alphabetisch, lesbar |
+| `/#grundlagen` | **ja** | FAQ-Cluster drucken |
+| `/#netzwerk` | **ja** | Fachstellen-Karten drucken |
+| `/#vignetten` | **ja** | Zusätzlich `.vignetten-print-notice` („Diese Seite ist nicht zum Ausdrucken vorgesehen.") als einziger Inhalt |
+
+Footer-Text auf allen 6 Seiten identisch: `"Notfall: 144 Sanität · 147 Pro Juventute · AERZTEFON 0800 33 66 55"`.
+
+Vignetten-Notice-Inhalt geprüft: Der H1-Text „Diese Seite ist nicht zum Ausdrucken vorgesehen." erscheint wie definiert. Alle `no-print`-Sections sind unsichtbar.
+
+### Audit-12-Verifikation (Wartbarkeit)
+
+**Cross-Reference-Integrität** (Python-Scan, finale Build-Ausgabe):
+
+| Metrik | Wert |
+|---|---|
+| SOURCES-Einträge | 17 (+1 durch Kohlhammer-Band) |
+| sourceIds-Referenzen in evidenceContent | 8 |
+| LITERATUR_IDS-Einträge | 14 |
+| Verwaiste Referenzen | **0** |
+| FACHSTELLEN-Einträge | 19 |
+| SUPPORT_OFFER_IDS | 9 |
+| Verwaiste SUPPORT_OFFER_IDS | **0** |
+| Glossar-Term-IDs | 21 |
+| Unique Glossar-IDs | **21** (alle unique) |
+
+**Schema-Konsistenz**:
+- `Source`-Typ: alle 17 Einträge konform (alle 10 Felder vorhanden, null wo nötig).
+- `Fachstelle`-Typ: alle 19 Einträge konform (5 Pflichtfelder, optional audience/category/official/highlight).
+- `GlossaryTerm`-Typ: alle 21 Terme mit id, term, definition, practice.
+- `TabItem`-Typ: alle 8 Tabs mit id, label, icon, footerNote, priority, primaryAudience.
+- `RouteMeta`-Typ: alle 8 Routen mit den 4 Text-Feldern plus geerbte Defaults für ogImage/canonical.
+
+**JSDoc-Abdeckung**: 5 Schemas getippt (Ziel aus W3a erreicht), plus GlossaryGroup als zusätzlicher Typ.
+
+**BASE_URL-Herkunft**: 1 Quelle (`.env` → `VITE_BASE_URL`), 4 konsumierende Stellen (routeMeta.js via `import.meta.env`, index.html via Vite-`%VITE_BASE_URL%`, robots.txt + sitemap.xml via `scripts/replace-env.mjs`). Build-Verifikation: `[replace-env] robots.txt: Platzhalter ersetzt durch https://eltern-a.netlify.app` und analog für sitemap.xml.
+
+**Glossar-Verlinkung**:
+- `<GlossarLink>`-Komponente in `src/components/ui/GlossarLink.jsx` erstellt und lint-sauber.
+- Klick öffnet `navigate('glossar')` ✓.
+- Direkter URL-Aufruf `#glossar-kesb` → Fallback auf `start` (bekannter W3b-Teil-2-Gap, dokumentiert).
+
+**`docs/content-pflege.md`**: 149 Zeilen, deckt alle vier Gruppe-B-Fussangeln plus die Plass-&-Wiegand-Grefe-Klärung und eine Schema-Änderungs-Prozedur ab.
+
+### Notfall-Funktionalität: Regressions-Check
+
+- `/` Bildschirm: 3 `tel:`-Links erhalten (`tel:144`, `tel:+41800336655`, `tel:147`) ✓
+- Druck: Notfall-Footer mit den drei Nummern als Text auf allen 6 getesteten Seiten ✓
+- R31-Fix aus Audit 09 unverändert intakt.
+
+### Aggregierte Metriken vorher/nachher
+
+| Metrik | Vorher | Nachher | Delta |
+|---|---|---|---|
+| Dateien in `src/data/` | 9 | 10 (`fachstellenContent.js` neu) | +1 |
+| Zeilen in `src/data/` | 2 085 | 2 205 | +120 (JSDoc-Typen, Kommentare) |
+| Schema-Inkonsistenzen zw. harmonisierten Dateien | 3 | **0** | -3 |
+| Doppelpflege LITERATUR/SOURCES | ja (50 %) | **nein** | gelöst |
+| Doppelpflege RESOURCE_DATA/SUPPORT_OFFERS | ja (8 Einträge) | **nein** | gelöst |
+| Unique SOURCES | 16 | 17 (+Kohlhammer-Band) | +1 (mit Klärungs-TODO) |
+| Unique FACHSTELLEN | 25 (16+9, davon 8 Dubletten) | 19 | -6 durch Deduplizierung |
+| JSDoc-Abdeckung | 0 Schemas | **6 Typen** (TabItem, PrimaryAudience, TabId, RouteMeta, Source, SourceType, Fachstelle, GlossaryTerm, GlossaryGroup) | +6 |
+| BASE_URL-Orte | 4 hartkodiert | 1 Quelle + 4 via Build injiziert | gelöst |
+| `docs/`-Dateien | frontend-richtlinien + design-system | +`content-pflege.md` | +1 |
+| Print-CSS-Regeln | 4 | ~30 (thematisch gruppiert) | +26 |
+| Templates mit `printView` oder `print-only`-Notice | 1 (Toolbox) | 2 (+Vignetten-Notice) | +1 |
+| Notfall-Footer auf Druckseiten | nirgends | überall | R31-analog auf Papier |
+
+### Bundle-Grösse
+
+- Vorher (Ende Audit 10): 285,88 kB main (gzip 91,51 kB)
+- Nachher (Ende Audit 12): 286,78 kB main (gzip 91,52 kB)
+- Delta: +0,9 kB (gzip +0,01 kB) durch neue FACHSTELLEN-Datei und GlossarLink-Komponente
+
+### Beobachtung zur Build-Script-Lösung
+
+Die `.env` + `scripts/replace-env.mjs`-Kombination lief beim ersten Versuch sauber. Eine kleine Stolperstelle: Vite lädt `.env`-Dateien nicht automatisch in Node-Scripts (nur für den Client-Build via `import.meta.env`). Das Script liest die `.env`-Datei deshalb selbst ein, mit einem einfachen Regex-Parser (~15 Zeilen). Keine zusätzliche Dependency. Für Staging-Deploys genügt Überschreiben der `VITE_BASE_URL` in der Deploy-Umgebung.
+
+### Plass-&-Wiegand-Grefe-Klärungs-Markierung
+
+Die Markierung findet in sechs Monaten auf zwei Pfaden zurück zur Auftraggeberin:
+
+1. **Code**: `TODO`-Kommentar direkt über dem neuen `plass-wiegandgrefe-2012-kohlhammer`-Eintrag in `sourcesContent.js`. Wer an Sources editiert, stolpert garantiert darüber.
+2. **Doku**: Eigener Abschnitt „Offene redaktionelle Klärungen" in `docs/content-pflege.md` mit konkreter Handlungsanweisung (Variante 1: zwei verschiedene Werke → beide behalten; Variante 2: Zitationsfehler → Kohlhammer-Eintrag entfernen + `LITERATUR_IDS` anpassen).
+
+Beide Pfade verweisen aufeinander. Der Doku-Pfad ist der robustere, weil er beim Gesamt-Content-Review sichtbar wird; der Code-Pfad ist der unmittelbare, weil er beim Sources-Edit sofort auffällt.
+
+### Fazit
+
+Audit 11 und Audit 12 haben die Seite wartbarkeits- und print-fest gemacht. Die beiden Audits sind strukturell unabhängig, aber ihre Effekte greifen ineinander:
+
+- **Audit 11** stellt sicher, dass die Seite auf Papier tatsächlich funktioniert -- inklusive des R31-Pendants (Notfall-Footer) und einer ehrlichen Vignetten-Behandlung.
+- **Audit 12** stellt sicher, dass die Content-Pflege langfristig ohne Doppelpflege, mit Typisierung und mit einem Leitfaden läuft.
+
+Nach Audit 12 bleibt **eine einzige offene redaktionelle Frage** (Plass-&-Wiegand-Grefe-Doppelbeleg) und **ein Follow-up-Ticket** (W3b Teil 2: Glossar-Verlinkung in Fliesstexten). Beide sind keine Release-Blocker.
+
+Nur Audit 13 (Wave-3-Verifikation) steht noch aus -- das ist Abschluss-Arbeit, kein neuer Sprint.
