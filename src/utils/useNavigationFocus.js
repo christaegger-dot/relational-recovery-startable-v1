@@ -47,11 +47,19 @@ export default function useNavigationFocus({
 
   useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
-      const explicitTabHash = getExplicitTabHash();
-      if (explicitTabHash && explicitTabHash !== activeTab) {
-        navigationFocusTargetRef.current = explicitTabHash === 'start' ? 'none' : 'heading';
-        setActiveTab(explicitTabHash);
-        return undefined;
+      // Hash -> activeTab Synchronisation darf NUR beim initial mount
+      // passieren. Bei nachfolgenden Renders (z. B. nach einem Nav-Button-
+      // Klick, der setActiveTab aufruft) wuerde diese Logik den frischen
+      // State faelschlich auf den alten URL-Hash zuruecksetzen, weil
+      // window.location.hash zu diesem Zeitpunkt noch nicht aktualisiert
+      // ist (der Hash-Sync geschieht erst weiter unten in diesem Effect).
+      if (!hasProcessedInitialFocusRef.current) {
+        const explicitTabHash = getExplicitTabHash();
+        if (explicitTabHash && explicitTabHash !== activeTab) {
+          navigationFocusTargetRef.current = explicitTabHash === 'start' ? 'none' : 'heading';
+          setActiveTab(explicitTabHash);
+          return undefined;
+        }
       }
 
       const rawHash = String(window.location.hash || '')
