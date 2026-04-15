@@ -21,34 +21,73 @@ const distDir = path.join(projectRoot, 'dist');
 const indexPath = path.join(distDir, 'index.html');
 const previewPort = 4173;
 const previewUrl = `http://127.0.0.1:${previewPort}/`;
-const readyTimeoutMs = 30000;
+// Audit-13-Follow-up (Netlify-Build-Fix): Timeout von 30s auf 90s erhoeht,
+// plus aktiver HTTP-Health-Check statt blosser stdout-Beobachtung. CI-
+// Umgebungen wie Netlify starten Vite-Preview teils deutlich langsamer
+// als lokale Entwickler-Maschinen.
+const readyTimeoutMs = 90_000;
+const healthCheckIntervalMs = 500;
 const renderWaitMs = 800;
 
-function startPreview() {
-  return new Promise((resolve, reject) => {
-    const child = spawn('npx', ['vite', 'preview', '--port', String(previewPort), '--strictPort'], {
-      cwd: projectRoot,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    const timer = setTimeout(() => {
-      child.kill();
-      reject(new Error(`Vite-Preview-Server ist nach ${readyTimeoutMs} ms nicht bereit geworden.`));
-    }, readyTimeoutMs);
-    child.stdout.on('data', (chunk) => {
-      const text = chunk.toString();
-      if (text.includes(`localhost:${previewPort}`) || text.includes(`${previewPort}/`)) {
-        clearTimeout(timer);
-        resolve(child);
-      }
-    });
-    child.stderr.on('data', (chunk) => {
-      process.stderr.write(`[preview] ${chunk}`);
-    });
-    child.on('error', (err) => {
-      clearTimeout(timer);
-      reject(err);
-    });
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function isPreviewReady() {
+  try {
+    const res = await fetch(previewUrl, { method: 'HEAD' });
+    return res.ok || (res.status >= 200 && res.status < 500);
+  } catch {
+    return false;
+  }
+}
+
+function spawnPreview() {
+  const child = spawn('npx', ['vite', 'preview', '--port', String(previewPort), '--strictPort'], {
+    cwd: projectRoot,
+    stdio: ['ignore', 'pipe', 'pipe'],
   });
+  // Vite-Preview-Output durchreichen, damit der Netlify-Build-Log
+  // sichtbar zeigt, was los ist, falls der Start scheitert.
+  child.stdout.on('data', (chunk) => {
+    process.stdout.write(`[preview] ${chunk}`);
+  });
+  child.stderr.on('data', (chunk) => {
+    process.stderr.write(`[preview] ${chunk}`);
+  });
+  return child;
+}
+
+async function startPreview() {
+  const child = spawnPreview();
+
+  // Aktives Polling des HTTP-Endpoints. So erkennen wir genau dann,
+  // wenn der Server tatsaechlich antwortet -- nicht nur wenn er etwas
+  // ins stdout schreibt.
+  const deadline = Date.now() + readyTimeoutMs;
+  let exited = false;
+  // Flag, das main() setzt, wenn wir den Prozess selbst beenden wollen
+  // -- dann ist ein anschliessender exit kein Fehler, sondern erwartet.
+  child.__intentionalShutdown = false;
+  child.on('exit', (code, signal) => {
+    exited = true;
+    if (!child.__intentionalShutdown) {
+      console.error(`[prerender] Vite-Preview-Prozess ist frueh beendet (code=${code}, signal=${signal}).`);
+    }
+  });
+
+  while (Date.now() < deadline) {
+    if (exited) {
+      throw new Error('Vite-Preview-Prozess ist vor Bereitschaft beendet worden.');
+    }
+    if (await isPreviewReady()) {
+      return child;
+    }
+    await wait(healthCheckIntervalMs);
+  }
+
+  child.kill();
+  throw new Error(`Vite-Preview-Server ist nach ${readyTimeoutMs} ms nicht bereit geworden (Health-Check auf ${previewUrl} schlug fehl).`);
 }
 
 async function prerenderStartRoute() {
@@ -98,6 +137,7 @@ async function main() {
     htmlSize = await injectPrerenderedHtml(rootInnerHTML);
     console.log(`[prerender] dist/index.html aktualisiert, neue Groesse: ${htmlSize} Bytes.`);
   } finally {
+    previewProcess.__intentionalShutdown = true;
     previewProcess.kill();
   }
 }
