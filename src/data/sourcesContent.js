@@ -2,6 +2,32 @@
 // Jeder Eintrag wird über seine ID von Claims in evidenceContent.js (und anderen Dateien)
 // via sourceIds[] referenziert. Quelle: Audit 04 Recherche-Ergebnisse.
 
+/**
+ * @typedef {('journal-article'|'book'|'report'|'weblink'|'editorial')} SourceType
+ */
+
+/**
+ * @typedef {Object} Source
+ * @property {string} id - Stabile ID, kebab-case. Konvention: nachname-jahr
+ *   oder leadwort-jahr. Wird aus evidenceContent.js via sourceIds[] referenziert.
+ * @property {string} author - Vollstaendige Autor:innen-Liste in Zitationsform.
+ * @property {number|null} year - Erscheinungsjahr; null wenn unbekannt (z.B.
+ *   bei fortlaufend aktualisierten Weblinks).
+ * @property {string} title - Titel der Arbeit.
+ * @property {string|null} journal - Zeitschriften-Angabe inkl. Jahrgang/Heft/
+ *   Seitenzahlen; null bei Buechern, Berichten, Weblinks.
+ * @property {string|null} publisher - Verlag oder herausgebende Institution;
+ *   null wenn durch journal/DOI ausreichend verankert.
+ * @property {SourceType} type - Publikationstyp.
+ * @property {string|null} doi - DOI ohne URL-Praefix (z.B. '10.1111/inm.12820');
+ *   null wenn keine DOI vergeben.
+ * @property {string|null} link - URL zur Quelle; null wenn nicht verfuegbar.
+ * @property {boolean} chFocus - true, wenn es sich um eine Schweizer
+ *   Primaer- oder Hauptquelle handelt (Audit-04-Pattern). Wichtig fuer die
+ *   Sortierung und Hervorhebung in der Evidenz-Ansicht.
+ */
+
+/** @type {Record<string, Source>} */
 export const SOURCES = {
   // === Schweizer Primärquellen ===
 
@@ -95,6 +121,25 @@ export const SOURCES = {
     type: 'book',
     doi: null,
     link: 'https://www.beltz.de/fileadmin/beltz/leseproben/978-3-621-27914-7.pdf',
+    chFocus: false,
+  },
+  // TODO (Audit 12, redaktionelle Klaerung): Die LITERATUR-Liste zitierte unter
+  // demselben Autor:innen-Paar einen Stuttgart/Kohlhammer-Band mit abweichendem
+  // Titel ('Ursachen, Folgen und Hilfen fuer Kinder psychisch Kranker'). Bis
+  // zur Klaerung durch die Auftraggeberin wird dieser Band als separater
+  // Eintrag gefuehrt, damit keine Quelle vorschnell verloren geht. Vermutlich
+  // zwei verschiedene Werke. Siehe docs/content-pflege.md -> 'Offene
+  // redaktionelle Klaerungen'.
+  'plass-wiegandgrefe-2012-kohlhammer': {
+    id: 'plass-wiegandgrefe-2012-kohlhammer',
+    author: 'Plass, A. & Wiegand-Grefe, S.',
+    year: 2012,
+    title: 'Ursachen, Folgen und Hilfen für Kinder psychisch Kranker',
+    journal: null,
+    publisher: 'Stuttgart: Kohlhammer',
+    type: 'book',
+    doi: null,
+    link: null,
     chFocus: false,
   },
 

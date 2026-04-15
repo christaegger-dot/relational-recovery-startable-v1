@@ -147,7 +147,7 @@ function ResourceDirectorySection({ directory }) {
                   </div>
                 ) : null}
                 <h3 className="ui-card__title">{resource.name}</h3>
-                <p className="ui-card__copy">{resource.info}</p>
+                <p className="ui-card__copy">{resource.description}</p>
                 <div className="ui-editorial-card__action">
                   <Button href={resource.link} target="_blank" rel="noopener noreferrer" variant="subtle" aria-label={`${resource.name} – Webseite öffnen (neues Fenster)`}>
                     Webseite öffnen <ExternalLink size={16} />

@@ -6,13 +6,28 @@
 // und bleibt bei hash-basiertem Routing bewusst identisch fuer alle Routen, weil
 // Fragment-URLs von Crawlern nicht als separate Ressourcen behandelt werden.
 
-export const BASE_URL = 'https://eltern-a.netlify.app';
+/**
+ * @typedef {Object} RouteMeta
+ * @property {string} title - document.title pro Route.
+ * @property {string} description - meta[name=description].
+ * @property {string} ogTitle - og:title und twitter:title.
+ * @property {string} ogDescription - og:description und twitter:description.
+ * @property {string} ogImage - Absolute URL auf Bild fuer OG/Twitter-Card.
+ * @property {string} canonical - Absolute URL fuer <link rel='canonical'>.
+ *   Bleibt bei hash-basiertem Routing bewusst fuer alle Routen identisch auf
+ *   der Root-URL, weil Fragment-URLs kein separater Crawler-Endpunkt sind.
+ */
+
+// Audit 12 / W4: Base-URL kommt ueber eine Vite-Environment-Variable. Der
+// Fallback sichert Dev- und Preview-Szenarien, in denen keine .env existiert.
+export const BASE_URL = import.meta.env.VITE_BASE_URL || 'https://eltern-a.netlify.app';
 
 const DEFAULT_TITLE = 'Relational Recovery – Schweizer Fachportal';
 const DEFAULT_DESCRIPTION =
   'Psychoedukative Web-App für Angehörige und Fachpersonen mit Fokus auf Elternschaft, psychische Krise, Kindesschutz und regionale Unterstützung in Zürich und der Schweiz.';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.webp`;
 
+/** @type {RouteMeta} */
 export const DEFAULT_META = {
   title: DEFAULT_TITLE,
   description: DEFAULT_DESCRIPTION,
@@ -89,6 +104,12 @@ export const ROUTE_META = {
   },
 };
 
+/**
+ * Liefert das Meta-Objekt fuer eine Route. Unbekannte tabId faellt auf
+ * DEFAULT_META zurueck.
+ * @param {string} tabId
+ * @returns {RouteMeta}
+ */
 export const getRouteMeta = (tabId) => {
   const routeEntry = ROUTE_META[tabId];
   if (!routeEntry) return { ...DEFAULT_META };

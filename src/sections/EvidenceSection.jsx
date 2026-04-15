@@ -16,7 +16,7 @@ import {
   HELP_BARRIER_POINTS,
   HELP_BARRIER_PRACTICE_POINTS,
   INTERVENTION_PROGRAM_POINTS,
-  LITERATUR,
+  LITERATUR_IDS,
   MEDIA_BOOKS,
   MEDIA_DIGITAL,
   MEDIA_NOTES,
@@ -35,8 +35,12 @@ import {
   PSYCHOEDUCATION_SETTINGS,
   RELEVANCE_POINTS,
   RELEVANCE_STATS,
-  SUPPORT_OFFERS,
 } from '../data/evidenceContent';
+import { FACHSTELLEN, SUPPORT_OFFER_IDS } from '../data/fachstellenContent';
+import { SOURCES } from '../data/sourcesContent';
+
+const FACHSTELLEN_BY_ID = Object.fromEntries(FACHSTELLEN.map((f) => [f.id, f]));
+const SUPPORT_OFFERS = SUPPORT_OFFER_IDS.map((id) => FACHSTELLEN_BY_ID[id]).filter(Boolean);
 import { createClosingSectionModel } from '../utils/closingModel';
 import { getPageHeadingId } from '../utils/appHelpers';
 
@@ -59,12 +63,26 @@ function supportOfferCards(items = []) {
   }));
 }
 
-function literatureItems(items = []) {
-  return items.map((item) => ({
-    title: item.title,
-    description: `${item.author} — ${item.publisher}`,
+function formatSourceAsLiteratur(source) {
+  // Baut den Anzeige-Satz aus Source-Feldern: Autor:in (Jahr) - Titel - Publisher
+  // mit DOI-Suffix, falls vorhanden.
+  const yearPart = source.year ? ` (${source.year})` : '';
+  const header = `${source.author}${yearPart}`;
+  const journalOrPublisher = source.journal || source.publisher || '';
+  const doiSuffix = source.doi ? `. DOI: ${source.doi}` : '';
+  return {
+    title: source.title,
+    description: `${header} — ${journalOrPublisher}${doiSuffix}`,
     meta: ['Literaturhinweis'],
-  }));
+    href: source.link || null,
+  };
+}
+
+function literatureItemsFromIds(ids = []) {
+  return ids
+    .map((id) => SOURCES[id])
+    .filter(Boolean)
+    .map(formatSourceAsLiteratur);
 }
 
 function mediaBookItems(items = []) {
@@ -363,7 +381,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
         title: 'Quellen für Vertiefung',
         description: 'Kompakte Fachliteratur zur weiteren Einordnung.',
         collectionKind: 'custom',
-        items: literatureItems(LITERATUR),
+        items: literatureItemsFromIds(LITERATUR_IDS),
       },
     ],
     notes: MEDIA_NOTES,

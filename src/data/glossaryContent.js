@@ -1,3 +1,24 @@
+/**
+ * @typedef {Object} GlossaryTerm
+ * @property {string} id - Stabile kebab-case ID, swiss-german-tauglich
+ *   (kein ß). Wird von <GlossarLink term='id'> referenziert.
+ * @property {string} term - Anzeigeform des Begriffs, inklusive optionaler
+ *   Klammer-Ergaenzung fuer Abkuerzungen (z.B. 'KESB (Kindes- und
+ *   Erwachsenenschutzbehoerde)').
+ * @property {string} definition - Knappe Arbeitsdefinition (1-3 Saetze).
+ * @property {string} practice - Praxisnahe Einordnung oder Anwendung.
+ */
+
+/**
+ * @typedef {Object} GlossaryGroup
+ * @property {string} id - Cluster-ID fuer Sprung-Links und Aria-Labels.
+ * @property {string} eyebrow - Kicker-Text vor dem Titel.
+ * @property {string} title
+ * @property {string} description
+ * @property {GlossaryTerm[]} terms
+ */
+
+/** @type {GlossaryGroup[]} */
 export const GLOSSARY_GROUPS = [
   {
     id: 'glossar-sprache',
@@ -7,6 +28,7 @@ export const GLOSSARY_GROUPS = [
       'Diese Begriffe helfen, Belastung nicht nur zu benennen, sondern in eine ruhige, arbeitsfähige Sprache zu übersetzen. Sie sind für Gespräche besonders wichtig, in denen Scham, Ambivalenz oder Unsicherheit die Zusammenarbeit erschweren.',
     terms: [
       {
+        id: 'belastete-elternschaft',
         term: 'Psychisch belastete Elternschaft',
         definition:
           'Wenn psychische Symptome, Krisen oder anhaltende Instabilität beeinflussen, wie verfügbar Eltern sind, wie der Alltag funktioniert oder wie gut sie auf ihr Kind eingehen können.',
@@ -14,6 +36,7 @@ export const GLOSSARY_GROUPS = [
           'Der Begriff vermeidet schnelle Schuldzuschreibungen und öffnet den Blick auf Belastung, Ressourcen und Unterstützungsbedarf zugleich.',
       },
       {
+        id: 'psychoedukation',
         term: 'Psychoedukation',
         definition:
           'Wissen über Symptome, Belastungen, Schutzfaktoren und Hilfemöglichkeiten verständlich und strukturiert vermitteln -- für Betroffene, Angehörige oder Fachpersonen.',
@@ -21,6 +44,7 @@ export const GLOSSARY_GROUPS = [
           'Besonders hilfreich, wenn Unsicherheit reduziert und ein gemeinsamer Begriffsrahmen für weitere Schritte aufgebaut werden soll.',
       },
       {
+        id: 'parentifizierung',
         term: 'Parentifizierung',
         definition:
           'Wenn Kinder Aufgaben übernehmen, die eigentlich Erwachsene tragen sollten: den Elternteil trösten, auf Stimmungsschwankungen achten, sich um Geschwister kümmern oder den Haushalt organisieren. Das kann nach aussen kompetent wirken, ist innerlich aber oft überfordernd.',
@@ -28,6 +52,7 @@ export const GLOSSARY_GROUPS = [
           'Im Gespräch aktiv nach stillem Mittragen, Sorgeverhalten und Verantwortungsübernahme von Kindern fragen. Zwischen altersangemessener Mithilfe und überfordernder Rollenumkehr unterscheiden.',
       },
       {
+        id: 'loyalitaetskonflikt',
         term: 'Loyalitätskonflikt',
         definition:
           'Wenn Kinder den erkrankten Elternteil schützen wollen und gleichzeitig ihre eigene Not ausdrücken möchten. Hilfe zu suchen kann sich dann wie Verrat anfühlen.',
@@ -35,6 +60,7 @@ export const GLOSSARY_GROUPS = [
           'Diese innere Zerrissenheit bindet viel Energie und macht offene Gespräche schwer. Im Kontakt mit Kindern aktiv ansprechbar machen, ohne Druck zu erzeugen.',
       },
       {
+        id: 'rollenumkehr',
         term: 'Rollenumkehr',
         definition:
           'Wenn Kinder Aufgaben und Verantwortung übernehmen, die eigentlich Erwachsene tragen sollten. Eng verwandt mit Parentifizierung, aber stärker auf die konkrete Verschiebung von Zuständigkeiten im Alltag bezogen.',
@@ -42,6 +68,7 @@ export const GLOSSARY_GROUPS = [
           'Zwischen altersangemessener Mithilfe und überfordernder Rollenumkehr zu unterscheiden, ist eine der zentralen Fragen in der Arbeit mit belasteten Familien.',
       },
       {
+        id: 'mentalisieren',
         term: 'Mentalisieren',
         definition:
           'Die Fähigkeit, eigenes und fremdes Verhalten als Ausdruck innerer Zustände wie Gefühle, Absichten, Stress oder Missverstehen zu begreifen.',
@@ -58,6 +85,7 @@ export const GLOSSARY_GROUPS = [
       'Diese Begriffe helfen Fachpersonen, zwischen Beobachten, Unterstützen und formeller Schutzabklärung zu unterscheiden. Sie schaffen eine gemeinsame Sprache für begründete Entscheidungen.',
     terms: [
       {
+        id: 'kesb',
         term: 'KESB (Kindes- und Erwachsenenschutzbehörde)',
         definition:
           'Die KESB ist die behördliche Stelle, die in der Schweiz für den Schutz von Kindern und schutzbedürftigen Erwachsenen zuständig ist. Sie wird tätig, wenn das Wohl eines Kindes gefährdet erscheint und die Eltern nicht selbst für Abhilfe sorgen können (Art. 307 ZGB). Im Kanton Zürich gibt es 13 KESB.',
@@ -65,6 +93,7 @@ export const GLOSSARY_GROUPS = [
           'Nicht jede Meldung an die KESB führt zu einer Massnahme -- im Kanton Zürich enden rund zwei Drittel der Meldungen mit einer Abklärung, Beratung oder ohne behördliche Anordnung. Wenn die KESB tätig wird, ist die häufigste Massnahme die Beistandschaft (Art. 308 ZGB): eine Fachperson unterstützt die Familie, das Sorgerecht bleibt bei den Eltern. Eine Fremdplatzierung (Art. 310 ZGB) ist die Ausnahme, nicht die Regel.',
       },
       {
+        id: 'kindeswohl',
         term: 'Kindeswohl',
         definition:
           'Die Bedingungen, unter denen ein Kind sicher aufwachsen, sich entwickeln und emotional getragen fühlen kann.',
@@ -72,6 +101,7 @@ export const GLOSSARY_GROUPS = [
           'Nicht als abstrakter Endzustand denken, sondern als fortlaufende Frage nach Schutz, Bindung, Versorgung und Entwicklungsraum.',
       },
       {
+        id: 'kindeswohlgefaehrdung',
         term: 'Kindeswohlgefährdung',
         definition:
           'Eine Situation, in der ernsthafte Hinweise bestehen, dass Schutz, Versorgung oder Entwicklung eines Kindes aktuell oder absehbar erheblich beeinträchtigt sind.',
@@ -79,6 +109,7 @@ export const GLOSSARY_GROUPS = [
           'Hilft bei der Frage: Reicht aufmerksame Beobachtung, braucht es eine vertiefte Klärung, oder muss eine Schutzstelle einbezogen werden?',
       },
       {
+        id: 'schutzfaktor',
         term: 'Schutzfaktor',
         definition:
           'Ein stabilisierendes Element, das Belastung abfedern oder Risiken begrenzen kann, zum Beispiel eine verlässliche Bezugsperson, Tagesstruktur oder erreichbare Hilfe.',
@@ -86,6 +117,7 @@ export const GLOSSARY_GROUPS = [
           'Schutzfaktoren machen Risiken nicht ungeschehen, helfen aber einzuschätzen, welche Hilfe wirklich nötig ist.',
       },
       {
+        id: 'triage',
         term: 'Triage',
         definition:
           'Fachlich begründet entscheiden, welche Hilfe, Abklärung oder Weitervermittlung in einer Situation zuerst nötig ist.',
@@ -93,6 +125,7 @@ export const GLOSSARY_GROUPS = [
           'Im Portal meint Triage nicht nur Dringlichkeit, sondern auch Passung zwischen Bedarf, Sicherheitslage und regionalen Hilfen.',
       },
       {
+        id: 'gefaehrdungsmeldung',
         term: 'Gefährdungsmeldung',
         definition:
           'Eine Mitteilung an die KESB, dass ein Kind möglicherweise gefährdet ist. Die meldende Person muss die Gefährdung nicht beweisen -- die Prüfung und Abklärung ist Aufgabe der KESB oder der beauftragten Fachstellen.',
@@ -100,6 +133,7 @@ export const GLOSSARY_GROUPS = [
           'Eine Gefährdungsmeldung ist kein Urteil und nicht dasselbe wie eine Massnahme. Vor einer formellen Meldung kann man sich anonym beraten lassen, zum Beispiel beim kjz oder bei Pro Mente Sana.',
       },
       {
+        id: 'spf',
         term: 'SPF (Sozialpädagogische Familienbegleitung)',
         definition:
           'Eine ambulante Hilfe für Familien, bei der eine Fachperson die Familie im Alltag begleitet und unterstützt. SPF ist kein eigener Massnahmetyp im Gesetz, sondern wird freiwillig oder über Art. 307/308 ZGB begleitet.',
@@ -107,6 +141,7 @@ export const GLOSSARY_GROUPS = [
           'Im Kanton Zürich ist SPF für Eltern grundsätzlich kostenlos. SPF kann sowohl freiwillig als auch behördlich angeordnet eingesetzt werden und setzt minimale Kooperationsbereitschaft voraus.',
       },
       {
+        id: 'komorbiditaet',
         term: 'Komorbidität',
         definition:
           'Wenn bei einer Person zwei oder mehr Erkrankungen gleichzeitig bestehen. Der Begriff beschreibt nur das gleichzeitige Auftreten und sagt nichts darüber aus, ob eine Erkrankung die andere ausgelöst hat.',
@@ -115,6 +150,7 @@ export const GLOSSARY_GROUPS = [
       },
       // L2: Beistandschaft (Art. 308 ZGB) – Quelle: Faktenbasis Abschnitt 2
       {
+        id: 'beistandschaft',
         term: 'Beistandschaft (Art. 308 ZGB)',
         definition:
           'Die häufigste Kindesschutzmassnahme. Die KESB ernennt eine Fachperson, die die Familie in bestimmten Bereichen unterstützt -- etwa bei Schule, Gesundheit, Alltagsorganisation oder der Koordination von Hilfen. Das Sorgerecht bleibt bei den Eltern. Im Kanton Zürich wird die Beistandschaft in der Regel durch spezialisierte Fachpersonen der kjz (Kinder- und Jugendhilfezentren) geführt.',
@@ -123,6 +159,7 @@ export const GLOSSARY_GROUPS = [
       },
       // L4: Melderecht vs. Meldepflicht – Quelle: Faktenbasis Abschnitt 4
       {
+        id: 'melderecht-meldepflicht',
         term: 'Melderecht und Meldepflicht (Art. 314c / 314d ZGB)',
         definition:
           'Das Melderecht (Art. 314c ZGB) erlaubt jeder Person, der KESB eine Gefährdung eines Kindes zu melden. Berufsgeheimnisträgerinnen und -träger (z.B. Ärztinnen, Psychologen) sind meldeberechtigt, wenn die Meldung im Interesse des Kindes liegt -- sie müssen eine Interessenabwägung vornehmen. Die Meldepflicht (Art. 314d ZGB) betrifft bestimmte Fachpersonen, die nicht dem Berufsgeheimnis unterstehen und regelmässig mit Kindern arbeiten.',
@@ -139,6 +176,7 @@ export const GLOSSARY_GROUPS = [
       'Diese Begriffe betreffen die Zusammenarbeit über Institutionsgrenzen hinweg. Sie helfen, Verantwortung, Übergaben und regionale Anschlussfähigkeit klarer zu beschreiben.',
     terms: [
       {
+        id: 'angehoerigenarbeit',
         term: 'Angehörigenarbeit',
         definition:
           'Nahe Bezugspersonen gezielt einbeziehen: informieren, entlasten, orientieren und die Behandlung gemeinsam gestalten.',
@@ -146,6 +184,7 @@ export const GLOSSARY_GROUPS = [
           'Nicht nur als Zusatz verstehen, sondern als wichtigen Teil davon, Stabilität zu stärken, Gelerntes in den Alltag zu bringen und Warnsignale früh zu erkennen. Angehörigenarbeit ist das Fachkonzept; Angehörigenberatung (z.B. bei der PUK Zürich) ist ein konkretes Angebot.',
       },
       {
+        id: 'weitervermittlung',
         term: 'Weitervermittlung',
         definition:
           'Wenn nach einer ersten Klärung oder Behandlung die passende weiterführende Stelle gefunden und der Übergang organisiert wird.',
@@ -153,6 +192,7 @@ export const GLOSSARY_GROUPS = [
           'Tragfaehig wird Weitervermittlung erst, wenn Ansprechpartner, Schwelle, Erreichbarkeit und nächster Schritt konkret benannt sind.',
       },
       {
+        id: 'netzwerkkarte',
         term: 'Netzwerkkarte',
         definition:
           'Eine Übersicht, die zeigt, welche Fachstellen es gibt, wer wofür zuständig ist und wie Hilfewege in der Region zusammenhängen.',
@@ -160,6 +200,7 @@ export const GLOSSARY_GROUPS = [
           'Hilft zu klären, wer informieren, abklären, entlasten oder in einer Krise eingreifen kann.',
       },
       {
+        id: 'trialog',
         term: 'Trialog',
         definition:
           'Ein gleichberechtigtes Gespräch zwischen drei Gruppen: Menschen mit psychiatrischer Erfahrung, Angehörigen und Fachpersonen. Die Idee entstand in den 1980er-Jahren aus der Psychiatrie-Erfahrenen-Bewegung und steht dafür, dass keine Perspektive wichtiger ist als die anderen.',
@@ -167,6 +208,7 @@ export const GLOSSARY_GROUPS = [
           'In der Praxis finden Trialog-Gespräche in Seminaren, offenen Runden und Fachtagungen statt. Jede Gruppe bringt Wissen und Erfahrung ein, die die anderen nicht haben.',
       },
       {
+        id: 'kooperationsfenster',
         term: 'Kooperationsfenster',
         definition:
           'Praktischer Begriff für den Moment, in dem Familien, Fachpersonen und Hilfesystem gleichzeitig erreichbar genug sind, um einen nächsten Schritt verbindlich zu vereinbaren.',

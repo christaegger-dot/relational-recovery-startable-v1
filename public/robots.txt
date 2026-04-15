@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://eltern-a.netlify.app/sitemap.xml
+Sitemap: __VITE_BASE_URL__/sitemap.xml
