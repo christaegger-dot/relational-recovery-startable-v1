@@ -163,7 +163,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => setShowSafeNote(false)}
-              className="haptic-btn rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--icon-warning-inverse)] transition-colors hover:bg-white/10 hover:text-white"
+              className="haptic-btn inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--icon-warning-inverse)] transition-colors hover:bg-white/10 hover:text-white"
               aria-label="Datenschutzhinweis schliessen"
             >
               Schliessen
