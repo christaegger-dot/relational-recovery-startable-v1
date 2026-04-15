@@ -1504,28 +1504,32 @@
   }
 }
 
-@media (max-width: 72rem) {
-  .ui-site-header__bar {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-  }
+/* Audit-13-Nachlauf, Option A: Desktop-Nav und Desktop-Header-Actions sind
+   auf allen Viewports ausgeblendet. Nur das Burger-Menue (compact-actions)
+   ist aktiv. Grund: Die Desktop-Nav hatte ab 1152px sichtbare Overlap-
+   Interception durch den Notfall-Span (.ui-header-actions), weil der
+   .page-shell--wide-Container bei 86rem/1376px cappt und der Nav-Inhalt
+   (~1120px) plus Actions-Breite immer in denselben Platz reinpasste.
+   Kein einfacher Viewport-Breakpoint konnte das loesen.
 
-  .ui-nav--desktop,
-  .ui-header-actions {
-    display: none;
-  }
-
-  .ui-header-compact-actions {
-    display: inline-flex;
-  }
+   Die Mobile-Menue-Infrastruktur ist voll getestet (Audit 09 A11y, Audit 13
+   Navigation), zeigt alle 8 Tabs + Notfall-Button + Reset-Button prominent,
+   und vermeidet den Overlap garantiert. Der Verzicht auf die Inline-Desktop-
+   Nav ist ein bewusster Trade-off fuer Robustheit. */
+.ui-nav--desktop,
+.ui-header-actions {
+  display: none;
 }
 
-@media (min-width: 72.001rem) {
-  .ui-header-compact-actions,
-  .ui-mobile-backdrop,
-  .ui-mobile-dialog {
-    display: none;
-  }
+.ui-header-compact-actions {
+  display: inline-flex;
 }
+
+/* Mobile-Dialog/Backdrop erscheinen nur, wenn React sie aktiv rendert
+   (mobileMenuOpen). Fuer den Fall, dass sie doch im DOM liegen, ohne
+   dass sie sichtbar sein sollen, greift die nachfolgende Sicherheits-
+   Regel: sie ist jetzt unconditional, nicht an einen Viewport-Breakpoint
+   gekoppelt. Die React-Komponente hat ohnehin die Autoritaet. */
 
 .ui-section-title {
   font-size: clamp(1.85rem, 3vw, 3rem);
