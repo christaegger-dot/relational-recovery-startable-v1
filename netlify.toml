@@ -2,6 +2,21 @@
   command = "npm run build"
   publish = "dist"
 
+# Chromium-Cache fuer den Prerender-Step (Audit 10 / Deploy-Fix).
+# Der Prerender-Step nutzt Playwright-Core plus ein separat via
+# 'npx playwright install chromium' nachgeladenes Browser-Binary
+# (~285 MB: Chrome + FFmpeg + Chrome-Headless-Shell). Ohne Cache
+# faellt der Download bei jedem Build an (~7-8 s).
+#
+# Der netlify-plugin-cache cached beliebige Pfade zwischen Builds.
+# Fuer diesen Pfad wird der Browser-Cache zwischen Builds erhalten;
+# der 'playwright install'-Aufruf erkennt die vorhandenen Binaries
+# und skipt den Download.
+[[plugins]]
+  package = "netlify-plugin-cache"
+  [plugins.inputs]
+    paths = ["/opt/buildhome/.cache/ms-playwright"]
+
 [[headers]]
   for = "/"
   [headers.values]
