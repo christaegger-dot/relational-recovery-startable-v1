@@ -309,3 +309,137 @@ Die 13 Follow-up-Tickets aus Säule F plus den Audit-13-Ergänzungen sind **nich
 ---
 
 **STOPP nach Phase 2.** Warte auf Freigabe der Sofort-Fix-Liste F1-F6 und der Stufe-B-Release-Readiness-Aussage.
+
+---
+
+## Phase 3 -- Umsetzung der Sofort-Fixes
+
+### Commit-Übersicht
+
+| # | Commit | Dateien |
+|---|---|---|
+| F1 | `audit(13): fix toolbox-badge contrast` | `src/utils/appHelpers.js` |
+| F2 | `audit(13): fix brand-button aria-label` | `src/components/Header.jsx` |
+| F3 | `audit(13): fix beltz-leseprobe 404` | `src/data/sourcesContent.js` |
+| F4 | `audit(13): fix emergency-banner touch-targets` | `src/App.jsx`, `src/components/ErrorBoundary.jsx`, `src/styles/app-global.css` |
+| F5 | `audit(13): fix safe-note-close touch-target` | `src/App.jsx` |
+| F6 | `audit(13): fix toolbox printview aria-hidden` | `src/components/closing/ClosingSection.jsx` |
+
+### Eine Entscheidung unterwegs
+
+**F4 wurde über den ursprünglichen Scope erweitert.** Die CSS-Klasse `.emergency-tel-link` wurde nicht nur an den drei tel:-Links in `App.jsx` (Emergency-Banner), sondern auch an den drei identischen tel:-Links in `ErrorBoundary.jsx` angebracht. Der R31-Fix aus Audit 09 hatte beide Stellen parallel mit tel:-Links versehen; F4 schliesst die Touch-Target-Lücke konsequent an beiden Stellen.
+
+---
+
+## Phase 4 -- Verifikation
+
+### Build + Lint
+
+- `npm run build` sauber (3-stufige Kette: vite build → replace-env → prerender)
+- `npm run lint` sauber
+- `npm run test:e2e` weiterhin durch hartkodierten `executablePath` in `playwright.config.js:27` blockiert (Audit-übergreifend seit Audit 08; kein F-Fix-Thema)
+
+### Lighthouse-Re-Run (Vergleich vorher/nachher)
+
+| Route | Perf vorher | Perf nachher | A11y vorher | A11y nachher | BP vorher | BP nachher | SEO vorher | SEO nachher |
+|---|---|---|---|---|---|---|---|---|
+| `/` (Start, prerendered) | 94 | **100** | 100 | **100** | 100 | **100** | 100 | **100** |
+| `/#toolbox` | 100 | **100** | 96 | **100** | 100 | **100** | 100 | **100** |
+| `/#glossar` | 100 | **100** | 100 | **100** | 100 | **100** | 100 | **100** |
+
+**Alle Category-Scores auf allen Routen sind nach F1-F6 bei 100.** Die Toolbox-Accessibility stieg von 96 auf 100 durch F1 (color-contrast gefixt). Die Start-Performance stieg von 94 auf 100 -- überraschend positiv, weil der LCP-Trade-off des Prerenders trotzdem in den 100er-Bereich passt.
+
+**Verbleibender Lighthouse-Audit-Befund** (nicht Category-gewichtet, Category bleibt 100): `label-content-name-mismatch` auf Toolbox, auf vier Buttons mit erweiterten aria-Labels (z. B. `aria-label="Krisenplan der Toolbox herunterladen"` bei sichtbarem Text „Krisenplan herunterladen"). Lighthouse zeigt den Audit-Score 0, rechnet ihn aber nicht in den Category-Score ein. Das sind **andere Buttons** als der Brand-Button aus F2 -- derselbe Konstruktions-Typ (aria-label ist erweiterte Variante des sichtbaren Texts), aber nicht Teil des F2-Scopes. Folgeticket empfohlen.
+
+### Mobile Touch-Targets (375×667)
+
+| Element | vorher | nachher | Status |
+|---|---|---|---|
+| `tel:144` im Emergency-Banner | 27×17 | **46×44** | ✓ |
+| `tel:+41800336655` | 195×17 | **214×44** | ✓ |
+| `tel:147` | 25×17 | **45×44** | ✓ |
+| „Zu Notfallinformationen"-Button | 271×35 | **271×44** | ✓ |
+| Safe-Note-Schliessen-Button | 111×29 | **119×44** | ✓ |
+
+**5/5 Emergency- und Hinweis-Targets erreichen oder übertreffen jetzt 44×44 px.**
+
+### Toolbox h1/Accessibility
+
+- DOM-Struktur: weiterhin 2× `<h1>` und 2× `<header>` (durch den `printView`, der im Screen-Modus `display: none` bleibt).
+- Für Screen-Reader sichtbar: **1× `<h1>` und 1× `<header>`** -- die Duplikate sind via `aria-hidden="true"` auf dem `.print-only`-Wrapper aus der Accessibility-Tree entfernt. ✓
+
+### Print-Mode
+
+- `.print-notfall-footer`: display: block, Text „Notfall: 144 Sanität · 147 Pro Juventute · AERZTEFON 0800 33 66 55" intakt ✓
+- `.toolbox-print-view`: im Print-Mode sichtbar (CSS steuert `display` unabhängig von ARIA) ✓
+- Keine Print-Regression aus F6.
+
+### Link-Rot Re-Check
+
+- Beltz-Leseprobe 404: `link: null` gesetzt, kein 404-Link mehr im Projekt ✓
+- Die 3 PUK-Cloudflare-403s bleiben bestehen (dokumentiert als Tooling-Limitation, nicht als Defekt)
+- **30/31 externe Links funktional direkt oder per Redirect; 1 Link bewusst auf `null` gesetzt**
+
+### Notfall-Funktionalität -- Drei-Schichten-Gesamttest
+
+| Schicht | Status |
+|---|---|
+| 1. tel:-Links am Bildschirm (R31 aus Audit 09) | ✓ intakt |
+| 2. Nummern auf Papier (P0 aus Audit 11) | ✓ intakt |
+| **3. Treffsicherheit der Tap-Targets (F4 aus Audit 13)** | **✓ vervollständigt** |
+
+Die drei Schichten tragen zusammen. Die Notfall-Architektur ist nach Audit 13 vollständig.
+
+### Aggregierte Metriken vorher/nachher
+
+| Metrik | Vorher (Phase 1) | Nachher (Phase 4) |
+|---|---|---|
+| Lighthouse A11y-Score (Toolbox) | 96 | **100** |
+| Lighthouse Perf-Score (Start) | 94 | **100** |
+| Touch-Targets <44×44 im Emergency-Banner | 4 | **0** |
+| Touch-Targets <44×44 beim Safe-Note-Close | 1 | **0** |
+| Accessible `<h1>` auf Toolbox | 2 | **1** |
+| Externe Links mit echtem 404 | 1 | **0** |
+| Externe Links mit Cloudflare-403 (dokumentiert als Tooling-Limitation) | 3 | 3 |
+
+### Release-Readiness-Aussage (final)
+
+**Stufe A -- Release-fähig ohne Vorbehalt.**
+
+Alle sechs Sofort-Fixes aus Phase 2 sind umgesetzt. Lighthouse zeigt 100/100/100/100 auf allen drei getesteten Routen. Die Mobile-Touch-Targets der Notfall-Ebene erreichen WCAG 2.5.5. Die Toolbox-`<h1>`-Duplikate sind aus der Accessibility-Tree entfernt. Der letzte echte 404-Link ist aufgelöst.
+
+Die 13 Follow-up-Tickets aus Phase 2 bleiben als bewusst dokumentierte Punkte offen. Keiner blockiert den Release. Zu dieser Liste kommt aus Phase 3/4 ein zusätzlicher kleiner Punkt dazu: die 4 Toolbox-Buttons mit erweiterten aria-Labels (nicht Category-gewichtet, aber vom selben Konstruktions-Typ wie der in F2 gefixte Brand-Button).
+
+### Follow-up-Tickets nach Audit 13
+
+**Priorität: vor Release zwingend** (Erwartung: leer) -- **leer.**
+
+**Priorität: vor Release empfehlenswert** (redaktionell):
+- PUK-Rechtsberatung: Validierungs-Termin zu 5 Formulierungstiefe-Fragen (Audit 03)
+
+**Priorität: nach Release optional** (keine Dringlichkeit):
+- URL-Normalisierung der 3 Text-/Section-Aliases `zuerich`, `network-map`, `network-directory` auf kanonische Hash-Form, oder Dokumentation als akzeptierte Eigenheit
+- Toolbox `printView` als saubere Komponenten-Aufteilung (falls später Bedarf entsteht; F6 via `aria-hidden` reicht aktuell)
+- 4 Toolbox-Buttons mit erweiterten aria-Labels harmonisieren (analog zu F2)
+- PUK-Cloudflare-403 + Selbsthilfe-Zürich-Bot-Blocking als bekannte Tooling-Limitation für spätere CI-Link-Checker dokumentieren
+- Dokumentation der M3-akzeptierten Mobile-Touch-Targets (Netzwerk-Chips + Evidenz-Anchors) in `docs/frontend-richtlinien.md`
+- Toolbox-Hero-Buttons 39 px als M2-Grenzfälle
+- Vignetten-Stubs V2 und V3 ausfüllen (Audit 05)
+- Glossar-Fliesstext-Einbettung der 4 Begriffe via Platzhalter-Parser (Audit 07 / 12 W3b Teil 2)
+- Kontrast-Ratio-Messungen für alle Tokens (Audit 09)
+- Typografie-Skala-Audit für font-size-Ausreisser (Audit 09)
+- Breakpoint-Tokens (Audit 09)
+- R18-Begründungs-Kommentare pro Button-Nicht-Kern-Variante (Audit 09)
+- Plass-&-Wiegand-Grefe-Klärung (Audit 12 W1a)
+
+Gesamt: **14 Follow-up-Tickets, 1 empfehlenswert redaktionell, 13 nach Release optional.**
+
+---
+
+## Audit-Reihen-Abschluss
+
+Die Audit-Reihe 02-13 ist mit Audit 13 abgeschlossen. Die Seite Relational Recovery ist release-fähig (Stufe A). Zwischen Audit 02 (Zielgruppen-Metadaten) und Audit 13 (Wave-3-Verifikation) sind zwölf Audits durchgelaufen, die Inhalt, Sprache, Quellen, Visual, Frontend-Compliance, Routing/SEO, Print und Content-Wartbarkeit systematisch bearbeitet haben.
+
+Die Verifikations-Säulen aus Audit 13 liefern die messbare Bestätigung, dass die Investition getragen hat: Lighthouse 100 in SEO, Best Practices und Accessibility auf allen geprüften Routen; Performance 100 auf Toolbox und Glossar, 100 auf Start nach dem F1-F6-Sprint. 15 von 18 Deep-Link-Aliases funktional vollständig, die restlichen drei kosmetisch. Die Notfall-Architektur trägt auf drei Schichten (tel:-Links am Bildschirm, Notfall-Footer auf Papier, Touch-Targets ≥44×44 px).
+
+Die folgenden Punkte bleiben als bewusst dokumentierte Follow-up-Tickets offen (siehe Liste oben). Keiner davon blockiert den Release.
