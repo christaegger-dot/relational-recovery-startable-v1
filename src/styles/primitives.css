@@ -1246,7 +1246,13 @@
 .ui-site-header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  /* z-Hierarchie (Audit 14): Skip-Link 200 > Site-Header 150 > Mobile-Dialog 120
+     > Mobile-Backdrop 110 > Persistenz-Banner 100.
+     Der Header muss ueber dem Persistenz-Banner liegen, weil das Mobile-Dialog
+     als DOM-Kind des Headers an dessen Stacking-Context gebunden ist. Ein
+     niedrigerer Header-z-Index wuerde die Dialog-z=120 auf Header-Layer clampen
+     und das Banner wuerde Nav-Klicks wieder ueberlagern (Audit-14-Phase-3). */
+  z-index: 150;
   border-bottom: 1px solid color-mix(in srgb, var(--border-default) 72%, transparent);
   background: color-mix(in srgb, var(--surface-page) 88%, white 12%);
   backdrop-filter: blur(var(--header-backdrop-blur));
@@ -1432,6 +1438,10 @@
 .ui-mobile-backdrop {
   position: fixed;
   inset: 0;
+  /* z-Hierarchie (Audit 14): Skip-Link 200 > Mobile-Dialog 120 > Mobile-Backdrop 110
+     > Persistenz-Banner 100 > Header 50. Aenderungen muessen diese Ordnung wahren,
+     sonst werden Mobile-Nav-Klicks vom Banner ueberlagert (Audit-14-Phase-2). */
+  z-index: 110;
   background: rgba(47, 47, 40, 0.32);
   /* Button-Defaults zuruecksetzen, damit das Element rein als Backdrop wirkt. */
   appearance: none;
@@ -1445,7 +1455,10 @@
 .ui-mobile-dialog {
   position: fixed;
   inset: auto 0 0;
-  z-index: 60;
+  /* Siehe z-Hierarchie-Kommentar bei .ui-mobile-backdrop. Dialog muss ueber dem
+     Persistenz-Banner (z=100) liegen, damit Nav-Buttons im oberen Dialog-Bereich
+     klickbar sind. */
+  z-index: 120;
   border-top: 1px solid color-mix(in srgb, var(--border-default) 74%, white 26%);
   background: color-mix(in srgb, var(--surface-page) 94%, white 6%);
   box-shadow: 0 -10px 30px rgba(76, 55, 39, 0.08);
