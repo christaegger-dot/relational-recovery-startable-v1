@@ -182,7 +182,7 @@ export default function App() {
             <a
               href="tel:144"
               aria-label="Sanitätsnotruf 144 anrufen"
-              className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+              className="emergency-tel-link font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
             >
               144
             </a>
@@ -190,7 +190,7 @@ export default function App() {
             <a
               href="tel:+41800336655"
               aria-label="AERZTEFON 0800 33 66 55 anrufen"
-              className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+              className="emergency-tel-link font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
             >
               AERZTEFON 0800 33 66 55
             </a>
@@ -198,7 +198,7 @@ export default function App() {
             <a
               href="tel:147"
               aria-label="Beratungstelefon 147 von Pro Juventute anrufen"
-              className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+              className="emergency-tel-link font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
             >
               147
             </a>
@@ -207,7 +207,7 @@ export default function App() {
           <button
             type="button"
             onClick={handleEmergencyAccess}
-            className="haptic-btn inline-flex items-center gap-2 rounded-full border border-[var(--border-warm-soft)] bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[var(--accent-primary-strong)] shadow-[0_10px_24px_rgba(141,63,50,0.06)] transition-colors hover:bg-[var(--surface-hover-warm)]"
+            className="haptic-btn inline-flex min-h-[44px] items-center gap-2 rounded-full border border-[var(--border-warm-soft)] bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[var(--accent-primary-strong)] shadow-[0_10px_24px_rgba(141,63,50,0.06)] transition-colors hover:bg-[var(--surface-hover-warm)]"
             aria-label="Zu Notfallinformationen wechseln"
           >
             <AlertTriangle size={14} aria-hidden="true" />

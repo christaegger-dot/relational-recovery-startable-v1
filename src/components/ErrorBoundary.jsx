@@ -36,7 +36,7 @@ export default class ErrorBoundary extends Component {
               <a
                 href="tel:144"
                 aria-label="Sanitätsnotruf 144 anrufen"
-                className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+                className="emergency-tel-link font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
               >
                 144
               </a>
@@ -44,7 +44,7 @@ export default class ErrorBoundary extends Component {
               <a
                 href="tel:+41800336655"
                 aria-label="AERZTEFON 0800 33 66 55 anrufen"
-                className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+                className="emergency-tel-link font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
               >
                 AERZTEFON 0800 33 66 55
               </a>
@@ -52,7 +52,7 @@ export default class ErrorBoundary extends Component {
               <a
                 href="tel:147"
                 aria-label="Beratungstelefon 147 von Pro Juventute anrufen"
-                className="font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+                className="emergency-tel-link font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
               >
                 147
               </a>
