@@ -43,7 +43,7 @@ const Header = memo(function Header({
           type="button"
           onClick={handleHomeClick}
           className="ui-brand"
-          aria-label="Zur Startseite wechseln"
+          aria-label="Relational Recovery – zur Startseite wechseln"
         >
           <div className="ui-brand__mark" aria-hidden="true">
             RR

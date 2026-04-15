@@ -120,7 +120,10 @@ export const SOURCES = {
     publisher: 'Weinheim: Beltz (Neuauflage 2017)',
     type: 'book',
     doi: null,
-    link: 'https://www.beltz.de/fileadmin/beltz/leseproben/978-3-621-27914-7.pdf',
+    // Audit 13 / F3: vormals '…/leseproben/978-3-621-27914-7.pdf' lieferte 404
+    // (Leseprobe beim Verlag nicht mehr verfuegbar). Link auf null gesetzt
+    // bis zur redaktionellen Neu-Verlinkung auf die aktuelle Produkt-Seite.
+    link: null,
     chFocus: false,
   },
   // TODO (Audit 12, redaktionelle Klaerung): Die LITERATUR-Liste zitierte unter

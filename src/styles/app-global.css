@@ -95,6 +95,25 @@
   display: none;
 }
 
+/* Emergency-Banner inline tel:-Links mit garantiertem 44x44-Touch-Target.
+   Audit 13 / F4: Die tel:-Links im Akute-Krise-Banner waren in Audit 09 R31
+   als Inline-Text-Links gestaltet und hatten dadurch Tap-Zonen von nur
+   17px Hoehe. Das ist im Notfall mit zittrigen Fingern zu klein. Diese
+   Klasse erweitert die Touch-Flaeche auf >=44x44px mittels Padding und
+   kompensiert die Flow-Abstaende mit negativem Margin, damit der visuelle
+   Inline-Charakter erhalten bleibt. */
+.emergency-tel-link {
+  display: inline-block;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.75rem 0.6rem;
+  margin-inline: -0.15rem;
+  margin-block: -0.45rem;
+  vertical-align: middle;
+  line-height: 1.2;
+  text-align: center;
+}
+
 /* Reduced-Motion-Guard fuer die in dieser Datei definierten Transitions.
    Ergaenzt die bestehenden Guards in primitives.css und index.css. */
 @media (prefers-reduced-motion: reduce) {

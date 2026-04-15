@@ -237,7 +237,10 @@ export const getRiskLabel = (risk) => {
 export const getRiskTone = (risk) => {
   if (risk >= 7) return 'bg-red-500 text-white';
   if (risk >= 3) return 'bg-amber-500 text-slate-900';
-  return 'bg-emerald-500 text-white';
+  // Audit 13 / F1: emerald-500 auf weiss ergab 2.47:1 Kontrast (unter WCAG AA
+  // 4.5:1 fuer normalen Text). emerald-700 (#047857) bringt 5.30:1 und erhaelt
+  // die visuelle Semantik 'tragende Ressourcen' (gruen fuer OK/unterstuetzend).
+  return 'bg-emerald-700 text-white';
 };
 
 export const downloadTextFile = (filename, content) => {
