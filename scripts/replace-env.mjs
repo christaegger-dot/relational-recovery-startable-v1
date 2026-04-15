@@ -59,6 +59,24 @@ async function main() {
       console.warn(`[replace-env] ${file} konnte nicht verarbeitet werden: ${err.message}`);
     }
   }
+
+  // Fallback-Schutz fuer index.html: Wenn Vite die VITE_BASE_URL-Env nicht
+  // sah (typisch bei CI-Umgebungen ohne .env), bleibt der Vite-Platzhalter
+  // %VITE_BASE_URL% in der dist/index.html stehen. Hier raeumen wir das
+  // nachtraeglich auf, damit die Seite trotz fehlender Env-Variable deploybar
+  // bleibt. Bei korrekt gesetzter Env-Variable ist der Platzhalter ohnehin
+  // schon durch Vite ersetzt -- dann ist dieser Block ein No-op.
+  try {
+    const indexPath = path.join(distDir, 'index.html');
+    let indexContent = await fs.readFile(indexPath, 'utf8');
+    if (indexContent.includes('%VITE_BASE_URL%')) {
+      indexContent = indexContent.split('%VITE_BASE_URL%').join(baseUrl);
+      await fs.writeFile(indexPath, indexContent, 'utf8');
+      console.log(`[replace-env] index.html: Vite-Platzhalter %VITE_BASE_URL% nachtraeglich ersetzt durch ${baseUrl}`);
+    }
+  } catch (err) {
+    console.warn(`[replace-env] index.html-Fallback konnte nicht verarbeitet werden: ${err.message}`);
+  }
 }
 
 main().catch((err) => {
