@@ -65,23 +65,40 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
         icon: ExternalLink,
       },
     ],
+    // Content-Stats werden pro Karte nur angezeigt, sobald der Count die
+    // Signal-Schwelle erreicht (>= 3). Vorher wirken einzelne kleine Werte
+    // wie "Trainingsfaelle: 1" eher entmutigend als vertrauensbildend
+    // (Verifikation P3 nach PR #40). Sobald Inhalte wachsen, kehrt die
+    // jeweilige Karte automatisch zurueck — keine redaktionelle Pflege.
     stats: [
       ...progressStat,
-      {
-        label: 'Module',
-        value: String(E_MODULE_COUNT),
-        note: 'kompakte Lernbausteine für die systemische Einordnung',
-      },
-      {
-        label: 'Trainingsfälle',
-        value: String(VIGNETTE_COUNT),
-        note: 'für Fallreflexion, Sprache und Dialog',
-      },
-      {
-        label: 'Netzwerkstellen',
-        value: String(NETWORK_RESOURCE_COUNT),
-        note: 'für Triage, Entlastung und Weitervermittlung',
-      },
+      ...(E_MODULE_COUNT >= 3
+        ? [
+            {
+              label: 'Module',
+              value: String(E_MODULE_COUNT),
+              note: 'kompakte Lernbausteine für die systemische Einordnung',
+            },
+          ]
+        : []),
+      ...(VIGNETTE_COUNT >= 3
+        ? [
+            {
+              label: 'Trainingsfälle',
+              value: String(VIGNETTE_COUNT),
+              note: 'für Fallreflexion, Sprache und Dialog',
+            },
+          ]
+        : []),
+      ...(NETWORK_RESOURCE_COUNT >= 3
+        ? [
+            {
+              label: 'Netzwerkstellen',
+              value: String(NETWORK_RESOURCE_COUNT),
+              note: 'für Triage, Entlastung und Weitervermittlung',
+            },
+          ]
+        : []),
     ],
   };
 
