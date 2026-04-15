@@ -284,10 +284,118 @@ auf Freigabe des Fix-Plans (Anhebung Dialog/Backdrop auf 120/110).
 
 _(Folgt nach Freigabe von Phase 2.)_
 
-## Phase 3 — Fixes
+## Phase 3 — Fix und Diagnose-Vertiefung
 
-_(Folgt nach Freigabe von Phase 2.)_
+### 3.1 Umsetzung
 
-## Phase 4 — Verifikation
+Commit `1323258` — `audit(14): fix mobile-dialog z-stack ueber persistenz-banner`.
 
-_(Folgt nach Phase 3.)_
+Aenderungen in `src/styles/primitives.css`:
+
+- `.ui-mobile-backdrop`: kein z-index → `z-index: 110`
+- `.ui-mobile-dialog`: `z-index: 60` → `z-index: 120`
+- `.ui-site-header`: `z-index: 50` → `z-index: 150`
+
+Begleitende Code-Kommentare dokumentieren die vollstaendige Hierarchie
+sowohl bei `.ui-mobile-backdrop` als auch bei `.ui-site-header`.
+
+### 3.2 Vertiefte Diagnose (Abweichung von Phase-2-Hypothese)
+
+Die urspruengliche Phase-2-Hypothese — Banner (100) ueberlagert Dialog (60)
+— war **korrekt in der Richtung, aber unvollstaendig in der Ursache**. Der
+erste Fix-Versuch (Dialog 120, Backdrop 110) allein hat die 28 Failures
+**nicht** behoben. Der Re-Lauf von Script B zeigte dieselben 28 Failures.
+
+Die vertiefte Diagnose per `click-diagnose.mjs` + direkter
+Computed-Style-Auslesung ergab: `.ui-site-header` hat
+`position: sticky; z-index: 50` und erzeugt dadurch einen eigenstaendigen
+Stacking-Context. Da das Mobile-Dialog als DOM-Kind von `<header>`
+gerendert wird, ist es an Header's Stacking-Context gebunden und global
+auf Layer 50 gedeckelt — unabhaengig davon, wie hoch sein eigener
+z-index intern gesetzt wird. Banner (z=100 im Root-Context) paint global
+oberhalb von Header-Layer-50-Kindern.
+
+Der vollstaendige Fix erforderte daher zusaetzlich die Anhebung des
+Headers selbst auf z=150 (ueber den Banner). Damit liegt die Dialog-
+Subtree-Hierarchie 120/110 innerhalb eines Header-Contexts, der global
+oberhalb des Banners paint.
+
+**Lernwert:** Diagnosen via `document.elementsFromPoint` liefern das
+oberste Element am Klickpunkt, aber nicht immer den **clampenden
+Stacking-Context-Vorfahren**. Wenn eine z-index-Hebung nicht die erwartete
+Wirkung zeigt, muss die gesamte `position/z-index`-Kette entlang der
+DOM-Parents gelesen werden — jede Kombination von `position != static`
+mit explizitem `z-index` erzeugt einen eigenen Stacking-Context, der
+Kind-z-Indices clampt. Diese Dimension wird in den Diagnose-Scripts
+bereits durch die Stacking-Context-Detektion in `z-stack.mjs` abgedeckt,
+war aber in Phase 2 nicht explizit entlang der Failure-Parent-Kette
+aufgeloest worden.
+
+## Phase 4 — Verifikation und Abschluss
+
+### 4.1 Build und Lint
+
+- `npm run build`: erfolgreich, Prerender-Step aktiv, 27401 Zeichen
+  Snapshot in `dist/index.html` injiziert.
+- `npm run lint`: sauber, keine Warnungen.
+
+### 4.2 Script-Re-Laeufe
+
+| Script                        | Erwartung | Ergebnis           |
+|-------------------------------|-----------|--------------------|
+| `interaction-overlap.mjs`     | 0 Overlaps (keine Regression) | 0 Overlaps ✓ |
+| `click-reachability.mjs`      | 0 Failures (vorher 28), 63 tel-Links erreichbar | 0 Failures, 63/63 tel ✓ |
+| `z-stack.mjs`                 | Hierarchie um Header 150 erweitert, keine neuen Anomalien | z=200/150/100 in jeder Route, 0 Anomalien ✓ |
+| `click-diagnose.mjs`          | Hit=true fuer alle 7 Phase-2-Failure-Szenarien | Alle 7 Hit=true ✓ |
+
+### 4.3 Manuelle Tests
+
+- Mobile-375 (DevTools-Emulation): Menue geoeffnet, "Start" und
+  "Lernmodule" getappt — Navigation greift, Hash wechselt, Menue
+  schliesst sich.
+- Desktop-1280 / Desktop-1920: Menue geoeffnet, "Grundlagen" geklickt —
+  Navigation greift. Kein visuelles Regression des Persistenz-Banners
+  (er bleibt sichtbar bei geschlossenem Menue; wird bei offenem Menue
+  korrekt vom Modal abgedeckt).
+
+### 4.4 Notfall-Funktionalitaet
+
+- Alle 63 `tel:`-Reachability-Checks bestanden. R31-Architektur intakt.
+- Notfall-Span (Header-Button) bleibt auf seine sichtbare Flaeche
+  beschraenkt (Audit-13-Fix unveraendert wirksam, 0 Overlaps).
+
+### 4.5 Aggregierte Metriken
+
+| Metrik                       | Vorher | Nachher |
+|------------------------------|-------:|--------:|
+| Nav-Klick-Failures           |     28 |       0 |
+| Interaction-Overlaps         |      0 |       0 |
+| z-Hierarchie (dokumentiert)  |      3 Ebenen | 5 Ebenen |
+| Tel-Link-Reachability        |  63/63 |   63/63 |
+
+### 4.6 Infrastruktur
+
+- `qa/scripts/README.md` neu angelegt: erklaert alle vier Scripts,
+  Ausfuehrungs-Anleitung, Empfehlung wann auszufuehren (vor jedem
+  Release; nach Header-, Modal-, Layout-Aenderungen).
+- `qa/audit-13-wave3-verifikation.md` um Schluss-Bemerkung erweitert:
+  dokumentiert den Notfall-Span-Fix sowie den Audit-14-Befund, dass die
+  Luecke zu dauerhaft verbesserter Verifikations-Infrastruktur gefuehrt
+  hat.
+
+### 4.7 Finale Release-Readiness
+
+**Stufe A (vollstaendig release-bereit) ist wiederhergestellt.**
+
+Die Audit-14-Test-Scripts stehen als laufende Verifikations-Infrastruktur
+permanent im Repository. Kuenftige Aenderungen an Header, Mobile-Menue,
+Persistenz-Banner oder CSS-Primitives mit z-index-Beruehrung MUESSEN einen
+Re-Lauf der Scripts mit Exit-Code 0 nachweisen, bevor gemerged wird.
+
+Die vierte Schicht der Notfall-Architektur (Klick-Erreichbarkeit) ist
+damit verifiziert aufgebaut:
+
+- R31 (tel:-Links)                    — Audit 09
+- P0 (Print-Notfall-Footer)           — Audit 11
+- F4 (Touch-Targets ≥ 44×44 px)        — Audit 13
+- **K1 (Klick-Erreichbarkeit)**       — **Audit 14**

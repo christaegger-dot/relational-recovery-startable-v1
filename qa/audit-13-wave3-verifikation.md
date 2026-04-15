@@ -443,3 +443,11 @@ Die Audit-Reihe 02-13 ist mit Audit 13 abgeschlossen. Die Seite Relational Recov
 Die Verifikations-Säulen aus Audit 13 liefern die messbare Bestätigung, dass die Investition getragen hat: Lighthouse 100 in SEO, Best Practices und Accessibility auf allen geprüften Routen; Performance 100 auf Toolbox und Glossar, 100 auf Start nach dem F1-F6-Sprint. 15 von 18 Deep-Link-Aliases funktional vollständig, die restlichen drei kosmetisch. Die Notfall-Architektur trägt auf drei Schichten (tel:-Links am Bildschirm, Notfall-Footer auf Papier, Touch-Targets ≥44×44 px).
 
 Die folgenden Punkte bleiben als bewusst dokumentierte Follow-up-Tickets offen (siehe Liste oben). Keiner davon blockiert den Release.
+
+---
+
+## Nachtrag: Notfall-Span-Header-Bug (post-Audit-13 Spotcheck)
+
+Nach dem formalen Abschluss von Audit 13 wurde im Zuge eines Spotchecks mit einem Ad-hoc-Overlap-Script ein residuales Defizit entdeckt: der Notfall-Span im Desktop-Header ueberlagerte den Netzwerk-Button auf Breakpoints > 1376 px wegen eines Layout-Overflows im 86-rem-Container. Der Bug wurde als Audit-13-Nachlauf behoben (Commit 435f41f, "fix: notfall-span ueberlagert netzwerk-button im header"), indem die Desktop-Nav unkonditional ausgeblendet und die Navigation ausschliesslich ueber das Mobile-Menue bedient wird.
+
+**Schluss-Bemerkung nach Audit 14:** Audit 14 hat nicht nur die ursprueng­liche Luecke geschlossen, sondern dabei einen weiteren strukturellen Defekt aufgedeckt: 28 Nav-Klick-Failures durch z-index-Konflikt zwischen Persistenz-Banner und Mobile-Dialog (Mobile-Dialog war im Stacking-Context des `<header>`-Parents gefangen). Beide Defekte sind durch die Audit-14-Test-Scripts (`qa/scripts/interaction-overlap.mjs`, `click-reachability.mjs`, `z-stack.mjs`, `click-diagnose.mjs`) kuenftig automatisch detektierbar. Die Luecke war damit nicht nur ein einmaliger Uebersehen-Fall, sondern hat zu einer dauerhaften Verbesserung der Verifikations-Infrastruktur gefuehrt.
