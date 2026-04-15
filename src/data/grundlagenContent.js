@@ -2,7 +2,7 @@ export const GRUNDLAGEN_HERO = {
   eyebrow: 'Redaktioneller Wissensbereich',
   title: 'Häufige Fragen für',
   accent: 'ruhigere Orientierung im Alltag.',
-  lead: 'Der Grundlagenbereich beantwortet typische Fragen von Angehörigen und Fachpersonen in einer klaren, entlastenden Sprache. Er soll Unsicherheit reduzieren, Begriffe in Alltagssituationen übersetzen und den Blick auf nächste Schritte öffnen.',
+  lead: 'Der Grundlagenbereich richtet sich primär an Angehörige und beantwortet typische Fragen in klarer, entlastender Sprache. Er soll Unsicherheit reduzieren, Begriffe in Alltagssituationen übersetzen und den Blick auf nächste Schritte öffnen. Fachpersonen können den Bereich ergänzend als Sprach- und Einordnungshilfe für Gespräche mit Angehörigen nutzen.',
   asideTitle: 'Einordnung',
   asideCopy:
     'Die Antworten ersetzen keine individuelle klinische, rechtliche oder kindesschutzbezogene Beurteilung. Sie dienen als tragfähige Erstorientierung für Gespräch, Reflexion und Weitervermittlung.',
