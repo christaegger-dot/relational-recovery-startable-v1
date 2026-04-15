@@ -26,6 +26,19 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
     title: 'Wenn ein Elternteil',
     accent: 'psychisch belastet ist.',
     lead: 'Orientierung, Triage und Arbeitshilfen für Fachpersonen. FAQ und Einordnung für Angehörige. Krisenhilfe und regionale Netzwerkstellen für beide Zielgruppen.',
+    audienceLabel: 'Zugang nach Rolle wählen',
+    audienceEntries: [
+      {
+        label: 'Für Fachpersonen',
+        destination: 'Toolbox',
+        onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
+      },
+      {
+        label: 'Für Angehörige',
+        destination: 'Grundlagen-FAQ',
+        onClick: () => navigate('grundlagen', { focusTarget: 'heading' }),
+      },
+    ],
     image: heroIllustration,
     imageAlt: 'Minimalistische Illustration eines Familiensystems mit Nähe, Distanz und Unterstützung',
     asideTitle: 'Wichtiger Hinweis zur Einordnung',
@@ -73,35 +86,14 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
   };
 
   // Startseite traegt genau zwei Orientierungs-Schichten:
-  // 1) Zielgruppen-Einstieg (Fachperson / Angehoerige) als sichtbare Doppelzielgruppen-Aufloesung
-  // 2) Phasen-Logik (Verstehen / Einschaetzen / Handeln / Vernetzen) als Haupt-Gliederung
-  // Die frueheren Bloecke "Direkte Einstiege" und "Vertrauen und Orientierung" wurden
-  // entfernt, weil sie dieselben Wege in anderer Form wiederholt haben.
+  // 1) Zielgruppen-Einstieg (Fachperson / Angehoerige) direkt im Hero als
+  //    audienceEntries-Chipleiste nach dem Lead — sichtbar im oberen
+  //    Nutzungsfenster (Verifikations-Befund nach PR #38: die frueher
+  //    eigene "Zugang waehlen"-Section lag auf allen Viewports unter der
+  //    Fold; siehe PR #39 / Verifikation).
+  // 2) Phasen-Logik (Verstehen / Einschaetzen / Handeln / Vernetzen) als
+  //    Haupt-Gliederung der Content-Sections darunter.
   const sections = [
-    {
-      eyebrow: 'Zugang wählen',
-      title: 'Zwei Einstiege, je nach Rolle.',
-      description:
-        'Das Portal richtet sich an zwei Zielgruppen. Fachpersonen finden den Einstieg über Triage und Arbeitshilfen, Angehörige über eine Einordnung in verständlicher Sprache.',
-      cards: [
-        {
-          label: 'Für Fachpersonen',
-          title: 'Mit der Toolbox beginnen',
-          copy: 'Strukturierte Einschätzung, Krisenplan, Gesprächsleitfaden und Downloads für die direkte Fallarbeit — inklusive Sofort-Triage und Notfall-Kontakte.',
-          tone: 'accent',
-          onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
-          actionLabel: 'Zur Toolbox',
-        },
-        {
-          label: 'Für Angehörige',
-          title: 'Mit der Grundlagen-FAQ beginnen',
-          copy: 'Einordnung zu häufigen Fragen rund um psychische Belastung in der Familie, verständlich formuliert, mit Weiterverweisen auf offizielle Beratung.',
-          tone: 'soft',
-          onClick: () => navigate('grundlagen', { focusTarget: 'heading' }),
-          actionLabel: 'Zu den Grundlagen',
-        },
-      ],
-    },
     {
       eyebrow: 'Orientierung',
       title: 'Ein ruhiger, fachlich klarer Weg durch die Inhalte.',

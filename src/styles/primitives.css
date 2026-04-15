@@ -856,6 +856,58 @@
   line-height: var(--line-height-relaxed);
 }
 
+/* Zielgruppen-Weiche direkt nach dem Lead. Kompakte Zwei-Eintraege-Leiste,
+   die Doppelzielgruppe bereits im ersten Nutzungsfenster sichtbar macht
+   (Audit-14-Folge / Verifikation-PR #39). Siehe audienceEntries-Prop in
+   PageHero.jsx. */
+.ui-hero__audience {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.ui-hero__audience-entry {
+  flex: 1 1 18rem;
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.75rem 1.125rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 22%, white 78%);
+  background: var(--surface-note);
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
+}
+
+.ui-hero__audience-entry:hover {
+  background: color-mix(in srgb, var(--surface-note) 82%, white 18%);
+  border-color: color-mix(in srgb, var(--accent-primary) 40%, white 60%);
+  box-shadow: var(--shadow-soft);
+}
+
+.ui-hero__audience-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-primary-strong);
+}
+
+.ui-hero__audience-destination {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
 .ui-hero__actions {
   display: flex;
   flex-wrap: wrap;

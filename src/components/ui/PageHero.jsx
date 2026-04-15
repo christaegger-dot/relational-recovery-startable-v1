@@ -34,6 +34,8 @@ export default function PageHero({
   imageAlt,
   stats = [],
   headingAriaLabel,
+  audienceEntries = [],
+  audienceLabel,
 }) {
   return (
     <div className="ui-hero">
@@ -49,6 +51,26 @@ export default function PageHero({
             {title} {accent ? <span className="ui-hero__accent">{accent}</span> : null}
           </h1>
           {lead ? <p className="ui-hero__lead">{lead}</p> : null}
+
+          {audienceEntries.length ? (
+            <div className="ui-hero__audience" role="group" aria-label={audienceLabel || 'Zugang nach Rolle wählen'}>
+              {audienceEntries.map((entry) => (
+                <button
+                  key={entry.label}
+                  type="button"
+                  className="ui-hero__audience-entry haptic-btn"
+                  onClick={entry.onClick}
+                  aria-label={entry.ariaLabel || `${entry.label}: ${entry.destination}`}
+                >
+                  <span className="ui-hero__audience-label">{entry.label}</span>
+                  <span className="ui-hero__audience-destination">
+                    <span aria-hidden="true">→ </span>
+                    {entry.destination}
+                  </span>
+                </button>
+              ))}
+            </div>
+          ) : null}
 
           {actions.length ? (
             <div className="ui-hero__actions">
