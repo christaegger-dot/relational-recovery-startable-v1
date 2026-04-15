@@ -15,8 +15,8 @@ export default function VignettenSection() {
 
   const hero = {
     eyebrow: 'Fallreflexion',
-    title: 'Training mit',
-    accent: 'Vignetten',
+    title: 'Training',
+    accent: 'mit Fallvignetten',
     lead: 'Kurze Fallprüfungen zur fachlichen Einschätzung von Entscheidungssituationen zwischen Schutz, Kooperation und systemischer Entlastung. Die Darstellung bleibt bewusst fachlich und abwägend.',
     asideTitle: 'Format',
     asideCopy:
