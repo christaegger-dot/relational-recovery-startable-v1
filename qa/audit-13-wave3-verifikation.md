@@ -181,3 +181,131 @@ Kandidaten, die als Follow-up-Tickets eingeordnet werden könnten (nicht Sofort-
 ---
 
 **STOPP nach Phase 1.** Warte auf Freigabe für Phase 2 (Triage und Release-Readiness-Aussage).
+
+---
+
+## Phase 2 -- Triage und Release-Readiness-Aussage
+
+### 2.1 Gesamtbild
+
+Das Gesamtwerk steht **besser da als erwartet** -- und zwar messbar, nicht gefühlt. Drei Ergebnisse tragen dieses Urteil:
+
+- Lighthouse misst über alle drei getesteten Routen **100 in SEO, 100 in Best Practices**, Accessibility zwischen 96 und 100, Performance zwischen 94 und 100. Das ist die direkte Validierung von Audit 09 (Frontend-Compliance) und Audit 10 (Routing/SEO). Die beiden Audits hatten versprochen, dass Token-Disziplin, Per-Route-Meta und Prerendering zusammen eine messbar bessere Seite ergeben; Lighthouse bestätigt dieses Versprechen in Zahlen. Die SEO-100 über alle Routen sind besonders aussagekräftig, weil sie das in Audit 10 diskutierte Crawler-Problem („leerer Shell bei Social-Media-Scraping") praktisch gelöst zeigen.
+- Die Deep-Link-QA zeigt 15 von 18 Aliases funktional vollständig, die drei verbleibenden nur mit kosmetischen URL-Abweichungen. Die Routing-Architektur aus Audit 10 hält unter systematischer Prüfung.
+- Die Cross-Reference-Integrität der Content-Dateien (Audit 12) blieb auch nach Audit 13 bei 0 verwaisten IDs.
+
+Die tatsächlichen Befunde aus Phase 1 sind **klein und punktuell**. Kein systemischer Befund, kein Anlass für einen Reopen einer früheren Audit-Welle. Phase 2 triagiert die Einzelbefunde klar.
+
+### 2.2 Mobile-Touch-Target-Triage (M1/M2/M3)
+
+Detail-Scan hat die 5-24 Befunde pro Seite in die drei Kategorien zugeordnet:
+
+**Auf allen Seiten gleich (5 Stellen):**
+
+| Stelle | Grösse | Kategorie | Massnahme |
+|---|---|---|---|
+| Safe-Note-Schliessen-Button (`.haptic-btn`, aria-label „Datenschutzhinweis schliessen") | 111×29 | **M2** | F5 Sofort-Fix |
+| `tel:144` inline im Emergency-Banner (aria-label „Sanitätsnotruf 144 anrufen") | 27×17 | **M1** | F4 Sofort-Fix |
+| `tel:+41800336655` inline (aria-label „AERZTEFON 0800 33 66 55 anrufen") | 195×17 | **M1** | F4 Sofort-Fix |
+| `tel:147` inline (aria-label „Beratungstelefon 147 von Pro Juventute anrufen") | 25×17 | **M1** | F4 Sofort-Fix |
+| „Zu Notfallinformationen wechseln"-Button im Emergency-Banner | 271×35 | **M1** | F4 Sofort-Fix (Teil derselben Emergency-Banner-Korrektur) |
+
+**Toolbox zusätzlich (+2 Stellen):**
+
+| Stelle | Grösse | Kategorie | Massnahme |
+|---|---|---|---|
+| „Krisenplan herunterladen"-Button (Hero) | 255×39 | **M2** Grenzfall | nicht als Sofort-Fix aufgenommen; Höhe 39 px ist 5 px unter der Schwelle; Fläche 255 px breit; im Zweifel später mit Button-Konsistenz-Ticket |
+| „Arbeitsansicht drucken"-Button (Hero) | 235×39 | **M2** Grenzfall | dito |
+
+**Netzwerk zusätzlich (+19 Stellen):**
+
+| Stelle | Grösse | Kategorie | Massnahme |
+|---|---|---|---|
+| 14× Filter-Chips (`.ui-chip[role="button"]`: Alle, Krise, 24/7, kostenlos, anonym, Zürich, mehrsprachig, Jugendliche, Erwachsene, Eltern 0-5, Sucht, offizielle Stelle, Selbsthilfe, Entlastung) | 289×36 | **M3** | Akzeptierte Audit-09-Ausnahme (`.ui-chip` explizit mit `min-height: calc(var(--touch-target-min) - 0.5rem)` = 36 px) |
+| 5× Lens-Buttons (Gesamtbild, Privates Umfeld, Alltagsstützen, Fachstellen, Lücken) | 251×36 | **M3** | analog zu Filter-Chips akzeptiert |
+
+**Evidenz zusätzlich (+4 Stellen):**
+
+| Stelle | Grösse | Kategorie | Massnahme |
+|---|---|---|---|
+| 4× Closing-Section-Collection-Anchors (Kinder- und Familienmedien, Externe Informationsangebote, Unterstützungsangebote, Quellen für Vertiefung) | 303×34 bis 303×41 | **M3** | Inline-Anchor-Links in Closing-Collection; Höhe 34-41 px knapp unter 44, Breite 291-303 gross; akzeptiert |
+
+**Zusammenfassung Mobile-Triage:**
+- M1 (sicherheitsrelevant, Sofort-Fix): **4 tel:-Links + 1 Emergency-Button** auf allen Seiten → F4
+- M2 (klein und einfach, Sofort-Fix): **1 Safe-Note-Close** auf allen Seiten → F5
+- M2 Grenzfälle (nicht als Sofort-Fix): 2 Toolbox-Hero-Buttons (bewusst nicht aufgenommen, um Audit-13-Scope schlank zu halten)
+- M3 (akzeptierte Ausnahmen): 19 Netzwerk-Controls + 4 Evidenz-Anchor-Links
+
+### 2.3 Sofort-Fix-Liste für Phase 3
+
+| # | Fix | Herkunft | Aufwands-Schätzung |
+|---|---|---|---|
+| **F1** | Toolbox-Badge `color-contrast` (`.ui-toolbox-status-badge.bg-emerald-500`: 2,47:1 → ≥4,5:1) | Säule A Lighthouse | 10-20 min |
+| **F2** | Brand-Button `label-content-name-mismatch` (sichtbarer Text „Relational Recovery" ≠ `aria-label` „Zur Startseite wechseln") | Säule A Lighthouse | 5-10 min |
+| **F3** | Beltz-Leseprobe 404-Link in `sourcesContent.js` `plass-wiegandgrefe-2012` auflösen (`link: null` oder auf Produkt-URL umstellen) | Säule E Link-Rot | 5 min |
+| **F4** | Emergency-Banner-Touch-Targets: 3 inline-`tel:`-Links + „Zu Notfallinformationen"-Button auf min. 44×44 px per CSS-Padding erweitern, ohne Inline-Charakter zu zerstören | Säule C Mobile M1 | 30-60 min |
+| **F5** | Safe-Note-Schliessen-Button auf `min-height: 44px` erweitern | Säule C Mobile M2 | 10-15 min |
+| **F6** | `toolboxPrintView` auf Screen mit `aria-hidden="true"` abschirmen, damit die doppelten `<h1>` und `<header>` nicht mehr von Screen-Readern als Dokument-Struktur interpretiert werden; im Print invertieren (auf sichtbarer Print-Version ohne `aria-hidden`) | Säule D A11y | 15-30 min |
+
+**Gesamt-Aufwand F1-F6**: ca. 1,5-2,5 Stunden.
+
+### 2.4 Follow-up-Tickets (nicht in Audit 13)
+
+Nach Phase 3 bleiben folgende Punkte als Follow-up-Tickets dokumentiert, **ohne Release-Blockade**:
+
+| Ticket | Herkunft | Priorität |
+|---|---|---|
+| URL-Normalisierung der 3 Text-/Section-Aliases (`zuerich`, `network-map`, `network-directory`) auf kanonische Hash-Form ODER Dokumentation als akzeptierte Eigenheit in `docs/content-pflege.md` | Säule B Audit 13 | niedrig (kosmetisch) |
+| Toolbox `printView` als saubere Komponenten-Aufteilung (falls `aria-hidden` in F6 sich als unzureichend herausstellt) | Säule D Audit 13 | mittel |
+| Dokumentation PUK-Cloudflare-403 und Selbsthilfe-Zürich-Bot-Blocking als bekannte Tooling-Limitationen für spätere CI-Link-Checker | Säule E Audit 13 | niedrig |
+| Dokumentation der M3-akzeptierten Mobile-Touch-Targets (Netzwerk-Chips + Evidenz-Anchors) in `docs/frontend-richtlinien.md` als Ergänzung zum Audit-09-Ausnahmemechanismus | Säule C Audit 13 | niedrig |
+| Toolbox-Hero-Buttons 39 px als M2-Grenzfälle (Konsistenz mit F5 wenn Button-System später refaktoriert wird) | Säule C Audit 13 | niedrig |
+| PUK-Rechtsberatung: Validierungs-Termin zu 5 Formulierungstiefe-Fragen | Audit 03 | **mittel (redaktionell)** |
+| Vignetten-Stubs V2 und V3 ausfüllen | Audit 05 | niedrig |
+| Glossar-Fliesstext-Einbettung der 4 Begriffe (Platzhalter-Parser) | Audit 07 / 12 W3b Teil 2 | niedrig |
+| Kontrast-Ratio-Messungen für alle Tokens (Format in Audit 09 R4 festgelegt) | Audit 09 | niedrig |
+| Typografie-Skala-Audit für ~20 font-size-Ausreisser | Audit 09 | niedrig |
+| Breakpoint-Tokens | Audit 09 | niedrig |
+| R18-Begründungs-Kommentare pro Button-Nicht-Kern-Variante | Audit 09 | niedrig |
+| Plass-&-Wiegand-Grefe-Klärung (zwei Einträge temporär) | Audit 12 W1a | niedrig |
+
+**Gesamt: 13 Follow-up-Tickets**, keiner release-blockierend.
+
+### 2.5 Akzeptierte Ausnahmen ohne Massnahme
+
+| Punkt | Begründung |
+|---|---|
+| LCP 1226 ms auf prerenderter Start-Route | Gewünschter Trade-off aus Audit 10: grösseres Initial-HTML für Crawler-Content. Bleibt im „good"-Bereich (<2500 ms). |
+| Netzwerk-Filter-Chips 36 px | Audit-09-Entscheidung (`.ui-chip { min-height: calc(--touch-target-min - 0.5rem) }`). |
+| `label-content-name-mismatch` nicht in Lighthouse-Category-Score eingewichtet | Nicht-Category-Score-relevant; trotzdem als F2 aufgenommen weil semantisch wichtig. |
+| PUK-Links 403 via Cloudflare-Bot-Challenge | Für Nutzer:innen im Browser funktional; automatisierte Checker können das nicht unterscheiden. |
+
+### 2.6 Würdigung der Lighthouse-Ergebnisse
+
+Audit 13 sollte in Säule A messen, ob Audit 09 und 10 ihr Versprechen eingelöst haben. Das Ergebnis ist ungeschmückt:
+
+- **SEO 100 auf allen drei getesteten Routen.** Das ist die praktische Bestätigung, dass die in Audit 10 eingeführte Per-Route-Meta-Infrastruktur (dynamische Titles, OG-Tags, canonical), das statische Fundament (sitemap.xml, robots.txt, OG-Image, JSON-LD `Organization`) und das Prerendering der Start-Route zusammen eine Seite ergeben, die Google und Social-Media-Scraper korrekt verstehen.
+- **Best Practices 100 auf allen drei Routen.** Das bestätigt die Token-Disziplin und Frontend-Compliance aus Audit 09. Keine Console-Errors, keine HTTPS-Probleme, kein `document.write`, keine Deprecation-Warnungen. Das sind nicht nur abwesende Fehler -- es sind die Audit-09-Regeln in ihrer Wirkung.
+- **Accessibility 96-100**, wobei die Lücke auf Toolbox präzise zwei einzelne Befunde sind, nicht systemische Schwäche: ein Kontrast-Verstoss (F1), ein `aria-label`-Mismatch (F2). Beide in 25 Minuten lösbar.
+- **Performance 94-100** mit CLS 0 und TBT 0 auf allen Routen. Der 94-Punkt auf Start ist allein durch den LCP von 1226 ms (prerendered Initial-HTML) erklärt, der bewusst in Kauf genommen wurde.
+
+Das ist der eigentliche Wert von Audit 13: aus dem Versprechen der vorherigen Audits eine **messbare Tatsache** zu machen. Wer Lighthouse gegen diese Seite laufen lässt, sieht die Investition der vorangegangenen Wochen in Zahlen. Das ist die ehrlichste Validierung, die diese Audit-Reihe liefern kann.
+
+### 2.7 Release-Readiness-Aussage
+
+**Stufe B -- Release-fähig nach den sechs Sofort-Fixes in Phase 3, ohne weitere Vorbehalte.**
+
+Die 13 Follow-up-Tickets aus Säule F plus den Audit-13-Ergänzungen sind **nicht release-blockierend**. Sie können nach Release weiter bearbeitet werden. Zwei davon (PUK-Rechtsberatungs-Termin, Kontrast-Messungen) sind redaktionell bzw. dokumentarisch empfehlenswert; keiner davon verhindert das Freischalten der Seite.
+
+### 2.8 Was Phase 3 nicht tut
+
+- Keine Refactorings (das `toolboxPrintView`-Problem wird via `aria-hidden` gelöst, nicht durch Komponenten-Aufteilung).
+- Keine neuen Features.
+- Keine inhaltlichen Änderungen an Texten.
+- Keine Audit-Reihen-Reopens.
+- Keine Sprints länger als 1-2 Stunden pro Fix.
+- Kein Anpacken der Toolbox-Hero-Buttons oder anderer M2-Grenzfälle, die nicht in F1-F6 gelistet sind.
+
+---
+
+**STOPP nach Phase 2.** Warte auf Freigabe der Sofort-Fix-Liste F1-F6 und der Stufe-B-Release-Readiness-Aussage.
