@@ -159,9 +159,130 @@ folgen in Phase 4.
 
 ---
 
-## Phase 2 — Triage und Fix-Plan
+## Phase 2 — Diagnose, Triage und Fix-Plan
 
-_(Folgt nach Freigabe von Phase 1.)_
+### 2.1 Positiver Substanz-Befund (Audit 09 + 13)
+
+Die Phase-1-Resultate von Script A (0 Overlaps) und Script C (0 z-Anomalien,
+flache Hierarchie 200/100/50) sind **kein Selbstverstaendlichkeit, sondern
+ein wichtiger positiver Befund**: Sie belegen, dass die Substanz von Audit 09
+(Frontend-Compliance) und Audit 13 (WCAG/Touch-Targets) trag­faehig ist und
+der Notfall-Span-Bug ein **Einzelfall** war, kein Symptom eines systemischen
+Anti-Patterns. Die Layer-Architektur ist konsistent, die z-Hierarchie
+diszipliniert (kein Element ueber 200, kein Element ohne expliziten z-Wert
+in der relevanten UI-Schicht). Wir koennen also kuenftige Header- oder Modal-
+Aenderungen mit Vertrauen vornehmen, ohne ein generelles Refactoring der
+Stacking-Order zu befuerchten.
+
+### 2.2 Diagnostisches Werkzeug (`click-diagnose.mjs`)
+
+Fuer die Ursachen-Identifikation der 28 Failures wurde ein viertes Script
+ergaenzt: `qa/scripts/click-diagnose.mjs`. Es oeffnet das Mobile-Menue,
+lokalisiert das Failure-Ziel-Element, ermittelt den geometrischen
+Mittelpunkt und gibt den vollstaendigen `elementsFromPoint`-Stack inklusive
+computed-CSS aus (position, z-index, transform, padding, pointer-events).
+
+### 2.3 Diagnose-Ergebnis: **Single Root Cause**
+
+Die Diagnose ueber alle Failure-Cluster (Mobile "Start"+"Lernmodule",
+Desktop "Grundlagen") liefert ein einheitliches Bild: An jedem Klick-Punkt
+der ausgefallenen Buttons liegt im obersten Stack der **Persistenz-Hinweis-
+Banner** ("Lokale Speicherung im Browser…"), nicht der Nav-Button.
+
+Konkrete Stack-Spitze pro Cluster:
+
+| Cluster                                    | Klick-Pos.    | Top-Element am Punkt                    |
+|--------------------------------------------|---------------|------------------------------------------|
+| mobile-375 / "Start" (y=42, h=44)          | (188, 64)     | SPAN im Banner ("Lokale Speicherung…")  |
+| mobile-375 / "Lernmodule" (y=94, h=44)     | (188, 116)    | DIV-Wrapper im Banner                    |
+| desktop-1280 / "Grundlagen" (y=17, h=44)   | (640, 39)     | SPAN im Banner                           |
+| desktop-1920 / "Grundlagen" (y=17, h=44)   | (960, 39)     | SPAN im Banner                           |
+
+Die Geometrie passt exakt:
+
+- Persistenz-Banner: `position: relative; z-index: 100`
+  - mobile-375: y=0, h=171
+  - desktop-1280/1920: y=0, h=69
+- Mobile-Dialog (`.ui-mobile-dialog`, primitives.css:1445–1452):
+  `position: fixed; z-index: 60`
+
+`60 < 100` → der Banner liegt im Stacking-Context **ueber** dem Modal-Dialog,
+obwohl der Dialog visuell ueber allem liegen sollte. Wo Banner und Nav-Items
+sich geometrisch kreuzen (oberer Bildschirmrand des geoeffneten Mobile-
+Menues), faengt der Banner alle Klicks ab.
+
+Warum nur `Start`/`Lernmodule` auf Mobile bzw. nur `Grundlagen` auf Desktop?
+Das sind genau die Nav-Buttons, deren `getBoundingClientRect()` in den
+y-Bereich des Banners (0…171 mobile, 0…69 desktop) faellt. Alle anderen
+Items liegen tiefer und damit ausserhalb der Banner-Geometrie. Auf Desktop
+ist die Dialog-Liste so gescrollt, dass nur `Grundlagen` mit y=17 in den
+Banner-Bereich (0…69) ragt; die uebrigen sichtbaren Items beginnen erst ab
+y=69+.
+
+**Hypothese-Sicherheit:** sehr hoch (≈ 95%). Die Diagnose ist nicht
+spekulativ — sie ist die **direkte Auslesung** von `elementFromPoint` und
+zeigt das ueberlagernde Element pro Failure mit Bounding-Box, z-index und
+Position. Die Fix-Vorhersage (Anhebung des Dialog-z-Index ueber 100) folgt
+deterministisch aus der CSS-Spec.
+
+### 2.4 Triage-Kategorisierung
+
+| Kategorie       | Anzahl | Befunde                                                            |
+|-----------------|-------:|--------------------------------------------------------------------|
+| Notfall-relevant (nicht verhandelbar) | 0  | Keine. Alle 63 tel-Link-Reachability-Checks bestanden. R31-Architektur intakt. |
+| Funktionskritisch / Release-Blocker    | 28 | Mobile-Nav "Start"+"Lernmodule" + Desktop-Nav "Grundlagen" durch Persistenz-Banner ueberlagert |
+| Diagnostisch / Beobachtung             |  0 | —                                                                  |
+| Kosmetisch                             |  0 | —                                                                  |
+
+**Notfall-Spalte explizit:** Der Audit hat keine Notfall-relevanten Befunde
+ergeben. Diese Aussage ist dokumentiert, weil das Fehlen kritischer Befunde
+ein eigenstaendiges, positives Pruefergebnis ist.
+
+### 2.5 Release-Readiness
+
+**Stufe A (vollstaendig release-bereit) ist derzeit nicht erreicht.**
+
+Begruendung: Auch wenn die 28 Failures nicht "kritisch" im Notfall-Sinn
+sind, untergraben sie die Hauptnavigation auf Mobile (zwei von acht Items
+unerreichbar) und auf Desktop (ein Item unerreichbar). Mobile-Nutzende
+machen einen substantiellen Anteil der Zielgruppe aus; eine kaputte
+"Start"-Schaltflaeche ist ein Vertrauensbruch, auch ohne Notfall-Kontext.
+Stufe A wird wieder erreicht, sobald der in Phase 3 vorgeschlagene Fix
+angewandt und durch Re-Lauf von Script B verifiziert ist.
+
+Aktuelle Stufe: **Stufe B** (live-tauglich mit dokumentierter Einschraenkung
+der Mobile-Hauptnavigation).
+
+### 2.6 Fix-Plan fuer Phase 3
+
+Da die Diagnose **eine einzige strukturelle Ursache** identifiziert hat,
+wird Phase 3 alle 28 Failures in **einem** Commit beheben (gemaess Punkt 5
+der Phase-2-Vorgaben).
+
+Fix: `.ui-mobile-dialog` und `.ui-mobile-backdrop` muessen im Stacking-
+Context oberhalb des Persistenz-Banners (`z-index: 100`) und unterhalb des
+Skip-Links (`z-index: 200`) liegen. Vorschlag:
+
+- `.ui-mobile-backdrop`: `z-index: 110`
+- `.ui-mobile-dialog`:   `z-index: 120`
+
+Damit bleibt der Persistenz-Banner sichtbar, wird aber vom geoeffneten
+Modal abgedeckt — was dem erwarteten Modal-Verhalten entspricht. Der
+Skip-Link (z=200) bleibt darueber, damit Tastaturnutzer ihn auch bei
+geoeffnetem Modal erreichen koennen.
+
+Verifikation in Phase 4: Re-Lauf aller drei Phase-1-Scripts; Erwartung
+`Failures: 0` in Script B.
+
+### 2.7 STOPP
+
+Warte auf Bestaetigung der Diagnose-Hypothese (Single Root Cause:
+Persistenz-Banner z-index 100 ueberlagert Mobile-Dialog z-index 60) und
+auf Freigabe des Fix-Plans (Anhebung Dialog/Backdrop auf 120/110).
+
+## Phase 3 — Fixes
+
+_(Folgt nach Freigabe von Phase 2.)_
 
 ## Phase 3 — Fixes
 
