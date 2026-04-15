@@ -445,7 +445,19 @@ export default function ClosingSection({ section, sectionId, surface = 'plain', 
             </div>
           ) : null}
           <ClosingNotes notes={section.notes} />
-          {section.printView ? <div className="print-only">{section.printView}</div> : null}
+          {section.printView ? (
+            // Audit 13 / F6: aria-hidden='true', damit die im printView
+            // enthaltenen h1/header-Elemente (Toolbox-Arbeitsansicht) nicht
+            // die Dokument-Struktur fuer Screen-Reader duplizieren. Auf dem
+            // Screen ist .print-only via display: none ohnehin unsichtbar,
+            // aber der DOM wird von Screen-Readern trotzdem gelesen; mit
+            // aria-hidden wird der ganze Teilbaum uebersprungen. Beim Drucken
+            // wird der Block weiterhin sichtbar (CSS steuert display:
+            // unabhaengig von aria-hidden) -- das Papier kennt kein ARIA.
+            <div className="print-only" aria-hidden="true">
+              {section.printView}
+            </div>
+          ) : null}
         </div>
       </Section>
       <ClosingReferences references={section.references} />
