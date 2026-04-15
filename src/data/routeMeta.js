@@ -55,7 +55,7 @@ export const ROUTE_META = {
       'Schrittweise Lernbausteine für Fachpersonen: Sprache, Falllogik und Gesprächsorientierung in der Begleitung psychisch belasteter Eltern.',
   },
   vignetten: {
-    title: 'Training und Vignetten – Relational Recovery',
+    title: 'Training – Relational Recovery',
     description:
       'Trainingsfälle zur Fallreflexion und Dialogführung in belasteten Familiensystemen, mit klinisch angelegter Entscheidungslogik.',
     ogTitle: 'Fallvignetten für Reflexion und Dialog – Relational Recovery',
