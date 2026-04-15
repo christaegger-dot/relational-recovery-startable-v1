@@ -43,7 +43,12 @@ async function isPreviewReady() {
 }
 
 function spawnPreview() {
-  const child = spawn('npx', ['vite', 'preview', '--port', String(previewPort), '--strictPort'], {
+  // --host 0.0.0.0: in CI-Umgebungen (Netlify u. a.) wichtig, damit der
+  // Server auf alle Interfaces bindet. Default 'localhost' kann in
+  // Container-Netzwerken zu Bind-Konflikten oder nicht-erreichbaren
+  // Endpoints fuehren; 127.0.0.1-Requests gegen einen 'localhost'-Bind
+  // klappen nicht zuverlaessig.
+  const child = spawn('npx', ['vite', 'preview', '--host', '0.0.0.0', '--port', String(previewPort), '--strictPort'], {
     cwd: projectRoot,
     stdio: ['ignore', 'pipe', 'pipe'],
   });
