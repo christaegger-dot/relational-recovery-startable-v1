@@ -25,20 +25,12 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
     eyebrow: 'Systemische Orientierung',
     title: 'Wenn ein Elternteil',
     accent: 'psychisch belastet ist.',
-    lead: 'Orientierung, Triage und Arbeitshilfen für Fachpersonen. FAQ und Einordnung für Angehörige. Krisenhilfe und regionale Netzwerkstellen für beide Zielgruppen.',
-    audienceLabel: 'Zugang nach Rolle wählen',
-    audienceEntries: [
-      {
-        label: 'Für Fachpersonen',
-        destination: 'Toolbox',
-        onClick: () => navigate('toolbox', { focusTarget: 'heading' }),
-      },
-      {
-        label: 'Für Angehörige',
-        destination: 'Grundlagen-FAQ',
-        onClick: () => navigate('grundlagen', { focusTarget: 'heading' }),
-      },
-    ],
+    lead: 'Orientierung, Triage und Arbeitshilfen für Fachpersonen, die mit Familien mit psychisch belasteten Eltern arbeiten. Krisenhilfe und regionale Netzwerkstellen bleiben auch für Angehörige erreichbar.',
+    audienceNote: {
+      prefix: 'Sie sind Angehörige?',
+      label: 'Zur Grundlagen-FAQ',
+      onClick: () => navigate('grundlagen', { focusTarget: 'heading' }),
+    },
     image: heroIllustration,
     imageAlt: 'Minimalistische Illustration eines Familiensystems mit Nähe, Distanz und Unterstützung',
     asideTitle: 'Wichtiger Hinweis zur Einordnung',
