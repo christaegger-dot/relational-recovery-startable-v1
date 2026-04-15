@@ -43,13 +43,13 @@ const Header = memo(function Header({
           type="button"
           onClick={handleHomeClick}
           className="ui-brand"
-          aria-label="Relational Recovery – zur Startseite wechseln"
+          aria-label="Eltern mit psychischen Erkrankungen im Beratungskontext – zur Startseite wechseln"
         >
           <div className="ui-brand__mark" aria-hidden="true">
             RR
           </div>
           <div className="ui-brand__copy">
-            <span className="ui-brand__title">Relational Recovery</span>
+            <span className="ui-brand__title">Eltern im Beratungskontext</span>
             <p className="ui-kicker ui-brand__meta">Schweizer Fachportal</p>
           </div>
         </button>

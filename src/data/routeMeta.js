@@ -22,9 +22,15 @@
 // Fallback sichert Dev- und Preview-Szenarien, in denen keine .env existiert.
 export const BASE_URL = import.meta.env.VITE_BASE_URL || 'https://eltern-angehoerige-fa.netlify.app';
 
-const DEFAULT_TITLE = 'Relational Recovery – Schweizer Fachportal';
+// Offizieller Website-Titel (seit Audience-Cut-Strategie Phase 2):
+// Klares Fachportal-Profil. Der frühere Projekt-/Arbeitstitel
+// "Relational Recovery" wird in Meta, SEO und sichtbarem Branding durch
+// den fachlich präzisen Titel abgelöst. Angehörige sind weiterhin
+// erreichbar, aber nicht mehr als gleichrangige Hauptzielgruppe in der
+// Portal-Selbstbeschreibung genannt.
+const DEFAULT_TITLE = 'Eltern mit psychischen Erkrankungen im Beratungskontext';
 const DEFAULT_DESCRIPTION =
-  'Psychoedukative Web-App für Angehörige und Fachpersonen mit Fokus auf Elternschaft, psychische Krise, Kindesschutz und regionale Unterstützung in Zürich und der Schweiz.';
+  'Fachportal für Orientierung, Triage und Weitervermittlung: Arbeitshilfen für Fachpersonen, die mit Familien mit psychisch belasteten Eltern arbeiten. Schwerpunkt Kanton Zürich, schweizweite Ergänzungen.';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.webp`;
 
 /** @type {RouteMeta} */
@@ -39,68 +45,68 @@ export const DEFAULT_META = {
 
 export const ROUTE_META = {
   start: {
-    title: 'Relational Recovery – Orientierung für Angehörige und Fachpersonen',
+    title: 'Eltern mit psychischen Erkrankungen im Beratungskontext',
     description:
-      'Einstieg in das Fachportal mit Training, systemischer Orientierung, Krisenhilfe, Netzwerk und printfähigen Arbeitshilfen.',
-    ogTitle: 'Relational Recovery – Begleitung ist Beziehungsarbeit',
+      'Fachportal für Orientierung, Triage und Weitervermittlung: Einstieg mit Arbeitshilfen, Trainingsfällen, systemischer Einordnung und regionalen Fachstellen.',
+    ogTitle: 'Fachportal für Orientierung, Triage und Weitervermittlung',
     ogDescription:
-      'Interaktive Fachressourcen für die Begleitung von Eltern mit psychischer Belastung – mit Training, systemischer Orientierung, Krisenhilfe und Netzwerk.',
+      'Arbeitshilfen für Fachpersonen, die mit Familien mit psychisch belasteten Eltern arbeiten – Toolbox, Trainingsfälle, Wissensraum, regionale Fachstellen.',
   },
   lernmodule: {
-    title: 'Lernmodule – Relational Recovery',
+    title: 'Lernmodule – Eltern mit psychischen Erkrankungen im Beratungskontext',
     description:
-      'Kompakte Lerneinheiten zur systemischen Falllogik, Sprache und Gesprächsführung in belasteten Familiensituationen.',
-    ogTitle: 'Lernmodule für die Fachpraxis – Relational Recovery',
+      'Kompakte Lerneinheiten für Fachpersonen: Sprache, Falllogik und Gesprächsführung in der Arbeit mit belasteten Familiensystemen.',
+    ogTitle: 'Lernmodule für die Fachpraxis',
     ogDescription:
       'Schrittweise Lernbausteine für Fachpersonen: Sprache, Falllogik und Gesprächsorientierung in der Begleitung psychisch belasteter Eltern.',
   },
   vignetten: {
-    title: 'Training – Relational Recovery',
+    title: 'Training – Eltern mit psychischen Erkrankungen im Beratungskontext',
     description:
-      'Trainingsfälle zur Fallreflexion und Dialogführung in belasteten Familiensystemen, mit klinisch angelegter Entscheidungslogik.',
-    ogTitle: 'Fallvignetten für Reflexion und Dialog – Relational Recovery',
+      'Trainingsfälle für Fachpersonen: Fallreflexion und Dialogführung in belasteten Familiensystemen, mit klinisch angelegter Entscheidungslogik.',
+    ogTitle: 'Trainingsfälle für Reflexion und Dialog',
     ogDescription:
       'Typische Entscheidungssituationen aus der Fachpraxis: Belastungsdynamik, Sprache und nächste Schritte konkret üben.',
   },
   glossar: {
-    title: 'Glossar – Relational Recovery',
+    title: 'Glossar – Eltern mit psychischen Erkrankungen im Beratungskontext',
     description:
-      'Zentrale Fachbegriffe für die Arbeit mit psychisch belasteten Eltern und ihren Angehörigen, kurz und anwendungsbezogen definiert.',
+      'Zentrale Fachbegriffe für die Arbeit mit psychisch belasteten Eltern und ihren Familien, kurz und anwendungsbezogen definiert.',
     ogTitle: 'Glossar – Gemeinsame Sprache für die Fachpraxis',
     ogDescription:
       'Sprache im Kontakt, Schutz und Risiko, Versorgung und Trialog – kompakt definiert und auf typische Arbeitssituationen bezogen.',
   },
   grundlagen: {
-    title: 'Grundlagen und häufige Fragen – Relational Recovery',
+    title: 'Grundlagen – Für Angehörige',
     description:
-      'Orientierende Antworten für Angehörige: Belastung verstehen, Grenzen und Verantwortung sortieren, Zusammenarbeit mit Hilfen strukturieren.',
-    ogTitle: 'Grundlagen für Angehörige – Relational Recovery',
+      'FAQ und Einordnung für Angehörige: Belastung verstehen, Grenzen und Verantwortung sortieren, Zusammenarbeit mit Hilfen strukturieren.',
+    ogTitle: 'Grundlagen-FAQ für Angehörige',
     ogDescription:
       'Häufige Fragen in einer klaren, entlastenden Sprache: Belastung verstehen, Grenzen klären, nächste Schritte finden.',
   },
   evidenz: {
-    title: 'Evidenzbereich – Relational Recovery',
+    title: 'Evidenz – Eltern mit psychischen Erkrankungen im Beratungskontext',
     description:
       'Kuratierte Einstiegspunkte, Materialien und Referenzen für die systemische Einordnung von Belastung in Elternsystemen.',
-    ogTitle: 'Evidenz und Wissensraum – Relational Recovery',
+    ogTitle: 'Evidenz und Wissensraum',
     ogDescription:
       'Familiendynamik, Schutzfaktoren und Psychoedukation – Grundlagen, Vertiefung und Materialien für die Fachpraxis.',
   },
   toolbox: {
     title: 'Toolbox – Orientierung, Schutz und nächste Schritte',
     description:
-      'Klinische Gesprächshilfe für Belastungseinschätzung, Triage, Sicherheitsplanung und Kindesschutz – ohne Diagnosefunktion.',
-    ogTitle: 'Toolbox – Relational Recovery',
+      'Klinische Gesprächshilfe für Fachpersonen: Belastungseinschätzung, Triage, Sicherheitsplanung und Kindesschutz – ohne Diagnosefunktion.',
+    ogTitle: 'Toolbox – Arbeitshilfen für die Fachpraxis',
     ogDescription:
       'Strukturierte Einschätzung familiärer Belastung als Gesprächshilfe für Abwägung, Schutz und nächste tragfähige Schritte.',
   },
   netzwerk: {
-    title: 'Netzwerk und Fachstellen – Relational Recovery',
+    title: 'Netzwerk – Weitervermittlung, Triage, regionale Fachstellen',
     description:
-      'Regionale Fachstellen für Krise, Beratung, Entlastung und Weitervermittlung im Kanton Zürich und schweizweit, plus Arbeitskarte.',
-    ogTitle: 'Netzwerk – Relational Recovery',
+      'Fachstellenverzeichnis und Netzwerkkarte für die Arbeit mit Familien mit psychisch belasteten Eltern: Weitervermittlung, Triage, Entlastung – Kanton Zürich und schweizweite Ergänzungen.',
+    ogTitle: 'Netzwerk – Fachstellen und Weitervermittlung',
     ogDescription:
-      'Fachstellenverzeichnis und Netzwerkkarte für Triage, Entlastung und Weitervermittlung an passende Angebote.',
+      'Regionale Fachstellen für Weitervermittlung, Triage und Entlastung – Zürich-Fokus mit schweizweiten Ergänzungen.',
   },
 };
 

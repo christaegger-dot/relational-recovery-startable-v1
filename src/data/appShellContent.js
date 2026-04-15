@@ -17,7 +17,13 @@ import { FACHSTELLEN, SUPPORT_OFFER_IDS } from './fachstellenContent';
  */
 
 /**
- * @typedef {('fachpersonen'|'angehoerige'|'beide')} PrimaryAudience
+ * @typedef {('angehoerige')} AngehoerigenAudience
+ * Redaktionelles Metadatum fuer Ausnahme-Tabs. Seit Audience-Cut-Phase 2
+ * ist Fachperson der Default — nur Tabs, die sich explizit an Angehoerige
+ * richten, tragen das Feld `primaryAudience: 'angehoerige'`. Die fruehere
+ * Dreiwertigkeit (fachpersonen | angehoerige | beide) ist aufgehoben,
+ * weil "beide" und "fachpersonen" nach der Fokus-Entscheidung identisch
+ * behandelt werden (Default-Adressat Fachperson).
  */
 
 /**
@@ -27,26 +33,27 @@ import { FACHSTELLEN, SUPPORT_OFFER_IDS } from './fachstellenContent';
  * @property {React.ComponentType} icon - Lucide-React-Icon-Komponente.
  * @property {string} footerNote - Kurzer Beschreibungstext fuer den Footer.
  * @property {'primary'} priority - Aktuell sind alle Top-Level-Tabs 'primary'.
- * @property {PrimaryAudience} primaryAudience - Redaktionelles Metadatum aus
- *   Audit 02. Dokumentiert die primaere Zielgruppe eines Tabs. Wird aktuell
- *   nicht im Runtime-Code konsumiert, aber bei redaktionellen Entscheidungen
- *   aktiv verwendet, z.B. bei der Fachjargon-Schwelle in Audit 06 Block 5
- *   ('Desorganisation nur in Angehoerigen-Texten verwenden'). Bei neuen Tabs
- *   setzen, damit die Konvention lebendig bleibt. Option PA1 aus Audit 12:
- *   bewusst ohne Runtime-Integration, um die Seite nach Audit 10 release-fest
- *   nicht durch neue Design-Entscheidungen zu belasten.
+ * @property {AngehoerigenAudience} [primaryAudience] - Optional. Nur gesetzt
+ *   fuer Tabs, die sich primaer an Angehoerige richten. Fehlendes Feld
+ *   bedeutet: Default-Adressat Fachperson. Kombiniert mit `audienceBadge`
+ *   fuer sichtbare Nav-Markierung.
+ * @property {string} [audienceBadge] - Optional. Sichtbarer Zielgruppen-
+ *   Marker im Nav-Button (Desktop + Mobile). Aktuell nur Grundlagen.
  */
 
 /** @type {TabItem[]} */
 export const TAB_ITEMS = [
-  { id: 'start', label: 'Start', icon: LayoutDashboard, footerNote: 'Dashboard und Orientierung', priority: 'primary', primaryAudience: 'beide' },
+  // Default-Adressat aller Tabs ohne explizites primaryAudience-Feld:
+  // Fachperson. Nur Tabs, die sich primaer an Angehoerige richten,
+  // setzen das Feld — sie erhalten zusaetzlich einen sichtbaren
+  // audienceBadge in der Nav.
+  { id: 'start', label: 'Start', icon: LayoutDashboard, footerNote: 'Dashboard und Orientierung', priority: 'primary' },
   {
     id: 'lernmodule',
     label: 'Lernmodule',
     icon: GraduationCap,
     footerNote: 'Kurzformate für Fachpraxis',
     priority: 'primary',
-    primaryAudience: 'fachpersonen',
   },
   {
     id: 'vignetten',
@@ -54,7 +61,6 @@ export const TAB_ITEMS = [
     icon: HeartHandshake,
     footerNote: 'Fallreflexion und Dialog',
     priority: 'primary',
-    primaryAudience: 'fachpersonen',
   },
   {
     id: 'glossar',
@@ -62,18 +68,14 @@ export const TAB_ITEMS = [
     icon: BookOpenText,
     footerNote: 'Begriffe, Konzepte und Sprache',
     priority: 'primary',
-    primaryAudience: 'fachpersonen',
   },
   {
     id: 'grundlagen',
     label: 'Grundlagen',
     icon: CircleHelp,
-    footerNote: 'FAQ, Einordnung und Orientierung',
+    footerNote: 'FAQ und Einordnung für Angehörige',
     priority: 'primary',
     primaryAudience: 'angehoerige',
-    // Sichtbarer Zielgruppen-Marker in der Haupt-/Mobile-Nav: Grundlagen
-    // ist der einzige Angehoerigen-Nebenpfad im sonst fachpersonenorientierten
-    // Portal (Audit-Phase-1 Audience-Cut-Strategie).
     audienceBadge: 'Für Angehörige',
   },
   {
@@ -82,7 +84,6 @@ export const TAB_ITEMS = [
     icon: Activity,
     footerNote: 'Grundlagen, Vertiefung, Materialien',
     priority: 'primary',
-    primaryAudience: 'fachpersonen',
   },
   {
     id: 'toolbox',
@@ -90,15 +91,13 @@ export const TAB_ITEMS = [
     icon: ClipboardCheck,
     footerNote: 'Triage, Schutz, nächste Schritte',
     priority: 'primary',
-    primaryAudience: 'fachpersonen',
   },
   {
     id: 'netzwerk',
     label: 'Netzwerk',
     icon: MapPin,
-    footerNote: 'Hilfen, Stellen, Weitervermittlung',
+    footerNote: 'Fachstellen und Weitervermittlung',
     priority: 'primary',
-    primaryAudience: 'beide',
   },
 ];
 

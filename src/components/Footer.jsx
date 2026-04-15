@@ -23,11 +23,11 @@ const Footer = memo(function Footer() {
           <div className="footer-panel footer-panel--brand">
             <div className="footer-brand-badge">Fachportal Zürich</div>
             <h2 className="footer-brand-title">
-              Relational <br /> Recovery
+              Eltern im <br /> Beratungskontext
             </h2>
             <p className="footer-brand-copy">
-              Ergänzendes psychoedukatives Informationsangebot zu psychisch belasteter Elternschaft, Kinderschutz,
-              Angehörigenarbeit und zürich-zentrierter Vernetzung mit punktuellen schweizweiten Ergänzungen.
+              Fachportal für Orientierung, Triage und Weitervermittlung: Arbeitshilfen für Fachpersonen, die mit
+              Familien mit psychisch belasteten Eltern arbeiten. Schwerpunkt Kanton Zürich, schweizweite Ergänzungen.
             </p>
             <div className="footer-stat-grid">
               <div className="footer-stat-card">
@@ -80,7 +80,7 @@ const Footer = memo(function Footer() {
                 </p>
               </div>
             </div>
-            <div className="footer-framework-legal">© 2026 Relational Recovery Fachportal.</div>
+            <div className="footer-framework-legal">© 2026 Eltern mit psychischen Erkrankungen im Beratungskontext.</div>
           </div>
         </div>
 
