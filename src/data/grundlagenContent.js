@@ -14,7 +14,7 @@ export const GRUNDLAGEN_HERO = {
     },
     {
       label: 'Leitfragen',
-      value: '28',
+      value: '30',
       note: 'kurz beantwortet und auf typische Entscheidungssituationen bezogen',
     },
     {
@@ -211,7 +211,16 @@ export const GRUNDLAGEN_CLUSTERS = [
           'Am hilfreichsten sind einfache, kurze Sätze, die beim Alltag des Kindes ansetzen: «Mama hat eine Krankheit, die macht, dass sie oft sehr traurig ist und fast nichts mehr schaffen kann.» Oder: «Papa hat so viel Angst, dass er manche Dinge nicht mehr tun kann.» Das Kind braucht zu Beginn nicht alle Details — wichtig ist, dass die Erkrankung einen Namen bekommt und das Kind weiss, dass darüber gesprochen werden darf.',
       },
       {
-        question: 'Was, wenn mein Kind sich schuldig fühlt?',
+        question: 'Wie beginne ich das Gespräch mit meinem Kind?',
+        answer:
+          'Ein möglicher Einstieg: «Damit du Bescheid weisst und dir nicht unnötig Sorgen machst, möchte ich dir erklären, was mit mir los ist.» Dieser Satz signalisiert drei Dinge: Offenheit, Fürsorge und die Erlaubnis, Fragen zu stellen. Das Kind braucht zu Beginn nicht alle Details — wichtig ist, dass die Erkrankung benannt wird, dass sich Veränderungen im Alltag ergeben können und dass das Kind nicht schuld ist.',
+      },
+      {
+        question: 'Wie merke ich, ob mein Kind das Gesagte wirklich verstanden hat?',
+        answer:
+          'Am hilfreichsten ist, das Kind zu bitten, das Gehörte in eigenen Worten wiederzugeben — nicht als Test, sondern als Einladung: «Magst du mir erzählen, was du jetzt verstanden hast?» Dabei nicht nur auf den Inhalt achten, sondern auch auf Mimik, Tonfall und Körpersprache. Wenn das Kind echohaft nachspricht oder ausweicht, braucht es vielleicht eine Pause oder eine andere Erklärung. Wichtig: Psychoedukation ist kein einmaliges Gespräch, sondern ein fortlaufender Prozess — Kinder kommen mit neuen Fragen zurück, wenn sie bereit sind.',
+      },
+      {
         answer:
           'Viele Kinder vermuten, dass sie durch ihr Verhalten die Erkrankung verursacht oder verschlimmert haben — insbesondere jüngere Kinder mit stark magischem Denken. Es ist wichtig, dem Kind klar zu sagen, dass es nicht schuld ist. Auch wenn es sich schlecht benommen hat, einen Streit ausgelöst hat oder zu wenig geholfen hat: die Krankheit hat andere Ursachen.',
       },
