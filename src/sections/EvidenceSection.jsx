@@ -33,6 +33,7 @@ import {
   PSYCHOEDUCATION_PRACTICE_POINTS,
   PSYCHOEDUCATION_PREPARATION_POINTS,
   PSYCHOEDUCATION_SETTINGS,
+  PARENT_GUIDING_PRINCIPLE,
   RELEVANCE_POINTS,
   RELEVANCE_STATS,
   SPECIFIC_PROTECTIVE_FACTORS,
@@ -206,7 +207,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       ],
       cardColumns: 'three',
       callout: {
-        text: 'Für die Praxis zählt weniger eine abstrakte Diagnose als die Frage, wie verlässlich Alltag, Kommunikation, Beziehung und Schutzfaktoren aktuell tatsächlich funktionieren.',
+        text: `${PARENT_GUIDING_PRINCIPLE.callout} — ${PARENT_GUIDING_PRINCIPLE.normalizing}`,
       },
     },
     {
