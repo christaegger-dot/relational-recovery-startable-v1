@@ -13,7 +13,7 @@ Leitfrage: ${field.hint}
 `
     ).join('\n');
 
-    const template = `Krisenplan – Relational Recovery Fachportal
+    const template = `Krisenplan – Eltern im Beratungskontext
 
 Bearbeitbare Textvorlage fuer Gespraech, Fallarbeit oder gemeinsame Krisenvorsorge.
 Aktueller Assessment-Score: ${scoreRisk}

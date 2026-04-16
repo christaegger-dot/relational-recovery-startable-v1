@@ -501,7 +501,7 @@ export default function ToolboxSection({
     <div className="toolbox-print-view">
       <div className="toolbox-print-view__inner">
         <header className="toolbox-print-block toolbox-print-card toolbox-print-card--hero">
-          <p className="toolbox-print-kicker">Relational Recovery · Toolbox Arbeitsansicht</p>
+          <p className="toolbox-print-kicker">Eltern im Beratungskontext · Toolbox Arbeitsansicht</p>
           <h1 className="toolbox-print-title">Orientierung, Schutz und nächste Schritte</h1>
           <p className="toolbox-print-lead">
             Kompakte Gesprächs- und Protokollansicht für akute Belastung, Krisenvorsorge und nächste verlässliche
