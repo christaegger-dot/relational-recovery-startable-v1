@@ -124,6 +124,38 @@ export const PARENT_PRACTICE_POINTS = [
   'konkrete Alltagshilfen vor abstrakte Appelle stellen',
 ];
 
+// Gesprächsbeispiele für die Beratungspraxis: zeigen, wie eine
+// ressourcenorientierte Haltung gegenüber Eltern im Gespräch klingen
+// kann. Stauber Kap. 3.2 (Empowerment, Augenhöhe, Mitbestimmung) +
+// Kap. 4.3 (Lob, Anerkennung, Selbstwirksamkeit). Eigenständig
+// formuliert.
+export const PARENT_DIALOGUE_EXAMPLES = [
+  {
+    label: 'Ressourcen sichtbar machen',
+    text: '«Was läuft gerade gut in Ihrem Alltag mit dem Kind — trotz allem?»',
+  },
+  {
+    label: 'Eltern als Kundige anerkennen',
+    text: '«Sie kennen Ihr Kind am besten. Was braucht es gerade von Ihnen?»',
+  },
+  {
+    label: 'Kleine Schritte statt grosse Pläne',
+    text: '«Was müsste heute passieren, damit der Abend etwas ruhiger wird?»',
+  },
+  {
+    label: 'Hilfe annehmen normalisieren',
+    text: '«Es ist in Ordnung, nicht alles alleine schaffen zu wollen. Das zeigt Verantwortung.»',
+  },
+  {
+    label: 'Mitbestimmung stärken',
+    text: '«Was würde Ihnen am meisten helfen — und was können Sie selbst gerade leisten?»',
+  },
+  {
+    label: 'Kraft zurückmelden',
+    text: '«Ihr Kind spürt, dass Sie sich kümmern. Das zählt.»',
+  },
+];
+
 export const COLLABORATION_PANELS = [
   {
     title: 'Information und Transparenz',
