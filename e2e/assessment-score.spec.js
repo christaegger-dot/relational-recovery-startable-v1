@@ -92,7 +92,9 @@ test.describe('Assessment Score', () => {
     const liveRegion = page.locator('#assessment-score-status');
     await expect(liveRegion).toContainText('Aktueller Assessment-Score: 0');
 
-    await checkboxFor(page, ITEMS[1].label).check({ force: true });
+    // Label-Click statt force:true, um React-State-Updates sicherzustellen.
+    await page.locator('label').filter({ hasText: ITEMS[1].label }).click();
+    await expect(checkboxFor(page, ITEMS[1].label)).toBeChecked();
 
     await expect(liveRegion).toContainText('Aktueller Assessment-Score: 3');
     await expect(liveRegion).toContainText('Hinweis auf vertiefte Begleitung');
