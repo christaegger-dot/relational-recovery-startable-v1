@@ -46,7 +46,7 @@ const Header = memo(function Header({
           aria-label="Eltern mit psychischen Erkrankungen im Beratungskontext – zur Startseite wechseln"
         >
           <div className="ui-brand__mark" aria-hidden="true">
-            RR
+            EB
           </div>
           <div className="ui-brand__copy">
             <span className="ui-brand__title">Eltern im Beratungskontext</span>
