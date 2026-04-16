@@ -64,6 +64,24 @@ export const E_MODULES = [
     ],
     correctQuizIdx: 1,
   },
+  {
+    // Vier-A-Modell nach Von Schlippe & Schweitzer (2009), referenziert
+    // in Stauber et al. (2018), Kap. 3.2. Empowerment-orientierte
+    // Auftragsklärung als Gesprächsgerüst für den Beziehungsaufbau mit
+    // psychisch belasteten Eltern.
+    id: 'mod3',
+    title: 'Die Vier A — Auftragsklärung im Erstgespräch',
+    duration: '4 Min.',
+    storyboard:
+      'Anlass, Anliegen, Auftrag und Abmachungen klären — ein strukturiertes Gesprächsgerüst, das psychisch belastete Eltern als Kundige ihrer Situation ernst nimmt und Selbstwirksamkeit stärkt, statt Hilflosigkeit zu vertiefen.',
+    quiz: 'Was ist das Hauptziel der Vier-A-Auftragsklärung?',
+    quizOptions: [
+      'Die Fachperson legt das Vorgehen fest',
+      'Eltern werden in Zieldefinition und Prozessgestaltung einbezogen',
+      'Der Auftrag wird durch die KESB formuliert',
+    ],
+    correctQuizIdx: 1,
+  },
 ];
 
 export const ASSESSMENT_ITEMS = [
