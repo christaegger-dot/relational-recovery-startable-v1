@@ -89,29 +89,32 @@ function ChapterOverview({ chapterOverview }) {
   if (!chapterOverview) return null;
 
   return (
-    <Section spacing="tight" surface="subtle" className="no-print">
-      <div className="ui-stack ui-stack--loose">
-        <SectionHeader
-          eyebrow={chapterOverview.eyebrow}
-          title={chapterOverview.title}
-          titleAccent={chapterOverview.accent}
-          description={chapterOverview.description}
-          aside={chapterOverview.aside}
-          asideTone="default"
-        />
+    <>
+      <Section spacing="tight" surface="subtle" className="no-print">
+        <div className="ui-stack ui-stack--loose">
+          <SectionHeader
+            eyebrow={chapterOverview.eyebrow}
+            title={chapterOverview.title}
+            titleAccent={chapterOverview.accent}
+            description={chapterOverview.description}
+            aside={chapterOverview.aside}
+            asideTone="default"
+          />
 
-        {chapterOverview.items?.length ? (
-          <div className="ui-card-grid ui-card-grid--5">
-            {chapterOverview.items.map((item) => (
-              <a key={item.id} href={`#${item.id}`} className="ui-card ui-card--editorial-link">
-                <div className="ui-fact-card__label">{item.label}</div>
-                <p className="ui-card__copy">{item.note}</p>
-              </a>
-            ))}
-          </div>
-        ) : null}
-      </div>
-    </Section>
+          {chapterOverview.items?.length ? (
+            <div className="ui-card-grid ui-card-grid--5">
+              {chapterOverview.items.map((item) => (
+                <a key={item.id} href={`#${item.id}`} className="ui-card ui-card--editorial-link">
+                  <div className="ui-fact-card__label">{item.label}</div>
+                  <p className="ui-card__copy">{item.note}</p>
+                </a>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </Section>
+
+    </>
   );
 }
 
