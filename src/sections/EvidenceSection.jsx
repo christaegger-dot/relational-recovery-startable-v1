@@ -35,6 +35,7 @@ import {
   PSYCHOEDUCATION_SETTINGS,
   RELEVANCE_POINTS,
   RELEVANCE_STATS,
+  SPECIFIC_PROTECTIVE_FACTORS,
 } from '../data/evidenceContent';
 import { FACHSTELLEN, SUPPORT_OFFER_IDS } from '../data/fachstellenContent';
 import { SOURCES } from '../data/sourcesContent';
@@ -214,6 +215,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
       title: 'Mit Kindern sprechen –',
       accent: 'klar, altersgerecht und entlastend',
       paragraphs: [
+        'Zwei Faktoren gelten als besonders starke Schutzfaktoren speziell für Kinder psychisch kranker Eltern — über allgemeine Resilienzfaktoren hinaus: ein altersgerechtes Krankheitswissen und ein offener Umgang mit der Erkrankung in der Familie.',
         'Psychoedukation hilft Kindern, Verhalten und Belastung eines Elternteils besser einzuordnen. Nicht das Wissen an sich überfordert, sondern meist die Sprachlosigkeit, Unsicherheit und Fantasie ohne Erklärung.',
         'Entscheidend ist eine Haltung, die ehrlich benennt, was los ist, ohne Kinder mit Erwachseneninhalten zu überladen. Gute Gespräche reduzieren Schuldgefühle, schaffen Orientierung und stärken Beziehung.',
       ],
@@ -245,6 +247,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
         },
       ],
       cards: [
+        ...panelCards(SPECIFIC_PROTECTIVE_FACTORS),
         ...panelCards(PSYCHOEDUCATION_AGE_GROUPS),
         ...panelCards(PSYCHOEDUCATION_SETTINGS),
         ...panelCards(PSYCHOEDUCATION_DIFFICULTIES),

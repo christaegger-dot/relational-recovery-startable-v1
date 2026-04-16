@@ -238,6 +238,21 @@ export const CHILD_EXPERIENCE_PRACTICE_POINTS = [
 
 
 
+// Spezifische Schutzfaktoren nach Stauber et al. (2018), Kap. 2.5 — die
+// Resilienzforschung identifiziert genau diese zwei Punkte als evidenzbasiert
+// protektiv speziell für Kinder psychisch kranker Eltern (über allgemeine
+// Schutzfaktoren hinaus).
+export const SPECIFIC_PROTECTIVE_FACTORS = [
+  {
+    title: 'Krankheitswissen und Krankheitsverstehen',
+    text: 'Kinder, die eine altersgerechte Aufklärung über die Erkrankung ihres Elternteils erhalten, können die Situation besser einordnen. Wissen gibt Kontrolle, reduziert Schuldgefühle und ersetzt diffuse Ängste durch benennbare Zusammenhänge.',
+  },
+  {
+    title: 'Offener Umgang mit der Erkrankung in der Familie',
+    text: 'Wenn in einer Familie offen über die Erkrankung gesprochen werden darf, können Kinder ihre Fragen stellen, Worte für ihre Erlebnisse finden und ausserfamiliäre Unterstützung leichter annehmen. Offenheit wirkt als Gegenmittel zur Tabuisierung.',
+  },
+];
+
 export const PSYCHOEDUCATION_BENEFITS = [
   'Wissen reduziert kindliche Schuldgefühle und falsche Selbstzuschreibungen.',
   'Benennbare Zusammenhänge schaffen Orientierung und ein Gefühl von Kontrolle.',
