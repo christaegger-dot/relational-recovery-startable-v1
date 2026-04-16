@@ -49,7 +49,7 @@ export const GLOSSARY_GROUPS = [
         definition:
           'Wenn Kinder Aufgaben übernehmen, die eigentlich Erwachsene tragen sollten: den Elternteil trösten, auf Stimmungsschwankungen achten, sich um Geschwister kümmern oder den Haushalt organisieren. Das kann nach aussen kompetent wirken, ist innerlich aber oft überfordernd.',
         practice:
-          'Im Gespräch aktiv nach stillem Mittragen, Sorgeverhalten und Verantwortungsübernahme von Kindern fragen. Zwischen altersangemessener Mithilfe und überfordernder Rollenumkehr unterscheiden.',
+          'Im Gespräch aktiv nach stillem Mittragen, Sorgeverhalten und Verantwortungsübernahme von Kindern fragen. Zwischen altersangemessener Mithilfe und überfordernder Rollenumkehr unterscheiden. Wichtig: Bevor das Kind zur Rollenveränderung motiviert wird, braucht es zuerst die Arbeit mit den Eltern — sonst entsteht zusätzlicher Druck statt Entlastung.',
       },
       {
         id: 'loyalitaetskonflikt',
