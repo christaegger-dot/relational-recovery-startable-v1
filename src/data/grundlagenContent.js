@@ -9,12 +9,12 @@ export const GRUNDLAGEN_HERO = {
   stats: [
     {
       label: 'FAQ-Cluster',
-      value: '5',
-      note: 'Belastung, Grenzen, Zusammenarbeit, mit Kindern sprechen, altersgerecht erklären',
+      value: '6',
+      note: 'Belastung, Grenzen, Zusammenarbeit, Kinder-Aufklärung, Alter, Formulierungshilfen',
     },
     {
       label: 'Leitfragen',
-      value: '23',
+      value: '28',
       note: 'kurz beantwortet und auf typische Entscheidungssituationen bezogen',
     },
     {
@@ -60,6 +60,12 @@ export const GRUNDLAGEN_INTRO = {
       title: 'Altersgerecht erklären',
       copy: 'Wie sich Informationsbedürfnis, Verständnis und typische Reaktionen von Kindern je nach Altersstufe unterscheiden — und was das für das Gespräch bedeutet.',
       meta: 'geeignet für Vorbereitung, Teamreflexion und altersdifferenzierte Psychoedukation',
+    },
+    {
+      label: 'Cluster 6',
+      title: 'Formulierungshilfen je Störungsbild',
+      copy: 'Konkrete, kindgerechte Sätze für das Gespräch über Depression, Manie, Psychose und Angst — als Orientierung, nicht als Vorgabe.',
+      meta: 'geeignet für Gesprächsvorbereitung und Psychoedukation mit dem Kind',
     },
   ],
 };
@@ -261,6 +267,51 @@ export const GRUNDLAGEN_CLUSTERS = [
         question: 'Worauf achte ich bei Jugendlichen (ab ca. 13 Jahre)?',
         answer:
           'Jugendliche haben kognitiv meist ein Verständnis für die Situation, werden aber aufgrund ihres erwachsen wirkenden Auftretens oft überschätzt. Emotional stehen sie vor der Herausforderung, Autonomie und Ablösung mit der Abhängigkeit von der Familie zu vereinbaren. Viele Jugendliche vergleichen sich mit dem erkrankten Elternteil und beschäftigen sich stark mit der Frage, ob sie selbst erkranken könnten — dieses Thema sollte offen angesprochen werden. Jugendliche haben häufig einen Wissensvorsprung aus dem Internet, der aber nicht immer korrekt oder vollständig ist. Es ist hilfreich, von ihrem Wissensstand auszugehen und darauf aufzubauen. Hilfreich sind auch Materialien wie die Broschüren von Pro Juventute oder die Kurzfilme des Instituts Kinderseele Schweiz.',
+      },
+    ],
+  },
+  {
+    // Cluster 6 ergänzt die Kinder-Trilogie (Cluster 4: was sagen,
+    // Cluster 5: wie, je nach Alter) um konkrete Formulierungshilfen pro
+    // Störungsbild. Inhaltlich orientiert an Stauber et al. (2018),
+    // Kap. 5.3.1 / Tabelle 2 (Lenz 2010, S. 207–208) und Wunderer (2008).
+    // Eigenständig formuliert, keine wörtliche Übernahme.
+    id: 'grundlagen-formulierungshilfen',
+    eyebrow: 'Cluster 6',
+    title: 'Formulierungshilfen — psychische Erkrankungen kindgerecht erklären',
+    description:
+      'Wenn Eltern oder Fachpersonen mit einem Kind über die elterliche Erkrankung sprechen, helfen einfache, anschauliche Sätze. Dieser Abschnitt bietet Formulierungsbeispiele für verschiedene Störungsbilder — als Orientierung, nicht als Vorgabe. Jedes Kind, jede Familie und jede Situation ist anders.',
+    aside: {
+      label: 'Merksatz',
+      title: 'Die Krankheit bekommt einen Namen',
+      copy: 'Wenn die Erkrankung benannt wird, wird sie für das Kind greifbarer. Das reduziert diffuse Ängste und gibt dem Kind eine Sprache, die es auch gegenüber Vertrauenspersonen verwenden kann.',
+      tone: 'soft',
+    },
+    faqs: [
+      {
+        question: 'Wie erkläre ich allgemein, was eine psychische Erkrankung ist?',
+        answer:
+          'Eine psychische Erkrankung ist eine Krankheit wie andere Krankheiten auch — wie eine Allergie oder eine Erkältung. Wenn jemand psychisch erkrankt, können sich Verhalten, Gefühle oder Gedanken verändern. Manche Menschen werden sehr traurig und schaffen fast nichts mehr. Andere haben vor vielem Angst. Wieder andere sind sehr unruhig oder verwirrt. Ein Zeichen kann sein, dass es schwierig wird, mit der erkrankten Person richtig in Kontakt zu kommen. Wichtig für das Kind: Diese Krankheiten haben einen Namen, sie können behandelt werden, und sie sind nicht ansteckend.',
+      },
+      {
+        question: 'Wie erkläre ich eine Depression?',
+        answer:
+          'Mögliche Formulierung: «Mama/Papa hat eine Krankheit, die heisst Depression. Das bedeutet, dass sie/er so traurig ist, dass fast gar nichts mehr geht — aufstehen, sich anziehen, kochen, essen. Alles fühlt sich furchtbar anstrengend an, obwohl sie/er gar nichts Schlimmes getan hat. Das ist nicht, weil du etwas falsch gemacht hast. Das ist die Krankheit. Und es gibt Hilfe dafür.»',
+      },
+      {
+        question: 'Wie erkläre ich eine Manie oder bipolare Erkrankung?',
+        answer:
+          'Mögliche Formulierung: «Mama/Papa hat eine Krankheit, bei der sich die Stimmung sehr stark verändert. Manchmal ist sie/er ganz aufgedreht, redet ganz viel, kann nicht stillsitzen und nicht schlafen, weil zu viele Gedanken im Kopf sind. Dann wieder kommt eine Phase, in der sie/er sehr traurig und müde ist. Dieser Wechsel gehört zur Krankheit. Er hat nichts mit dir zu tun.»',
+      },
+      {
+        question: 'Wie erkläre ich eine Psychose oder Schizophrenie?',
+        answer:
+          'Mögliche Formulierung: «Mama/Papa hat eine Krankheit, die macht, dass ihr/sein Kopf manchmal durcheinandergerät. Sie/er hört oder sieht dann Dinge, die andere nicht hören oder sehen. Manchmal sagt oder tut sie/er Dinge, die komisch wirken oder die dir Angst machen. Das liegt an der Krankheit, nicht daran, dass sie/er dich nicht mehr lieb hat. Es gibt Ärzte, die dabei helfen können.»',
+      },
+      {
+        question: 'Wie erkläre ich eine Angststörung?',
+        answer:
+          'Mögliche Formulierung: «Mama/Papa hat eine Krankheit, die heisst Angststörung. Das bedeutet, dass sie/er vor bestimmten Dingen so viel Angst hat, dass sie/er sie nicht mehr tun kann — zum Beispiel Bus fahren, einkaufen gehen oder Leute treffen. Die Angst fühlt sich riesengross an, auch wenn andere sagen, es sei nicht schlimm. Das ist nicht, weil sie/er nicht will. Das ist die Krankheit. Und es gibt Hilfe dafür.»',
       },
     ],
   },
