@@ -430,6 +430,7 @@ export default function ToolboxSection({
         titlePrefix: 'Wann freiwillige Hilfe reicht und wann',
         titleAccent: 'Schutzschwellen enger werden',
         description: [
+          'Dieser Abschnitt richtet sich an Fachpersonen im Beratungskontext. Angehörige finden Erstorientierung und FAQ im Bereich Grundlagen.',
           'Nicht jede hohe Belastung verlangt sofort eine formelle Meldung. Als Orientierung dient die Frage: Sind Aufsicht, Sicherheit, Nahrung und Schutz aktuell gewährleistet?',
           'Wenn Zweifel bestehen, ist der erste Schritt oft ein vertrauliches Gespräch mit einer Beratungsstelle. Eine vertiefte fachliche Klärung und gegebenenfalls eine Kindesschutzabklärung kommen erst danach.',
         ],
@@ -474,8 +475,10 @@ export default function ToolboxSection({
         eyebrow: 'Rolle und Rechte',
         titlePrefix: 'Schweigepflicht, Rückmeldung und',
         titleAccent: 'pragmatische Orientierung',
-        description:
-          'Angehörige und Fachpersonen verlieren in belasteten Situationen oft Zeit, weil unklar ist, was mitgeteilt werden darf und was nicht. Die FAQ bündeln die wichtigsten alltagsnahen Klärungen.',
+        description: [
+          'Dieser Abschnitt richtet sich an Fachpersonen im Beratungskontext. Angehörige finden Erstorientierung und FAQ im Bereich Grundlagen.',
+          'Fachpersonen und Angehörige verlieren in belasteten Situationen oft Zeit, weil unklar ist, was mitgeteilt werden darf und was nicht. Die FAQ bündeln die wichtigsten alltagsnahen Klärungen.',
+        ],
         disclosureItems: RIGHTS_FAQ.map((item) => ({
           title: item.question,
           summaryAriaLabel: `FAQ ${item.question}`,
