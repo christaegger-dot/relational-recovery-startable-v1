@@ -22,10 +22,6 @@ export default defineConfig({
       name: 'chromium',
       use: {
         browserName: 'chromium',
-        channel: undefined,
-        launchOptions: {
-          executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
-        },
       },
     },
   ],

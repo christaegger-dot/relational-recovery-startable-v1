@@ -177,8 +177,10 @@ test.describe('Emergency Access', () => {
     await page.addInitScript(() => localStorage.clear());
     await page.goto('/');
 
-    // Verify emergency button exists with correct aria-label
-    const emergencyBtn = page.locator('.ui-header-actions button[aria-label*="Notfall"]');
+    // Verify emergency button exists with correct aria-label.
+    // Seit Audit 13/14 ist nur noch der Compact-Actions-Block sichtbar
+    // (Desktop-Nav permanent ausgeblendet).
+    const emergencyBtn = page.locator('.ui-header-compact-actions button[aria-label*="Notfall"]');
     await expect(emergencyBtn).toBeVisible();
 
     // Verify it has a click handler
