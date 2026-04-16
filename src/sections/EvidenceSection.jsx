@@ -33,6 +33,7 @@ import {
   PSYCHOEDUCATION_PRACTICE_POINTS,
   PSYCHOEDUCATION_PREPARATION_POINTS,
   PSYCHOEDUCATION_SETTINGS,
+  PARENT_DIALOGUE_EXAMPLES,
   PARENT_GUIDING_PRINCIPLE,
   RELEVANCE_POINTS,
   RELEVANCE_STATS,
@@ -290,6 +291,14 @@ export default function EvidenceSection({ downloadResources = [] }) {
           title: 'Nicht alles stabilisieren wollen – zuerst das Verlässlichste sichern.',
           paragraphs: [
             'Im Alltag helfen kleine, wiederholbare Schritte oft mehr als grosse Appelle. Versorgung, Übergaben, Schlaf, Essen und Entlastung haben Priorität.',
+          ],
+        },
+        {
+          label: 'Gesprächsbeispiele',
+          title: 'Wie eine ressourcenorientierte Haltung im Gespräch klingen kann.',
+          paragraphs: [
+            'Die folgenden Sätze sind keine Skripte, sondern Orientierungshilfen. Sie zeigen, wie Fachpersonen Eltern als handlungsfähige, kompetente Gesprächspartner adressieren können — nicht als Objekte von Massnahmen.',
+            ...PARENT_DIALOGUE_EXAMPLES.map((ex) => `${ex.label}: ${ex.text}`),
           ],
         },
       ],
