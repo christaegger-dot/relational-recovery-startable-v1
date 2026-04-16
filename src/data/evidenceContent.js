@@ -70,24 +70,37 @@ export const RELEVANCE_POINTS = [
   'Elternschaft sollte deshalb von Anfang an mitgedacht werden: bei der Anamnese, bei der Planung der Behandlung und bei der Vorbereitung des Austritts.',
 ];
 
+// Haltungs-Leitsatz: Ressourcen- statt Defizit-Perspektive auf Elternschaft.
+// Stauber et al. (2018), Kap. 4: «Wie eigentlich alle Eltern wollen auch
+// psychisch kranke Eltern gute Eltern sein.» Kap. 4.1: Elternschaft als
+// Kraft- UND Belastungsquelle. Kap. 4.3: Was Eltern tun können.
+export const PARENT_GUIDING_PRINCIPLE = {
+  callout:
+    'Psychisch belastete Eltern wollen gute Eltern sein — und sie können es, wenn sie die richtige Unterstützung erhalten. Elternschaft stärken heisst Kinderschutz stärken.',
+  normalizing:
+    'Es gibt keine Eltern, die immer perfekt feinfühlig reagieren. Das gilt mit und ohne psychische Erkrankung. Entscheidend ist nicht Perfektion, sondern die Bereitschaft, hinzuschauen, zu korrigieren und bei Bedarf Hilfe anzunehmen.',
+};
+
 // Sammelreferenz für E10-E17 (Elternerleben, Familiensystem, Psychoedukation) und E22-E23 (Diagnose/Gefährdung):
 // sourceIds: ['wiegand-grefe-plass-christl-2025'] -- Standardlehrbuch 2. Auflage
 export const PARENT_EXPERIENCE_PANELS = [
+  // Ressourcen-Perspektive zuerst (Stauber Kap. 4.1: Kraft VOR Belastung)
   {
     title: 'Elternschaft als Kraftquelle',
-    text: 'Für viele betroffene Eltern ist die Beziehung zum Kind nicht nur Belastung, sondern auch Sinnquelle, Motivation und ein wichtiger Grund, Hilfe anzunehmen und dranzubleiben.',
+    text: 'Für viele betroffene Eltern ist die Beziehung zum Kind Sinnquelle, Motivation und ein wichtiger Grund, Hilfe anzunehmen und dranzubleiben. Elternschaft kann zu persönlicher Stärke, Stabilität und innerem Halt verhelfen — und das Selbstwirksamkeitsgefühl stärken.',
   },
+  {
+    title: 'Was Eltern trotz Erkrankung tun können',
+    text: 'Nähe und Sicherheit vermitteln. Lob und Anerkennung geben. Kinder bei Problemen begleiten. Soziale Kontakte ausdrücklich erlauben. Hilfe annehmen. Über die Krankheit sprechen. Sechs Handlungsfelder, die auch unter Belastung möglich bleiben.',
+  },
+  // Belastungs-Perspektive nachgeordnet, aber ehrlich
   {
     title: 'Elternschaft als Belastungsquelle',
-    text: 'Gleichzeitig können Symptome wie Erschöpfung, Angst, Reizbarkeit oder innere Leere dazu führen, dass selbst einfache Alltagsaufgaben kaum noch zu bewältigen sind.',
+    text: 'Gleichzeitig können Symptome wie Erschöpfung, Angst, Reizbarkeit oder innere Leere dazu führen, dass selbst einfache Alltagsaufgaben kaum noch zu bewältigen sind. Das Wegfallen elterlicher Aufgaben kann wiederum den Gesundheitszustand verschlechtern.',
   },
   {
-    title: 'Schuld und Scham',
-    text: 'Viele Eltern leiden unter der Diskrepanz zwischen dem eigenen Anspruch, eine gute Mutter oder ein guter Vater zu sein, und dem Erleben, den Kindern aktuell nicht gerecht zu werden.',
-  },
-  {
-    title: 'Überforderung im Alltag',
-    text: 'Besonders belastend sind Übergänge: Aufstehen, Schule, Hausaufgaben, Konflikte, Trennungssituationen, Reizüberflutung, Termine und die Organisation von Entlastung.',
+    title: 'Schuld, Scham und hohe Ansprüche',
+    text: 'Viele Eltern leiden unter der Diskrepanz zwischen dem eigenen Anspruch, eine gute Mutter oder ein guter Vater zu sein, und dem Erleben, den Kindern aktuell nicht gerecht zu werden. Scham und Angst vor Bewertung können Hilfesuche stark erschweren.',
   },
 ];
 
@@ -140,13 +153,16 @@ export const COLLABORATION_FOUR_AS = [
 
 
 
+// Orientierung für Fachpersonen: was sie Eltern als konkrete Handlungsfelder
+// aufzeigen können. Ressourcen-orientiert statt rein krisenbezogen.
+// Stauber Kap. 4.3 + Lenz & Brockmann 2013.
 export const PARENT_SELF_HELP_POINTS = [
-  'Im Alltag zuerst das Wichtigste sichern: Nahrung, Aufsicht, Schlaf, Übergaben und eine ruhige Information an das Kind.',
-  'Eine kleine stabile Routine ist oft hilfreicher als der Versuch, alles wie früher zu schaffen.',
-  'Wenn Reizbarkeit, Rückzug oder Erschöpfung zunehmen, früh entlasten statt bis zur Eskalation durchhalten.',
+  'Feinfühligkeit ist kein Dauerzustand, sondern ein Bemühen. Achtsam sein, korrigieren, wenn nötig Hilfe holen — das reicht.',
+  'Eine kleine stabile Routine ist oft hilfreicher als der Versuch, alles wie früher zu schaffen. Verlässlichkeit in kleinen Dingen trägt.',
+  'Lob, Anerkennung und ehrliches Zuhören stabilisieren Kinder stärker als grosse Erziehungspläne.',
   'Kinder brauchen die klare Botschaft: Du bist nicht schuld, und Erwachsene kümmern sich.',
-  'Wenn Betreuung oder Sicherheit vorübergehend nicht verlässlich gewährleistet sind, braucht es sofort Unterstützung von aussen.',
-  'Hilfreich ist die Leitfrage: Was muss heute wirklich verlässlich bleiben, und wer kann mich dabei konkret unterstützen?',
+  'Soziale Kontakte ausserhalb der Familie ausdrücklich erlauben und fördern — die «innere Erlaubnis» der Eltern ist entscheidend.',
+  'Hilfe annehmen ist kein Zeichen von Versagen, sondern von Verantwortung. Gute Eltern holen sich Unterstützung, wenn sie sie brauchen.',
 ];
 
 export const PARENT_EVERYDAY_SUPPORT_PANELS = [
