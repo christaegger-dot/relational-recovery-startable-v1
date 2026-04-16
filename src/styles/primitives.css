@@ -39,6 +39,12 @@
   padding-block: var(--section-wide);
 }
 
+/* Letzte Section vor dem Footer: reduziertes Bottom-Padding,
+   damit kein visuelles «Loch» entsteht (Nutzer-Audit N2). */
+.ui-section:last-child {
+  padding-bottom: var(--section-tight);
+}
+
 .ui-section__surface {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-2xl);
@@ -2909,7 +2915,7 @@
 }
 
 .footer-shell {
-  margin-top: 5rem;
+  margin-top: 2rem;
   border-top: 1px solid color-mix(in srgb, var(--border-default) 82%, transparent 18%);
   background: linear-gradient(180deg, var(--footer-surface-top), var(--footer-surface-bottom));
   padding: 5rem var(--space-5);
