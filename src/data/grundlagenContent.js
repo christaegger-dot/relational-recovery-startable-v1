@@ -9,12 +9,12 @@ export const GRUNDLAGEN_HERO = {
   stats: [
     {
       label: 'FAQ-Cluster',
-      value: '4',
-      note: 'Belastung verstehen, Grenzen klären, zusammenarbeiten und mit Kindern sprechen',
+      value: '5',
+      note: 'Belastung, Grenzen, Zusammenarbeit, mit Kindern sprechen, altersgerecht erklären',
     },
     {
       label: 'Leitfragen',
-      value: '18',
+      value: '23',
       note: 'kurz beantwortet und auf typische Entscheidungssituationen bezogen',
     },
     {
@@ -54,6 +54,12 @@ export const GRUNDLAGEN_INTRO = {
       title: 'Mit Kindern über die Erkrankung sprechen',
       copy: 'Fragen dazu, was Kinder wissen wollen, wie kindgerechte Aufklärung gelingt und warum Offenheit als Schutzfaktor wirkt.',
       meta: 'geeignet für Elternberatung, Psychoedukation und Familiengespräche',
+    },
+    {
+      label: 'Cluster 5',
+      title: 'Altersgerecht erklären',
+      copy: 'Wie sich Informationsbedürfnis, Verständnis und typische Reaktionen von Kindern je nach Altersstufe unterscheiden — und was das für das Gespräch bedeutet.',
+      meta: 'geeignet für Vorbereitung, Teamreflexion und altersdifferenzierte Psychoedukation',
     },
   ],
 };
@@ -212,6 +218,49 @@ export const GRUNDLAGEN_CLUSTERS = [
         question: 'Was braucht mein Kind, wenn ich in einer akuten Krankheitsphase bin?',
         answer:
           'Einen Krisenplan: Wer ist die Vertrauensperson, an die sich das Kind wenden kann? Wie kann das Kind diese Person erreichen? Welche Unterstützung kann die Person leisten — kurzfristig und über längere Zeit? Verbindliche Abmachungen geben dem Kind das Gefühl, selbst etwas tun zu können, und entlasten Eltern von Sorgen um die Versorgung in instabilen Phasen.',
+      },
+    ],
+  },
+  {
+    // Cluster 5 basiert auf Stauber et al. (2018), Kap. 5.3.2
+    // «Altersspezifische Aspekte bei der Psychoedukation». Schliesst direkt
+    // an Cluster 4 an, das Grundlagen der Kinder-Aufklärung behandelt.
+    id: 'grundlagen-altersgerecht',
+    eyebrow: 'Cluster 5',
+    title: 'Altersgerecht erklären — was Kinder in welchem Alter brauchen',
+    description:
+      'Der Informationsbedarf und das Verständnis von Kindern sind je nach Alter und Entwicklungsstand unterschiedlich. Dieser Abschnitt fasst zusammen, was in welcher Phase besonders wichtig ist — von Kleinkindern bis zu Jugendlichen.',
+    aside: {
+      label: 'Merksatz',
+      title: 'Das Gespräch beginnt nicht bei einem bestimmten Alter',
+      copy: 'Auch sehr junge Kinder spüren Veränderungen. Es ist nicht die Frage ob, sondern wie man mit ihnen spricht — und in welcher Form.',
+      tone: 'soft',
+    },
+    faqs: [
+      {
+        question: 'Ab welchem Alter kann man mit Kindern über die Erkrankung sprechen?',
+        answer:
+          'Das Sprechen mit dem Kind ist nicht an ein bestimmtes Alter gebunden. Auch Kleinkinder reagieren auf die Atmosphäre in der Familie und spüren Veränderungen. Was sich unterscheidet, ist die Form: bei ganz jungen Kindern zählt der Ton mehr als der Inhalt, bei Schulkindern wird Sachinformation wichtiger, bei Jugendlichen steht das Gespräch auf Augenhöhe im Vordergrund. Entscheidend ist, dem Kind zu signalisieren, dass es Fragen stellen darf.',
+      },
+      {
+        question: 'Wie erkläre ich es einem Kleinkind (bis ca. 3 Jahre)?',
+        answer:
+          'Kleinkinder brauchen keine detaillierten Erklärungen — sie würden diese nicht einordnen können. Wichtig ist die Art, wie gesprochen wird: ruhig, warm und in kurzen Sätzen. Zum Beispiel: «Mama geht es heute nicht gut, sie ist müde und traurig und möchte schlafen. Wenn es ihr wieder besser geht, spielt sie wieder mit dir.» Auch Kleinkinder können sich schuldig fühlen, ohne das ausdrücken zu können. Es lohnt sich, ihnen zu vermitteln, dass sie nichts dafür können.',
+      },
+      {
+        question: 'Was ist bei Kindergartenkindern (ca. 3 bis 6 Jahre) besonders?',
+        answer:
+          'Kinder in diesem Alter haben einen grossen Wissensdrang und möchten Unbekanntes verstehen. Gleichzeitig spielt das magische Denken eine wichtige Rolle: Kinder sind häufig überzeugt, Ereignisse durch eigene Handlungen oder Wünsche verursacht zu haben — zum Beispiel: «Wenn ich braver gewesen wäre, wäre Papa nicht krank geworden.» Diese Fantasien sind oft bedrohlicher als die Wirklichkeit. Eltern sollten mögliche Schuldgefühle aktiv aufgreifen und die Erkrankung in einfacher, anschaulicher Sprache erklären. Bilderbücher können dabei helfen. Die Aufmerksamkeitsspanne ist begrenzt — sich auf das Wichtigste beschränken.',
+      },
+      {
+        question: 'Wie gehe ich mit Schulkindern (ca. 7 bis 12 Jahre) um?',
+        answer:
+          'Schulkinder nehmen Unterschiede zwischen ihrer Familie und anderen Familien wahr und sorgen sich oft still um den erkrankten Elternteil. Es fällt ihnen aber meist noch schwer, direkt nach Informationen zu fragen. Stattdessen verstecken sie ihr Informationsbedürfnis manchmal hinter sachlich klingenden Fragen wie «Was ist die Ursache der Krankheit?». Hinter solchen Fragen können Angst oder Sorge stehen — es hilft, neben der Sachantwort auch die emotionale Ebene aufzunehmen. Wenn in der Familie ein stilles Einvernehmen besteht, nicht über die Krankheit zu sprechen, kann das Kind in einen Loyalitätskonflikt geraten, weil es eigentlich mit jemandem darüber reden möchte.',
+      },
+      {
+        question: 'Worauf achte ich bei Jugendlichen (ab ca. 13 Jahre)?',
+        answer:
+          'Jugendliche haben kognitiv meist ein Verständnis für die Situation, werden aber aufgrund ihres erwachsen wirkenden Auftretens oft überschätzt. Emotional stehen sie vor der Herausforderung, Autonomie und Ablösung mit der Abhängigkeit von der Familie zu vereinbaren. Viele Jugendliche vergleichen sich mit dem erkrankten Elternteil und beschäftigen sich stark mit der Frage, ob sie selbst erkranken könnten — dieses Thema sollte offen angesprochen werden. Jugendliche haben häufig einen Wissensvorsprung aus dem Internet, der aber nicht immer korrekt oder vollständig ist. Es ist hilfreich, von ihrem Wissensstand auszugehen und darauf aufzubauen. Hilfreich sind auch Materialien wie die Broschüren von Pro Juventute oder die Kurzfilme des Instituts Kinderseele Schweiz.',
       },
     ],
   },
