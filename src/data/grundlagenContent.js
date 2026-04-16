@@ -9,12 +9,12 @@ export const GRUNDLAGEN_HERO = {
   stats: [
     {
       label: 'FAQ-Cluster',
-      value: '3',
-      note: 'Belastung verstehen, Grenzen klären und Zusammenarbeit strukturieren',
+      value: '4',
+      note: 'Belastung verstehen, Grenzen klären, zusammenarbeiten und mit Kindern sprechen',
     },
     {
       label: 'Leitfragen',
-      value: '12',
+      value: '18',
       note: 'kurz beantwortet und auf typische Entscheidungssituationen bezogen',
     },
     {
@@ -48,6 +48,12 @@ export const GRUNDLAGEN_INTRO = {
       title: 'Zusammenarbeit und nächste Schritte',
       copy: 'Fragen zu Helfersystem, Mitsprache, Informationsweitergabe und dem Finden des nächsten realistischen Schritts.',
       meta: 'geeignet für Trialog, Weitervermittlung und Fallkoordination',
+    },
+    {
+      label: 'Cluster 4',
+      title: 'Mit Kindern über die Erkrankung sprechen',
+      copy: 'Fragen dazu, was Kinder wissen wollen, wie kindgerechte Aufklärung gelingt und warum Offenheit als Schutzfaktor wirkt.',
+      meta: 'geeignet für Elternberatung, Psychoedukation und Familiengespräche',
     },
   ],
 };
@@ -156,6 +162,56 @@ export const GRUNDLAGEN_CLUSTERS = [
         question: 'Wann sollte ich nicht mehr nur abwarten?',
         answer:
           'Wenn Sicherheit, Versorgung von Kindern, deutliche Auflösung von Routinen, Suizidalität, schwere Eskalationen oder anhaltende Überforderung im Raum stehen, ist reines Hoffen meist zu wenig. Dann braucht es mindestens Rücksprache mit einer Fachstelle wie dem kjz, der Angehörigenberatung oder im Notfall sofortige Krisenhilfe (144 / 147).',
+      },
+    ],
+  },
+  {
+    // Cluster 4 basiert auf dem Transfer-Audit (2026-05-Content), Primärquelle:
+    // Stauber, A., Nyffeler, C. & Gosteli, L. (2018). Psychisch kranke Eltern
+    // im Beratungskontext. Praxisforschung Band 25, Erziehungsdirektion Kanton
+    // Bern. Insbesondere Tabelle 1 (Lenz, 2010, S. 187) und Kapitel 2.5
+    // (spezifische Schutzfaktoren: Krankheitswissen + offener Umgang).
+    id: 'grundlagen-kinder',
+    eyebrow: 'Cluster 4',
+    title: 'Mit Kindern über die Erkrankung sprechen',
+    description:
+      'Kinder nehmen Veränderungen im Verhalten ihrer Eltern genau wahr, auch wenn darüber nicht gesprochen wird. Studien zeigen, dass altersgerechtes Krankheitswissen und ein offener Umgang in der Familie zu den stärksten Schutzfaktoren gehören. Dieser Abschnitt greift die häufigsten Fragen auf, die Angehörige und Eltern zum Gespräch mit dem Kind bewegen.',
+    aside: {
+      label: 'Merksatz',
+      title: 'Nicht das Wissen überfordert, sondern das Nichtwissen',
+      copy: 'Wenn Kinder keine Erklärung für die Veränderung ihrer Eltern erhalten, füllen sie die Lücke mit eigenen Fantasien — die oft bedrohlicher sind als die Wirklichkeit.',
+      tone: 'soft',
+    },
+    faqs: [
+      {
+        question: 'Was möchten Kinder über die Erkrankung ihrer Eltern wissen?',
+        answer:
+          'Studien zeigen fünf wiederkehrende Themenbereiche: Wie soll ich mich gegenüber Mama oder Papa verhalten? Wird sich mein Leben verändern? Was ist die Ursache der Erkrankung und werde ich auch krank? Was ist der Unterschied zwischen psychischer und körperlicher Krankheit? Und: Kann Mama oder Papa wieder gesund werden? Die Reihenfolge und Dringlichkeit dieser Fragen verändern sich je nach Alter, Entwicklungsstand und Krankheitsverlauf.',
+      },
+      {
+        question: 'Darf ich meinem Kind sagen, was los ist, oder belastet das zu sehr?',
+        answer:
+          'Forschungsbefunde zeigen klar, dass Krankheitswissen und Krankheitsverstehen zu den wichtigsten spezifischen Schutzfaktoren für Kinder psychisch kranker Eltern gehören. Wissen gibt Kindern ein Gefühl von Kontrolle und reduziert Schuldgefühle. Diffuse Vorstellungen dagegen lösen oft Angst, Verunsicherung und Hilflosigkeit aus. Ehrlichkeit und Offenheit stabilisieren die Eltern-Kind-Beziehung langfristig.',
+      },
+      {
+        question: 'Wie erkläre ich meinem Kind, was psychisch krank heisst?',
+        answer:
+          'Am hilfreichsten sind einfache, kurze Sätze, die beim Alltag des Kindes ansetzen: «Mama hat eine Krankheit, die macht, dass sie oft sehr traurig ist und fast nichts mehr schaffen kann.» Oder: «Papa hat so viel Angst, dass er manche Dinge nicht mehr tun kann.» Das Kind braucht zu Beginn nicht alle Details — wichtig ist, dass die Erkrankung einen Namen bekommt und das Kind weiss, dass darüber gesprochen werden darf.',
+      },
+      {
+        question: 'Was, wenn mein Kind sich schuldig fühlt?',
+        answer:
+          'Viele Kinder vermuten, dass sie durch ihr Verhalten die Erkrankung verursacht oder verschlimmert haben — insbesondere jüngere Kinder mit stark magischem Denken. Es ist wichtig, dem Kind klar zu sagen, dass es nicht schuld ist. Auch wenn es sich schlecht benommen hat, einen Streit ausgelöst hat oder zu wenig geholfen hat: die Krankheit hat andere Ursachen.',
+      },
+      {
+        question: 'Was sage ich, wenn mein Kind fragt, ob es selbst auch krank werden kann?',
+        answer:
+          'Die Frage nach der Vererbbarkeit beschäftigt vor allem Jugendliche und sollte ehrlich beantwortet werden. Die Wissenschaft zeigt: nicht die Krankheit selbst wird vererbt, sondern eine erhöhte Verletzlichkeit. Ob daraus eine Erkrankung entsteht, hängt stark von Umweltfaktoren, Beziehungen und Unterstützung ab. Das Kind darf wissen, dass es selbst viel tun kann und dass es Hilfe gibt, wenn es sie braucht.',
+      },
+      {
+        question: 'Was braucht mein Kind, wenn ich in einer akuten Krankheitsphase bin?',
+        answer:
+          'Einen Krisenplan: Wer ist die Vertrauensperson, an die sich das Kind wenden kann? Wie kann das Kind diese Person erreichen? Welche Unterstützung kann die Person leisten — kurzfristig und über längere Zeit? Verbindliche Abmachungen geben dem Kind das Gefühl, selbst etwas tun zu können, und entlasten Eltern von Sorgen um die Versorgung in instabilen Phasen.',
       },
     ],
   },
