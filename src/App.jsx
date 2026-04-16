@@ -12,6 +12,9 @@ import useMobileMenu from './utils/useMobileMenu';
 import useNavigationFocus from './utils/useNavigationFocus';
 import useDownloadHandlers from './utils/useDownloadHandlers';
 import useDocumentMeta from './utils/useDocumentMeta';
+// useScrollReveal wird nicht mehr am App-Root aufgerufen — stattdessen
+// nutzt jede Section-Komponente einen eigenen ref-basierten Observer
+// (siehe Section.jsx).
 
 const ElearningSection = lazy(() => import('./sections/ElearningSection'));
 const VignettenSection = lazy(() => import('./sections/VignettenSection'));
@@ -74,6 +77,7 @@ export default function App() {
   } = useMobileMenu(activeTab);
 
   useDocumentMeta(activeTab);
+  // Scroll-Reveal wird per-Section in Section.jsx gehandhabt.
 
   const { skipLinkActivatedRef, setPendingPriorityFocus } = useNavigationFocus({
     activeTab,

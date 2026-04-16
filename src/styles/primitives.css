@@ -595,7 +595,7 @@
 .ui-card--interactive:hover {
   transform: translateY(-2px);
   border-color: color-mix(in srgb, var(--accent-primary) 18%, white 82%);
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 8px 24px rgba(76, 55, 39, 0.1);
 }
 
 .ui-card--interactive:focus-visible {

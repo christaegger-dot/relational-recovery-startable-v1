@@ -69,6 +69,31 @@
   }
 }
 
+/* Scroll-Reveal: Sektionen blenden beim Scrollen sanft ein.
+   Klasse .reveal-on-scroll wird initial gesetzt; .is-revealed wird
+   per IntersectionObserver hinzugefügt (src/utils/useScrollReveal.js).
+   Bei prefers-reduced-motion: sofort sichtbar, keine Animation. */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--motion-slow) var(--motion-curve-standard),
+    transform var(--motion-slow) var(--motion-curve-standard);
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 :focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring);
   outline-offset: var(--focus-ring-offset);
