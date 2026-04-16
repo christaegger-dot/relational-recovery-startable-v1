@@ -520,8 +520,6 @@ export default function ToolboxPageTemplate({
   closingSection,
   scoreStatusId,
 }) {
-  const heroTitleText = [hero?.title, hero?.accent].filter(Boolean).join(' ').trim();
-
   return (
     <div className="ui-stack">
       <div className="ui-stack">
@@ -532,11 +530,11 @@ export default function ToolboxPageTemplate({
                 <div className="ui-stack ui-stack--tight">
                   <Eyebrow>Schnellzugriff</Eyebrow>
                   <h2 className="ui-hero__title ui-section-title--compact">
-                    {heroTitleText || 'Orientierung, Schutz und nächste Schritte'}
+                    Krisenplan und Arbeitsansicht
                   </h2>
                   <p className="ui-card__copy">
-                    Die wichtigsten Arbeitsaktionen der Toolbox sind hier zusätzlich direkt erreichbar, damit Tastatur-
-                    und Screenreader-Nutzung ohne Umwege in den zentralen Handlungsbereich gelangen.
+                    Die wichtigsten Arbeitsaktionen der Toolbox direkt erreichbar — auch für Tastatur- und
+                    Screenreader-Nutzung.
                   </p>
                 </div>
                 <div

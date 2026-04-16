@@ -73,6 +73,15 @@ export default function GrundlagenSection({ sharedDownloadResources = [] }) {
         },
         {
           kind: 'navigation',
+          title: 'Evidenz',
+          description:
+            'Wenn Familiendynamik, Schutzfaktoren oder Psychoedukation fachlich vertieft werden sollen — inklusive Kinder- und Jugendbuch-Empfehlungen.',
+          meta: ['Vertiefung', 'Materialien'],
+          actionLabel: 'Zum Evidenzbereich wechseln',
+          onClick: () => onNavigateToTab('evidenz', { focusTarget: 'heading' }),
+        },
+        {
+          kind: 'navigation',
           title: 'Netzwerk',
           description:
             'Wenn aus Orientierung eine konkrete Fachstelle, regionale Hilfe oder Weitervermittlung werden soll.',

@@ -82,7 +82,7 @@ export const TAB_ITEMS = [
     id: 'evidenz',
     label: 'Evidenz',
     icon: Activity,
-    footerNote: 'Grundlagen, Vertiefung, Materialien',
+    footerNote: 'Kapitel, Vertiefung, Materialien',
     priority: 'primary',
   },
   {

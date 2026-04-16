@@ -254,7 +254,7 @@ export const GLOSSARY_GROUPS = [
 const totalTerms = GLOSSARY_GROUPS.reduce((sum, group) => sum + group.terms.length, 0);
 
 export const GLOSSARY_HERO = {
-  eyebrow: 'Redaktioneller Wissensbereich',
+  eyebrow: 'Gemeinsame Sprache für die Fachpraxis',
   title: 'Begriffe für',
   accent: 'ruhige fachliche Orientierung.',
   lead: 'Das Glossar sammelt zentrale Begriffe aus relationaler Recovery, Kindesschutz, Angehörigenarbeit und Netzwerkpraxis in einer einheitlichen Sprache. Es soll Fachpersonen helfen, schneller zwischen Einordnung, Gespräch und Weitervermittlung zu wechseln.',
