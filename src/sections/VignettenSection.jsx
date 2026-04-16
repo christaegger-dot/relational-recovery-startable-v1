@@ -22,16 +22,20 @@ export default function VignettenSection() {
     asideCopy:
       'Ein Fall, zwei Optionen, direkte fachliche Rückmeldung. Ziel ist eine begründete Einschätzung, nicht ein Wissenstest.',
     stats: [
-      {
-        label: 'Aktueller Fall',
-        value: `${currentIndex + 1}/${VIGNETTEN.length}`,
-        note: vignette.status,
-      },
-      {
-        label: 'Bearbeitungsstand',
-        value: `${Object.keys(selectedOption).filter((id) => VIGNETTEN.some((v) => v.id === id)).length}`,
-        note: 'Fälle mit gewählter Option',
-      },
+      ...(VIGNETTEN.length > 1
+        ? [
+            {
+              label: 'Aktueller Fall',
+              value: `${currentIndex + 1}/${VIGNETTEN.length}`,
+              note: vignette.status,
+            },
+            {
+              label: 'Bearbeitungsstand',
+              value: `${Object.keys(selectedOption).filter((id) => VIGNETTEN.some((v) => v.id === id)).length}`,
+              note: 'Fälle mit gewählter Option',
+            },
+          ]
+        : []),
     ],
   };
 
@@ -75,17 +79,24 @@ export default function VignettenSection() {
       : null,
   };
 
-  const navigation = {
-    eyebrow: 'Navigation',
-    title: 'Nächsten Fall vorbereiten',
-    description: 'Sie können die aktuelle Wahl beibehalten, später anpassen oder direkt zum nächsten Fall wechseln.',
-    previousLabel: 'Vorheriger Fall',
-    nextLabel: 'Nächster Fall',
-    disablePrevious: currentIndex === 0,
-    disableNext: currentIndex === VIGNETTEN.length - 1,
-    onPrevious: () => setCurrentIndex((prev) => Math.max(prev - 1, 0)),
-    onNext: () => setCurrentIndex((prev) => Math.min(prev + 1, VIGNETTEN.length - 1)),
-  };
+  // Navigations-Section nur anzeigen, wenn es mehr als 1 Fall gibt.
+  // Bei nur 1 Vignette wären beide Buttons disabled — sinnlos und
+  // für Nutzende irritierend (Nutzer-Audit N4).
+  const navigation =
+    VIGNETTEN.length > 1
+      ? {
+          eyebrow: 'Navigation',
+          title: 'Nächsten Fall vorbereiten',
+          description:
+            'Sie können die aktuelle Wahl beibehalten, später anpassen oder direkt zum nächsten Fall wechseln.',
+          previousLabel: 'Vorheriger Fall',
+          nextLabel: 'Nächster Fall',
+          disablePrevious: currentIndex === 0,
+          disableNext: currentIndex === VIGNETTEN.length - 1,
+          onPrevious: () => setCurrentIndex((prev) => Math.max(prev - 1, 0)),
+          onNext: () => setCurrentIndex((prev) => Math.min(prev + 1, VIGNETTEN.length - 1)),
+        }
+      : null;
 
   return (
     <VignettenPageTemplate
