@@ -3160,3 +3160,78 @@
     padding: 2.5rem;
   }
 }
+
+/* Evidenz-Kapitel als aufklappbare Disclosure-Blöcke. Kapitel 1 ist
+   initial geöffnet, alle weiteren eingeklappt. Progressive Disclosure
+   reduziert die initiale Seitenlänge von ~25 auf ~5 Desktop-Screens.
+   Visueller-Overload-Audit, Massnahme 1. */
+.ui-chapter-disclosure {
+  border: 0;
+}
+
+.ui-chapter-disclosure__summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.ui-chapter-disclosure__summary::-webkit-details-marker {
+  display: none;
+}
+
+.ui-chapter-disclosure__indicator {
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.5rem;
+  border-radius: var(--radius-full);
+  background: var(--surface-subtle);
+  position: relative;
+  transition: transform var(--motion-standard) var(--motion-curve-standard);
+}
+
+.ui-chapter-disclosure__indicator::before,
+.ui-chapter-disclosure__indicator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--text-secondary);
+  border-radius: 1px;
+}
+
+/* Horizontal bar (always visible) */
+.ui-chapter-disclosure__indicator::before {
+  width: 10px;
+  height: 2px;
+  transform: translate(-50%, -50%);
+}
+
+/* Vertical bar (hidden when open) */
+.ui-chapter-disclosure__indicator::after {
+  width: 2px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  transition: opacity var(--motion-fast) ease;
+}
+
+.ui-chapter-disclosure[open] > .ui-chapter-disclosure__summary .ui-chapter-disclosure__indicator::after {
+  opacity: 0;
+}
+
+.ui-chapter-disclosure__summary:hover .ui-chapter-disclosure__indicator {
+  background: color-mix(in srgb, var(--accent-primary) 12%, white 88%);
+}
+
+.ui-chapter-disclosure__body {
+  padding-top: var(--space-5);
+}
+
+/* SectionHeader innerhalb der Summary braucht weniger Margin */
+.ui-chapter-disclosure__summary .ui-section-header {
+  flex: 1;
+  min-width: 0;
+}

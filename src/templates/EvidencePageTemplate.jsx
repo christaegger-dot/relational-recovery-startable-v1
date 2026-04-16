@@ -115,7 +115,7 @@ function ChapterOverview({ chapterOverview }) {
   );
 }
 
-function ZoneSection({ zone }) {
+function ZoneSection({ zone, defaultOpen = false }) {
   if (!zone) return null;
 
   return (
@@ -125,40 +125,52 @@ function ZoneSection({ zone }) {
       surface={zone.surface || 'plain'}
       className={zone.className || 'no-print'}
     >
-      <div className="ui-stack ui-stack--loose">
-        <SectionHeader
-          eyebrow={zone.eyebrow}
-          title={zone.title}
-          titleAccent={zone.accent}
-          paragraphs={zone.paragraphs}
-          aside={zone.aside}
-        />
+      <details className="ui-chapter-disclosure" open={defaultOpen || undefined}>
+        <summary className="ui-chapter-disclosure__summary">
+          <SectionHeader
+            eyebrow={zone.eyebrow}
+            title={zone.title}
+            titleAccent={zone.accent}
+          />
+          <span className="ui-chapter-disclosure__indicator" aria-hidden="true" />
+        </summary>
 
-        {zone.highlightList ? (
-          <BulletList items={zone.highlightList.items} tone={zone.highlightList.tone} icon={zone.highlightList.icon} />
-        ) : null}
-        {zone.metrics?.length ? <MetricGrid items={zone.metrics} /> : null}
-        {zone.cards?.length ? <CardGrid items={zone.cards} columns={zone.cardColumns} tone={zone.cardTone} /> : null}
+        <div className="ui-stack ui-stack--loose ui-chapter-disclosure__body">
+          {zone.paragraphs?.length ? <RichCopy paragraphs={zone.paragraphs} /> : null}
+          {zone.aside ? (
+            <SurfaceCard tone="soft">
+              {zone.aside.eyebrow ? <p className="ui-fact-card__label">{zone.aside.eyebrow}</p> : null}
+              <h3 className="ui-card__title">{zone.aside.title}</h3>
+              {zone.aside.description ? <p className="ui-card__copy">{zone.aside.description}</p> : null}
+            </SurfaceCard>
+          ) : null}
 
-        {zone.subsections?.length ? (
-          <div className="ui-stack ui-stack--standard">
-            {zone.subsections.map((subsection) => (
-              <SurfaceCard key={subsection.title} tone={subsection.tone || 'default'}>
-                {subsection.label ? <p className="ui-fact-card__label">{subsection.label}</p> : null}
-                <h3 className="ui-card__title">{subsection.title}</h3>
-                {subsection.paragraphs?.length ? <RichCopy paragraphs={subsection.paragraphs} /> : null}
-                {subsection.points?.length ? <BulletList items={subsection.points} tone="soft" /> : null}
-              </SurfaceCard>
-            ))}
-          </div>
-        ) : null}
+          {zone.highlightList ? (
+            <BulletList items={zone.highlightList.items} tone={zone.highlightList.tone} icon={zone.highlightList.icon} />
+          ) : null}
+          {zone.metrics?.length ? <MetricGrid items={zone.metrics} /> : null}
+          {zone.cards?.length ? <CardGrid items={zone.cards} columns={zone.cardColumns} tone={zone.cardTone} /> : null}
 
-        {zone.callout ? (
-          <div className={`ui-note-panel ${zone.callout.className || ''}`.trim()}>
-            <p className="ui-note-panel__copy">{zone.callout.text}</p>
-          </div>
-        ) : null}
-      </div>
+          {zone.subsections?.length ? (
+            <div className="ui-stack ui-stack--standard">
+              {zone.subsections.map((subsection) => (
+                <SurfaceCard key={subsection.title} tone={subsection.tone || 'default'}>
+                  {subsection.label ? <p className="ui-fact-card__label">{subsection.label}</p> : null}
+                  <h3 className="ui-card__title">{subsection.title}</h3>
+                  {subsection.paragraphs?.length ? <RichCopy paragraphs={subsection.paragraphs} /> : null}
+                  {subsection.points?.length ? <BulletList items={subsection.points} tone="soft" /> : null}
+                </SurfaceCard>
+              ))}
+            </div>
+          ) : null}
+
+          {zone.callout ? (
+            <div className={`ui-note-panel ${zone.callout.className || ''}`.trim()}>
+              <p className="ui-note-panel__copy">{zone.callout.text}</p>
+            </div>
+          ) : null}
+        </div>
+      </details>
     </Section>
   );
 }
@@ -180,8 +192,8 @@ export default function EvidencePageTemplate({ hero, pageHeadingId, chapterOverv
         </Container>
       </Section>
       <ChapterOverview chapterOverview={chapterOverview} />
-      {zones.map((zone) => (
-        <ZoneSection key={zone.id || zone.title} zone={zone} />
+      {zones.map((zone, index) => (
+        <ZoneSection key={zone.id || zone.title} zone={zone} defaultOpen={index === 0} />
       ))}
       <MaterialsSection closingSection={closingSection} />
     </article>
