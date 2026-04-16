@@ -73,12 +73,15 @@
    Klasse .reveal-on-scroll wird initial gesetzt; .is-revealed wird
    per IntersectionObserver hinzugefügt (src/utils/useScrollReveal.js).
    Bei prefers-reduced-motion: sofort sichtbar, keine Animation. */
+/* Transition schnell genug, damit Inhalte auf einem Fachportal sofort
+   lesbar sind — kein visuelles Warten beim Scrollen. Mikro-Polish
+   statt Marketing-Animation (Nutzer-Audit N1). */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(6px);
   transition:
-    opacity var(--motion-slow) var(--motion-curve-standard),
-    transform var(--motion-slow) var(--motion-curve-standard);
+    opacity var(--motion-fast) var(--motion-curve-standard),
+    transform var(--motion-fast) var(--motion-curve-standard);
 }
 
 .reveal-on-scroll.is-revealed {
