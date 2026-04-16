@@ -187,7 +187,7 @@ export const GRUNDLAGEN_CLUSTERS = [
     eyebrow: 'Cluster 4',
     title: 'Mit Kindern über die Erkrankung sprechen',
     description:
-      'Kinder nehmen Veränderungen im Verhalten ihrer Eltern genau wahr, auch wenn darüber nicht gesprochen wird. Studien zeigen, dass altersgerechtes Krankheitswissen und ein offener Umgang in der Familie zu den stärksten Schutzfaktoren gehören. Dieser Abschnitt greift die häufigsten Fragen auf, die Angehörige und Eltern zum Gespräch mit dem Kind bewegen.',
+      'Kinder nehmen Veränderungen im Verhalten ihrer Eltern genau wahr, auch wenn darüber nicht gesprochen wird. Studien zeigen, dass altersgerechtes Krankheitswissen und ein offener Umgang in der Familie zu den stärksten Schutzfaktoren gehören. Dieser Abschnitt greift die häufigsten Fragen auf, die Angehörige und Eltern zum Gespräch mit dem Kind bewegen. Bilderbücher, Kinderbücher und Jugendbücher, die das Gespräch unterstützen können, finden sich im Evidenz-Materialbereich.',
     aside: {
       label: 'Merksatz',
       title: 'Nicht das Wissen überfordert, sondern das Nichtwissen',

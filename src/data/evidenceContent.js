@@ -463,41 +463,105 @@ export const ABOUT_THIS_WEBSITE_POINTS = [
   'Offizielle Informationen, Anmeldung, Krisenwege und konkrete Beratung laufen über die jeweils zuständigen Institutionen.',
 ];
 
+// Kinder- und Jugendbuch-Empfehlungen nach Alter und Störungsbild.
+// Kuratierte Auswahl aus Stauber et al. (2018), Anhang A, ergänzt um
+// neuere und CH-spezifische Titel. Die Liste erhebt keinen Anspruch
+// auf Vollständigkeit. Aktualität und Verfügbarkeit der Titel vor
+// einer Empfehlung prüfen.
 export const MEDIA_BOOKS = [
+  // Bilderbücher (ab ca. 3 Jahre)
   {
     title: 'Mama, warum weinst du?',
+    author: 'Wunderer, S. (2010). Mabuse Verlag',
     age: 'ab 3 Jahren',
-    focus: 'Umgang mit mütterlicher Depression in einer frühen, kindgerechten Sprache',
+    disorder: 'allgemein',
+    focus: 'Vorlesebuch für Kinder mit einem psychisch erkrankten Elternteil',
+  },
+  {
+    title: 'Papas Seele hat Schnupfen',
+    author: 'Gliemann, C. (2017). Monterosa Verlag',
+    age: 'ab 3 Jahren',
+    disorder: 'depression',
+    focus: 'Kindgerechte Metapher für Depression, mit behutsamer Sprache und Hoffnung',
   },
   {
     title: 'Fufu und der grüne Mantel',
+    author: 'Eggermann, V. & Janggen, L. (2005). Inthera',
     age: 'ab 4 Jahren',
-    focus: 'erzählerischer Zugang zu Psychose und Wahn',
+    disorder: 'psychose',
+    focus: 'Erzählerischer Zugang zu Psychose und Wahn',
   },
   {
+    title: 'Mama, Mia und das Schleuderprogramm',
+    author: 'Tilly, C. & Offermann, A. (2013). Balance Verlag',
+    age: 'ab 4 Jahren',
+    disorder: 'bipolar',
+    focus: 'Stimmungsschwankungen und Unberechenbarkeit kindgerecht erklärt',
+  },
+  // Kinderbücher (ab ca. 6 Jahre)
+  {
     title: 'Sonnige Traurigtage',
+    author: 'Homeier, S. (2008). Mabuse Verlag',
     age: 'ab 6 Jahren',
+    disorder: 'allgemein',
     focus: 'Kinderfachbuch mit Erklärungen und begleitendem Ratgeberteil',
   },
   {
     title: 'Annikas andere Welt',
+    author: 'Eder, S., Rebhandl, P. & Gasser, E. (2013). Edition Riedenburg',
     age: 'ab 7 Jahren',
+    disorder: 'allgemein',
     focus: 'Sachinformationen und Entlastung für Kinder psychisch erkrankter Eltern',
   },
   {
-    title: 'Flüsterkind',
-    age: 'ab 12 Jahren',
-    focus: 'Verantwortung und Traurigkeit bei psychischer Erkrankung eines Elternteils',
+    title: 'Was ist bloss mit Mama los?',
+    author: 'Glistrup, K. (2014). Kösel',
+    age: 'ab 6 Jahren',
+    disorder: 'angst / depression',
+    focus: 'Angst, Depression, Stress und Trauma in verständlicher Sprache',
   },
   {
-    title: 'Schattenspringer',
-    age: 'ab 12 Jahren',
-    focus: 'Comicform mit Einblick in belastete Familienrealitäten',
+    title: 'ZiegenHundeKrähenMama',
+    author: 'Tanner, K. & Jacob, L. (2016). Atlantis Verlag',
+    age: 'ab 6 Jahren',
+    disorder: 'allgemein',
+    focus: 'Schweizer Bilderbuch über Veränderung und Verunsicherung im Familienalltag',
   },
   {
-    title: 'Invisible Girl',
-    age: 'ab 13 Jahren',
-    focus: 'Belastung, Schule und Freundschaften bei erkranktem Elternteil',
+    title: 'Flaschenpost nach irgendwo',
+    author: 'Homeier, S. & Schrappe, A. (2012). Mabuse Verlag',
+    age: 'ab 8 Jahren',
+    disorder: 'sucht',
+    focus: 'Standardwerk zu Sucht in der Familie, mit Erklärungen und Mitmachteil',
+  },
+  {
+    title: 'Der beste Vater der Welt',
+    author: 'Trostmann, K. & Jahn, R. (2010). Balance Verlag',
+    age: 'ab 6 Jahren',
+    disorder: 'psychose',
+    focus: 'Kindern Psychose erklären, mit Gesprächsimpulsen',
+  },
+  // Jugendbücher (ab ca. 11 Jahre)
+  {
+    title: 'Schoko- und Zitronentage',
+    author: 'Wartenweiler, M. & Kiener, A. (2017). Rex Verlag / Kinderheim Titlisblick',
+    age: 'ab 10 Jahren',
+    disorder: 'allgemein',
+    focus: 'Schweizer Jugendbuch, alltagsnah und auf Erfahrungen von Betroffenen bezogen',
+  },
+  {
+    title: 'Das Gegenteil von fröhlich',
+    author: 'Stehle, K. (2011). Thienemann',
+    age: 'ab 12 Jahren',
+    disorder: 'depression',
+    focus: 'Jugendliche Perspektive auf elterliche Depression und Familienalltag',
+  },
+  {
+    title: 'Lieber Matz, Dein Papa hat \'ne Meise',
+    author: 'Schlösser, S. (2012). Ullstein',
+    age: 'ab 12 Jahren',
+    disorder: 'depression',
+    focus: 'Ein Vater schreibt Briefe über seine Zeit in der Psychiatrie — offen und enttabuisierend',
   },
 ];
 
@@ -526,6 +590,13 @@ export const MEDIA_DIGITAL = [
     type: 'Suchhilfe / Orientierung',
     description: 'Digitale Such- und Orientierungshilfe, um passende Angebote in der Region schneller zu finden.',
     link: 'https://www.kinderseele.ch/hilfe-finden',
+  },
+  {
+    name: 'Pro Juventute – Broschüren für Kinder und Jugendliche',
+    type: 'Broschüre / Print',
+    description:
+      'Informationshefte für Kinder (8–12) und Jugendliche (12–18) mit psychisch belasteten Eltern. Auch Eltern-Broschüre verfügbar. Kostenlos bestellbar.',
+    link: 'https://www.projuventute.ch',
   },
 ];
 
