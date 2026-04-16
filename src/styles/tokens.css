@@ -116,9 +116,12 @@
   --space-7: 3rem;
   --space-8: 4rem;
 
-  --section-tight: 3rem;
-  --section-standard: 4.5rem;
-  --section-wide: 6rem;
+  /* Section-Spacing: grosszügiger gesetzt, damit Sektionen stärker
+     voneinander getrennt wirken und die Seite mehr «atmet».
+     Overload-Review: +25% gegenüber vorherigen Werten. */
+  --section-tight: 3.75rem;
+  --section-standard: 5.5rem;
+  --section-wide: 7.5rem;
 
   /* Radius tokens */
   --radius-sm: 0.75rem;
@@ -151,9 +154,9 @@
 
 @media (max-width: 48rem) {
   :root {
-    --section-tight: 2.5rem;
-    --section-standard: 3.5rem;
-    --section-wide: 4.5rem;
+    --section-tight: 3rem;
+    --section-standard: 4.5rem;
+    --section-wide: 5.5rem;
     --font-size-3xl: 1.75rem;
     --font-size-4xl: 2rem;
     --font-size-5xl: 2.5rem;
