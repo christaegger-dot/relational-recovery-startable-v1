@@ -108,8 +108,9 @@ export default function EvidenceSection({ downloadResources = [] }) {
     eyebrow: 'Evidenz und klinische Orientierung',
     title: 'Einordnen, benennen und',
     accent: 'familienorientiert handeln.',
+    lead: 'Knapp 18 % der Schweizer Bevölkerung leben gemäss OBSAN-Analysen mit einer wahrscheinlichen psychischen Störung. Wenn Betroffene Kinder haben, wird die Erkrankung zur Familienangelegenheit.',
     description:
-      'Diese Seite bündelt die fachliche Logik hinter Relational Recovery: warum Elternschaft in der Erwachsenenpsychiatrie relevant ist, wie Kinder Belastung erleben und welche Gesprächs- und Unterstützungsformen sich für die Praxis besonders bewähren.',
+      'Diese Seite bündelt die fachliche Logik dahinter: warum Elternschaft in der Erwachsenenpsychiatrie relevant ist, wie Kinder Belastung erleben und welche Gesprächs- und Unterstützungsformen sich für die Praxis besonders bewähren.',
     supportingPoints: [
       'systemischer Blick statt isolierte Symptomperspektive',
       'kindliche Entlastung durch Sprache, Struktur und verlässliche Erwachsene',

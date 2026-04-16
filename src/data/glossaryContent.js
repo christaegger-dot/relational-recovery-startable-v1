@@ -75,6 +75,14 @@ export const GLOSSARY_GROUPS = [
         practice:
           'Wird wichtig, wenn eskalierende Situationen wieder in Beobachtung, Sprache und Beziehung übersetzt werden müssen.',
       },
+      {
+        id: 'tabuisierung',
+        term: 'Tabuisierung',
+        definition:
+          'Wenn über die psychische Erkrankung innerhalb der Familie oder gegenüber Aussenstehenden nicht gesprochen wird — oft aus Scham, Angst vor Stigmatisierung, Sorge um die Kinder oder dem Wunsch, sie zu schützen.',
+        practice:
+          'Tabuisierung isoliert Kinder, nimmt ihnen die Sprache für ihre Erlebnisse und verstärkt Schuldgefühle. Im Beratungskontext: das Schweigegebot aktiv und feinfühlig ansprechen, ohne es zu forcieren. Offenheit ist ein spezifischer Schutzfaktor.',
+      },
     ],
   },
   {
@@ -115,6 +123,22 @@ export const GLOSSARY_GROUPS = [
           'Ein stabilisierendes Element, das Belastung abfedern oder Risiken begrenzen kann, zum Beispiel eine verlässliche Bezugsperson, Tagesstruktur oder erreichbare Hilfe.',
         practice:
           'Schutzfaktoren machen Risiken nicht ungeschehen, helfen aber einzuschätzen, welche Hilfe wirklich nötig ist.',
+      },
+      {
+        id: 'resilienz',
+        term: 'Resilienz',
+        definition:
+          'Erworbene psychische Widerstandsfähigkeit, die es ermöglicht, trotz belastender Lebensumstände eine gesunde Entwicklung zu nehmen. Resilienz ist keine stabile Persönlichkeitseigenschaft, sondern variabel, kontextabhängig und durch Umweltfaktoren beeinflussbar.',
+        practice:
+          'In der Arbeit mit belasteten Familien: Schutzfaktoren systematisch erfassen und stärken, statt nur Risiken zu dokumentieren. Auch in schwierigen Konstellationen danach fragen, was trägt — nicht nur, was fehlt.',
+      },
+      {
+        id: 'kohaerenzgefuehl',
+        term: 'Kohärenzgefühl',
+        definition:
+          'Die Überzeugung, dass das Leben und die zu bewältigenden Aufgaben sinnvoll, verstehbar und handhabbar sind — auch unter schwierigen Bedingungen. Geht auf Antonovskys Salutogenese-Modell zurück.',
+        practice:
+          'Bei Kindern psychisch kranker Eltern kann ein starkes Kohärenzgefühl dazu beitragen, Belastungen besser einzuordnen und Handlungsfähigkeit zu bewahren. Förderbar durch verlässliche Strukturen, verständliche Erklärungen und erlebte Wirksamkeit.',
       },
       {
         id: 'triage',
@@ -214,6 +238,14 @@ export const GLOSSARY_GROUPS = [
           'Praktischer Begriff für den Moment, in dem Familien, Fachpersonen und Hilfesystem gleichzeitig erreichbar genug sind, um einen nächsten Schritt verbindlich zu vereinbaren.',
         practice:
           'Gerade in instabilen Verläufen lohnt es sich, dieses Zeitfenster aktiv zu nutzen statt nur lose Hinweise mitzuteilen.',
+      },
+      {
+        id: 'helferkonferenz',
+        term: 'Helferkonferenz',
+        definition:
+          'Strukturiertes Treffen der involvierten Fachpersonen rund um eine belastete Familie. Klärt Verantwortlichkeiten, Ressourcen, zeitliche Grenzen und das weitere Vorgehen.',
+        practice:
+          'Gelingensbedingungen: gegenseitige Kenntnis der Aufgabenprofile, gleichberechtigter Austausch ohne Statusgefälle, personelle Kontinuität und realistisches Zeitbudget. Frühzeitig die Fallführung klären.',
       },
     ],
   },
