@@ -646,17 +646,17 @@
 .ui-disclosure-card__toggle {
   margin-top: var(--space-1);
   display: inline-flex;
-  height: 2.25rem;
-  width: 2.25rem;
+  height: 2.75rem;
+  width: 2.75rem;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  border: 1px solid var(--border-subtle);
-  background: var(--surface-panel);
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-  color: var(--text-muted);
+  border: 1px solid var(--border-default);
+  background: var(--surface-note);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent-primary-strong);
   transition:
     transform var(--motion-fast) ease,
     border-color var(--motion-fast) ease,
@@ -820,10 +820,10 @@
 }
 
 .ui-hero-shell {
-  border: 1px solid var(--border-subtle);
+  border: 0;
   border-radius: calc(var(--radius-2xl) + 0.25rem);
   background: var(--surface-hero);
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   overflow: clip;
 }
 
@@ -1010,6 +1010,12 @@
   border-radius: var(--radius-xl);
   background: var(--surface-app);
   padding: 1.125rem;
+}
+
+/* Warmer linker Akzentrand auf Stat-Cards im Hero, damit die Zahlen
+   visuell mehr Gewicht bekommen. */
+.ui-fact-grid > .ui-card {
+  border-left: 3px solid color-mix(in srgb, var(--accent-primary) 30%, white 70%);
 }
 
 .ui-fact-card__label {
@@ -3191,11 +3197,12 @@
 
 .ui-chapter-disclosure__indicator {
   flex: none;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2rem;
+  height: 2rem;
   margin-top: 0.5rem;
   border-radius: var(--radius-full);
-  background: var(--surface-subtle);
+  background: var(--surface-note);
+  border: 1px solid var(--border-default);
   position: relative;
   transition: transform var(--motion-standard) var(--motion-curve-standard);
 }
