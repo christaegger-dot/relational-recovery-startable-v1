@@ -151,7 +151,52 @@ export default function App() {
       )}
 
       <div className="no-print border-b border-[var(--border-error-soft)] bg-[linear-gradient(180deg,var(--surface-error-soft),var(--surface-muted))]">
-        <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-4 py-3 md:flex-row md:items-center md:px-6">
+        {/* Mobile-Variante (<md): kompakte Liste mit Label → Nummer.
+            Spart gegenüber der Desktop-Prosa ~200px ATF. Der CTA-Button
+            entfällt auf Mobile, weil das Notfall-Icon im Header (PR #65)
+            denselben Sprung in die Toolbox auslöst. */}
+        <div className="md:hidden">
+          <div className="mx-auto flex max-w-[86rem] flex-col gap-2 px-4 py-3">
+            <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--text-danger-label)]">
+              Akute Krise
+            </span>
+            <ul className="grid gap-1 text-sm text-[var(--text-danger-strong)]">
+              <li className="flex items-center justify-between gap-3">
+                <span>Lebensgefahr</span>
+                <a
+                  href="tel:144"
+                  aria-label="Sanitätsnotruf 144 anrufen"
+                  className="emergency-tel-link font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+                >
+                  144
+                </a>
+              </li>
+              <li className="flex items-center justify-between gap-3">
+                <span>Nicht lebensbedrohlich (ZH)</span>
+                <a
+                  href="tel:+41800336655"
+                  aria-label="AERZTEFON 0800 33 66 55 anrufen"
+                  className="emergency-tel-link whitespace-nowrap font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+                >
+                  0800 33 66 55
+                </a>
+              </li>
+              <li className="flex items-center justify-between gap-3">
+                <span>Jugendliche</span>
+                <a
+                  href="tel:147"
+                  aria-label="Beratungstelefon 147 von Pro Juventute anrufen"
+                  className="emergency-tel-link font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
+                >
+                  147
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Desktop-Variante (md+): unveränderte Prosa-Form mit CTA. */}
+        <div className="mx-auto hidden max-w-[86rem] flex-col items-start justify-between gap-3 px-4 py-3 md:flex md:flex-row md:items-center md:px-6">
           <div className="text-sm leading-relaxed text-[var(--text-danger-strong)]">
             <span className="mr-3 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--text-danger-label)]">
               Akute Krise
