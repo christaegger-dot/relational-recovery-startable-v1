@@ -30,8 +30,15 @@ export const FACHSTELLEN = [
   {
     id: 'puk-angehoerigenberatung',
     name: 'PUK Zürich – offizielle Angehörigenberatung',
+    // Audit-Folge A5 (PUK-Karte): description war 270 Zeichen / drei Saetze und
+    // verdoppelte Info, die ohnehin in `audience` (Zielgruppen-Aufzaehlung) und
+    // `highlight` ("auch ohne PUK-Hospitalisation") sichtbar ist. Die Karte
+    // wuchs dadurch auf ~518px Hoehe und fiel im 3-spaltigen Grid (ab >=1152px)
+    // visuell aus der Reihe. Gekuerzt auf einen Satz / ~175 Zeichen, semantisch
+    // identisch (kostenlos+vertraulich bleibt erhalten, Hospitalisation-Hinweis
+    // wandert vollstaendig in den `highlight`-Badge).
     description:
-      'Kostenlose und vertrauliche Beratung der Fachstelle Angehörigenarbeit für Angehörige und Bezugspersonen psychisch erkrankter Menschen, auch für psychisch erkrankte Eltern und deren minderjährige Kinder. Eine Beratung ist auch ohne Hospitalisation in der PUK möglich.',
+      'Kostenlose, vertrauliche Beratung der Fachstelle Angehörigenarbeit für Angehörige und Bezugspersonen psychisch erkrankter Menschen — auch für betroffene Eltern und ihre Kinder.',
     link: 'https://www.pukzh.ch/patienten-angehoerige/informationen-fuer-angehoerige/',
     tags: ['Klinik', 'Zürich', 'offizielle Stelle'],
     audience: 'Angehörige, Eltern, Kinder, Fachpersonen',
