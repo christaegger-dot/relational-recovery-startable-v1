@@ -44,6 +44,24 @@ export const SOURCES = {
     chFocus: true,
   },
 
+  // Neuere OBSAN-Publikation zur psychischen Gesundheit. Enthält
+  // wahrscheinlich aktualisierte Prävalenzdaten. Die 18%-Zahl auf der
+  // Website stammt noch aus dem 2016er-Bericht; sobald die aktuelle Zahl
+  // geprüft ist, sollte sie in evidenceContent.js RELEVANCE_STATS und
+  // im Evidenz-Hero-Lead aktualisiert werden.
+  'obsan-2024-psychische-gesundheit': {
+    id: 'obsan-2024-psychische-gesundheit',
+    author: 'Schweizerisches Gesundheitsobservatorium (Obsan)',
+    year: 2024,
+    title: 'Psychische Gesundheit',
+    journal: null,
+    publisher: 'Neuchâtel: Schweizerisches Gesundheitsobservatorium',
+    type: 'report',
+    doi: null,
+    link: 'https://www.obsan.admin.ch/de/publikationen/2024-psychische-gesundheit',
+    chFocus: true,
+  },
+
   'albermann-mueller-2021': {
     id: 'albermann-mueller-2021',
     author: 'Albermann, K. & Müller, B.',

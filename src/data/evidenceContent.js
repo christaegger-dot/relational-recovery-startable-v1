@@ -28,8 +28,8 @@ export const RELEVANCE_STATS = [
   {
     label: 'Erhöhte psychische Belastung',
     value: '18 %',
-    note: 'Bei rund 18% der Schweizer Bevölkerung liegt eine erhöhte psychische Belastung vor (5% stark, 13% mittel), was auf das Vorliegen einer psychischen Störung hindeutet.',
-    sourceIds: ['obsan-72-schuler-2016'],
+    note: 'Bei rund 18% der Schweizer Bevölkerung liegt eine erhöhte psychische Belastung vor (5% stark, 13% mittel), was auf das Vorliegen einer psychischen Störung hindeutet (Erhebung 2016; aktuellere OBSAN-Daten von 2024 verfügbar).',
+    sourceIds: ['obsan-72-schuler-2016', 'obsan-2024-psychische-gesundheit'],
   },
   {
     label: 'Kinder und Jugendliche mit psychisch erkranktem Elternteil',
