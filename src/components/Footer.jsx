@@ -22,9 +22,17 @@ const Footer = memo(function Footer() {
         <div className="footer-grid">
           <div className="footer-panel footer-panel--brand">
             <div className="footer-brand-badge">Fachportal Zürich</div>
-            <h2 className="footer-brand-title">
-              Eltern im <br /> Beratungskontext
-            </h2>
+            {/* Audit: Brand-Lockup ist kein topical heading -- vorher als <h2>
+                landete es auf jeder Seite zusaetzlich in der Heading-Outline und
+                konkurrierte mit den inhaltlichen Sektionen. Das `<br />` mit
+                Leerzeichen davor und danach produzierte zudem textContent
+                "Eltern im  Beratungskontext" (Doppel-Leerzeichen) -- schlecht
+                fuer Screen Reader. Loesung: `<p>` statt `<h2>` (Brand-Label
+                statt Ueberschrift) und Span-Block-Lines statt `<br />`. */}
+            <p className="footer-brand-title">
+              <span className="footer-brand-title__line">Eltern im</span>{' '}
+              <span className="footer-brand-title__line">Beratungskontext</span>
+            </p>
             <p className="footer-brand-copy">
               Fachportal für Orientierung, Triage und Weitervermittlung: Arbeitshilfen für Fachpersonen, die mit
               Familien mit psychisch belasteten Eltern arbeiten. Schwerpunkt Kanton Zürich, schweizweite Ergänzungen.
