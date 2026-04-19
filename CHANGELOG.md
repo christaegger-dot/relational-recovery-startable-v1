@@ -7,21 +7,29 @@ Daten in `YYYY-MM-DD` (lokale Schweizer Zeit). Sprache: Deutsch (de-CH).
 
 ## [Unreleased]
 
-Stand 2026-04-19. Noch ohne Tag-Release. Vor dem ersten Release zu klären:
+Offene Punkte für nach 1.0.0:
 
-- Versionsnummer (Vorschlag: `1.0.0` als initialer öffentlicher Release)
 - Custom-Domain für die produktive Site (3 Netlify-Vorschauen aktuell parallel)
-- Optionales `package.json`-Metadaten-Set (`description`, `repository`, `homepage`, `license`, `author`)
-- Bestehender `index.html`-Verweis auf `/favicon.svg` ist tot — Datei existiert nicht im Repo
+- Optionales `package.json`-Metadaten-Set (`description`, `repository`, `homepage`, `license`, `author`) — aktuell nur Pflichtfelder
+- HSTS-`preload`-Aktivierung sobald produktive Custom-Domain steht
+- Optionale CSP-Definition (bewusst noch nicht in `netlify.toml` — braucht eigene Prüfung wegen React/Vite-Inline-Styles)
+
+## [1.0.0] — 2026-04-19
+
+Initialer öffentlicher Release. Schweizer Fachportal «Eltern im Beratungskontext»
+für Fachpersonen, die mit Familien arbeiten, in denen ein Elternteil psychisch
+erkrankt ist.
 
 ### Hinzugefügt
 
+- Brand-Favicon `public/favicon.svg` mit `EB`-Monogramm in Brand-Farben
 - Security-Header in `netlify.toml`: HSTS, X-Content-Type-Options, X-Frame-Options DENY,
   Referrer-Policy, Permissions-Policy ([#59])
 - README-Sektion zu E2E-, Lint- und Format-Befehlen ([#59])
 
 ### Geändert
 
+- `package.json`: Version 0.1.0 → 1.0.0
 - README: Hero-Asset-Referenz auf `.webp` korrigiert ([#59])
 - README: stale Aussage «keine automatisierten Tests» ersetzt durch Verweis auf Playwright-Suite ([#59])
 
@@ -29,6 +37,7 @@ Stand 2026-04-19. Noch ohne Tag-Release. Vor dem ersten Release zu klären:
 
 - A11y: dekorative `lucide-react`-Icons in Buttons/Links durchgängig mit `aria-hidden="true"`
   versehen (30 Stellen über 6 Templates und `ToolboxSection`) ([#58])
+- A11y: toter `index.html`-Verweis auf `/favicon.svg` jetzt mit echtem Asset
 
 ### Sicherheit
 
