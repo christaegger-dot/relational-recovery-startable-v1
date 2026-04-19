@@ -2859,7 +2859,27 @@
     letter-spacing: 0.12em;
   }
 
+  /* Audit: Notfall-Button bleibt auf allen Viewports sichtbar (P1-Fix).
+     Vorher per display:none ausgeblendet — Krisenzugang lag dann ausschliesslich
+     hinter dem Hamburger-Menue. Auf <=48rem reduzieren wir den Button auf
+     reines Icon (analog zur Hamburger-Beschriftung), damit Brand + Notfall +
+     Menue-Toggle auch bei 375px-Viewports nebeneinander Platz finden.
+     Die Accessibility-Beschriftung kommt aus aria-label. */
+  .ui-header-compact-actions {
+    /* Da .ui-nav--desktop ausgeblendet ist, landet compact-actions in der
+       breiten 1fr-Grid-Spalte. justify-self: end haelt die Buttons rechts. */
+    justify-self: end;
+  }
+
   .ui-header-compact-actions__emergency {
+    /* Override globale .ui-button { width: 100% } Regel weiter unten in
+       diesem Media-Query — Notfall-Button bleibt intrinsic schmal. */
+    width: auto;
+    padding-inline: 0.7rem;
+    gap: 0;
+  }
+
+  .ui-header-compact-actions__emergency-label {
     display: none;
   }
 
@@ -2889,6 +2909,19 @@
 
   .ui-nav--mobile .ui-nav__item {
     font-size: var(--font-size-xs);
+  }
+}
+
+/* Schmale Viewports (<=40rem / 640px): Brand-Titel ausblenden, damit
+   EB-Mark + Notfall-Button + Hamburger ohne Ueberlagerung Platz finden.
+   Der gesperrte Uppercase-Titel ist breiter als die Buchstabenzahl
+   suggeriert (~348px bei 16px Font + 0.18em letter-spacing) — schon bei
+   500px-Viewports kollidiert er sonst mit den compact-actions.
+   Das EB-Mark traegt die Markenwiedererkennung, der Button bleibt klickbar
+   (aria-label "...zur Startseite wechseln"). */
+@media (max-width: 40rem) {
+  .ui-brand__title {
+    display: none;
   }
 }
 
