@@ -8,7 +8,7 @@ function renderActionIcon(icon) {
 
   if (typeof icon === 'function') {
     const Icon = icon;
-    return <Icon size={16} />;
+    return <Icon size={16} aria-hidden="true" />;
   }
 
   if (isValidElement(icon)) {

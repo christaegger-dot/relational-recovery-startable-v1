@@ -133,7 +133,7 @@ function PathwaySection({ pathway }) {
                     <>
                       <div className="ui-toolbox-step__connector" />
                       <div className="ui-toolbox-step__connector-mobile">
-                        <ChevronRight size={16} />
+                        <ChevronRight size={16} aria-hidden="true" />
                       </div>
                     </>
                   ) : null}
@@ -237,7 +237,7 @@ function TriageSection({ triage }) {
                     onClick={() => prompt.recommendation.onJump(prompt.recommendation.target)}
                   >
                     {prompt.recommendation.targetLabel}
-                    <ChevronRight size={14} />
+                    <ChevronRight size={14} aria-hidden="true" />
                   </Button>
                 </div>
               ) : null}
@@ -263,7 +263,7 @@ function TriageSection({ triage }) {
               onClick={() => triage.primaryPriority.onJump(triage.primaryPriority.target)}
             >
               {triage.primaryPriority.targetLabel}
-              <ChevronRight size={14} />
+              <ChevronRight size={14} aria-hidden="true" />
             </Button>
           </div>
         ) : null}
@@ -319,7 +319,7 @@ function PracticeBlocksSection({ practice }) {
                 onClick={() => item.onJump(item.target)}
               >
                 {item.targetLabel}
-                <ChevronRight size={14} />
+                <ChevronRight size={14} aria-hidden="true" />
               </Button>
             </SurfaceCard>
           ))}
@@ -422,7 +422,7 @@ function ClusterSection({ cluster }) {
                       {item.meta ? <p className="ui-fact-card__label ui-editorial-card__action">{item.meta}</p> : null}
                     </div>
                   </div>
-                  <span className="ui-toolbox-disclosure__toggle">+</span>
+                  <span className="ui-toolbox-disclosure__toggle" aria-hidden="true">+</span>
                 </summary>
                 <div className="ui-copy ui-toolbox-disclosure__content">
                   {Array.isArray(item.content) ? (

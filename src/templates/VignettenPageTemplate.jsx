@@ -146,10 +146,10 @@ function VignettenNavigationSection({ navigation }) {
               disabled={navigation.disablePrevious}
               variant="secondary"
             >
-              <ChevronLeft size={16} /> {navigation.previousLabel}
+              <ChevronLeft size={16} aria-hidden="true" /> {navigation.previousLabel}
             </Button>
             <Button type="button" onClick={navigation.onNext} disabled={navigation.disableNext} variant="primary">
-              {navigation.nextLabel} <ChevronRight size={16} />
+              {navigation.nextLabel} <ChevronRight size={16} aria-hidden="true" />
             </Button>
           </div>
         </div>
