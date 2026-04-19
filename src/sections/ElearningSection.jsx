@@ -48,18 +48,15 @@ export default function ElearningSection() {
       'Jedes Modul beginnt mit einer fachlichen Leitidee, führt dann durch eine kurze Einordnung und schliesst mit einer Reflexionsfrage ab.',
     steps: [
       {
-        label: 'Schritt 1',
         title: 'Leitidee erfassen',
         copy: 'Zu Beginn wird die fachliche Grundidee sichtbar gemacht, damit das Modul zuerst orientiert und nicht sofort abfragt.',
         tone: 'soft',
       },
       {
-        label: 'Schritt 2',
         title: 'Kurz einordnen',
         copy: 'Die sprachliche und systemische Störungslage bleibt in einem kompakten Format lesbar und anschlussfähig an Fallbesprechungen.',
       },
       {
-        label: 'Schritt 3',
         title: 'Reflexiv antworten',
         copy: 'Erst dann folgt eine einzelne Antwortentscheidung, die zur fachlich tragfähigeren Perspektive zurückführt.',
         tone: 'accent',
