@@ -101,6 +101,21 @@ export const TAB_ITEMS = [
   },
 ];
 
+// Zwei unabhaengige Versionsachsen -- bewusst nicht synchron:
+//
+// 1. Die `_v5`-Suffixe an `STORAGE_KEYS.appState` und `APP_BROADCAST_CHANNEL`
+//    bezeichnen die *Schluessel-Generation*. Bei jedem groesseren Schema-
+//    Bruch wird der Suffix erhoeht, sodass alte localStorage-Eintraege nicht
+//    mehr aufgegriffen werden (effektive Cache-Invalidierung). Aktuell v5.
+//
+// 2. `APP_STATE_VERSION` ist die *Daten-Version innerhalb* eines persistierten
+//    State-Objekts. Sie steuert die Migrations-Logik in `AppStateContext`,
+//    wenn ein State mit aelterer Versionsnummer geladen wird. Aktuell 2.
+//
+// Bei der naechsten Migration: ueberlegen, ob nur der Daten-Version
+// hochzaehlen reicht (kompatible Erweiterung) oder ob zusaetzlich der
+// Schluessel-Suffix springen muss (inkompatibler Bruch, der alte States
+// nicht migrieren will).
 export const STORAGE_KEYS = {
   appState: 'rr_app_state_v5',
 };
