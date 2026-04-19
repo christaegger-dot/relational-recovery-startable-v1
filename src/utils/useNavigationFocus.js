@@ -24,6 +24,24 @@ function getSectionHashTarget(hashValue) {
   return SECTION_ALIAS_MAP[cleaned] ?? null;
 }
 
+// Audit (Redundanzen-Welle, Befund #3): Scroll + Heading-Focus-Sequenz wurde
+// vorher zweimal fast wortgleich in zwei Effekten weiter unten gebaut. Eine
+// Variante suchte 'h2, h3', die andere 'h3, h2' -- ein verraeterisches Indiz,
+// dass die zwei Bloecke unabhaengig voneinander gewachsen sind. Hier zentral.
+//
+// Verhalten: zum Element scrollen, ersten H2/H3 darin fokussieren, sonst aufs
+// Element selbst zurueckfallen. Keine Aufgabe ueber den Aufruf hinaus.
+function scrollAndFocusElement(targetElement) {
+  if (!targetElement) return;
+  targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const heading = targetElement.querySelector('h2, h3');
+  if (heading && typeof heading.focus === 'function') {
+    heading.focus();
+  } else if (typeof targetElement.focus === 'function') {
+    targetElement.focus();
+  }
+}
+
 export default function useNavigationFocus({
   activeTab,
   setActiveTab,
@@ -178,13 +196,7 @@ export default function useNavigationFocus({
       const targetElement = document.getElementById(pendingSectionHash);
       if (!targetElement) return;
 
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      const heading = targetElement.querySelector('h2, h3');
-      if (heading && typeof heading.focus === 'function') {
-        heading.focus();
-      } else if (typeof targetElement.focus === 'function') {
-        targetElement.focus();
-      }
+      scrollAndFocusElement(targetElement);
       setPendingSectionHash(null);
     };
 
@@ -216,13 +228,7 @@ export default function useNavigationFocus({
     if (!targetElement) return;
 
     const frame = window.requestAnimationFrame(() => {
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      const heading = targetElement.querySelector('h3, h2');
-      if (heading && typeof heading.focus === 'function') {
-        heading.focus();
-      } else if (typeof targetElement.focus === 'function') {
-        targetElement.focus();
-      }
+      scrollAndFocusElement(targetElement);
     });
 
     setPendingPriorityFocus(null);
