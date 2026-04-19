@@ -158,15 +158,20 @@ function PathwaySection({ pathway }) {
 function ScoreBandsSection({ scoreBands }) {
   if (!scoreBands) return null;
 
+  // Audit A4: Section hatte vorher keinen H2 -- nur Eyebrow + Description als
+  // ad-hoc Stack. Auf SectionHeader umgestellt, damit der Heading-Rhythmus
+  // der Toolbox geschlossen ist. Das Interpretations-Aside bleibt bewusst
+  // im Band-Layout unten neben den Score-Karten -- seine Position dort
+  // gehoert inhaltlich zu den Bands (Lese-Schluessel direkt am Schluessel).
   return (
     <Section spacing="tight" surface="subtle" className="no-print">
       <div className="ui-stack ui-stack--loose">
-        <div className="ui-stack ui-stack--tight">
-          <Eyebrow>{scoreBands.eyebrow}</Eyebrow>
-          <div className="ui-copy">
-            <p>{scoreBands.description}</p>
-          </div>
-        </div>
+        <SectionHeader
+          eyebrow={scoreBands.eyebrow}
+          titlePrefix={scoreBands.titlePrefix}
+          titleAccent={scoreBands.titleAccent}
+          description={scoreBands.description}
+        />
 
         <div className="ui-toolbox-band-layout">
           <div className="ui-card-grid ui-card-grid--3">

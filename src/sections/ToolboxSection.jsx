@@ -289,8 +289,14 @@ export default function ToolboxSection({
     steps: PATHWAY_STEPS,
   };
 
+  // Audit A4: ScoreBandsSection rendert(e) eine kopflose Section -- nur
+  // Eyebrow, kein H2. Das bricht den Heading-Rhythmus der Toolbox (alle
+  // Geschwister-Sektionen haben H2 ueber SectionHeader). Wir ergaenzen
+  // titlePrefix/titleAccent und stellen das Template auf SectionHeader um.
   const scoreBandSection = {
     eyebrow: 'Einordnung',
+    titlePrefix: 'Score-Werte als',
+    titleAccent: 'Aufmerksamkeitsmarker lesen',
     description:
       'Die Werte markieren keine Diagnose. Sie helfen lediglich dabei, die Aufmerksamkeit zwischen tragenden Ressourcen, vertiefter Begleitung und möglichem Schutzbedarf zu gewichten.',
     items: SCORE_BANDS,
