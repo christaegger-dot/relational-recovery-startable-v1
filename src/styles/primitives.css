@@ -3066,13 +3066,21 @@
   box-shadow: 0 18px 40px rgba(93, 68, 51, 0.04);
 }
 
+/* Audit P2 #14: Vorher war das Arbeitsrahmen-Panel ein dunkelbrauner
+   Slab (#3d3128 -> #262019) zwischen den beiden hellen Panels (Brand
+   und Bereiche). Die starke Inversion las sich als visuelle Prioritaet
+   der Karte mit dem Inhalt ("Arbeitsrahmen", Hinweise zur lokalen
+   Speicherung, Copyright) – dabei sind das die unterstuetzenden Meta-
+   Inhalte des Footers, nicht die wichtigsten. Wir wechseln auf eine
+   ruhig-warme Sandkachel: weiterhin sichtbar als eigene Kategorie
+   (waermerer Ton als das Brand-Panel), aber ohne dominante Inversion. */
 .footer-panel--framework {
   border-radius: 2.5rem;
-  border-color: var(--footer-surface-inverse-top);
-  background: linear-gradient(180deg, var(--footer-surface-inverse-top), var(--footer-surface-inverse-bottom));
+  border-color: var(--footer-badge-border);
+  background: linear-gradient(180deg, #f0e1cf, #e8d5be);
   padding: var(--space-6);
-  color: var(--footer-text-inverse);
-  box-shadow: 0 28px 70px rgba(38, 32, 25, 0.24);
+  color: var(--footer-text-warm);
+  box-shadow: 0 18px 40px rgba(93, 68, 51, 0.06);
 }
 
 .footer-brand-badge {
@@ -3152,8 +3160,12 @@
   text-transform: uppercase;
 }
 
+/* Audit P2 #14: Klassenname "inverse" stammt aus der frueheren
+   Inversions-Variante (helle Schrift auf dunklem Slab). Markup behaelt
+   den Namen, der visuelle Effekt ist nun ein warm-akzentuiertes Label
+   passend zur Sand-Tonalitaet des Arbeitsrahmen-Panels. */
 .footer-kicker--inverse {
-  color: var(--footer-text-inverse-soft);
+  color: var(--footer-badge-text);
 }
 
 .footer-nav-list {
@@ -3224,18 +3236,25 @@
   gap: var(--space-4);
 }
 
+/* Audit P2 #14: Body- und Legal-Text stehen jetzt dunkel auf der
+   warmen Sandkachel (vorher hell auf dunkelbraun). Trennlinie wechselt
+   von rgba(white, 0.1) zu einer ruhigen warmen Linie. */
 .footer-framework-item__copy {
   margin: 0;
-  color: var(--footer-text-inverse-body);
+  color: var(--footer-text-warm);
   font-size: var(--font-size-sm);
   line-height: 1.6;
 }
 
 .footer-framework-legal {
   margin-top: var(--space-6);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid color-mix(in srgb, var(--footer-text-warm) 18%, transparent 82%);
   padding-top: var(--space-5);
-  color: var(--footer-text-inverse-soft);
+  /* --footer-text-muted (#8a705f) waere auf der Sandkachel nur 3.40
+     Kontrast – unter WCAG AA fuer Normaltext. --footer-text-warm
+     (#5a4a3f) liefert 6.24, sekundaere Hierarchie kommt durch die
+     kleinere font-size-xs und reduzierte Linienstaerke. */
+  color: var(--footer-text-warm);
   font-size: var(--font-size-xs);
   font-weight: 500;
   line-height: 1.9;
