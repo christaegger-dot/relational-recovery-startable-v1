@@ -2966,6 +2966,18 @@
   .ui-brand__title {
     display: none;
   }
+
+  /* Audit P3 #16: längere Eyebrows wie "Evidenz und klinische Orientierung"
+     brachen mit 0.24em Tracking + 2.5rem ::before-Markierung dreizeilig auf
+     375px-Viewports um. Tracking auf 0.14em und Marker auf 1.75rem reduziert
+     gibt genug Platz für eine zweizeilige (statt dreizeilige) Darstellung. */
+  .ui-eyebrow {
+    letter-spacing: 0.14em;
+  }
+
+  .ui-eyebrow::before {
+    width: 1.75rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
