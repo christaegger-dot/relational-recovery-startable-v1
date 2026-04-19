@@ -2941,6 +2941,15 @@
     width: 100%;
   }
 
+  /* Audit P2 #10: Innerhalb einer .ui-chip-row (Praxisblöcke-Filter,
+     Netzwerk-Filter, Closing-Tags) sollen die Chip-Buttons ihre
+     intrinsische Breite behalten, damit flex-wrap sie zu mehreren
+     pro Zeile umbrechen kann. Sonst stapeln sie sich vertikal. */
+  .ui-chip-row .ui-button,
+  .ui-chip-row .ui-chip {
+    width: auto;
+  }
+
   .ui-nav--mobile .ui-nav__item {
     font-size: var(--font-size-xs);
   }
