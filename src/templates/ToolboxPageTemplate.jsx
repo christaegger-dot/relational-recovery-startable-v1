@@ -121,8 +121,11 @@ function PathwaySection({ pathway }) {
                 <div key={step.label} className="ui-toolbox-step">
                   <SurfaceCard tone="soft" className="ui-card--full-height">
                     <div className="ui-toolbox-step__header">
-                      <div className="ui-chip ui-chip--active ui-toolbox-step__chip">Schritt {index + 1}</div>
-                      <div className="ui-toolbox-kicker ui-toolbox-step__label">{step.label}</div>
+                      <div className="ui-chip ui-chip--active ui-toolbox-step__chip">
+                        <span className="ui-toolbox-step__chip-index">Schritt {index + 1}</span>
+                        <span className="ui-toolbox-step__chip-separator" aria-hidden="true">·</span>
+                        <span className="ui-toolbox-step__chip-label">{step.label}</span>
+                      </div>
                     </div>
                     <div className="ui-toolbox-step__divider" />
                     <div className="ui-toolbox-kicker ui-toolbox-step__window">Arbeitsfenster</div>

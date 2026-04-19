@@ -1810,18 +1810,31 @@
 .ui-toolbox-step__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-4);
   margin-bottom: var(--space-4);
 }
 
+/* Audit P2 #11: chip enthält jetzt sowohl die Schritt-Nummer als auch
+   das Phasen-Label ("Schritt 1 · Orientieren") statt zwei nebeneinander
+   freistehender Elemente. Vorher wirkte der separate Chip leer/disabled
+   und das Phasenwort floss frei daneben. Letter-spacing und Padding sind
+   gegenüber dem Default-Chip leicht reduziert, damit die längeren
+   Phasenworte ("Orientieren", "Kooperieren") in der Karten-Spalte ohne
+   Umbruch Platz finden. */
 .ui-toolbox-step__chip {
-  padding: 0.375rem var(--space-3);
-  font-size: 0.65rem;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  column-gap: 0.4rem;
+  row-gap: 0.125rem;
+  padding: 0.375rem 0.625rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
 }
 
-.ui-toolbox-step__label {
-  color: var(--text-muted);
+.ui-toolbox-step__chip-separator {
+  opacity: 0.55;
 }
 
 .ui-toolbox-step__divider {
