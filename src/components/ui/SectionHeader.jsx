@@ -44,18 +44,25 @@ export default function SectionHeader({
     );
   }
 
+  // Audit A2: Bisher wurde `title` stillschweigend verworfen, sobald `titleAccent`
+  // gesetzt war (ohne `titlePrefix`). Das hinterliess fragmentarische H2 wie
+  // "passende Unterstützung." -- schlecht für Screenreader-Outline und SEO.
+  // Neue Regel:
+  //   - `titlePrefix` (falls gesetzt) wird wörtlich als Prefix verwendet
+  //   - sonst dient `title` als Prefix, sobald ein Accent existiert
+  //   - ohne Accent bleibt `title` der einzige, vollständige H2-Text
+  const prefix = titlePrefix ?? (titleAccent ? title : null);
+  const standalone = !titleAccent && !titlePrefix ? title : null;
+
   return (
     <div className="ui-split">
       <div className="ui-stack ui-stack--tight">
         {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
         {hasTitle ? (
           <HeadingTag className={headingClassName}>
-            {titlePrefix ? <>{titlePrefix} </> : null}
-            {titleAccent ? (
-              <span className="ui-hero__accent">{titleAccent}</span>
-            ) : !titlePrefix ? (
-              title
-            ) : null}
+            {prefix ? <>{prefix} </> : null}
+            {standalone ? standalone : null}
+            {titleAccent ? <span className="ui-hero__accent">{titleAccent}</span> : null}
           </HeadingTag>
         ) : null}
         <RichCopy description={description} paragraphs={paragraphs} />
