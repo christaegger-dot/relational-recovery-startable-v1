@@ -140,13 +140,15 @@ function ZoneSection({ zone, defaultOpen = false }) {
 
         <div className="ui-stack ui-stack--loose ui-chapter-disclosure__body">
           {zone.paragraphs?.length ? <RichCopy paragraphs={zone.paragraphs} /> : null}
-          {zone.aside ? (
-            <SurfaceCard tone="soft">
-              {zone.aside.eyebrow ? <p className="ui-fact-card__label">{zone.aside.eyebrow}</p> : null}
-              <h3 className="ui-card__title">{zone.aside.title}</h3>
-              {zone.aside.description ? <p className="ui-card__copy">{zone.aside.description}</p> : null}
-            </SurfaceCard>
-          ) : null}
+          {/* Audit (Aside-Konsolidierung, Welle 1, Schritt 3): Hier stand
+              zuvor ein inline SurfaceCard-Renderer fuer `zone.aside` mit
+              eigenem Schema (`{eyebrow, title, description}`). Verifiziert,
+              dass keine der vier Zonen in `EvidenceSection.zones` ein
+              `aside:`-Feld setzt -- der Renderer war seit unbekannt langem
+              Dead Code. Falls einmal ein Zone-Aside gebraucht wird:
+              <AsideCard aside={zone.aside} tone="soft" /> mit dem regulaeren
+              `{label, title, value, copy, badges}`-Schema, NICHT wieder ein
+              eigenes Inline-Schema einfuehren. */}
 
           {zone.highlightList ? (
             <BulletList items={zone.highlightList.items} tone={zone.highlightList.tone} icon={zone.highlightList.icon} />
