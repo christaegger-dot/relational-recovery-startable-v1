@@ -3153,6 +3153,13 @@
   line-height: 0.95;
 }
 
+/* Audit-Folge: Footer-Brand-Lockup erzwingt zwei Zeilen ueber Span-Blocks
+   (statt <br />), damit textContent sauber als "Eltern im Beratungskontext"
+   serialisiert -- ohne das frueher entstandene Doppel-Leerzeichen. */
+.footer-brand-title__line {
+  display: block;
+}
+
 .footer-brand-copy {
   margin: var(--space-5) 0 0;
   max-width: 32rem;
