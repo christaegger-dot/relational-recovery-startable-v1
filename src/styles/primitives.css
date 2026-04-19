@@ -2436,6 +2436,38 @@
   align-items: start;
 }
 
+/* Audit P2 #13: Statt einer flachen Chip-Reihe rendern wir vier
+   gruppierte Reihen (Erreichbarkeit, Lebensphase, Schwerpunkt,
+   Rahmen) plus einen Reset-Chip ("Alle") oben. Jede Gruppe hat ein
+   kleines Eyebrow-Label und einen ruhigen Vertikalrhythmus. */
+.ui-network-filter-groups {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.ui-network-filter-reset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.ui-network-filter-group {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.ui-network-filter-group__label {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
 .ui-network-search-label {
   font-size: 0.7rem;
   font-weight: 800;
@@ -2963,9 +2995,13 @@
   /* Audit P2 #10: Innerhalb einer .ui-chip-row (Praxisblöcke-Filter,
      Netzwerk-Filter, Closing-Tags) sollen die Chip-Buttons ihre
      intrinsische Breite behalten, damit flex-wrap sie zu mehreren
-     pro Zeile umbrechen kann. Sonst stapeln sie sich vertikal. */
+     pro Zeile umbrechen kann. Sonst stapeln sie sich vertikal.
+     Audit P2 #13: Der Netzwerk-Filter-Reset-Chip ("Alle") sitzt nicht
+     in einer .ui-chip-row, sondern in einer eigenen Wrapper-Klasse;
+     hier braucht es dieselbe Breitenkorrektur. */
   .ui-chip-row .ui-button,
-  .ui-chip-row .ui-chip {
+  .ui-chip-row .ui-chip,
+  .ui-network-filter-reset .ui-chip {
     width: auto;
   }
 

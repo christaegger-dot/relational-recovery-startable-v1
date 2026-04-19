@@ -1,21 +1,40 @@
 // RESOURCE_DATA wurde in Audit 12 zu FACHSTELLEN (src/data/fachstellenContent.js)
 // konsolidiert. Neue Eintraege bitte dort pflegen. Siehe docs/content-pflege.md.
 
+// Audit P2 #13: Die 13 Filter-Chips wurden zuvor flach in einer
+// einzigen Zeile gerendert, obwohl die Intro-Copy bereits eine
+// Gruppierung versprach. Wir sortieren sie nun nach User-Intent
+// (Modell A des Cluster-Vorschlags):
+//
+//   - Erreichbarkeit: wann/wie ist die Stelle ansprechbar
+//   - Lebensphase:    fuer welche Altersgruppe gedacht
+//   - Schwerpunkt:    welche Profil-/Themenmarker hat die Stelle
+//   - Rahmen:         praktische Konditionen (Region, Sprache, Kosten)
+//
+// "Alle" bleibt als separater Reset-Chip ohne Gruppe (group: null)
+// und wird im Template visuell vor den Gruppen platziert.
+export const NETWORK_FILTER_GROUPS = [
+  { id: 'erreichbarkeit', label: 'Erreichbarkeit' },
+  { id: 'lebensphase', label: 'Lebensphase' },
+  { id: 'schwerpunkt', label: 'Schwerpunkt' },
+  { id: 'rahmen', label: 'Rahmen' },
+];
+
 export const NETWORK_FILTERS = [
-  { id: 'all', label: 'Alle' },
-  { id: 'Krise', label: 'Krise' },
-  { id: '24/7', label: '24/7' },
-  { id: 'kostenlos', label: 'kostenlos' },
-  { id: 'anonym', label: 'anonym' },
-  { id: 'Zürich', label: 'Zürich' },
-  { id: 'mehrsprachig', label: 'mehrsprachig' },
-  { id: 'Jugendliche', label: 'Jugendliche' },
-  { id: 'Erwachsene', label: 'Erwachsene' },
-  { id: 'Eltern 0–5', label: 'Eltern 0–5' },
-  { id: 'Sucht', label: 'Sucht' },
-  { id: 'offizielle Stelle', label: 'offizielle Stelle' },
-  { id: 'Selbsthilfe', label: 'Selbsthilfe' },
-  { id: 'Entlastung', label: 'Entlastung' },
+  { id: 'all', label: 'Alle', group: null },
+  { id: 'Krise', label: 'Krise', group: 'erreichbarkeit' },
+  { id: '24/7', label: '24/7', group: 'erreichbarkeit' },
+  { id: 'anonym', label: 'anonym', group: 'erreichbarkeit' },
+  { id: 'Jugendliche', label: 'Jugendliche', group: 'lebensphase' },
+  { id: 'Erwachsene', label: 'Erwachsene', group: 'lebensphase' },
+  { id: 'Eltern 0–5', label: 'Eltern 0–5', group: 'lebensphase' },
+  { id: 'offizielle Stelle', label: 'offizielle Stelle', group: 'schwerpunkt' },
+  { id: 'Selbsthilfe', label: 'Selbsthilfe', group: 'schwerpunkt' },
+  { id: 'Sucht', label: 'Sucht', group: 'schwerpunkt' },
+  { id: 'Entlastung', label: 'Entlastung', group: 'schwerpunkt' },
+  { id: 'Zürich', label: 'Zürich', group: 'rahmen' },
+  { id: 'mehrsprachig', label: 'mehrsprachig', group: 'rahmen' },
+  { id: 'kostenlos', label: 'kostenlos', group: 'rahmen' },
 ];
 
 export const NETWORK_MAP_STEPS = [
