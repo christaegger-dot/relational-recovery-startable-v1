@@ -1005,6 +1005,27 @@
   grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
 }
 
+/* Audit P2 #9: Karten mit längeren Fließtext-Titeln (z. B. Sucht und
+   Komorbidität: "Psychische Erkrankung und Substanzkonsum zusammen denken")
+   wirken im Default-`auto-fit`-Grid auf Tablet bereits dreispaltig (210 px
+   pro Spalte) und damit zu eng. Diese Variante hält 2 Spalten bis 1024 px
+   und dehnt erst danach auf 3 Spalten. */
+.ui-fact-grid--prose {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 30rem) {
+  .ui-fact-grid--prose {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .ui-fact-grid--prose {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .ui-fact-card {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
