@@ -917,9 +917,19 @@
 /* Schmaler Angehoerigen-Nebenpfad-Hinweis unter den Hero-Actions.
    Ersatz fuer die frueher zweigliedrige Audience-Row (Audit-Phase-1,
    Audience-Cut-Strategie: Fachpersonen-Fokus mit Angehoerigen als
-   markiertem Nebenpfad). */
+   markiertem Nebenpfad).
+
+   Audit P3 #17: zuvor schwebte der Hinweis bei symmetrischem Abstand
+   (24px oben und unten) zwischen Actions und Stats-Grid und wirkte
+   "visuell unverbunden". Loesung: negativer margin-top zieht den Hinweis
+   naeher zu den Actions (asymmetrischer Rhythmus = Kopplung nach oben),
+   eine schmale Akzent-Linie links verankert ihn als bewussten Nebenpfad,
+   und der Pfeil vor dem Link spiegelt das Audience-Entry-Glyph. */
 .ui-hero__audience-note {
   margin: 0;
+  margin-top: calc(var(--space-3) - var(--space-5));
+  padding-inline-start: var(--space-3);
+  border-inline-start: 2px solid var(--accent-primary-soft);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -942,6 +952,15 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+}
+
+.ui-hero__audience-note-link::before {
+  content: '\2192';
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .ui-hero__audience-note-link:hover,
