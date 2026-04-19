@@ -1,4 +1,5 @@
 import { ChevronRight } from 'lucide-react';
+import AsideCard from '../components/ui/AsideCard';
 import Container from '../components/ui/Container';
 import Eyebrow from '../components/ui/Eyebrow';
 import Button from '../components/ui/Button';
@@ -182,12 +183,18 @@ function ScoreBandsSection({ scoreBands }) {
               </div>
             ))}
           </div>
-          {scoreBands.aside ? (
-            <SurfaceCard as="aside" tone="default">
-              {scoreBands.aside.label ? <p className="ui-fact-card__label">{scoreBands.aside.label}</p> : null}
-              {scoreBands.aside.copy ? <p className="ui-card__copy">{scoreBands.aside.copy}</p> : null}
-            </SurfaceCard>
-          ) : null}
+          {/* Audit (Aside-Konsolidierung, Welle 1, Schritt 2): Inline
+              SurfaceCard mit `{label, copy}` durch <AsideCard> ersetzt -- die
+              Felder matchen AsideCards API exakt, das gerenderte DOM ist
+              identisch (ui-fact-card__label + ui-card__copy in einer
+              SurfaceCard as="aside" tone="default"). Vorteil: weniger
+              Duplikat, klares "AsideCard rendert hier" statt verstecktes
+              Inline-Markup. */}
+          <AsideCard aside={scoreBands.aside} tone="default" />
+          {/* Hinweis: `assessment.scoreAside` weiter oben (Zeile ~28) bleibt
+              bewusst inline, weil es domain-spezifische Toolbox-Felder traegt
+              (live region, action button, status badge mit ui-toolbox-status-
+              badge-Styling) -- die wuerden AsideCards API ueberladen. */}
         </div>
       </div>
     </Section>
