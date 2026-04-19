@@ -1677,17 +1677,6 @@
   text-align: left;
 }
 
-@media (min-width: 72.001rem) {
-  .ui-card-grid--3,
-  .ui-closing-collection-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .ui-card-grid--5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-}
-
 /* Audit-13-Nachlauf, Option A: Desktop-Nav und Desktop-Header-Actions sind
    auf allen Viewports ausgeblendet. Nur das Burger-Menue (compact-actions)
    ist aktiv. Grund: Die Desktop-Nav hatte ab 1152px sichtbare Overlap-
@@ -2426,6 +2415,23 @@
     flex-direction: row;
     align-items: end;
     justify-content: space-between;
+  }
+}
+
+/* Audit A5: Dieser Block stand vorher VOR dem 48rem-Block oben in der Datei
+   und wurde dadurch im Cascade-Tie ueberschrieben (gleiche Spezifitaet,
+   spaeterer Source-Position-Sieg). Dadurch rendete --3 ueberall als 2-col,
+   --5 ueberall als 2-col, ui-closing-collection-grid ueberall als 2-col --
+   selbst auf Viewports >= 1152px. Nach Verschiebung ans Cascade-Ende
+   greifen die Desktop-Spaltenzahlen wieder. */
+@media (min-width: 72.001rem) {
+  .ui-card-grid--3,
+  .ui-closing-collection-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ui-card-grid--5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 
