@@ -2,6 +2,21 @@
   command = "npm run build"
   publish = "dist"
 
+# Security-Header für alle Routen.
+# Hinweise:
+# - kein CSP-Header gesetzt: die App lädt zur Laufzeit keine externen Ressourcen,
+#   aber inline-Styles/SVG kommen aus React/Vite — daher würde eine strikte CSP
+#   ohne sorgfältige Prüfung Build-Output brechen. Lieber bewusst ergänzen.
+# - HSTS preload nicht aktiviert: erst sinnvoll wenn produktive Custom-Domain steht.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
 [[headers]]
   for = "/"
   [headers.values]
