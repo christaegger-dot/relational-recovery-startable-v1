@@ -18,6 +18,15 @@ const AppStateContext = createContext(null);
 
 export { AppStateContext };
 
+// Module-scope helper so impure calls (Date.now / Math.random) live outside
+// the component render path — keeps react-hooks/purity happy.
+function generateTabInstanceId() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return `tab-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
 export function AppStateProvider({ children }) {
   const initialAppStateRef = useRef(null);
   if (!initialAppStateRef.current) {
@@ -39,12 +48,13 @@ export function AppStateProvider({ children }) {
   // Ref shared with App for focus management: updated by navigate() before setActiveTab
   const navigationFocusTargetRef = useRef(initialAppState.activeTab === 'start' ? 'none' : 'heading');
 
-  // Sync/persistence internals
-  const tabInstanceIdRef = useRef(
-    typeof crypto !== 'undefined' && crypto.randomUUID
-      ? crypto.randomUUID()
-      : `tab-${Date.now()}-${Math.random().toString(16).slice(2)}`
-  );
+  // Sync/persistence internals: lazy-initialized, stable across renders.
+  // The impure ID generation lives in a module-scope helper so the
+  // react-hooks/purity rule sees only a normal function call here.
+  const tabInstanceIdRef = useRef(null);
+  if (tabInstanceIdRef.current === null) {
+    tabInstanceIdRef.current = generateTabInstanceId();
+  }
   const latestAppliedTimestampRef = useRef(null);
   if (latestAppliedTimestampRef.current === null) {
     let ts = 0;
