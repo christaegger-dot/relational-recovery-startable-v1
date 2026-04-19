@@ -3,6 +3,7 @@ import { MapPin, Search } from 'lucide-react';
 import heroIllustration from '../assets/relational-recovery-hero-v3-web.webp';
 import {
   NETWORK_FILTERS,
+  NETWORK_FILTER_GROUPS,
   NETWORK_MAP_LENSES,
   NETWORK_MAP_QUESTIONS,
   NETWORK_MAP_STEPS,
@@ -113,6 +114,7 @@ export default function NetworkSection() {
       ],
     },
     filters: NETWORK_FILTERS,
+    filterGroups: NETWORK_FILTER_GROUPS,
     activeFilter: activeResourceFilter,
     onFilterChange: setActiveResourceFilter,
     searchTerm,

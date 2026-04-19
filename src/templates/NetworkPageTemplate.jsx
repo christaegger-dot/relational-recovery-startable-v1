@@ -7,8 +7,22 @@ import Section from '../components/ui/Section';
 import SectionHeader from '../components/ui/SectionHeader';
 import SurfaceCard from '../components/ui/SurfaceCard';
 
+function FilterChipButton({ filter, isActive, onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={() => onClick(filter.id)}
+      aria-pressed={isActive}
+      className={`ui-chip ${isActive ? 'ui-chip--active' : ''}`}
+    >
+      {filter.label}
+    </button>
+  );
+}
+
 function FilterToolbar({
   filters = [],
+  filterGroups = [],
   activeFilter,
   onFilterChange,
   searchTerm,
@@ -17,6 +31,15 @@ function FilterToolbar({
   searchStatusText,
   filterStatusText,
 }) {
+  // Audit P2 #13: Filter werden nach Gruppen gerendert (Erreichbarkeit,
+  // Lebensphase, Schwerpunkt, Rahmen) statt flach in einer Reihe.
+  // "Alle" steht als Reset-Chip vor allen Gruppen.
+  const resetFilter = filters.find((filter) => filter.group == null);
+  const groupedFilters = filterGroups.map((group) => ({
+    ...group,
+    items: filters.filter((filter) => filter.group === group.id),
+  }));
+
   return (
     <div className="ui-network-toolbar">
       <div className="ui-stack ui-stack--tight">
@@ -24,30 +47,46 @@ function FilterToolbar({
           <Eyebrow>Filter</Eyebrow>
           <div className="ui-copy">
             <p>
-              Die Filter gruppieren Krisenwege, jugendbezogene Angebote, Entlastung und offizielle Stellen, damit je
-              nach Lage schneller priorisiert werden kann.
+              Die Filter sind nach Erreichbarkeit, Lebensphase, Schwerpunkt und Rahmen gruppiert, damit je nach Lage
+              schneller priorisiert werden kann.
             </p>
           </div>
         </div>
 
         <fieldset>
           <legend className="ui-visually-hidden">Fachstellen filtern</legend>
-          <div className="ui-chip-row">
-            {filters.map((filter) => {
-              const isActive = activeFilter === filter.id;
-
-              return (
-                <button
-                  key={filter.id}
-                  type="button"
-                  onClick={() => onFilterChange(filter.id)}
-                  aria-pressed={isActive}
-                  className={`ui-chip ${isActive ? 'ui-chip--active' : ''}`}
+          <div className="ui-network-filter-groups">
+            {resetFilter ? (
+              <div className="ui-network-filter-reset">
+                <FilterChipButton
+                  filter={resetFilter}
+                  isActive={activeFilter === resetFilter.id}
+                  onClick={onFilterChange}
+                />
+              </div>
+            ) : null}
+            {groupedFilters.map((group) =>
+              group.items.length ? (
+                <div
+                  key={group.id}
+                  className="ui-network-filter-group"
+                  role="group"
+                  aria-label={`Filter: ${group.label}`}
                 >
-                  {filter.label}
-                </button>
-              );
-            })}
+                  <p className="ui-network-filter-group__label">{group.label}</p>
+                  <div className="ui-chip-row">
+                    {group.items.map((filter) => (
+                      <FilterChipButton
+                        key={filter.id}
+                        filter={filter}
+                        isActive={activeFilter === filter.id}
+                        onClick={onFilterChange}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ) : null
+            )}
           </div>
         </fieldset>
         <p className="ui-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
@@ -96,6 +135,7 @@ function ResourceDirectorySection({ directory }) {
   const {
     intro,
     filters,
+    filterGroups,
     activeFilter,
     onFilterChange,
     searchTerm,
@@ -124,6 +164,7 @@ function ResourceDirectorySection({ directory }) {
 
         <FilterToolbar
           filters={filters}
+          filterGroups={filterGroups}
           activeFilter={activeFilter}
           onFilterChange={onFilterChange}
           searchTerm={searchTerm}
