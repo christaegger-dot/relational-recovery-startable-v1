@@ -44,21 +44,21 @@ export const SOURCES = {
     chFocus: true,
   },
 
-  // Neuere OBSAN-Publikation zur psychischen Gesundheit. Enthält
-  // wahrscheinlich aktualisierte Prävalenzdaten. Die 18%-Zahl auf der
-  // Website stammt noch aus dem 2016er-Bericht; sobald die aktuelle Zahl
-  // geprüft ist, sollte sie in evidenceContent.js RELEVANCE_STATS und
-  // im Evidenz-Hero-Lead aktualisiert werden.
-  'obsan-2024-psychische-gesundheit': {
-    id: 'obsan-2024-psychische-gesundheit',
+  // Nationaler Gesundheitsbericht 2025 — aktuellste Schweizer Referenz
+  // zur psychischen Gesundheit. Enthält SGB-2022-Daten (PHQ-9, GAD-7)
+  // sowie Lebenszeitprävalenz aus Zürich-Studie und PsyCoLaus.
+  // Kernaussage: «Verlässliche Daten zur Häufigkeit psychischer
+  // Erkrankungen stammen aus älteren, regionalen Erhebungen.»
+  'ngb-2025': {
+    id: 'ngb-2025',
     author: 'Schweizerisches Gesundheitsobservatorium (Obsan)',
-    year: 2024,
-    title: 'Psychische Gesundheit',
+    year: 2025,
+    title: 'Nationaler Gesundheitsbericht 2025 — Psychische Gesundheit',
     journal: null,
     publisher: 'Neuchâtel: Schweizerisches Gesundheitsobservatorium',
     type: 'report',
     doi: null,
-    link: 'https://www.obsan.admin.ch/de/publikationen/2024-psychische-gesundheit',
+    link: 'https://www.obsan.admin.ch/sites/default/files/2025-09/ngb2025_de.pdf',
     chFocus: true,
   },
 

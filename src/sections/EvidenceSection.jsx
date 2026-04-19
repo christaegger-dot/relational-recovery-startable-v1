@@ -111,7 +111,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
     eyebrow: 'Evidenz und klinische Orientierung',
     title: 'Einordnen, benennen und',
     accent: 'familienorientiert handeln.',
-    lead: 'Knapp 18 % der Schweizer Bevölkerung leben gemäss OBSAN-Monitoring (Schuler et al. 2016) mit einer wahrscheinlichen psychischen Störung. Wenn Betroffene Kinder haben, wird die Erkrankung zur Familienangelegenheit.',
+    lead: 'Jede zweite Person in der Schweiz ist im Laufe ihres Lebens von einer psychischen Erkrankung betroffen. Rund 10 % der Bevölkerung zeigen aktuell klinisch relevante Depressionssymptome (NGB 2025, SGB 2022). Wenn Betroffene Kinder haben, wird die Erkrankung zur Familienangelegenheit.',
     description:
       'Diese Seite bündelt die fachliche Logik dahinter: warum Elternschaft in der Erwachsenenpsychiatrie relevant ist, wie Kinder Belastung erleben und welche Gesprächs- und Unterstützungsformen sich für die Praxis besonders bewähren.',
     supportingPoints: [

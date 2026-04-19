@@ -22,14 +22,21 @@ export const LITERATUR_IDS = [
   'wiegand-grefe-2024',
   'wiegand-grefe-plass-christl-2025',
   'obsan-72-schuler-2016',
+  'ngb-2025',
 ];
 
 export const RELEVANCE_STATS = [
   {
-    label: 'Erhöhte psychische Belastung',
-    value: '18 %',
-    note: 'Bei rund 18% der Schweizer Bevölkerung liegt eine erhöhte psychische Belastung vor (5% stark, 13% mittel), was auf das Vorliegen einer psychischen Störung hindeutet (Erhebung 2016; aktuellere OBSAN-Daten von 2024 verfügbar).',
-    sourceIds: ['obsan-72-schuler-2016', 'obsan-2024-psychische-gesundheit'],
+    label: 'Lebenszeitprävalenz',
+    value: 'Jede 2.',
+    note: 'Jede zweite Person in der Schweiz ist im Laufe ihres Lebens von einer psychischen Erkrankung betroffen (Zürich-Studie, PsyCoLaus).',
+    sourceIds: ['ngb-2025'],
+  },
+  {
+    label: 'Aktuelle Depressionssymptome',
+    value: '10 %',
+    note: 'Rund 10% der Bevölkerung zeigen mittelschwere bis schwere Depressionssymptome, bei jungen Frauen (15–24) sind es 25,5% (SGB 2022, PHQ-9).',
+    sourceIds: ['ngb-2025'],
   },
   {
     label: 'Kinder und Jugendliche mit psychisch erkranktem Elternteil',
