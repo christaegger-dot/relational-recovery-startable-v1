@@ -128,32 +128,6 @@ export default function App() {
         Zum Inhalt springen
       </a>
 
-      {activeTab === 'toolbox' && (
-        <div className="no-print border-b border-stone-300/60 bg-white/80 px-4 py-3 shadow-[0_8px_20px_rgba(76,55,39,0.04)]">
-          <div className="mx-auto flex max-w-[86rem] flex-col gap-3 md:px-2">
-            <h2 className="text-base font-semibold text-stone-900">Orientierung, Schutz und nächste Schritte</h2>
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={handleDownloadCrisisPlan}
-                className="haptic-btn inline-flex items-center gap-2 rounded-full border border-stone-300/70 bg-white px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-stone-700 shadow-[0_10px_24px_rgba(76,55,39,0.06)]"
-                aria-label="Krisenplan herunterladen"
-              >
-                Krisenplan herunterladen
-              </button>
-              <button
-                type="button"
-                onClick={handleToolboxPrint}
-                className="haptic-btn inline-flex items-center gap-2 rounded-full border border-stone-300/70 bg-white px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-stone-700 shadow-[0_10px_24px_rgba(76,55,39,0.06)]"
-                aria-label="Arbeitsansicht drucken"
-              >
-                Arbeitsansicht drucken
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {showSafeNote && (
         <div className="relative z-[100] border-b border-[var(--border-inverse)] bg-[linear-gradient(180deg,var(--surface-inverse-top),var(--surface-inverse-bottom))] px-3 py-3 text-[var(--text-inverse)] no-print">
           <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-2 md:flex-row md:items-center md:px-6">
