@@ -10,6 +10,23 @@ export default function ElearningSection() {
   const completedCount = completedModules.length;
   const totalCount = E_MODULES.length;
   const progressPercent = totalCount ? Math.round((completedCount / totalCount) * 100) : 0;
+  const hasStartedLearning = completedCount > 0;
+
+  // Audit P2 #12: vor dem ersten bearbeiteten Modul wirkt eine "0%"-Kachel
+  // wie ein leerer Score und damit wie eine negative Erstbegegnung.
+  // Stattdessen zeigen wir bei completedCount === 0 einen ruhigen
+  // Empty-State ("Bereit") mit einladendem Hinweis statt einer Quote.
+  const progressStat = hasStartedLearning
+    ? {
+        label: 'Lernfortschritt',
+        value: `${progressPercent}%`,
+        note: `${completedCount} von ${totalCount} Modulen bearbeitet`,
+      }
+    : {
+        label: 'Lernfortschritt',
+        value: 'Bereit',
+        note: `${totalCount} Module warten auf den ersten Lernschritt.`,
+      };
 
   const hero = {
     eyebrow: 'Fachliche Kurzformate',
@@ -22,11 +39,7 @@ export default function ElearningSection() {
     asideCopy:
       'April 2026. Die Lernmodule sind als psychoedukative Orientierung und für ruhige fachliche Reflexion konzipiert, nicht als Ersatz für Supervision, Behandlung oder Krisenentscheidungen.',
     stats: [
-      {
-        label: 'Lernfortschritt',
-        value: `${progressPercent}%`,
-        note: `${completedCount} von ${totalCount} Modulen bearbeitet`,
-      },
+      progressStat,
       {
         label: 'Module',
         value: String(totalCount),
