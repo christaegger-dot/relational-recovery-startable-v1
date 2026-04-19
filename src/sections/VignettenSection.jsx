@@ -60,6 +60,12 @@ export default function VignettenSection() {
         tone: 'soft',
       };
 
+  // Audit A3: `statusLabel: 'Fallsituation'` wiederholte den Eyebrow der
+  // umgebenden Section eins zu eins -- im DOM standen zwei identische Labels
+  // direkt untereinander. Der Eyebrow setzt den Kontext bereits, im Card
+  // genuegen Titel + Badge (z. B. "Aufnahme / Woche 1"). Das Template
+  // rendert `statusLabel` weiterhin konditional -- spaetere Vignetten
+  // koennten es fuer abweichende Subkontexte re-aktivieren.
   const caseStudy = {
     eyebrow: 'Fallsituation',
     titlePrefix: 'Aktueller',
@@ -67,7 +73,6 @@ export default function VignettenSection() {
     description:
       'Jede Vignette verdichtet eine typische Entscheidungssituation aus Familie und Versorgungskontext. Ziel ist eine fachlich nachvollziehbare Einschätzung, nicht eine perfekte Antwort.',
     aside: caseStudyAside,
-    statusLabel: 'Fallsituation',
     title: vignette.title,
     badge: vignette.status,
     body: vignette.description,
