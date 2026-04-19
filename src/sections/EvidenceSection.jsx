@@ -150,6 +150,12 @@ export default function EvidenceSection({ downloadResources = [] }) {
         'Kapitel 5 Materialien',
       ],
     },
+    // Konvention (Audit-Folge A5): `note`-Felder moeglichst <= ~80 Zeichen halten.
+    // Diese fuenf Items rendern als `ui-card-grid--5` und stehen ab Viewport
+    // >= 1152px nebeneinander -- pro Karte bleiben rund 217px Breite. Laengere
+    // Notes brechen mehrfach um und lassen die Reihe optisch gequetscht wirken.
+    // Aktuell laengste Note: 84 Zeichen ("Unterstuetzungsangebote, klinische
+    // Schritte und naechste Interventionen") -- gerade noch im Rahmen.
     items: [
       {
         id: 'evidenz-verstehen',
