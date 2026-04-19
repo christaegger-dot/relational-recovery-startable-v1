@@ -12,6 +12,18 @@ function checkboxFor(page, label) {
   return page.locator('label').filter({ hasText: label }).locator('input[type="checkbox"]');
 }
 
+// Click the visible label to toggle the visually-hidden checkbox.
+// Playwright 1.59+ refuses to dispatch `.check({force: true})` on
+// `ui-visually-hidden` inputs reliably; clicking the label is the
+// semantically correct path (matches actual user interaction).
+async function setItemChecked(page, label, desired) {
+  const cb = checkboxFor(page, label);
+  const isChecked = await cb.isChecked();
+  if (isChecked !== desired) {
+    await page.locator('label').filter({ hasText: label }).click();
+  }
+}
+
 test.describe('Assessment Score', () => {
   test.beforeEach(async ({ page }) => {
     await page.addInitScript(() => localStorage.clear());
@@ -26,17 +38,17 @@ test.describe('Assessment Score', () => {
   });
 
   test('checking a single item updates the score', async ({ page }) => {
-    await checkboxFor(page, ITEMS[0].label).check({ force: true });
+    await setItemChecked(page, ITEMS[0].label, true);
 
     await expect(page.locator('.ui-toolbox-score')).toHaveText(String(ITEMS[0].val));
     await expect(page.locator('#assessment-score-status')).toContainText(`Aktueller Assessment-Score: ${ITEMS[0].val}`);
   });
 
   test('unchecking an item decreases the score', async ({ page }) => {
-    await checkboxFor(page, ITEMS[0].label).check({ force: true });
+    await setItemChecked(page, ITEMS[0].label, true);
     await expect(page.locator('.ui-toolbox-score')).toHaveText(String(ITEMS[0].val));
 
-    await checkboxFor(page, ITEMS[0].label).uncheck({ force: true });
+    await setItemChecked(page, ITEMS[0].label, false);
     await expect(page.locator('#assessment-score-status')).toContainText('Aktueller Assessment-Score: 0');
   });
 
@@ -47,24 +59,24 @@ test.describe('Assessment Score', () => {
     await expect(liveRegion).toContainText('Hinweis auf tragende Ressourcen');
 
     // Check crisis(2) → score 2, still supportive
-    await checkboxFor(page, ITEMS[0].label).check({ force: true });
+    await setItemChecked(page, ITEMS[0].label, true);
     await expect(page.locator('.ui-toolbox-score')).toHaveText('2');
     await expect(liveRegion).toContainText('Hinweis auf tragende Ressourcen');
 
     // Check backup(3) → score 5, caution
-    await checkboxFor(page, ITEMS[1].label).check({ force: true });
+    await setItemChecked(page, ITEMS[1].label, true);
     await expect(page.locator('.ui-toolbox-score')).toHaveText('5');
     await expect(liveRegion).toContainText('Hinweis auf vertiefte Begleitung');
 
     // Check shame(2) → score 7, danger
-    await checkboxFor(page, ITEMS[2].label).check({ force: true });
+    await setItemChecked(page, ITEMS[2].label, true);
     await expect(page.locator('.ui-toolbox-score')).toHaveText('7');
     await expect(liveRegion).toContainText('Hinweis auf Schutzabklärung');
   });
 
   test('checking all items gives maximum score of 10', async ({ page }) => {
     for (const item of ITEMS) {
-      await checkboxFor(page, item.label).check({ force: true });
+      await setItemChecked(page, item.label, true);
     }
 
     await expect(page.locator('.ui-toolbox-score')).toHaveText('10');
@@ -73,7 +85,7 @@ test.describe('Assessment Score', () => {
 
   test('reset button clears score and unchecks all items', async ({ page }) => {
     for (const item of ITEMS.slice(0, 2)) {
-      await checkboxFor(page, item.label).check({ force: true });
+      await setItemChecked(page, item.label, true);
     }
     await expect(page.locator('.ui-toolbox-score')).toHaveText('5');
 
@@ -102,7 +114,7 @@ test.describe('Assessment Score', () => {
 
   test('score persists across tab navigation', async ({ page }) => {
     for (const item of ITEMS.slice(0, 2)) {
-      await checkboxFor(page, item.label).check({ force: true });
+      await setItemChecked(page, item.label, true);
     }
     await expect(page.locator('.ui-toolbox-score')).toHaveText('5');
 
@@ -131,7 +143,7 @@ test.describe('Assessment Score Persistence', () => {
 
     // Check items (score = 5)
     for (const item of ITEMS.slice(0, 2)) {
-      await checkboxFor(page, item.label).check({ force: true });
+      await setItemChecked(page, item.label, true);
     }
     await expect(page.locator('.ui-toolbox-score')).toHaveText('5');
 
