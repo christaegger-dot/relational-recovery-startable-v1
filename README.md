@@ -13,7 +13,7 @@ Die Hilfsangebote sind bewusst **zürich-zentriert** angelegt und werden punktue
 - lokale Browser-Persistenz für Lern- und Toolzustände
 - Cross-Tab-Synchronisierung per `localStorage` und `BroadcastChannel`
 - tab-basiertes Code-Splitting für grössere Bereiche
-- Hero-Illustration als reduziertes PNG-Asset im Projekt
+- Hero-Illustration als reduziertes WebP-Asset im Projekt
 
 ## Voraussetzungen
 
@@ -44,6 +44,19 @@ Build lokal prüfen:
 
 ```bash
 npm run preview
+```
+
+E2E-Tests (Playwright):
+
+```bash
+npm run test:e2e
+```
+
+Lint und Format:
+
+```bash
+npm run lint
+npm run format
 ```
 
 ## Projektstruktur
@@ -131,14 +144,12 @@ Die Inhalte liegen nicht mehr in einem grossen Einzelmodul, sondern bereichsbezo
 ## Assets und generierte Dateien
 
 - aktive Hero-Datei:
-  `src/assets/relational-recovery-hero-v3-web.png`
-- grössere Originalversion:
-  `src/assets/relational-recovery-hero-v3.png`
+  `src/assets/relational-recovery-hero-v3-web.webp`
 - `output/` ist für generierte Zwischenstände reserviert und via `.gitignore` ausgeschlossen
 
 ## Bekannte Grenzen
 
-- Es gibt aktuell keine automatisierten Tests.
+- Die E2E-Suite (`npm run test:e2e`) deckt Navigation, Hash-Routing, Mobile-Menü, Assessment-Score und Session-Reset ab. Unit-Tests gibt es bewusst nicht — die App ist primär Daten-Rendering ohne komplexe Logik.
 - Der Fokus liegt auf statischer Fachinformation und lokaler Interaktion, nicht auf Backend-Integration.
 - Ein Teil der Lernmodul-Metadaten bleibt bewusst früh verfügbar, weil er für Fortschritt und Zustandsvalidierung benötigt wird.
 - Einige Arbeitsmaterialien werden aktuell als einfache `TXT`-Vorlagen bereitgestellt und nicht als gestaltete PDF-Dokumente.
