@@ -18,6 +18,8 @@ import {
   ADDICTION_TIPS,
   CHILD_PROTECTION_THRESHOLDS,
   CHILD_PROTECTION_TIPS,
+  EARLY_WARNING_NOTE,
+  EARLY_WARNING_SIGN_DOMAINS,
   PRACTICE_BLOCKS,
   PRACTICE_BLOCK_FILTERS,
   RIGHTS_FAQ,
@@ -392,6 +394,7 @@ export default function ToolboxSection({
         description: [
           'Ein schriftlicher Plan reduziert Entscheidungsdruck in belasteten Phasen und schafft eine gemeinsame Sprache für Warnzeichen, Kontakte und Übergaben.',
           'Besonders wichtig ist der Kinder-Schutzteil: Wer übernimmt Betreuung, Information und sichere Orte, wenn Symptome eskalieren?',
+          EARLY_WARNING_NOTE,
         ],
         actions: [
           {
@@ -412,6 +415,12 @@ export default function ToolboxSection({
           text: item,
           icon: <ShieldCheck size={18} aria-hidden="true" />,
           className: 'ui-toolbox-list-card--plain',
+        })),
+        disclosureItems: EARLY_WARNING_SIGN_DOMAINS.map((domain) => ({
+          title: `Frühwarnzeichen — ${domain.domain}`,
+          summaryAriaLabel: `Frühwarnzeichen im Bereich ${domain.domain}`,
+          icon: <AlertTriangle size={18} aria-hidden="true" />,
+          content: domain.examples,
         })),
         gridCards: SAFETY_PLAN_TEMPLATE_FIELDS.map((field) => ({
           label: 'Leitfrage',

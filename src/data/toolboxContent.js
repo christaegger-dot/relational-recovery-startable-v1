@@ -47,6 +47,66 @@ export const SAFETY_PLAN_POINTS = [
   'Nachsorge: Wer kümmert sich um Anschluss an Beratung oder Behandlung?',
 ];
 
+// Frühwarnzeichen für drohende Verschlechterung — als gemeinsame Sprache
+// zwischen Eltern, Kind und Fachperson. Quelle: Lenz & Brockmann (2010),
+// referenziert in Stauber et al. (2018), Kap. 6.2 (Krisenplan). Die Liste
+// ist als Anstoss für die individuelle Erarbeitung gedacht, nicht als
+// abzuhakende Checkliste — Frühwarnzeichen sind familien- und
+// erkrankungsspezifisch.
+export const EARLY_WARNING_SIGN_DOMAINS = [
+  {
+    domain: 'Schlaf und Energie',
+    examples: [
+      'deutlich weniger oder mehr Schlaf als sonst',
+      'früh erschöpft trotz wenig Aktivität',
+      'Antriebslosigkeit ab dem Morgen, schwer aus dem Bett kommen',
+    ],
+  },
+  {
+    domain: 'Stimmung und Reizbarkeit',
+    examples: [
+      'häufiger gereizt, weinerlich oder dünnhäutig',
+      'plötzliche Hoffnungslosigkeit oder Gefühl von Leere',
+      'Angst vor Alltagssituationen, die vorher unproblematisch waren',
+    ],
+  },
+  {
+    domain: 'Kontakt und Rückzug',
+    examples: [
+      'Termine werden abgesagt oder vergessen',
+      'Telefon, E-Mail oder Nachrichten bleiben unbeantwortet',
+      'Rückzug ins Schlafzimmer, weniger Kontakt mit Kindern und Partnerin oder Partner',
+    ],
+  },
+  {
+    domain: 'Versorgung und Alltag',
+    examples: [
+      'Mahlzeiten fallen aus oder werden nur noch unregelmässig zubereitet',
+      'Hygiene, Wäsche oder Haushalt bleiben über mehrere Tage liegen',
+      'Routinen mit den Kindern (Schule, Zubettgehen) werden brüchig',
+    ],
+  },
+  {
+    domain: 'Substanzen und Medikamente',
+    examples: [
+      'mehr Alkohol, Cannabis oder andere Substanzen als sonst',
+      'verordnete Medikamente werden eigenmächtig reduziert oder abgesetzt',
+      'Beschaffung von Substanzen rückt in den Vordergrund',
+    ],
+  },
+  {
+    domain: 'Gefährdungssignale',
+    examples: [
+      'Suizidgedanken werden geäussert oder angedeutet',
+      'Sätze wie „Es geht ohne mich besser" oder „Es hat keinen Sinn mehr"',
+      'Verteilen oder Weggeben persönlicher Dinge, plötzliche Abschiedsgesten',
+    ],
+  },
+];
+
+export const EARLY_WARNING_NOTE =
+  'Frühwarnzeichen sind individuell. Hilfreich ist, sie gemeinsam mit der erkrankten Person und — altersgerecht — mit dem Kind zu identifizieren und im Sicherheitsplan zu hinterlegen. Je konkreter die Zeichen benannt sind, desto eher kann früh reagiert werden, ohne dass die ganze Beziehung erst in einer Krise verhandelt werden muss.';
+
 export const SAFETY_PLAN_TEMPLATE_FIELDS = [
   {
     title: 'Warnzeichen',
