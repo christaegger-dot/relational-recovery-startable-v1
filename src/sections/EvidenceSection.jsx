@@ -125,13 +125,18 @@ export default function EvidenceSection({ downloadResources = [] }) {
       'praxisnahe Brücke zwischen Evidenz, Gesprächsführung und Vernetzung',
     ],
     badges: ['Verstehen', 'Mit Kindern sprechen', 'Mit Eltern arbeiten', 'Handeln & vernetzen'],
-    aside: {
-      eyebrow: 'Praxisfokus',
-      title: 'Nicht nur Krankheit sehen, sondern Beziehung und Versorgung.',
-      description:
-        'Die Inhalte übersetzen Forschung und klinische Erfahrung in konkrete Fragen für Anamnese, Gesprächsführung, Entlastung und nächste Schritte im familiären Alltag.',
-      meta: ['Psychoedukation', 'Elternarbeit', 'Schutzfaktoren', 'Vernetzung'],
-    },
+    // Audit (Aside-Konsolidierung, Welle 1, Schritt 1): Hier stand zuvor ein
+    // `aside`-Objekt mit `{eyebrow, title, description, meta}`. PageHero liest
+    // aber nur die flachen Props `asideTitle`/`asideCopy` und ignoriert ein
+    // `aside`-Objekt komplett -- das Objekt war also stillschweigend tote
+    // Daten und wurde nirgends gerendert. Bewusste Entscheidung gegen ein
+    // Re-Aktivieren des Asides: die Hero traegt mit eyebrow + title + lead +
+    // description + supportingPoints + badges bereits sechs Inhaltsebenen,
+    // und die Aside-Copy (`Beziehung und Versorgung sehen`) war im Kern eine
+    // dritte Paraphrase dessen, was Description und SupportingPoints schon
+    // sagen. Die anderen sechs Sections haben einen Hero-Aside, weil ihre
+    // Hero sonst schlanker ist -- die Evidenz-Hero ist die begruendete
+    // Ausnahme.
   };
 
   const chapterOverview = {
