@@ -8,10 +8,16 @@ export default function AsideCard({ aside, tone = 'soft' }) {
       {aside.label ? <p className="ui-fact-card__label">{aside.label}</p> : null}
       {aside.title ? <h3 className="ui-card__title">{aside.title}</h3> : null}
       {aside.value ? <p className="ui-fact-card__value">{aside.value}</p> : null}
+      {/* Audit (Redundanzen-Welle): `aside.note` wurde hier zuvor zusaetzlich
+          gerendert, war aber im gesamten src/-Tree nirgends gesetzt. Drei
+          parallele Felder (`copy`/`note` + value-abhaengige Klassen) loesten
+          effektiv denselben Job mit unklarer Semantik. Verbleibend: `aside.copy`
+          rendert als `ui-card__copy`, faellt aber zu `ui-fact-card__note`
+          herunter, wenn ein `aside.value` darueber steht (kleinere Typo unter
+          der Kennzahl). */}
       {aside.copy ? (
         <p className={aside.value ? 'ui-fact-card__note' : 'ui-card__copy'}>{aside.copy}</p>
       ) : null}
-      {aside.note ? <p className="ui-card__copy">{aside.note}</p> : null}
       {aside.badges?.length ? (
         <div className="ui-badge-row ui-editorial-card__action">
           {aside.badges.map((badge) => (
