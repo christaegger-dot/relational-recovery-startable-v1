@@ -12,6 +12,8 @@ import {
   FAMILY_SYSTEM_PANELS,
   FAMILY_SYSTEM_POINTS,
   FAMILY_SYSTEM_PRACTICE_POINTS,
+  HEALTHY_PARENT_PANELS,
+  HEALTHY_PARENT_PRACTICE_POINTS,
   HELP_BARRIER_PANELS,
   HELP_BARRIER_POINTS,
   HELP_BARRIER_PRACTICE_POINTS,
@@ -200,11 +202,21 @@ export default function EvidenceSection({ downloadResources = [] }) {
           paragraphs: CHILD_EXPERIENCE_POINTS,
           points: CHILD_EXPERIENCE_PRACTICE_POINTS,
         },
+        {
+          label: 'Gesunder Elternteil',
+          title: 'Der gesunde Elternteil ist tragende Ressource und zugleich oft selbst belastet.',
+          paragraphs: [
+            'In vielen Familien stützt der gesunde Elternteil das System: Routinen, Versorgung, Beziehungspflege, Verbindung zu Fachpersonen. Gleichzeitig neigt er dazu, die Erkrankung zu umschreiben und sich selbst keine Hilfe zu holen — „ich bin ja gesund".',
+            'Fachlich entscheidend ist, ihn von Beginn an als eigenständige Person mit eigenem Belastungs- und Hilfebedarf zu adressieren — nicht nur als Co-Versorger der erkrankten Person.',
+          ],
+          points: HEALTHY_PARENT_PRACTICE_POINTS,
+        },
       ],
       cards: [
         ...panelCards(PARENT_EXPERIENCE_PANELS),
         ...panelCards(FAMILY_SYSTEM_PANELS),
         ...panelCards(CHILD_EXPERIENCE_PANELS),
+        ...panelCards(HEALTHY_PARENT_PANELS),
       ],
       cardColumns: 'three',
       callout: {

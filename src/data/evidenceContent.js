@@ -447,6 +447,36 @@ export const CLINICAL_PRACTICE_POINTS = [
 
 
 
+// Rolle des gesunden Elternteils. Quelle: Stauber et al. (2018), Kap. 7
+// (Synthese, S. 47). Eigenständiger Schwerpunkt, weil in der Beratung
+// häufig der gesunde Elternteil das Anliegen einbringt — gleichzeitig
+// neigt er zur Verharmlosung und holt sich selbst kaum Hilfe.
+export const HEALTHY_PARENT_PANELS = [
+  {
+    title: 'Bedeutende Ressource',
+    text: 'Der gesunde Elternteil ist oft die zentrale Stütze des Familiensystems: er trägt Routinen, sichert Versorgung, hält die Beziehung zum Kind und ermöglicht häufig überhaupt erst die Zusammenarbeit mit Fachpersonen. Sein Einbezug in beraterische und therapeutische Arbeit ist für alle Familien zentral.',
+  },
+  {
+    title: 'Typisches Muster: Verharmlosung',
+    text: 'Gesunde Elternteile neigen oft dazu, die Erkrankung zu umschreiben — als vorübergehend, als Reaktion auf eine besondere Belastung oder als somatische Krankheit. Diese Deutung kann kurzfristig entlasten, hält aber langfristig Hilfesuche, Krankheitsverstehen beim Kind und offene Familienkommunikation zurück.',
+  },
+  {
+    title: 'Eigene Belastung wird übersehen',
+    text: 'Trotz Bedarf und deutlicher Belastung holt sich der gesunde Elternteil meist selbst keine Hilfe — weil er „ja gesund" ist. Vielfach fehlt die Einsicht in die familiäre Problematik und in die eigene Erschöpfung. Die Dynamiken unterscheiden sich je nach Familie deutlich.',
+  },
+  {
+    title: 'Konsequenz für die Beratung',
+    text: 'Den gesunden Elternteil von Beginn an als eigenständige Person mit eigenem Belastungs- und Hilfebedarf adressieren — nicht nur als Ko-Therapeut der erkrankten Person. Das eigene Wahrnehmen der Belastung kann Voraussetzung dafür sein, die Erkrankung im Familiensystem realistisch einordnen zu können.',
+  },
+];
+
+export const HEALTHY_PARENT_PRACTICE_POINTS = [
+  'gesunden Elternteil als eigenständige Person mit eigenem Hilfebedarf adressieren, nicht nur als Co-Versorger',
+  'Tendenz zur Verharmlosung („das geht vorbei") respektvoll, aber explizit ansprechbar machen',
+  'eigene Erschöpfung und emotionale Belastung benennen — auch wenn keine Diagnose vorliegt',
+  'konkrete Hilfsangebote auch für den gesunden Elternteil aufzeigen (Angehörigenberatung, Gruppe, Entlastung)',
+];
+
 export const INTERVENTION_PROGRAM_POINTS = [
   'Familienorientierte Interventionen wirken besonders dann plausibel, wenn sie nicht nur Symptome, sondern Kommunikation, Beziehung, Alltag und soziale Ressourcen gemeinsam betrachten.',
   'Das Vortragsmaterial von Lenz verweist auf multimodale Programme wie Beardslee, CHIMPs, Kindergruppen und mentalisierungsorientierte Elternprogramme als anschlussfähige Interventionsmodelle.',
