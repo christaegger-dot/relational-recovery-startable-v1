@@ -381,7 +381,7 @@ export default function ToolboxSection({
           actionLabel: contact.link ? 'Kontakt öffnen' : null,
           href: contact.link,
           target: contact.link ? '_blank' : undefined,
-          rel: contact.link ? 'noreferrer' : undefined,
+          rel: contact.link ? 'noopener noreferrer' : undefined,
           actionIcon: contact.link ? <ExternalLink size={14} aria-hidden="true" /> : null,
         })),
       },
