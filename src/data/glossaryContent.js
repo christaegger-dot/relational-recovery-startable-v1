@@ -247,6 +247,16 @@ export const GLOSSARY_GROUPS = [
         practice:
           'Gelingensbedingungen: gegenseitige Kenntnis der Aufgabenprofile, gleichberechtigter Austausch ohne Statusgefälle, personelle Kontinuität und realistisches Zeitbudget. Frühzeitig die Fallführung klären.',
       },
+      // Quelle: Lenz (2014), referenziert in Stauber et al. (2018), Kap. 6.2.
+      // Patenschaften als kontextbezogene Strategie zur Ressourcen-Aktivierung.
+      {
+        id: 'patenschaften',
+        term: 'Patenschaften',
+        definition:
+          'Verlässliche, dauerhafte Beziehungsangebote ausserhalb der Kernfamilie — meist über organisierte Vermittlungsstellen. Patenfamilien oder Einzelpat:innen begleiten Kinder und Jugendliche regelmässig, geben Orientierung, schaffen Ablenkung von der familiären Belastung und können in Krisenphasen intensivere Betreuung übernehmen.',
+        practice:
+          'Besonders relevant für isolierte Familien und alleinerziehende belastete Eltern. Patenschaften entlasten die Eltern, fördern den Familienzusammenhalt und schützen die Eltern-Kind-Beziehung — gerade weil sie nicht in die elterliche Rolle eingreifen, sondern ergänzend wirken. Im Kanton Zürich u.a. über Patenschafts-Vermittlungen wie «zeitundwir» oder «Patenschaft Plus» zugänglich.',
+      },
     ],
   },
 ];

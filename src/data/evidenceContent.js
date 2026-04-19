@@ -447,6 +447,42 @@ export const CLINICAL_PRACTICE_POINTS = [
 
 
 
+// Strategie-Trias zur Aktivierung sozialer Ressourcen. Quelle: Lenz (2014),
+// referenziert in Stauber et al. (2018), Kap. 6.2. Während Netzwerkkarte
+// und Netzwerkzeichnung soziale Ressourcen sichtbar machen, beschreiben
+// diese drei Strategie-Familien, wie Ressourcen aktiv mobilisiert oder
+// neu aufgebaut werden — sie ergänzen sich, sind nicht hierarchisch.
+export const SOCIAL_RESOURCES_INTRO_POINTS = [
+  'Eine Netzwerkkarte zeigt, wer im Umfeld einer Familie da ist. Wenn Bindungs- und Kontaktbedürfnisse durch die bestehenden Kontakte nicht ausreichend abgedeckt werden, ist der nächste Schritt, soziale Ressourcen gezielt zu aktivieren.',
+  'Die drei Strategie-Familien — personenbezogen, kontextbezogen und gruppenbezogen — ergänzen sich. Welche im Vordergrund steht, hängt davon ab, ob bestehende Beziehungen mobilisiert, strukturelle Bedingungen verändert oder neue Schutzräume aufgebaut werden müssen.',
+  'Familiäre Tabuisierung und die Angst vor Stigmatisierung sind die häufigsten Hürden. Ohne Bearbeitung dieser inneren Erlaubnis bleiben auch sichtbare soziale Ressourcen ungenutzt.',
+];
+
+export const SOCIAL_RESOURCES_ACTIVATION = [
+  {
+    title: 'Personenbezogene Strategien',
+    text: 'Familienmitglieder ermutigen, auf andere Menschen im sozialen Beziehungsgefüge zuzugehen. Bei Kindern: Aktivitäten mit Freundinnen, Verwandten, Klassenkameraden oder Nachbarschaftskindern bestärken. Voraussetzung ist, dass die Familie Probleme nach aussen sichtbar machen darf — Ängste, Scham und Bedenken der Eltern und Kinder ernst nehmen und sie für die Frage sensibilisieren, wem sie was erzählen möchten.',
+  },
+  {
+    title: 'Kontextbezogene Strategien',
+    text: 'Unmittelbare Netzwerkförderung: unterstützende Interaktionen zwischen Personen oder Gruppen verbessern, Kontaktintensität verändern, strukturelle Bedingungen anpassen. Für die Arbeit mit psychisch kranken Eltern besonders zentral: ein gemeinsam erarbeiteter Krisenplan mit benannten Vertrauenspersonen sowie Patenschaften als verlässliches Beziehungsangebot ausserhalb der Kernfamilie.',
+  },
+  {
+    title: 'Gruppen-Interventionen',
+    text: 'Gruppenangebote für Kinder oder Eltern in ähnlichen Situationen schaffen einen Schutzraum, in dem Sicherheit und Zugehörigkeit erlebbar werden. Kinder können Erfahrungen austauschen, sich emotional öffnen und neue Bewältigungsmöglichkeiten kennenlernen. Eltern werden für eigene Erkrankung und Auswirkungen auf die Kinder sensibilisiert und in alters- und kindgerechter Kommunikation gestärkt.',
+  },
+];
+
+// Patenschaften als eigene kontextbezogene Intervention. Quelle: Lenz (2014),
+// referenziert in Stauber et al. (2018), Kap. 6.2. Insbesondere für isolierte
+// Familien und alleinerziehende belastete Eltern relevant. Eigenständig
+// als Panel-Block, weil Konzept und Wirkung über das hinausgehen, was
+// in der Strategie-Trias kompakt erklärt werden kann.
+export const PATENSCHAFTEN_PANEL = {
+  title: 'Patenschaften und verlässliche Drittbeziehungen',
+  text: 'Patenschaften stellen für Kinder und Jugendliche eine verlässliche und dauerhafte Beziehungserfahrung ausserhalb der Kernfamilie her. Sie entlasten die Eltern, fördern den Familienzusammenhalt und schützen die Eltern-Kind-Beziehung. Eine Patenfamilie kann den Kindern Orientierung geben, Ablenkung von der familiären Überforderung schaffen und einen Ort, an dem Gefühle ausgedrückt werden dürfen, die gegenüber dem kranken Elternteil nicht aussprechbar sind. In Krisenphasen können Pat:innen intensivere Betreuung über längere Zeit übernehmen. Besonders wichtig für isolierte Familien und alleinerziehende belastete Eltern.',
+};
+
 // Rolle des gesunden Elternteils. Quelle: Stauber et al. (2018), Kap. 7
 // (Synthese, S. 47). Eigenständiger Schwerpunkt, weil in der Beratung
 // häufig der gesunde Elternteil das Anliegen einbringt — gleichzeitig
