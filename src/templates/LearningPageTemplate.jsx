@@ -52,7 +52,7 @@ function ModuleCard({ module }) {
             {module.duration ? <span className="ui-badge">{module.duration}</span> : null}
             {module.completed ? (
               <div className="ui-badge ui-badge--soft">
-                <Check size={14} /> Bearbeitet
+                <Check size={14} aria-hidden="true" /> Bearbeitet
               </div>
             ) : null}
           </div>
@@ -65,7 +65,7 @@ function ModuleCard({ module }) {
 
         <div className="ui-card__section--push ui-card__section--panel">
           <div className="ui-note-panel__label ui-note-panel__label--with-icon">
-            <Brain size={16} /> Reflexionsfrage
+            <Brain size={16} aria-hidden="true" /> Reflexionsfrage
           </div>
           <fieldset aria-describedby={module.result ? feedbackId : undefined}>
             <legend className="learning-module-quiz__legend">{module.quiz}</legend>
@@ -92,7 +92,7 @@ function ModuleCard({ module }) {
                         .filter(Boolean)
                         .join(' ')}
                     >
-                      <Circle size={16} className="ui-choice-card__control" />
+                      <Circle size={16} className="ui-choice-card__control" aria-hidden="true" />
                       <span>{option}</span>
                     </span>
                   </label>

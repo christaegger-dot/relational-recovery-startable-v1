@@ -60,7 +60,7 @@ function FilterToolbar({
           Fachstelle suchen
         </label>
         <div className="ui-network-search">
-          <Search className="ui-network-search__icon" size={18} />
+          <Search className="ui-network-search__icon" size={18} aria-hidden="true" />
           <input
             id="network-resource-search"
             type="text"
@@ -82,7 +82,7 @@ function FilterToolbar({
         </p>
         {(searchTerm.trim() || activeFilter !== 'all') && (
           <Button variant="secondary" className="ui-button--fit-content" onClick={onReset}>
-            <XCircle size={14} /> Suche und Filter zurücksetzen
+            <XCircle size={14} aria-hidden="true" /> Suche und Filter zurücksetzen
           </Button>
         )}
       </div>
@@ -150,7 +150,7 @@ function ResourceDirectorySection({ directory }) {
                 <p className="ui-card__copy">{resource.description}</p>
                 <div className="ui-editorial-card__action">
                   <Button href={resource.link} target="_blank" rel="noopener noreferrer" variant="subtle" aria-label={`${resource.name} – Webseite öffnen (neues Fenster)`}>
-                    Webseite öffnen <ExternalLink size={16} />
+                    Webseite öffnen <ExternalLink size={16} aria-hidden="true" />
                   </Button>
                 </div>
               </SurfaceCard>
@@ -168,7 +168,7 @@ function ResourceDirectorySection({ directory }) {
                 </p>
               </div>
               <Button type="button" onClick={onReset} variant="secondary">
-                <XCircle size={16} /> Zurücksetzen
+                <XCircle size={16} aria-hidden="true" /> Zurücksetzen
               </Button>
             </div>
           </SurfaceCard>
@@ -373,7 +373,7 @@ function NetworkMapSection({ mapping }) {
 
           <SurfaceCard as="aside" tone="default">
             <div className="ui-note-panel__label ui-note-panel__label--with-icon">
-              <MapPin size={16} /> Leitfragen für die Exploration
+              <MapPin size={16} aria-hidden="true" /> Leitfragen für die Exploration
             </div>
             <div className="ui-network-question-list">
               {questions.map((question) => (

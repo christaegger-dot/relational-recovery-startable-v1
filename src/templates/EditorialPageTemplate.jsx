@@ -29,7 +29,7 @@ function ContentSection({ section }) {
                     rel={action.rel}
                   >
                     {action.label}
-                    {action.icon ? <action.icon size={16} /> : null}
+                    {action.icon ? <action.icon size={16} aria-hidden="true" /> : null}
                   </Button>
                 ))}
               </div>

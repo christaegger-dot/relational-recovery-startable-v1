@@ -229,13 +229,13 @@ export default function ToolboxSection({
         label: 'Krisenplan herunterladen',
         ariaLabel: 'Krisenplan der Toolbox herunterladen',
         onClick: onDownloadCrisisPlan,
-        icon: <Download size={16} />,
+        icon: <Download size={16} aria-hidden="true" />,
       },
       {
         label: 'Arbeitsansicht drucken',
         ariaLabel: 'Arbeitsansicht drucken',
         onClick: onPrint,
-        icon: <Printer size={16} />,
+        icon: <Printer size={16} aria-hidden="true" />,
         variant: 'secondary',
       },
     ],
@@ -262,7 +262,7 @@ export default function ToolboxSection({
       action: {
         label: 'Assessment zurücksetzen',
         onClick: onResetAssessment,
-        icon: <RotateCcw size={16} />,
+        icon: <RotateCcw size={16} aria-hidden="true" />,
       },
     },
     itemsLabel: 'Assessment-Faktoren',
@@ -272,7 +272,7 @@ export default function ToolboxSection({
       meta: `Wert ${item.val}`,
       checked: score.checked.includes(item.id),
       onChange: () => onToggleAssessment(item.id),
-      checkIcon: <Check size={16} />,
+      checkIcon: <Check size={16} aria-hidden="true" />,
     })),
   };
 
@@ -362,14 +362,14 @@ export default function ToolboxSection({
           {
             label: 'Krisenplan herunterladen',
             onClick: onDownloadCrisisPlan,
-            icon: <Download size={16} />,
+            icon: <Download size={16} aria-hidden="true" />,
             variant: 'primary',
           },
         ],
         listCards: ACUTE_CRISIS_STEPS.map((step, index) => ({
           title: `Sofort-Schritt ${index + 1}`,
           text: step,
-          icon: <AlertTriangle size={18} />,
+          icon: <AlertTriangle size={18} aria-hidden="true" />,
           className: 'ui-toolbox-list-card--plain',
         })),
         disclosureItems: ACUTE_CRISIS_CONTACTS.map((contact) => ({
@@ -380,7 +380,7 @@ export default function ToolboxSection({
           href: contact.link,
           target: contact.link ? '_blank' : undefined,
           rel: contact.link ? 'noreferrer' : undefined,
-          actionIcon: contact.link ? <ExternalLink size={14} /> : null,
+          actionIcon: contact.link ? <ExternalLink size={14} aria-hidden="true" /> : null,
         })),
       },
       {
@@ -397,20 +397,20 @@ export default function ToolboxSection({
           {
             label: 'Krisenplan herunterladen',
             onClick: onDownloadCrisisPlan,
-            icon: <Download size={16} />,
+            icon: <Download size={16} aria-hidden="true" />,
             variant: 'primary',
           },
           {
             label: 'Druckansicht öffnen',
             onClick: onPrint,
-            icon: <Printer size={16} />,
+            icon: <Printer size={16} aria-hidden="true" />,
             variant: 'secondary',
           },
         ],
         listCards: SAFETY_PLAN_POINTS.map((item, index) => ({
           title: `Baustein ${index + 1}`,
           text: item,
-          icon: <ShieldCheck size={18} />,
+          icon: <ShieldCheck size={18} aria-hidden="true" />,
           className: 'ui-toolbox-list-card--plain',
         })),
         gridCards: SAFETY_PLAN_TEMPLATE_FIELDS.map((field) => ({
@@ -443,7 +443,7 @@ export default function ToolboxSection({
         listCards: CHILD_PROTECTION_TIPS.map((tip, index) => ({
           title: `Leitfrage ${index + 1}`,
           text: tip,
-          icon: <CheckCircle2 size={18} />,
+          icon: <CheckCircle2 size={18} aria-hidden="true" />,
           className: 'ui-toolbox-list-card--panel',
         })),
       },
@@ -464,7 +464,7 @@ export default function ToolboxSection({
         listCards: ADDICTION_TIPS.map((tip, index) => ({
           title: `Leitlinie ${index + 1}`,
           text: tip,
-          icon: <ChevronRight size={18} />,
+          icon: <ChevronRight size={18} aria-hidden="true" />,
           className: 'ui-toolbox-list-card--plain',
         })),
       },
@@ -610,7 +610,7 @@ export default function ToolboxSection({
         actionLabel: 'Vorlage herunterladen',
         ariaLabel: 'Krisenplan als Textvorlage aus der Toolbox herunterladen',
         onClick: onDownloadCrisisPlan,
-        actionIcon: <Download size={14} />,
+        actionIcon: <Download size={14} aria-hidden="true" />,
       },
       {
         kind: 'custom',
@@ -620,7 +620,7 @@ export default function ToolboxSection({
         actionLabel: 'Druckansicht öffnen',
         ariaLabel: 'Druckansicht der Toolbox-Arbeitsansicht öffnen',
         onClick: onPrint,
-        actionIcon: <Printer size={14} />,
+        actionIcon: <Printer size={14} aria-hidden="true" />,
       },
     ],
   });
