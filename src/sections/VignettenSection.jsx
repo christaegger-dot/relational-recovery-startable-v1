@@ -39,18 +39,34 @@ export default function VignettenSection() {
     ],
   };
 
+  // Audit P3 #18: 'Fall 1 von 1' liest sich als ausgereizter Zähler
+  // (alles abgearbeitet, nichts mehr da) und entwertet die einzige
+  // verfügbare Vignette unbeabsichtigt. Solange nur ein Fall existiert,
+  // zeigen wir stattdessen einen ruhigen Empty-State-Hinweis: der
+  // aktuelle Fall ist bewusst ausgewählt, weitere sind in Vorbereitung.
+  const isSingleCase = VIGNETTEN.length === 1;
+  const caseStudyAside = isSingleCase
+    ? {
+        label: 'Bestand',
+        value: 'Ausgewählter Fall',
+        copy:
+          'Aktuell steht eine vertieft ausgearbeitete Vignette zur Reflexion bereit. Weitere Fälle zu anderen Entscheidungssituationen werden schrittweise ergänzt.',
+        tone: 'soft',
+      }
+    : {
+        label: 'Status',
+        value: `Fall ${currentIndex + 1} von ${VIGNETTEN.length}`,
+        copy: 'Die Reihenfolge kann jederzeit vor und zurück durchlaufen werden.',
+        tone: 'soft',
+      };
+
   const caseStudy = {
     eyebrow: 'Fallsituation',
     titlePrefix: 'Aktueller',
     titleAccent: 'Kontext',
     description:
       'Jede Vignette verdichtet eine typische Entscheidungssituation aus Familie und Versorgungskontext. Ziel ist eine fachlich nachvollziehbare Einschätzung, nicht eine perfekte Antwort.',
-    aside: {
-      label: 'Status',
-      value: `Fall ${currentIndex + 1} von ${VIGNETTEN.length}`,
-      copy: 'Die Reihenfolge kann jederzeit vor und zurück durchlaufen werden.',
-      tone: 'soft',
-    },
+    aside: caseStudyAside,
     statusLabel: 'Fallsituation',
     title: vignette.title,
     badge: vignette.status,
