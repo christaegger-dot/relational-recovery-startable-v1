@@ -12,6 +12,8 @@ import {
   FAMILY_SYSTEM_PANELS,
   FAMILY_SYSTEM_POINTS,
   FAMILY_SYSTEM_PRACTICE_POINTS,
+  HEALTHY_PARENT_PANELS,
+  HEALTHY_PARENT_PRACTICE_POINTS,
   HELP_BARRIER_PANELS,
   HELP_BARRIER_POINTS,
   HELP_BARRIER_PRACTICE_POINTS,
@@ -26,6 +28,7 @@ import {
   PARENT_PRACTICE_POINTS,
   PARENT_ROLE_EVIDENCE_POINTS,
   PARENT_SELF_HELP_POINTS,
+  PATENSCHAFTEN_PANEL,
   PUK_CONTEXT_POINTS,
   PSYCHOEDUCATION_AGE_GROUPS,
   PSYCHOEDUCATION_BENEFITS,
@@ -37,6 +40,8 @@ import {
   PARENT_GUIDING_PRINCIPLE,
   RELEVANCE_POINTS,
   RELEVANCE_STATS,
+  SOCIAL_RESOURCES_ACTIVATION,
+  SOCIAL_RESOURCES_INTRO_POINTS,
   SPECIFIC_PROTECTIVE_FACTORS,
 } from '../data/evidenceContent';
 import { FACHSTELLEN, SUPPORT_OFFER_IDS } from '../data/fachstellenContent';
@@ -200,11 +205,21 @@ export default function EvidenceSection({ downloadResources = [] }) {
           paragraphs: CHILD_EXPERIENCE_POINTS,
           points: CHILD_EXPERIENCE_PRACTICE_POINTS,
         },
+        {
+          label: 'Gesunder Elternteil',
+          title: 'Der gesunde Elternteil ist tragende Ressource und zugleich oft selbst belastet.',
+          paragraphs: [
+            'In vielen Familien stützt der gesunde Elternteil das System: Routinen, Versorgung, Beziehungspflege, Verbindung zu Fachpersonen. Gleichzeitig neigt er dazu, die Erkrankung zu umschreiben und sich selbst keine Hilfe zu holen — „ich bin ja gesund".',
+            'Fachlich entscheidend ist, ihn von Beginn an als eigenständige Person mit eigenem Belastungs- und Hilfebedarf zu adressieren — nicht nur als Co-Versorger der erkrankten Person.',
+          ],
+          points: HEALTHY_PARENT_PRACTICE_POINTS,
+        },
       ],
       cards: [
         ...panelCards(PARENT_EXPERIENCE_PANELS),
         ...panelCards(FAMILY_SYSTEM_PANELS),
         ...panelCards(CHILD_EXPERIENCE_PANELS),
+        ...panelCards(HEALTHY_PARENT_PANELS),
       ],
       cardColumns: 'three',
       callout: {
@@ -332,6 +347,11 @@ export default function EvidenceSection({ downloadResources = [] }) {
           paragraphs: CLINICAL_PRACTICE_POINTS,
         },
         {
+          label: 'Soziale Ressourcen aktivieren',
+          title: 'Drei Strategie-Familien, die Netzwerk- und Patenschaftsarbeit fachlich rahmen.',
+          paragraphs: SOCIAL_RESOURCES_INTRO_POINTS,
+        },
+        {
           label: 'Unterstützungslandschaft',
           title: 'Angebote gewinnen an Wirkung, wenn sie nach Funktion und Zugänglichkeit sortiert werden.',
           paragraphs: [
@@ -339,7 +359,12 @@ export default function EvidenceSection({ downloadResources = [] }) {
           ],
         },
       ],
-      cards: [...panelCards(CLINICAL_PRACTICE_PANELS), ...supportOfferCards(SUPPORT_OFFERS)],
+      cards: [
+        ...panelCards(CLINICAL_PRACTICE_PANELS),
+        ...panelCards(SOCIAL_RESOURCES_ACTIVATION),
+        ...panelCards([PATENSCHAFTEN_PANEL]),
+        ...supportOfferCards(SUPPORT_OFFERS),
+      ],
       cardColumns: 'three',
       callout: {
         text: 'Die offizielle Angehörigenberatung der PUK Zürich bleibt im Zürcher Kontext eine zentrale Anlaufstelle, besonders wenn Elternschaft, psychische Belastung und kindliche Mitbetroffenheit gemeinsam in den Blick kommen.',
