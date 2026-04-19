@@ -470,6 +470,7 @@ export default function ToolboxSection({
           copy: panel.text,
           tone: 'default',
         })),
+        gridClassName: 'ui-fact-grid ui-fact-grid--prose',
         listCards: ADDICTION_TIPS.map((tip, index) => ({
           title: `Leitlinie ${index + 1}`,
           text: tip,
