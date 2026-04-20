@@ -307,7 +307,90 @@
     letter-spacing: 0.02em;
   }
 
-  /* 9. Vignetten-Print-Hinweis (V1 aus Audit 11) ------------------------ *
+  /* 9. Material-Handouts -------------------------------------------------- *
+   * Issue #105: Pro einzelnes Handout druckbar. Die Rahmung im Tab (Hero,
+   * Intro, Index, FAQ-Cluster, ClosingSection) ist bereits per `.no-print`
+   * ausgeblendet. Hier wird das Handout-Artikel-Layout auf Papier
+   * optimiert: schwarz/weiss, feste Pt-Groessen, Linien als dunkle
+   * Borders, Notfall-Box mit forced color-adjust. Der Scoped-Style aus
+   * useMaterialHandoutPrint blendet zusaetzlich alle Handouts ausser dem
+   * Ziel aus, falls spaetere Tiers mehrere Handouts nebeneinander zeigen.
+   */
+  .ui-material-handout {
+    border: none;
+    background: #fff !important;
+    padding: 0;
+    gap: 6mm;
+    break-inside: avoid;
+  }
+  .ui-material-handout__head {
+    padding-bottom: 3mm;
+    border-bottom: 1pt solid #333;
+    gap: 2mm;
+  }
+  .ui-material-handout__title {
+    font-size: 16pt;
+    color: #000;
+  }
+  .ui-material-handout__lead {
+    font-size: 10pt;
+    color: #000;
+  }
+  .ui-material-handout__usage {
+    padding: 3mm 4mm;
+    border: 1pt solid #666;
+    background: #fff !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .ui-material-handout__usage-item > p:last-child {
+    color: #000;
+  }
+  .ui-material-handout__field {
+    border: 1pt solid #999;
+    background: #fff !important;
+    padding: 3mm 4mm;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .ui-material-handout__field-hint,
+  .ui-material-handout__field-example {
+    color: #000;
+  }
+  .ui-material-handout__line {
+    border-bottom: 1pt solid #333;
+  }
+  .ui-material-handout__section-title {
+    font-size: 13pt;
+    margin-top: 2mm;
+  }
+  .ui-material-handout__emergency {
+    background: #fff !important;
+    color: #000;
+    border: 1.2pt solid #000;
+    padding: 3mm 4mm;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .ui-material-handout__emergency-number {
+    font-size: 14pt;
+    color: #000;
+  }
+  .ui-material-handout__disclaimer {
+    background: #fff !important;
+    border: 0.5pt solid #999;
+    color: #000;
+    padding: 3mm 4mm;
+    font-size: 9pt;
+  }
+  .ui-material-handout__cross-refs,
+  .ui-material-handout__foot {
+    border-top: 0.5pt solid #999;
+    color: #000;
+    font-size: 9pt;
+  }
+
+  /* 10. Vignetten-Print-Hinweis (V1 aus Audit 11) ------------------------ *
    * Die Vignetten-Seite ist bewusst nicht druckbar. Der Hinweis erscheint
    * zentral und ruhig auf der ansonsten leeren Druckseite.
    */

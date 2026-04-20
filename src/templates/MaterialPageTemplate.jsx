@@ -1,3 +1,4 @@
+import { Printer } from 'lucide-react';
 import ClosingSection from '../components/closing/ClosingSection';
 import EditorialIndex from '../components/ui/EditorialIndex';
 import EditorialIntro from '../components/ui/EditorialIntro';
@@ -126,13 +127,27 @@ function MaterialHandoutCrossRefs({ crossRefs, onNavigate }) {
   );
 }
 
-function MaterialCrisisPlan({ handout, onNavigate }) {
+function MaterialCrisisPlan({ handout, onNavigate, onPrintHandout }) {
   return (
-    <article id={handout.id} className="ui-material-handout ui-section-anchor-offset">
+    <article id={handout.id} data-handout-id={handout.id} className="ui-material-handout ui-section-anchor-offset">
       <header className="ui-material-handout__head">
-        <p className="ui-fact-card__label">{handout.eyebrow}</p>
-        <h3 className="ui-material-handout__title">{handout.title}</h3>
-        <p className="ui-material-handout__lead">{handout.description}</p>
+        <div className="ui-material-handout__head-text">
+          <p className="ui-fact-card__label">{handout.eyebrow}</p>
+          <h3 className="ui-material-handout__title">{handout.title}</h3>
+          <p className="ui-material-handout__lead">{handout.description}</p>
+        </div>
+        {onPrintHandout ? (
+          <button
+            type="button"
+            className="ui-material-handout__print-btn no-print"
+            data-action="print"
+            onClick={() => onPrintHandout(handout.id)}
+            aria-label={`${handout.title} drucken oder als PDF speichern`}
+          >
+            <Printer size={14} aria-hidden="true" />
+            <span>Drucken / PDF</span>
+          </button>
+        ) : null}
       </header>
 
       <div className="ui-material-handout__usage" aria-label="Hinweise zur Nutzung">
@@ -208,25 +223,35 @@ function MaterialCrisisPlan({ handout, onNavigate }) {
   );
 }
 
-function MaterialHandoutSwitch({ handout, onNavigate }) {
+function MaterialHandoutSwitch({ handout, onNavigate, onPrintHandout }) {
   switch (handout.kind) {
     case 'crisis-plan':
-      return <MaterialCrisisPlan handout={handout} onNavigate={onNavigate} />;
+      return <MaterialCrisisPlan handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout} />;
     default:
       return null;
   }
 }
 
-function MaterialHandoutsSection({ block, handouts, onNavigate }) {
+function MaterialHandoutsSection({ block, handouts, onNavigate, onPrintHandout }) {
   if (!block || !handouts?.length) return null;
 
   return (
     <Section spacing="tight" surface="plain">
       <div className="ui-stack ui-stack--loose">
-        <SectionHeader eyebrow={block.eyebrow} title={block.title} description={block.description} />
+        {/* SectionHeader gehoert zum Web-Chrome -- beim Druck eines Handouts
+            soll nur das Handout selbst erscheinen, nicht die Rahmung
+            "Material zum Ausfuellen..." darueber. */}
+        <div className="no-print">
+          <SectionHeader eyebrow={block.eyebrow} title={block.title} description={block.description} />
+        </div>
         <div className="ui-material-handouts-grid">
           {handouts.map((handout) => (
-            <MaterialHandoutSwitch key={handout.id} handout={handout} onNavigate={onNavigate} />
+            <MaterialHandoutSwitch
+              key={handout.id}
+              handout={handout}
+              onNavigate={onNavigate}
+              onPrintHandout={onPrintHandout}
+            />
           ))}
         </div>
       </div>
@@ -242,19 +267,31 @@ export default function MaterialPageTemplate({
   handoutsBlock = null,
   handouts = [],
   onNavigate,
+  onPrintHandout,
   closingSection = null,
 }) {
   return (
     <div className="ui-stack">
-      <Container width="wide">
-        <PageHero {...hero} headingId={pageHeadingId} />
-      </Container>
-      <EditorialIntro intro={intro} />
-      <EditorialIndex items={clusters} spacing="tight" surface="subtle" />
-      {clusters.map((cluster) => (
-        <MaterialCluster key={cluster.id} cluster={cluster} />
-      ))}
-      <MaterialHandoutsSection block={handoutsBlock} handouts={handouts} onNavigate={onNavigate} />
+      {/* Rahmung (Hero, Intro, Index, FAQ-Cluster) ist Web-Chrome und
+          verschwindet beim Handout-Druck. Der Handouts-Grid bleibt
+          sichtbar; scoped Styles aus useMaterialHandoutPrint blenden die
+          nicht-angewaehlten Handouts aus. */}
+      <div className="no-print">
+        <Container width="wide">
+          <PageHero {...hero} headingId={pageHeadingId} />
+        </Container>
+        <EditorialIntro intro={intro} />
+        <EditorialIndex items={clusters} spacing="tight" surface="subtle" />
+        {clusters.map((cluster) => (
+          <MaterialCluster key={cluster.id} cluster={cluster} />
+        ))}
+      </div>
+      <MaterialHandoutsSection
+        block={handoutsBlock}
+        handouts={handouts}
+        onNavigate={onNavigate}
+        onPrintHandout={onPrintHandout}
+      />
       {closingSection ? (
         <ClosingSection
           section={closingSection}

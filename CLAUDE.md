@@ -32,6 +32,22 @@ Rein clientseitige React 19 SPA ohne Backend. Kein Routing-Library — Hash-basi
 - **SectionHeader + AsideCard**: Wiederverwendbare Shared Components für das Split-Layout-Pattern (Eyebrow + Title + Description + Aside-Karte).
 - **Custom Hooks in utils/**: `useMobileMenu`, `useNavigationFocus`, `useDownloadHandlers` — aus App.jsx extrahiert.
 
+### Material-Handouts: Print / PDF-Export
+
+Jedes einzelne Handout im Material-Tab ist druckbar via Print-Button im Handout-Head. Der Browser-Druckdialog deckt auch "Als PDF speichern" ab (keine separate PDF-Bibliothek nötig).
+
+**Wie ein neues Handout print-ready wird:**
+
+1. Handout-Objekt in `src/data/materialContent.js` unter `MATERIAL_HANDOUTS` anlegen (mit `id`, `kind`, etc.).
+2. Im Template (`src/templates/MaterialPageTemplate.jsx`) eine passende Komponente für den neuen `kind` im `MaterialHandoutSwitch` ergänzen. Die Komponente muss:
+   - `data-handout-id={handout.id}` auf dem `<article>` setzen (Voraussetzung für den Scoped-Print-Style),
+   - den `onPrintHandout`-Prop annehmen und als Button-Handler in Nähe des Titels nutzen (Muster: `MaterialCrisisPlan`),
+   - den Print-Button mit `className="ui-material-handout__print-btn no-print"` versehen.
+3. Print-Typografie: Standardregeln für `.ui-material-handout*` im `@media print`-Block in `src/styles/app-global.css` (Abschnitt 9) greifen automatisch. Handout-spezifische Eigenheiten nur ergänzen, wenn ein Format stark abweicht.
+4. Der `useMaterialHandoutPrint`-Hook rendert beim Click einen scoped `<style>`-Block, der beim Druck alle anderen Handouts ausblendet — kein zusätzlicher Code pro Handout-Typ nötig.
+
+Alle Rahmung (Hero, Intro, Index, FAQ-Cluster, ClosingSection) ist im `MaterialPageTemplate` mit `.no-print`-Wrappern versehen, damit beim Druck nur der Handout-Grid übrig bleibt.
+
 ## Zielgruppen
 
 - **Primäradressat aller Tabs: Fachpersonen** (Erwachsenenpsychiatrie und Beratungskontext). Default, sobald ein Tab kein `primaryAudience`-Feld in `appShellContent.js` trägt.
