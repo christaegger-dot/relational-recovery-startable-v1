@@ -27,15 +27,23 @@ function MaterialFaqItem({ item, index }) {
   );
 }
 
-function MaterialCluster({ cluster }) {
+function MaterialCluster({ cluster, audienceBadge }) {
   return (
     <Section spacing="tight" surface={cluster.surface || 'plain'}>
       <div id={cluster.id} className="ui-stack ui-stack--loose ui-section-anchor-offset">
+        {audienceBadge ? (
+          <div className="ui-badge-row ui-material-cluster__audience">
+            <span className="ui-badge ui-badge--soft" data-audience={cluster.audience}>
+              {audienceBadge}
+            </span>
+          </div>
+        ) : null}
         <SectionHeader
           eyebrow={cluster.eyebrow}
           title={cluster.title}
           description={cluster.description}
           aside={cluster.aside}
+          headingTag="h3"
         />
 
         {cluster.faqs?.length ? (
@@ -47,6 +55,33 @@ function MaterialCluster({ cluster }) {
         ) : null}
 
         {cluster.legalDisclaimer ? <LegalDisclaimer /> : null}
+      </div>
+    </Section>
+  );
+}
+
+/**
+ * Block-Header fuer eine Zielgruppen-Gruppe (Issue #103). Trennt die
+ * Cluster visuell in "Material fuer Angehoerige" (Cluster 1-3) und
+ * "Material fuer betroffene Eltern" (Cluster 4-6). Badge wiederholt den
+ * Adressat-Text, den auch die Einzel-Cluster tragen, damit die Zuordnung
+ * beim Scrollen nicht verlorengeht.
+ */
+function MaterialClusterBlockHeader({ audience, surface = 'subtle' }) {
+  return (
+    <Section spacing="tight" surface={surface}>
+      <div className="ui-stack ui-stack--tight ui-material-cluster-block__header">
+        <div className="ui-badge-row">
+          <span className="ui-badge ui-badge--soft" data-audience={audience.id}>
+            {audience.badge}
+          </span>
+        </div>
+        <h2 className="ui-section-title ui-material-cluster-block__title">{audience.title}</h2>
+        {audience.description ? (
+          <div className="ui-copy">
+            <p>{audience.description}</p>
+          </div>
+        ) : null}
       </div>
     </Section>
   );
@@ -264,12 +299,30 @@ export default function MaterialPageTemplate({
   pageHeadingId,
   intro,
   clusters = [],
+  clusterAudiences = [],
   handoutsBlock = null,
   handouts = [],
   onNavigate,
   onPrintHandout,
   closingSection = null,
 }) {
+  // Zielgruppen-Gruppierung (Issues #102 + #103): sofern clusterAudiences
+  // gesetzt ist, werden Cluster pro Audience in einem eigenen Block
+  // gerendert (Block-Header + Audience-Badge auf jedem Einzel-Cluster).
+  // Fallback: flache Liste, falls keine Audiences uebergeben wurden.
+  const audienceLookup = new Map(clusterAudiences.map((a) => [a.id, a]));
+  const orderedAudiences = clusterAudiences.length
+    ? clusterAudiences
+        .map((audience) => ({
+          audience,
+          items: clusters.filter((c) => c.audience === audience.id),
+        }))
+        .filter((group) => group.items.length > 0)
+    : [];
+  const ungroupedClusters = clusterAudiences.length
+    ? clusters.filter((c) => !c.audience || !audienceLookup.has(c.audience))
+    : clusters;
+
   return (
     <div className="ui-stack">
       {/* Rahmung (Hero, Intro, Index, FAQ-Cluster) ist Web-Chrome und
@@ -282,7 +335,15 @@ export default function MaterialPageTemplate({
         </Container>
         <EditorialIntro intro={intro} />
         <EditorialIndex items={clusters} spacing="tight" surface="subtle" />
-        {clusters.map((cluster) => (
+        {orderedAudiences.map(({ audience, items }) => (
+          <div key={audience.id} className="ui-material-cluster-block" data-audience={audience.id}>
+            <MaterialClusterBlockHeader audience={audience} />
+            {items.map((cluster) => (
+              <MaterialCluster key={cluster.id} cluster={cluster} audienceBadge={audience.badge} />
+            ))}
+          </div>
+        ))}
+        {ungroupedClusters.map((cluster) => (
           <MaterialCluster key={cluster.id} cluster={cluster} />
         ))}
       </div>

@@ -177,6 +177,43 @@ test.describe('Logo / Home Navigation', () => {
   });
 });
 
+test.describe('Material Cluster Audience Blocks', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => localStorage.clear());
+    await page.goto('/#material');
+  });
+
+  test('renders two audience block headers (Angehörige + Eltern)', async ({ page }) => {
+    const angehoerige = page.getByRole('heading', { level: 2, name: /Material für Angehörige/ });
+    const eltern = page.getByRole('heading', { level: 2, name: /Material für betroffene Eltern/ });
+
+    await expect(angehoerige).toBeVisible({ timeout: 10_000 });
+    await expect(eltern).toBeVisible({ timeout: 10_000 });
+  });
+
+  test('each cluster carries an audience badge matching its group', async ({ page }) => {
+    // Cluster 1-3 (Angehoerige)
+    for (const id of ['material-verstehen', 'material-grenzen', 'material-zusammenarbeit']) {
+      const badge = page.locator(`#${id} .ui-badge[data-audience="angehoerige"]`);
+      await expect(badge).toBeVisible({ timeout: 10_000 });
+      await expect(badge).toContainText(/Für Angehörige/);
+    }
+    // Cluster 4-6 (betroffene Eltern)
+    for (const id of ['material-kinder', 'material-altersgerecht', 'material-formulierungshilfen']) {
+      const badge = page.locator(`#${id} .ui-badge[data-audience="eltern"]`);
+      await expect(badge).toBeVisible({ timeout: 10_000 });
+      await expect(badge).toContainText(/Für betroffene Eltern/);
+    }
+  });
+
+  test('cluster titles are h3 so block headers stay the h2 layer', async ({ page }) => {
+    // Block-Header ist h2, Cluster-Titel werden zu h3 (Outline-Hygiene).
+    const clusterTitle = page.locator('#material-verstehen h3').first();
+    await expect(clusterTitle).toBeVisible({ timeout: 10_000 });
+    await expect(clusterTitle).toContainText(/Belastung verstehen/);
+  });
+});
+
 test.describe('Material Handouts', () => {
   test('crisis-plan handout renders on Material tab', async ({ page }) => {
     await page.addInitScript(() => localStorage.clear());

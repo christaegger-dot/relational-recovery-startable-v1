@@ -680,6 +680,40 @@
   gap: var(--space-4);
 }
 
+/* Material-Cluster nach Zielgruppe (Issues #102 + #103).
+   Pro Audience-Gruppe (Angehoerige / betroffene Eltern) wird ein Block mit
+   Block-Header (H2 + Badge + Description) + Cluster 1-3 bzw. 4-6 darunter
+   gerendert. Die bestehenden ui-section--tight-Abstaende greifen; hier nur
+   audience-spezifische Badge-Farben + eine leicht abgesetzte Data-Attribute-
+   Variante pro Block-Hintergrund. */
+.ui-material-cluster-block {
+  display: contents;
+}
+
+.ui-material-cluster-block__title {
+  margin: 0;
+}
+
+.ui-material-cluster-block__header {
+  max-width: 52rem;
+}
+
+.ui-material-cluster__audience {
+  margin-bottom: calc(-1 * var(--space-2));
+}
+
+.ui-badge[data-audience='angehoerige'] {
+  border-color: color-mix(in srgb, var(--accent-primary) 22%, white 78%);
+  background: color-mix(in srgb, var(--accent-primary) 8%, white 92%);
+  color: var(--accent-primary-strong);
+}
+
+.ui-badge[data-audience='eltern'] {
+  border-color: color-mix(in srgb, var(--accent-secondary) 42%, white 58%);
+  background: color-mix(in srgb, var(--accent-secondary) 14%, white 86%);
+  color: var(--accent-info-strong);
+}
+
 .learning-flow-grid {
   display: grid;
   gap: var(--space-4);

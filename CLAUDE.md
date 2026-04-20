@@ -48,6 +48,15 @@ Jedes einzelne Handout im Material-Tab ist druckbar via Print-Button im Handout-
 
 Alle Rahmung (Hero, Intro, Index, FAQ-Cluster, ClosingSection) ist im `MaterialPageTemplate` mit `.no-print`-Wrappern versehen, damit beim Druck nur der Handout-Grid übrig bleibt.
 
+### Material-Cluster: Zielgruppen-Blöcke
+
+Die FAQ-Cluster im Material-Tab adressieren zwei Gruppen: Cluster 1–3 Angehörige, Cluster 4–6 betroffene Eltern. Die Gliederung wird im Template über zwei Eingaben gesteuert:
+
+- **`audience`** pro Cluster in `MATERIAL_CLUSTERS` (`'angehoerige'` | `'eltern'`) — rendert das `.ui-badge--soft`-Label im Cluster-Header.
+- **`MATERIAL_CLUSTER_AUDIENCES`** — Array mit einem Eintrag pro Gruppe (`id`, `badge`, `title`, `description`). Jede Gruppe bekommt einen eigenen Block-Header (H2). Cluster-Titel rutschen dadurch auf H3 (Outline-Regel: H1 Page → H2 Block → H3 Cluster).
+
+Neue Cluster hinzufügen: `audience`-Feld nicht vergessen. Wenn eine neue Zielgruppe dazukommt, einen weiteren Eintrag in `MATERIAL_CLUSTER_AUDIENCES` anlegen und ggf. eine Badge-Variante in `primitives.css` unter `.ui-badge[data-audience='…']` ergänzen.
+
 ## Zielgruppen
 
 - **Primäradressat aller Tabs: Fachpersonen** (Erwachsenenpsychiatrie und Beratungskontext). Default, sobald ein Tab kein `primaryAudience`-Feld in `appShellContent.js` trägt.
