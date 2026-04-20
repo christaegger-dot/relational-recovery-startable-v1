@@ -24,8 +24,8 @@ export default class ErrorBoundary extends Component {
             <h2 className="text-lg font-bold">Ein Fehler ist aufgetreten</h2>
           </div>
           <p className="text-sm leading-relaxed text-stone-700">
-            Dieser Bereich konnte nicht geladen werden. Bitte laden Sie die Seite neu.
-            Falls das Problem bestehen bleibt, nutzen Sie die Notfallnummern unten.
+            Dieser Bereich konnte nicht geladen werden. Bitte laden Sie die Seite neu. Falls das Problem bestehen
+            bleibt, nutzen Sie die Notfallnummern unten.
           </p>
           <div className="rounded-xl border border-[var(--border-warm-soft)] bg-white/80 px-5 py-4 text-sm leading-relaxed text-[var(--text-danger-strong)]">
             <p className="mb-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--text-danger-label)]">
@@ -55,8 +55,8 @@ export default class ErrorBoundary extends Component {
                 className="emergency-tel-link font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
               >
                 147
-              </a>
-              {' '}telefonisch.
+              </a>{' '}
+              telefonisch.
             </p>
           </div>
           <button

@@ -220,8 +220,7 @@ export const GLOSSARY_GROUPS = [
         term: 'Netzwerkkarte',
         definition:
           'Eine Übersicht, die zeigt, welche Fachstellen es gibt, wer wofür zuständig ist und wie Hilfewege in der Region zusammenhängen.',
-        practice:
-          'Hilft zu klären, wer informieren, abklären, entlasten oder in einer Krise eingreifen kann.',
+        practice: 'Hilft zu klären, wer informieren, abklären, entlasten oder in einer Krise eingreifen kann.',
       },
       {
         id: 'trialog',

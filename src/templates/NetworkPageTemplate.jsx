@@ -190,7 +190,13 @@ function ResourceDirectorySection({ directory }) {
                 <h3 className="ui-card__title">{resource.name}</h3>
                 <p className="ui-card__copy">{resource.description}</p>
                 <div className="ui-editorial-card__action">
-                  <Button href={resource.link} target="_blank" rel="noopener noreferrer" variant="subtle" aria-label={`${resource.name} – Webseite öffnen (neues Fenster)`}>
+                  <Button
+                    href={resource.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="subtle"
+                    aria-label={`${resource.name} – Webseite öffnen (neues Fenster)`}
+                  >
                     Webseite öffnen <ExternalLink size={16} aria-hidden="true" />
                   </Button>
                 </div>
@@ -354,7 +360,11 @@ function NetworkMapSection({ mapping }) {
 
             <div className="ui-network-map-shell">
               <div>
-                <div className="ui-card--outline ui-network-map-stage is-desktop" role="img" aria-label="Netzwerkkarte: visuelle Darstellung der Bezugspersonen rund um Kind und Familie">
+                <div
+                  className="ui-card--outline ui-network-map-stage is-desktop"
+                  role="img"
+                  aria-label="Netzwerkkarte: visuelle Darstellung der Bezugspersonen rund um Kind und Familie"
+                >
                   <div className="ui-network-map-center-shell" aria-hidden="true" />
                   <div className="ui-network-map-center-orbit" aria-hidden="true" />
                   <div className="ui-network-map-ring" aria-hidden="true" />

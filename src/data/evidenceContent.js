@@ -189,9 +189,6 @@ export const COLLABORATION_FOUR_AS = [
   'Abmachungen: Was ist unser nächster Schritt, und wer übernimmt was?',
 ];
 
-
-
-
 // Orientierung für Fachpersonen: was sie Eltern als konkrete Handlungsfelder
 // aufzeigen können. Ressourcen-orientiert statt rein krisenbezogen.
 // Stauber Kap. 4.3 + Lenz & Brockmann 2013.
@@ -289,10 +286,6 @@ export const CHILD_EXPERIENCE_PRACTICE_POINTS = [
   'kindliche Perspektive in Krisenplanung, Entlastung und Gesprächsführung mitdenken',
 ];
 
-
-
-
-
 // Spezifische Schutzfaktoren nach Stauber et al. (2018), Kap. 2.5 — die
 // Resilienzforschung identifiziert genau diese zwei Punkte als evidenzbasiert
 // protektiv speziell für Kinder psychisch kranker Eltern (über allgemeine
@@ -336,7 +329,6 @@ export const PSYCHOEDUCATION_AGE_GROUPS = [
     text: 'Jugendliche möchten meist genauer verstehen, was los ist, und fragen häufiger nach Vererbbarkeit, Verantwortung und eigener Abgrenzung. Hier helfen ehrliche Gespräche auf Augenhöhe, ohne die Jugendlichen zu Erwachsenenrollen zu drängen.',
   },
 ];
-
 
 export const PSYCHOEDUCATION_PRACTICE_POINTS = [
   'einfach, ehrlich und entlastend sprechen – nicht beschönigen, aber auch nicht überfordern',
@@ -444,9 +436,6 @@ export const CLINICAL_PRACTICE_POINTS = [
   'Krisen- und Übergangssituationen brauchen schriftliche, einfache und alltagstaugliche Absprachen statt nur guter Absichten.',
 ];
 
-
-
-
 // Strategie-Trias zur Aktivierung sozialer Ressourcen. Quelle: Lenz (2014),
 // referenziert in Stauber et al. (2018), Kap. 6.2. Während Netzwerkkarte
 // und Netzwerkzeichnung soziale Ressourcen sichtbar machen, beschreiben
@@ -522,7 +511,6 @@ export const INTERVENTION_PROGRAM_POINTS = [
 // SUPPORT_OFFERS wurde in Audit 12 zu FACHSTELLEN (src/data/fachstellenContent.js)
 // konsolidiert. Die Evidenz-Ansicht leitet ihre Teil-Liste ueber SUPPORT_OFFER_IDS
 // ab (dort definiert). Siehe docs/content-pflege.md.
-
 
 export const PUK_CONTEXT_POINTS = [
   'Diese Website ist ein ergänzendes psychoedukatives Informationsangebot und keine offizielle Unterseite der PUK Zürich.',
@@ -630,7 +618,7 @@ export const MEDIA_BOOKS = [
     focus: 'Jugendliche Perspektive auf elterliche Depression und Familienalltag',
   },
   {
-    title: 'Lieber Matz, Dein Papa hat \'ne Meise',
+    title: "Lieber Matz, Dein Papa hat 'ne Meise",
     author: 'Schlösser, S. (2012). Ullstein',
     age: 'ab 12 Jahren',
     disorder: 'depression',
@@ -679,11 +667,8 @@ export const MEDIA_NOTES = [
   'Bücher und digitale Ressourcen wirken oft am besten als Gesprächseinstieg, nicht als alleinige Lösung.',
 ];
 
-
 export const CROSS_DIAGNOSIS_POINTS = [
   'Nicht jede psychische Erkrankung führt automatisch zu einer Kindeswohlgefährdung. Entscheidend ist, wie stark Symptome den Alltag, die Verlässlichkeit und die Versorgung beeinflussen.',
   'Für Kinder zählt weniger die Diagnose als das, was sie im Alltag erleben: Ist der Elternteil erreichbar? Ist der Alltag vorhersagbar? Wird über die Erkrankung gesprochen? Gibt es Unterstützung?',
   'Die Praxis braucht deshalb keine vereinfachenden Urteile, sondern eine differenzierte Einschätzung nach Symptombelastung, Ressourcen, Schutzfaktoren und Netzwerk.',
 ];
-
-

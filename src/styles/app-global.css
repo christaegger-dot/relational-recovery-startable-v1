@@ -54,7 +54,6 @@
   animation: pageEnter var(--motion-slow) var(--motion-curve-standard) forwards;
 }
 
-
 @keyframes pageEnter {
   from {
     opacity: 0;
@@ -231,13 +230,13 @@
    * nachvollziehen koennen. tel:-Links sind ausgenommen, weil der
    * sichtbare Text bereits die Nummer ist.
    */
-  a[href^="http"]:not([href*="eltern-angehoerige-fa.netlify.app"])::after {
-    content: " (" attr(href) ")";
+  a[href^='http']:not([href*='eltern-angehoerige-fa.netlify.app'])::after {
+    content: ' (' attr(href) ')';
     font-size: 9pt;
     color: #333;
     word-break: break-all;
   }
-  a[href^="tel:"]::after {
+  a[href^='tel:']::after {
     content: none;
   }
 
@@ -273,7 +272,7 @@
    * Sinn.
    */
   button[aria-expanded],
-  .ui-chip[role="button"] {
+  .ui-chip[role='button'] {
     display: none !important;
   }
 

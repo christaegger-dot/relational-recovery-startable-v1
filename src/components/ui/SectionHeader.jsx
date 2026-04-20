@@ -13,9 +13,7 @@ function RichCopy({ description, paragraphs }) {
   return (
     <div className="ui-copy">
       {description ? <p>{description}</p> : null}
-      {paragraphs
-        ? paragraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>)
-        : null}
+      {paragraphs ? paragraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>) : null}
     </div>
   );
 }
@@ -40,7 +38,7 @@ export default function SectionHeader({
   if (import.meta.env?.DEV && eyebrow && hasTitle && (description || paragraphs) && aside) {
     console.warn(
       '[SectionHeader] Alle vier Felder aktiv (eyebrow, title, description/paragraphs, aside). ' +
-        'Konvention: maximal 3 Ebenen pro Sektion. Prüfen, ob der aside wirklich Zusatzinhalt trägt.',
+        'Konvention: maximal 3 Ebenen pro Sektion. Prüfen, ob der aside wirklich Zusatzinhalt trägt.'
     );
   }
 

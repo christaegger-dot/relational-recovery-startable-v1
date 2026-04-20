@@ -4,7 +4,12 @@ import { getPageHeadingId } from '../utils/appHelpers';
 import { useAppState } from '../context/useAppState';
 
 export default function VignettenSection() {
-  const { currentVignette: currentIndex, setCurrentVignette: setCurrentIndex, selectedOption, handleSelectVignetteOption: onSelectOption } = useAppState();
+  const {
+    currentVignette: currentIndex,
+    setCurrentVignette: setCurrentIndex,
+    selectedOption,
+    handleSelectVignetteOption: onSelectOption,
+  } = useAppState();
   const vignette = VIGNETTEN[currentIndex];
 
   if (!vignette) return null;
@@ -49,8 +54,7 @@ export default function VignettenSection() {
     ? {
         label: 'Bestand',
         value: 'Ausgewählter Fall',
-        copy:
-          'Aktuell steht eine vertieft ausgearbeitete Vignette zur Reflexion bereit. Weitere Fälle zu anderen Entscheidungssituationen werden schrittweise ergänzt.',
+        copy: 'Aktuell steht eine vertieft ausgearbeitete Vignette zur Reflexion bereit. Weitere Fälle zu anderen Entscheidungssituationen werden schrittweise ergänzt.',
         tone: 'soft',
       }
     : {

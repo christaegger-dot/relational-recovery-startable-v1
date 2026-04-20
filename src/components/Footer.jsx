@@ -88,7 +88,9 @@ const Footer = memo(function Footer() {
                 </p>
               </div>
             </div>
-            <div className="footer-framework-legal">© 2026 Eltern mit psychischen Erkrankungen im Beratungskontext.</div>
+            <div className="footer-framework-legal">
+              © 2026 Eltern mit psychischen Erkrankungen im Beratungskontext.
+            </div>
           </div>
         </div>
 
