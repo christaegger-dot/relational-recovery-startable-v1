@@ -5,7 +5,7 @@ const TABS = [
   { id: 'lernmodule', label: 'Lernmodule' },
   { id: 'vignetten', label: 'Training' },
   { id: 'glossar', label: 'Glossar' },
-  { id: 'grundlagen', label: 'Grundlagen' },
+  { id: 'material', label: 'Material' },
   { id: 'evidenz', label: 'Evidenz' },
   { id: 'toolbox', label: 'Toolbox' },
   { id: 'netzwerk', label: 'Netzwerk' },
@@ -132,6 +132,11 @@ test.describe('Hash Routing', () => {
   test('hash alias "home" resolves to "start"', async ({ page }) => {
     await page.goto('/#home');
     await expect(page).toHaveURL(/#start/);
+  });
+
+  test('hash alias "grundlagen" resolves to "material"', async ({ page }) => {
+    await page.goto('/#grundlagen');
+    await expect(page).toHaveURL(/#material/);
   });
 
   test('invalid hash falls back to Start', async ({ page }) => {

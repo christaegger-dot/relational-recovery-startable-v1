@@ -32,6 +32,12 @@ Rein clientseitige React 19 SPA ohne Backend. Kein Routing-Library — Hash-basi
 - **SectionHeader + AsideCard**: Wiederverwendbare Shared Components für das Split-Layout-Pattern (Eyebrow + Title + Description + Aside-Karte).
 - **Custom Hooks in utils/**: `useMobileMenu`, `useNavigationFocus`, `useDownloadHandlers` — aus App.jsx extrahiert.
 
+## Zielgruppen
+
+- **Primäradressat aller Tabs: Fachpersonen** (Erwachsenenpsychiatrie und Beratungskontext). Default, sobald ein Tab kein `primaryAudience`-Feld in `appShellContent.js` trägt.
+- **Ausnahme: der Material-Tab** (`#material`). Inhalte sind als Handout-Material gerahmt, das Fachpersonen im Gespräch mit Patient:innen und Angehörigen einsetzen oder zur Weitergabe verlinken. Trägt `primaryAudience: 'weitergabe'`.
+- Mischung der Adressaten innerhalb eines Tabs bewusst vermeiden. Wenn unklar ist, welcher Zielgruppe ein neuer Inhalt dient: eher auf Fachperson zuspitzen und entlastendes/erklärendes Weitergabe-Material im Material-Tab bündeln.
+
 ## Konventionen
 
 - Fachspezifische deutsche Begriffe in Section-/Template-Namen (GlossarSection, VignettenSection), technische Begriffe auf Englisch

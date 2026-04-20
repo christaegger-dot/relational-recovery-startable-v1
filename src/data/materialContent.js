@@ -1,8 +1,8 @@
-export const GRUNDLAGEN_HERO = {
-  eyebrow: 'Für Angehörige',
+export const MATERIAL_HERO = {
+  eyebrow: 'Für Patient:innen und Angehörige',
   title: 'Häufige Fragen für',
   accent: 'ruhigere Orientierung im Alltag.',
-  lead: 'Der Grundlagenbereich richtet sich an Angehörige und beantwortet typische Fragen in klarer, entlastender Sprache. Er soll Unsicherheit reduzieren, Begriffe in Alltagssituationen übersetzen und den Blick auf nächste Schritte öffnen.',
+  lead: 'Dieser Bereich bündelt Material, das Fachpersonen im Gespräch mit Patient:innen und Angehörigen einsetzen oder zur Weitergabe verlinken können. Die Cluster beantworten typische Fragen in klarer, entlastender Sprache — sie sollen Unsicherheit reduzieren, Begriffe in Alltagssituationen übersetzen und den Blick auf nächste Schritte öffnen.',
   asideTitle: 'Einordnung',
   asideCopy:
     'Die Antworten ersetzen keine individuelle klinische, rechtliche oder kindesschutzbezogene Beurteilung. Sie dienen als tragfähige Erstorientierung für Gespräch, Reflexion und Weitervermittlung.',
@@ -25,9 +25,9 @@ export const GRUNDLAGEN_HERO = {
   ],
 };
 
-export const GRUNDLAGEN_INTRO = {
+export const MATERIAL_INTRO = {
   eyebrow: 'Aufbau',
-  title: 'Der Bereich verbindet Grundlagenwissen mit häufigen Entscheidungsmomenten.',
+  title: 'Der Bereich verbindet praktisches Wissen mit häufigen Entscheidungsmomenten.',
   description:
     'Statt lose Antworten zu sammeln, ordnet die Seite wiederkehrende Fragen entlang typischer Belastungslagen. So entsteht ein Wissenspfad, der Begriffe, emotionale Entlastung und konkrete Orientierung miteinander verbindet.',
   cards: [
@@ -70,9 +70,9 @@ export const GRUNDLAGEN_INTRO = {
   ],
 };
 
-export const GRUNDLAGEN_CLUSTERS = [
+export const MATERIAL_CLUSTERS = [
   {
-    id: 'grundlagen-verstehen',
+    id: 'material-verstehen',
     eyebrow: 'Cluster 1',
     title: 'Belastung verstehen, ohne sich vorschnell schuldig zu machen',
     description:
@@ -107,7 +107,7 @@ export const GRUNDLAGEN_CLUSTERS = [
     ],
   },
   {
-    id: 'grundlagen-grenzen',
+    id: 'material-grenzen',
     eyebrow: 'Cluster 2',
     title: 'Grenzen, Verantwortung und legitimer Selbstschutz',
     description:
@@ -142,7 +142,7 @@ export const GRUNDLAGEN_CLUSTERS = [
     ],
   },
   {
-    id: 'grundlagen-zusammenarbeit',
+    id: 'material-zusammenarbeit',
     legalDisclaimer: true,
     eyebrow: 'Cluster 3',
     title: 'Zusammenarbeit, Mitsprache und der nächste sinnvolle Schritt',
@@ -156,7 +156,8 @@ export const GRUNDLAGEN_CLUSTERS = [
     },
     faqs: [
       {
-        question: 'Was kann ich dem Behandlungsteam sagen, auch wenn keine Entbindung vorliegt?',
+        question:
+          'Was kann ich dem Behandlungsteam sagen, auch wenn ich nicht offiziell von der Schweigepflicht entbunden bin?',
         answer:
           'Wichtige Beobachtungen zu Alltag, Krisenverlauf, Kindersicherheit, Versorgungslücken oder warnenden Veränderungen können Sie in der Regel immer mitteilen. Schwieriger ist häufig nicht das Mitteilen, sondern was Teams ohne Einwilligung zurückmelden dürfen. Trotzdem kann Ihre Perspektive fachlich sehr relevant sein.',
       },
@@ -183,7 +184,7 @@ export const GRUNDLAGEN_CLUSTERS = [
     // im Beratungskontext. Praxisforschung Band 25, Erziehungsdirektion Kanton
     // Bern. Insbesondere Tabelle 1 (Lenz, 2010, S. 187) und Kapitel 2.5
     // (spezifische Schutzfaktoren: Krankheitswissen + offener Umgang).
-    id: 'grundlagen-kinder',
+    id: 'material-kinder',
     eyebrow: 'Cluster 4',
     title: 'Mit Kindern über die Erkrankung sprechen',
     description:
@@ -241,7 +242,7 @@ export const GRUNDLAGEN_CLUSTERS = [
     // Cluster 5 basiert auf Stauber et al. (2018), Kap. 5.3.2
     // «Altersspezifische Aspekte bei der Psychoedukation». Schliesst direkt
     // an Cluster 4 an, das Grundlagen der Kinder-Aufklärung behandelt.
-    id: 'grundlagen-altersgerecht',
+    id: 'material-altersgerecht',
     eyebrow: 'Cluster 5',
     title: 'Altersgerecht erklären — was Kinder in welchem Alter brauchen',
     description:
@@ -286,7 +287,7 @@ export const GRUNDLAGEN_CLUSTERS = [
     // Störungsbild. Inhaltlich orientiert an Stauber et al. (2018),
     // Kap. 5.3.1 / Tabelle 2 (Lenz 2010, S. 207–208) und Wunderer (2008).
     // Eigenständig formuliert, keine wörtliche Übernahme.
-    id: 'grundlagen-formulierungshilfen',
+    id: 'material-formulierungshilfen',
     eyebrow: 'Cluster 6',
     title: 'Formulierungshilfen — psychische Erkrankungen kindgerecht erklären',
     description:

@@ -7,7 +7,7 @@ import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
 import SectionHeader from '../components/ui/SectionHeader';
 
-function GrundlagenFaqItem({ item, index }) {
+function MaterialFaqItem({ item, index }) {
   return (
     <details className="ui-card ui-card--interactive ui-disclosure-card">
       <summary className="ui-disclosure-card__summary">
@@ -26,7 +26,7 @@ function GrundlagenFaqItem({ item, index }) {
   );
 }
 
-function GrundlagenCluster({ cluster }) {
+function MaterialCluster({ cluster }) {
   return (
     <Section spacing="tight" surface={cluster.surface || 'plain'}>
       <div id={cluster.id} className="ui-stack ui-stack--loose ui-section-anchor-offset">
@@ -38,9 +38,9 @@ function GrundlagenCluster({ cluster }) {
         />
 
         {cluster.faqs?.length ? (
-          <div className="grundlagen-faq-grid">
+          <div className="material-faq-grid">
             {cluster.faqs.map((item, index) => (
-              <GrundlagenFaqItem key={item.question} item={item} index={index} />
+              <MaterialFaqItem key={item.question} item={item} index={index} />
             ))}
           </div>
         ) : null}
@@ -51,7 +51,7 @@ function GrundlagenCluster({ cluster }) {
   );
 }
 
-export default function GrundlagenPageTemplate({ hero, pageHeadingId, intro, clusters = [], closingSection = null }) {
+export default function MaterialPageTemplate({ hero, pageHeadingId, intro, clusters = [], closingSection = null }) {
   return (
     <div className="ui-stack">
       <Container width="wide">
@@ -60,12 +60,12 @@ export default function GrundlagenPageTemplate({ hero, pageHeadingId, intro, clu
       <EditorialIntro intro={intro} />
       <EditorialIndex items={clusters} spacing="tight" surface="subtle" />
       {clusters.map((cluster) => (
-        <GrundlagenCluster key={cluster.id} cluster={cluster} />
+        <MaterialCluster key={cluster.id} cluster={cluster} />
       ))}
       {closingSection ? (
         <ClosingSection
           section={closingSection}
-          sectionId="grundlagen-materials"
+          sectionId="material-downloads-anchor"
           surface="plain"
           className="no-print"
         />

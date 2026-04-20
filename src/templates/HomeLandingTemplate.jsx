@@ -27,9 +27,9 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
     accent: 'Orientierung, Triage und Weitervermittlung.',
     lead: 'Arbeitshilfen für Fachpersonen, die mit Familien mit psychisch belasteten Eltern arbeiten – Toolbox, Trainingsfälle, Wissensraum und regionale Fachstellen.',
     audienceNote: {
-      prefix: 'Sie sind Angehörige?',
-      label: 'Zur Grundlagen-FAQ',
-      onClick: () => navigate('grundlagen', { focusTarget: 'heading' }),
+      prefix: 'Sie sind Patient:in oder Angehörige?',
+      label: 'Zum Material-Bereich',
+      onClick: () => navigate('material', { focusTarget: 'heading' }),
     },
     image: heroIllustration,
     imageAlt: 'Minimalistische Illustration eines Familiensystems mit Nähe, Distanz und Unterstützung',
