@@ -117,7 +117,7 @@ export const FACHSTELLEN = [
     name: 'SafeZone',
     description: 'Kostenlose und anonyme Online-Suchtberatung für Betroffene, Angehörige und Nahestehende.',
     link: 'https://www.safezone.ch/de/',
-    tags: ['Sucht', 'anonym', 'kostenlos', 'online'],
+    tags: ['Sucht', 'anonym', 'kostenlos'],
   },
   {
     id: 'stiftung-windlicht',
@@ -152,7 +152,7 @@ export const FACHSTELLEN = [
     description:
       'Schweizer Jugendportal mit Informationen, Hilfsangeboten und Orientierung für psychische Gesundheit und Krisen.',
     link: 'https://www.feel-ok.ch/de_CH/jugendliche/uebersicht.cfm',
-    tags: ['Jugendliche', 'online', 'kostenlos'],
+    tags: ['Jugendliche', 'kostenlos'],
   },
   {
     id: 'selbsthilfe-zh',
