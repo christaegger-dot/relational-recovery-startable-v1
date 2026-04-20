@@ -675,7 +675,7 @@
   scroll-margin-top: 8rem;
 }
 
-.grundlagen-faq-grid {
+.material-faq-grid {
   display: grid;
   gap: var(--space-4);
 }
@@ -1522,10 +1522,11 @@
   flex: none;
 }
 
-/* Dezenter Zielgruppen-Marker am Grundlagen-Tab. Sichtbar, aber optisch
+/* Dezenter Zielgruppen-Marker pro Nav-Tab. Sichtbar, aber optisch
    nachgeordnet: weder eigene Nav-Ebene noch reine Farbtrennung. Default
    aller Tabs ist Fachperson; nur Tabs mit explizitem Badge tragen das
-   Label (Audit-Phase-1, Audience-Cut-Strategie). */
+   Label. Aktuell ungenutzt -- fuer kuenftige Sub-Adressat-Markierung
+   pro Cluster im Material-Tab reserviert. */
 .ui-nav__badge {
   display: inline-flex;
   align-items: center;
@@ -2351,7 +2352,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .grundlagen-faq-grid {
+  .material-faq-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 

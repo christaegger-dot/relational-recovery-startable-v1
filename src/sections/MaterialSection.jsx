@@ -1,10 +1,10 @@
-import GrundlagenPageTemplate from '../templates/GrundlagenPageTemplate';
-import { GRUNDLAGEN_CLUSTERS, GRUNDLAGEN_HERO, GRUNDLAGEN_INTRO } from '../data/grundlagenContent';
+import MaterialPageTemplate from '../templates/MaterialPageTemplate';
+import { MATERIAL_CLUSTERS, MATERIAL_HERO, MATERIAL_INTRO } from '../data/materialContent';
 import { createClosingSectionModel } from '../utils/closingModel';
 import { getPageHeadingId } from '../utils/appHelpers';
 import { useAppState } from '../context/useAppState';
 
-function mapGrundlagenDownloads(sharedDownloadResources = []) {
+function mapMaterialDownloads(sharedDownloadResources = []) {
   return sharedDownloadResources
     .filter((item) =>
       ['Gesprächsleitfaden für Fachpersonen', 'Psychoedukations-Hilfe', 'Schutzfaktoren-Check'].includes(item.title)
@@ -15,10 +15,10 @@ function mapGrundlagenDownloads(sharedDownloadResources = []) {
     }));
 }
 
-export default function GrundlagenSection({ sharedDownloadResources = [] }) {
+export default function MaterialSection({ sharedDownloadResources = [] }) {
   const { navigate: onNavigateToTab } = useAppState();
   const closingSection = createClosingSectionModel({
-    id: 'grundlagen-materials',
+    id: 'material-downloads-anchor',
     eyebrow: 'Weiterarbeiten',
     title: 'Arbeitsmaterialien und',
     accent: 'nächste Anschlusswege.',
@@ -34,16 +34,16 @@ export default function GrundlagenSection({ sharedDownloadResources = [] }) {
       copy: 'Wenn eine Frage hängen bleibt, hilft oft kein weiteres Lesen, sondern ein kleines Arbeitsmittel oder der Wechsel in den nächsten passenden Seitentyp.',
       tone: 'soft',
     },
-    collections: mapGrundlagenDownloads(sharedDownloadResources).length
+    collections: mapMaterialDownloads(sharedDownloadResources).length
       ? [
           {
-            id: 'grundlagen-downloads',
+            id: 'material-downloads',
             eyebrow: 'Arbeitsmaterialien',
             title: 'Hilfen für Gespräch, Psychoedukation und Schutzfaktoren',
             description:
               'Diese Vorlagen passen besonders dann, wenn aus allgemeiner Orientierung ein konkretes Gespräch, eine kindbezogene Erklärung oder eine erste Fallsortierung werden soll.',
             collectionKind: 'downloads',
-            items: mapGrundlagenDownloads(sharedDownloadResources),
+            items: mapMaterialDownloads(sharedDownloadResources),
           },
         ]
       : [],
@@ -94,11 +94,11 @@ export default function GrundlagenSection({ sharedDownloadResources = [] }) {
   });
 
   return (
-    <GrundlagenPageTemplate
-      hero={GRUNDLAGEN_HERO}
-      pageHeadingId={getPageHeadingId('grundlagen')}
-      intro={GRUNDLAGEN_INTRO}
-      clusters={GRUNDLAGEN_CLUSTERS}
+    <MaterialPageTemplate
+      hero={MATERIAL_HERO}
+      pageHeadingId={getPageHeadingId('material')}
+      intro={MATERIAL_INTRO}
+      clusters={MATERIAL_CLUSTERS}
       closingSection={closingSection}
     />
   );

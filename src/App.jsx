@@ -19,7 +19,7 @@ import useDocumentMeta from './utils/useDocumentMeta';
 const ElearningSection = lazy(() => import('./sections/ElearningSection'));
 const VignettenSection = lazy(() => import('./sections/VignettenSection'));
 const GlossarSection = lazy(() => import('./sections/GlossarSection'));
-const GrundlagenSection = lazy(() => import('./sections/GrundlagenSection'));
+const MaterialSection = lazy(() => import('./sections/MaterialSection'));
 const ToolboxSection = lazy(() => import('./sections/ToolboxSection'));
 const NetworkSection = lazy(() => import('./sections/NetworkSection'));
 const EvidenceSection = lazy(() => import('./sections/EvidenceSection'));
@@ -268,7 +268,7 @@ export default function App() {
 
             {activeTab === 'glossar' && <GlossarSection />}
 
-            {activeTab === 'grundlagen' && <GrundlagenSection sharedDownloadResources={downloadResources} />}
+            {activeTab === 'material' && <MaterialSection sharedDownloadResources={downloadResources} />}
 
             {activeTab === 'toolbox' && (
               <ToolboxSection

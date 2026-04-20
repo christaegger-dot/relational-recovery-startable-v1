@@ -38,6 +38,11 @@ const TAB_ALIASES = {
   training: 'vignetten',
   trainingsfaelle: 'vignetten',
   vignetten: 'vignetten',
+  // Der frueher "Grundlagen" genannte Tab heisst seit der Weitergabe-
+  // Rahmung "Material" (Hash #material). Alias haelt alte Bookmarks und
+  // externe Deep-Links (#grundlagen) lebendig.
+  grundlagen: 'material',
+  material: 'material',
 };
 
 export const safeParse = (key, fallback, validate) => {
@@ -230,7 +235,7 @@ const PAGE_HEADING_IDS = {
   netzwerk: 'page-heading-netzwerk',
   evidenz: 'page-heading-evidenz',
   glossar: 'page-heading-glossar',
-  grundlagen: 'page-heading-grundlagen',
+  material: 'page-heading-material',
 };
 
 export const getPageHeadingId = (tab) => PAGE_HEADING_IDS[tab] ?? 'page-heading-start';

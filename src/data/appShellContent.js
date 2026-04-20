@@ -13,17 +13,18 @@ import { LITERATUR_IDS, MEDIA_BOOKS, MEDIA_DIGITAL } from './evidenceContent';
 import { FACHSTELLEN, SUPPORT_OFFER_IDS } from './fachstellenContent';
 
 /**
- * @typedef {('start'|'lernmodule'|'vignetten'|'glossar'|'grundlagen'|'evidenz'|'toolbox'|'netzwerk')} TabId
+ * @typedef {('start'|'lernmodule'|'vignetten'|'glossar'|'material'|'evidenz'|'toolbox'|'netzwerk')} TabId
  */
 
 /**
- * @typedef {('angehoerige')} AngehoerigenAudience
+ * @typedef {('weitergabe')} WeitergabeAudience
  * Redaktionelles Metadatum fuer Ausnahme-Tabs. Seit Audience-Cut-Phase 2
- * ist Fachperson der Default — nur Tabs, die sich explizit an Angehoerige
- * richten, tragen das Feld `primaryAudience: 'angehoerige'`. Die fruehere
- * Dreiwertigkeit (fachpersonen | angehoerige | beide) ist aufgehoben,
- * weil "beide" und "fachpersonen" nach der Fokus-Entscheidung identisch
- * behandelt werden (Default-Adressat Fachperson).
+ * ist Fachperson der Default — nur der Material-Tab traegt das Feld
+ * `primaryAudience: 'weitergabe'`, weil seine Inhalte als Handout-Material
+ * an Patient:innen und Angehoerige gedacht sind (Fachperson nutzt sie im
+ * Gespraech oder gibt sie weiter). Das Nav-Label "Material" traegt das
+ * Zielgruppen-Signal selbst, deshalb ist der frueher zusaetzlich gesetzte
+ * audienceBadge hier entfallen.
  */
 
 /**
@@ -33,20 +34,23 @@ import { FACHSTELLEN, SUPPORT_OFFER_IDS } from './fachstellenContent';
  * @property {React.ComponentType} icon - Lucide-React-Icon-Komponente.
  * @property {string} footerNote - Kurzer Beschreibungstext fuer den Footer.
  * @property {'primary'} priority - Aktuell sind alle Top-Level-Tabs 'primary'.
- * @property {AngehoerigenAudience} [primaryAudience] - Optional. Nur gesetzt
- *   fuer Tabs, die sich primaer an Angehoerige richten. Fehlendes Feld
- *   bedeutet: Default-Adressat Fachperson. Kombiniert mit `audienceBadge`
- *   fuer sichtbare Nav-Markierung.
+ * @property {WeitergabeAudience} [primaryAudience] - Optional. Nur gesetzt
+ *   fuer Tabs, deren Inhalte als Material zur Weitergabe an Patient:innen
+ *   und Angehoerige gedacht sind. Fehlendes Feld bedeutet: Default-Adressat
+ *   Fachperson.
  * @property {string} [audienceBadge] - Optional. Sichtbarer Zielgruppen-
- *   Marker im Nav-Button (Desktop + Mobile). Aktuell nur Grundlagen.
+ *   Marker im Nav-Button (Desktop + Mobile). Aktuell ungenutzt — fuer
+ *   kuenftige Sub-Adressat-Markierung pro Cluster reserviert (siehe
+ *   Follow-Up "Material: Adressat-Marke pro Cluster").
  */
 
 /** @type {TabItem[]} */
 export const TAB_ITEMS = [
   // Default-Adressat aller Tabs ohne explizites primaryAudience-Feld:
-  // Fachperson. Nur Tabs, die sich primaer an Angehoerige richten,
-  // setzen das Feld — sie erhalten zusaetzlich einen sichtbaren
-  // audienceBadge in der Nav.
+  // Fachperson. Nur der Material-Tab traegt `primaryAudience: 'weitergabe'`,
+  // weil seine Inhalte als Handout-Material an Patient:innen und Angehoerige
+  // gedacht sind. Das Nav-Label "Material" traegt das Zielgruppen-Signal
+  // selbst, deshalb ist dort aktuell kein zusaetzlicher audienceBadge gesetzt.
   { id: 'start', label: 'Start', icon: LayoutDashboard, footerNote: 'Dashboard und Orientierung', priority: 'primary' },
   {
     id: 'lernmodule',
@@ -70,13 +74,12 @@ export const TAB_ITEMS = [
     priority: 'primary',
   },
   {
-    id: 'grundlagen',
-    label: 'Grundlagen',
+    id: 'material',
+    label: 'Material',
     icon: CircleHelp,
-    footerNote: 'FAQ und Einordnung für Angehörige',
+    footerNote: 'Handouts für Patient:innen und Angehörige',
     priority: 'primary',
-    primaryAudience: 'angehoerige',
-    audienceBadge: 'Für Angehörige',
+    primaryAudience: 'weitergabe',
   },
   {
     id: 'evidenz',

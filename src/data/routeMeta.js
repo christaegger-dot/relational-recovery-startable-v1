@@ -76,11 +76,11 @@ export const ROUTE_META = {
     ogDescription:
       'Sprache im Kontakt, Schutz und Risiko, Versorgung und Trialog – kompakt definiert und auf typische Arbeitssituationen bezogen.',
   },
-  grundlagen: {
-    title: 'Grundlagen – Für Angehörige',
+  material: {
+    title: 'Material – Für Patient:innen und Angehörige',
     description:
-      'FAQ und Einordnung für Angehörige: Belastung verstehen, Grenzen und Verantwortung sortieren, Zusammenarbeit mit Hilfen strukturieren.',
-    ogTitle: 'Grundlagen-FAQ für Angehörige',
+      'Handout-Material, das Fachpersonen im Gespräch mit Patient:innen und Angehörigen einsetzen oder zur Weitergabe verlinken können: Belastung verstehen, Grenzen und Verantwortung sortieren, Kinder altersgerecht aufklären.',
+    ogTitle: 'Material – Handouts für Patient:innen und Angehörige',
     ogDescription:
       'Häufige Fragen in einer klaren, entlastenden Sprache: Belastung verstehen, Grenzen klären, nächste Schritte finden.',
   },

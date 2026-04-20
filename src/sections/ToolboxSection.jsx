@@ -444,7 +444,7 @@ export default function ToolboxSection({
         titlePrefix: 'Wann freiwillige Hilfe reicht und wann',
         titleAccent: 'Schutzschwellen enger werden',
         description: [
-          'Dieser Abschnitt richtet sich an Fachpersonen im Beratungskontext. Angehörige finden Erstorientierung und FAQ im Bereich Grundlagen.',
+          'Dieser Abschnitt richtet sich an Fachpersonen im Beratungskontext. Handout-Material zur Weitergabe an Patient:innen und Angehörige findet sich im Bereich Material.',
           'Nicht jede hohe Belastung verlangt sofort eine formelle Meldung. Als Orientierung dient die Frage: Sind Aufsicht, Sicherheit, Nahrung und Schutz aktuell gewährleistet?',
           'Wenn Zweifel bestehen, ist der erste Schritt oft ein vertrauliches Gespräch mit einer Beratungsstelle. Eine vertiefte fachliche Klärung und gegebenenfalls eine Kindesschutzabklärung kommen erst danach.',
         ],
@@ -491,7 +491,7 @@ export default function ToolboxSection({
         titlePrefix: 'Schweigepflicht, Rückmeldung und',
         titleAccent: 'pragmatische Orientierung',
         description: [
-          'Dieser Abschnitt richtet sich an Fachpersonen im Beratungskontext. Angehörige finden Erstorientierung und FAQ im Bereich Grundlagen.',
+          'Dieser Abschnitt richtet sich an Fachpersonen im Beratungskontext. Handout-Material zur Weitergabe an Patient:innen und Angehörige findet sich im Bereich Material.',
           'Fachpersonen und Angehörige verlieren in belasteten Situationen oft Zeit, weil unklar ist, was mitgeteilt werden darf und was nicht. Die FAQ bündeln die wichtigsten alltagsnahen Klärungen.',
         ],
         disclosureItems: RIGHTS_FAQ.map((item) => ({
@@ -606,7 +606,7 @@ export default function ToolboxSection({
       'Die Toolbox endet nicht bei Orientierung. Im Anschluss helfen druckbare Arbeitsmittel und die nächsten passenden Seitentypen dabei, Gespräche, Einordnung und Weitervermittlung tatsächlich umzusetzen.',
     paragraphs: [
       'Wenn eine akute Spur sichtbar wird, sollte sie in eine kurze schriftliche Absprache, einen Kontakt oder eine abgestimmte Weitervermittlung übersetzt werden.',
-      'Wenn die Lage weniger akut ist, tragen oft Glossar, Grundlagen oder Netzwerk dazu bei, Sprache, Arbeitslogik und Anschlussversorgung zu stabilisieren.',
+      'Wenn die Lage weniger akut ist, tragen oft Glossar, Material oder Netzwerk dazu bei, Sprache, Arbeitslogik und Anschlussversorgung zu stabilisieren.',
     ],
     aside: {
       label: 'Praxisnutzen',
