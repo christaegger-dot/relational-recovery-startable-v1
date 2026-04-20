@@ -102,7 +102,7 @@ export const GRUNDLAGEN_CLUSTERS = [
       {
         question: 'Hilft es, alles möglichst ruhig zu halten, damit nichts eskaliert?',
         answer:
-          'Kurzfristig kann Deeskalation sinnvoll sein. Langfristig führt ein dauerhaftes Ausweichen jedoch oft dazu, dass Angehörige immer mehr Spannung mittragen, während wichtige Themen unbesprechbar werden. Tragfaehiger ist meist eine Kombination aus ruhigem Ton, klaren Grenzen und kleinen, konkret vereinbarten Schritten.',
+          'Kurzfristig kann Deeskalation sinnvoll sein. Langfristig führt ein dauerhaftes Ausweichen jedoch oft dazu, dass Angehörige immer mehr Spannung mittragen, während wichtige Themen unbesprechbar werden. Tragfähiger ist meist eine Kombination aus ruhigem Ton, klaren Grenzen und kleinen, konkret vereinbarten Schritten.',
       },
     ],
   },
@@ -221,6 +221,7 @@ export const GRUNDLAGEN_CLUSTERS = [
           'Am hilfreichsten ist, das Kind zu bitten, das Gehörte in eigenen Worten wiederzugeben — nicht als Test, sondern als Einladung: «Magst du mir erzählen, was du jetzt verstanden hast?» Dabei nicht nur auf den Inhalt achten, sondern auch auf Mimik, Tonfall und Körpersprache. Wenn das Kind echohaft nachspricht oder ausweicht, braucht es vielleicht eine Pause oder eine andere Erklärung. Wichtig: Psychoedukation ist kein einmaliges Gespräch, sondern ein fortlaufender Prozess — Kinder kommen mit neuen Fragen zurück, wenn sie bereit sind.',
       },
       {
+        question: 'Was tue ich, wenn mein Kind sich für meine Erkrankung schuldig fühlt?',
         answer:
           'Viele Kinder vermuten, dass sie durch ihr Verhalten die Erkrankung verursacht oder verschlimmert haben — insbesondere jüngere Kinder mit stark magischem Denken. Es ist wichtig, dem Kind klar zu sagen, dass es nicht schuld ist. Auch wenn es sich schlecht benommen hat, einen Streit ausgelöst hat oder zu wenig geholfen hat: die Krankheit hat andere Ursachen.',
       },

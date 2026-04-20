@@ -213,7 +213,7 @@ export const GLOSSARY_GROUPS = [
         definition:
           'Wenn nach einer ersten Klärung oder Behandlung die passende weiterführende Stelle gefunden und der Übergang organisiert wird.',
         practice:
-          'Tragfaehig wird Weitervermittlung erst, wenn Ansprechpartner, Schwelle, Erreichbarkeit und nächster Schritt konkret benannt sind.',
+          'Tragfähig wird Weitervermittlung erst, wenn Ansprechpartner, Schwelle, Erreichbarkeit und nächster Schritt konkret benannt sind.',
       },
       {
         id: 'netzwerkkarte',
