@@ -70,6 +70,141 @@ export const MATERIAL_INTRO = {
   ],
 };
 
+// Handout-Block: neue Gliederungsebene unterhalb der FAQ-Cluster, eingefuehrt
+// nach Issue #104 (Handout-Offensive) + #107 (Krisenplan als Tier-1). Hybrid-
+// Pfad: FAQ-Anker bleibt, Handouts kommen als zweiter Block darunter. Block-
+// Rahmung bewusst ruhig, damit das erste Handout (Krisenplan) visuell fuehrt
+// und nicht in einer generischen Ueberschrift untergeht.
+export const MATERIAL_HANDOUTS_BLOCK = {
+  eyebrow: 'Handouts',
+  title: 'Material zum Ausfüllen, Mitgeben und Besprechen',
+  description:
+    'Diese Vorlagen begleiten konkrete Gespräche in der Familie. Sie sind als Struktur gedacht, nicht als Checkliste — und werden am besten gemeinsam ausgefüllt.',
+};
+
+// Tier-1-Handout: Kind-orientierter Krisenplan als Gegenstueck zum fachlichen
+// Toolbox-Sicherheitsplan (SAFETY_PLAN_TEMPLATE_FIELDS). Perspektive: Kind
+// (Ich-Form), eine Seite, altersgerechte Felder. Inhaltlich fundiert auf
+// FAQ 4.8 (Cluster 4 Krisenplan-Empfehlung) und evidenceContent.js (Abschnitt
+// "Krisenplan / Notfallplan"). Quellenbindung: Lenz & Brockmann (2010),
+// referenziert in Stauber et al. (2018) Kap. 6.2 -- identisch mit der Quellen-
+// grundlage des Toolbox-Sicherheitsplans, bewusst geteilt.
+export const MATERIAL_HANDOUTS = [
+  {
+    id: 'material-handout-mein-notfallplan',
+    kind: 'crisis-plan',
+    eyebrow: 'Handout für Kinder',
+    title: 'Mein Notfallplan',
+    description:
+      'Ein einseitiger Plan für Kinder in Familien, in denen ein Elternteil psychisch erkrankt ist. Er wird gemeinsam in einer stabilen Phase ausgefüllt und bleibt beim Kind.',
+    usage: {
+      when: 'In einer stabilen Phase — nicht in der Krise. Der Plan ist ein Gespräch, nicht ein Formular.',
+      people:
+        'Kind + ein betreuender Elternteil oder eine Fachperson + die Vertrauensperson, wenn möglich. Die Vertrauensperson muss vorher wissen und zustimmen.',
+      validity:
+        'Ein Krisenplan altert. Mindestens einmal pro Jahr gemeinsam durchgehen. Bei wichtigen Veränderungen (Umzug, neue Vertrauensperson, veränderte Erkrankung) sofort anpassen.',
+      where:
+        'Eine Kopie beim Kind (sichtbar, nicht versteckt). Eine Kopie bei der Vertrauensperson. Optional beim Behandlungsteam des erkrankten Elternteils.',
+    },
+    header: {
+      ownerLabel: 'Dieser Plan gehört',
+      dateLabel: 'Datum der Erstellung',
+      revisedLabel: 'Zuletzt überarbeitet',
+    },
+    sections: [
+      {
+        id: 'material-handout-crisis',
+        title: 'Krisenplan',
+        fields: [
+          {
+            title: 'Wer hilft mir, wenn es zu Hause gerade nicht gut ist?',
+            hint: 'Eine Vertrauensperson ausserhalb des Haushalts. Jemand, den das Kind gut kennt und ohne Angst anrufen kann. Oft Grossmutter, Tante, Göttin, Nachbarin — nicht immer die «offensichtliche» Person, sondern die, zu der das Kind echten Kontakt hat.',
+            example: 'Wenn es zu Hause schwierig wird, kann ich Tante Sara anrufen.',
+          },
+          {
+            title: 'Wie erreiche ich sie?',
+            hint: 'Telefonnummer(n), Adresse, wie das Kind dahin kommt. Mehrere Wege, falls einer nicht funktioniert.',
+            example:
+              'Sara hat die Nummer 079 …. Wenn sie nicht rangeht, schreibe ich ihr eine Nachricht. Ihre Adresse: Musterstrasse 3, das ist zehn Minuten zu Fuss von uns.',
+          },
+          {
+            title: 'Wann rufe ich sie an?',
+            hint: 'Konkrete Beispiele, keine abstrakten Regeln. Je jünger das Kind, desto beobachtbarer müssen die Anlässe sein.',
+            example:
+              'Wenn Mama seit dem Morgen nicht aufsteht und es Mittag ist. Wenn Papa Dinge sagt, die mir Angst machen. Wenn ich alleine bin und nicht weiss, was ich tun soll.',
+          },
+          {
+            title: 'Was tut sie für mich?',
+            hint: 'Was wurde mit der Vertrauensperson vorher besprochen? Was darf das Kind erwarten? Nicht offenlassen, sondern vorab klären.',
+            example:
+              'Sara kommt vorbei oder holt mich ab. Bei ihr kann ich übernachten. Sie ruft Oma an, wenn etwas Wichtiges ist.',
+          },
+          {
+            title: 'Wenn ich meine erste Person nicht erreiche',
+            hint: 'Eine zweite Person als Backup. Mindestens eine Ersatz-Option, falls die erste nicht verfügbar ist. Ohne Backup ist der Plan fragil.',
+            example: 'Dann rufe ich Oma an: 044 ….',
+          },
+        ],
+        emergency: {
+          title: 'Wenn es wirklich dringend ist',
+          intro: 'Diese Nummern gelten immer — auch wenn ich niemanden sonst erreiche:',
+          items: [
+            {
+              number: '144',
+              description: 'wenn jemand in Lebensgefahr ist. Kommt sofort, wie bei einem schlimmen Unfall.',
+            },
+            {
+              number: '147',
+              description: 'wenn ich mit jemandem reden will, der mir zuhört und hilft. Tag und Nacht, gratis.',
+            },
+          ],
+        },
+      },
+      {
+        id: 'material-handout-everyday',
+        title: 'Was mir im Alltag hilft',
+        fields: [
+          {
+            title: 'Was die Schule oder der Kindergarten weiss',
+            hint: 'Vorab-Absprache: Wer an der Schule oder im Kindergarten weiss, dass das Kind in einer belasteten Familiensituation lebt? An wen darf das Kind sich dort wenden? Darf die Vertrauensperson bei Bedarf dort abholen?',
+            example: 'Frau Müller weiss Bescheid. Ich kann zu ihr, wenn etwas ist.',
+          },
+          {
+            title: 'Was mir sonst noch hilft',
+            hint: 'Selbstberuhigung. Was macht das Kind, wenn die Situation noch nicht ganz so schlimm ist, aber schwierig? Eigene Ressourcen sichtbar machen.',
+            example: 'Ich höre meine Lieblingsmusik. Ich gehe zu meinem Plüschtier. Ich atme dreimal langsam.',
+          },
+        ],
+      },
+    ],
+    footer:
+      'Dieser Plan gehört mir. Ich kann ihn lesen, wann ich will. Er wird manchmal angepasst, wenn sich etwas ändert.',
+    disclaimer:
+      'Dieser Plan ist eine Orientierungsvorlage. Er ersetzt weder eine individuelle klinische Einschätzung noch eine Kindeswohlabklärung. In akuten Gefährdungssituationen gilt immer zuerst die Notfallnummer 144. Fachliche Begleitung beim Erstellen bieten z. B. das kjz, die PUK Zürich oder Pro Mente Sana.',
+    crossRefs: {
+      title: 'Verwandte Inhalte',
+      items: [
+        {
+          kind: 'faq',
+          label: 'Aus dem FAQ: «Was braucht mein Kind, wenn ich in einer akuten Krankheitsphase bin?»',
+          anchor: '#material-kinder',
+        },
+        {
+          kind: 'toolbox',
+          label: 'Fachperson-Perspektive: Sicherheitsplan in der Toolbox',
+          target: 'toolbox',
+          anchor: '#safety-plan',
+        },
+        {
+          kind: 'evidence',
+          label: 'Fachlicher Hintergrund: Krisenplan und Schutzfaktoren im Evidenzbereich',
+          target: 'evidenz',
+        },
+      ],
+    },
+  },
+];
+
 export const MATERIAL_CLUSTERS = [
   {
     id: 'material-verstehen',

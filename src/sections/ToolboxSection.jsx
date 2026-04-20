@@ -180,7 +180,7 @@ export default function ToolboxSection({
   rightsSectionRef,
   onJumpToPrioritySection,
 }) {
-  const { score, handleScoreChange: onToggleAssessment, resetScore: onResetAssessment } = useAppState();
+  const { score, handleScoreChange: onToggleAssessment, resetScore: onResetAssessment, navigate } = useAppState();
   const pageHeadingId = getPageHeadingId('toolbox');
   const [triageAnswers, setTriageAnswers] = useState({});
   const [activePracticeFilter, setActivePracticeFilter] = useState('all');
@@ -414,6 +414,15 @@ export default function ToolboxSection({
             icon: <Printer size={16} aria-hidden="true" />,
             variant: 'secondary',
           },
+          // Rueckverlink auf das kind-orientierte Pendant im Material-Tab
+          // (`#material-handout-mein-notfallplan`). Der hiesige Sicherheitsplan
+          // ist bewusst fachperson-orientiert; das Material-Handout ist die
+          // Ich-Form-Variante fuer Gespraeche mit Kind und Angehoerigen.
+          {
+            label: 'Kindgerechte Variante im Material-Tab',
+            onClick: () => navigate('material', { focusTarget: 'heading' }),
+            variant: 'subtle',
+          },
         ],
         listCards: SAFETY_PLAN_POINTS.map((item, index) => ({
           title: `Baustein ${index + 1}`,
@@ -509,6 +518,7 @@ export default function ToolboxSection({
       safetyPlanSectionRef,
       onDownloadCrisisPlan,
       onPrint,
+      navigate,
     ]
   );
 
