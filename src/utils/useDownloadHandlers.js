@@ -209,46 +209,55 @@ Aktueller Assessment-Score: ${scoreRisk}
     downloadTextFile('krisenplan-kompakt.txt', template);
   }, [scoreRisk]);
 
-  const downloadResources = useMemo(() => [
-    {
-      title: 'Gesprächsleitfaden für Fachpersonen',
-      description:
-        'Kurzblatt für Erstgespräch, Verlaufsgespräch oder Supervision mit Fokus auf Elternrolle, Versorgung, Netzwerk und nächsten Schritt.',
-      meta: ['TXT editierbar', 'Gespräch / Supervision'],
-      actionLabel: 'Leitfaden herunterladen',
-      onDownload: handleDownloadConversationGuide,
-    },
-    {
-      title: 'Netzwerkkarte als Arbeitsvorlage',
-      description:
-        'Strukturierte Vorlage für private Kontakte, Alltagsstützen, Fachstellen, Mitwissende und Versorgungslücken.',
-      meta: ['TXT editierbar', 'Vernetzung / Mapping'],
-      actionLabel: 'Netzwerkkarte herunterladen',
-      onDownload: handleDownloadNetworkMap,
-    },
-    {
-      title: 'Psychoedukations-Hilfe',
-      description:
-        'Kurzhilfe für Fachpersonen zum Sprechen mit Kindern über die psychische Erkrankung eines Elternteils.',
-      meta: ['TXT editierbar', 'Gespräch mit Kindern'],
-      actionLabel: 'Kurzhilfe herunterladen',
-      onDownload: handleDownloadPsychoeducationGuide,
-    },
-    {
-      title: 'Schutzfaktoren-Check',
-      description: 'Einseitige Versorgungsübersicht für Fallreflexion, Verlaufsbeobachtung und Supervision.',
-      meta: ['TXT editierbar', 'Schutz / Verlauf'],
-      actionLabel: 'Check herunterladen',
-      onDownload: handleDownloadProtectionChecklist,
-    },
-    {
-      title: 'Krisenplan kompakt',
-      description: 'Reduzierte Kurzvorlage für Mitgabe, Besprechung oder schnelle gemeinsame Krisenvorsorge.',
-      meta: ['TXT editierbar', 'Krise / Mitgabe'],
-      actionLabel: 'Kurzvorlage herunterladen',
-      onDownload: handleDownloadCompactCrisisSheet,
-    },
-  ], [handleDownloadConversationGuide, handleDownloadNetworkMap, handleDownloadPsychoeducationGuide, handleDownloadProtectionChecklist, handleDownloadCompactCrisisSheet]);
+  const downloadResources = useMemo(
+    () => [
+      {
+        title: 'Gesprächsleitfaden für Fachpersonen',
+        description:
+          'Kurzblatt für Erstgespräch, Verlaufsgespräch oder Supervision mit Fokus auf Elternrolle, Versorgung, Netzwerk und nächsten Schritt.',
+        meta: ['TXT editierbar', 'Gespräch / Supervision'],
+        actionLabel: 'Leitfaden herunterladen',
+        onDownload: handleDownloadConversationGuide,
+      },
+      {
+        title: 'Netzwerkkarte als Arbeitsvorlage',
+        description:
+          'Strukturierte Vorlage für private Kontakte, Alltagsstützen, Fachstellen, Mitwissende und Versorgungslücken.',
+        meta: ['TXT editierbar', 'Vernetzung / Mapping'],
+        actionLabel: 'Netzwerkkarte herunterladen',
+        onDownload: handleDownloadNetworkMap,
+      },
+      {
+        title: 'Psychoedukations-Hilfe',
+        description:
+          'Kurzhilfe für Fachpersonen zum Sprechen mit Kindern über die psychische Erkrankung eines Elternteils.',
+        meta: ['TXT editierbar', 'Gespräch mit Kindern'],
+        actionLabel: 'Kurzhilfe herunterladen',
+        onDownload: handleDownloadPsychoeducationGuide,
+      },
+      {
+        title: 'Schutzfaktoren-Check',
+        description: 'Einseitige Versorgungsübersicht für Fallreflexion, Verlaufsbeobachtung und Supervision.',
+        meta: ['TXT editierbar', 'Schutz / Verlauf'],
+        actionLabel: 'Check herunterladen',
+        onDownload: handleDownloadProtectionChecklist,
+      },
+      {
+        title: 'Krisenplan kompakt',
+        description: 'Reduzierte Kurzvorlage für Mitgabe, Besprechung oder schnelle gemeinsame Krisenvorsorge.',
+        meta: ['TXT editierbar', 'Krise / Mitgabe'],
+        actionLabel: 'Kurzvorlage herunterladen',
+        onDownload: handleDownloadCompactCrisisSheet,
+      },
+    ],
+    [
+      handleDownloadConversationGuide,
+      handleDownloadNetworkMap,
+      handleDownloadPsychoeducationGuide,
+      handleDownloadProtectionChecklist,
+      handleDownloadCompactCrisisSheet,
+    ]
+  );
 
   return {
     handleDownloadCrisisPlan,

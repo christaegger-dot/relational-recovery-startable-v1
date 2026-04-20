@@ -113,7 +113,6 @@ function ChapterOverview({ chapterOverview }) {
           ) : null}
         </div>
       </Section>
-
     </>
   );
 }
@@ -130,11 +129,7 @@ function ZoneSection({ zone, defaultOpen = false }) {
     >
       <details className="ui-chapter-disclosure" open={defaultOpen || undefined}>
         <summary className="ui-chapter-disclosure__summary">
-          <SectionHeader
-            eyebrow={zone.eyebrow}
-            title={zone.title}
-            titleAccent={zone.accent}
-          />
+          <SectionHeader eyebrow={zone.eyebrow} title={zone.title} titleAccent={zone.accent} />
           <span className="ui-chapter-disclosure__indicator" aria-hidden="true" />
         </summary>
 
@@ -151,7 +146,11 @@ function ZoneSection({ zone, defaultOpen = false }) {
               eigenes Inline-Schema einfuehren. */}
 
           {zone.highlightList ? (
-            <BulletList items={zone.highlightList.items} tone={zone.highlightList.tone} icon={zone.highlightList.icon} />
+            <BulletList
+              items={zone.highlightList.items}
+              tone={zone.highlightList.tone}
+              icon={zone.highlightList.icon}
+            />
           ) : null}
           {zone.metrics?.length ? <MetricGrid items={zone.metrics} /> : null}
           {zone.cards?.length ? <CardGrid items={zone.cards} columns={zone.cardColumns} tone={zone.cardTone} /> : null}

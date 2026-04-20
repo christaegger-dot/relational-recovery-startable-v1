@@ -50,7 +50,7 @@ const Section = forwardRef(function Section(
     children,
     ...props
   },
-  ref,
+  ref
 ) {
   const revealRef = useRevealRef();
 

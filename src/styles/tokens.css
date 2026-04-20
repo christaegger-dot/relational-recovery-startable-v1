@@ -7,7 +7,12 @@
   --surface-accent-soft: #f1f3ce; /* use with --text-primary or --text-secondary; not for inverse text */
   --surface-info-soft: #edf3f8; /* use with --text-primary for informational highlights */
   --surface-danger-soft: #fff1eb; /* use with --text-danger for urgent but low-arousal states */
-  --surface-elevated: rgba(255, 250, 246, 0.86); /* nur auf hellen Flächen mit Luminanz > 0.7; sonst --surface-app nutzen */
+  --surface-elevated: rgba(
+    255,
+    250,
+    246,
+    0.86
+  ); /* nur auf hellen Flächen mit Luminanz > 0.7; sonst --surface-app nutzen */
 
   /* Inverse surfaces (dunkle Streifen wie Emergency-Banner). Gradient-Paar + Border-Partner. */
   --surface-inverse-top: #3f322b;

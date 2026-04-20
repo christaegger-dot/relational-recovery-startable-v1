@@ -81,7 +81,8 @@ export const SOURCES = {
     year: 2020,
     title: 'Psychisch kranke Eltern im Beratungskontext. Was stärkt psychisch kranke Eltern und deren Kinder?',
     journal: null,
-    publisher: 'Praxisforschung der Erziehungsberatung des Kantons Bern, Band 25. Bern: Erziehungsberatung des Kantons Bern',
+    publisher:
+      'Praxisforschung der Erziehungsberatung des Kantons Bern, Band 25. Bern: Erziehungsberatung des Kantons Bern',
     type: 'report',
     doi: null,
     link: 'https://www.eb.bkd.be.ch/content/dam/eb_bkd/bilder/de/themen/praxisforschung/eb-pf-band-25-psychisch-kranke-eltern-im-beratungskontext.pdf',
@@ -233,7 +234,8 @@ export const SOURCES = {
     id: 'leijdesdorff-2017',
     author: 'Leijdesdorff, S., van Doesum, K., Popma, A., Klaassen, R. & van Amelsvoort, T.',
     year: 2017,
-    title: 'Prevalence of psychopathology in children of parents with mental illness and/or addiction: an up to date narrative review',
+    title:
+      'Prevalence of psychopathology in children of parents with mental illness and/or addiction: an up to date narrative review',
     journal: 'Current Opinion in Psychiatry, 30(4), 312-317',
     publisher: null,
     type: 'journal-article',

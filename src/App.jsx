@@ -26,7 +26,11 @@ const EvidenceSection = lazy(() => import('./sections/EvidenceSection'));
 
 const SectionLoadingFallback = function SectionLoadingFallback() {
   return (
-    <section aria-busy="true" aria-label="Inhalt wird geladen" className="rounded-[3rem] border border-slate-200 bg-white px-8 py-12 shadow-sm md:px-12 md:py-16">
+    <section
+      aria-busy="true"
+      aria-label="Inhalt wird geladen"
+      className="rounded-[3rem] border border-slate-200 bg-white px-8 py-12 shadow-sm md:px-12 md:py-16"
+    >
       <p className="ui-visually-hidden">Inhalt wird geladen…</p>
       <div className="max-w-2xl">
         <div className="mb-5 h-2 w-20 rounded-full bg-emerald-100" />
@@ -87,10 +91,7 @@ export default function App() {
     toolboxRefs,
   });
 
-  const {
-    handleDownloadCrisisPlan,
-    downloadResources,
-  } = useDownloadHandlers(score.risk);
+  const { handleDownloadCrisisPlan, downloadResources } = useDownloadHandlers(score.risk);
 
   const openPriorityToolboxSection = useCallback(
     (section) => {
@@ -224,8 +225,8 @@ export default function App() {
               className="emergency-tel-link font-extrabold underline decoration-2 underline-offset-2 hover:no-underline"
             >
               147
-            </a>
-            {' '}telefonisch der schnellste Weg.
+            </a>{' '}
+            telefonisch der schnellste Weg.
           </div>
           <button
             type="button"
@@ -258,38 +259,34 @@ export default function App() {
         className="flex-grow max-w-7xl mx-auto w-full px-4 md:px-6 py-8 md:py-10 outline-none page-enter"
       >
         <ErrorBoundary>
-        <Suspense fallback={<SectionLoadingFallback />}>
-          {activeTab === 'start' && (
-            <HomeLandingTemplate pageHeadingId={getPageHeadingId('start')} />
-          )}
+          <Suspense fallback={<SectionLoadingFallback />}>
+            {activeTab === 'start' && <HomeLandingTemplate pageHeadingId={getPageHeadingId('start')} />}
 
-          {activeTab === 'lernmodule' && <ElearningSection />}
+            {activeTab === 'lernmodule' && <ElearningSection />}
 
-          {activeTab === 'vignetten' && <VignettenSection />}
+            {activeTab === 'vignetten' && <VignettenSection />}
 
-          {activeTab === 'glossar' && <GlossarSection />}
+            {activeTab === 'glossar' && <GlossarSection />}
 
-          {activeTab === 'grundlagen' && (
-            <GrundlagenSection sharedDownloadResources={downloadResources} />
-          )}
+            {activeTab === 'grundlagen' && <GrundlagenSection sharedDownloadResources={downloadResources} />}
 
-          {activeTab === 'toolbox' && (
-            <ToolboxSection
-              onPrint={handleToolboxPrint}
-              onDownloadCrisisPlan={handleDownloadCrisisPlan}
-              acuteCrisisSectionRef={acuteCrisisSectionRef}
-              safetyPlanSectionRef={safetyPlanSectionRef}
-              childProtectionSectionRef={childProtectionSectionRef}
-              addictionSectionRef={addictionSectionRef}
-              rightsSectionRef={rightsSectionRef}
-              onJumpToPrioritySection={openPriorityToolboxSection}
-            />
-          )}
+            {activeTab === 'toolbox' && (
+              <ToolboxSection
+                onPrint={handleToolboxPrint}
+                onDownloadCrisisPlan={handleDownloadCrisisPlan}
+                acuteCrisisSectionRef={acuteCrisisSectionRef}
+                safetyPlanSectionRef={safetyPlanSectionRef}
+                childProtectionSectionRef={childProtectionSectionRef}
+                addictionSectionRef={addictionSectionRef}
+                rightsSectionRef={rightsSectionRef}
+                onJumpToPrioritySection={openPriorityToolboxSection}
+              />
+            )}
 
-          {activeTab === 'netzwerk' && <NetworkSection />}
+            {activeTab === 'netzwerk' && <NetworkSection />}
 
-          {activeTab === 'evidenz' && <EvidenceSection downloadResources={downloadResources} />}
-        </Suspense>
+            {activeTab === 'evidenz' && <EvidenceSection downloadResources={downloadResources} />}
+          </Suspense>
         </ErrorBoundary>
       </main>
 

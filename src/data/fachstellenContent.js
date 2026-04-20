@@ -75,16 +75,14 @@ export const FACHSTELLEN = [
   {
     id: 'aerztefon',
     name: 'AERZTEFON Kanton Zürich',
-    description:
-      'Telefonische medizinische Triage für nicht lebensbedrohliche Situationen im Kanton Zürich.',
+    description: 'Telefonische medizinische Triage für nicht lebensbedrohliche Situationen im Kanton Zürich.',
     link: 'https://www.aerztefon.ch/',
     tags: ['24/7', 'Triage', 'Zürich', 'Krise'],
   },
   {
     id: '143-dargebotene-hand',
     name: '143 – Die Dargebotene Hand',
-    description:
-      'Anonyme und vertrauliche Krisenhilfe für Erwachsene per Telefon, Chat oder Mail.',
+    description: 'Anonyme und vertrauliche Krisenhilfe für Erwachsene per Telefon, Chat oder Mail.',
     link: 'https://www.143.ch/',
     tags: ['24/7', 'Erwachsene', 'Krise', 'anonym'],
   },
@@ -117,8 +115,7 @@ export const FACHSTELLEN = [
   {
     id: 'safezone',
     name: 'SafeZone',
-    description:
-      'Kostenlose und anonyme Online-Suchtberatung für Betroffene, Angehörige und Nahestehende.',
+    description: 'Kostenlose und anonyme Online-Suchtberatung für Betroffene, Angehörige und Nahestehende.',
     link: 'https://www.safezone.ch/de/',
     tags: ['Sucht', 'anonym', 'kostenlos', 'online'],
   },
@@ -135,8 +132,7 @@ export const FACHSTELLEN = [
   {
     id: 'mvb-zh',
     name: 'Mütter- und Väterberatung Kanton Zürich',
-    description:
-      'Kostenlose, vertrauliche und mehrsprachige Beratung für Familien mit Kindern von 0 bis 5 Jahren.',
+    description: 'Kostenlose, vertrauliche und mehrsprachige Beratung für Familien mit Kindern von 0 bis 5 Jahren.',
     link: 'https://mvb.zh.ch/beratungsangebot/',
     tags: ['Eltern 0–5', 'kostenlos', 'mehrsprachig', 'offizielle Stelle', 'Zürich'],
   },

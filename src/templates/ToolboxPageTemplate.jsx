@@ -124,7 +124,9 @@ function PathwaySection({ pathway }) {
                     <div className="ui-toolbox-step__header">
                       <div className="ui-chip ui-chip--active ui-toolbox-step__chip">
                         <span className="ui-toolbox-step__chip-index">Schritt {index + 1}</span>
-                        <span className="ui-toolbox-step__chip-separator" aria-hidden="true">·</span>
+                        <span className="ui-toolbox-step__chip-separator" aria-hidden="true">
+                          ·
+                        </span>
                         <span className="ui-toolbox-step__chip-label">{step.label}</span>
                       </div>
                     </div>
@@ -242,7 +244,11 @@ function TriageSection({ triage }) {
               </div>
 
               {prompt.recommendation ? (
-                <div role="status" aria-live="polite" className={`ui-toolbox-feedback ui-editorial-card__action ${prompt.recommendation.className}`}>
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className={`ui-toolbox-feedback ui-editorial-card__action ${prompt.recommendation.className}`}
+                >
                   <div className="ui-note-panel__label">Einordnung</div>
                   <h4 className="ui-toolbox-feedback__title">{prompt.recommendation.title}</h4>
                   <p className="ui-toolbox-feedback__copy">{prompt.recommendation.text}</p>
@@ -437,7 +443,9 @@ function ClusterSection({ cluster }) {
                       {item.meta ? <p className="ui-fact-card__label ui-editorial-card__action">{item.meta}</p> : null}
                     </div>
                   </div>
-                  <span className="ui-toolbox-disclosure__toggle" aria-hidden="true">+</span>
+                  <span className="ui-toolbox-disclosure__toggle" aria-hidden="true">
+                    +
+                  </span>
                 </summary>
                 <div className="ui-copy ui-toolbox-disclosure__content">
                   {Array.isArray(item.content) ? (
@@ -499,9 +507,7 @@ function ClusterSection({ cluster }) {
           </div>
         ) : null}
 
-        {cluster.legalDisclaimer ? (
-          <LegalDisclaimer showCantonalNote={cluster.legalDisclaimerCantonal} />
-        ) : null}
+        {cluster.legalDisclaimer ? <LegalDisclaimer showCantonalNote={cluster.legalDisclaimerCantonal} /> : null}
       </div>
     </Section>
   );
@@ -544,9 +550,7 @@ export default function ToolboxPageTemplate({
               <div className="ui-card--outline ui-toolbox-quick-access">
                 <div className="ui-stack ui-stack--tight">
                   <Eyebrow>Schnellzugriff</Eyebrow>
-                  <h2 className="ui-hero__title ui-section-title--compact">
-                    Krisenplan und Arbeitsansicht
-                  </h2>
+                  <h2 className="ui-hero__title ui-section-title--compact">Krisenplan und Arbeitsansicht</h2>
                   <p className="ui-card__copy">
                     Die wichtigsten Arbeitsaktionen der Toolbox direkt erreichbar — auch für Tastatur- und
                     Screenreader-Nutzung.

@@ -24,7 +24,9 @@ function GlossarGroup({ group }) {
                   <p className="ui-fact-card__label">Begriff</p>
                   <h3 className="ui-card__title">{entry.term}</h3>
                 </div>
-                <span className="ui-disclosure-card__toggle" aria-hidden="true">+</span>
+                <span className="ui-disclosure-card__toggle" aria-hidden="true">
+                  +
+                </span>
               </summary>
               <div className="ui-disclosure-card__content">
                 <p className="ui-card__copy">{entry.definition}</p>
