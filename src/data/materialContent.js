@@ -205,9 +205,37 @@ export const MATERIAL_HANDOUTS = [
   },
 ];
 
+// Zielgruppen-Blöcke fuer die Material-Cluster (Issues #102 + #103). Die sechs
+// FAQ-Cluster adressieren zwei verschiedene Lesergruppen — Cluster 1-3
+// richten sich an Angehoerige (Partner:innen / Familie der erkrankten Person),
+// Cluster 4-6 an betroffene Eltern selbst (Ich-Form-Fragen zum Gespraech mit
+// dem Kind). Frueher lagen alle sechs Cluster in einer linearen Liste;
+// inzwischen wird die Grenze im Template durch einen Block-Header mit H2 +
+// Audience-Badge sichtbar gemacht. Die Meta-Texte hier (title / description)
+// steuern diesen Block-Header, der `badge`-Text wird zusaetzlich auf jedem
+// einzelnen Cluster angezeigt, damit die Adressat-Zuordnung auch beim Scrollen
+// erhalten bleibt.
+export const MATERIAL_CLUSTER_AUDIENCES = [
+  {
+    id: 'angehoerige',
+    badge: 'Für Angehörige',
+    title: 'Material für Angehörige',
+    description:
+      'Die nächsten drei Cluster richten sich an Partner:innen und Familie der erkrankten Person — mit Fragen zu Belastung, Grenzen und Zusammenarbeit im Helfersystem.',
+  },
+  {
+    id: 'eltern',
+    badge: 'Für betroffene Eltern',
+    title: 'Material für betroffene Eltern',
+    description:
+      'Die folgenden drei Cluster richten sich an psychisch erkrankte Eltern selbst — mit Fragen zum Gespräch mit dem Kind: was sagen, wie altersgerecht erklären und mit welchen Formulierungen je Störungsbild.',
+  },
+];
+
 export const MATERIAL_CLUSTERS = [
   {
     id: 'material-verstehen',
+    audience: 'angehoerige',
     eyebrow: 'Cluster 1',
     title: 'Belastung verstehen, ohne sich vorschnell schuldig zu machen',
     description:
@@ -243,6 +271,7 @@ export const MATERIAL_CLUSTERS = [
   },
   {
     id: 'material-grenzen',
+    audience: 'angehoerige',
     eyebrow: 'Cluster 2',
     title: 'Grenzen, Verantwortung und legitimer Selbstschutz',
     description:
@@ -278,6 +307,7 @@ export const MATERIAL_CLUSTERS = [
   },
   {
     id: 'material-zusammenarbeit',
+    audience: 'angehoerige',
     legalDisclaimer: true,
     eyebrow: 'Cluster 3',
     title: 'Zusammenarbeit, Mitsprache und der nächste sinnvolle Schritt',
@@ -320,6 +350,7 @@ export const MATERIAL_CLUSTERS = [
     // Bern. Insbesondere Tabelle 1 (Lenz, 2010, S. 187) und Kapitel 2.5
     // (spezifische Schutzfaktoren: Krankheitswissen + offener Umgang).
     id: 'material-kinder',
+    audience: 'eltern',
     eyebrow: 'Cluster 4',
     title: 'Mit Kindern über die Erkrankung sprechen',
     description:
@@ -378,6 +409,7 @@ export const MATERIAL_CLUSTERS = [
     // «Altersspezifische Aspekte bei der Psychoedukation». Schliesst direkt
     // an Cluster 4 an, das Grundlagen der Kinder-Aufklärung behandelt.
     id: 'material-altersgerecht',
+    audience: 'eltern',
     eyebrow: 'Cluster 5',
     title: 'Altersgerecht erklären — was Kinder in welchem Alter brauchen',
     description:
@@ -423,6 +455,7 @@ export const MATERIAL_CLUSTERS = [
     // Kap. 5.3.1 / Tabelle 2 (Lenz 2010, S. 207–208) und Wunderer (2008).
     // Eigenständig formuliert, keine wörtliche Übernahme.
     id: 'material-formulierungshilfen',
+    audience: 'eltern',
     eyebrow: 'Cluster 6',
     title: 'Formulierungshilfen — psychische Erkrankungen kindgerecht erklären',
     description:

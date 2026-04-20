@@ -1,6 +1,7 @@
 import MaterialPageTemplate from '../templates/MaterialPageTemplate';
 import {
   MATERIAL_CLUSTERS,
+  MATERIAL_CLUSTER_AUDIENCES,
   MATERIAL_HANDOUTS,
   MATERIAL_HANDOUTS_BLOCK,
   MATERIAL_HERO,
@@ -107,6 +108,7 @@ export default function MaterialSection({ sharedDownloadResources = [] }) {
       pageHeadingId={getPageHeadingId('material')}
       intro={MATERIAL_INTRO}
       clusters={MATERIAL_CLUSTERS}
+      clusterAudiences={MATERIAL_CLUSTER_AUDIENCES}
       handoutsBlock={MATERIAL_HANDOUTS_BLOCK}
       handouts={MATERIAL_HANDOUTS}
       onNavigate={onNavigateToTab}
