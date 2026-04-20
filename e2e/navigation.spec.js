@@ -177,6 +177,22 @@ test.describe('Logo / Home Navigation', () => {
   });
 });
 
+test.describe('Material Handouts', () => {
+  test('crisis-plan handout renders on Material tab', async ({ page }) => {
+    await page.addInitScript(() => localStorage.clear());
+    await page.goto('/#material');
+
+    // Handout-Artikel muss sichtbar sein (Tier-1: Krisenplan "Mein Notfallplan")
+    const handout = page.locator('#material-handout-mein-notfallplan');
+    await expect(handout).toBeVisible({ timeout: 10_000 });
+    await expect(handout).toContainText('Mein Notfallplan');
+
+    // Notfallnummern müssen als Handout-Anker enthalten sein
+    await expect(handout).toContainText('144');
+    await expect(handout).toContainText('147');
+  });
+});
+
 test.describe('Emergency Access', () => {
   test('emergency button exists and navigates to Toolbox', async ({ page }) => {
     await page.addInitScript(() => localStorage.clear());

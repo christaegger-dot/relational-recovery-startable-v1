@@ -1,5 +1,11 @@
 import MaterialPageTemplate from '../templates/MaterialPageTemplate';
-import { MATERIAL_CLUSTERS, MATERIAL_HERO, MATERIAL_INTRO } from '../data/materialContent';
+import {
+  MATERIAL_CLUSTERS,
+  MATERIAL_HANDOUTS,
+  MATERIAL_HANDOUTS_BLOCK,
+  MATERIAL_HERO,
+  MATERIAL_INTRO,
+} from '../data/materialContent';
 import { createClosingSectionModel } from '../utils/closingModel';
 import { getPageHeadingId } from '../utils/appHelpers';
 import { useAppState } from '../context/useAppState';
@@ -99,6 +105,9 @@ export default function MaterialSection({ sharedDownloadResources = [] }) {
       pageHeadingId={getPageHeadingId('material')}
       intro={MATERIAL_INTRO}
       clusters={MATERIAL_CLUSTERS}
+      handoutsBlock={MATERIAL_HANDOUTS_BLOCK}
+      handouts={MATERIAL_HANDOUTS}
+      onNavigate={onNavigateToTab}
       closingSection={closingSection}
     />
   );

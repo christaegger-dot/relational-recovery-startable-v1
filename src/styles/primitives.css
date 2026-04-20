@@ -2199,6 +2199,249 @@
   border-bottom: 1px solid var(--border-default);
 }
 
+/* Material-Handout: Kind-orientierter Krisenplan und weitere Handouts. Bewusst
+   eigener Namespace (nicht ui-toolbox-template), damit der Material-Handout
+   visuell vom fachlichen Toolbox-Sicherheitsplan unterscheidbar bleibt --
+   weicherer Surface-Mix, ruhigere Abstaende, gemeinsame Linien-Tokens. */
+.ui-material-handouts-grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.ui-material-handout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: clamp(var(--space-5), 2.5vw, var(--space-6));
+  border: 1px solid var(--border-subtle);
+  border-radius: calc(var(--radius-xl) + 0.5rem);
+  background: var(--surface-panel);
+}
+
+.ui-material-handout__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.ui-material-handout__title {
+  margin: 0;
+  font-size: clamp(1.35rem, 2vw, 1.6rem);
+  line-height: var(--line-height-heading);
+}
+
+.ui-material-handout__lead {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-copy);
+}
+
+.ui-material-handout__usage {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--surface-app);
+}
+
+.ui-material-handout__usage-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ui-material-handout__usage-item > p:last-child {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
+.ui-material-handout__ownership {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.ui-material-handout__ownership-meta {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.ui-material-handout__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ui-material-handout__section-title {
+  margin: 0;
+  font-size: clamp(1.1rem, 1.6vw, 1.25rem);
+  line-height: var(--line-height-heading);
+}
+
+.ui-material-handout__fields {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.ui-material-handout__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 1.25rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: calc(var(--radius-lg) + 0.25rem);
+  background: var(--surface-app);
+}
+
+.ui-material-handout__field--inline {
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 1rem 1.25rem;
+}
+
+.ui-material-handout__field-title {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  line-height: var(--line-height-heading);
+}
+
+.ui-material-handout__field-hint {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
+.ui-material-handout__field-example {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
+.ui-material-handout__lines {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: 0.75rem;
+}
+
+.ui-material-handout__line {
+  height: 1.75rem;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.ui-material-handout__emergency {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--surface-note);
+  color: var(--accent-primary-strong);
+}
+
+.ui-material-handout__emergency-title {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  line-height: var(--line-height-heading);
+}
+
+.ui-material-handout__emergency-intro {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
+.ui-material-handout__emergency-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ui-material-handout__emergency-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-4);
+}
+
+.ui-material-handout__emergency-number {
+  font-size: clamp(1.4rem, 2vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.ui-material-handout__emergency-desc {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
+.ui-material-handout__foot {
+  margin: 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
+.ui-material-handout__foot p {
+  margin: 0;
+}
+
+.ui-material-handout__disclaimer {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--surface-app);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
+.ui-material-handout__disclaimer p {
+  margin: 0;
+}
+
+.ui-material-handout__cross-refs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.ui-material-handout__cross-refs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.ui-material-handout__cross-ref-link {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--accent-primary-strong);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ui-material-handout__cross-ref-link:hover,
+.ui-material-handout__cross-ref-link:focus-visible {
+  text-decoration: underline;
+}
+
 .ui-toolbox-quick-access {
   border-radius: calc(var(--radius-xl) + 0.25rem);
   background: var(--surface-app);
@@ -2377,6 +2620,19 @@
   .ui-toolbox-template__grid {
     grid-template-columns: minmax(0, 1.2fr) minmax(17rem, 0.8fr);
   }
+
+  .ui-material-handout__usage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ui-material-handout__ownership {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.8fr);
+    align-items: end;
+  }
+
+  .ui-material-handout__ownership-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 64rem) {
@@ -2416,6 +2672,10 @@
     flex-direction: row;
     align-items: end;
     justify-content: space-between;
+  }
+
+  .ui-material-handout__usage {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
