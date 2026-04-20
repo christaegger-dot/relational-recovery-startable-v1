@@ -191,6 +191,36 @@ test.describe('Material Handouts', () => {
     await expect(handout).toContainText('144');
     await expect(handout).toContainText('147');
   });
+
+  test('print button triggers window.print and injects scoped style', async ({ page }) => {
+    // Print-Dialog kann in Chromium nicht wirklich geoeffnet werden; wir
+    // mocken window.print und verifizieren Aufruf + den Scoped-<style>, den
+    // der Hook zum Ausblenden anderer Handouts einfuegt (zukunftssicher).
+    await page.addInitScript(() => {
+      window.localStorage.clear();
+      window.__printCount = 0;
+      window.print = () => {
+        window.__printCount += 1;
+      };
+    });
+    await page.goto('/#material');
+
+    const handout = page.locator('#material-handout-mein-notfallplan');
+    await expect(handout).toBeVisible({ timeout: 10_000 });
+
+    const printButton = handout.locator('button[data-action="print"]');
+    await expect(printButton).toBeVisible();
+    await printButton.click();
+
+    // rAF tick: kurz warten, bis window.print aufgerufen wurde.
+    await expect.poll(async () => await page.evaluate(() => window.__printCount), { timeout: 3_000 }).toBe(1);
+
+    // Scoped <style> fuer das Ziel-Handout liegt im head.
+    const styleTag = page.locator('style#material-handout-print-scope-material-handout-mein-notfallplan');
+    await expect(styleTag).toHaveCount(1);
+    const styleContent = await styleTag.textContent();
+    expect(styleContent).toContain('data-handout-id="material-handout-mein-notfallplan"');
+  });
 });
 
 test.describe('Emergency Access', () => {

@@ -9,6 +9,7 @@ import {
 import { createClosingSectionModel } from '../utils/closingModel';
 import { getPageHeadingId } from '../utils/appHelpers';
 import { useAppState } from '../context/useAppState';
+import { useMaterialHandoutPrint } from '../utils/useMaterialHandoutPrint';
 
 function mapMaterialDownloads(sharedDownloadResources = []) {
   return sharedDownloadResources
@@ -23,6 +24,7 @@ function mapMaterialDownloads(sharedDownloadResources = []) {
 
 export default function MaterialSection({ sharedDownloadResources = [] }) {
   const { navigate: onNavigateToTab } = useAppState();
+  const printHandout = useMaterialHandoutPrint();
   const closingSection = createClosingSectionModel({
     id: 'material-downloads-anchor',
     eyebrow: 'Weiterarbeiten',
@@ -108,6 +110,7 @@ export default function MaterialSection({ sharedDownloadResources = [] }) {
       handoutsBlock={MATERIAL_HANDOUTS_BLOCK}
       handouts={MATERIAL_HANDOUTS}
       onNavigate={onNavigateToTab}
+      onPrintHandout={printHandout}
       closingSection={closingSection}
     />
   );
