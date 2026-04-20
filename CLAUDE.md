@@ -48,6 +48,14 @@ Jedes einzelne Handout im Material-Tab ist druckbar via Print-Button im Handout-
 
 Alle Rahmung (Hero, Intro, Index, FAQ-Cluster, ClosingSection) ist im `MaterialPageTemplate` mit `.no-print`-Wrappern versehen, damit beim Druck nur der Handout-Grid übrig bleibt.
 
+**Bekannte Handout-`kind`-Werte und ihre Daten-Schemata:**
+
+- `'crisis-plan'` — Notfallplan-Vorlage mit Eigentumsfeldern, Sektionen, Notfallnummern (`MaterialCrisisPlan`).
+- `'conversation-script'` — Tier-1 (Issue #112): Gespräch-Skript für betroffene Eltern. Erwartet `usage`, `opener {title, text, note}`, `childQuestions {title, intro, items[].question, items[].anchor}`, `understandingCheck {title, intro, prompt, note}`, `process {title, items[]}`, `disclaimer`, `crossRefs` (`MaterialConversationScript`).
+- `'threshold-checklist'` — Tier-1 (Issue #113): Schwellen-Karte für Angehörige. Erwartet `usage`, `priorityRule {title, intro, items[].step, items[].label, items[].detail}`, `thresholds {title, intro, items[].observation, items[].escalate}`, `contacts {title, intro, items[].number?, items[].name?, items[].detail}`, `selfNote {title, text}`, `disclaimer`, `crossRefs` (`MaterialThresholdChecklist`).
+
+Die Tier-1-Komponenten teilen sich die kleinen Helper `MaterialHandoutHead` / `MaterialHandoutUsage` / `MaterialHandoutDisclaimer`. `MaterialCrisisPlan` ist bewusst NICHT auf die Helper umgestellt — die existierende DOM-Struktur ist von den Print-Tests + Print-Typografie abhängig. Refactoring auf gemeinsame Bausteine kommt als separate Welle, sobald das Pattern bei 3+ Handouts stabil ist.
+
 ### Material-Cluster: Zielgruppen-Blöcke
 
 Die FAQ-Cluster im Material-Tab adressieren zwei Gruppen: Cluster 1–3 Angehörige, Cluster 4–6 betroffene Eltern. Die Gliederung wird im Template über zwei Eingaben gesteuert:

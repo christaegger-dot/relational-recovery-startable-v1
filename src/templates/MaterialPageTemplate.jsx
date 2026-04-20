@@ -258,10 +258,234 @@ function MaterialCrisisPlan({ handout, onNavigate, onPrintHandout }) {
   );
 }
 
+/**
+ * Wiederverwendbare Bausteine fuer die Tier-1-Handouts (Issues #112 + #113).
+ * MaterialCrisisPlan ist bewusst NICHT auf diese Helper umgestellt -- die
+ * existierende DOM-Struktur ist von den Print-Tests + Print-Typografie in
+ * app-global.css abhaengig. Refactoring auf gemeinsame Bausteine kommt als
+ * separate Welle, sobald das Pattern bei 3+ Handouts stabil ist.
+ */
+function MaterialHandoutHead({ handout, onPrintHandout }) {
+  return (
+    <header className="ui-material-handout__head">
+      <div className="ui-material-handout__head-text">
+        <p className="ui-fact-card__label">{handout.eyebrow}</p>
+        <h3 className="ui-material-handout__title">{handout.title}</h3>
+        <p className="ui-material-handout__lead">{handout.description}</p>
+      </div>
+      {onPrintHandout ? (
+        <button
+          type="button"
+          className="ui-material-handout__print-btn no-print"
+          data-action="print"
+          onClick={() => onPrintHandout(handout.id)}
+          aria-label={`${handout.title} drucken oder als PDF speichern`}
+        >
+          <Printer size={14} aria-hidden="true" />
+          <span>Drucken / PDF</span>
+        </button>
+      ) : null}
+    </header>
+  );
+}
+
+function MaterialHandoutUsage({ usage }) {
+  return (
+    <div className="ui-material-handout__usage" aria-label="Hinweise zur Nutzung">
+      <div className="ui-material-handout__usage-item">
+        <p className="ui-fact-card__label">Wann</p>
+        <p>{usage.when}</p>
+      </div>
+      <div className="ui-material-handout__usage-item">
+        <p className="ui-fact-card__label">Mit wem</p>
+        <p>{usage.people}</p>
+      </div>
+      <div className="ui-material-handout__usage-item">
+        <p className="ui-fact-card__label">Wie lange gilt es</p>
+        <p>{usage.validity}</p>
+      </div>
+      <div className="ui-material-handout__usage-item">
+        <p className="ui-fact-card__label">Wohin damit</p>
+        <p>{usage.where}</p>
+      </div>
+    </div>
+  );
+}
+
+function MaterialHandoutDisclaimer({ disclaimer }) {
+  if (!disclaimer) return null;
+  return (
+    <div className="ui-material-handout__disclaimer" role="note">
+      <p>{disclaimer}</p>
+    </div>
+  );
+}
+
+/**
+ * Tier-1-Handout (Issue #112): Gespraech-Skript fuer betroffene Eltern.
+ * Format B (Conversation Script) -- vorbereiteter Einstieg, fuenf typische
+ * Kinder-Fragen mit Antwort-Ankern, Verstehens-Check + Prozess-Notizen.
+ */
+function MaterialConversationScript({ handout, onNavigate, onPrintHandout }) {
+  return (
+    <article id={handout.id} data-handout-id={handout.id} className="ui-material-handout ui-section-anchor-offset">
+      <MaterialHandoutHead handout={handout} onPrintHandout={onPrintHandout} />
+      <MaterialHandoutUsage usage={handout.usage} />
+
+      {handout.opener ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.opener.title}</h4>
+          <blockquote className="ui-material-handout__opener">
+            <p className="ui-material-handout__opener-text">{handout.opener.text}</p>
+            {handout.opener.note ? <p className="ui-material-handout__opener-note">{handout.opener.note}</p> : null}
+          </blockquote>
+        </section>
+      ) : null}
+
+      {handout.childQuestions?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.childQuestions.title}</h4>
+          {handout.childQuestions.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.childQuestions.intro}</p>
+          ) : null}
+          <ol className="ui-material-handout__qa-list">
+            {handout.childQuestions.items.map((item, index) => (
+              <li key={item.question} className="ui-material-handout__qa-item">
+                <p className="ui-material-handout__qa-question">
+                  <span className="ui-material-handout__qa-number">{index + 1}.</span> {item.question}
+                </p>
+                <p className="ui-material-handout__qa-anchor">{item.anchor}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : null}
+
+      {handout.understandingCheck ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.understandingCheck.title}</h4>
+          {handout.understandingCheck.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.understandingCheck.intro}</p>
+          ) : null}
+          <p className="ui-material-handout__prompt">{handout.understandingCheck.prompt}</p>
+          {handout.understandingCheck.note ? (
+            <p className="ui-material-handout__section-note">{handout.understandingCheck.note}</p>
+          ) : null}
+        </section>
+      ) : null}
+
+      {handout.process?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.process.title}</h4>
+          <ul className="ui-material-handout__notes">
+            {handout.process.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      <MaterialHandoutDisclaimer disclaimer={handout.disclaimer} />
+      <MaterialHandoutCrossRefs crossRefs={handout.crossRefs} onNavigate={onNavigate} />
+    </article>
+  );
+}
+
+/**
+ * Tier-1-Handout (Issue #113): Schwellen-Karte fuer Angehoerige. Format C
+ * (Threshold Checklist) -- Reihenfolge in der Krise, Beobachtungs-Items mit
+ * klarer Wenn-Dann-Logik, kompakte CH-Anlaufstellen, Selbst-Schwelle als
+ * legitimer Anlass.
+ */
+function MaterialThresholdChecklist({ handout, onNavigate, onPrintHandout }) {
+  return (
+    <article id={handout.id} data-handout-id={handout.id} className="ui-material-handout ui-section-anchor-offset">
+      <MaterialHandoutHead handout={handout} onPrintHandout={onPrintHandout} />
+      <MaterialHandoutUsage usage={handout.usage} />
+
+      {handout.priorityRule?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.priorityRule.title}</h4>
+          {handout.priorityRule.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.priorityRule.intro}</p>
+          ) : null}
+          <ol className="ui-material-handout__steps">
+            {handout.priorityRule.items.map((step) => (
+              <li key={step.step} className="ui-material-handout__step">
+                <span className="ui-material-handout__step-number" aria-hidden="true">
+                  {step.step}
+                </span>
+                <div className="ui-material-handout__step-body">
+                  <p className="ui-material-handout__step-label">{step.label}</p>
+                  <p className="ui-material-handout__step-detail">{step.detail}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : null}
+
+      {handout.thresholds?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.thresholds.title}</h4>
+          {handout.thresholds.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.thresholds.intro}</p>
+          ) : null}
+          <ul className="ui-material-handout__thresholds">
+            {handout.thresholds.items.map((item) => (
+              <li key={item.observation} className="ui-material-handout__threshold">
+                <p className="ui-material-handout__threshold-observation">{item.observation}</p>
+                <p className="ui-material-handout__threshold-escalate">
+                  <span className="ui-fact-card__label">Wenn ja</span>
+                  {item.escalate}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {handout.contacts?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.contacts.title}</h4>
+          {handout.contacts.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.contacts.intro}</p>
+          ) : null}
+          <ul className="ui-material-handout__contacts">
+            {handout.contacts.items.map((c) => (
+              <li key={`${c.number || ''}-${c.name || ''}`} className="ui-material-handout__contact">
+                {c.number ? <span className="ui-material-handout__contact-number">{c.number}</span> : null}
+                <div className="ui-material-handout__contact-body">
+                  {c.name ? <p className="ui-material-handout__contact-name">{c.name}</p> : null}
+                  {c.detail ? <p className="ui-material-handout__contact-detail">{c.detail}</p> : null}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {handout.selfNote ? (
+        <aside className="ui-material-handout__callout" aria-label={handout.selfNote.title}>
+          <p className="ui-fact-card__label">{handout.selfNote.title}</p>
+          <p>{handout.selfNote.text}</p>
+        </aside>
+      ) : null}
+
+      <MaterialHandoutDisclaimer disclaimer={handout.disclaimer} />
+      <MaterialHandoutCrossRefs crossRefs={handout.crossRefs} onNavigate={onNavigate} />
+    </article>
+  );
+}
+
 function MaterialHandoutSwitch({ handout, onNavigate, onPrintHandout }) {
   switch (handout.kind) {
     case 'crisis-plan':
       return <MaterialCrisisPlan handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout} />;
+    case 'conversation-script':
+      return <MaterialConversationScript handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout} />;
+    case 'threshold-checklist':
+      return <MaterialThresholdChecklist handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout} />;
     default:
       return null;
   }

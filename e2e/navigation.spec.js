@@ -258,6 +258,60 @@ test.describe('Material Handouts', () => {
     const styleContent = await styleTag.textContent();
     expect(styleContent).toContain('data-handout-id="material-handout-mein-notfallplan"');
   });
+
+  // Tier-1-Handout (Issue #112): Conversation-Script fuer betroffene Eltern.
+  test('conversation-script handout (erstes-gespraech) renders with opener + 5 child questions', async ({ page }) => {
+    await page.addInitScript(() => localStorage.clear());
+    await page.goto('/#material');
+
+    const handout = page.locator('#material-handout-erstes-gespraech');
+    await expect(handout).toBeVisible({ timeout: 10_000 });
+    await expect(handout).toContainText('Erstes Gespräch mit dem Kind');
+    await expect(handout).toContainText('Handout für Eltern');
+
+    // Opener-Blockquote ist da
+    await expect(handout.locator('.ui-material-handout__opener')).toBeVisible();
+
+    // Genau fuenf Q&A-Items (typische Kinder-Fragen)
+    const qaItems = handout.locator('.ui-material-handout__qa-item');
+    await expect(qaItems).toHaveCount(5);
+
+    // Verstehens-Check-Prompt + Print-Button vorhanden
+    await expect(handout.locator('.ui-material-handout__prompt')).toBeVisible();
+    await expect(handout.locator('button[data-action="print"]')).toBeVisible();
+  });
+
+  // Tier-1-Handout (Issue #113): Threshold-Checklist fuer Angehoerige.
+  test('threshold-checklist handout (wann-fachstelle) renders with priority steps + thresholds + contacts', async ({
+    page,
+  }) => {
+    await page.addInitScript(() => localStorage.clear());
+    await page.goto('/#material');
+
+    const handout = page.locator('#material-handout-wann-fachstelle');
+    await expect(handout).toBeVisible({ timeout: 10_000 });
+    await expect(handout).toContainText('Wann ist es Zeit, eine Fachstelle zu kontaktieren?');
+    await expect(handout).toContainText('Handout für Angehörige');
+
+    // Drei Prioritaets-Schritte (1 Sicherheit, 2 Versorgung, 3 Grundsatz)
+    const steps = handout.locator('.ui-material-handout__step');
+    await expect(steps).toHaveCount(3);
+
+    // Beobachtungs-Schwellen (mindestens 6 Items)
+    const thresholds = handout.locator('.ui-material-handout__threshold');
+    expect(await thresholds.count()).toBeGreaterThanOrEqual(6);
+
+    // CH-Notfallnummern muessen als Anlaufstellen-Anker enthalten sein
+    await expect(handout).toContainText('144');
+    await expect(handout).toContainText('143');
+    await expect(handout).toContainText('147');
+
+    // Selbst-Schwelle als Callout
+    await expect(handout.locator('.ui-material-handout__callout')).toBeVisible();
+
+    // Print-Button funktioniert (gemeinsamer Mechanik-Pfad ueber MaterialHandoutSwitch)
+    await expect(handout.locator('button[data-action="print"]')).toBeVisible();
+  });
 });
 
 test.describe('Emergency Access', () => {

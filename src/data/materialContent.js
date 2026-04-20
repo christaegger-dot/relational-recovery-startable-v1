@@ -203,6 +203,244 @@ export const MATERIAL_HANDOUTS = [
       ],
     },
   },
+  // Tier-1-Handout (Issue #112): Gespraech-Skript fuer betroffene Eltern.
+  // Setzt direkt an Cluster 4 an (Mit Kindern sprechen) und gibt einen
+  // vorbereiteten Einstiegssatz, fuenf typische Kinder-Fragen mit moeglichen
+  // Antworten + einen Verstehens-Check als druckbares Skript zur Vorbereitung.
+  // Quelle: Stauber et al. (2018) Kap. 5.3.1; Lenz (2010) Tab. 2.
+  {
+    id: 'material-handout-erstes-gespraech',
+    kind: 'conversation-script',
+    eyebrow: 'Handout für Eltern',
+    title: 'Erstes Gespräch mit dem Kind',
+    description:
+      'Eine vorbereitete Skript-Vorlage fuer das erste Gespraech mit dem eigenen Kind ueber die psychische Erkrankung. Gedacht zur Vorbereitung — nicht als Vorlese-Text. Die Saetze sind Anker, keine Vorgaben.',
+    usage: {
+      when: 'In einer ruhigen Phase, nicht im akuten Zustand. Vorzugsweise allein vorab durchlesen, dann das Gespräch in eigener Sprache führen.',
+      people:
+        'Sie selbst (betroffene:r Elternteil) — optional gemeinsam mit der zweiten Bezugsperson, einer Fachperson oder Vertrauensperson zur Vorbereitung.',
+      validity:
+        'Das Skript altert nicht. Es bleibt nützlich für Folgegespräche, wenn das Kind mit neuen Fragen kommt — denn das wird es.',
+      where:
+        'Vorbereitung in Ruhe. Beim Gespräch nicht ablesen, sondern in eigener Sprache reden. Optional als Teil des Eltern-Materials beim Behandlungsteam ablegen.',
+    },
+    opener: {
+      title: 'Möglicher Einstiegssatz',
+      text: '«Damit du Bescheid weisst und dir nicht unnötig Sorgen machst, möchte ich dir erklären, was mit mir los ist.»',
+      note: 'Dieser Satz signalisiert drei Dinge: Offenheit, Fürsorge und die Erlaubnis, Fragen zu stellen. Er funktioniert für Schulkinder und Jugendliche; bei jüngeren Kindern lieber kürzer, beim Alltag ansetzen.',
+    },
+    childQuestions: {
+      title: 'Die fünf typischen Fragen — und mögliche Antwort-Anker',
+      intro:
+        'Forschungsbefunde zeigen fünf wiederkehrende Themenbereiche. Die Reihenfolge variiert mit Alter und Krankheitsverlauf. Es ist hilfreich, sich auf jede vorbereitet zu haben — die Antworten unten sind Beispiel-Anker, nicht Skripte.',
+      items: [
+        {
+          question: 'Wie soll ich mich gegenüber dir verhalten?',
+          anchor:
+            'So normal wie möglich. Wenn du dir unsicher bist, frag mich oder unsere Vertrauensperson. Du musst nicht aufpassen — das ist meine Aufgabe.',
+        },
+        {
+          question: 'Wird sich mein Leben verändern?',
+          anchor:
+            'Manche Dinge bleiben gleich (z. B. dein Schulweg, deine Freundinnen und Freunde). Manche können sich verändern (z. B. wer dich abholt, wenn ich nicht kann). Veränderungen besprechen wir miteinander, du erfährst es nicht plötzlich.',
+        },
+        {
+          question: 'Was ist die Ursache — und werde ich auch krank?',
+          anchor:
+            'Diese Krankheit hat verschiedene Ursachen, nicht eine einzige. Du hast nichts damit zu tun. Dass auch du krank wirst, ist nicht garantiert — viel hängt davon ab, dass es dir gut geht und du Hilfe bekommst, wenn du sie brauchst.',
+        },
+        {
+          question: 'Was ist der Unterschied zu einer körperlichen Krankheit?',
+          anchor:
+            'Eine körperliche Krankheit kann man oft sehen oder spüren. Eine psychische Krankheit verändert Gefühle, Gedanken und Verhalten — das macht sie schwerer sichtbar, aber sie ist genauso ernst. Und sie kann behandelt werden.',
+        },
+        {
+          question: 'Kannst du wieder gesund werden?',
+          anchor:
+            'Vielen Menschen geht es mit der Zeit und mit Hilfe wieder besser. Manche Krankheiten kommen wieder, manche bleiben. Was uns hilft: gute Behandlung, Hilfe von aussen und dass wir miteinander reden.',
+        },
+      ],
+    },
+    understandingCheck: {
+      title: 'Verstehens-Check',
+      intro:
+        'Nach dem Gespräch ist es hilfreich zu prüfen, was angekommen ist — nicht als Test, sondern als Einladung.',
+      prompt: '«Magst du mir erzählen, was du jetzt verstanden hast?»',
+      note: 'Achten Sie nicht nur auf den Inhalt, sondern auch auf Mimik, Tonfall und Körpersprache. Echohaftes Nachsprechen oder Ausweichen können bedeuten: das Kind braucht eine Pause, eine andere Erklärung oder einfach Zeit.',
+    },
+    process: {
+      title: 'Wichtig zu wissen',
+      items: [
+        'Das ist kein einmaliges Gespräch, sondern ein Prozess. Kinder kommen mit neuen Fragen zurück, wenn sie bereit sind.',
+        'Schweigen oder Ausweichen ist keine Ablehnung — manchmal braucht das Kind erst Zeit, das Gehörte zu sortieren.',
+        'Es ist okay, etwas nicht zu wissen. Sie können sagen: «Das weiss ich gerade auch nicht — wir können zusammen nachfragen.»',
+        'Klären Sie das Kind nicht alleine auf, wenn Sie sich überfordert fühlen — Fachpersonen (kjz, PUK Angehörigenberatung, Pro Mente Sana) begleiten solche Gespräche bei Bedarf.',
+      ],
+    },
+    disclaimer:
+      'Dieses Skript ist eine Orientierungshilfe, kein Therapieersatz. Bei akuter Belastung des Kindes oder bei Unsicherheit, was wann gesagt werden soll, sind das kjz, die PUK Angehörigenberatung oder das Institut Kinderseele Schweiz fachliche Anlaufstellen.',
+    crossRefs: {
+      title: 'Verwandte Inhalte',
+      items: [
+        {
+          kind: 'faq',
+          label: 'Aus dem FAQ: Cluster 4 «Mit Kindern über die Erkrankung sprechen»',
+          anchor: '#material-kinder',
+        },
+        {
+          kind: 'faq',
+          label: 'Aus dem FAQ: Cluster 5 «Altersgerecht erklären»',
+          anchor: '#material-altersgerecht',
+        },
+        {
+          kind: 'handout',
+          label: 'Komplementär: «Mein Notfallplan» für die akute Krankheitsphase',
+          anchor: '#material-handout-mein-notfallplan',
+        },
+      ],
+    },
+  },
+  // Tier-1-Handout (Issue #113): Schwellen-Karte fuer Angehoerige. Loest die
+  // Paralyse-Frage "Ist das schon ernst genug, um Hilfe zu holen?" durch
+  // konkrete Beobachtungs-Items + klare Wenn-Dann-Logik + CH-Anlaufstellen
+  // mit Notfallnummern. Datenquelle Anlaufstellen: fachstellenContent.js.
+  {
+    id: 'material-handout-wann-fachstelle',
+    kind: 'threshold-checklist',
+    eyebrow: 'Handout für Angehörige',
+    title: 'Wann ist es Zeit, eine Fachstelle zu kontaktieren?',
+    description:
+      'Eine Schwellen-Karte fuer Angehoerige psychisch erkrankter Menschen. Sie hilft einzuschaetzen, wann Beobachten reicht und wann eine Fachstelle anzurufen ist — und welche Stelle wofuer zustaendig ist.',
+    usage: {
+      when: 'Vorab in einer ruhigen Phase ansehen — damit Sie im Belastungsmoment nicht erst suchen müssen.',
+      people:
+        'Sie selbst (angehörige Person). Optional zur Absprache mit anderen Familienmitgliedern oder dem Behandlungsteam.',
+      validity:
+        'Die Schwellen sind robust, die Anlaufstellen ändern sich kaum. Notfallnummern (144, 143, 147) gelten national rund um die Uhr.',
+      where:
+        'In der Nähe des Telefons. Eine Kopie an die Pinnwand, eine ins Portemonnaie. Bei mehreren Bezugspersonen: gleicher Stand für alle.',
+    },
+    priorityRule: {
+      title: 'Reihenfolge in der Krise',
+      intro: 'Wenn vieles gleichzeitig wichtig wirkt: nicht alles auf einmal lösen, sondern in dieser Reihenfolge.',
+      items: [
+        {
+          step: '1',
+          label: 'Akute Sicherheit zuerst',
+          detail:
+            'Lebensgefahr → 144. Suizidgedanken, schwere Eskalation, Kindeswohl in Gefahr → sofortige Krisenhilfe (siehe Anlaufstellen unten).',
+        },
+        {
+          step: '2',
+          label: 'Versorgung und Alltag',
+          detail:
+            'Sind Kinder verlässlich versorgt? Mahlzeiten, Schulweg, Aufsicht, Medikamenteneinnahme — was kippt zuerst, wer übernimmt?',
+        },
+        {
+          step: '3',
+          label: 'Grundsatzfragen später',
+          detail:
+            'Diagnostik, Behandlungsentscheidungen, langfristige Versorgung — wenn Sicherheit und Alltag stehen. Nicht in der akuten Phase verhandeln.',
+        },
+      ],
+    },
+    thresholds: {
+      title: 'Beobachtungen + Schwellen',
+      intro:
+        'Diese Beobachtungen helfen einzuschätzen, ob eine Fachstelle sinnvoll wird. Mehrere Items gleichzeitig im «jetzt anrufen»-Bereich: nicht weiter abwarten.',
+      items: [
+        {
+          observation: 'Mein:e Angehörige:r spricht von Suizid oder davon, niemandem mehr eine Last sein zu wollen.',
+          escalate: 'Sofort: 144 in akuter Lebensgefahr, sonst AERZTEFON oder Behandlungsteam.',
+        },
+        {
+          observation: 'Routinen lösen sich auf (Schlaf-Wach-Rhythmus, Essen, Hygiene) seit mehr als einer Woche.',
+          escalate: 'Bei Verschlechterung: AERZTEFON, Behandlungsteam, ggf. Pro Mente Sana zur Orientierung.',
+        },
+        {
+          observation: 'Kinder sind nicht mehr verlässlich versorgt (Schulweg, Mahlzeiten, Aufsicht).',
+          escalate: 'Sofort: kjz oder regionale Kindeswohl-Stelle. Nicht warten, bis es eskaliert.',
+        },
+        {
+          observation: 'Ich selbst kann nicht mehr schlafen, bin dauerhaft alarmiert oder ziehe mich zurück.',
+          escalate:
+            'Anhaltend: PUK Angehörigenberatung, Pro Mente Sana oder VASK. Eigene Erschöpfung ist ein legitimer Anlass.',
+        },
+        {
+          observation: 'Es gibt Eskalationen, Drohungen, Gewalt im Haushalt.',
+          escalate: 'Sofort: 144 (Polizei), Beratungsstelle, ggf. Kinderschutz. Eigene Sicherheit zuerst.',
+        },
+        {
+          observation: 'Wir sind unsicher, ob wir die richtige Stelle ansprechen — und schieben es deshalb auf.',
+          escalate: 'Lieber zu früh als zu spät: 143 (Dargebotene Hand) oder Pro Mente Sana zur Orientierung.',
+        },
+      ],
+    },
+    contacts: {
+      title: 'Anlaufstellen Schweiz',
+      intro: 'Notfallnummern gelten rund um die Uhr, kostenlos und auf Wunsch anonym.',
+      items: [
+        {
+          number: '144',
+          name: 'Sanität / Lebensgefahr',
+          detail: 'Sofort, rund um die Uhr, in akuter Lebensgefahr. Auch bei Suizidversuch.',
+        },
+        {
+          number: '143',
+          name: 'Die Dargebotene Hand',
+          detail: 'Anonym, kostenlos, 24/7 — auch zur ersten Orientierung, wenn unklar ist, wohin.',
+        },
+        {
+          number: '147',
+          name: 'Pro Juventute',
+          detail: 'Beratung für Kinder und Jugendliche, anonym, 24/7.',
+        },
+        {
+          number: '0800 33 66 55',
+          name: 'AERZTEFON Kanton Zürich',
+          detail: 'Medizinische Triage in nicht-lebensbedrohlichen Situationen.',
+        },
+        {
+          name: 'kjz',
+          detail: 'Kinder- und Jugendhilfezentren ZH — Beratung, Kindeswohlabklärung, regional.',
+        },
+        {
+          name: 'PUK Angehörigenberatung',
+          detail: 'Kostenlos, vertraulich, auch ohne PUK-Hospitalisation.',
+        },
+        {
+          name: 'Pro Mente Sana',
+          detail: 'Telefon- und Online-Beratung Schweiz für Angehörige und Betroffene.',
+        },
+      ],
+    },
+    selfNote: {
+      title: 'Eigene Erschöpfung ist ein legitimer Anlass',
+      text: 'Anhaltende Überforderung der angehörigen Person ist selbst ein Grund, Hilfe zu holen — nicht erst, wenn auch andere kippen. Angehörigenberatung ist genau dafür da, und sie kostet im Erstgespräch in der Regel nichts.',
+    },
+    disclaimer:
+      'Diese Karte ist eine Orientierungshilfe, kein klinisches Triage-Werkzeug. In jeder akuten Lebensgefahr gilt zuerst 144. Bei Unsicherheit über Kindeswohl: lieber einmal zu früh beim kjz anrufen als einmal zu spät.',
+    crossRefs: {
+      title: 'Verwandte Inhalte',
+      items: [
+        {
+          kind: 'faq',
+          label: 'Aus dem FAQ: Cluster 3 «Zusammenarbeit und nächste Schritte»',
+          anchor: '#material-zusammenarbeit',
+        },
+        {
+          kind: 'faq',
+          label: 'Aus dem FAQ: Cluster 2 «Grenzen und Selbstschutz»',
+          anchor: '#material-grenzen',
+        },
+        {
+          kind: 'navigation',
+          label: 'Vollständiges Fachstellen-Verzeichnis im Netzwerk-Tab',
+          target: 'netzwerk',
+        },
+      ],
+    },
+  },
 ];
 
 // Zielgruppen-Blöcke fuer die Material-Cluster (Issues #102 + #103). Die sechs
