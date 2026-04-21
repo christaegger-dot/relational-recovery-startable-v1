@@ -43,13 +43,19 @@ export const NETWORK_MAP_STEPS = [
   'anschliessend Lücken besprechen: Wo fehlt Unterstützung, wer weiss schon Bescheid, wem könnte man sich anvertrauen?',
 ];
 
+// Leitfragen fuer die Exploration durch die Fachperson -- bewusst in
+// Beobachtungsform formuliert ("der/des Betroffenen", "die/der Betroffene"),
+// nicht als direkte Du-Anrede an Patient:innen. Konsistent mit
+// `primaryAudience: 'fachperson'` des Netzwerk-Tabs (siehe CLAUDE.md
+// "Zielgruppen"). Issue #118 hat die frueher hier verbliebene Du-Form
+// auf Sie- bzw. Fachperson-Perspektive umgestellt.
 export const NETWORK_MAP_QUESTIONS = [
-  'Wer gehört zu deiner Kernfamilie und wer zur erweiterten Familie?',
-  'Wer hat dir oder deiner Familie bei Schwierigkeiten schon geholfen?',
-  'Mit wem kannst du reden oder etwas unternehmen?',
+  'Wer gehört zur Kernfamilie der/des Betroffenen, wer zur erweiterten Familie?',
+  'Wer hat der/dem Betroffenen oder der Familie bei Schwierigkeiten schon geholfen?',
+  'Mit wem kann die/der Betroffene reden oder etwas unternehmen?',
   'Wer weiss über die aktuelle Belastung oder Erkrankung Bescheid?',
   'Gibt es Schule, Verein, Nachbarschaft oder Fachstellen, die eine tragende Rolle spielen?',
-  'Wem möchtest du was erzählen und wo braucht es eher Schutz der Privatsphäre?',
+  'Wem möchte die/der Betroffene was erzählen, wo braucht es eher Schutz der Privatsphäre?',
 ];
 
 export const NETWORK_MAP_LENSES = [

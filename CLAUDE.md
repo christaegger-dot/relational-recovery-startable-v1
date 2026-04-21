@@ -103,9 +103,13 @@ Mischadressaten innerhalb eines Tabs erzeugen Mikro-Brüche, die Lesende verunsi
 1. **Umformulieren** in den Frame des Tabs (z. B. „Wer gehört zur Kernfamilie der/des Betroffenen?" statt „Wer gehört zu deiner Kernfamilie?").
 2. **Explizit als Sub-Adressat markieren** mit dem `audience`-Pattern aus dem Material-Tab (Block-Header + Audience-Badge pro Cluster — siehe „Material-Cluster: Zielgruppen-Blöcke" oben). Dieses Pattern ist aktuell nur im Material-Tab im Einsatz und kann bei Bedarf auf andere Tabs übertragen werden.
 
-### Bekannte offene Mismatches (Stand: dieser PR)
+### Bekannte Mismatches
 
-- **Netzwerk-Tab**: `NETWORK_MAP_QUESTIONS` (`networkContent.js`) verwendet Du-Anrede an Patient:innen („Wer gehört zu **deiner** Kernfamilie", „Mit wem kannst **du** reden") — bricht den Fachperson-Frame des Tabs. Lösung: Umformulieren in Sie-Form / Fachperson-Perspektive. Wird nicht in diesem Doku-PR gefixt — Folge-Issue empfohlen.
+Aktueller Stand: **keine offenen Mismatches bekannt**.
+
+Historisch behoben:
+
+- **Netzwerk-Tab** (Issue #118, behoben kurz nach PR #117): `NETWORK_MAP_QUESTIONS` in `networkContent.js` sprach Patient:innen mit Du an („deiner Kernfamilie", „kannst du reden"). Die Fragen sind jetzt in Beobachtungsform formuliert („der/des Betroffenen", „die/der Betroffene") und damit konsistent mit dem `'fachperson'`-Frame des Tabs. Das Beispiel oben in „Mischung innerhalb eines Tabs vermeiden" stammt aus diesem Fall.
 
 ## Konventionen
 
