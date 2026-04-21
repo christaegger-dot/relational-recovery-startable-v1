@@ -32,6 +32,7 @@ export default function PageHero({
   actions = [],
   asideTitle,
   asideCopy,
+  asideTone,
   image,
   imageAlt,
   stats = [],
@@ -157,7 +158,7 @@ export default function PageHero({
           ) : null}
 
           {(asideTitle || asideCopy) && (
-            <div className="ui-hero__aside">
+            <div className={`ui-hero__aside${asideTone ? ` ui-hero__aside--${asideTone}` : ''}`}>
               {asideTitle ? <p className="ui-hero__aside-title">{asideTitle}</p> : null}
               {asideCopy ? <p className="ui-hero__aside-copy">{asideCopy}</p> : null}
             </div>
