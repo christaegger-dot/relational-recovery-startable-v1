@@ -4219,3 +4219,77 @@
   flex: 1;
   min-width: 0;
 }
+
+/* Audit 25 / Sprint 5 (O11): Alphabet-Navigation auf dem Glossar-Tab.
+   Kompaktes Pill-Band: jedes Zeichen sitzt auf einem 2rem-Minifeld,
+   klickbare Letter tragen den warmen Primary-Accent, leere Letter
+   bleiben als gedimmter Hinweis sichtbar (At-a-Glance-Coverage).
+   Auf Mobile: das Band bricht in mehrere Reihen um, bleibt aber
+   beruehrbar dank min-height 2rem (44px-Touch-Target wird ueber
+   die Hit-Area des <a> mit padding erreicht). */
+.ui-letter-index {
+  width: 100%;
+}
+
+.ui-letter-index__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ui-letter-index__cell {
+  display: flex;
+}
+
+.ui-letter-index__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  padding: 0 0.5rem;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--surface-app);
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background var(--motion-fast) var(--motion-curve-standard),
+    color var(--motion-fast) var(--motion-curve-standard),
+    border-color var(--motion-fast) var(--motion-curve-standard),
+    transform var(--motion-fast) var(--motion-curve-standard);
+}
+
+.ui-letter-index__item:hover,
+.ui-letter-index__item:focus-visible {
+  background: var(--accent-primary-strong);
+  border-color: var(--accent-primary-strong);
+  color: var(--text-inverse);
+  transform: translateY(-1px);
+}
+
+/* Gedimmte Darstellung fuer Buchstaben ohne Term. Kontrast bleibt
+   >= 4.5:1 (--text-muted auf --surface-subtle: 4.89), damit der
+   Buchstabe fuer Screen Reader + sehende Nutzer noch wahrnehmbar
+   ist -- inaktiv heisst nicht unsichtbar. */
+.ui-letter-index__item--empty {
+  background: var(--surface-subtle);
+  border-color: var(--border-subtle);
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.ui-letter-index__item--empty:hover,
+.ui-letter-index__item--empty:focus-visible {
+  background: var(--surface-subtle);
+  border-color: var(--border-subtle);
+  color: var(--text-muted);
+  transform: none;
+}

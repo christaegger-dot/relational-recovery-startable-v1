@@ -74,10 +74,18 @@
    Bei prefers-reduced-motion: sofort sichtbar, keine Animation. */
 /* Transition schnell genug, damit Inhalte auf einem Fachportal sofort
    lesbar sind — kein visuelles Warten beim Scrollen. Mikro-Polish
-   statt Marketing-Animation (Nutzer-Audit N1). */
+   statt Marketing-Animation (Nutzer-Audit N1).
+   Audit 25 / Sprint 5 (O16): translateY von 6px auf 10px angehoben,
+   damit die Bewegung auch beim schnellen Scrollen wahrnehmbar bleibt
+   (6px war in der Praxis unter der Wahrnehmungsschwelle). Duration
+   bleibt bei --motion-fast (180ms) -- Text soll nicht auf die Animation
+   warten. Zusaetzlich: Threshold-Bump in Section.jsx von 0.08 auf 0.15
+   verlagert den Ausloeser etwas spaeter in den sichtbaren Bereich, sodass
+   die Animation tatsaechlich beobachtet wird statt unbemerkt am Rand zu
+   verklingen. */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(10px);
   transition:
     opacity var(--motion-fast) var(--motion-curve-standard),
     transform var(--motion-fast) var(--motion-curve-standard);

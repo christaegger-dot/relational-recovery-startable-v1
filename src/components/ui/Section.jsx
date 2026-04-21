@@ -29,7 +29,12 @@ function useRevealRef() {
           }
         }
       },
-      { threshold: 0.08, rootMargin: '0px 0px 40px 0px' }
+      // Audit 25 / Sprint 5 (O16): Threshold von 0.08 auf 0.15 angehoben.
+      // Bei 0.08 loeste der Reveal schon aus, wenn 8% einer Sektion am
+      // unteren Viewport-Rand angeschnitten waren -- die Animation lief
+      // oft ausserhalb der Aufmerksamkeit ab. 0.15 wartet bis 15% sichtbar
+      // sind, sodass der Uebergang im Blickfeld passiert.
+      { threshold: 0.15, rootMargin: '0px 0px 40px 0px' }
     );
 
     observer.observe(node);
