@@ -85,7 +85,9 @@ async function scanRoute(browser, viewport, route) {
 }
 
 async function main() {
-  const browser = await chromium.launch({ headless: true });
+  const launchOpts = { headless: true };
+  if (process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE) launchOpts.executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
+  const browser = await chromium.launch(launchOpts);
   const report = {};
   const anomalies = [];
 
