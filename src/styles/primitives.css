@@ -910,7 +910,7 @@
 }
 
 .ui-hero__accent {
-  color: var(--accent-primary);
+  color: var(--hero-accent-color, var(--accent-primary));
   font-style: italic;
 }
 

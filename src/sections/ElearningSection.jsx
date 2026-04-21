@@ -31,6 +31,7 @@ export default function ElearningSection() {
 
   const hero = {
     icon: GraduationCap,
+    accentColor: 'var(--accent-info-strong)',
     eyebrow: 'Fachliche Kurzformate',
     title: 'Lernen in',
     accent: 'ruhigen Fachsequenzen.',

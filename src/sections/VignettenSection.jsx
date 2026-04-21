@@ -21,6 +21,7 @@ export default function VignettenSection() {
 
   const hero = {
     icon: HeartHandshake,
+    accentColor: 'var(--accent-primary-strong)',
     eyebrow: 'Fallreflexion',
     title: 'Training',
     accent: 'mit Fallvignetten',
