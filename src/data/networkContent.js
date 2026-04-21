@@ -167,8 +167,8 @@ export const NETWORK_MAP_TEMPLATE_NODES = [
 ];
 
 // Rechtsberatungs-Linkliste (Audit 03)
-// Kategorien und Struktur stehen, Einträge werden von der Auftraggeberin kuratiert.
-// Kuratierte Liste folgt – Platzhalter-Einträge markiert.
+// Kategorien und Einträge kuratiert; gepflegte Liste mit realen Fachstellen.
+// Neue Einträge ergänzen bestehende Kategorien oder neue Kategorie oben anhängen.
 export const LEGAL_COUNSELING_CATEGORIES = [
   { id: 'psychosozial', label: 'Unabhängige psychosoziale Rechtsberatung' },
   { id: 'ombudsstelle', label: 'Ombudsstelle Kindesschutz' },
