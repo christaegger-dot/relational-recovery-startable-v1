@@ -75,8 +75,10 @@ function MaterialHandoutCrossRefs({ crossRefs, onNavigate, handoutTitle }) {
 
   const ariaLabel = handoutTitle ? `${crossRefs.title} – ${handoutTitle}` : crossRefs.title;
 
+  // Audit 15 A-2: <div role="group">, nicht <aside>. CrossRefs sind kontextuell
+  // zum umgebenden Handout-<article> und kein eigener Landmark.
   return (
-    <aside className="ui-material-handout__cross-refs" aria-label={ariaLabel}>
+    <div className="ui-material-handout__cross-refs" role="group" aria-label={ariaLabel}>
       <p className="ui-fact-card__label">{crossRefs.title}</p>
       <ul className="ui-material-handout__cross-refs-list">
         {crossRefs.items.map((ref) => {
@@ -102,7 +104,7 @@ function MaterialHandoutCrossRefs({ crossRefs, onNavigate, handoutTitle }) {
           );
         })}
       </ul>
-    </aside>
+    </div>
   );
 }
 
@@ -422,10 +424,12 @@ function MaterialThresholdChecklist({ handout, onNavigate, onPrintHandout }) {
       ) : null}
 
       {handout.selfNote ? (
-        <aside className="ui-material-handout__callout" aria-label={handout.selfNote.title}>
+        // Audit 15 A-2: Callout als <div role="note">, nicht als <aside>.
+        // Inline-Hinweis im Handout-Flow, kein eigener Landmark.
+        <div className="ui-material-handout__callout" role="note" aria-label={handout.selfNote.title}>
           <p className="ui-fact-card__label">{handout.selfNote.title}</p>
           <p>{handout.selfNote.text}</p>
-        </aside>
+        </div>
       ) : null}
     </MaterialHandoutShell>
   );

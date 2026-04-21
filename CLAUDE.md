@@ -13,14 +13,18 @@ Schweizer Fachportal zur Unterstützung von Fachpersonen, die mit Familien arbei
 
 ## Workflow für Code-Aufgaben
 
-Standard-Ablauf am Ende jeder Aufgabe (Code-Änderungen oder Audit-Berichte): **Commits pushen → PR eröffnen → Merge** — alles in einem Schritt, ohne dazwischen nachzufragen. Erst stoppen, wenn das Resultat im `main` ist.
+**Grünes Licht ist Default.** Standard-Ablauf am Ende jeder Aufgabe (Code-Änderungen, Audit-Berichte, Follow-up-Tickets): **Commits pushen → PR eröffnen → Squash-Merge → ggf. zugehöriges Issue closen** — alles in einem Rutsch, ohne dazwischen Bestätigungen einzuholen. Erst stoppen, wenn das Resultat im `main` ist.
 
-Ausnahmen, in denen vorher gefragt werden muss:
-- Fachliche Mehrdeutigkeit (z. B. zwei plausible Lösungen für ein Finding).
-- Änderungen an `main`-only-Files (CLAUDE.md, package.json) ohne klaren Auftrag.
-- Force-Push, History-Rewrites oder Reverts.
+Bei fachlicher Mehrdeutigkeit (z. B. mehrere plausible Lösungswege für ein Audit-Finding): **die plausibelste Option wählen, im PR-Body begründen, durchziehen** — nicht stehenbleiben und fragen. Wenn die Entscheidung später revidiert werden muss, ist das ein normaler Folge-PR.
 
-Sonst: PR erstellen mit aussagekräftigem Titel + Test-Plan, Squash-Merge, fertig.
+Echte Stopp-Schilder (vorher fragen):
+- Force-Push, History-Rewrites, `git reset --hard` auf gepushte Commits, Reverts gemergeter PRs.
+- Lösch- oder Datenbank-Migrationen, die nicht trivial reversibel sind.
+- Inhaltliche Aussagen zu klinischen/rechtlichen Fragen, die fachliche Verifikation brauchen (KESB-Pfade, medizinische Empfehlungen).
+
+`CLAUDE.md`/`package.json`-Updates dürfen ohne Rückfrage erfolgen, wenn sie zur laufenden Aufgabe gehören (z. B. Konventions-Notiz, neue Abhängigkeit für ein Feature).
+
+PR-Body immer mit aussagekräftigem Titel + kurzer Test-Plan-Checkliste.
 
 ## Architektur
 
