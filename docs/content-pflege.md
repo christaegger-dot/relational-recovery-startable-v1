@@ -107,6 +107,38 @@ Die Base-URL der Produktions-Installation lebt an **einer einzigen Stelle**: in 
 
 ---
 
+## Hash-Aliases für Deep-Links
+
+`src/utils/appHelpers.js` normalisiert einige historische oder alternative Hash-Formen auf die kanonischen Tab-Slugs. Grund: frühere Version der Seite nutzte andere Bezeichnungen, externe Links auf die Alt-Form dürfen nicht brechen.
+
+| Alias (Hash-Input) | Kanonische Form | Hintergrund |
+|---|---|---|
+| `zuerich` | `netzwerk` | Alt-Hash vor der Umbenennung zur deutschsprachigen Section-Bezeichnung |
+| `network-map` | `netzwerk-karte` | Englisches Sub-Anchor aus der Wave-2-Iteration |
+| `network-directory` | `netzwerk-fachstellen` | Englisches Sub-Anchor aus der Wave-2-Iteration |
+| `training` | `vignetten` | Nav-Label heisst „Training"; interner Code-Name bleibt `vignetten`. Alias für nutzerseitige Deep-Links |
+| `trainingsfaelle` | `vignetten` | Zweite Nutzer-Lesart desselben Tabs |
+| `zaesur` | `evidenz` | Alt-Name aus frühem Konzeptstand |
+
+**Wann entfernen?** Wenn bestätigt ist, dass keine externen Referenzen mehr auf die Alt-Form zeigen (z. B. via Web-Archiv-Check oder 6+ Monate ohne Traffic auf diese Hashes). Bis dahin bleiben die Aliases — sie sind ~20 Zeilen in einem Map-Objekt und kosten nichts.
+
+Auch in `src/utils/useNavigationFocus.js` existiert eine Scroll-Ziel-Liste, die Alias-Hashes als gültige Scroll-Anchor akzeptiert. Beim Entfernen eines Alias auch dort synchron entfernen.
+
+---
+
+## Automatische Link-Checker: bekannte False-Positives
+
+Einige Domains im `sourcesContent.js`- oder `networkContent.js`-Pool blockieren automatische Link-Checker (`lychee`, `markdown-link-check` etc.) mit HTTP 403, obwohl die Links für Nutzer:innen im Browser problemlos funktionieren. Das ist kein Link-Rot.
+
+Bekannte Fälle:
+
+- **PUK Zürich** (`puk.zh.ch`, `psychiatrie.puk.zh.ch`) — Cloudflare-Bot-Challenge. Liefert 403 an User-Agents ohne JavaScript-Ausführung.
+- **Selbsthilfe Zürich** (`selbsthilfe-zuerich.ch`) — Bot-Block.
+
+Wenn ein Link-Checker eingeführt wird (siehe Audit 17 Follow-up: GitHub-Action mit `lychee`), diese Domains per Allow-List oder `--exclude`-Pattern ausnehmen. Sonst liefern sie permanent Fehlalarme.
+
+---
+
 ## `primaryAudience`-Konvention
 
 Jeder Tab in `TAB_ITEMS` trägt ein `primaryAudience`-Feld mit einem der drei Werte `'fachpersonen'`, `'angehoerige'`, `'beide'`. Das Feld stammt aus Audit 02, dokumentiert die primäre Zielgruppe und wird bei redaktionellen Entscheidungen konsultiert (z. B. Audit 06 Block 5: „Fachbegriff Desorganisation nur in Angehörigen-Texten verwenden").

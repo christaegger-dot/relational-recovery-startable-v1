@@ -248,6 +248,10 @@
   width: fit-content;
 }
 
+/* Compact: gleiche Touch-Target-Hoehe (44px) wie .ui-button, aber gekuerztes
+   Padding (0.625/0.875rem statt 0.875/1.25rem). Fuer dichte Sekundaer-Aktions-
+   Gruppen, in denen Standard-Padding Zeilenumbrueche oder unnoetige Breite
+   erzeugen wuerde (z. B. Filterleisten, Modal-Footer). */
 .ui-button--compact {
   min-height: 2.75rem;
   padding: 0.625rem 0.875rem;
@@ -450,6 +454,10 @@
   gap: 0.625rem;
 }
 
+/* Bewusste Ausnahme vom 44x44-Touch-Target (Audit-09-Ausnahmemechanismus):
+   Chips stehen in dichten Reihen (Netzwerk-Filter, Evidenz-Anchors), in denen
+   44px Hoehe die horizontale Lesbarkeit zerschneidet. Horizontale Touch-Flaeche
+   bleibt via Padding + gap > 44px. Siehe docs/frontend-richtlinien.md. */
 .ui-chip {
   min-height: calc(var(--touch-target-min) - 0.5rem);
   border-radius: var(--radius-pill);
