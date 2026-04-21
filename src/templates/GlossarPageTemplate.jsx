@@ -1,9 +1,11 @@
 import EditorialIndex from '../components/ui/EditorialIndex';
 import EditorialIntro from '../components/ui/EditorialIntro';
 import Container from '../components/ui/Container';
+import GlossarLetterIndex from '../components/ui/GlossarLetterIndex';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
 import SectionHeader from '../components/ui/SectionHeader';
+import { buildGlossarLetterIndex } from '../utils/glossarLetterIndex';
 
 function GlossarGroup({ group }) {
   return (
@@ -18,7 +20,11 @@ function GlossarGroup({ group }) {
 
         <div className="ui-glossary-term-grid">
           {group.terms.map((entry) => (
-            <details key={entry.term} className="ui-disclosure-card">
+            // Audit 25 / Sprint 5 (O11): Term-id als Scroll-Anker fuer die
+            // Letter-Index-Jumps. Klick auf "P" in der Alphabet-Navigation
+            // springt via `#glossar-term-{id}` auf den ersten Term, dessen
+            // Anfangsbuchstabe (nach Umlaut-Faltung) passt.
+            <details id={`glossar-term-${entry.id}`} key={entry.term} className="ui-disclosure-card">
               <summary className="ui-disclosure-card__summary">
                 <div>
                   <p className="ui-fact-card__label">Begriff</p>
@@ -46,6 +52,8 @@ function GlossarGroup({ group }) {
 }
 
 export default function GlossarPageTemplate({ hero, pageHeadingId, intro, groups = [] }) {
+  const letterIndex = buildGlossarLetterIndex(groups);
+
   return (
     <div className="ui-stack">
       <Container width="wide">
@@ -53,6 +61,15 @@ export default function GlossarPageTemplate({ hero, pageHeadingId, intro, groups
       </Container>
       <EditorialIntro intro={intro} />
       <EditorialIndex items={groups} spacing="compact" surface="muted" />
+      {/* Audit 25 / Sprint 5 (O11): Alphabet-Navigation unter der Cluster-Nav.
+          Cluster-Nav beantwortet "welches Thema?", Letter-Nav beantwortet
+          "welcher Begriff?". Beide im schmalen Stack, um die Seite nicht
+          mit doppelten Orientierungsbaendern aufzubauschen. Die schmale
+          Section (spacing="compact") haelt das Band visuell nahe an der
+          Cluster-Nav. */}
+      <Section spacing="compact" surface="plain">
+        <GlossarLetterIndex entries={letterIndex} />
+      </Section>
       {groups.map((group) => (
         <GlossarGroup key={group.id} group={group} />
       ))}
