@@ -137,7 +137,20 @@ export default function PageHero({
         <div className="ui-hero__media">
           {image ? (
             <div className="ui-hero__figure">
-              <img src={image} alt={imageAlt || ''} width={1200} height={800} />
+              {/* Audit 16 P1-3: fetchpriority + decoding als LCP-Hinweise.
+                  Das Hero-<img> ist auf der Start-Route der LCP-Kandidat;
+                  'high' schiebt es in die Priority-Queue und spart typ.
+                  100-300 ms LCP gegenueber Default. decoding='async'
+                  verhindert, dass die Bilddekodierung den Main-Thread
+                  blockiert. width/height bleiben gesetzt (CLS-Schutz). */}
+              <img
+                src={image}
+                alt={imageAlt || ''}
+                width={1200}
+                height={800}
+                fetchpriority="high"
+                decoding="async"
+              />
             </div>
           ) : null}
 
