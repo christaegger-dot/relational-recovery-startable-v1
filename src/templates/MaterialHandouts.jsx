@@ -429,6 +429,56 @@ function MaterialThresholdChecklist({ handout, onNavigate, onPrintHandout }) {
   );
 }
 
+/**
+ * Tier-2-Handout (#116): Altersgerechte Uebersicht fuer Eltern + Fachpersonen.
+ * Format D (Age-Grid) -- vier Karten (Kleinkind / Kindergarten / Schulkind /
+ * Jugendliche), jede mit vier Sub-Sektionen (Symptome / Bedarf / Eltern-
+ * Hilfen / Fachstellen-Schwelle). Mobile: 1-Spalten-Stack. Tablet: 2 Spalten.
+ * Desktop: 4 Spalten. Print: 2x2 auf A4 Portrait (siehe app-global.css §9).
+ */
+function MaterialAgeGrid({ handout, onNavigate, onPrintHandout }) {
+  return (
+    <MaterialHandoutShell handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout}>
+      {handout.ageGroups?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.ageGroups.title}</h4>
+          {handout.ageGroups.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.ageGroups.intro}</p>
+          ) : null}
+          <ul className="ui-material-handout__age-grid">
+            {handout.ageGroups.items.map((group) => (
+              <li key={group.id} className="ui-material-handout__age-group">
+                <header className="ui-material-handout__age-head">
+                  <p className="ui-material-handout__age-range">{group.ageRange}</p>
+                  <h5 className="ui-material-handout__age-label">{group.label}</h5>
+                </header>
+                {[group.symptoms, group.needs, group.parentHelp].map((sub) =>
+                  sub?.items?.length ? (
+                    <div key={sub.title} className="ui-material-handout__age-subsection">
+                      <p className="ui-material-handout__age-subsection-title">{sub.title}</p>
+                      <ul className="ui-material-handout__age-subsection-list">
+                        {sub.items.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null
+                )}
+                {group.threshold ? (
+                  <div className="ui-material-handout__age-threshold">
+                    <p className="ui-material-handout__age-subsection-title">{group.threshold.title}</p>
+                    <p className="ui-material-handout__age-threshold-text">{group.threshold.text}</p>
+                  </div>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+    </MaterialHandoutShell>
+  );
+}
+
 // ─── Switch (Default-Export) ───────────────────────────────────────────────
 
 export default function MaterialHandoutSwitch({ handout, onNavigate, onPrintHandout }) {
@@ -439,6 +489,8 @@ export default function MaterialHandoutSwitch({ handout, onNavigate, onPrintHand
       return <MaterialConversationScript handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout} />;
     case 'threshold-checklist':
       return <MaterialThresholdChecklist handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout} />;
+    case 'age-grid':
+      return <MaterialAgeGrid handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout} />;
     default:
       return null;
   }

@@ -441,6 +441,204 @@ export const MATERIAL_HANDOUTS = [
       ],
     },
   },
+  // Tier-2-Handout (Issue #116): Altersgerechte Uebersicht fuer Eltern +
+  // Fachpersonen. Vier Altersphasen (Kleinkind bis 3, Kindergarten 3-6,
+  // Schulkind 7-12, Jugendliche ab 13), jede Karte in vier Sektionen:
+  // was zeigen Kinder, was brauchen sie, was hilft den Eltern, wann eine
+  // Fachstelle dazu. Altersgrenzen entsprechen Cluster 5 (material-
+  // altersgerecht), damit Handout + FAQ inhaltlich synchron bleiben.
+  // Quelle: Stauber et al. (2018), Kap. 5.3.2; Lenz (2010), Tab. 3.
+  {
+    id: 'material-handout-was-kinder-brauchen',
+    kind: 'age-grid',
+    eyebrow: 'Handout für Eltern + Fachpersonen',
+    title: 'Was Kinder in welchem Alter brauchen',
+    description:
+      'Eine altersdifferenzierte Übersicht für Familien, in denen ein Elternteil psychisch erkrankt ist. Vier Altersphasen, je vier Leitfragen — was zeigt das Kind, was braucht es, was hilft Eltern, wann eine Fachstelle.',
+    usage: {
+      when: 'Zur Vorbereitung eines Gesprächs oder zur Orientierung im Alltag — nicht in der akuten Krise.',
+      people:
+        'Eltern (betroffen oder unterstützend) zur Selbstlektüre; Fachpersonen als Gesprächsgrundlage in Elternberatung oder Psychoedukation.',
+      validity:
+        'Die Altersphasen sind Orientierung, kein Raster. Entwicklung verläuft individuell — Karten gelten breit, nicht pro Geburtstag.',
+      where:
+        'Zur Vorbereitung ausdrucken, am Kühlschrank markieren (aktuelle Phase), gemeinsam mit der zweiten Bezugsperson oder dem Behandlungsteam durchgehen.',
+    },
+    ageGroups: {
+      title: 'Vier Altersphasen — was zeigen Kinder, was brauchen sie',
+      intro:
+        'Die vier Karten fassen zusammen, was in der jeweiligen Phase besonders wichtig ist. Sie ersetzen keine individuelle Einschätzung — sie geben Orientierung, an welcher Stelle ein Gespräch ansetzen kann und worauf die Beobachtung sich richten sollte.',
+      items: [
+        {
+          id: 'kleinkind',
+          ageRange: 'bis 3 Jahre',
+          label: 'Kleinkind',
+          symptoms: {
+            title: 'Was zeigen Kinder',
+            items: [
+              'Spüren Veränderungen in Atmosphäre und Stimmung, auch ohne zu verstehen, was los ist.',
+              'Reagieren mit stärkerem Anklammern, Unruhe, Schlafproblemen oder verändertem Essverhalten.',
+              'Können sich schuldig fühlen, ohne das in Worten ausdrücken zu können.',
+            ],
+          },
+          needs: {
+            title: 'Was brauchen sie',
+            items: [
+              'Verlässliche Routinen (Aufwachen, Essen, Schlafen) — der Alltag als Anker.',
+              'Ruhigen Ton, warme kurze Sätze — nicht detaillierte Erklärungen.',
+              'Eine durchgehend verfügbare Bezugsperson, wenn der erkrankte Elternteil zeitweise nicht da sein kann.',
+            ],
+          },
+          parentHelp: {
+            title: 'Was hilft Eltern',
+            items: [
+              'Benennen, was gerade ist: «Mama ist heute müde, sie schläft jetzt. Ich bin bei dir.»',
+              'Signalisieren — auch nonverbal —, dass das Kind nichts dafür kann.',
+              'Rituale halten (Gute-Nacht-Lied, Bilderbuch) — Kontinuität wirkt stärker als Worte.',
+            ],
+          },
+          threshold: {
+            title: 'Wann eine Fachstelle',
+            text: 'Bei anhaltenden Schlaf- oder Essstörungen, plötzlichem Rückzug oder markanten Verhaltensänderungen über mehrere Wochen: kinderärztliche Abklärung und kjz.',
+          },
+        },
+        {
+          id: 'kindergarten',
+          ageRange: '3–6 Jahre',
+          label: 'Kindergartenkind',
+          symptoms: {
+            title: 'Was zeigen Kinder',
+            items: [
+              'Grosser Wissensdrang — fragen nach, wollen Unbekanntes einordnen.',
+              'Magisches Denken: vermuten, die Erkrankung durch eigenes Verhalten oder Wünsche verursacht zu haben.',
+              'Schuldgefühle und Fantasien, die oft bedrohlicher sind als die Wirklichkeit.',
+              'Begrenzte Aufmerksamkeitsspanne — Erklärungen müssen kurz bleiben.',
+            ],
+          },
+          needs: {
+            title: 'Was brauchen sie',
+            items: [
+              'Einfache, anschauliche Sprache mit konkreten Alltagsbeispielen.',
+              'Aktives Aufgreifen möglicher Schuldgefühle — nicht warten, bis das Kind fragt.',
+              'Bilderbücher als Brücke zu schwer greifbaren Themen.',
+              'Die Erlaubnis, Fragen zu stellen, auch wiederholt.',
+            ],
+          },
+          parentHelp: {
+            title: 'Was hilft Eltern',
+            items: [
+              'Die Krankheit bei einem Namen nennen («Depression», «Angst»), damit sie greifbar wird.',
+              'Den Satz «Du bist nicht schuld» aktiv und mehrfach sagen, nicht nur auf Nachfrage.',
+              'Sich auf das Wichtigste beschränken — Details kommen später, wenn Fragen gestellt werden.',
+            ],
+          },
+          threshold: {
+            title: 'Wann eine Fachstelle',
+            text: 'Wenn Ängste, Schuldgefühle oder Regression (z. B. Einnässen, Babysprache) bleiben: Kita-Leitung, Kinderarzt, kjz oder Institut Kinderseele Schweiz.',
+          },
+        },
+        {
+          id: 'schulkind',
+          ageRange: '7–12 Jahre',
+          label: 'Schulkind',
+          symptoms: {
+            title: 'Was zeigen Kinder',
+            items: [
+              'Nehmen Unterschiede zur eigenen Familie und anderen Familien wahr.',
+              'Sorgen sich oft still um den erkrankten Elternteil, ohne direkt zu fragen.',
+              'Verstecken Informationsbedürfnis hinter sachlich klingenden Fragen («Was ist die Ursache?»).',
+              'Geraten in Loyalitätskonflikte, wenn in der Familie über die Krankheit geschwiegen wird.',
+            ],
+          },
+          needs: {
+            title: 'Was brauchen sie',
+            items: [
+              'Sachliche Antworten plus die emotionale Ebene aufnehmen, die oft mitschwingt.',
+              'Die Erlaubnis, ausserhalb der Familie zu sprechen (Lehrperson, Vertrauensperson).',
+              'Einen Krisenplan mit benannter Vertrauensperson für akute Phasen.',
+              'Kontakte und Freizeit ausserhalb des Familiensystems.',
+            ],
+          },
+          parentHelp: {
+            title: 'Was hilft Eltern',
+            items: [
+              'Sprechfenster aktiv öffnen: «Hast du gerade Sorgen, die du mir erzählen magst?»',
+              'Eine feste Vertrauensperson benennen und diese vorab einbeziehen.',
+              'Schule oder Hort informieren, damit das Kind dort einen sicheren Ort hat.',
+              'Auf Parentifizierung achten — das Kind soll nicht für Eltern oder Geschwister sorgen müssen.',
+            ],
+          },
+          threshold: {
+            title: 'Wann eine Fachstelle',
+            text: 'Bei Schulleistungs-Einbrüchen, Rückzug von Freund:innen oder zunehmender Verantwortungsübernahme im Haushalt: Schulsozialarbeit, Schulpsychologischer Dienst oder kjz.',
+          },
+        },
+        {
+          id: 'jugendliche',
+          ageRange: 'ab 13 Jahren',
+          label: 'Jugendliche',
+          symptoms: {
+            title: 'Was zeigen Kinder',
+            items: [
+              'Verstehen die Situation kognitiv, werden aber wegen des erwachsen wirkenden Auftretens oft überschätzt.',
+              'Stehen zwischen Autonomiebedürfnis und Abhängigkeit von der Familie.',
+              'Vergleichen sich mit dem erkrankten Elternteil und fragen sich, ob sie selbst erkranken können.',
+              'Haben Wissensvorsprung aus dem Internet, der oft unvollständig oder einseitig ist.',
+            ],
+          },
+          needs: {
+            title: 'Was brauchen sie',
+            items: [
+              'Gespräch auf Augenhöhe — keine Vereinfachungen, keine Beschönigung.',
+              'Ehrliche Auseinandersetzung mit Vererbbarkeit und Risiko.',
+              'Zugang zu Fachpersonen und Peers ausserhalb der Familie.',
+              'Raum für eigene Entwicklung — nicht zur Co-Betreuer:in werden.',
+            ],
+          },
+          parentHelp: {
+            title: 'Was hilft Eltern',
+            items: [
+              'Den vorhandenen Wissensstand anerkennen und darauf aufbauen, statt bei Null anzufangen.',
+              'Offen über Risiko und Schutzfaktoren sprechen: «Vererbt wird Verletzlichkeit, nicht die Krankheit.»',
+              'Materialien wie Broschüren von Pro Juventute oder Kurzfilme von Kinderseele Schweiz anbieten.',
+              'Nicht überbehüten — Autonomie und Freund:innen bleiben Schutzfaktoren.',
+            ],
+          },
+          threshold: {
+            title: 'Wann eine Fachstelle',
+            text: 'Bei Suizidgedanken, riskantem Verhalten, Substanzkonsum oder anhaltender Niedergeschlagenheit: Pro Juventute 147, kjz, PUK Kinder- und Jugendpsychiatrie oder Institut Kinderseele Schweiz.',
+          },
+        },
+      ],
+    },
+    disclaimer:
+      'Die Altersphasen sind Orientierung, nicht Diagnose. Entwicklung verläuft individuell — Mein-Kind-sollte-mit-8-schon-Vergleiche sind nicht das Ziel. Bei akuter Belastung des Kindes oder des Familiensystems ist eine individuelle Fachstelleneinschätzung (kjz, Kinderarzt, Institut Kinderseele Schweiz) wichtiger als die Karte.',
+    crossRefs: {
+      title: 'Verwandte Inhalte',
+      items: [
+        {
+          kind: 'faq',
+          label: 'Aus dem FAQ: Cluster 5 «Altersgerecht erklären» (ausführlicher Text pro Phase)',
+          anchor: '#material-altersgerecht',
+        },
+        {
+          kind: 'handout',
+          label: 'Komplementär: «Erstes Gespräch mit dem Kind» (Einstiegssätze + typische Fragen)',
+          anchor: '#material-handout-erstes-gespraech',
+        },
+        {
+          kind: 'handout',
+          label: 'Komplementär: «Wann eine Fachstelle?» (Schwellen-Karte für Angehörige)',
+          anchor: '#material-handout-wann-fachstelle',
+        },
+        {
+          kind: 'faq',
+          label: 'Aus dem FAQ: Cluster 4 «Mit Kindern über die Erkrankung sprechen»',
+          anchor: '#material-kinder',
+        },
+      ],
+    },
+  },
 ];
 
 // Zielgruppen-Blöcke fuer die Material-Cluster (Issues #102 + #103). Die sechs

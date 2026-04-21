@@ -312,6 +312,34 @@ test.describe('Material Handouts', () => {
     // Print-Button funktioniert (gemeinsamer Mechanik-Pfad ueber MaterialHandoutSwitch)
     await expect(handout.locator('button[data-action="print"]')).toBeVisible();
   });
+
+  // Tier-2-Handout (Issue #116): Age-Grid fuer Eltern + Fachpersonen.
+  test('age-grid handout (was-kinder-brauchen) renders with 4 age cards + threshold per card', async ({ page }) => {
+    await page.addInitScript(() => localStorage.clear());
+    await page.goto('/#material');
+
+    const handout = page.locator('#material-handout-was-kinder-brauchen');
+    await expect(handout).toBeVisible({ timeout: 10_000 });
+    await expect(handout).toContainText('Was Kinder in welchem Alter brauchen');
+    await expect(handout).toContainText('Handout für Eltern + Fachpersonen');
+
+    // Genau vier Altersphasen-Karten im Grid
+    const ageGroups = handout.locator('.ui-material-handout__age-group');
+    await expect(ageGroups).toHaveCount(4);
+
+    // Alle vier Altersangaben sind sichtbar
+    await expect(handout).toContainText('bis 3 Jahre');
+    await expect(handout).toContainText('3–6 Jahre');
+    await expect(handout).toContainText('7–12 Jahre');
+    await expect(handout).toContainText('ab 13 Jahren');
+
+    // Jede Karte hat einen Fachstellen-Schwellen-Block
+    const thresholds = handout.locator('.ui-material-handout__age-threshold');
+    await expect(thresholds).toHaveCount(4);
+
+    // Print-Button vorhanden (gemeinsamer Pfad ueber MaterialHandoutSwitch)
+    await expect(handout.locator('button[data-action="print"]')).toBeVisible();
+  });
 });
 
 test.describe('Emergency Access', () => {
