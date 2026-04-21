@@ -24,7 +24,7 @@
 import { chromium } from 'playwright-core';
 
 const BASE_URL = process.argv[2] || 'http://localhost:4180';
-const ROUTES = ['start', 'lernmodule', 'vignetten', 'glossar', 'grundlagen', 'evidenz', 'toolbox', 'netzwerk'];
+const ROUTES = ['start', 'lernmodule', 'vignetten', 'glossar', 'material', 'evidenz', 'toolbox', 'netzwerk'];
 const VIEWPORTS = [
   { name: 'mobile-375', width: 375, height: 812, hasTouch: true },
   { name: 'desktop-1280', width: 1280, height: 900 },
@@ -32,7 +32,7 @@ const VIEWPORTS = [
 ];
 
 // Erwartete Nav-Ziele: Klick auf Nav-Button "Toolbox" soll zu #toolbox fuehren
-const NAV_TARGETS = ['start', 'lernmodule', 'vignetten', 'glossar', 'grundlagen', 'evidenz', 'toolbox', 'netzwerk'];
+const NAV_TARGETS = ['start', 'lernmodule', 'vignetten', 'glossar', 'material', 'evidenz', 'toolbox', 'netzwerk'];
 
 function classifySeverity(expectedType, label) {
   const l = (label || '').toLowerCase();

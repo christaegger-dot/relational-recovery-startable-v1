@@ -17,9 +17,9 @@ const SCENARIOS = [
   { viewport: { name: 'mobile-375', w: 375, h: 812 }, route: 'vignetten', target: 'lernmodule' },
   { viewport: { name: 'mobile-375', w: 375, h: 812 }, route: 'glossar', target: 'start' },
   { viewport: { name: 'mobile-375', w: 375, h: 812 }, route: 'glossar', target: 'lernmodule' },
-  { viewport: { name: 'desktop-1280', w: 1280, h: 900 }, route: 'start', target: 'grundlagen' },
-  { viewport: { name: 'desktop-1280', w: 1280, h: 900 }, route: 'vignetten', target: 'grundlagen' },
-  { viewport: { name: 'desktop-1920', w: 1920, h: 1080 }, route: 'start', target: 'grundlagen' },
+  { viewport: { name: 'desktop-1280', w: 1280, h: 900 }, route: 'start', target: 'material' },
+  { viewport: { name: 'desktop-1280', w: 1280, h: 900 }, route: 'vignetten', target: 'material' },
+  { viewport: { name: 'desktop-1920', w: 1920, h: 1080 }, route: 'start', target: 'material' },
 ];
 
 async function diagnose(browser, sc) {
