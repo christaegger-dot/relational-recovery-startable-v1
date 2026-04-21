@@ -115,6 +115,7 @@ function digitalMediaItems(items = []) {
 export default function EvidenceSection({ downloadResources = [] }) {
   const hero = {
     icon: Activity,
+    accentColor: 'var(--accent-info-strong)',
     eyebrow: 'Evidenz und klinische Orientierung',
     title: 'Einordnen, benennen und',
     accent: 'familienorientiert handeln.',

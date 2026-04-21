@@ -105,7 +105,7 @@ export default function MaterialSection({ sharedDownloadResources = [] }) {
 
   return (
     <MaterialPageTemplate
-      hero={{ ...MATERIAL_HERO, icon: CircleHelp }}
+      hero={{ ...MATERIAL_HERO, icon: CircleHelp, accentColor: 'var(--accent-primary-strong)' }}
       pageHeadingId={getPageHeadingId('material')}
       intro={MATERIAL_INTRO}
       clusters={MATERIAL_CLUSTERS}

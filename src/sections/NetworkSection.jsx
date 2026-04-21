@@ -71,6 +71,7 @@ export default function NetworkSection() {
 
   const hero = {
     icon: MapPin,
+    accentColor: 'var(--accent-info-strong)',
     eyebrow: 'Weitervermittlung und Triage',
     title: 'Fachstellen für',
     accent: 'Zürich und schweizweite Ergänzungen.',

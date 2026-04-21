@@ -25,6 +25,7 @@ export default function PageHero({
   eyebrow,
   title,
   accent,
+  accentColor,
   lead,
   headingId,
   icon,
@@ -40,8 +41,9 @@ export default function PageHero({
   audienceNote,
 }) {
   const HeroIcon = icon || null;
+  const heroStyle = accentColor ? { '--hero-accent-color': accentColor } : undefined;
   return (
-    <div className="ui-hero">
+    <div className="ui-hero" style={heroStyle}>
       <div className="ui-hero__inner">
         <div className="ui-hero__content">
           {HeroIcon ? (
