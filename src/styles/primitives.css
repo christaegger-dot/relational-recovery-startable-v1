@@ -2772,6 +2772,100 @@
   line-height: var(--line-height-copy);
 }
 
+/* Tier-2-Handout H-3 (#116): Age-Grid — vier Altersphasen als Karten.
+   Basis: 1-Spalten-Stack auf Mobile. Tablet (48rem) wechselt zu 2-Spalten,
+   Desktop (64rem) zu 4-Spalten (siehe Media-Queries weiter unten). Im Druck
+   wird explizit 2x2 erzwungen (app-global.css §9). */
+.ui-material-handout__age-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ui-material-handout__age-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-app);
+}
+
+.ui-material-handout__age-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.ui-material-handout__age-range {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary-strong);
+}
+
+.ui-material-handout__age-label {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  line-height: var(--line-height-heading);
+  color: var(--text-primary);
+}
+
+.ui-material-handout__age-subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.ui-material-handout__age-subsection-title {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.ui-material-handout__age-subsection-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+  color: var(--text-primary);
+}
+
+.ui-material-handout__age-subsection-list li {
+  margin: 0;
+}
+
+.ui-material-handout__age-threshold {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: auto;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--surface-note);
+  color: var(--text-primary);
+}
+
+.ui-material-handout__age-threshold-text {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
 .ui-toolbox-quick-access {
   border-radius: calc(var(--radius-xl) + 0.25rem);
   background: var(--surface-app);
@@ -2986,6 +3080,12 @@
   .ui-material-handout__contacts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* H-3 Age-Grid (#116): 2-Spalten-Layout auf Tablet — entspricht dem
+     Print-2x2 und gibt jeder Karte genug Breite fuer die Bullet-Listen. */
+  .ui-material-handout__age-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 64rem) {
@@ -3028,6 +3128,12 @@
   }
 
   .ui-material-handout__usage {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  /* H-3 Age-Grid (#116): 4-Spalten-Layout auf Desktop — vier Karten
+     nebeneinander, jede Karte ein Altersbereich. */
+  .ui-material-handout__age-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

@@ -525,6 +525,67 @@
     break-inside: avoid;
   }
 
+  /* H-3 Age-Grid (#116): 2x2 auf A4 Portrait — vier Karten passen so auf
+     eine Seite, jede Karte bleibt am Stueck (avoid-page-break). Bildschirm-
+     4-Spalten ist auf A4 zu schmal, Querformat waere Mehraufwand fuer
+     Browser-Print-Dialog. */
+  .ui-material-handout__age-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 4mm !important;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+  .ui-material-handout__age-group {
+    background: #fff !important;
+    border: 0.5pt solid #999;
+    padding: 3mm 4mm;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .ui-material-handout__age-head {
+    border-bottom: 0.5pt solid #333;
+    padding-bottom: 1.5mm;
+    margin-bottom: 1mm;
+  }
+  .ui-material-handout__age-range {
+    color: #000;
+    font-size: 8pt;
+  }
+  .ui-material-handout__age-label {
+    color: #000;
+    font-size: 12pt;
+  }
+  .ui-material-handout__age-subsection-title {
+    color: #000;
+    font-size: 8pt;
+    margin-top: 1mm;
+  }
+  .ui-material-handout__age-subsection-list {
+    color: #000;
+    font-size: 9.5pt;
+    padding-left: 4mm;
+  }
+  .ui-material-handout__age-subsection-list li {
+    color: #000;
+    margin: 0;
+  }
+  .ui-material-handout__age-threshold {
+    background: #fff !important;
+    border: 0.5pt solid #000;
+    padding: 2mm 3mm;
+    margin-top: 1mm;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .ui-material-handout__age-threshold-text {
+    color: #000;
+    font-size: 9.5pt;
+  }
+
   /* 10. Vignetten-Print-Hinweis (V1 aus Audit 11) ------------------------ *
    * Die Vignetten-Seite ist bewusst nicht druckbar. Der Hinweis erscheint
    * zentral und ruhig auf der ansonsten leeren Druckseite.
