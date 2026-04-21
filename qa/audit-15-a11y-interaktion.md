@@ -1,7 +1,7 @@
 # Audit 15 — Accessibility + Interaktions-Integrität
 
 **Stand:** 2026-04-21
-**Bericht:** Phase 1 (Inventur, read-only)
+**Bericht:** Phase 1 (Inventur) + Phase 2 (Triage)
 **Prompt:** `qa/prompts/audit-a11y-interaktion.md`
 **Auslöser:** Verifikation gegen den neu etablierten Audit-Prompt-Katalog (PR #125).
 
@@ -185,22 +185,102 @@ Betroffene Zeilen:
 
 ---
 
-## STOPP
+---
 
-Phase 1 abgeschlossen. Ich warte auf Freigabe für Phase 2 (Triage + Massnahmenkatalog).
+## Phase 2 — Triage und Massnahmenkatalog
 
-### Vorschlag für Phase 2 (zur Diskussion, nicht zur Ausführung)
+### Gesamtbild
 
-- **I-1 — Sofort-Fix**: Routenliste in drei qa/scripts von `grundlagen` → `material`; `click-diagnose.mjs` Zielliste ebenfalls aktualisieren. Ein Commit, trivial, aber wichtig.
-- **A-1 / A-2 / A-3 — Follow-up-Tickets**: best-practice-Qualität, sauber, aber nicht release-blockierend. Zusammen fassbar oder einzeln.
-- **C-1 — Follow-up-Ticket**: entweder Token-Wert anheben oder drei Nutzungen umflaggen.
-- **Release-Readiness**: Stufe A (release-ready) empfehlenswert, sobald I-1 behoben ist.
+| Kategorie | Anzahl |
+|---|---:|
+| Sofort-Fix-Kandidaten | 1 |
+| Follow-up-Tickets (Quality of Life) | 4 |
+| Akzeptiert (bewusste Entscheidung) | 1 |
+| Release-Blocker | **0** |
 
-### Nicht fortgeführte Spuren (bewusst)
+**Release-Readiness-Empfehlung: Stufe A (release-ready).** I-1 ist der einzige Befund mit nicht-trivialer Auswirkung. Er betrifft die Test-Infrastruktur, nicht die Live-App — die App selbst hat nach allen laufenden Checks kein A11y-Problem. Dennoch sollte I-1 vor dem nächsten Release geschlossen sein, damit das Audit-14-Schutznetz den Material-Tab wieder abdeckt.
 
-- Lighthouse: nicht verfügbar. Falls später ein Full Accessibility Score gewünscht ist, manuell in Chrome DevTools laufen lassen — die axe-Abdeckung deckt das inhaltlich bereits ab.
-- Tastatur-Durchlauf pro Route: nicht automatisiert getestet. Kein Indiz aus statischer Prüfung auf Defekte, aber menschliche Tab-Tour bleibt empfehlenswert vor dem nächsten Major-Release.
+### Triage pro Befund
 
-### Artefakte
+#### I-1 — qa/scripts prüfen `grundlagen` statt `material`
 
-- `qa/scratch/axe-scan.mjs`, `qa/scratch/axe-detail.mjs`, `qa/scratch/contrast.mjs` — nur für diesen Audit angelegt, stehen als Vorlage bereit. Vor Phase 3 entweder konsolidiert in `qa/scripts/` aufnehmen oder löschen.
+- **Einordnung:** Sofort-Fix.
+- **Schwere:** Mittel-Hoch (Infrastruktur-Lücke, nicht Live-Defekt).
+- **Aufwand:** S (5 Minuten).
+- **Massnahme:** Hardcodierte Strings in vier Dateien ersetzen:
+  - `qa/scripts/interaction-overlap.mjs` Zeilen 28 + 43: `'grundlagen'` → `'material'`.
+  - `qa/scripts/click-reachability.mjs` Zeilen 27 + 35: dito.
+  - `qa/scripts/click-diagnose.mjs` Zeilen 20–22: `target: 'grundlagen'` → `target: 'material'`.
+- **Verifikation:** Nach Fix alle drei Scripts erneut laufen lassen. Exit-Code 0 erwartet, Material-Tab taucht in den Route-Logs auf.
+- **Risiko:** Minimal. Falls `material` geometrisch Probleme hätte, würde das Script den Fund jetzt erstmals sichtbar machen — genau der Schutzmechanismus, den wir zurückhaben wollen.
+
+#### A-1 — `region` best-practice (alle 8 Routen)
+
+- **Einordnung:** Follow-up-Ticket (niedrige Priorität).
+- **Schwere:** Niedrig. Kein WCAG-Fail — Screenreader können den Inhalt trotzdem erreichen.
+- **Ursache:** Der Persistenz-Banner (`div.leading-relaxed` mit Erklärtext zur lokalen Browser-Speicherung) und der zugehörige Uppercase-Kicker stehen ausserhalb jedes Landmarks im `<body>`.
+- **Massnahme-Optionen:**
+  - A) Banner in ein `<aside aria-label="Hinweis zur lokalen Speicherung">` einpacken.
+  - B) Pro Inhaltsblock `role="region"` + `aria-label` setzen.
+  - Empfehlung: A — semantisch passender, keine zusätzlichen ARIA-Attribute.
+- **Aufwand:** S. Einzige Stelle in `src/App.jsx`.
+- **Risiko:** Gering. Aside darf nicht akzidentell unter die z-Hierarchie des Site-Headers rutschen — nach Fix `z-stack.mjs` erneut laufen lassen.
+
+#### A-2 — `landmark-complementary-is-top-level` (6/8 Routen, 7× auf material)
+
+- **Einordnung:** Follow-up-Ticket (niedrige Priorität).
+- **Schwere:** Niedrig. Kein WCAG-Fail.
+- **Ursache:** Das `.ui-split`-Layout der Sections steckt `<aside class="ui-card">`-Karten direkt in `<section>`-Landmarks. axe verlangt, dass `<aside>` top-level steht oder zumindest nicht in einem anderen Landmark.
+- **Massnahme-Optionen:**
+  - A) `<aside>` → `<div role="complementary" aria-label="…">` mit expliziter Labelung.
+  - B) `<aside>` → `<div>` (semantisch Downgrade, wenn der Inhalt nicht wirklich "komplementär" ist).
+  - C) Einzelne `<section>` → `<div>`, damit `<aside>` top-level wird.
+  - Empfehlung: B oder A, je nach Cluster. Die Material-Handout-CrossRefs sind echte Komplementärinhalte (A); die AsideCards im Split-Layout sind oft nur Visual-Layout (B).
+- **Aufwand:** M. Betrifft `AsideCard.jsx` und ggf. `MaterialHandouts.jsx`. Muss sorgfältig abgewogen werden — voreiliges Downgrade bricht die semantische Bedeutung an den Stellen, wo die Aside wirklich Aside ist.
+- **Risiko:** Mittel. Am besten mit einer Design-System-Entscheidung koppeln (was ist strukturell Aside, was visuell Aside?).
+
+#### A-3 — Material-Handout Heading-Order + landmark-unique
+
+- **Einordnung:** Follow-up-Ticket (niedrige Priorität).
+- **Schwere:** Niedrig. Kein WCAG-Fail.
+- **Zwei Teildefekte:**
+  - **A-3a Heading-Order:** `MaterialHandouts.jsx:235, 242, 248` nutzen `<h5>` für Owner-/Datum-/Revisions-Labels direkt nach einem `<h3>` (Handout-Title). Der dazwischenliegende `<h4>` fehlt — die Owner-Felder stehen VOR dem ersten `<section>` mit seinem `<h4 section-title>`. Fix: `<h5>` → `<p class="ui-material-handout__field-title">` (rein visuelle Beschriftung, kein Heading nötig). Aufwand S.
+  - **A-3b landmark-unique:** 4 Handouts × gleiches `aria-label="Verwandte Inhalte"` führen zu nicht-eindeutigen Landmarks. Fix in `MaterialHandouts.jsx:77`: `aria-label={\`${crossRefs.title}: ${handout.title}\`}` oder auf `aria-labelledby` mit per-Handout-ID umstellen. Aufwand S.
+- **Risiko:** Gering. Beide Änderungen sind rein semantisch, keine Visuals.
+
+#### C-1 — Footer-Kicker unter AA-Schwelle
+
+- **Einordnung:** Follow-up-Ticket (niedrige Priorität).
+- **Schwere:** Niedrig. WCAG-strenggenommen Fail für Normaltext bei 10px/11px Uppercase, in der Praxis aber durch Tracking + Bold visuell gut lesbar. Audit bewertet streng.
+- **Massnahme-Optionen:**
+  - A) Token-Wert `--footer-text-muted` von `#8a705f` auf z.B. `#7a5f4c` anheben → ~5.0 Kontrast, AA für alle Nutzungen.
+  - B) Drei Nutzungen (`.footer-kicker`, `.footer-stat-card__label`, `.footer-bottom__claim`) auf `--footer-text-warm` (#5a4a3f, 6.24) umstellen — wie `.footer-framework-legal` es bereits tut.
+  - Empfehlung: B. Token-System zeigt in `primitives.css:4022` bereits, dass das Problem bekannt ist und die Lösung für den Legal-Block bereits `--footer-text-warm` ist. Konsistenz mit bestehender Entscheidung > Token-Wert-Änderung.
+- **Aufwand:** S.
+- **Risiko:** Gering. Visuelle Hierarchie im Footer wird etwas dichter, aber `--footer-text-muted` bleibt für grössere Footer-Texte (falls zukünftig hinzukommend) als Kategorie erhalten.
+
+### Werkzeug-Grenze (akzeptiert)
+
+- **Lighthouse nicht ausgeführt.** In dieser Sandkasten-Umgebung ist Lighthouse nicht verfügbar; Online-Download blockiert. axe-core deckt den WCAG-Teil vollständig ab. Wer einen Lighthouse-Score als Marketing-Zahl möchte: manueller Durchlauf in Chrome DevTools.
+- **Playwright-Browser-Revision.** Das Projekt pinnt `playwright-core@1.59.1` (Chromium 1217); die Sandkasten-Umgebung hat nur 1194 vorinstalliert. Kein Projekt-Defekt — CI und Production-Entwicklung auf Systemen mit funktionierendem Playwright-Install sind unberührt. Dokumentation für Audit-Reproduktion unter Sandkasten: temporär `playwright-core@1.56.1 --no-save --ignore-scripts` installieren.
+
+### Priorisierung für Phase 3
+
+Wenn Phase 3 durchgeführt wird, empfohlene Commit-Reihenfolge:
+
+1. **I-1** (Sofort-Fix, bringt Schutznetz zurück) — `audit(a11y): fix <grundlagen→material in qa/scripts>`.
+2. **A-3a** (trivial, heading-order `<h5>` → `<p>`) — `audit(a11y): fix material handout heading-order`.
+3. **A-3b** (trivial, aria-label pro Handout eindeutig) — `audit(a11y): fix material landmark-unique labels`.
+4. **C-1** (three-line CSS) — `audit(a11y): fix footer kicker contrast`.
+5. **A-1** (small scope in App.jsx) — `audit(a11y): fix persistence banner landmark`.
+6. **A-2** (grössere Design-System-Entscheidung) — **nicht ohne explizite Freigabe**. Sollte als eigenständiges Ticket mit Design-Review laufen.
+
+Nach jedem Commit alle drei qa/scripts + `qa/scratch/axe-scan.mjs` erneut laufen lassen (Regression-Check).
+
+### STOPP
+
+Phase 2 abgeschlossen. Ich warte auf Freigabe für Phase 3. Vorschlag: Fixes 1–5 durchführen (trivial, niedrig-riskant), A-2 separat als Ticket erfassen.
+
+### Artefakte (wie Phase 1)
+
+- `qa/scratch/axe-scan.mjs`, `qa/scratch/axe-detail.mjs`, `qa/scratch/contrast.mjs` — stehen als Vorlage bereit. Vor Phase 3 entweder konsolidiert in `qa/scripts/` aufnehmen oder löschen.
