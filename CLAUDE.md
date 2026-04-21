@@ -39,10 +39,7 @@ Jedes einzelne Handout im Material-Tab ist druckbar via Print-Button im Handout-
 **Wie ein neues Handout print-ready wird:**
 
 1. Handout-Objekt in `src/data/materialContent.js` unter `MATERIAL_HANDOUTS` anlegen (mit `id`, `kind`, etc.).
-2. Im Template (`src/templates/MaterialPageTemplate.jsx`) eine passende Komponente für den neuen `kind` im `MaterialHandoutSwitch` ergänzen. Die Komponente muss:
-   - `data-handout-id={handout.id}` auf dem `<article>` setzen (Voraussetzung für den Scoped-Print-Style),
-   - den `onPrintHandout`-Prop annehmen und als Button-Handler in Nähe des Titels nutzen (Muster: `MaterialCrisisPlan`),
-   - den Print-Button mit `className="ui-material-handout__print-btn no-print"` versehen.
+2. In `src/templates/MaterialHandouts.jsx` eine Komponente für den neuen `kind` ergänzen. Empfohlen: `<MaterialHandoutShell handout onNavigate onPrintHandout>…</MaterialHandoutShell>` als Wrapper — er liefert Article-Container + Head + Usage + Disclaimer + CrossRefs; die spezifische Komponente liefert nur die mittleren Sections via `children`. Im `MaterialHandoutSwitch` (Default-Export) einen `case`-Branch für den neuen `kind` ergänzen.
 3. Print-Typografie: Standardregeln für `.ui-material-handout*` im `@media print`-Block in `src/styles/app-global.css` (Abschnitt 9) greifen automatisch. Handout-spezifische Eigenheiten nur ergänzen, wenn ein Format stark abweicht.
 4. Der `useMaterialHandoutPrint`-Hook rendert beim Click einen scoped `<style>`-Block, der beim Druck alle anderen Handouts ausblendet — kein zusätzlicher Code pro Handout-Typ nötig.
 
@@ -54,7 +51,7 @@ Alle Rahmung (Hero, Intro, Index, FAQ-Cluster, ClosingSection) ist im `MaterialP
 - `'conversation-script'` — Tier-1 (Issue #112): Gespräch-Skript für betroffene Eltern. Erwartet `usage`, `opener {title, text, note}`, `childQuestions {title, intro, items[].question, items[].anchor}`, `understandingCheck {title, intro, prompt, note}`, `process {title, items[]}`, `disclaimer`, `crossRefs` (`MaterialConversationScript`).
 - `'threshold-checklist'` — Tier-1 (Issue #113): Schwellen-Karte für Angehörige. Erwartet `usage`, `priorityRule {title, intro, items[].step, items[].label, items[].detail}`, `thresholds {title, intro, items[].observation, items[].escalate}`, `contacts {title, intro, items[].number?, items[].name?, items[].detail}`, `selfNote {title, text}`, `disclaimer`, `crossRefs` (`MaterialThresholdChecklist`).
 
-Die Tier-1-Komponenten teilen sich die kleinen Helper `MaterialHandoutHead` / `MaterialHandoutUsage` / `MaterialHandoutDisclaimer`. `MaterialCrisisPlan` ist bewusst NICHT auf die Helper umgestellt — die existierende DOM-Struktur ist von den Print-Tests + Print-Typografie abhängig. Refactoring auf gemeinsame Bausteine kommt als separate Welle, sobald das Pattern bei 3+ Handouts stabil ist.
+Die Tier-1-Komponenten nutzen den `MaterialHandoutShell`-Wrapper (Head + Usage am Anfang, Disclaimer + CrossRefs am Ende). `MaterialCrisisPlan` ist bewusst NICHT auf den Shell umgestellt — die existierende DOM-Struktur ist von den Print-Tests + Print-Typografie abhängig. Konsolidierung kommt erst, wenn ein begründeter Anlass besteht (z. B. Label-Vereinheitlichung).
 
 ### Material-Cluster: Zielgruppen-Blöcke
 
