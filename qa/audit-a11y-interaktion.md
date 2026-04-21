@@ -441,3 +441,126 @@ und Feld-Labeln. Die spaeteren Felder "Krisenplan" und "Was mir im Alltag
 hilft" haben `<h4>`, die Ownership-Felder (Name/Datum/Zuletzt-ueberarbeitet)
 aber `<h5>`. Lokalisierter Inconsistenz im Crisis-Plan-Template,
 `MaterialHandoutShell`-Handouts sind davon nicht betroffen.
+
+---
+
+## Phase 4: Verifikation
+
+Datum: 2026-04-21. Build sauber, Lint sauber, alle Audit-Scripts clean auf
+`audit/a11y-interaktion` nach den vier Phase-3-Fix-Commits.
+
+### Commit-Chronik (Phase 3)
+
+```
+1a24d37  audit(a11y): fix heading-order — Handout-Ownership-Felder h5 auf h4
+80b5e33  audit(a11y): fix landmark-complementary + landmark-unique — <aside> zu <div>
+f57eafb  audit(a11y): fix region — Banner + Emergency-Strip als Landmarks kapseln
+10064be  audit(a11y): Phase 2 — Triage und Fix-Plan
+a04012c  audit(a11y): Phase 1 — Inventur a11y + Interaktions-Integritaet
+```
+
+### Build + Lint
+
+- `npm run build`: sauber (1724 Module, 2.69 s). Nur der bereits vorher
+  bestehende `%VITE_BASE_URL%`-Hinweis in `index.html`, wird im Post-Build-
+  Replace durch den tatsaechlichen Wert ersetzt.
+- `npm run lint` (ESLint): sauber, 0 Warnings.
+
+### axe-core (`qa/scripts/a11y-axe.mjs`)
+
+```
+Base URL:   http://127.0.0.1:4180
+Viewports:  mobile-375, tablet-768, desktop-1280
+Routen:     start, lernmodule, vignetten, glossar, material, evidenz, toolbox, netzwerk
+Gesamt-Violations (Summe Routen × Viewports): 0
+
+--- Eindeutige Regeln nach Impact ---
+{ "critical": 0, "serious": 0, "moderate": 0, "minor": 0 }
+```
+
+Im Vergleich zur Phase-1-Baseline:
+
+| Regel                             | Impact   | Baseline | Phase 4 |
+| --------------------------------- | -------- | -------- | ------- |
+| region                            | moderate |       12 |       0 |
+| landmark-complementary-is-top-level | moderate |     21 |       0 |
+| landmark-unique                   | moderate |        9 |       0 |
+| heading-order                     | moderate |        3 |       0 |
+
+Alle moderate-Findings beseitigt. Keine neuen Regeln ausgeloest.
+
+### Heading-Tree (`qa/scripts/a11y-heading-tree.mjs`)
+
+Alle 8 Routen: genau 1× H1, 0 Heading-Spruenge groesser 1 Stufe. Landmark-
+Liste pro Route jetzt einheitlich:
+
+```
+<aside aria-label="Datenschutzhinweis">
+<aside aria-label="Akute Krise — Notfallnummern">
+<header>
+<main>
+<footer>
+<nav aria-label="Fusszeilen-Navigation">
+```
+
+(Auf Routen ohne aktivierten Persistenz-Banner faellt dessen `<aside>` weg;
+auf Material- + Evidence-Routen mit internem Sprungtexten steht zusaetzlich
+noch ein `<header>` im Hero-Bereich — das ist ein HTML-`<header>`-Tag
+_innerhalb_ von `<main>`, das nur landmark-rollenmaessig zaehlt, wenn es
+nicht in einem `<article>`/`<section>`/`<main>` liegt; hier unkritisch.)
+
+### Interaction-Overlap (`qa/scripts/interaction-overlap.mjs`)
+
+```
+Viewports: mobile-375, tablet-768, laptop-1024, desktop-1280, desktop-1440, desktop-1920
+Routes:    start, lernmodule, vignetten, glossar, grundlagen, evidenz, toolbox, netzwerk
+Overlaps gefunden: 0
+
+Keine Overlap-Befunde. Interaction-Layer clean.
+```
+
+Unveraendert zur Phase-1-Baseline. Der Tausch `<aside>` → `<div>` + die
+neuen Landmark-Wrapper aendern weder DOM-Reihenfolge noch Stacking, darum
+keine Regression zu erwarten.
+
+### Click-Reachability (`qa/scripts/click-reachability.mjs`)
+
+```
+Viewports: mobile-375, desktop-1280, desktop-1920
+Routes:    start, lernmodule, vignetten, glossar, grundlagen, evidenz, toolbox, netzwerk
+Nav-Klicks geprueft: 88, Tel-Links geprueft: 66
+Failures: 0
+
+Alle Klick-Erwartungen erfuellt. Interaktion funktional.
+```
+
+66/66 `tel:`-Links erreichbar auf drei Viewport-Groessen — die R31-
+Notfallkette bleibt intakt.
+
+### Z-Stack (`qa/scripts/z-stack.mjs`)
+
+```
+Positioned mit z-index: 3
+Fixed ohne z-index:     0
+Top z-index Werte:
+  z=  200  A "Zum Inhalt springen"
+  z=  150  HEADER "EB Eltern im Beratungskontext..."
+  z=  100  ASIDE "Datenschutzhinweis"
+Anomalien: 0
+```
+
+Hierarchie unveraendert zur Baseline. Der Banner traegt jetzt Tag `<aside>`
+statt `<div>` (Fix #1), der Skip-Link bleibt auf z=200 hoechster Knoten.
+
+### Fazit
+
+Phase-1-Baseline (45 moderate axe-Violations verteilt auf 4 Regeln) ist
+auf 0 Violations reduziert. Die Notfall-Infrastruktur (R31 `tel:`-Kette,
+P0 Print, F4 Touch-Targets, K1 Klick-Erreichbarkeit) ist in allen Regres-
+sionstests intakt. Barrierefreiheits-Substanz wurde ausschliesslich
+**ergaenzt** (Banner + Emergency-Strip jetzt als `<aside aria-label>`
+zugaenglich) oder durch aequivalente Struktur ersetzt (Sidecards:
+`<aside>` → `<div role="group" aria-label>` mit erhaltenen Labels) —
+keine Reduktion.
+
+Der Branch `audit/a11y-interaktion` ist mit 5 Commits bereit zum Push.
