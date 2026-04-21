@@ -130,7 +130,10 @@ export default function App() {
       </a>
 
       {showSafeNote && (
-        <div className="relative z-[100] border-b border-[var(--border-inverse)] bg-[linear-gradient(180deg,var(--surface-inverse-top),var(--surface-inverse-bottom))] px-3 py-3 text-[var(--text-inverse)] no-print">
+        <aside
+          aria-label="Datenschutzhinweis"
+          className="relative z-[100] border-b border-[var(--border-inverse)] bg-[linear-gradient(180deg,var(--surface-inverse-top),var(--surface-inverse-bottom))] px-3 py-3 text-[var(--text-inverse)] no-print"
+        >
           <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-2 md:flex-row md:items-center md:px-6">
             <div className="flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[var(--text-inverse-muted)]">
               <ShieldCheck size={16} className="shrink-0 text-[var(--icon-warning-inverse)]" aria-hidden="true" />
@@ -148,10 +151,13 @@ export default function App() {
               Schliessen
             </button>
           </div>
-        </div>
+        </aside>
       )}
 
-      <div className="no-print border-b border-[var(--border-error-soft)] bg-[linear-gradient(180deg,var(--surface-error-soft),var(--surface-muted))]">
+      <aside
+        aria-label="Akute Krise — Notfallnummern"
+        className="no-print border-b border-[var(--border-error-soft)] bg-[linear-gradient(180deg,var(--surface-error-soft),var(--surface-muted))]"
+      >
         {/* Mobile-Variante (<md): kompakte Liste mit Label → Nummer.
             Spart gegenüber der Desktop-Prosa ~200px ATF. Der CTA-Button
             entfällt auf Mobile, weil das Notfall-Icon im Header (PR #65)
@@ -238,7 +244,7 @@ export default function App() {
             Zu Notfallinformationen
           </button>
         </div>
-      </div>
+      </aside>
 
       <Header
         mobileMenuOpen={mobileMenuOpen}
