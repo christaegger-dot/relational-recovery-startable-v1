@@ -125,7 +125,7 @@ export const NETWORK_MAP_TEMPLATE_NODES = [
     positionKey: 'freund-in-des-kindes',
     tone: 'support',
     zone: 'outer',
-    detail: 'Zeigt soziale Einbindung und entlastende Außenbezüge für das Kind.',
+    detail: 'Zeigt soziale Einbindung und entlastende Aussenbezüge für das Kind.',
     mobileRow: '3 / span 1',
     mobileCol: '1 / span 2',
     desktopTop: '76%',
