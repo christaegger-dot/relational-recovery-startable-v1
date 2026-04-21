@@ -17,14 +17,26 @@ import { FACHSTELLEN, SUPPORT_OFFER_IDS } from './fachstellenContent';
  */
 
 /**
+ * @typedef {('fachperson')} FachpersonAudience
+ * Default-Adressat des Portals: Fachpersonen in Erwachsenenpsychiatrie
+ * und Beratungskontext. Sie-Anrede, Fach-Vokabular, klinische Rahmung,
+ * Neutralitaet ohne therapeutische Direktive. Sieben von acht Tabs
+ * tragen diese Markierung.
+ */
+
+/**
  * @typedef {('weitergabe')} WeitergabeAudience
- * Redaktionelles Metadatum fuer Ausnahme-Tabs. Seit Audience-Cut-Phase 2
- * ist Fachperson der Default — nur der Material-Tab traegt das Feld
- * `primaryAudience: 'weitergabe'`, weil seine Inhalte als Handout-Material
- * an Patient:innen und Angehoerige gedacht sind (Fachperson nutzt sie im
- * Gespraech oder gibt sie weiter). Das Nav-Label "Material" traegt das
- * Zielgruppen-Signal selbst, deshalb ist der frueher zusaetzlich gesetzte
- * audienceBadge hier entfallen.
+ * Ausnahme-Adressat: Patient:innen und Angehoerige. Inhalte sind als
+ * Handout-Material gerahmt, das Fachpersonen im Gespraech einsetzen oder
+ * zur Weitergabe verlinken. Sprache zugaenglich, Anrede situativ (oft Du),
+ * keine Fachsprache ohne Erklaerung. Aktuell traegt nur der Material-Tab
+ * dieses Feld.
+ */
+
+/**
+ * @typedef {FachpersonAudience | WeitergabeAudience} PrimaryAudience
+ * Diskriminierte Union — jeder Tab muss genau einen der beiden Werte
+ * tragen. Fehlende oder andere Werte sind ein Fehler.
  */
 
 /**
@@ -34,10 +46,10 @@ import { FACHSTELLEN, SUPPORT_OFFER_IDS } from './fachstellenContent';
  * @property {React.ComponentType} icon - Lucide-React-Icon-Komponente.
  * @property {string} footerNote - Kurzer Beschreibungstext fuer den Footer.
  * @property {'primary'} priority - Aktuell sind alle Top-Level-Tabs 'primary'.
- * @property {WeitergabeAudience} [primaryAudience] - Optional. Nur gesetzt
- *   fuer Tabs, deren Inhalte als Material zur Weitergabe an Patient:innen
- *   und Angehoerige gedacht sind. Fehlendes Feld bedeutet: Default-Adressat
- *   Fachperson.
+ * @property {PrimaryAudience} primaryAudience - Pflichtfeld. Steuert die
+ *   redaktionelle Hand fuer den gesamten Tab: Sprache, Anrede, Beispiele,
+ *   Disclaimer-Tonalitaet. Siehe CLAUDE.md "Zielgruppen" fuer die
+ *   Entscheidungslogik.
  * @property {string} [audienceBadge] - Optional. Sichtbarer Zielgruppen-
  *   Marker im Nav-Button (Desktop + Mobile). Aktuell ungenutzt — fuer
  *   kuenftige Sub-Adressat-Markierung pro Cluster reserviert (siehe
@@ -46,18 +58,27 @@ import { FACHSTELLEN, SUPPORT_OFFER_IDS } from './fachstellenContent';
 
 /** @type {TabItem[]} */
 export const TAB_ITEMS = [
-  // Default-Adressat aller Tabs ohne explizites primaryAudience-Feld:
-  // Fachperson. Nur der Material-Tab traegt `primaryAudience: 'weitergabe'`,
-  // weil seine Inhalte als Handout-Material an Patient:innen und Angehoerige
-  // gedacht sind. Das Nav-Label "Material" traegt das Zielgruppen-Signal
-  // selbst, deshalb ist dort aktuell kein zusaetzlicher audienceBadge gesetzt.
-  { id: 'start', label: 'Start', icon: LayoutDashboard, footerNote: 'Dashboard und Orientierung', priority: 'primary' },
+  // Jeder Tab traegt explizit `primaryAudience`. Sieben von acht sind
+  // 'fachperson' (Default-Adressat: Erwachsenenpsychiatrie + Beratung).
+  // Nur der Material-Tab ist 'weitergabe' — Handouts fuer Patient:innen
+  // und Angehoerige, die Fachpersonen im Gespraech einsetzen oder
+  // weitergeben. Entscheidungslogik fuer kuenftige Tabs in CLAUDE.md
+  // "Zielgruppen".
+  {
+    id: 'start',
+    label: 'Start',
+    icon: LayoutDashboard,
+    footerNote: 'Dashboard und Orientierung',
+    priority: 'primary',
+    primaryAudience: 'fachperson',
+  },
   {
     id: 'lernmodule',
     label: 'Lernmodule',
     icon: GraduationCap,
     footerNote: 'Kurzformate für Fachpraxis',
     priority: 'primary',
+    primaryAudience: 'fachperson',
   },
   {
     id: 'vignetten',
@@ -65,6 +86,7 @@ export const TAB_ITEMS = [
     icon: HeartHandshake,
     footerNote: 'Fallreflexion und Dialog',
     priority: 'primary',
+    primaryAudience: 'fachperson',
   },
   {
     id: 'glossar',
@@ -72,6 +94,7 @@ export const TAB_ITEMS = [
     icon: BookOpenText,
     footerNote: 'Begriffe, Konzepte und Sprache',
     priority: 'primary',
+    primaryAudience: 'fachperson',
   },
   {
     id: 'material',
@@ -87,6 +110,7 @@ export const TAB_ITEMS = [
     icon: Activity,
     footerNote: 'Kapitel, Vertiefung, Materialien',
     priority: 'primary',
+    primaryAudience: 'fachperson',
   },
   {
     id: 'toolbox',
@@ -94,6 +118,7 @@ export const TAB_ITEMS = [
     icon: ClipboardCheck,
     footerNote: 'Triage, Schutz, nächste Schritte',
     priority: 'primary',
+    primaryAudience: 'fachperson',
   },
   {
     id: 'netzwerk',
@@ -101,8 +126,26 @@ export const TAB_ITEMS = [
     icon: MapPin,
     footerNote: 'Fachstellen und Weitervermittlung',
     priority: 'primary',
+    primaryAudience: 'fachperson',
   },
 ];
+
+// Dev-Guard: jeder TabItem muss ein gueltiges `primaryAudience` tragen.
+// Laeuft nur im Dev-Build (Vite-Konstante DEV) und kostet in Production
+// nichts. Verhindert, dass kuenftige Tab-Eintraege das Pflichtfeld
+// vergessen — ohne ein eigenes Test-Framework dafuer aufzusetzen.
+if (import.meta.env?.DEV) {
+  const VALID_AUDIENCES = new Set(['fachperson', 'weitergabe']);
+  for (const tab of TAB_ITEMS) {
+    if (!VALID_AUDIENCES.has(tab.primaryAudience)) {
+      console.error(
+        `[appShellContent] TAB_ITEMS["${tab.id}"]: primaryAudience fehlt oder ist ungueltig ` +
+          `(erwartet: 'fachperson' | 'weitergabe', erhalten: ${JSON.stringify(tab.primaryAudience)}). ` +
+          `Siehe CLAUDE.md "Zielgruppen" fuer die Entscheidungslogik.`
+      );
+    }
+  }
+}
 
 // Zwei unabhaengige Versionsachsen -- bewusst nicht synchron:
 //
