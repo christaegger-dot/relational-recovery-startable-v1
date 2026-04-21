@@ -29,8 +29,19 @@
     />
     <meta name="twitter:image" content="%VITE_BASE_URL%/og-image.webp" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Audit 16 P1-2: preconnect-Hints zu fonts.googleapis.com und
+      fonts.gstatic.com entfernt. tokens.css deklariert zwar
+      `--font-body: 'Manrope', ...` und `--font-heading: 'Source Serif 4', ...`,
+      aber es gibt keinen @font-face, kein @import url(...) und keinen
+      CSS-Link auf Google Fonts — die App rendert auf System-Fallbacks
+      (ui-sans-serif / Georgia). Die Preconnects starteten bei jedem
+      Kalt-Load zwei DNS+TLS-Handshakes zu einer Origin, die nie
+      angesprochen wurde. Wenn Manrope / Source Serif 4 tatsaechlich
+      geladen werden sollen, muss das zusammen mit font-display und
+      Self-Hosting (oder bunny.net) in einem eigenen Editorial-Entscheid
+      passieren — siehe auch qa/audit-09-frontend-compliance.md.
+    -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
