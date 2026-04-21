@@ -6,7 +6,12 @@ import { getPageHeadingId } from '../utils/appHelpers';
 export default function GlossarSection() {
   return (
     <GlossarPageTemplate
-      hero={{ ...GLOSSARY_HERO, icon: BookOpenText, accentColor: 'var(--accent-info-strong)' }}
+      hero={{
+        ...GLOSSARY_HERO,
+        icon: BookOpenText,
+        accentColor: 'var(--accent-info-strong)',
+        asideTone: 'highlight',
+      }}
       pageHeadingId={getPageHeadingId('glossar')}
       intro={GLOSSARY_INTRO}
       groups={GLOSSARY_GROUPS}

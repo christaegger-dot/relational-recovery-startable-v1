@@ -1063,6 +1063,20 @@
   padding: 1.25rem;
 }
 
+/* Audit 25 / Sprint 4 (O5): Highlight-Variante aktiviert --surface-accent-soft
+   (das blieb bisher ungenutzt, ausser als 24%-Beimischung im --surface-note).
+   Einsatz aktuell nur auf dem Glossar-Hero-Aside -- der weich-gelbe
+   Hintergrund signalisiert dort die Funktion "Referenz / Nachschlagewerk"
+   und hebt den Aside bewusst gegen die anderen Hero-Asides ab. Kontrast:
+   --text-primary (#2f2f28) auf --surface-accent-soft (#f1f3ce) = 11.05 : 1
+   (AA fuer Normaltext 4.5 deutlich uebererfuellt). Border uebernimmt eine
+   gedaempfte Mischung aus --accent-secondary, damit der Rand nicht in der
+   warmen Seitenfarbe verschwindet. */
+.ui-hero__aside--highlight {
+  background: var(--surface-accent-soft);
+  border-color: color-mix(in srgb, var(--accent-secondary) 40%, var(--border-default) 60%);
+}
+
 .ui-hero__aside-title {
   margin: 0;
   color: var(--text-primary);
@@ -4062,6 +4076,30 @@
   font-size: var(--font-size-xs);
   font-weight: 500;
   line-height: 1.9;
+}
+
+/* Audit 25 / Sprint 4 (O15): Identitaetssatz in Source Serif 4 Italic
+   schiebt sich zwischen Nav-Grid und Uppercase-Claim. Groesserer margin-top
+   setzt den Satz optisch als eigenen Block ab, die margin-bottom laesst den
+   nachfolgenden Claim anschliessen. --footer-text-warm (#5a4a3f) erreicht
+   auf der Sandkachel 6.24 Kontrast (AA). Font-Family erbt nicht automatisch
+   die Serif; explizit setzen, da Manrope der Footer-Default ist. */
+.footer-identity {
+  margin: var(--space-7) 0 var(--space-4);
+  padding-top: var(--space-6);
+  border-top: 1px solid color-mix(in srgb, var(--footer-text-warm) 18%, transparent 82%);
+  color: var(--footer-text-warm);
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 1.2vw, 1.1875rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.55;
+  max-width: 44rem;
+}
+
+.footer-identity__emphasis {
+  font-style: italic;
+  color: var(--footer-text-warm);
 }
 
 .footer-bottom {

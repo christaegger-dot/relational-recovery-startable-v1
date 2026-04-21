@@ -421,7 +421,15 @@ export default function ClosingSection({ section, sectionId, surface = 'plain', 
 
   return (
     <>
-      <Section id={section.id || sectionId} spacing="tight" surface={surface} className={className}>
+      {/* Audit 25 / Sprint 4 (O14): Section-Rhythmus variieren.
+          Die ClosingSection war bislang auf jeder Seite mit `spacing="tight"`
+          direkt an die letzte Kapitel-Section angeschlossen -- der Uebergang
+          von Inhaltsfluss zu Abschluss blieb dadurch kaum spuerbar. Mit
+          `spacing="standard"` entsteht ein klarer Atempunkt (+5.5rem vs
+          3.75rem) zwischen letzter Arbeitssektion und Abschlussblock.
+          Die nested ClosingReferences bleibt bewusst `tight`, weil sie
+          innerhalb des Closing-Stacks sitzt (kein zweiter Atempunkt noetig). */}
+      <Section id={section.id || sectionId} spacing="standard" surface={surface} className={className}>
         <div className={hasPrintView ? 'ui-stack ui-stack--loose no-print' : 'ui-stack ui-stack--loose'}>
           <ClosingHeader section={section} />
           <ClosingPrimaryActions items={section.primaryActions} />

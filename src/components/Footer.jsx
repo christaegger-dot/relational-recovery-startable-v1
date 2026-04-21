@@ -94,6 +94,18 @@ const Footer = memo(function Footer() {
           </div>
         </div>
 
+        {/* Audit 25 / Sprint 4 (O15): Serif-Italic-Identitaetssatz als
+            editoriale Stimme zwischen Navigations-Grid und Uppercase-Claim.
+            Die bewusste Ruhe in Manrope/Source-Serif + Italic setzt einen
+            kleinen Ton-Kontrast gegen die Uppercase-Kacheln darunter und
+            macht den Footer zur Identitaetsflaeche statt zur blossen
+            Service-Zeile. Text ist redaktionell; Paarung mit dem Claim
+            darunter ist Absicht (Editorial-Satz zuerst, dann Markenton). */}
+        <p className="footer-identity">
+          Ein ruhiger Ort zwischen{' '}
+          <em className="footer-identity__emphasis">Erwachsenenpsychiatrie und Beratungsalltag.</em>
+        </p>
+
         <div className="footer-bottom">
           <p className="footer-bottom__claim">Fachlich ruhig. Systemisch. Praxisnah.</p>
         </div>
