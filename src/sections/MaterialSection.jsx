@@ -1,3 +1,4 @@
+import { CircleHelp } from 'lucide-react';
 import MaterialPageTemplate from '../templates/MaterialPageTemplate';
 import {
   MATERIAL_CLUSTERS,
@@ -104,7 +105,7 @@ export default function MaterialSection({ sharedDownloadResources = [] }) {
 
   return (
     <MaterialPageTemplate
-      hero={MATERIAL_HERO}
+      hero={{ ...MATERIAL_HERO, icon: CircleHelp }}
       pageHeadingId={getPageHeadingId('material')}
       intro={MATERIAL_INTRO}
       clusters={MATERIAL_CLUSTERS}

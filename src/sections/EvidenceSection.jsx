@@ -1,3 +1,4 @@
+import { Activity } from 'lucide-react';
 import EvidencePageTemplate from '../templates/EvidencePageTemplate';
 import {
   ABOUT_THIS_WEBSITE_POINTS,
@@ -113,6 +114,7 @@ function digitalMediaItems(items = []) {
 
 export default function EvidenceSection({ downloadResources = [] }) {
   const hero = {
+    icon: Activity,
     eyebrow: 'Evidenz und klinische Orientierung',
     title: 'Einordnen, benennen und',
     accent: 'familienorientiert handeln.',
