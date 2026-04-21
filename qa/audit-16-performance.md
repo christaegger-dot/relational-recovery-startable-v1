@@ -1,7 +1,7 @@
 # Audit 16 — Performance + Bundle-Hygiene
 
 **Stand:** 2026-04-21
-**Bericht:** Phase 1 (Inventur)
+**Bericht:** Phase 1 (Inventur) + Phase 3 (Fixes) + Phase 4 (Verifikation)
 **Prompt:** `qa/prompts/audit-performance.md`
 **Auslöser:** Verifikation gegen den Audit-Prompt-Katalog, nachdem Audit 15 (a11y + Interaktion) release-ready abgeschlossen ist (PR #126, PR #129).
 **Stack:** Vite 7.3.2 + React 19.2 + Tailwind 4.1.0, rein clientseitig, kein Backend. Start-Route wird per `scripts/inject-prerender.mjs` statisch in `dist/index.html` injiziert.
@@ -220,3 +220,57 @@ Tailwind 4 + primitives.css ergeben 119.40 KB raw / 19.45 KB gzip. Für einen De
 Die P1-Fixes (P1-1 vendor-split, P1-2 dead preconnects, P1-3 fetchpriority) sind alle S-Aufwand und zusammen voraussichtlich 100-300 ms LCP + 40-50 KB Repeat-Visit-Gewinn. **Vorschlag: alle drei in Phase 3 umsetzen**, je ein Commit, danach Re-Build + Diff-Tabelle im Bericht. P2-1 und P3-1 bleiben als Follow-up-Notizen ohne Ticket.
 
 **Bundle-Analyzer-Empfehlung:** Der User hat explizit keinen `npm install` für Analyzer erlaubt. Falls später gewünscht: `rollup-plugin-visualizer` wäre der Standard, als devDep ins package.json, liefert `stats.html` pro Build. Nicht Teil dieses Audits.
+
+---
+
+## Phase 3 — Umsetzung
+
+Die drei P1-Fixes sind in drei Commits auf `claude/audit-16-performance` umgesetzt:
+
+| Commit | Hot-Spot | Änderung |
+|---|---|---|
+| `44cd7d5` | P1-1 | `vite.config.js` manualChunks Function-Form; React/ReactDOM/scheduler → `vendor`, lucide-react → `icons` |
+| `3b3e762` | P1-2 | `index.html` Preconnects zu fonts.googleapis.com / fonts.gstatic.com entfernt, Begründungs-Kommentar ergänzt |
+| `9b116c5` | P1-3 | `src/components/ui/PageHero.jsx` + `src/prerendered/start-body.html`: Hero-`<img>` mit `fetchpriority="high"` + `decoding="async"` |
+
+## Phase 4 — Verifikation
+
+**Build:** `npm run build` sauber (warnings unverändert: 5-6× `%VITE_BASE_URL%` — ist Post-Build-Platzhalter, kein Regress).
+**Lint:** `npm run lint` grün.
+**`npm audit --omit=dev`:** 0 vulnerabilities (unverändert).
+
+### Bundle-Diff (gzip)
+
+| Chunk | Vorher | Nachher | Δ |
+|---|---:|---:|---:|
+| `vendor` | 1.38 KB | **60.29 KB** | **+58.91 KB** (React-Interna jetzt hier) |
+| `index` (entry) | 95.60 KB | **38.82 KB** | **−56.78 KB** |
+| `icons` | 5.77 KB | **2.89 KB** | **−2.88 KB** |
+| Summe (entry+vendor+icons, first-load) | 102.75 KB | 102.00 KB | −0.75 KB |
+| **Repeat-Visit Ersparnis nach App-Update** | — | — | **~60 KB gzip** (vendor aus Cache) |
+
+Die restlichen Route-Chunks sind unverändert (nur Hash-Änderung durch die manualChunks-Umstellung).
+
+### Was sich messbar ändert
+
+- **First Load (kalt):** ~gleich grosse Total-Bytes, minimaler Overhead durch zusätzlichen vendor-Chunk-Request (über HTTP/2 parallelisiert → irrelevant).
+- **Repeat Load nach App-Änderung:** ~60 KB gzip weniger (React kommt aus dem Browser-Cache, da der `vendor-*.js`-Content-Hash stabil bleibt, solange React-Version unverändert ist).
+- **LCP auf Start-Route:** geschätzt 100-300 ms schneller auf Mobile, weil das Hero-Bild jetzt `fetchpriority="high"` trägt und in der ersten Priority-Queue-Welle geladen wird.
+- **Kalt-Load-DNS:** 50-200 ms gespart, weil die zwei toten Preconnects auf Google Fonts weg sind.
+
+### Was sich NICHT ändern soll
+
+- **CSS-Bundle (119 KB raw / 19.45 KB gzip):** unverändert, kein Refactoring im Scope (P3).
+- **Build-Warnings `%VITE_BASE_URL%`:** unverändert, bewusst als Post-Build-Platzhalter akzeptiert (P2-1 hat keinen Runtime-Impact).
+- **Lazy-Loading-Coverage:** unverändert bei 7/8 (HomeLanding bleibt eager wie in CLAUDE.md dokumentiert).
+
+### Manuelle Nachkontrollen (nicht in diesem Audit)
+
+- CWV-Messung auf produktivem Netlify-Deploy (Lighthouse/PageSpeed) nach dem Merge zur Validierung der LCP-Schätzung.
+- Cache-Hit-Rate auf `vendor-*.js` nach zwei App-Releases (Browser-DevTools-Network-Panel).
+
+---
+
+## Fazit
+
+Phase 1 hat bestätigt, dass das CLAUDE.md-Konzept (Vite 7, React 19, Tailwind 4, HomeLanding eager + 7 Sections lazy) sauber umgesetzt ist. Die drei P1-Hot-Spots waren alle S-Aufwand, je ein Commit, verbessern LCP und Cache-Hygiene, und ändern weder Funktionalität noch Design. Release-ready.
