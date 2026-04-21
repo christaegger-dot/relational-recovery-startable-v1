@@ -232,20 +232,20 @@ function MaterialCrisisPlan({ handout, onNavigate, onPrintHandout }) {
 
       <div className="ui-material-handout__ownership">
         <div className="ui-material-handout__field ui-material-handout__field--inline">
-          <h5 className="ui-material-handout__field-title">{handout.header.ownerLabel}</h5>
+          <h4 className="ui-material-handout__field-title">{handout.header.ownerLabel}</h4>
           <div aria-hidden="true" className="ui-material-handout__lines">
             <div className="ui-material-handout__line" />
           </div>
         </div>
         <div className="ui-material-handout__ownership-meta">
           <div className="ui-material-handout__field ui-material-handout__field--inline">
-            <h5 className="ui-material-handout__field-title">{handout.header.dateLabel}</h5>
+            <h4 className="ui-material-handout__field-title">{handout.header.dateLabel}</h4>
             <div aria-hidden="true" className="ui-material-handout__lines">
               <div className="ui-material-handout__line" />
             </div>
           </div>
           <div className="ui-material-handout__field ui-material-handout__field--inline">
-            <h5 className="ui-material-handout__field-title">{handout.header.revisedLabel}</h5>
+            <h4 className="ui-material-handout__field-title">{handout.header.revisedLabel}</h4>
             <div aria-hidden="true" className="ui-material-handout__lines">
               <div className="ui-material-handout__line" />
             </div>
