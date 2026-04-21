@@ -3,8 +3,14 @@ import SurfaceCard from './SurfaceCard';
 export default function AsideCard({ aside, tone = 'soft' }) {
   if (!aside) return null;
 
+  // Audit 15 A-2: Rendert als <div>, nicht als <aside>. Die Karte sitzt
+  // visuell in der Aside-Spalte des Split-Layouts, ist semantisch aber
+  // kein page-level Komplementaer-Landmark -- sie ergaenzt die umliegende
+  // Section-Hierarchie. <aside> innerhalb einer <section> verletzt
+  // landmark-complementary-is-top-level und blaeht die SR-Landmark-Liste
+  // ohne Mehrwert auf.
   return (
-    <SurfaceCard as="aside" tone={aside.tone || tone}>
+    <SurfaceCard as="div" tone={aside.tone || tone}>
       {aside.label ? <p className="ui-fact-card__label">{aside.label}</p> : null}
       {aside.title ? <h3 className="ui-card__title">{aside.title}</h3> : null}
       {aside.value ? <p className="ui-fact-card__value">{aside.value}</p> : null}

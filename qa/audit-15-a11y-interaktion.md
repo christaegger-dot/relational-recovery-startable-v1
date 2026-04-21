@@ -349,3 +349,36 @@ node qa/scripts/z-stack.mjs http://127.0.0.1:4180
 ### TL;DR Phase 4
 
 5 Commits, 3 Findings komplett behoben (I-1, A-3a/b, C-1), 1 Finding teilweise behoben (A-1 löst 8 region-Nodes), 1 bewusst verschoben (A-2 braucht Design-System-Review). Audit-14-Schutznetz wieder vollständig. Keine neuen Verstösse eingeführt.
+
+---
+
+## Phase 5 — A-2-Nachgang (Issue #128)
+
+A-2 wurde nach Phase 4 als eigenständiges Ticket bearbeitet. **Designentscheidung:** Option B durchgängig (Aside-Downgrade auf `<div>`), weil:
+
+- Option A (`<div role="complementary">`) hat denselben Landmark-Effekt — die Regel wäre nicht gelöst.
+- Option C (Section-Restrukturierung) ist meist nicht möglich, ohne andere Landmarks zu beschädigen.
+- Die betroffenen Asides sind in der Praxis visuelle Side-Cards in Split-Layouts (`AsideCard`, NetworkMap-Side, Toolbox-Score) oder kontextuelle Inline-Hinweise innerhalb von Handouts (CrossRefs, selfNote-Callout) — kein page-level Komplementärinhalt.
+
+### Migration
+
+| Datei:Zeile | Vorher | Nachher |
+|---|---|---|
+| `src/components/ui/AsideCard.jsx:7` | `<SurfaceCard as="aside">` | `<SurfaceCard as="div">` |
+| `src/templates/MaterialHandouts.jsx` (CrossRefs) | `<aside aria-label>` | `<div role="group" aria-label>` |
+| `src/templates/MaterialHandouts.jsx` (Callout) | `<aside aria-label>` | `<div role="note" aria-label>` |
+| `src/templates/NetworkPageTemplate.jsx` (Side-Block) | `<aside>` | `<div>` |
+| `src/templates/NetworkPageTemplate.jsx` (Leitfragen) | `<SurfaceCard as="aside">` | `<SurfaceCard as="div">` |
+| `src/templates/ToolboxPageTemplate.jsx` (Score) | `<SurfaceCard as="aside">` | `<SurfaceCard as="div">` |
+
+`<aside>`-Elemente, die **bewusst Landmarks** sind, bleiben erhalten:
+- `src/App.jsx` Persistenz-Banner (top-level, durch Audit-15 A-1 gesetzt).
+- `VignettenPageTemplate.jsx` + `PrintNotfallFooter.jsx` print-only mit `aria-hidden="true"` (axe ignoriert).
+
+### Verifikation
+
+Vorher (nach Audit-15 Phase 4): `landmark-complementary-is-top-level` mit 7 Nodes auf material, 3 auf toolbox, 2 auf evidenz/netzwerk, 1 auf lernmodule/vignetten. **Nachher: 0 Nodes auf allen 8 Routen.** Übrig bleibt nur `region[1]` (Akute-Krise-Banner — separater Scope).
+
+`qa/scripts` weiterhin grün; `npm run lint` + `npm run build` clean.
+
+**Status:** Audit 15 vollständig abgeschlossen. WCAG 2.1 AA: 0. Best-practice: 1 verbleibendes Finding (Akute-Krise-Banner-Landmark) — eigenes Ticket bei Bedarf.

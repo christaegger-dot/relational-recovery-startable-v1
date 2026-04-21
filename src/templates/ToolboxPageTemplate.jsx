@@ -26,7 +26,9 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
             </div>
           </div>
           {assessment.scoreAside ? (
-            <SurfaceCard as="aside" tone="soft">
+            // Audit 15 A-2: as="div" statt as="aside" -- Score-Box visuell
+            // neben dem Section-Header, semantisch keine Landmark.
+            <SurfaceCard as="div" tone="soft">
               {assessment.scoreAside.label ? (
                 <p className="ui-fact-card__label">{assessment.scoreAside.label}</p>
               ) : null}
@@ -187,11 +189,9 @@ function ScoreBandsSection({ scoreBands }) {
           </div>
           {/* Audit (Aside-Konsolidierung, Welle 1, Schritt 2): Inline
               SurfaceCard mit `{label, copy}` durch <AsideCard> ersetzt -- die
-              Felder matchen AsideCards API exakt, das gerenderte DOM ist
-              identisch (ui-fact-card__label + ui-card__copy in einer
-              SurfaceCard as="aside" tone="default"). Vorteil: weniger
-              Duplikat, klares "AsideCard rendert hier" statt verstecktes
-              Inline-Markup. */}
+              Felder matchen AsideCards API exakt. Audit 15 A-2: AsideCard
+              rendert seit der Landmark-Bereinigung als <div> (nicht <aside>),
+              um landmark-complementary-is-top-level zu loesen. */}
           <AsideCard aside={scoreBands.aside} tone="default" />
           {/* Hinweis: `assessment.scoreAside` weiter oben (Zeile ~28) bleibt
               bewusst inline, weil es domain-spezifische Toolbox-Felder traegt
