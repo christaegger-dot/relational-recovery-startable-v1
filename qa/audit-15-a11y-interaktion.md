@@ -1,7 +1,7 @@
 # Audit 15 — Accessibility + Interaktions-Integrität
 
 **Stand:** 2026-04-21
-**Bericht:** Phase 1 (Inventur) + Phase 2 (Triage)
+**Bericht:** Phase 1 (Inventur) + Phase 2 (Triage) + Phase 3 (Fixes) + Phase 4 (Verifikation)
 **Prompt:** `qa/prompts/audit-a11y-interaktion.md`
 **Auslöser:** Verifikation gegen den neu etablierten Audit-Prompt-Katalog (PR #125).
 
@@ -284,3 +284,68 @@ Phase 2 abgeschlossen. Ich warte auf Freigabe für Phase 3. Vorschlag: Fixes 1�
 ### Artefakte (wie Phase 1)
 
 - `qa/scratch/axe-scan.mjs`, `qa/scratch/axe-detail.mjs`, `qa/scratch/contrast.mjs` — stehen als Vorlage bereit. Vor Phase 3 entweder konsolidiert in `qa/scripts/` aufnehmen oder löschen.
+
+---
+
+## Phase 3 — Fixes (5 Commits, ein Fix pro Commit)
+
+Commit-Reihenfolge folgt der Phase-2-Priorisierung. Jeder Commit enthält genau einen Fix; keiner vermischt Infrastruktur mit Code.
+
+| # | Finding | Commit | Datei(en) | Scope |
+|---|---|---|---|---|
+| 1 | I-1 | `e45f36e` | `qa/scripts/{interaction-overlap,click-reachability,click-diagnose}.mjs` | `'grundlagen'` → `'material'` in 3 Scripts |
+| 2 | A-3a | `9c0a817` | `src/templates/MaterialHandouts.jsx` | 3× `<h5>` → `<p>` (heading-order-Bruch behoben) |
+| 3 | A-3b | `c64978d` | `src/templates/MaterialHandouts.jsx` | `aria-label` pro Handout eindeutig (`${crossRefs.title} – ${handout.title}`) |
+| 4 | C-1 | `df00972` | `src/styles/primitives.css` | `--footer-text-muted` → `--footer-text-warm` in 3 Klassen (Kontrast 3.40 → 4.83) |
+| 5 | A-1 | `5159c50` | `src/App.jsx` | Persistenz-Banner `<div>` → `<aside aria-label="Hinweis zur lokalen Speicherung">` |
+
+**A-2 bewusst nicht umgesetzt** — Phase 2 hatte A-2 als Design-System-Entscheidung markiert, die ein eigenständiges Ticket mit Review braucht (Aside-in-Section-Nesting trifft `AsideCard.jsx` und Material-Handout-CrossRefs). Kein Release-Blocker; axe best-practice ohne WCAG-Relevanz.
+
+## Phase 4 — Verifikation (Vorher-/Nachher-Vergleich)
+
+### Axe-core WCAG 2.1 AA + Best-Practice
+
+| Route | Vorher (violations) | Nachher (violations) | Entfallen |
+|---|:-:|:-:|---|
+| start | 1 (region×2) | 1 (region×1) | 1 region-Node (Persistenz-Banner) |
+| lernmodule | 2 (region×2, landmark-compl×1) | 2 (region×1, landmark-compl×1) | 1 region-Node |
+| vignetten | 2 | 2 | 1 region-Node |
+| glossar | 1 | 1 | 1 region-Node |
+| material | 3 (region×2, landmark-compl×7, landmark-unique×7, heading-order×1) | 2 (region×1, landmark-compl×7) | landmark-unique, heading-order, 1 region-Node |
+| evidenz | 2 | 2 | 1 region-Node |
+| toolbox | 2 | 2 | 1 region-Node |
+| netzwerk | 2 | 2 | 1 region-Node |
+
+**WCAG 2.1 AA: weiterhin 0 Verstösse.** Best-Practice-Rest (`region×1` Emergency-Banner, `landmark-complementary-is-top-level`) ist dokumentierter A-2-Scope.
+
+### qa/scripts — alle grün
+
+```
+node qa/scripts/interaction-overlap.mjs http://127.0.0.1:4180
+  Overlaps gefunden: 0 → EXIT=0
+
+node qa/scripts/click-reachability.mjs http://127.0.0.1:4180
+  Nav-Klicks geprueft: 112, Tel-Links geprueft: 66 (Vorher: 88 + 66)
+  Failures: 0 → EXIT=0
+
+node qa/scripts/z-stack.mjs http://127.0.0.1:4180
+  Anomalien: 0 → EXIT=0
+```
+
+**Audit-14-Schutznetz wiederhergestellt:** Nav-Klicks stiegen von 88 auf 112 (+24 = 8 Routen × 3 Viewports mehr Coverage), weil `material` jetzt tatsächlich getestet wird statt des 404-Fallbacks `grundlagen`.
+
+**Z-Stack-Bestätigung:** Neue `<aside aria-label="Hinweis zur lokalen Speicherung">` sitzt auf z=100 wie die frühere `<div>`-Version — keine Verschiebung der Z-Hierarchie (Skip-Link 200 > Header 150 > Banner 100).
+
+### Kontrast (nach C-1-Fix)
+
+- `--footer-kicker`, `--footer-stat-card__label`, `--footer-bottom__claim` nutzen jetzt `--footer-text-warm` → 4.83:1 (AA erfüllt, zuvor 3.40:1).
+- `--footer-text-muted` bleibt als Token erhalten (Kategorie für zukünftig grössere Footer-Texte).
+
+### Lint + Build
+
+- `npm run lint` → 0 Warnings/Errors.
+- `npm run build` → Build erfolgreich (298 kB Main-Bundle, keine Regressionen in den Chunk-Grössen).
+
+### TL;DR Phase 4
+
+5 Commits, 3 Findings komplett behoben (I-1, A-3a/b, C-1), 1 Finding teilweise behoben (A-1 löst 8 region-Nodes), 1 bewusst verschoben (A-2 braucht Design-System-Review). Audit-14-Schutznetz wieder vollständig. Keine neuen Verstösse eingeführt.
