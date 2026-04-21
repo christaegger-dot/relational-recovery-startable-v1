@@ -1,0 +1,52 @@
+# Wochentlicher npm-audit-Gate fuer Relational Recovery.
+#
+# Laeuft Montag 06:00 UTC und manuell via workflow_dispatch. Bewusst
+# getrennt von ci.yml gehalten:
+# - CI soll PR-Latenz nicht vom npm-Advisory-Stand abhaengen.
+# - Ein neues Upstream-Advisory darf existierende PRs nicht rot faerben.
+#
+# --audit-level=high: schlaegt nur bei high/critical fehl. Low/moderate
+# in Dev-Deps ist Advisory-Rauschen, das nicht automatisch handelbar ist.
+#
+# Audit-Scope:
+# - Erst prod-only (--omit=dev) -- diese Advisories landen im Build-Output
+#   und sind die eigentliche Risiko-Quelle.
+# - Dann full inkl. Dev-Deps -- Entwickler-Maschinen / CI-Runner schuetzen.
+#
+# Manuell triggern: Actions-Tab -> "Weekly npm audit" -> "Run workflow".
+
+name: Weekly npm audit
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch: {}
+
+concurrency:
+  group: audit-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: npm audit (high/critical)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Audit all dependencies
+        run: npm audit --audit-level=high
