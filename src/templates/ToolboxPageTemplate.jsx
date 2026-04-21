@@ -26,7 +26,7 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
             </div>
           </div>
           {assessment.scoreAside ? (
-            <SurfaceCard as="aside" tone="soft">
+            <SurfaceCard as="div" tone="soft">
               {assessment.scoreAside.label ? (
                 <p className="ui-fact-card__label">{assessment.scoreAside.label}</p>
               ) : null}

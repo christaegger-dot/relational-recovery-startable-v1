@@ -393,7 +393,7 @@ function NetworkMapSection({ mapping }) {
               </div>
 
               <div className="ui-stack ui-stack--tight ui-network-map-side">
-                <aside className="ui-network-map-side__block">
+                <div className="ui-network-map-side__block">
                   <p className="ui-fact-card__label">Aktive Lesart</p>
                   {activeLens?.label ? <h3 className="ui-card__title">{activeLens.label}</h3> : null}
                   {activeLens?.description ? <p className="ui-card__copy">{activeLens.description}</p> : null}
@@ -402,7 +402,7 @@ function NetworkMapSection({ mapping }) {
                       <p>{lensSummary}</p>
                     </div>
                   ) : null}
-                </aside>
+                </div>
 
                 <div className="ui-network-count-grid">
                   {counts.map((count) => (
@@ -422,7 +422,7 @@ function NetworkMapSection({ mapping }) {
             </div>
           </SurfaceCard>
 
-          <SurfaceCard as="aside" tone="default">
+          <SurfaceCard as="div" tone="default">
             <div className="ui-note-panel__label ui-note-panel__label--with-icon">
               <MapPin size={16} aria-hidden="true" /> Leitfragen für die Exploration
             </div>

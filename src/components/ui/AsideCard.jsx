@@ -4,7 +4,7 @@ export default function AsideCard({ aside, tone = 'soft' }) {
   if (!aside) return null;
 
   return (
-    <SurfaceCard as="aside" tone={aside.tone || tone}>
+    <SurfaceCard as="div" tone={aside.tone || tone}>
       {aside.label ? <p className="ui-fact-card__label">{aside.label}</p> : null}
       {aside.title ? <h3 className="ui-card__title">{aside.title}</h3> : null}
       {aside.value ? <p className="ui-fact-card__value">{aside.value}</p> : null}

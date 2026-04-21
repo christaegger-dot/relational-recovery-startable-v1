@@ -74,7 +74,7 @@ function MaterialHandoutCrossRefs({ crossRefs, onNavigate }) {
   if (!crossRefs?.items?.length) return null;
 
   return (
-    <aside className="ui-material-handout__cross-refs" aria-label={crossRefs.title}>
+    <div className="ui-material-handout__cross-refs" role="group" aria-label={crossRefs.title}>
       <p className="ui-fact-card__label">{crossRefs.title}</p>
       <ul className="ui-material-handout__cross-refs-list">
         {crossRefs.items.map((ref) => {
@@ -100,7 +100,7 @@ function MaterialHandoutCrossRefs({ crossRefs, onNavigate }) {
           );
         })}
       </ul>
-    </aside>
+    </div>
   );
 }
 
@@ -420,10 +420,10 @@ function MaterialThresholdChecklist({ handout, onNavigate, onPrintHandout }) {
       ) : null}
 
       {handout.selfNote ? (
-        <aside className="ui-material-handout__callout" aria-label={handout.selfNote.title}>
+        <div className="ui-material-handout__callout" role="group" aria-label={handout.selfNote.title}>
           <p className="ui-fact-card__label">{handout.selfNote.title}</p>
           <p>{handout.selfNote.text}</p>
-        </aside>
+        </div>
       ) : null}
     </MaterialHandoutShell>
   );
