@@ -11,6 +11,17 @@ Schweizer Fachportal zur Unterstützung von Fachpersonen, die mit Familien arbei
 - `npm run format` — Prettier
 - `npm run test:e2e` — Playwright E2E-Tests
 
+## Workflow für Code-Aufgaben
+
+Standard-Ablauf am Ende jeder Aufgabe (Code-Änderungen oder Audit-Berichte): **Commits pushen → PR eröffnen → Merge** — alles in einem Schritt, ohne dazwischen nachzufragen. Erst stoppen, wenn das Resultat im `main` ist.
+
+Ausnahmen, in denen vorher gefragt werden muss:
+- Fachliche Mehrdeutigkeit (z. B. zwei plausible Lösungen für ein Finding).
+- Änderungen an `main`-only-Files (CLAUDE.md, package.json) ohne klaren Auftrag.
+- Force-Push, History-Rewrites oder Reverts.
+
+Sonst: PR erstellen mit aussagekräftigem Titel + Test-Plan, Squash-Merge, fertig.
+
 ## Architektur
 
 Rein clientseitige React 19 SPA ohne Backend. Kein Routing-Library — Hash-basierte Navigation (`#start`, `#toolbox`, `#evidenz` etc.).
