@@ -37,18 +37,28 @@
     <meta name="twitter:image" content="%VITE_BASE_URL%/og-image.webp" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <!--
-      Audit 16 P1-2: preconnect-Hints zu fonts.googleapis.com und
-      fonts.gstatic.com entfernt. tokens.css deklariert zwar
-      `--font-body: 'Manrope', ...` und `--font-heading: 'Source Serif 4', ...`,
-      aber es gibt keinen @font-face, kein @import url(...) und keinen
-      CSS-Link auf Google Fonts — die App rendert auf System-Fallbacks
-      (ui-sans-serif / Georgia). Die Preconnects starteten bei jedem
-      Kalt-Load zwei DNS+TLS-Handshakes zu einer Origin, die nie
-      angesprochen wurde. Wenn Manrope / Source Serif 4 tatsaechlich
-      geladen werden sollen, muss das zusammen mit font-display und
-      Self-Hosting (oder bunny.net) in einem eigenen Editorial-Entscheid
-      passieren — siehe auch qa/audit-09-frontend-compliance.md.
+      Audit 25 / Sprint 3: Webfonts sind self-hosted (public/fonts/).
+      Preload des Hero-Cuts (Source Serif 4 Regular + Italic) priorisiert
+      den LCP-Text ueber dem ersten Paint. Manrope wird nicht vorgeladen
+      (Body-Copy toleriert Fallback-FOFT 80-150ms gut; Preload-Budget
+      fuer 3 Fonts waere zuviel). font-display: swap in fonts.css tauscht
+      die Fonts sanft aus, sobald sie geladen sind; Fallback-Stack
+      (Georgia / ui-sans-serif) rendert sofort.
     -->
+    <link
+      rel="preload"
+      href="/fonts/source-serif-4-latin-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/source-serif-4-latin-italic-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
