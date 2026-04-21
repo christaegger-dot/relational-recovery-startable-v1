@@ -143,14 +143,7 @@ export default function PageHero({
                   100-300 ms LCP gegenueber Default. decoding='async'
                   verhindert, dass die Bilddekodierung den Main-Thread
                   blockiert. width/height bleiben gesetzt (CLS-Schutz). */}
-              <img
-                src={image}
-                alt={imageAlt || ''}
-                width={1200}
-                height={800}
-                fetchpriority="high"
-                decoding="async"
-              />
+              <img src={image} alt={imageAlt || ''} width={1200} height={800} fetchpriority="high" decoding="async" />
             </div>
           ) : null}
 
