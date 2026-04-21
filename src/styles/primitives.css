@@ -2834,21 +2834,6 @@
   text-transform: uppercase;
 }
 
-.ui-material-handout__age-subsection-list {
-  margin: 0;
-  padding-left: 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-copy);
-  color: var(--text-primary);
-}
-
-.ui-material-handout__age-subsection-list li {
-  margin: 0;
-}
-
 .ui-material-handout__age-threshold {
   display: flex;
   flex-direction: column;

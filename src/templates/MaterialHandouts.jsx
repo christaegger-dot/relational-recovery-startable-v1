@@ -452,13 +452,13 @@ function MaterialAgeGrid({ handout, onNavigate, onPrintHandout }) {
                   <p className="ui-material-handout__age-range">{group.ageRange}</p>
                   <h5 className="ui-material-handout__age-label">{group.label}</h5>
                 </header>
-                {[group.symptoms, group.needs, group.parentHelp].map((sub) =>
+                {[group.symptoms, group.needs, group.parentHelp].map((sub, subIdx) =>
                   sub?.items?.length ? (
-                    <div key={sub.title} className="ui-material-handout__age-subsection">
+                    <div key={subIdx} className="ui-material-handout__age-subsection">
                       <p className="ui-material-handout__age-subsection-title">{sub.title}</p>
-                      <ul className="ui-material-handout__age-subsection-list">
-                        {sub.items.map((item) => (
-                          <li key={item}>{item}</li>
+                      <ul className="ui-material-handout__notes">
+                        {sub.items.map((item, itemIdx) => (
+                          <li key={itemIdx}>{item}</li>
                         ))}
                       </ul>
                     </div>

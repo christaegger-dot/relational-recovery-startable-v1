@@ -551,27 +551,21 @@
     padding-bottom: 1.5mm;
     margin-bottom: 1mm;
   }
-  .ui-material-handout__age-range {
+  .ui-material-handout__age-range,
+  .ui-material-handout__age-label,
+  .ui-material-handout__age-subsection-title,
+  .ui-material-handout__age-threshold-text {
     color: #000;
+  }
+  .ui-material-handout__age-range {
     font-size: 8pt;
   }
   .ui-material-handout__age-label {
-    color: #000;
     font-size: 12pt;
   }
   .ui-material-handout__age-subsection-title {
-    color: #000;
     font-size: 8pt;
     margin-top: 1mm;
-  }
-  .ui-material-handout__age-subsection-list {
-    color: #000;
-    font-size: 9.5pt;
-    padding-left: 4mm;
-  }
-  .ui-material-handout__age-subsection-list li {
-    color: #000;
-    margin: 0;
   }
   .ui-material-handout__age-threshold {
     background: #fff !important;
@@ -582,7 +576,6 @@
     -webkit-print-color-adjust: exact;
   }
   .ui-material-handout__age-threshold-text {
-    color: #000;
     font-size: 9.5pt;
   }
 
