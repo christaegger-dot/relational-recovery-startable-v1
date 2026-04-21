@@ -256,7 +256,110 @@ fuer Screen-Reader-Nutzer im Notfall-Flow.
 
 ## Phase 2 – Triage
 
-_(Folgt nach Freigabe von Phase 1.)_
+### 2.1 Positiver Substanz-Befund
+
+Die Phase-1-Ergebnisse der drei Interaktions-Scripts (0 Overlaps, 0 Klick-
+Failures, 0 z-Anomalien, 66/66 tel-Links erreichbar) bestaetigen, dass die
+Audit-14-Infrastruktur intakt ist. Die Notfall-Architektur (R31 tel:, P0
+Print, F4 Touch-Targets, K1 Klick-Erreichbarkeit) bleibt nachweislich
+tragfaehig.
+
+axe-core findet **0 critical, 0 serious, 0 minor** Verletzungen. Die vier
+moderate-Findings sind semantische Verbesserungen, keine funktionalen
+Barrieren.
+
+### 2.2 Triage-Kategorisierung
+
+| # | Befund | Schwere (axe) | Streuung | Klassifikation | Begruendung |
+|---|--------|---------------|----------|----------------|-------------|
+| 1 | `region` — Persistenz-Banner + Emergency-Strip ausserhalb Landmarks | moderate | 8 Routen × 3 VP = 24 Instanzen, 2 Knoten pro Seite (App.jsx:132-152 / 154-241) | **Sofort-Fix** | Eindeutig, klein: zwei umschliessende Landmark-Wrapper (`<section aria-label="Datenschutzhinweis">` bzw. `<aside aria-label="Akute Krise">`). Sichtbarer SR-Gewinn — Emergency-Strip wird per Landmark-Navigation erreichbar. |
+| 2 | `landmark-complementary-is-top-level` — `<aside>` innerhalb `<main>` / `<section>` / `<article>` | moderate | 6 von 8 Routen × 3 VP = 18 Instanzen, 48 Knoten (AsideCard + handout `__cross-refs` + `__callout`) | **Sofort-Fix** | Tag-Swap `<aside>` → `<div>` in `AsideCard.jsx` (genau eine Zeile: `SurfaceCard as="aside"` → `as="div"`) und in den zwei Material-Handout-Asides. CSS ist klassenbasiert — kein visuelles Regressionsrisiko. Semantisch korrekter: diese Karten sind Sidecars innerhalb eines Artikels / Cluster-Splits, keine Seiten-level `complementary`-Landmarks. |
+| 3 | `landmark-unique` — vier Mal `<aside aria-label="Verwandte Inhalte">` auf `material` | moderate | nur material × 3 VP = 3 Instanzen, 3 Knoten | **Sofort-Fix (Kaskade)** | Entfaellt automatisch durch Fix #2 (kein Aside → keine Landmark-Uniqueness-Pruefung). Keine zusaetzliche Arbeit. |
+| 4 | `heading-order` — MaterialCrisisPlan h3 → h5 Ownership-Felder | moderate | nur material × 3 VP = 3 Instanzen, 3 Knoten (MaterialHandouts.jsx:235, 242, 248) | **Sofort-Fix** | Drei gezielte Tag-Swaps `<h5>` → `<h4>` fuer die drei Ownership-Felder. Print-CSS nutzt Klassen-Selektoren, nicht Tag-Selektoren (primitives.css:2370 `.ui-material-handout__field-title`). Keine Regressionsgefahr. |
+
+**Keine Follow-up-Tickets und keine Akzeptiert-Befunde in dieser Welle.**
+Alle vier Findings sind in einem Commit-Cluster abarbeitbar; der Zeitaufwand
+fuer die Umsetzung ist geringer als der Aufwand, ein Follow-up-Ticket
+sauber zu formulieren.
+
+### 2.3 Nicht-Befunde (explizit)
+
+Folgende Pruefungen aus Phase 1 haben keine Befunde geliefert und werden
+hier dokumentiert, damit das Fehlen kritischer Barriere-Vorkommen nicht als
+Unvollstaendigkeit der Pruefung missverstanden wird:
+
+- **Mehrfach-H1**: 0 (jede Route hat genau 1 `<h1>`, verifiziert ueber
+  alle 8 Routen).
+- **Heading-Spruenge >1 Stufe** ausserhalb Crisis-Plan: 0.
+- **Fehlende Alt-Texte**: 0 (das einzige `<img>` im Code hat `imageAlt`-
+  Uebergabe von drei Sections; uebrige Sections rendern kein `<img>`).
+- **Leere Buttons / Links**: 0 (kein `<button></button>`, kein `href=""`
+  oder `href="#"`).
+- **Form-Inputs ohne Label**: 0 (5/5 Inputs haben umschliessendes `<label>`
+  oder `htmlFor`).
+- **Kontrast-Violations**: 0 (axe-core `color-contrast` ueber 3 VP × 8 Routen).
+- **Keyboard-Blocker**: keine. Skip-Link, `:focus-visible`-Ring global,
+  `aria-current="page"`, Mobile-Dialog mit `role/aria-modal/Escape`-Handler.
+- **Reduced-Motion-Luecken**: keine systematischen. Drei `@media
+  (prefers-reduced-motion)`-Bloecke decken `.reveal-on-scroll`, Hover-
+  Transitions, `.page-enter`, `.haptic-btn` und Anker-Transitions ab.
+
+### 2.4 Release-Readiness
+
+**Stufe A (live-tauglich) ist erreicht.**
+
+Begruendung:
+
+- **Notfall-Architektur intakt**: 0 Click-Failures, 66/66 tel-Link-
+  Reachability, 0 Interaction-Overlaps, 0 z-Anomalien (Audit-14-
+  Basislinie gehalten).
+- **Keine kritischen/seriose a11y-Barrieren**: axe-core findet weder
+  `critical` noch `serious` Verletzungen. Keine fehlenden Labels, keine
+  unlabelled Images, keine leeren Buttons, keine Kontrast-Failures,
+  keine Keyboard-Traps.
+- **Die vier moderate-Findings sind Semantik-Feinschliff**: sie
+  beeintraechtigen Landmark-Navigation fuer SR-Nutzer (Banner-Strip
+  nicht per Landmark-Menue erreichbar; redundante "Verwandte Inhalte"-
+  Labels auf material; h5 nach h3 in einem Template). SR-Nutzer koennen
+  alle Inhalte sequenziell lesen; die Einschraenkung betrifft nur die
+  Effizienz der Navigation, nicht den Zugang.
+
+Phase-3-Fixes wuerden die axe-Score von `0/0/4/0` auf `0/0/0/0` heben und
+die semantische Qualitaet von "gut" auf "poliert". Die Fixes sind klein
+und risikoarm (drei Dateien: `App.jsx`, `AsideCard.jsx`,
+`MaterialHandouts.jsx`).
+
+### 2.5 Fix-Plan fuer Phase 3
+
+Vier thematische Commits (je Befund ein eigener Commit, pro Pattern
+`audit(a11y): fix <was>`):
+
+1. `audit(a11y): fix region — Banner + Emergency-Strip als Landmarks kapseln`
+   - `src/App.jsx`: Persistenz-Banner in `<section aria-label="Datenschutzhinweis">`, Emergency-Strip in `<aside aria-label="Akute Krise — Notfallnummern">` umbenennen.
+   - Re-Lauf axe: Regel `region` erwartet 0 Instanzen.
+
+2. `audit(a11y): fix landmark-complementary — AsideCard als div (Sidecar statt Landmark)`
+   - `src/components/ui/AsideCard.jsx:7`: `as="aside"` → `as="div"`.
+   - `src/templates/MaterialHandouts.jsx:77` (`__cross-refs`) und `:423` (`__callout`): `<aside>` → `<div role="group" aria-label="...">` oder nur `<div>` (Entscheidung vor Fix: ob wir die Karte als gruppierter Block-Inhalt markieren wollen — beides ist WCAG-konform).
+   - Re-Lauf axe: Regel `landmark-complementary-is-top-level` erwartet 0 Instanzen.
+
+3. `audit(a11y): fix landmark-unique — kaskadiert durch Fix #2`
+   - Keine eigene Aenderung noetig; nach Fix #2 gibt es keine doppelten
+     complementary-Landmarks mehr. Verifiziert durch axe-Re-Lauf.
+
+4. `audit(a11y): fix heading-order — MaterialCrisisPlan h5 → h4 fuer Ownership-Felder`
+   - `src/templates/MaterialHandouts.jsx:235, 242, 248`: `<h5>` → `<h4>`.
+   - Re-Lauf axe: Regel `heading-order` erwartet 0 Instanzen.
+   - Re-Lauf `a11y-heading-tree.mjs`: Heading-Spruenge erwartet 0 auf material.
+
+Alle vier Fixes sind additiv oder ersetzen Tag-Namen bei gleichbleibender
+Klasse — keine Substanz wird reduziert. Nach jedem Fix erneuter Lauf von
+`a11y-axe.mjs` + `interaction-overlap.mjs` + `click-reachability.mjs` +
+`z-stack.mjs` zur Regressions-Kontrolle.
+
+### 2.6 STOPP
+
+Warte auf Freigabe des Fix-Plans.
 
 ## Phase 3 – Fixes
 
