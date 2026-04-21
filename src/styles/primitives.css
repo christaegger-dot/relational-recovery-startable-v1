@@ -2506,6 +2506,272 @@
   text-decoration: underline;
 }
 
+/* Tier-1-Handouts (Issues #112 + #113) — geteilte Section-Bausteine. */
+.ui-material-handout__section-intro {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
+.ui-material-handout__section-note {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+  font-style: italic;
+}
+
+/* Conversation-Script (H-2): Opener-Blockquote + Q&A-Liste + Verstehens-Check. */
+.ui-material-handout__opener {
+  margin: 0;
+  padding: var(--space-4);
+  border-left: 3px solid var(--accent-primary-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-app);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ui-material-handout__opener-text {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  line-height: var(--line-height-copy);
+  color: var(--text-primary);
+}
+
+.ui-material-handout__opener-note {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+  color: var(--text-secondary);
+}
+
+.ui-material-handout__qa-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ui-material-handout__qa-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-app);
+}
+
+.ui-material-handout__qa-question {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  line-height: var(--line-height-copy);
+  color: var(--text-primary);
+}
+
+.ui-material-handout__qa-number {
+  display: inline-block;
+  margin-right: 0.25rem;
+  color: var(--accent-primary-strong);
+  font-weight: 700;
+}
+
+.ui-material-handout__qa-anchor {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+  color: var(--text-secondary);
+}
+
+.ui-material-handout__prompt {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--accent-secondary, #a1be95);
+  background: var(--surface-app);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  line-height: var(--line-height-copy);
+  color: var(--text-primary);
+}
+
+.ui-material-handout__notes {
+  list-style: disc;
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.ui-material-handout__notes li {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+  color: var(--text-secondary);
+}
+
+/* Threshold-Checklist (H-6): Reihenfolge-Steps + Beobachtungs-Liste +
+   Anlaufstellen + Selbst-Schwelle als Callout. */
+.ui-material-handout__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ui-material-handout__step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-app);
+}
+
+.ui-material-handout__step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--accent-primary-strong);
+  color: var(--surface-panel);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.ui-material-handout__step-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ui-material-handout__step-label {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  line-height: var(--line-height-heading);
+  color: var(--text-primary);
+}
+
+.ui-material-handout__step-detail {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+  color: var(--text-secondary);
+}
+
+.ui-material-handout__thresholds {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ui-material-handout__threshold {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-app);
+}
+
+.ui-material-handout__threshold-observation {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  line-height: var(--line-height-copy);
+  color: var(--text-primary);
+}
+
+.ui-material-handout__threshold-escalate {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+  color: var(--text-secondary);
+}
+
+.ui-material-handout__contacts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ui-material-handout__contact {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-app);
+}
+
+.ui-material-handout__contact-number {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent-primary-strong);
+  white-space: nowrap;
+}
+
+.ui-material-handout__contact-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ui-material-handout__contact-name {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  line-height: var(--line-height-heading);
+  color: var(--text-primary);
+}
+
+.ui-material-handout__contact-detail {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+  color: var(--text-secondary);
+}
+
+.ui-material-handout__callout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--surface-note);
+  color: var(--text-primary);
+}
+
+.ui-material-handout__callout p:last-child {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
 .ui-toolbox-quick-access {
   border-radius: calc(var(--radius-xl) + 0.25rem);
   background: var(--surface-app);
@@ -2708,6 +2974,17 @@
   .ui-material-handout__print-btn {
     align-self: flex-start;
     flex-shrink: 0;
+  }
+
+  /* Tier-1-Handouts: zweispaltige Beobachtungs-Items + Anlaufstellen-Liste
+     auf Tablet/Desktop. Steps und Q&A bleiben einspaltig — die linearen
+     Lese-Reihenfolgen sind Teil der Mechanik. */
+  .ui-material-handout__thresholds {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ui-material-handout__contacts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
