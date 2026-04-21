@@ -8,6 +8,12 @@
 #   aber inline-Styles/SVG kommen aus React/Vite — daher würde eine strikte CSP
 #   ohne sorgfältige Prüfung Build-Output brechen. Lieber bewusst ergänzen.
 # - HSTS preload nicht aktiviert: erst sinnvoll wenn produktive Custom-Domain steht.
+# - COOP same-origin: isoliert Top-Level-Browsing-Context gegen cross-origin
+#   window.opener-Angriffe. Die App öffnet selbst keine Popups; alle externen
+#   Links haben rel="noopener noreferrer".
+# - COEP require-corp bewusst NICHT: würde zukünftig eingebettete Bilder/iframes
+#   ohne CORP-Header brechen. Erst sinnvoll, wenn Cross-Origin-Isolation aktiv
+#   gebraucht wird (z. B. SharedArrayBuffer).
 [[headers]]
   for = "/*"
   [headers.values]
@@ -16,6 +22,7 @@
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    Cross-Origin-Opener-Policy = "same-origin"
 
 [[headers]]
   for = "/"
