@@ -4,9 +4,15 @@
 
 # Security-Header für alle Routen.
 # Hinweise:
-# - kein CSP-Header gesetzt: die App lädt zur Laufzeit keine externen Ressourcen,
-#   aber inline-Styles/SVG kommen aus React/Vite — daher würde eine strikte CSP
-#   ohne sorgfältige Prüfung Build-Output brechen. Lieber bewusst ergänzen.
+# - CSP im Report-Only-Modus: beobachtet Verstösse ohne zu blockieren.
+#   Monitoring via Browser-DevTools-Console (kein report-uri konfiguriert,
+#   da kein Collector-Endpoint bereitsteht). Nach 1-2 Wochen ohne Noise
+#   wird der Header zu "Content-Security-Policy" promotet (Folge-PR).
+#   Bekannte zu klärende Stelle: <script type="application/ld+json"> in
+#   index.html — wird unter script-src 'self' potenziell gemeldet; Enforce-
+#   Phase extrahiert in externe .json-Datei oder nutzt SHA-256-Hash.
+#   style-src 'unsafe-inline' bleibt: React emittiert inline style="..."
+#   Attribute, die nicht sinnvoll hashbar sind (bekannter SPA-Kompromiss).
 # - HSTS preload nicht aktiviert: erst sinnvoll wenn produktive Custom-Domain steht.
 # - COOP same-origin: isoliert Top-Level-Browsing-Context gegen cross-origin
 #   window.opener-Angriffe. Die App öffnet selbst keine Popups; alle externen
@@ -23,6 +29,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
     Cross-Origin-Opener-Policy = "same-origin"
+    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
 
 [[headers]]
   for = "/"
