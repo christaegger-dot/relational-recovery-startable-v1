@@ -70,11 +70,13 @@ function MaterialHandoutEmergency({ emergency }) {
   );
 }
 
-function MaterialHandoutCrossRefs({ crossRefs, onNavigate }) {
+function MaterialHandoutCrossRefs({ crossRefs, onNavigate, handoutTitle }) {
   if (!crossRefs?.items?.length) return null;
 
+  const ariaLabel = handoutTitle ? `${crossRefs.title} – ${handoutTitle}` : crossRefs.title;
+
   return (
-    <aside className="ui-material-handout__cross-refs" aria-label={crossRefs.title}>
+    <aside className="ui-material-handout__cross-refs" aria-label={ariaLabel}>
       <p className="ui-fact-card__label">{crossRefs.title}</p>
       <ul className="ui-material-handout__cross-refs-list">
         {crossRefs.items.map((ref) => {
@@ -175,7 +177,7 @@ function MaterialHandoutShell({ handout, onNavigate, onPrintHandout, children })
       <MaterialHandoutUsage usage={handout.usage} />
       {children}
       <MaterialHandoutDisclaimer disclaimer={handout.disclaimer} />
-      <MaterialHandoutCrossRefs crossRefs={handout.crossRefs} onNavigate={onNavigate} />
+      <MaterialHandoutCrossRefs crossRefs={handout.crossRefs} onNavigate={onNavigate} handoutTitle={handout.title} />
     </article>
   );
 }
@@ -232,20 +234,20 @@ function MaterialCrisisPlan({ handout, onNavigate, onPrintHandout }) {
 
       <div className="ui-material-handout__ownership">
         <div className="ui-material-handout__field ui-material-handout__field--inline">
-          <h5 className="ui-material-handout__field-title">{handout.header.ownerLabel}</h5>
+          <p className="ui-material-handout__field-title">{handout.header.ownerLabel}</p>
           <div aria-hidden="true" className="ui-material-handout__lines">
             <div className="ui-material-handout__line" />
           </div>
         </div>
         <div className="ui-material-handout__ownership-meta">
           <div className="ui-material-handout__field ui-material-handout__field--inline">
-            <h5 className="ui-material-handout__field-title">{handout.header.dateLabel}</h5>
+            <p className="ui-material-handout__field-title">{handout.header.dateLabel}</p>
             <div aria-hidden="true" className="ui-material-handout__lines">
               <div className="ui-material-handout__line" />
             </div>
           </div>
           <div className="ui-material-handout__field ui-material-handout__field--inline">
-            <h5 className="ui-material-handout__field-title">{handout.header.revisedLabel}</h5>
+            <p className="ui-material-handout__field-title">{handout.header.revisedLabel}</p>
             <div aria-hidden="true" className="ui-material-handout__lines">
               <div className="ui-material-handout__line" />
             </div>
@@ -279,7 +281,7 @@ function MaterialCrisisPlan({ handout, onNavigate, onPrintHandout }) {
         </div>
       ) : null}
 
-      <MaterialHandoutCrossRefs crossRefs={handout.crossRefs} onNavigate={onNavigate} />
+      <MaterialHandoutCrossRefs crossRefs={handout.crossRefs} onNavigate={onNavigate} handoutTitle={handout.title} />
     </article>
   );
 }

@@ -25,7 +25,7 @@
 import { chromium } from 'playwright-core';
 
 const BASE_URL = process.argv[2] || 'http://localhost:4180';
-const ROUTES = ['start', 'lernmodule', 'vignetten', 'glossar', 'grundlagen', 'evidenz', 'toolbox', 'netzwerk'];
+const ROUTES = ['start', 'lernmodule', 'vignetten', 'glossar', 'material', 'evidenz', 'toolbox', 'netzwerk'];
 const VIEWPORTS = [
   { name: 'mobile-375', width: 375, height: 812, hasTouch: true },
   { name: 'tablet-768', width: 768, height: 1024, hasTouch: true },
@@ -40,7 +40,7 @@ function classifySeverity(aria, href, text) {
   const hrefL = (href || '').toLowerCase();
   if (hrefL.startsWith('tel:') || label.includes('notfall') || label.includes('144') || label.includes('147') || label.includes('aerztefon')) return 'kritisch';
   if (label.includes('toolbox') || label.includes('akute krise') || label.includes('zum inhalt')) return 'hoch';
-  if (hrefL.startsWith('#') || label.includes('start') || label.includes('lernmodule') || label.includes('vignetten') || label.includes('glossar') || label.includes('grundlagen') || label.includes('evidenz') || label.includes('netzwerk')) return 'hoch';
+  if (hrefL.startsWith('#') || label.includes('start') || label.includes('lernmodule') || label.includes('vignetten') || label.includes('glossar') || label.includes('material') || label.includes('evidenz') || label.includes('netzwerk')) return 'hoch';
   if (hrefL.startsWith('http')) return 'mittel';
   return 'mittel';
 }
