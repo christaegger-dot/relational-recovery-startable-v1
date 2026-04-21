@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { GraduationCap } from 'lucide-react';
 import heroIllustration from '../assets/relational-recovery-hero-v3-web.webp';
 import { E_MODULES } from '../data/learningContent';
 import LearningPageTemplate from '../templates/LearningPageTemplate';
@@ -29,6 +30,7 @@ export default function ElearningSection() {
       };
 
   const hero = {
+    icon: GraduationCap,
     eyebrow: 'Fachliche Kurzformate',
     title: 'Lernen in',
     accent: 'ruhigen Fachsequenzen.',

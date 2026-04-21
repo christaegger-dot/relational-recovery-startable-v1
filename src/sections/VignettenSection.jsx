@@ -1,3 +1,4 @@
+import { HeartHandshake } from 'lucide-react';
 import VignettenPageTemplate from '../templates/VignettenPageTemplate';
 import { VIGNETTEN } from '../data/learningContent';
 import { getPageHeadingId } from '../utils/appHelpers';
@@ -19,6 +20,7 @@ export default function VignettenSection() {
   const feedbackId = `${vignette.id}-feedback`;
 
   const hero = {
+    icon: HeartHandshake,
     eyebrow: 'Fallreflexion',
     title: 'Training',
     accent: 'mit Fallvignetten',

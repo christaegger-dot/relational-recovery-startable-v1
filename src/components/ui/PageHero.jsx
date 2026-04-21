@@ -27,6 +27,7 @@ export default function PageHero({
   accent,
   lead,
   headingId,
+  icon,
   actions = [],
   asideTitle,
   asideCopy,
@@ -38,10 +39,16 @@ export default function PageHero({
   audienceLabel,
   audienceNote,
 }) {
+  const HeroIcon = icon || null;
   return (
     <div className="ui-hero">
       <div className="ui-hero__inner">
         <div className="ui-hero__content">
+          {HeroIcon ? (
+            <span className="ui-hero__icon" aria-hidden="true">
+              <HeroIcon size={28} strokeWidth={1.6} />
+            </span>
+          ) : null}
           {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
           <h1
             id={headingId}

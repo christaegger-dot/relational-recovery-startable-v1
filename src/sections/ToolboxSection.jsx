@@ -4,6 +4,7 @@ import {
   Check,
   CheckCircle2,
   ChevronRight,
+  ClipboardCheck,
   Download,
   ExternalLink,
   Printer,
@@ -217,6 +218,7 @@ export default function ToolboxSection({
       : `${answeredCount} von ${TRIAGE_PROMPTS.length} Fragen beantwortet. Die aktuell wichtigste Spur ist ${primaryPriority?.title?.toLowerCase() ?? 'noch offen'}.`;
 
   const hero = {
+    icon: ClipboardCheck,
     eyebrow: 'Klinische Orientierung',
     title: 'Toolbox: Orientierung, Schutz und nächste Schritte',
     accent: 'in belasteten Familiensituationen.',

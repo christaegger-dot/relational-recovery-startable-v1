@@ -70,6 +70,7 @@ export default function NetworkSection() {
   );
 
   const hero = {
+    icon: MapPin,
     eyebrow: 'Weitervermittlung und Triage',
     title: 'Fachstellen für',
     accent: 'Zürich und schweizweite Ergänzungen.',
