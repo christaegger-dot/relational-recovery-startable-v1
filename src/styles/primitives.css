@@ -3903,7 +3903,10 @@
 }
 
 .footer-stat-card__label {
-  color: var(--footer-text-muted);
+  /* --footer-text-muted (#8a705f) erreicht auf der Sandkachel nur 3.40
+     Kontrast – unter WCAG AA fuer Normaltext. --footer-text-warm
+     (#5a4a3f) liefert 4.83 und haelt die Kachel-Tonalitaet. */
+  color: var(--footer-text-warm);
   font-size: 0.625rem;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -3921,7 +3924,9 @@
 
 .footer-kicker {
   margin: 0 0 var(--space-4);
-  color: var(--footer-text-muted);
+  /* Contrast-Fix (Audit 15, C-1): --footer-text-muted liefert auf dem
+     Footer-Panel nur 3.40 – unter AA. --footer-text-warm erreicht 4.83. */
+  color: var(--footer-text-warm);
   font-size: 0.625rem;
   font-weight: 800;
   letter-spacing: 0.35em;
@@ -4038,7 +4043,9 @@
 
 .footer-bottom__claim {
   margin: 0;
-  color: var(--footer-text-muted);
+  /* Contrast-Fix (Audit 15, C-1): --footer-text-muted liefert auf dem
+     Footer-Panel nur 3.40 – unter AA. --footer-text-warm erreicht 4.83. */
+  color: var(--footer-text-warm);
   font-size: var(--font-size-2xs);
   font-weight: 800;
   letter-spacing: 0.28em;
