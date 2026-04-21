@@ -134,8 +134,8 @@ export default function App() {
           aria-label="Hinweis zur lokalen Speicherung"
           className="relative z-[100] border-b border-[var(--border-inverse)] bg-[linear-gradient(180deg,var(--surface-inverse-top),var(--surface-inverse-bottom))] px-3 py-3 text-[var(--text-inverse)] no-print"
         >
-          <div className="mx-auto flex max-w-[86rem] flex-col items-start justify-between gap-3 px-2 md:flex-row md:items-center md:px-6">
-            <div className="flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[0.24em] text-[var(--text-inverse-muted)]">
+          <div className="mx-auto flex max-w-[var(--content-width-wide)] flex-col items-start justify-between gap-3 px-2 md:flex-row md:items-center md:px-6">
+            <div className="flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[var(--letter-spacing-kicker)] text-[var(--text-inverse-muted)]">
               <ShieldCheck size={16} className="shrink-0 text-[var(--icon-warning-inverse)]" aria-hidden="true" />
               <span>
                 Lokale Speicherung im Browser • auf gemeinsam genutzten Geräten nach der Nutzung zurücksetzen • keine
@@ -145,7 +145,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => setShowSafeNote(false)}
-              className="haptic-btn inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--icon-warning-inverse)] transition-colors hover:bg-white/10 hover:text-white"
+              className="haptic-btn inline-flex min-h-[var(--touch-target-min)] min-w-[var(--touch-target-min)] items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-extrabold uppercase tracking-[var(--letter-spacing-label)] text-[var(--icon-warning-inverse)] transition-colors hover:bg-white/10 hover:text-white"
               aria-label="Datenschutzhinweis schliessen"
             >
               Schliessen
@@ -160,8 +160,8 @@ export default function App() {
             entfällt auf Mobile, weil das Notfall-Icon im Header (PR #65)
             denselben Sprung in die Toolbox auslöst. */}
         <div className="md:hidden">
-          <div className="mx-auto flex max-w-[86rem] flex-col gap-2 px-4 py-3">
-            <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--text-danger-label)]">
+          <div className="mx-auto flex max-w-[var(--content-width-wide)] flex-col gap-2 px-4 py-3">
+            <span className="text-[10px] font-extrabold uppercase tracking-[var(--letter-spacing-label)] text-[var(--text-danger-label)]">
               Akute Krise
             </span>
             <ul className="grid gap-1 text-sm text-[var(--text-danger-strong)]">
@@ -200,9 +200,9 @@ export default function App() {
         </div>
 
         {/* Desktop-Variante (md+): unveränderte Prosa-Form mit CTA. */}
-        <div className="mx-auto hidden max-w-[86rem] flex-col items-start justify-between gap-3 px-4 py-3 md:flex md:flex-row md:items-center md:px-6">
+        <div className="mx-auto hidden max-w-[var(--content-width-wide)] flex-col items-start justify-between gap-3 px-4 py-3 md:flex md:flex-row md:items-center md:px-6">
           <div className="text-sm leading-relaxed text-[var(--text-danger-strong)]">
-            <span className="mr-3 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--text-danger-label)]">
+            <span className="mr-3 text-[10px] font-extrabold uppercase tracking-[var(--letter-spacing-label)] text-[var(--text-danger-label)]">
               Akute Krise
             </span>
             Bei akuter Lebensgefahr:{' '}
@@ -234,7 +234,7 @@ export default function App() {
           <button
             type="button"
             onClick={handleEmergencyAccess}
-            className="haptic-btn inline-flex min-h-[44px] items-center gap-2 rounded-full border border-[var(--border-warm-soft)] bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[var(--accent-primary-strong)] shadow-[0_10px_24px_rgba(141,63,50,0.06)] transition-colors hover:bg-[var(--surface-hover-warm)]"
+            className="haptic-btn inline-flex min-h-[var(--touch-target-min)] items-center gap-2 rounded-full border border-[var(--border-warm-soft)] bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[var(--letter-spacing-label)] text-[var(--accent-primary-strong)] shadow-[0_10px_24px_rgba(141,63,50,0.06)] transition-colors hover:bg-[var(--surface-hover-warm)]"
             aria-label="Zu Notfallinformationen wechseln"
           >
             <AlertTriangle size={14} aria-hidden="true" />

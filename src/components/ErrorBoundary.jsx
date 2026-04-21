@@ -28,7 +28,7 @@ export default class ErrorBoundary extends Component {
             bleibt, nutzen Sie die Notfallnummern unten.
           </p>
           <div className="rounded-xl border border-[var(--border-warm-soft)] bg-white/80 px-5 py-4 text-sm leading-relaxed text-[var(--text-danger-strong)]">
-            <p className="mb-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--text-danger-label)]">
+            <p className="mb-2 text-[10px] font-extrabold uppercase tracking-[var(--letter-spacing-label)] text-[var(--text-danger-label)]">
               Akute Krise
             </p>
             <p>
