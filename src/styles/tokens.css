@@ -67,7 +67,6 @@
   /* Border tokens */
   --border-subtle: #e6dacb;
   --border-default: #d5c9b1;
-  --border-strong: #bda894;
   --border-danger: #e8b8aa;
 
   /* Brand and interaction tokens */
@@ -82,7 +81,6 @@
 
   /* Focus tokens */
   --focus-ring: #8d3f32; /* intended for light surfaces; target visible AA-level contrast */
-  --focus-ring-contrast: #fff8f2; /* intended as halo on dense or dark accent surfaces */
   --focus-ring-width: 3px;
   --focus-ring-offset: 4px;
   --focus-outline-radius: 0.875rem;
@@ -119,7 +117,6 @@
   --space-5: 1.5rem;
   --space-6: 2rem;
   --space-7: 3rem;
-  --space-8: 4rem;
 
   /* Section-Spacing: grosszügiger gesetzt, damit Sektionen stärker
      voneinander getrennt wirken und die Seite mehr «atmet».
@@ -137,9 +134,18 @@
   --radius-pill: 999px;
 
   /* Shadow tokens */
+  /* Overlay */
+  --overlay-scrim: rgba(47, 47, 40, 0.32);
+
+  /* Footer-spezifische Tokens (eigene Farbwelt, Audit 18 #138) */
+  --footer-gradient-brand: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(248, 240, 231, 0.92));
+  --footer-gradient-framework: linear-gradient(180deg, #f0e1cf, #e8d5be);
+  --footer-shadow-subtle: 0 18px 40px rgba(93, 68, 51, 0.04);
+  --footer-shadow-medium: 0 24px 60px rgba(93, 68, 51, 0.06);
+  --footer-shadow-card: 0 16px 34px rgba(93, 68, 51, 0.05);
+
   --shadow-soft: 0 8px 24px rgba(76, 55, 39, 0.08);
   --shadow-card: 0 16px 36px rgba(76, 55, 39, 0.1);
-  --shadow-elevated: 0 24px 60px rgba(76, 55, 39, 0.12);
   --shadow-focus: 0 0 0 4px rgba(141, 63, 50, 0.14);
 
   /* Layout tokens */
