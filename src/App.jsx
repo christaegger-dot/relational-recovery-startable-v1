@@ -23,6 +23,11 @@ const MaterialSection = lazy(() => import('./sections/MaterialSection'));
 const ToolboxSection = lazy(() => import('./sections/ToolboxSection'));
 const NetworkSection = lazy(() => import('./sections/NetworkSection'));
 const EvidenceSection = lazy(() => import('./sections/EvidenceSection'));
+// Sekundaer-Routen (nicht in TAB_ITEMS): werden nur ueber Footer-Links und
+// Deep-Link-Hash erreicht, aber ueber denselben Lazy-/Suspense-Mechanismus
+// geladen wie die Haupt-Tabs. Siehe SECONDARY_TAB_IDS in utils/appHelpers.js.
+const ImpressumSection = lazy(() => import('./sections/ImpressumSection'));
+const DatenschutzSection = lazy(() => import('./sections/DatenschutzSection'));
 
 const SectionLoadingFallback = function SectionLoadingFallback() {
   return (
@@ -139,7 +144,14 @@ export default function App() {
               <ShieldCheck size={16} className="shrink-0 text-[var(--icon-warning-inverse)]" aria-hidden="true" />
               <span>
                 Lokale Speicherung im Browser • auf gemeinsam genutzten Geräten nach der Nutzung zurücksetzen • keine
-                serverseitige Falldokumentation in dieser Ansicht
+                serverseitige Falldokumentation in dieser Ansicht •{' '}
+                <button
+                  type="button"
+                  onClick={() => navigate('datenschutz', { focusTarget: 'heading' })}
+                  className="underline underline-offset-2 decoration-1 text-[var(--icon-warning-inverse)] hover:text-white"
+                >
+                  mehr in der Datenschutzerklärung
+                </button>
               </span>
             </div>
             <button
@@ -289,6 +301,10 @@ export default function App() {
             {activeTab === 'netzwerk' && <NetworkSection />}
 
             {activeTab === 'evidenz' && <EvidenceSection downloadResources={downloadResources} />}
+
+            {activeTab === 'impressum' && <ImpressumSection />}
+
+            {activeTab === 'datenschutz' && <DatenschutzSection />}
           </Suspense>
         </ErrorBoundary>
       </main>

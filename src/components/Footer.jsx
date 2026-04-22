@@ -94,6 +94,30 @@ const Footer = memo(function Footer() {
           </div>
         </div>
 
+        {/* Legal-Links (Impressum + Datenschutz): separate schmale Zeile
+            ueber dem Identitaetssatz, damit die rechtlichen Pflichtangaben
+            erreichbar sind, ohne die Haupt-Navigation zu ueberlagern. */}
+        <ul className="footer-legal-links no-print" aria-label="Rechtliche Angaben">
+          <li>
+            <button
+              type="button"
+              className="footer-legal-links__link"
+              onClick={() => navigate('impressum', { focusTarget: 'heading' })}
+            >
+              Impressum
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className="footer-legal-links__link"
+              onClick={() => navigate('datenschutz', { focusTarget: 'heading' })}
+            >
+              Datenschutz
+            </button>
+          </li>
+        </ul>
+
         {/* Audit 25 / Sprint 4 (O15): Serif-Italic-Identitaetssatz als
             editoriale Stimme zwischen Navigations-Grid und Uppercase-Claim.
             Die bewusste Ruhe in Manrope/Source-Serif + Italic setzt einen
