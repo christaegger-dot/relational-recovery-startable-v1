@@ -74,6 +74,7 @@ export const TAB_ITEMS = [
   },
   {
     id: 'lernmodule',
+    navGroupStart: true,
     label: 'Lernmodule',
     icon: GraduationCap,
     footerNote: 'Kurzformate für Fachpraxis',
@@ -98,6 +99,7 @@ export const TAB_ITEMS = [
   },
   {
     id: 'material',
+    navGroupStart: true,
     label: 'Material',
     icon: CircleHelp,
     footerNote: 'Handouts für Patient:innen und Angehörige',

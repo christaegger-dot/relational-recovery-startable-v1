@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import { AlertTriangle, Check, Menu, Trash2, X } from 'lucide-react';
 import { TAB_ITEMS } from '../data/appShellContent';
 import Button from './ui/Button';
@@ -56,17 +56,19 @@ const Header = memo(function Header({
 
         <nav className="ui-nav ui-nav--desktop" aria-label="Hauptnavigation">
           {TAB_ITEMS.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => handleNavigate(item.id)}
-              className={`ui-nav__item haptic-btn ${activeTab === item.id ? 'is-active' : ''}`}
-              aria-current={activeTab === item.id ? 'page' : undefined}
-            >
-              <item.icon size={14} strokeWidth={2.1} aria-hidden="true" />
-              <span>{item.label}</span>
-              {item.audienceBadge ? <span className="ui-nav__badge">{item.audienceBadge}</span> : null}
-            </button>
+            <React.Fragment key={item.id}>
+              {item.navGroupStart ? <span className="ui-nav__separator" aria-hidden="true" /> : null}
+              <button
+                type="button"
+                onClick={() => handleNavigate(item.id)}
+                className={`ui-nav__item haptic-btn ${activeTab === item.id ? 'is-active' : ''}`}
+                aria-current={activeTab === item.id ? 'page' : undefined}
+              >
+                <item.icon size={14} strokeWidth={2.1} aria-hidden="true" />
+                <span>{item.label}</span>
+                {item.audienceBadge ? <span className="ui-nav__badge">{item.audienceBadge}</span> : null}
+              </button>
+            </React.Fragment>
           ))}
         </nav>
 
@@ -174,18 +176,20 @@ const Header = memo(function Header({
 
               <nav className="ui-nav ui-nav--mobile" aria-label="Mobile Navigation">
                 {TAB_ITEMS.map((item, index) => (
-                  <button
-                    key={item.id}
-                    ref={index === 0 ? firstMobileNavItemRef : undefined}
-                    type="button"
-                    onClick={() => handleNavigate(item.id)}
-                    className={`ui-nav__item haptic-btn ${activeTab === item.id ? 'is-active' : ''}`}
-                    aria-current={activeTab === item.id ? 'page' : undefined}
-                  >
-                    <item.icon size={18} strokeWidth={2.1} aria-hidden="true" />
-                    <span>{item.label}</span>
-                    {item.audienceBadge ? <span className="ui-nav__badge">{item.audienceBadge}</span> : null}
-                  </button>
+                  <React.Fragment key={item.id}>
+                    {item.navGroupStart ? <hr className="ui-nav__separator--mobile" aria-hidden="true" /> : null}
+                    <button
+                      ref={index === 0 ? firstMobileNavItemRef : undefined}
+                      type="button"
+                      onClick={() => handleNavigate(item.id)}
+                      className={`ui-nav__item haptic-btn ${activeTab === item.id ? 'is-active' : ''}`}
+                      aria-current={activeTab === item.id ? 'page' : undefined}
+                    >
+                      <item.icon size={18} strokeWidth={2.1} aria-hidden="true" />
+                      <span>{item.label}</span>
+                      {item.audienceBadge ? <span className="ui-nav__badge">{item.audienceBadge}</span> : null}
+                    </button>
+                  </React.Fragment>
                 ))}
               </nav>
             </div>
