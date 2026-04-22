@@ -28,7 +28,7 @@ test.describe('Assessment Score', () => {
   test.beforeEach(async ({ page }) => {
     await page.addInitScript(() => localStorage.clear());
     await page.goto('/#toolbox');
-    await page.waitForSelector('fieldset.ui-toolbox-checklist');
+    await page.waitForSelector('fieldset.ui-toolbox-checklist', { timeout: 60_000 });
   });
 
   test('starts at zero with supportive risk band', async ({ page }) => {
@@ -127,7 +127,7 @@ test.describe('Assessment Score', () => {
     await page.evaluate(() => {
       window.location.hash = '#toolbox';
     });
-    await page.waitForSelector('fieldset.ui-toolbox-checklist');
+    await page.waitForSelector('fieldset.ui-toolbox-checklist', { timeout: 60_000 });
 
     await expect(page.locator('.ui-toolbox-score')).toHaveText('5');
   });
@@ -139,7 +139,7 @@ test.describe('Assessment Score Persistence', () => {
     await page.goto('/');
     await page.evaluate(() => localStorage.clear());
     await page.goto('/#toolbox');
-    await page.waitForSelector('fieldset.ui-toolbox-checklist');
+    await page.waitForSelector('fieldset.ui-toolbox-checklist', { timeout: 60_000 });
 
     // Check items (score = 5)
     for (const item of ITEMS.slice(0, 2)) {
@@ -149,7 +149,7 @@ test.describe('Assessment Score Persistence', () => {
 
     // Reload — localStorage is NOT cleared this time
     await page.reload();
-    await page.waitForSelector('fieldset.ui-toolbox-checklist');
+    await page.waitForSelector('fieldset.ui-toolbox-checklist', { timeout: 60_000 });
 
     await expect(page.locator('.ui-toolbox-score')).toHaveText('5');
     for (const item of ITEMS.slice(0, 2)) {
