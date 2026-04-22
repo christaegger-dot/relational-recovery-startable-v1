@@ -151,13 +151,10 @@ export const SOURCES = {
     chFocus: false,
     isClassic: true,
   },
-  // TODO (Audit 12, redaktionelle Klaerung): Die LITERATUR-Liste zitierte unter
-  // demselben Autor:innen-Paar einen Stuttgart/Kohlhammer-Band mit abweichendem
-  // Titel ('Ursachen, Folgen und Hilfen fuer Kinder psychisch Kranker'). Bis
-  // zur Klaerung durch die Auftraggeberin wird dieser Band als separater
-  // Eintrag gefuehrt, damit keine Quelle vorschnell verloren geht. Vermutlich
-  // zwei verschiedene Werke. Siehe docs/content-pflege.md -> 'Offene
-  // redaktionelle Klaerungen'.
+  // Bestaetigt (Issue #121 Punkt 2): Dies ist ein EIGENSTAENDIGES Werk
+  // desselben Autorenpaars, nicht ein Duplikat des Beltz-Bands oben.
+  // Beltz 2012 = "Entwicklungsrisiken erkennen und behandeln" (klinisch).
+  // Kohlhammer 2012 = "Ursachen, Folgen und Hilfen" (breiter angelegt).
   'plass-wiegandgrefe-2012-kohlhammer': {
     id: 'plass-wiegandgrefe-2012-kohlhammer',
     author: 'Plass, A. & Wiegand-Grefe, S.',
@@ -169,6 +166,7 @@ export const SOURCES = {
     doi: null,
     link: null,
     chFocus: false,
+    isClassic: true,
   },
 
   'jones-2016': {
