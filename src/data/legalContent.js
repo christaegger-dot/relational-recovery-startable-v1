@@ -1,13 +1,19 @@
 /**
  * Legal-Inhalte: Impressum + Datenschutzerklärung.
  *
- * Default-Entwurf auf Basis der technischen Fakten der Site. Platzhalter
- * mit **"(ZU ERSETZEN: ...)"** markieren redaktionelle Angaben, die vom
- * Betreiber eingesetzt werden müssen, bevor die Seite live gehen kann.
+ * Betreiber: Psychiatrische Universitätsklinik Zürich, Fachstelle
+ * Angehörigenarbeit. Redaktionell verantwortlich: Christa Egger,
+ * Sozialarbeiterin und Angehörigenberaterin. Datenbearbeitung erfolgt
+ * ausschliesslich im institutionellen Rahmen der PUK und unter der
+ * Aufsicht der Gesundheitsdirektion Kanton Zürich.
  *
  * Stand: April 2026 (nDSG in Kraft seit 1.9.2023). Sprache de-CH (ss
  * statt ß). Die DSE folgt den Mindestangaben nach Art. 19 nDSG und
  * nennt Datenübermittlungen ins Ausland transparent (Netlify-Hosting).
+ *
+ * Die **bold**-Syntax in den Paragraphen erzeugt im LegalPageTemplate
+ * eine leichte Hervorhebung (nicht die Soft-Danger-Surface, die wurde
+ * mit dem Entfernen der "(ZU ERSETZEN: ...)"-Platzhalter obsolet).
  */
 
 export const LEGAL_STAND = 'April 2026';
@@ -20,20 +26,24 @@ export const IMPRESSUM_CONTENT = {
   sections: [
     {
       id: 'impressum-betreiber',
-      heading: 'Betreiber und inhaltliche Verantwortung',
+      heading: 'Betreiber',
       paragraphs: [
-        '**(ZU ERSETZEN: Name der verantwortlichen Person oder Organisation)**',
-        '**(ZU ERSETZEN: Postadresse)**',
-        '**(ZU ERSETZEN: E-Mail-Kontakt)**',
+        'Psychiatrische Universitätsklinik Zürich',
+        'Fachstelle Angehörigenarbeit',
+        'Lenggstrasse 31, Postfach, 8032 Zürich',
+        'Telefon: +41 58 384 38 00',
+        'E-Mail: angehoerigenarbeit@pukzh.ch',
+        'Web: https://www.pukzh.ch',
       ],
       note:
-        'Die redaktionelle Verantwortung für die Inhalte dieses Fachportals liegt beim genannten Betreiber. Inhalte beruhen auf fachlicher Literatur, publizierten Leitlinien und klinischer Erfahrung aus der Erwachsenenpsychiatrie und im Beratungskontext im Kanton Zürich.',
+        'Die Psychiatrische Universitätsklinik Zürich (PUK) ist als öffentlich-rechtliche Anstalt Teil des Kantons Zürich und untersteht der Aufsicht der Gesundheitsdirektion des Kantons Zürich.',
     },
     {
-      id: 'impressum-qualifikation',
-      heading: 'Fachliche Qualifikation',
+      id: 'impressum-redaktion',
+      heading: 'Redaktionelle Verantwortung',
       paragraphs: [
-        '**(ZU ERSETZEN: Berufsbezeichnung, z. B. "Fachperson Psychiatrische Pflege HF" oder "Psychologin FSP" — bei Berufsbezeichnungen unter Bundesgesetz die zugehörige Aufsichtsbehörde nennen, z. B. Kantonaler Gesundheitsdirektor, BAG, PsyKo)**',
+        'Inhaltlich verantwortlich für diese Website ist **Christa Egger, Sozialarbeiterin und Angehörigenberaterin** an der Fachstelle Angehörigenarbeit der Psychiatrischen Universitätsklinik Zürich.',
+        'Die Inhalte entstehen im Rahmen der fachlichen Arbeit der Fachstelle und werden fortlaufend überprüft und aktualisiert. Sie beruhen auf fachlicher Literatur, publizierten Leitlinien und klinischer Erfahrung aus der Erwachsenenpsychiatrie und im Beratungskontext.',
       ],
     },
     {
@@ -74,7 +84,8 @@ export const DATENSCHUTZ_CONTENT = {
       id: 'datenschutz-verantwortlicher',
       heading: 'Verantwortlicher',
       paragraphs: [
-        'Verantwortlich für die Datenbearbeitung im Zusammenhang mit dieser Website ist der im Impressum genannte Betreiber. Anfragen zu diesem Text oder zu Ihren Rechten nach Art. 25 ff. nDSG richten Sie bitte an die dort genannte E-Mail-Adresse.',
+        'Verantwortlich für die Datenbearbeitung im Zusammenhang mit dieser Website ist die Psychiatrische Universitätsklinik Zürich, Fachstelle Angehörigenarbeit, Lenggstrasse 31, 8032 Zürich.',
+        'Anfragen zu dieser Erklärung oder zu Ihren Rechten nach Art. 25 ff. nDSG richten Sie bitte an: angehoerigenarbeit@pukzh.ch oder +41 58 384 38 00. Für institutionelle Datenschutzanliegen leiten wir Ihre Anfrage an die zuständige Stelle der PUK weiter.',
       ],
     },
     {
@@ -124,7 +135,7 @@ export const DATENSCHUTZ_CONTENT = {
       paragraphs: [
         'Sie haben nach dem Bundesgesetz über den Datenschutz das Recht auf **Auskunft** (Art. 25), **Berichtigung** (Art. 32), **Löschung** beziehungsweise **Einschränkung der Bearbeitung** und **Widerspruch** gegen bestimmte Bearbeitungen. Soweit eine betroffene Person im Geltungsbereich der DSGVO ansässig ist, stehen ihr ergänzend die dort vorgesehenen Rechte zu (insbesondere Art. 15 bis 22 DSGVO).',
         'Sie können sich jederzeit an die zuständige schweizerische Aufsichtsbehörde wenden: Eidgenössischer Datenschutz- und Öffentlichkeitsbeauftragter (EDÖB), Feldeggweg 1, 3003 Bern, https://www.edoeb.admin.ch',
-        'Für die konkrete Ausübung Ihrer Rechte gegenüber dieser Website wenden Sie sich bitte an die im Impressum genannte Kontaktadresse.',
+        'Für die konkrete Ausübung Ihrer Rechte gegenüber dieser Website wenden Sie sich bitte an die Fachstelle Angehörigenarbeit der PUK Zürich: angehoerigenarbeit@pukzh.ch.',
       ],
     },
     {

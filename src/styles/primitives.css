@@ -4348,16 +4348,13 @@
   line-height: var(--line-height-copy);
 }
 
-/* Platzhalter-Hervorhebung: "(ZU ERSETZEN: ...)"-Marker wird im Build-
-   Entwurf deutlich sichtbar gemacht, damit niemand uebersieht, dass hier
-   ein redaktioneller Einsatz noetig ist. Warnstelle auf weicher
-   Danger-Surface, nicht aggressiv. */
+/* Emphasis-Styling fuer **bold**-Markup im LegalPageTemplate. Rein
+   typografische Hervorhebung (kein farblicher Alarm), damit Begriffe
+   wie "Auskunft", "Berichtigung", "Loeschung" in der Rechte-Liste
+   oder Namen + Funktionsbezeichnungen in der Redaktions-Verantwortung
+   klar hervortreten, ohne als Warnung missverstanden zu werden. */
 .ui-legal-emphasis {
-  display: inline-block;
-  padding: 0.125rem 0.375rem;
-  border-radius: var(--radius-sm);
-  background: var(--surface-danger-soft);
-  color: var(--text-danger-strong);
+  color: var(--text-primary);
   font-weight: 700;
 }
 
