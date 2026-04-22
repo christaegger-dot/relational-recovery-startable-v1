@@ -2432,6 +2432,93 @@
   line-height: var(--line-height-copy);
 }
 
+/* Ausfüllbare Felder (H-5 Schule, ggf. H-1 Notfallplan) */
+.ui-material-handout__field-box {
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  min-height: 3rem;
+  background: var(--surface-app);
+}
+
+.ui-material-handout__field-box--large {
+  min-height: 5rem;
+}
+
+.ui-material-handout__placeholder {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  line-height: var(--line-height-copy);
+}
+
+/* Checkliste (H-5 Schule: Support-Items) */
+.ui-material-handout__checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ui-material-handout__check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  line-height: var(--line-height-copy);
+}
+
+.ui-material-handout__checkbox {
+  flex: none;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+/* Callout-Box (H-5: Boundary-Hinweis) */
+.ui-material-handout__callout {
+  background: var(--surface-note);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  border-left: 3px solid var(--accent-primary);
+}
+
+/* Kontaktliste (H-5 Schule, H-6 Behandlungsteam) */
+.ui-material-handout__contacts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ui-material-handout__contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-app);
+}
+
+.ui-material-handout__contact-name {
+  margin: 0;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ui-material-handout__contact-detail {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.ui-material-handout__contact-number {
+  font-weight: 700;
+  color: var(--accent-primary-strong);
+}
+
 .ui-material-handout__lines {
   display: grid;
   gap: var(--space-3);
