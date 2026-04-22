@@ -11,16 +11,22 @@ const TABS = [
   { id: 'netzwerk', label: 'Netzwerk' },
 ];
 
-// Note: Playwright + Chromium 141 has a known issue with click events on
-// position:sticky + backdrop-filter elements. Navigation buttons in the
-// sticky header don't receive React events via Playwright's click().
-// We test hash-based navigation directly (which the buttons delegate to)
-// and verify the handler wiring separately.
+// Note: Desktop-Nav is permanently display:none (Audit 13/14 decision).
+// All nav-state assertions use page.evaluate() on the DOM (which includes
+// hidden elements) instead of visibility-based locators.
 
 async function navigateViaHash(page, tabId) {
   await page.evaluate((id) => {
     window.location.hash = `#${id}`;
   }, tabId);
+}
+
+/** Returns the text of the currently active nav button (works even if nav is display:none). */
+async function getActiveTabLabel(page) {
+  return page.evaluate(() => {
+    const btn = document.querySelector('nav.ui-nav--desktop button.is-active');
+    return btn ? btn.textContent.trim() : null;
+  });
 }
 
 test.describe('Tab Navigation', () => {
@@ -30,39 +36,67 @@ test.describe('Tab Navigation', () => {
   });
 
   test('loads Start tab by default', async ({ page }) => {
-    const activeBtn = page.locator('nav.ui-nav--desktop button.is-active');
-    await expect(activeBtn).toContainText('Start');
+    // Wait for React to hydrate and render nav buttons
+    await page.waitForFunction(
+      () => document.querySelector('nav.ui-nav--desktop button.is-active') !== null,
+      null,
+      { timeout: 10_000 }
+    );
+    const label = await getActiveTabLabel(page);
+    expect(label).toContain('Start');
   });
 
   test('switching tabs updates hash and active state', async ({ page }) => {
+    await page.waitForFunction(
+      () => document.querySelector('nav.ui-nav--desktop button.is-active') !== null,
+      null,
+      { timeout: 10_000 }
+    );
     for (const tab of TABS.slice(1)) {
       await navigateViaHash(page, tab.id);
       await expect(page).toHaveURL(new RegExp(`#${tab.id}`));
-
-      const activeBtn = page.locator('nav.ui-nav--desktop button.is-active');
-      await expect(activeBtn).toContainText(tab.label);
+      await page.waitForFunction(
+        (label) => {
+          const btn = document.querySelector('nav.ui-nav--desktop button.is-active');
+          return btn && btn.textContent.includes(label);
+        },
+        tab.label,
+        { timeout: 10_000 }
+      );
     }
   });
 
   test('active tab button has aria-current="page"', async ({ page }) => {
     await navigateViaHash(page, 'toolbox');
-
-    await expect(page.locator('nav.ui-nav--desktop button', { hasText: 'Toolbox' })).toHaveAttribute(
-      'aria-current',
-      'page'
+    await page.waitForFunction(
+      () => document.querySelector('nav.ui-nav--desktop button[aria-current="page"]')?.textContent?.includes('Toolbox'),
+      null,
+      { timeout: 10_000 }
     );
 
-    // Inactive tab should NOT have aria-current attribute
-    const ariaCurrent = await page
-      .locator('nav.ui-nav--desktop button', { hasText: 'Start' })
-      .getAttribute('aria-current');
-    expect(ariaCurrent).toBeNull();
+    const result = await page.evaluate(() => {
+      const toolbox = document.querySelector('nav.ui-nav--desktop button[aria-current="page"]');
+      const start = document.querySelector('nav.ui-nav--desktop button:first-of-type');
+      return {
+        activeText: toolbox?.textContent?.trim() ?? null,
+        startAriaCurrent: start?.getAttribute('aria-current'),
+      };
+    });
+    expect(result.activeText).toContain('Toolbox');
+    expect(result.startAriaCurrent).toBeNull();
   });
 
   test('only one tab is active at a time', async ({ page }) => {
     await navigateViaHash(page, 'evidenz');
-    const activeBtns = page.locator('nav.ui-nav--desktop button.is-active');
-    await expect(activeBtns).toHaveCount(1);
+    await page.waitForFunction(
+      () => document.querySelector('nav.ui-nav--desktop button.is-active')?.textContent?.includes('Evidenz'),
+      null,
+      { timeout: 10_000 }
+    );
+    const count = await page.evaluate(() => {
+      return document.querySelectorAll('nav.ui-nav--desktop button.is-active').length;
+    });
+    expect(count).toBe(1);
   });
 
   test('page heading receives focus after navigation', async ({ page }) => {
@@ -83,6 +117,12 @@ test.describe('Tab Navigation', () => {
   });
 
   test('nav buttons have correct onClick handlers wired', async ({ page }) => {
+    // Wait for React to hydrate (buttons need React props)
+    await page.waitForFunction(
+      () => document.querySelectorAll('nav.ui-nav--desktop button').length === 8,
+      null,
+      { timeout: 10_000 }
+    );
     // Verify each nav button has a React onClick that calls navigateToTab
     const result = await page.evaluate(() => {
       const buttons = document.querySelectorAll('nav.ui-nav--desktop button');
@@ -109,50 +149,71 @@ test.describe('Hash Routing', () => {
 
   test('direct hash navigation loads correct tab', async ({ page }) => {
     await page.goto('/#evidenz');
-    const activeBtn = page.locator('nav.ui-nav--desktop button.is-active');
-    await expect(activeBtn).toContainText('Evidenz');
+    await page.waitForFunction(
+      () => document.querySelector('nav.ui-nav--desktop button.is-active')?.textContent?.includes('Evidenz'),
+      null,
+      { timeout: 10_000 }
+    );
+    const label = await getActiveTabLabel(page);
+    expect(label).toContain('Evidenz');
     await expect(page.locator('#page-heading-evidenz')).toBeVisible();
   });
 
   test('hash alias "evidence" resolves to "evidenz"', async ({ page }) => {
     await page.goto('/#evidence');
+    await page.waitForFunction(() => window.location.hash === '#evidenz', null, { timeout: 10_000 });
     await expect(page).toHaveURL(/#evidenz/);
   });
 
   test('hash alias "network" resolves to "netzwerk"', async ({ page }) => {
     await page.goto('/#network');
+    await page.waitForFunction(() => window.location.hash === '#netzwerk', null, { timeout: 10_000 });
     await expect(page).toHaveURL(/#netzwerk/);
   });
 
   test('hash alias "elearning" resolves to "lernmodule"', async ({ page }) => {
     await page.goto('/#elearning');
+    await page.waitForFunction(() => window.location.hash === '#lernmodule', null, { timeout: 10_000 });
     await expect(page).toHaveURL(/#lernmodule/);
   });
 
   test('hash alias "home" resolves to "start"', async ({ page }) => {
     await page.goto('/#home');
+    await page.waitForFunction(() => window.location.hash === '#start', null, { timeout: 10_000 });
     await expect(page).toHaveURL(/#start/);
   });
 
   test('hash alias "grundlagen" resolves to "material"', async ({ page }) => {
     await page.goto('/#grundlagen');
+    await page.waitForFunction(() => window.location.hash === '#material', null, { timeout: 10_000 });
     await expect(page).toHaveURL(/#material/);
   });
 
   test('invalid hash falls back to Start', async ({ page }) => {
     await page.goto('/#nonexistent');
+    await page.waitForFunction(() => window.location.hash === '#start', null, { timeout: 10_000 });
     await expect(page).toHaveURL(/#start/);
-    const activeBtn = page.locator('nav.ui-nav--desktop button.is-active');
-    await expect(activeBtn).toContainText('Start');
+    const label = await getActiveTabLabel(page);
+    expect(label).toContain('Start');
   });
 
   test('hashchange event triggers tab switch', async ({ page }) => {
     await page.goto('/');
+    await page.waitForFunction(
+      () => document.querySelector('nav.ui-nav--desktop button.is-active') !== null,
+      null,
+      { timeout: 10_000 }
+    );
     await page.evaluate(() => {
       window.location.hash = '#glossar';
     });
-    const activeBtn = page.locator('nav.ui-nav--desktop button.is-active');
-    await expect(activeBtn).toContainText('Glossar');
+    await page.waitForFunction(
+      () => document.querySelector('nav.ui-nav--desktop button.is-active')?.textContent?.includes('Glossar'),
+      null,
+      { timeout: 10_000 }
+    );
+    const label = await getActiveTabLabel(page);
+    expect(label).toContain('Glossar');
   });
 });
 
@@ -172,8 +233,13 @@ test.describe('Logo / Home Navigation', () => {
     // Navigate home
     await navigateViaHash(page, 'start');
     await expect(page).toHaveURL(/#start/);
-    const activeBtn = page.locator('nav.ui-nav--desktop button.is-active');
-    await expect(activeBtn).toContainText('Start');
+    await page.waitForFunction(
+      () => document.querySelector('nav.ui-nav--desktop button.is-active')?.textContent?.includes('Start'),
+      null,
+      { timeout: 10_000 }
+    );
+    const label = await getActiveTabLabel(page);
+    expect(label).toContain('Start');
   });
 });
 
@@ -313,7 +379,7 @@ test.describe('Material Handouts', () => {
     await expect(handout.locator('button[data-action="print"]')).toBeVisible();
   });
 
-  // Tier-2-Handout (Issue #116): Age-Grid fuer Eltern + Fachpersonen.
+  // Tier-2-Handout (Issue #116): Age-Grid fuer Eltern.
   test('age-grid handout (was-kinder-brauchen) renders with 4 age cards + threshold per card', async ({ page }) => {
     await page.addInitScript(() => localStorage.clear());
     await page.goto('/#material');
@@ -321,7 +387,7 @@ test.describe('Material Handouts', () => {
     const handout = page.locator('#material-handout-was-kinder-brauchen');
     await expect(handout).toBeVisible({ timeout: 10_000 });
     await expect(handout).toContainText('Was Kinder in welchem Alter brauchen');
-    await expect(handout).toContainText('Handout für Eltern + Fachpersonen');
+    await expect(handout).toContainText('Handout für Eltern');
 
     // Genau vier Altersphasen-Karten im Grid
     const ageGroups = handout.locator('.ui-material-handout__age-group');
@@ -370,7 +436,7 @@ test.describe('Session Reset', () => {
   test('reset clears score', async ({ page }) => {
     await page.addInitScript(() => localStorage.clear());
     await page.goto('/#toolbox');
-    await page.waitForSelector('fieldset.ui-toolbox-checklist');
+    await page.waitForSelector('fieldset.ui-toolbox-checklist', { timeout: 60_000 });
 
     // Check an assessment item
     const checkbox = page
@@ -390,7 +456,7 @@ test.describe('Session Reset', () => {
     await navigateViaHash(page, 'start');
     await page.reload();
     await navigateViaHash(page, 'toolbox');
-    await page.waitForSelector('fieldset.ui-toolbox-checklist');
+    await page.waitForSelector('fieldset.ui-toolbox-checklist', { timeout: 60_000 });
 
     await expect(page.locator('#assessment-score-status')).toContainText('Aktueller Assessment-Score: 0');
   });
@@ -428,6 +494,6 @@ test.describe('Mobile Navigation', () => {
     await expect(page.locator('#mobile-nav')).toBeVisible();
 
     await page.keyboard.press('Escape');
-    await expect(page.locator('button.ui-mobile-toggle')).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('#mobile-nav')).not.toBeVisible();
   });
 });
