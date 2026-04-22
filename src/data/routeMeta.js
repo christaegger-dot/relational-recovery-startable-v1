@@ -110,8 +110,7 @@ export const ROUTE_META = {
   },
   impressum: {
     title: 'Impressum – Eltern mit psychischen Erkrankungen im Beratungskontext',
-    description:
-      'Angaben zum Betreiber, zur inhaltlichen Verantwortung und zum Haftungsrahmen des Fachportals.',
+    description: 'Angaben zum Betreiber, zur inhaltlichen Verantwortung und zum Haftungsrahmen des Fachportals.',
     ogTitle: 'Impressum',
     ogDescription: 'Betreiber, inhaltliche Verantwortung und rechtliche Rahmung des Fachportals.',
   },

@@ -35,7 +35,5 @@ export function buildGlossarLetterIndex(groups = []) {
       byLetter.get(letter).count += 1;
     }
   }
-  return BASE_ALPHABET.map(
-    (letter) => byLetter.get(letter) || { letter, firstTermId: null, count: 0 }
-  );
+  return BASE_ALPHABET.map((letter) => byLetter.get(letter) || { letter, firstTermId: null, count: 0 });
 }
