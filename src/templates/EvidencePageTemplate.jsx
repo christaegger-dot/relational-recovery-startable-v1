@@ -4,6 +4,7 @@ import Section from '../components/ui/Section';
 import SectionHeader from '../components/ui/SectionHeader';
 import SurfaceCard from '../components/ui/SurfaceCard';
 import ClosingSection from '../components/closing/ClosingSection';
+import parseGlossarPlaceholders from '../utils/parseGlossarPlaceholders';
 
 function RichCopy({ paragraphs = [] }) {
   if (!paragraphs.length) return null;
@@ -11,7 +12,9 @@ function RichCopy({ paragraphs = [] }) {
   return (
     <div className="ui-copy">
       {paragraphs.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
+        <p key={typeof paragraph === 'string' ? paragraph : JSON.stringify(paragraph)}>
+          {parseGlossarPlaceholders(paragraph)}
+        </p>
       ))}
     </div>
   );
@@ -31,9 +34,9 @@ function BulletList({ items = [], tone = 'default', icon }) {
     <div className={toneClass}>
       <div className="ui-stack ui-stack--tight">
         {items.map((item) => (
-          <div key={item} className="ui-bullet-panel__item">
+          <div key={typeof item === 'string' ? item : JSON.stringify(item)} className="ui-bullet-panel__item">
             {icon ? <span className="ui-bullet-panel__marker">{icon}</span> : <span className="ui-bullet-panel__dot" />}
-            <p className="ui-bullet-panel__copy">{item}</p>
+            <p className="ui-bullet-panel__copy">{parseGlossarPlaceholders(item)}</p>
           </div>
         ))}
       </div>
