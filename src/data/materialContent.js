@@ -796,7 +796,6 @@ export const MATERIAL_HANDOUTS = [
         { action: 'Ansprechperson wechseln', detail: 'Fragen Sie nach einer anderen Fachperson im Team — das ist kein Affront, sondern Alltag.' },
         { action: 'Ombudsstelle kontaktieren', detail: 'Jede Klinik hat eine Beschwerde- oder Ombudsstelle. Dort können Sie neutral vermittelte Unterstützung bekommen.' },
         { action: 'Pro Mente Sana anrufen', detail: 'Kostenlose Rechtsberatung für Betroffene und Angehörige (0848 800 858).' },
-        { action: 'KESB-Selbstmeldung', detail: 'Wenn Sie sich Sorgen um Kinder machen und das Team nicht reagiert, können Sie sich direkt an die KESB (Kindes- und Erwachsenenschutzbehörde) wenden. Das ist kein Denunzieren — es ist Verantwortung.' },
       ],
     },
     disclaimer:
