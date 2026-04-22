@@ -639,6 +639,138 @@ export const MATERIAL_HANDOUTS = [
       ],
     },
   },
+  // Tier-2-Handout #5: Psychoedukations-Info fuer Eltern an die Schule.
+  // Format E (school-info): Situationsfelder zum Ausfuellen, konkrete
+  // Support-Items, Boundary-Callout (was NICHT geteilt werden muss),
+  // Notfall-Kontakte. Quelle: Stauber Kap. 4.3 + 5.3 (soziale Kontakte
+  // ermoeglichen, Schule als Schutzfaktor, «innere Erlaubnis»).
+  {
+    id: 'material-handout-schule',
+    kind: 'school-info',
+    eyebrow: 'Handout für Eltern → Schule',
+    title: 'Information an die Lehrperson',
+    description:
+      'Eine kurze, ausfüllbare Vorlage, die Eltern dabei unterstützt, die Lehrperson ihres Kindes über die familiäre Situation zu informieren — sachlich, begrenzt und auf die Bedürfnisse des Kindes fokussiert.',
+    usage: {
+      when: 'Wenn ein Kind in der Schule auffällt, sich verändert oder Eltern präventiv informieren möchten.',
+      people: 'Betroffene Eltern (ggf. mit Fachperson vorbereitet) → Klassenlehrperson.',
+      validity: 'Kann jederzeit angepasst oder zurückgezogen werden. Gilt, solange es für die Familie stimmt.',
+      where: 'Ausdrucken, gemeinsam ausfüllen, persönlich übergeben oder per Post senden.',
+    },
+    situation: {
+      title: 'Über unser Kind',
+      intro: 'Diese Angaben helfen der Lehrperson, das Kind besser zu verstehen und zu begleiten.',
+      fields: [
+        { label: 'Name des Kindes', placeholder: '_______________', type: 'text' },
+        { label: 'Klasse / Stufe', placeholder: '_______________', type: 'text' },
+        { label: 'Was die Lehrperson wissen sollte', placeholder: 'In unserer Familie gibt es aktuell eine besondere Belastung. Ein Elternteil ist psychisch erkrankt. Wir möchten, dass die Schule Bescheid weiss, damit unser Kind gut begleitet werden kann.', type: 'textarea' },
+        { label: 'Was sich beim Kind verändern kann', placeholder: 'z. B. Rückzug, Müdigkeit, Konzentrationsprobleme, verstärkte Emotionalität', type: 'textarea' },
+      ],
+    },
+    supportItems: {
+      title: 'Was unserem Kind in der Schule helfen kann',
+      intro: 'Bitte ankreuzen oder ergänzen, was auf Ihr Kind zutrifft:',
+      items: [
+        'Geduld bei Konzentrationsproblemen oder Vergesslichkeit',
+        'Verständnis, wenn das Kind stiller oder gereizter ist als üblich',
+        'Die Möglichkeit, sich kurz zurückzuziehen, wenn es zu viel wird',
+        'Eine verlässliche Ansprechperson, an die sich das Kind wenden kann',
+        'Keine öffentliche Thematisierung vor der Klasse',
+        'Rückmeldung an die Eltern bei auffälligen Veränderungen',
+      ],
+    },
+    boundary: {
+      title: 'Was nicht geteilt werden muss',
+      text: 'Sie müssen der Lehrperson keine Diagnose nennen, keine Behandlungsdetails mitteilen und nichts über die familiäre Situation erzählen, das über die Bedürfnisse des Kindes hinausgeht. Es reicht, zu sagen: «Ein Elternteil ist gesundheitlich belastet. Unser Kind braucht aktuell etwas mehr Aufmerksamkeit und Geduld.»',
+    },
+    contacts: {
+      title: 'Notfall-Kontakte',
+      intro: 'Falls die Schule Sorgen hat oder das Kind akute Unterstützung braucht:',
+      items: [
+        { name: 'Erreichbare Bezugsperson', detail: '(Name und Telefonnummer eintragen)', number: null },
+        { name: 'Pro Juventute Beratung', detail: 'Für Kinder und Jugendliche, kostenlos und vertraulich', number: '147' },
+        { name: 'Elternnotruf', detail: '24h-Beratung für Eltern in Belastungssituationen', number: '0848 35 45 55' },
+      ],
+    },
+    disclaimer:
+      'Dieses Informationsblatt ist freiwillig und kann jederzeit zurückgezogen werden. Es ersetzt keine schulpsychologische Abklärung. Bei akuter Gefährdung gilt das schulische Meldeverfahren.',
+    crossRefs: [
+      { targetId: 'material-kinder', label: 'Cluster 4: Mit Kindern über die Erkrankung sprechen' },
+      { targetId: 'material-altersgerecht', label: 'Cluster 5: Altersgerecht erklären' },
+      { targetId: 'material-handout-erstes-gespraech', label: 'Handout: Wie sage ich es meinem Kind?' },
+    ],
+  },
+  // Tier-2-Handout #6: Was darf ich vom Behandlungsteam erwarten?
+  // Fuer Angehoerige. Aggregiert Glossar-Inhalte (Schweigepflicht, Trialog,
+  // Angehoerigenarbeit) + Cluster-3-FAQs. Format F (rights-overview):
+  // Rechte / Realitaeten / Grenzen / Trialog-Pfad / Eskalation.
+  {
+    id: 'material-handout-behandlungsteam',
+    kind: 'rights-overview',
+    eyebrow: 'Handout für Angehörige',
+    title: 'Was darf ich vom Behandlungsteam erwarten?',
+    description:
+      'Orientierung für Angehörige: was Sie mitteilen dürfen, was Sie erfahren können, wo die Grenzen liegen — und was Sie tun können, wenn die Zusammenarbeit stockt.',
+    usage: {
+      when: 'Vor oder nach einem Gespräch mit dem Behandlungsteam — zur Vorbereitung oder Einordnung.',
+      people: 'Angehörige (Partner:innen, erwachsene Kinder, Eltern) der erkrankten Person.',
+      validity: 'Allgemeine Orientierung. Rechtliche Fragen immer mit einer Beratungsstelle klären.',
+      where: 'Ausdrucken, markieren was zutrifft, zum Gespräch mitnehmen oder zur Reflexion nutzen.',
+    },
+    rights: {
+      title: 'Was Ihnen zusteht',
+      intro: 'Auch ohne formelle Entbindung von der Schweigepflicht haben Sie bestimmte Möglichkeiten:',
+      items: [
+        { right: 'Eigene Beobachtungen mitteilen', detail: 'Sie dürfen dem Behandlungsteam jederzeit sagen, was Sie im Alltag wahrnehmen — Veränderungen, Krisen, Sorgen um Kinder. Das Team muss Ihnen nichts zurückmelden, aber es darf zuhören.' },
+        { right: 'Allgemeine Informationen erhalten', detail: 'Fachpersonen dürfen Ihnen allgemeine Informationen über die Erkrankung, Behandlungsformen und Unterstützungsangebote geben — ohne patientenbezogene Details.' },
+        { right: 'An der Angehörigenberatung teilnehmen', detail: 'Die PUK Zürich und viele andere Kliniken bieten eigenständige Angehörigenberatung an. Dort sind Sie die Klient:in, nicht die erkrankte Person.' },
+        { right: 'Eine Entbindung anregen', detail: 'Sie können die erkrankte Person bitten, das Team von der Schweigepflicht zu entbinden — ganz oder für bestimmte Themen. Das Team kann das nicht von sich aus tun.' },
+      ],
+    },
+    realities: {
+      title: 'Was realistisch ist',
+      intro: 'Gute Zusammenarbeit braucht Erwartungen, die der Realität entsprechen:',
+      items: [
+        'Das Team hat begrenzte Zeit — kurze, konkrete Anliegen werden eher gehört als lange Schilderungen.',
+        'Schweigepflicht schützt die erkrankte Person, nicht das Team. Das kann frustrierend sein, ist aber rechtlich notwendig.',
+        'Trialog-Gesprächsformate (Betroffene + Angehörige + Fachperson gemeinsam) existieren, sind aber nicht überall Standard.',
+        'Nicht jede Fachperson ist gleich sensibel für Angehörigen-Anliegen. Wenn der Kontakt nicht trägt, ist ein Wechsel der Ansprechperson legitim.',
+      ],
+    },
+    limits: {
+      title: 'Wo die Grenzen liegen',
+      items: [
+        { limit: 'Keine Auskünfte ohne Einwilligung', detail: 'Ohne Entbindung darf das Team Ihnen nichts über Diagnose, Therapie oder Medikation sagen — auch wenn Sie die nächste Bezugsperson sind.' },
+        { limit: 'Keine Behandlungsentscheide durch Angehörige', detail: 'Solange die erkrankte Person urteilsfähig ist, entscheidet sie selbst über Behandlung, Aufenthalt und Informationsweitergabe.' },
+        { limit: 'Keine automatische Einbeziehung', detail: 'Angehörige werden nicht automatisch informiert oder einbezogen — das braucht aktive Schritte von beiden Seiten.' },
+      ],
+    },
+    trialogPath: {
+      title: 'Der Weg zum Trialog',
+      intro: 'Ein Trialog ist ein Gespräch auf Augenhöhe zwischen drei Perspektiven: der erkrankten Person, den Angehörigen und den Fachpersonen.',
+      steps: [
+        'Eigenen Wunsch nach einem gemeinsamen Gespräch äussern — gegenüber der erkrankten Person und/oder dem Behandlungsteam.',
+        'Wenn die erkrankte Person zustimmt: Zeitpunkt, Rahmen und Themen gemeinsam vereinbaren.',
+        'Wenn die erkrankte Person (noch) nicht bereit ist: eigene Angehörigenberatung nutzen und den Wunsch offen halten.',
+      ],
+    },
+    escalation: {
+      title: 'Wenn es nicht weitergeht',
+      intro: 'Nicht jeder Kontakt mit dem Behandlungsteam funktioniert. Mögliche nächste Schritte:',
+      items: [
+        { action: 'Ansprechperson wechseln', detail: 'Fragen Sie nach einer anderen Fachperson im Team — das ist kein Affront, sondern Alltag.' },
+        { action: 'Ombudsstelle kontaktieren', detail: 'Jede Klinik hat eine Anlaufstelle für Beschwerden. Diese vermittelt neutral.' },
+        { action: 'Pro Mente Sana anrufen', detail: 'Kostenlose Rechtsberatung für Betroffene und Angehörige (0848 800 858).' },
+        { action: 'KESB-Selbstmeldung', detail: 'Wenn Sie sich Sorgen um Kinder machen und das Team nicht reagiert, können Sie sich direkt an die KESB wenden. Das ist kein Denunzieren — es ist Verantwortung.' },
+      ],
+    },
+    disclaimer:
+      'Dieses Blatt gibt allgemeine Orientierung. Es ersetzt keine individuelle Rechtsberatung. Bei konkreten Fragen zu Ihrem Fall: Angehörigenberatung der PUK Zürich oder Pro Mente Sana (0848 800 858).',
+    crossRefs: [
+      { targetId: 'material-zusammenarbeit', label: 'Cluster 3: Zusammenarbeit und nächste Schritte' },
+      { targetId: 'material-handout-wann-fachstelle', label: 'Handout: Wann braucht es eine Fachstelle?' },
+    ],
+  },
 ];
 
 // Zielgruppen-Blöcke fuer die Material-Cluster (Issues #102 + #103). Die sechs
