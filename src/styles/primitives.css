@@ -1692,7 +1692,7 @@
      > Persistenz-Banner 100 > Header 50. Aenderungen muessen diese Ordnung wahren,
      sonst werden Mobile-Nav-Klicks vom Banner ueberlagert (Audit-14-Phase-2). */
   z-index: 110;
-  background: rgba(47, 47, 40, 0.32);
+  background: var(--overlay-scrim);
   /* Button-Defaults zuruecksetzen, damit das Element rein als Backdrop wirkt. */
   appearance: none;
   border: 0;
@@ -3860,16 +3860,16 @@
 
 .footer-panel--brand {
   border-radius: 2.5rem;
-  background: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(248, 240, 231, 0.92));
+  background: var(--footer-gradient-brand);
   padding: var(--space-6);
-  box-shadow: 0 24px 60px rgba(93, 68, 51, 0.06);
+  box-shadow: var(--footer-shadow-medium);
 }
 
 .footer-panel--nav {
   border-radius: 2.25rem;
   background: color-mix(in srgb, white 65%, transparent 35%);
   padding: var(--space-6);
-  box-shadow: 0 18px 40px rgba(93, 68, 51, 0.04);
+  box-shadow: var(--footer-shadow-subtle);
 }
 
 /* Audit P2 #14: Vorher war das Arbeitsrahmen-Panel ein dunkelbrauner
@@ -3883,10 +3883,10 @@
 .footer-panel--framework {
   border-radius: 2.5rem;
   border-color: var(--footer-badge-border);
-  background: linear-gradient(180deg, #f0e1cf, #e8d5be);
+  background: var(--footer-gradient-framework);
   padding: var(--space-6);
   color: var(--footer-text-warm);
-  box-shadow: 0 18px 40px rgba(93, 68, 51, 0.06);
+  box-shadow: var(--footer-shadow-medium);
 }
 
 .footer-brand-badge {
@@ -4014,7 +4014,7 @@
   transform: translateY(-1px);
   border-color: var(--footer-badge-border);
   background: color-mix(in srgb, white 85%, transparent 15%);
-  box-shadow: 0 16px 34px rgba(93, 68, 51, 0.05);
+  box-shadow: var(--footer-shadow-card);
 }
 
 .footer-nav-link__body {
