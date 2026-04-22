@@ -8,9 +8,9 @@
   --section-padding-inline: clamp(1.25rem, 2vw, 2rem);
   --section-padding-block: clamp(1.5rem, 2.5vw, 3rem);
   --surface-hero: color-mix(in srgb, var(--surface-app) 88%, var(--accent-primary-soft) 12%);
-  --surface-panel: color-mix(in srgb, var(--surface-app) 82%, var(--surface-subtle) 18%);
+  --surface-panel: color-mix(in srgb, var(--surface-app) 62%, var(--surface-subtle) 38%);
   --surface-panel-strong: color-mix(in srgb, white 16%, var(--accent-primary) 84%);
-  --surface-note: color-mix(in srgb, var(--surface-app) 76%, var(--surface-accent-soft) 24%);
+  --surface-note: color-mix(in srgb, var(--surface-app) 70%, var(--surface-accent-soft) 30%);
 }
 
 .page-shell {
@@ -76,10 +76,10 @@
   background:
     radial-gradient(
       ellipse 50% 70% at 95% 10%,
-      color-mix(in srgb, var(--accent-primary-soft) 6%, transparent 94%),
+      color-mix(in srgb, var(--accent-primary-soft) 8%, transparent 92%),
       transparent 60%
     ),
-    color-mix(in srgb, var(--surface-app) 70%, var(--surface-muted) 30%);
+    color-mix(in srgb, var(--surface-app) 50%, var(--surface-muted) 50%);
 }
 
 .ui-section__surface--accent {
@@ -107,7 +107,7 @@
 }
 
 .ui-section--bleed--warm {
-  background: color-mix(in srgb, var(--surface-app) 70%, var(--surface-muted) 30%);
+  background: color-mix(in srgb, var(--surface-app) 50%, var(--surface-muted) 50%);
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
 }
