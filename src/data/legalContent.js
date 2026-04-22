@@ -21,8 +21,7 @@ export const LEGAL_STAND = 'April 2026';
 export const IMPRESSUM_CONTENT = {
   eyebrow: 'Rechtliches',
   title: 'Impressum',
-  lead:
-    'Angaben gemäss schweizerischer Informationspflicht (UWG Art. 3 lit. s) und zur Transparenz über die inhaltliche Verantwortung des Fachportals.',
+  lead: 'Angaben gemäss schweizerischer Informationspflicht (UWG Art. 3 lit. s) und zur Transparenz über die inhaltliche Verantwortung des Fachportals.',
   sections: [
     {
       id: 'impressum-betreiber',
@@ -35,8 +34,7 @@ export const IMPRESSUM_CONTENT = {
         'E-Mail: angehoerigenarbeit@pukzh.ch',
         'Web: https://www.pukzh.ch',
       ],
-      note:
-        'Die Psychiatrische Universitätsklinik Zürich (PUK) ist als öffentlich-rechtliche Anstalt Teil des Kantons Zürich und untersteht der Aufsicht der Gesundheitsdirektion des Kantons Zürich.',
+      note: 'Die Psychiatrische Universitätsklinik Zürich (PUK) ist als öffentlich-rechtliche Anstalt Teil des Kantons Zürich und untersteht der Aufsicht der Gesundheitsdirektion des Kantons Zürich.',
     },
     {
       id: 'impressum-redaktion',
@@ -76,8 +74,7 @@ export const IMPRESSUM_CONTENT = {
 export const DATENSCHUTZ_CONTENT = {
   eyebrow: 'Rechtliches',
   title: 'Datenschutzerklärung',
-  lead:
-    'Diese Website verarbeitet bewusst so wenig Daten wie möglich. Es gibt keine Cookies, kein Analytics und keine externen Tracker. Dennoch entstehen beim blossen Aufrufen der Seite technische Daten (Server-Logs), und die Seite speichert Bedienzustände lokal im Browser. Diese Erklärung macht transparent, welche Daten warum und wo verarbeitet werden.',
+  lead: 'Diese Website verarbeitet bewusst so wenig Daten wie möglich. Es gibt keine Cookies, kein Analytics und keine externen Tracker. Dennoch entstehen beim blossen Aufrufen der Seite technische Daten (Server-Logs), und die Seite speichert Bedienzustände lokal im Browser. Diese Erklärung macht transparent, welche Daten warum und wo verarbeitet werden.',
   standNotice: `Stand: ${LEGAL_STAND}. Grundlage: Bundesgesetz über den Datenschutz (nDSG, in Kraft seit 1. September 2023).`,
   sections: [
     {

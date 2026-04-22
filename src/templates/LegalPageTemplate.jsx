@@ -49,12 +49,7 @@ export default function LegalPageTemplate({ content, pageHeadingId, standNotice 
   return (
     <div className="ui-stack">
       <Container width="wide">
-        <PageHero
-          eyebrow={content.eyebrow}
-          title={content.title}
-          lead={content.lead}
-          headingId={pageHeadingId}
-        />
+        <PageHero eyebrow={content.eyebrow} title={content.title} lead={content.lead} headingId={pageHeadingId} />
       </Container>
       <Section spacing="tight" surface="plain">
         <div className="ui-legal-body">
