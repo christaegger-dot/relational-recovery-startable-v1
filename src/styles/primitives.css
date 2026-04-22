@@ -1663,6 +1663,25 @@
     0 10px 24px rgba(76, 55, 39, 0.04);
 }
 
+/* Visueller Gruppentrenner zwischen Nav-Clustern (Einstieg | Lernen | Anwenden).
+   Desktop: vertikale 1px-Linie. Mobile-Drawer: horizontale Trennlinie. */
+.ui-nav__separator {
+  width: 1px;
+  height: 1.25rem;
+  margin-inline: 0.125rem;
+  background: color-mix(in srgb, var(--border-default) 60%, transparent 40%);
+  border-radius: 0.5px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.ui-nav__separator--mobile {
+  border: none;
+  height: 1px;
+  margin: var(--space-2) var(--space-4);
+  background: color-mix(in srgb, var(--border-default) 40%, transparent 60%);
+}
+
 .ui-nav__item {
   min-height: var(--touch-target-min);
   border: 1px solid transparent;
