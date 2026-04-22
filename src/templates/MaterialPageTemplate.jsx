@@ -69,7 +69,7 @@ function MaterialCluster({ cluster, audienceBadge }) {
  */
 function MaterialClusterBlockHeader({ audience, surface = 'subtle' }) {
   return (
-    <Section spacing="tight" surface={surface}>
+    <Section spacing="tight" surface={surface} bleed>
       <div className="ui-stack ui-stack--tight ui-material-cluster-block__header">
         <div className="ui-badge-row">
           <span className="ui-badge ui-badge--soft" data-audience={audience.id}>

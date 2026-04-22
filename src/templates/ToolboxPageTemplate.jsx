@@ -14,7 +14,7 @@ function AssessmentPanel({ assessment, scoreStatusId }) {
   if (!assessment) return null;
 
   return (
-    <Section spacing="tight" surface="subtle" className="no-print">
+    <Section spacing="tight" surface="subtle" bleed className="no-print">
       <div className="ui-stack ui-stack--loose">
         <div className="ui-split">
           <div className="ui-stack ui-stack--tight">

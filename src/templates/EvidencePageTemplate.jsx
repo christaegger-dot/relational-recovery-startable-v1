@@ -93,7 +93,7 @@ function ChapterOverview({ chapterOverview }) {
 
   return (
     <>
-      <Section spacing="tight" surface="subtle" className="no-print">
+      <Section spacing="tight" surface="subtle" bleed className="no-print">
         <div className="ui-stack ui-stack--loose">
           <SectionHeader
             eyebrow={chapterOverview.eyebrow}

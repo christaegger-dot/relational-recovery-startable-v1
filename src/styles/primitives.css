@@ -68,6 +68,48 @@
   border-color: var(--border-default);
 }
 
+/* Bleed-Modus: Hintergrund auf volle Viewport-Breite (kein border-radius,
+   kein border, kein box-shadow). Wirkt als horizontales Band, das den
+   visuellen Rhythmus bricht. Content bleibt im Container. */
+.ui-section--bleed {
+  padding-inline: var(--section-padding-inline);
+}
+
+.ui-section--bleed--plain {
+  background: var(--surface-app);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.ui-section--bleed--subtle {
+  background: var(--surface-panel);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.ui-section--bleed--warm {
+  background: color-mix(in srgb, var(--surface-app) 70%, var(--surface-muted) 30%);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.ui-section--bleed--accent {
+  background: var(--surface-note);
+  border-top: 1px solid var(--border-default);
+  border-bottom: 1px solid var(--border-default);
+}
+
+/* Dekorativer Gradient-Akzent auf Bleed-Sections: sehr subtiler radialer
+   Gradient in der oberen Ecke, der Tiefe und Wärme erzeugt. */
+.ui-section--bleed--subtle,
+.ui-section--bleed--warm {
+  background-image: radial-gradient(
+    ellipse 60% 80% at 100% 0%,
+    color-mix(in srgb, var(--accent-primary-soft) 8%, transparent 92%),
+    transparent 70%
+  );
+}
+
 .ui-eyebrow {
   display: inline-flex;
   align-items: center;
