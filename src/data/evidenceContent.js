@@ -280,7 +280,7 @@ export const CHILD_EXPERIENCE_POINTS = [
 ];
 
 export const CHILD_EXPERIENCE_PRACTICE_POINTS = [
-  'nach Mitverantwortung, Sorgeverhalten und stiller Anpassung von Kindern fragen',
+  'nach Mitverantwortung, Sorgeverhalten und stiller Anpassung ([[glossar:parentifizierung|Parentifizierung]]) von Kindern fragen',
   'Loyalitätskonflikte und Familiengeheimnisse aktiv ansprechbar machen',
   'zwischen altersangemessener Mithilfe und überfordernder Rollenumkehr unterscheiden',
   'kindliche Perspektive in Krisenplanung, Entlastung und Gesprächsführung mitdenken',
@@ -334,7 +334,7 @@ export const PSYCHOEDUCATION_PRACTICE_POINTS = [
   'einfach, ehrlich und entlastend sprechen – nicht beschönigen, aber auch nicht überfordern',
   'wichtige Sätze wiederholen: Du bist nicht schuld. Du bist nicht allein. Erwachsene kümmern sich.',
   'altersgerechte Sprache wählen und an vorhandene Fragen des Kindes anknüpfen',
-  'Psychoedukation als fortlaufendes Gespräch verstehen, nicht als einmalige Erklärung',
+  '[[glossar:psychoedukation|Psychoedukation]] als fortlaufendes Gespräch verstehen, nicht als einmalige Erklärung',
 ];
 
 export const PSYCHOEDUCATION_PREPARATION_POINTS = [
@@ -401,7 +401,7 @@ export const HELP_BARRIER_POINTS = [
 ];
 
 export const HELP_BARRIER_PRACTICE_POINTS = [
-  'Ängste vor KESB, Bewertung oder Sorgerechtsverlust ansprechbar machen statt zu bagatellisieren',
+  'Ängste vor [[glossar:kesb|KESB]], Bewertung oder Sorgerechtsverlust ansprechbar machen statt zu bagatellisieren',
   'Hilfen konkret, klein und nachvollziehbar erklären: Wer macht was, was passiert zuerst, was nicht?',
   'symptombedingte Hürden mitdenken und Unterstützung so organisieren, dass sie tatsächlich erreichbar bleibt',
   'mit Eltern auf Augenhöhe arbeiten und Selbstwirksamkeit stärken statt vorschnell zu moralisieren',
@@ -444,7 +444,7 @@ export const CLINICAL_PRACTICE_POINTS = [
 export const SOCIAL_RESOURCES_INTRO_POINTS = [
   'Eine Netzwerkkarte zeigt, wer im Umfeld einer Familie da ist. Wenn Bindungs- und Kontaktbedürfnisse durch die bestehenden Kontakte nicht ausreichend abgedeckt werden, ist der nächste Schritt, soziale Ressourcen gezielt zu aktivieren.',
   'Die drei Strategie-Familien — personenbezogen, kontextbezogen und gruppenbezogen — ergänzen sich. Welche im Vordergrund steht, hängt davon ab, ob bestehende Beziehungen mobilisiert, strukturelle Bedingungen verändert oder neue Schutzräume aufgebaut werden müssen.',
-  'Familiäre Tabuisierung und die Angst vor Stigmatisierung sind die häufigsten Hürden. Ohne Bearbeitung dieser inneren Erlaubnis bleiben auch sichtbare soziale Ressourcen ungenutzt.',
+  'Familiäre [[glossar:tabuisierung|Tabuisierung]] und die Angst vor Stigmatisierung sind die häufigsten Hürden. Ohne Bearbeitung dieser inneren Erlaubnis bleiben auch sichtbare soziale Ressourcen ungenutzt.',
 ];
 
 export const SOCIAL_RESOURCES_ACTIVATION = [
