@@ -382,7 +382,8 @@
     color: #000;
   }
   .ui-material-handout__line {
-    border-bottom: 1pt solid #333;
+    height: 7mm;
+    border-bottom: 0.5pt solid #333;
   }
   .ui-material-handout__section-title {
     font-size: 13pt;
@@ -657,12 +658,18 @@
    */
   .ui-material-handout__field-box {
     border: 1pt dashed #999 !important;
-    background: #fff !important;
-    min-height: 18mm;
+    background: #fff repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 6.5mm,
+      #ccc 6.5mm,
+      #ccc 7mm
+    ) !important;
+    min-height: 21mm;
     padding: 3mm 4mm !important;
   }
   .ui-material-handout__field-box--large {
-    min-height: 30mm;
+    min-height: 35mm;
   }
   .ui-material-handout__placeholder {
     color: #bbb !important;
