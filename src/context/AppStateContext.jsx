@@ -101,10 +101,31 @@ export function AppStateProvider({ children }) {
   };
 
   // Navigate to a tab with an optional focus target (sets navigationFocusTargetRef for App)
+  // Audit 25 / Sprint 6 (O11): Bei Browsern mit View Transition API wird der
+  // Tab-Wechsel als Cross-Fade gerendert (Chromium 111+, Safari 18+). Das
+  // macht den SPA-Wechsel als sanfte Uebergabe erfahrbar statt als
+  // instantaner DOM-Austausch. Fallback fuer Firefox / aeltere Browser:
+  // direkter State-Update (Verhalten wie vor Sprint 6). prefers-reduced-motion
+  // bypasst die Transition bewusst -- Nutzer mit Motion-Aversion sollen
+  // keine crossfade-Bewegung bekommen, auch keine sanfte.
   const navigate = useCallback((nextTab, options = {}) => {
     const { focusTarget = 'heading' } = options;
     navigationFocusTargetRef.current = focusTarget;
-    setActiveTab((prev) => (prev === nextTab ? prev : nextTab));
+
+    const applyUpdate = () => setActiveTab((prev) => (prev === nextTab ? prev : nextTab));
+
+    const supportsViewTransition =
+      typeof document !== 'undefined' && typeof document.startViewTransition === 'function';
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (supportsViewTransition && !prefersReducedMotion) {
+      document.startViewTransition(applyUpdate);
+    } else {
+      applyUpdate();
+    }
   }, []);
 
   // Reset all persisted state to defaults

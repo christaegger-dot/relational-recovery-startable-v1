@@ -104,6 +104,26 @@
   }
 }
 
+/* Audit 25 / Sprint 6 (O11): Tab-Change-Transition via View Transition API.
+   Default-Behaviour des Browsers waere ein 250ms-Cross-Fade; wir schrauben
+   das auf 180ms zurueck, damit es dem Motion-System der Seite entspricht
+   (--motion-fast). Mikro-Polish-Prinzip: sichtbar, aber nicht wartend.
+   prefers-reduced-motion wird bereits in navigate() abgefangen -- die
+   Transition wird in dem Fall gar nicht gestartet; zusaetzlich dieser
+   CSS-Guard, falls ein Browser das JS-Guard umgeht. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--motion-fast);
+  animation-timing-function: var(--motion-curve-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 :focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring);
   outline-offset: var(--focus-ring-offset);
