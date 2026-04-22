@@ -4293,3 +4293,117 @@
   color: var(--text-muted);
   transform: none;
 }
+
+/* Legal-Pages (Impressum + Datenschutzerklaerung) — ruhige Prosa-Ansicht.
+   Bewusst schlank, weil es um Lesbarkeit einer laengeren Textstrecke geht
+   und nicht um Karten-Grids. Max-Width via --content-width-copy entspricht
+   dem Standard fuer Fliesstext (860px). */
+.ui-legal-body {
+  max-width: var(--content-width-copy);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+.ui-legal-stand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--surface-subtle);
+}
+
+.ui-legal-stand__copy {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
+.ui-legal-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ui-legal-section__heading {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 1.4vw, 1.5rem);
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-display);
+}
+
+.ui-legal-section__note {
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--border-default);
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-copy);
+}
+
+/* Platzhalter-Hervorhebung: "(ZU ERSETZEN: ...)"-Marker wird im Build-
+   Entwurf deutlich sichtbar gemacht, damit niemand uebersieht, dass hier
+   ein redaktioneller Einsatz noetig ist. Warnstelle auf weicher
+   Danger-Surface, nicht aggressiv. */
+.ui-legal-emphasis {
+  display: inline-block;
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-danger-soft);
+  color: var(--text-danger-strong);
+  font-weight: 700;
+}
+
+.ui-legal-body .ui-copy p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: var(--line-height-copy);
+}
+
+.ui-legal-body .ui-copy p + p {
+  margin-top: var(--space-4);
+}
+
+/* Legal-Pages-Links im Footer: eigene schmale Zeile ueber dem Identitaets-
+   Satz, damit Impressum/Datenschutz visuell nicht mit der Inhalts-Navigation
+   konkurrieren, aber auch nicht am Seitenfuss vergraben werden. */
+.footer-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-legal-links li {
+  margin: 0;
+}
+
+.footer-legal-links__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: transparent;
+  border: 0;
+  padding: 0.25rem 0;
+  color: var(--footer-text-warm);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.footer-legal-links__link:hover,
+.footer-legal-links__link:focus-visible {
+  color: var(--accent-primary-strong);
+}

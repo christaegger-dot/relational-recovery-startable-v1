@@ -108,6 +108,21 @@ export const ROUTE_META = {
     ogDescription:
       'Regionale Fachstellen für Weitervermittlung, Triage und Entlastung – Zürich-Fokus mit schweizweiten Ergänzungen.',
   },
+  impressum: {
+    title: 'Impressum – Eltern mit psychischen Erkrankungen im Beratungskontext',
+    description:
+      'Angaben zum Betreiber, zur inhaltlichen Verantwortung und zum Haftungsrahmen des Fachportals.',
+    ogTitle: 'Impressum',
+    ogDescription: 'Betreiber, inhaltliche Verantwortung und rechtliche Rahmung des Fachportals.',
+  },
+  datenschutz: {
+    title: 'Datenschutzerklärung – Eltern mit psychischen Erkrankungen im Beratungskontext',
+    description:
+      'Transparenzhinweise zur Datenverarbeitung: lokaler Browser-Speicher, Hosting, keine Cookies, keine Analytics. Grundlage: nDSG.',
+    ogTitle: 'Datenschutzerklärung',
+    ogDescription:
+      'Was die Seite speichert, was sie nicht speichert und welche Rechte Sie nach dem Bundesgesetz über den Datenschutz haben.',
+  },
 };
 
 /**

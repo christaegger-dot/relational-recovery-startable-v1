@@ -43,7 +43,24 @@ const TAB_ALIASES = {
   // externe Deep-Links (#grundlagen) lebendig.
   grundlagen: 'material',
   material: 'material',
+  // Legal-Pages (Impressum + Datenschutz): Sekundaer-Routen, die nicht in
+  // TAB_ITEMS stehen -- sie tauchen nicht in der Haupt-Navigation auf,
+  // sind aber ueber Footer-Links und Deep-Link-Hash erreichbar.
+  impressum: 'impressum',
+  imprint: 'impressum',
+  datenschutz: 'datenschutz',
+  privacy: 'datenschutz',
+  'privacy-policy': 'datenschutz',
 };
+
+/**
+ * Sekundaer-Routen, die nicht in `TAB_ITEMS` erscheinen: Impressum und
+ * Datenschutz. Werden ueber Footer-Links und Deep-Link-Hash (`#impressum`,
+ * `#datenschutz`) erreicht. Gleicher Routing-Mechanismus wie die
+ * Haupt-Tabs (activeTab + Hash), aber ohne Nav-Buttons.
+ */
+export const SECONDARY_TAB_IDS = ['impressum', 'datenschutz'];
+const SECONDARY_TAB_SET = new Set(SECONDARY_TAB_IDS);
 
 export const safeParse = (key, fallback, validate) => {
   if (typeof window === 'undefined') return fallback;
@@ -106,7 +123,9 @@ export const normalizeHashToTab = (hashValue) => {
     .trim()
     .toLowerCase();
   const aliased = TAB_ALIASES[cleaned] ?? cleaned;
-  return TAB_ITEMS.some((item) => item.id === aliased) ? aliased : 'start';
+  if (TAB_ITEMS.some((item) => item.id === aliased)) return aliased;
+  if (SECONDARY_TAB_SET.has(aliased)) return aliased;
+  return 'start';
 };
 
 const normalizeTabId = (value) => normalizeHashToTab(String(value || '').replace(/^#/, ''));
@@ -206,7 +225,7 @@ export const getInitialAppState = (storageKey) => {
   const requestedTab =
     rawHash && normalizedHash !== 'start'
       ? normalizedHash
-      : TAB_ITEMS.some((item) => item.id === rawHashLower)
+      : TAB_ITEMS.some((item) => item.id === rawHashLower) || SECONDARY_TAB_SET.has(rawHashLower)
         ? rawHashLower
         : null;
   const storedAppState = safeParse(storageKey, null, (value) => isValidStoredAppState(value));
@@ -236,6 +255,8 @@ const PAGE_HEADING_IDS = {
   evidenz: 'page-heading-evidenz',
   glossar: 'page-heading-glossar',
   material: 'page-heading-material',
+  impressum: 'page-heading-impressum',
+  datenschutz: 'page-heading-datenschutz',
 };
 
 export const getPageHeadingId = (tab) => PAGE_HEADING_IDS[tab] ?? 'page-heading-start';
