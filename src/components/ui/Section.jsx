@@ -50,6 +50,7 @@ const Section = forwardRef(function Section(
     width = 'default',
     spacing = 'standard',
     surface = 'plain',
+    bleed = false,
     inset = true,
     className = '',
     children,
@@ -75,15 +76,29 @@ const Section = forwardRef(function Section(
       : spacing === 'wide'
         ? 'ui-section ui-section--wide'
         : 'ui-section';
-  const surfaceClass =
-    surface === 'subtle' || surface === 'muted'
-      ? 'ui-section__surface ui-section__surface--subtle'
-      : surface === 'warm'
-        ? 'ui-section__surface ui-section__surface--warm'
-        : surface === 'accent'
-          ? 'ui-section__surface ui-section__surface--accent'
-          : 'ui-section__surface';
 
+  const surfaceVariant =
+    surface === 'subtle' || surface === 'muted'
+      ? '--subtle'
+      : surface === 'warm'
+        ? '--warm'
+        : surface === 'accent'
+          ? '--accent'
+          : '';
+
+  // Bleed-Modus: Hintergrund auf volle Viewport-Breite, Content im Container.
+  // Kein border-radius, kein border, kein box-shadow — wirkt als Band.
+  if (bleed) {
+    const bleedClass = `ui-section--bleed ui-section--bleed${surfaceVariant || '--plain'}`;
+    const sectionClasses = [spacingClass, bleedClass, 'reveal-on-scroll', className].filter(Boolean).join(' ');
+    return (
+      <Tag ref={combinedRef} className={sectionClasses} {...props}>
+        <Container width={width}>{children}</Container>
+      </Tag>
+    );
+  }
+
+  const surfaceClass = `ui-section__surface${surfaceVariant ? ` ui-section__surface${surfaceVariant}` : ''}`;
   const sectionClasses = [spacingClass, 'reveal-on-scroll', className].filter(Boolean).join(' ');
   const content = inset ? <div className={surfaceClass}>{children}</div> : children;
 
