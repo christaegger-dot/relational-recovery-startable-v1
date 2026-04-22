@@ -89,7 +89,7 @@ const Footer = memo(function Footer() {
               </div>
             </div>
             <div className="footer-framework-legal">
-              © 2026 Eltern mit psychischen Erkrankungen im Beratungskontext.
+              © 2026 Psychiatrische Universitätsklinik Zürich · Fachstelle Angehörigenarbeit
             </div>
           </div>
         </div>
