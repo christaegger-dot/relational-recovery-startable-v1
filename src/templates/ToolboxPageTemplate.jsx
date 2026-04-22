@@ -9,6 +9,7 @@ import Section from '../components/ui/Section';
 import SectionHeader from '../components/ui/SectionHeader';
 import SurfaceCard from '../components/ui/SurfaceCard';
 import ClosingSection from '../components/closing/ClosingSection';
+import sectionIllustrationAmpel from '../assets/section-toolbox-ampel.webp';
 
 function AssessmentPanel({ assessment, scoreStatusId }) {
   if (!assessment) return null;
@@ -209,13 +210,25 @@ function TriageSection({ triage }) {
   return (
     <Section spacing="tight" surface="plain" className="no-print">
       <div className="ui-stack ui-stack--loose">
-        <SectionHeader
-          eyebrow={triage.eyebrow}
-          titlePrefix={triage.titlePrefix}
-          titleAccent={triage.titleAccent}
-          description={triage.description}
-          aside={triage.aside}
-        />
+        <div className="ui-split ui-split--illustration">
+          <SectionHeader
+            eyebrow={triage.eyebrow}
+            titlePrefix={triage.titlePrefix}
+            titleAccent={triage.titleAccent}
+            description={triage.description}
+            aside={triage.aside}
+          />
+          <figure className="ui-section-figure">
+            <img
+              src={sectionIllustrationAmpel}
+              alt="Ampel-Illustration: drei Schwellenbänder in Salbei, Honey und Terracotta mit einem Peacock-Blue-Pfeil – Metapher für Triage-Priorisierung."
+              width="900"
+              height="600"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
 
         <div className="ui-card-grid">
           {triage.prompts.map((prompt, index) => (

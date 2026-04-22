@@ -7,6 +7,7 @@ import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
 import SectionHeader from '../components/ui/SectionHeader';
 import MaterialHandoutSwitch from './MaterialHandouts';
+import sectionIllustrationMaterial from '../assets/section-material-icons.webp';
 
 function MaterialFaqItem({ item, index }) {
   return (
@@ -97,7 +98,19 @@ function MaterialHandoutsSection({ block, handouts, onNavigate, onPrintHandout }
             soll nur das Handout selbst erscheinen, nicht die Rahmung
             "Material zum Ausfuellen..." darueber. */}
         <div className="no-print">
-          <SectionHeader eyebrow={block.eyebrow} title={block.title} description={block.description} />
+          <div className="ui-split ui-split--illustration">
+            <SectionHeader eyebrow={block.eyebrow} title={block.title} description={block.description} />
+            <figure className="ui-section-figure">
+              <img
+                src={sectionIllustrationMaterial}
+                alt="Vier Spot-Illustrationen für Handout-Typen: Dokument, Gesprächsblasen, Checkliste und Schutzschild."
+                width="900"
+                height="600"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
         </div>
         <div className="ui-material-handouts-grid">
           {handouts.map((handout) => (

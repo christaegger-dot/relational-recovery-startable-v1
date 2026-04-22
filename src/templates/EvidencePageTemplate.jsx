@@ -5,6 +5,7 @@ import SectionHeader from '../components/ui/SectionHeader';
 import SurfaceCard from '../components/ui/SurfaceCard';
 import ClosingSection from '../components/closing/ClosingSection';
 import parseGlossarPlaceholders from '../utils/parseGlossarPlaceholders';
+import sectionIllustrationFamiliensystem from '../assets/section-evidenz-familiensystem.webp';
 
 function RichCopy({ paragraphs = [] }) {
   if (!paragraphs.length) return null;
@@ -95,14 +96,26 @@ function ChapterOverview({ chapterOverview }) {
     <>
       <Section spacing="tight" surface="subtle" bleed className="no-print">
         <div className="ui-stack ui-stack--loose">
-          <SectionHeader
-            eyebrow={chapterOverview.eyebrow}
-            title={chapterOverview.title}
-            titleAccent={chapterOverview.accent}
-            description={chapterOverview.description}
-            aside={chapterOverview.aside}
-            asideTone="default"
-          />
+          <div className="ui-split ui-split--illustration">
+            <SectionHeader
+              eyebrow={chapterOverview.eyebrow}
+              title={chapterOverview.title}
+              titleAccent={chapterOverview.accent}
+              description={chapterOverview.description}
+              aside={chapterOverview.aside}
+              asideTone="default"
+            />
+            <figure className="ui-section-figure">
+              <img
+                src={sectionIllustrationFamiliensystem}
+                alt="Familiensystem-Diagramm: drei verbundene Kreise in Salbei, Bluebell und Ivory symbolisieren Beziehungen im Familiensystem."
+                width="900"
+                height="600"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
 
           {chapterOverview.items?.length ? (
             <div className="ui-card-grid ui-card-grid--5">

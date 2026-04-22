@@ -5,6 +5,7 @@ import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
 import SectionHeader from '../components/ui/SectionHeader';
 import SurfaceCard from '../components/ui/SurfaceCard';
+import sectionIllustrationFlow from '../assets/section-lernmodule-flow.webp';
 
 function LearningFlowSection({ sequence }) {
   if (!sequence) return null;
@@ -12,13 +13,25 @@ function LearningFlowSection({ sequence }) {
   return (
     <Section spacing="tight" surface={sequence.surface || 'subtle'} className="no-print">
       <div className="ui-stack ui-stack--loose">
-        <SectionHeader
-          eyebrow={sequence.eyebrow}
-          titlePrefix={sequence.titlePrefix}
-          titleAccent={sequence.titleAccent}
-          description={sequence.description}
-          aside={sequence.aside}
-        />
+        <div className="ui-split ui-split--illustration">
+          <SectionHeader
+            eyebrow={sequence.eyebrow}
+            titlePrefix={sequence.titlePrefix}
+            titleAccent={sequence.titleAccent}
+            description={sequence.description}
+            aside={sequence.aside}
+          />
+          <figure className="ui-section-figure">
+            <img
+              src={sectionIllustrationFlow}
+              alt="Drei-Schritt-Flow: Terracotta-Kreis (Leitidee), Salbei-Rechteck (Einordnung) und Bluebell-Hexagon (Reflexion), verbunden durch Honey-Pfeile."
+              width="900"
+              height="600"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
 
         {sequence.steps?.length ? (
           <div className="learning-flow-grid">

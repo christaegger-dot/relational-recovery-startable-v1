@@ -1233,6 +1233,43 @@
   align-items: start;
 }
 
+/* Section-Illustration: Split-Layout mit breiterer Illustration-Spalte */
+.ui-split--illustration {
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem);
+  align-items: center;
+}
+
+/* Schwebende Section-Figure ohne Border, nahtlos eingebettet */
+.ui-section-figure {
+  margin: 0;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: #F9F4EE;
+  box-shadow:
+    0 4px 24px 0 rgba(47, 47, 40, 0.07),
+    0 1px 4px 0 rgba(47, 47, 40, 0.04);
+  align-self: center;
+}
+
+.ui-section-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+/* Mobil: Illustration unter den Text */
+@media (max-width: 768px) {
+  .ui-split--illustration {
+    grid-template-columns: 1fr;
+  }
+  .ui-section-figure {
+    max-width: 28rem;
+    margin-inline: auto;
+  }
+}
+
 .ui-closing-tags {
   margin-bottom: var(--space-4);
 }
