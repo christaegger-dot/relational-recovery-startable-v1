@@ -46,6 +46,19 @@
   padding-bottom: var(--section-tight);
 }
 
+/* Dekorativer Sektions-Trenner: zentrierte Akzentlinie zwischen Sections.
+   Subtiler als ein border, staerker als reiner Whitespace. Erscheint nur
+   zwischen aufeinanderfolgenden Sections (nicht vor der ersten). */
+.ui-section + .ui-section::before {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 2px;
+  margin: 0 auto var(--section-tight);
+  background: color-mix(in srgb, var(--accent-primary-soft) 50%, transparent 50%);
+  border-radius: 1px;
+}
+
 .ui-section__surface {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-2xl);
@@ -60,7 +73,13 @@
 }
 
 .ui-section__surface--warm {
-  background: color-mix(in srgb, var(--surface-app) 70%, var(--surface-muted) 30%);
+  background:
+    radial-gradient(
+      ellipse 50% 70% at 95% 10%,
+      color-mix(in srgb, var(--accent-primary-soft) 6%, transparent 94%),
+      transparent 60%
+    ),
+    color-mix(in srgb, var(--surface-app) 70%, var(--surface-muted) 30%);
 }
 
 .ui-section__surface--accent {
