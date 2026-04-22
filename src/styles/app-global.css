@@ -203,11 +203,7 @@
   .print-only {
     display: block !important;
   }
-  @page {
-    size: A4;
-    /* Zusatz-Platz am Unterrand fuer den fixierten Notfall-Footer. */
-    margin: 12mm 14mm 22mm;
-  }
+  /* @page-Regeln konsolidiert in §10 (Print-Header/Footer). */
 
   /* 2. Basis-Typografie ------------------------------------------------- */
   html {
@@ -553,6 +549,26 @@
     break-inside: avoid;
   }
 
+  /* Handout-Sections: einzelne Abschnitte duerfen umbrechen, aber
+     Titel + erster Absatz bleiben zusammen. Checklisten-Items (H-5, H-6)
+     brechen nicht mitten durch. */
+  .ui-material-handout__section {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+  .ui-material-handout__section-title {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  .ui-material-handout__checklist {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+  .ui-material-handout__check-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
   /* H-3 Age-Grid (#116): 2x2 auf A4 Portrait — vier Karten passen so auf
      eine Seite, jede Karte bleibt am Stueck (avoid-page-break). Bildschirm-
      4-Spalten ist auf A4 zu schmal, Querformat waere Mehraufwand fuer
@@ -621,7 +637,8 @@
    * harte Abhängigkeit.
    */
   @page {
-    margin: 15mm;
+    size: A4;
+    margin: 15mm 14mm 22mm;
     @top-left {
       content: 'Eltern im Beratungskontext';
       font-size: 7pt;
