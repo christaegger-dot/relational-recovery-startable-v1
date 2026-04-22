@@ -153,19 +153,14 @@ Neue Tabs: Feld unbedingt setzen, damit die Konvention lebendig bleibt.
 
 Stand bei Abschluss von Audit 12. Diese Punkte sind in den Daten markiert (als `TODO`-Kommentar oder in entsprechenden Bereichen) und warten auf eine redaktionelle Entscheidung.
 
-### Plass & Wiegand-Grefe (2012)
+### Plass & Wiegand-Grefe (2012) — ✓ geklärt
 
-`sourcesContent.js` enthält aktuell **zwei Einträge** für dasselbe Autor:innen-Paar aus demselben Jahr:
+`sourcesContent.js` enthält zwei Einträge für dasselbe Autor:innen-Paar aus demselben Jahr. **Bestätigt: es sind zwei verschiedene Werke** (PR #160, Issue #121 Punkt 2):
 
-- `plass-wiegandgrefe-2012` -- Beltz-Verlag, Weinheim, Titel „Kinder psychisch kranker Eltern. Entwicklungsrisiken erkennen und behandeln"
-- `plass-wiegandgrefe-2012-kohlhammer` -- Kohlhammer-Verlag, Stuttgart, Titel „Ursachen, Folgen und Hilfen für Kinder psychisch Kranker"
+- `plass-wiegandgrefe-2012` — Beltz, „Entwicklungsrisiken erkennen und behandeln" (klinisch)
+- `plass-wiegandgrefe-2012-kohlhammer` — Kohlhammer, „Ursachen, Folgen und Hilfen" (breiter)
 
-Die zwei Einträge stehen temporär, weil beim Audit-12-Konsolidierungs-Schritt unklar war, ob es sich um zwei verschiedene Werke oder um eine redaktionell unterschiedlich zitierte Ausgabe handelt. Beide bleiben erhalten, bis die Auftraggeberin prüft:
-
-1. Handelt es sich um zwei verschiedene Werke? Dann beide behalten, ggf. den Kohlhammer-Eintrag mit einem spezifischeren Titel versehen.
-2. Oder ist der Kohlhammer-Band nicht existent (Zitationsfehler in der alten LITERATUR-Liste)? Dann den `plass-wiegandgrefe-2012-kohlhammer`-Eintrag entfernen und die Referenz in `LITERATUR_IDS` auf den Beltz-Eintrag umstellen.
-
-Verortung: `TODO`-Kommentar direkt über beiden Einträgen in `sourcesContent.js`.
+Beide bleiben als eigenständige Einträge erhalten. Der TODO-Kommentar in `sourcesContent.js` ist aufgelöst.
 
 ---
 
