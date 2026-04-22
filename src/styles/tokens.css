@@ -134,6 +134,16 @@
   --radius-pill: 999px;
 
   /* Shadow tokens */
+  /* Breakpoints (dokumentiert, nicht als CSS-Variablen nutzbar in @media).
+     CSS Custom Properties funktionieren nicht in @media-Queries.
+     Die Werte hier dienen als Single Source of Truth — alle @media-
+     Literale im Projekt MUESSEN diese Werte verwenden.
+     --breakpoint-sm: 30rem    (480px — selten, nur Netzwerk-Grid)
+     --breakpoint-md: 48rem    (768px — Haupt-Breakpoint Mobile→Tablet)
+     --breakpoint-lg: 64rem    (1024px — Haupt-Breakpoint Tablet→Desktop)
+     --breakpoint-xl: 80rem    (1280px — breit, nur Netzwerk-Karte)
+  */
+
   /* Overlay */
   --overlay-scrim: rgba(47, 47, 40, 0.32);
 
