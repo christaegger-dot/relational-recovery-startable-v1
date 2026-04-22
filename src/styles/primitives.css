@@ -915,6 +915,7 @@
   background: var(--surface-hero);
   box-shadow: none;
   overflow: clip;
+  min-height: max(70vh, 28rem);
 }
 
 .ui-hero__inner {
@@ -3814,6 +3815,10 @@
 }
 
 @media (max-width: 64rem) {
+  .ui-hero-shell {
+    min-height: auto;
+  }
+
   .ui-hero__inner,
   .ui-split {
     grid-template-columns: 1fr;
