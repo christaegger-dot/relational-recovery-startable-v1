@@ -838,6 +838,7 @@ export const MATERIAL_CLUSTERS = [
   {
     id: 'material-verstehen',
     audience: 'angehoerige',
+    surface: 'plain',
     eyebrow: 'Cluster 1',
     title: 'Belastung verstehen, ohne sich vorschnell schuldig zu machen',
     description:
@@ -874,6 +875,7 @@ export const MATERIAL_CLUSTERS = [
   {
     id: 'material-grenzen',
     audience: 'angehoerige',
+    surface: 'subtle',
     eyebrow: 'Cluster 2',
     title: 'Grenzen, Verantwortung und legitimer Selbstschutz',
     description:
@@ -910,6 +912,7 @@ export const MATERIAL_CLUSTERS = [
   {
     id: 'material-zusammenarbeit',
     audience: 'angehoerige',
+    surface: 'warm',
     legalDisclaimer: true,
     eyebrow: 'Cluster 3',
     title: 'Zusammenarbeit, Mitsprache und der nächste sinnvolle Schritt',
@@ -953,6 +956,7 @@ export const MATERIAL_CLUSTERS = [
     // (spezifische Schutzfaktoren: Krankheitswissen + offener Umgang).
     id: 'material-kinder',
     audience: 'eltern',
+    surface: 'plain',
     eyebrow: 'Cluster 4',
     title: 'Mit Kindern über die Erkrankung sprechen',
     description:
@@ -1012,6 +1016,7 @@ export const MATERIAL_CLUSTERS = [
     // an Cluster 4 an, das Grundlagen der Kinder-Aufklärung behandelt.
     id: 'material-altersgerecht',
     audience: 'eltern',
+    surface: 'subtle',
     eyebrow: 'Cluster 5',
     title: 'Altersgerecht erklären — was Kinder in welchem Alter brauchen',
     description:
@@ -1058,6 +1063,7 @@ export const MATERIAL_CLUSTERS = [
     // Eigenständig formuliert, keine wörtliche Übernahme.
     id: 'material-formulierungshilfen',
     audience: 'eltern',
+    surface: 'warm',
     eyebrow: 'Cluster 6',
     title: 'Formulierungshilfen — psychische Erkrankungen kindgerecht erklären',
     description:
