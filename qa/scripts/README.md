@@ -1,9 +1,14 @@
-# QA Test-Scripts — Interaktions-Integritaet
+# QA Test-Scripts — Interaktions-Integritaet + Baseline-Checks
 
-Diese vier headless-browser-basierten Scripts bilden die permanente Verifikations-
-Infrastruktur fuer Interaktions-Integritaet, entstanden aus Audit 14. Sie laufen
-gegen eine laufende Preview-Instanz der Site (`npm run preview` bzw. gegen eine
-beliebige Base-URL).
+Dieser Ordner sammelt permanente Verifikations-Scripts. Sie zerfallen in
+zwei Kategorien:
+
+1. **Interaktions-Integritaet** (Audit 14) — laufen gegen eine Preview-
+   Instanz (`interaction-overlap`, `click-reachability`, `z-stack`,
+   `click-diagnose`). Bewertung: Pflicht vor jedem Release.
+2. **QA-Baseline** (Audit-Nachfolge) — laufen gegen die Produktions-URL
+   (`link-health-check`, `lighthouse-baseline`). Bewertung: Monatlich via
+   GitHub-Actions-Workflow `qa-baseline.yml` oder manuell vor Release.
 
 ## Voraussetzungen
 
@@ -60,12 +65,49 @@ position, padding und pointer-events aus.
 node qa/scripts/click-diagnose.mjs [base-url]
 ```
 
+### `link-health-check.mjs`
+
+Scannt `src/`, `public/` und `index.html` nach externen http(s)-URLs und
+prueft jeden via HEAD (GET-Fallback) mit 15s-Timeout. Timeout, 4xx und
+5xx werden nach Kategorie gebuendelt, Quellen-Dateien referenziert.
+Report nach `qa/link-health-check-report.md`.
+
+```
+node qa/scripts/link-health-check.mjs
+```
+
+Braucht outbound HTTPS (wird in Sandbox-Umgebungen typischerweise
+blockiert). Aus CI heraus via `qa-baseline.yml` triggerbar.
+
+### `lighthouse-baseline.mjs`
+
+Laeuft Lighthouse 13 via `npx` in Mobile + Desktop gegen die Produktions-
+URL (oder eine uebergebene Base-URL). Erfasst die vier Category-Scores
+(Performance, Accessibility, Best Practices, SEO) + Core Web Vitals
+(LCP, TBT, CLS, FCP, Speed Index). Report nach
+`qa/lighthouse-baseline.md`.
+
+```
+node qa/scripts/lighthouse-baseline.mjs                               # Produktion
+node qa/scripts/lighthouse-baseline.mjs https://staging.example.com   # Staging
+```
+
+Braucht lokales Chrome/Chromium (Lighthouse bringt sein eigenes via
+`chrome-launcher` mit) + outbound HTTPS. Aus CI heraus via
+`qa-baseline.yml` triggerbar.
+
 ## Wann ausfuehren?
 
 **Pflicht vor jedem Release:**
 
 - `interaction-overlap.mjs` + `click-reachability.mjs` beide mit Exit-Code 0
 - `z-stack.mjs` ohne neue Anomalien
+
+**Empfohlen monatlich (oder via `qa-baseline.yml`-Workflow):**
+
+- `link-health-check.mjs` — broken External-Links erkennen, bevor sie
+  auffallen
+- `lighthouse-baseline.mjs` — Score-Regressions sichtbar machen
 
 **Nach allen Aenderungen an:**
 

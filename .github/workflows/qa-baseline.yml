@@ -1,0 +1,99 @@
+# QA-Baseline-Workflow fuer Relational Recovery.
+#
+# Fuehrt zwei Pruefungen aus, die lokales Sandboxing aus CI heraus
+# nicht brauchen (beide reden mit externen Hosts):
+#
+# 1. Link-Health-Check: scannt src/ + public/ + index.html nach
+#    externen URLs und prueft jeden mit HEAD/GET. Report als
+#    Artefakt + optional Auto-Commit.
+# 2. Lighthouse-Baseline: Performance / A11y / Best-Practices / SEO
+#    in Mobile + Desktop gegen die Produktions-URL. Report als
+#    Artefakt.
+#
+# Beide Jobs sind nur per `workflow_dispatch` (manueller Button im
+# Actions-Tab) oder im Monatsrhythmus scheduliert triggerbar --
+# absichtlich NICHT auf jedem PR, weil:
+# - Lighthouse rechnet ~1 Minute pro Run und ist flaky genug, dass
+#   es kein Merge-Gate sein sollte.
+# - Link-Health ist ein Content-Anliegen, kein Code-Anliegen --
+#   broken Links sollen einen Content-Fix triggern, keinen
+#   blockierten PR.
+#
+# Scheduled: 1. Mittwoch im Monat, 06:15 UTC (direkt nach dem
+# Monday-06:00-audit-Gate, damit die Jobs nicht um dieselben
+# Runner kaempfen).
+
+name: QA Baseline
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: 'Ziel-URL fuer Lighthouse (default: Produktion)'
+        required: false
+        default: 'https://eltern-angehoerige-fa.netlify.app/'
+  schedule:
+    - cron: '15 6 1-7 * 3' # 1. Mittwoch im Monat, 06:15 UTC
+
+concurrency:
+  group: qa-baseline-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  link-health:
+    name: Link-Health-Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run link-health-check
+        run: node qa/scripts/link-health-check.mjs
+
+      - name: Upload link-health report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-health-report
+          path: qa/link-health-check-report.md
+          retention-days: 90
+
+  lighthouse:
+    name: Lighthouse Baseline (Mobile + Desktop)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Lighthouse
+        run: node qa/scripts/lighthouse-baseline.mjs ${{ github.event.inputs.target_url || 'https://eltern-angehoerige-fa.netlify.app/' }}
+
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-baseline-report
+          path: qa/lighthouse-baseline.md
+          retention-days: 90
