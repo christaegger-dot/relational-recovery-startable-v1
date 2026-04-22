@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import toolboxIllustration from '../assets/illustration-toolbox.webp';
 import {
   AlertTriangle,
   Check,
@@ -242,6 +243,8 @@ export default function ToolboxSection({
         variant: 'secondary',
       },
     ],
+    image: toolboxIllustration,
+    imageAlt: 'Illustration einer Toolbox mit Werkzeugen – Metapher für strukturierte Arbeitsinstrumente und klinische Orientierung.',
     aside: {
       label: 'Überblick',
       title: 'Sicherheit zuerst, dann Struktur, dann Kooperation',

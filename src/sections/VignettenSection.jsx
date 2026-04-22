@@ -1,4 +1,5 @@
 import { HeartHandshake } from 'lucide-react';
+import trainingIllustration from '../assets/illustration-training.webp';
 import VignettenPageTemplate from '../templates/VignettenPageTemplate';
 import { VIGNETTEN } from '../data/learningContent';
 import { getPageHeadingId } from '../utils/appHelpers';
@@ -26,6 +27,8 @@ export default function VignettenSection() {
     title: 'Training',
     accent: 'mit Fallvignetten',
     lead: 'Kurze Fallprüfungen zur fachlichen Einschätzung von Entscheidungssituationen zwischen Schutz, Kooperation und systemischer Entlastung. Die Darstellung bleibt bewusst fachlich und abwägend.',
+    image: trainingIllustration,
+    imageAlt: 'Illustration zweier divergierender Pfade an einem Entscheidungspunkt – Metapher für fachliche Abwägung in Fallvignetten.',
     asideTitle: 'Format',
     asideCopy:
       'Ein Fall, zwei Optionen, direkte fachliche Rückmeldung. Ziel ist eine begründete Einschätzung, nicht ein Wissenstest.',

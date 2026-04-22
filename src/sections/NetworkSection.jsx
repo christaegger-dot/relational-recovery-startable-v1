@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { MapPin, Search } from 'lucide-react';
-import heroIllustration from '../assets/relational-recovery-hero-v3-web.webp';
+import heroIllustration from '../assets/illustration-network.webp';
 import {
   NETWORK_FILTERS,
   NETWORK_FILTER_GROUPS,
@@ -77,7 +77,7 @@ export default function NetworkSection() {
     accent: 'Zürich und schweizweite Ergänzungen.',
     lead: 'Fachstellenverzeichnis und Netzwerkkarte für die Arbeit mit Familien mit psychisch belasteten Eltern: Weitervermittlung, Triage und Entlastung. Schwerpunkt Kanton Zürich, ergänzt durch ausgewählte schweizweite Angebote.',
     image: heroIllustration,
-    imageAlt: 'Illustration eines Familiensystems mit Beziehungslinien und ruhiger Orientierung',
+    imageAlt: 'Illustration eines Netzwerks aus verbundenen Kreisen – Metapher für Fachstellen, Weitervermittlung und Vernetzung.',
     asideTitle: 'Einordnung',
     asideCopy:
       'Der Bereich bleibt bewusst Zürich-zentriert: offizielle Krisenwege, Familienberatung, Kinder- und Jugendangebote sowie längerfristige Entlastung in und um Zürich werden durch wenige nationale Stellen für Orientierung und Rechtefragen ergänzt.',

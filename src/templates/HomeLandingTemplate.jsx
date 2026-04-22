@@ -1,5 +1,5 @@
 import { ChevronRight, ExternalLink } from 'lucide-react';
-import heroIllustration from '../assets/relational-recovery-hero-v3-web.webp';
+import heroIllustration from '../assets/relational-recovery-hero-v4-web.webp';
 import EditorialPageTemplate from './EditorialPageTemplate';
 import { E_MODULE_COUNT, NETWORK_RESOURCE_COUNT, VIGNETTE_COUNT } from '../data/appShellContent';
 import { useAppState } from '../context/useAppState';
@@ -32,7 +32,7 @@ export default function HomeLandingTemplate({ pageHeadingId }) {
       onClick: () => navigate('material', { focusTarget: 'heading' }),
     },
     image: heroIllustration,
-    imageAlt: 'Minimalistische Illustration eines Familiensystems mit Nähe, Distanz und Unterstützung',
+    imageAlt: 'Illustration einer Beratungssituation: eine Person sitzt entspannt im Sessel, ein Kind spielt auf dem Boden, eine Fachperson steht begleitend daneben.',
     asideTitle: 'Wichtiger Hinweis zur Einordnung',
     asideCopy:
       'Dieses Angebot dient der psychoedukativen Orientierung. Für offizielle Informationen und Beratung bleibt die Angehörigenberatung der PUK Zürich die zentrale Anlaufstelle.',

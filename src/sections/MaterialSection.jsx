@@ -1,4 +1,5 @@
 import { CircleHelp } from 'lucide-react';
+import materialIllustration from '../assets/illustration-material.webp';
 import MaterialPageTemplate from '../templates/MaterialPageTemplate';
 import {
   MATERIAL_CLUSTERS,
@@ -105,7 +106,7 @@ export default function MaterialSection({ sharedDownloadResources = [] }) {
 
   return (
     <MaterialPageTemplate
-      hero={{ ...MATERIAL_HERO, icon: CircleHelp, accentColor: 'var(--accent-primary-strong)' }}
+      hero={{ ...MATERIAL_HERO, icon: CircleHelp, accentColor: 'var(--accent-primary-strong)', image: materialIllustration, imageAlt: 'Illustration einer Hand, die ein offenes Dokument hält – Metapher für Weitergabe von Arbeitsmaterialien.' }}
       pageHeadingId={getPageHeadingId('material')}
       intro={MATERIAL_INTRO}
       clusters={MATERIAL_CLUSTERS}

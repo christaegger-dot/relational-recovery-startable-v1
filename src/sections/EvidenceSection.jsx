@@ -1,4 +1,5 @@
 import { Activity } from 'lucide-react';
+import evidenceIllustration from '../assets/illustration-evidence.webp';
 import EvidencePageTemplate from '../templates/EvidencePageTemplate';
 import {
   ABOUT_THIS_WEBSITE_POINTS,
@@ -128,6 +129,8 @@ export default function EvidenceSection({ downloadResources = [] }) {
       'praxisnahe Brücke zwischen Evidenz, Gesprächsführung und Vernetzung',
     ],
     badges: ['Verstehen', 'Mit Kindern sprechen', 'Mit Eltern arbeiten', 'Handeln & vernetzen'],
+    image: evidenceIllustration,
+    imageAlt: 'Illustration einer Lampe über gestapelten Dokumenten – Metapher für Wissen, Evidenz und fachliche Orientierung.',
     // Audit (Aside-Konsolidierung, Welle 1, Schritt 1): Hier stand zuvor ein
     // `aside`-Objekt mit `{eyebrow, title, description, meta}`. PageHero liest
     // aber nur die flachen Props `asideTitle`/`asideCopy` und ignoriert ein

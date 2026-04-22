@@ -1084,18 +1084,22 @@
 }
 
 .ui-hero__figure {
-  border: 1px solid var(--border-subtle);
+  /* Illustration floats naturally: Creme-Hintergrund passend zum Website-Ton,
+     kein harter Border-Rahmen, weicher Schatten statt Einrahmung. */
+  border: none;
   border-radius: calc(var(--radius-xl) + 0.25rem);
-  background: color-mix(in srgb, var(--surface-app) 80%, var(--surface-subtle) 20%);
-  padding: var(--space-4);
+  background: #F9F4EE;
+  padding: 0;
+  box-shadow: 0 4px 24px 0 rgba(47, 47, 40, 0.07), 0 1px 4px 0 rgba(47, 47, 40, 0.04);
+  overflow: hidden;
 }
 
 .ui-hero__figure img {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: contain;
-  border-radius: var(--radius-lg);
+  object-fit: cover;
+  border-radius: 0;
 }
 
 .ui-hero__aside {

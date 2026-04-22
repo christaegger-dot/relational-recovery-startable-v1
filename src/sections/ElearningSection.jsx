@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { GraduationCap } from 'lucide-react';
-import heroIllustration from '../assets/relational-recovery-hero-v3-web.webp';
+import heroIllustration from '../assets/illustration-learning.webp';
 import { E_MODULES } from '../data/learningContent';
 import LearningPageTemplate from '../templates/LearningPageTemplate';
 import { getPageHeadingId } from '../utils/appHelpers';
@@ -37,7 +37,7 @@ export default function ElearningSection() {
     accent: 'ruhigen Fachsequenzen.',
     lead: 'Kompakte Module für Gesprächsführung, Sprache und Einschätzung im Klinikalltag. Jedes Modul führt von einer Leitidee zu einer einzelnen Reflexionsfrage und bleibt damit näher an Fallarbeit als an prüfungsartigem Wissenstest.',
     image: heroIllustration,
-    imageAlt: 'Illustration eines Familiensystems mit Beziehungslinien und ruhiger Orientierung',
+    imageAlt: 'Illustration eines offenen Buches, aus dem ein Pflanzentrieb mit Blättern wächst – Metapher für Lernen und fachliches Wachstum.',
     asideTitle: 'Zuletzt geprüft',
     asideCopy:
       'April 2026. Die Lernmodule sind als psychoedukative Orientierung und für ruhige fachliche Reflexion konzipiert, nicht als Ersatz für Supervision, Behandlung oder Krisenentscheidungen.',
