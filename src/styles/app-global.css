@@ -614,7 +614,52 @@
     font-size: 9.5pt;
   }
 
-  /* 10. Vignetten-Print-Hinweis (V1 aus Audit 11) ------------------------ *
+  /* 10. Handout Print-Header/Footer ---------------------------------------- *
+   * Titel oben links, Seitenzahl unten rechts auf jeder gedruckten Seite.
+   * Nutzt @page-Margin-Boxen (CSS Paged Media Level 3). Browser-Support:
+   * Chromium + Safari mit Einschränkungen; als Enhancement, nicht als
+   * harte Abhängigkeit.
+   */
+  @page {
+    margin: 15mm;
+    @top-left {
+      content: 'Eltern im Beratungskontext';
+      font-size: 7pt;
+      color: #999;
+    }
+    @bottom-right {
+      content: counter(page);
+      font-size: 7pt;
+      color: #999;
+    }
+  }
+
+  /* 11. Ausfüllbare Felder visuell markieren ------------------------------ *
+   * Felder in Handouts (H-1 Notfallplan, H-5 Schule) bekommen eine
+   * gestrichelte Linie, damit auf Papier klar ist: hier reinschreiben.
+   */
+  .ui-material-handout__field-box {
+    border: 1pt dashed #999 !important;
+    background: #fff !important;
+    min-height: 18mm;
+    padding: 3mm 4mm !important;
+  }
+  .ui-material-handout__field-box--large {
+    min-height: 30mm;
+  }
+  .ui-material-handout__placeholder {
+    color: #bbb !important;
+    font-style: italic;
+    font-size: 9pt;
+  }
+  .ui-material-handout__checkbox {
+    font-size: 14pt;
+  }
+  .ui-material-handout__check-item {
+    page-break-inside: avoid;
+  }
+
+  /* 12. Vignetten-Print-Hinweis (V1 aus Audit 11) ------------------------ *
    * Die Vignetten-Seite ist bewusst nicht druckbar. Der Hinweis erscheint
    * zentral und ruhig auf der ansonsten leeren Druckseite.
    */
