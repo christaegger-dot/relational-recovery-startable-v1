@@ -650,12 +650,16 @@ export const MATERIAL_HANDOUTS = [
     eyebrow: 'Handout für Eltern → Schule',
     title: 'Information an die Lehrperson',
     description:
-      'Eine kurze, ausfüllbare Vorlage, die Eltern dabei unterstützt, die Lehrperson ihres Kindes über die familiäre Situation zu informieren — sachlich, begrenzt und auf die Bedürfnisse des Kindes fokussiert.',
+      'Eine ausfüllbare Vorlage, die Eltern dabei unterstützt, die Lehrperson ihres Kindes über die familiäre Situation zu informieren — sachlich, begrenzt und auf die Bedürfnisse des Kindes fokussiert.',
     usage: {
       when: 'Wenn ein Kind in der Schule auffällt, sich verändert oder Eltern präventiv informieren möchten.',
       people: 'Betroffene Eltern (ggf. mit Fachperson vorbereitet) → Klassenlehrperson.',
       validity: 'Kann jederzeit angepasst oder zurückgezogen werden. Gilt, solange es für die Familie stimmt.',
       where: 'Ausdrucken, gemeinsam ausfüllen, persönlich übergeben oder per Post senden.',
+    },
+    whyThisSheet: {
+      title: 'Warum dieses Blatt?',
+      text: 'Kinder verbringen einen grossen Teil ihres Alltags in der Schule. Wenn zu Hause eine besondere Belastung besteht, merken Lehrpersonen oft, dass sich etwas verändert — ohne zu wissen, warum. Dieses Blatt gibt Ihnen als Eltern die Möglichkeit, die Schule sachlich und begrenzt zu informieren, damit Ihr Kind dort die Unterstützung bekommt, die es braucht. Sie entscheiden, was Sie mitteilen — und was nicht.',
     },
     situation: {
       title: 'Über unser Kind',
@@ -663,8 +667,8 @@ export const MATERIAL_HANDOUTS = [
       fields: [
         { label: 'Name des Kindes', placeholder: '_______________', type: 'text' },
         { label: 'Klasse / Stufe', placeholder: '_______________', type: 'text' },
-        { label: 'Was die Lehrperson wissen sollte', placeholder: 'In unserer Familie gibt es aktuell eine besondere Belastung. Ein Elternteil ist psychisch erkrankt. Wir möchten, dass die Schule Bescheid weiss, damit unser Kind gut begleitet werden kann.', type: 'textarea' },
-        { label: 'Was sich beim Kind verändern kann', placeholder: 'z. B. Rückzug, Müdigkeit, Konzentrationsprobleme, verstärkte Emotionalität', type: 'textarea' },
+        { label: 'Was die Lehrperson wissen sollte', placeholder: 'Beispiel: «In unserer Familie gibt es aktuell eine besondere Belastung. Ein Elternteil ist psychisch erkrankt. Wir möchten, dass die Schule Bescheid weiss, damit unser Kind gut begleitet werden kann.» — Sie können diesen Satz übernehmen oder in eigenen Worten schreiben.', type: 'textarea' },
+        { label: 'Was sich beim Kind verändern kann', placeholder: 'Beispiel: «Unser Kind könnte in den nächsten Wochen stiller, müder oder gereizter sein als üblich. Es könnte Konzentrationsprobleme zeigen oder sich aus dem Kontakt zurückziehen.» — Beschreiben Sie, was Sie bei Ihrem Kind beobachten.', type: 'textarea' },
       ],
     },
     supportItems: {
@@ -674,14 +678,25 @@ export const MATERIAL_HANDOUTS = [
         'Geduld bei Konzentrationsproblemen oder Vergesslichkeit',
         'Verständnis, wenn das Kind stiller oder gereizter ist als üblich',
         'Die Möglichkeit, sich kurz zurückzuziehen, wenn es zu viel wird',
-        'Eine verlässliche Ansprechperson, an die sich das Kind wenden kann',
+        'Eine verlässliche Ansprechperson in der Schule, an die sich das Kind wenden kann',
         'Keine öffentliche Thematisierung vor der Klasse',
         'Rückmeldung an die Eltern bei auffälligen Veränderungen',
+        'Flexibilität bei Hausaufgaben oder Terminen, wenn es zu Hause schwierig ist',
+        'Aufmerksamkeit darauf, ob das Kind zu viel Verantwortung für andere übernimmt',
+      ],
+    },
+    schoolDoesNotNeed: {
+      title: 'Was die Schule nicht tun muss',
+      items: [
+        'Die Lehrperson muss keine Therapie ersetzen und kein Beratungsgespräch führen.',
+        'Sie muss die Diagnose nicht kennen und keine medizinischen Fragen klären.',
+        'Sie muss das Kind nicht anders behandeln — nur aufmerksamer hinschauen.',
+        'Wenn die Belastung über das hinausgeht, was die Schule auffangen kann, darf sie an den Schulpsychologischen Dienst oder an die Eltern zurückverweisen.',
       ],
     },
     boundary: {
-      title: 'Was nicht geteilt werden muss',
-      text: 'Sie müssen der Lehrperson keine Diagnose nennen, keine Behandlungsdetails mitteilen und nichts über die familiäre Situation erzählen, das über die Bedürfnisse des Kindes hinausgeht. Es reicht, zu sagen: «Ein Elternteil ist gesundheitlich belastet. Unser Kind braucht aktuell etwas mehr Aufmerksamkeit und Geduld.»',
+      title: 'Was Sie als Eltern nicht teilen müssen',
+      text: 'Sie müssen der Lehrperson keine Diagnose nennen, keine Behandlungsdetails mitteilen und nichts über die familiäre Situation erzählen, das über die Bedürfnisse des Kindes hinausgeht. Ein Satz wie «Ein Elternteil ist gesundheitlich belastet, unser Kind braucht aktuell etwas mehr Aufmerksamkeit» ist vollkommen ausreichend.',
     },
     contacts: {
       title: 'Notfall-Kontakte',
@@ -716,6 +731,26 @@ export const MATERIAL_HANDOUTS = [
       people: 'Angehörige (Partner:innen, erwachsene Kinder, Eltern) der erkrankten Person.',
       validity: 'Allgemeine Orientierung. Rechtliche Fragen immer mit einer Beratungsstelle klären.',
       where: 'Ausdrucken, markieren was zutrifft, zum Gespräch mitnehmen oder zur Reflexion nutzen.',
+    },
+    preparation: {
+      title: 'Vorbereitung auf das Gespräch',
+      intro: 'Gespräche mit dem Behandlungsteam sind oft kurz. Vorbereitung hilft, das Wesentliche zu sagen:',
+      items: [
+        { task: 'Notieren Sie vorher 2–3 konkrete Beobachtungen', hint: 'Was hat sich verändert? Seit wann? Was macht Ihnen am meisten Sorgen?' },
+        { task: 'Formulieren Sie Ihr Anliegen in einem Satz', hint: 'z. B. «Ich möchte wissen, wie ich mein Kind in dieser Phase am besten unterstütze.»' },
+        { task: 'Klären Sie: Gibt es eine Entbindung von der Schweigepflicht?', hint: 'Falls nein: Sie dürfen trotzdem Ihre Beobachtungen mitteilen. Das Team darf nur nicht frei antworten.' },
+        { task: 'Nehmen Sie dieses Blatt mit', hint: 'Es kann helfen, die eigenen Rechte und Grenzen im Blick zu behalten, wenn das Gespräch emotional wird.' },
+      ],
+    },
+    conversationStarters: {
+      title: 'Mögliche Einstiegssätze',
+      intro: 'Nicht als Skript — als Anker, wenn die Worte fehlen:',
+      items: [
+        '«Ich möchte Ihnen etwas mitteilen, das mir im Alltag aufgefallen ist.»',
+        '«Ich mache mir Sorgen um die Kinder. Darf ich Ihnen erzählen, was ich beobachte?»',
+        '«Ich weiss, dass Sie mir nicht alles sagen können. Aber ich hätte eine Frage, die mir hilft.»',
+        '«Gibt es etwas, das ich zu Hause tun kann, um die Behandlung zu unterstützen?»',
+      ],
     },
     rights: {
       title: 'Was Ihnen zusteht',

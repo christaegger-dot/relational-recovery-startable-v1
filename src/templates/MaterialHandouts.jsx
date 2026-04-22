@@ -493,6 +493,13 @@ function MaterialAgeGrid({ handout, onNavigate, onPrintHandout }) {
 function MaterialSchoolInfo({ handout, onNavigate, onPrintHandout }) {
   return (
     <MaterialHandoutShell handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout}>
+      {handout.whyThisSheet ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.whyThisSheet.title}</h4>
+          <p className="ui-material-handout__section-intro">{handout.whyThisSheet.text}</p>
+        </section>
+      ) : null}
+
       {handout.situation ? (
         <section className="ui-material-handout__section">
           <h4 className="ui-material-handout__section-title">{handout.situation.title}</h4>
@@ -530,6 +537,17 @@ function MaterialSchoolInfo({ handout, onNavigate, onPrintHandout }) {
                 <span className="ui-material-handout__checkbox" aria-hidden="true">☐</span>
                 <span>{item}</span>
               </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {handout.schoolDoesNotNeed?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.schoolDoesNotNeed.title}</h4>
+          <ul className="ui-material-handout__notes">
+            {handout.schoolDoesNotNeed.items.map((item) => (
+              <li key={item}>{item}</li>
             ))}
           </ul>
         </section>
@@ -578,6 +596,40 @@ function MaterialSchoolInfo({ handout, onNavigate, onPrintHandout }) {
 function MaterialRightsOverview({ handout, onNavigate, onPrintHandout }) {
   return (
     <MaterialHandoutShell handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout}>
+      {handout.preparation?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.preparation.title}</h4>
+          {handout.preparation.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.preparation.intro}</p>
+          ) : null}
+          <ul className="ui-material-handout__checklist">
+            {handout.preparation.items.map((item) => (
+              <li key={item.task} className="ui-material-handout__check-item">
+                <span className="ui-material-handout__checkbox" aria-hidden="true">☐</span>
+                <div>
+                  <p><strong>{item.task}</strong></p>
+                  <p className="ui-material-handout__field-hint">{item.hint}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {handout.conversationStarters?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.conversationStarters.title}</h4>
+          {handout.conversationStarters.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.conversationStarters.intro}</p>
+          ) : null}
+          <ul className="ui-material-handout__notes">
+            {handout.conversationStarters.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       {handout.rights?.items?.length ? (
         <section className="ui-material-handout__section">
           <h4 className="ui-material-handout__section-title">{handout.rights.title}</h4>
