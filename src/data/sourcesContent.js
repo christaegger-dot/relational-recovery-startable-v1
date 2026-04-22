@@ -25,6 +25,10 @@
  * @property {boolean} chFocus - true, wenn es sich um eine Schweizer
  *   Primaer- oder Hauptquelle handelt (Audit-04-Pattern). Wichtig fuer die
  *   Sortierung und Hervorhebung in der Evidenz-Ansicht.
+ * @property {boolean} [isClassic] - true fuer Werke, die als etablierte
+ *   Standardreferenz gelten, aber aelter als ~10 Jahre sind. Transparenz-
+ *   Markierung (Audit 17 Follow-up #137), damit Lesende einordnen koennen,
+ *   dass die Daten wertvoll, aber nicht aktuell sind.
  */
 
 /** @type {Record<string, Source>} */
@@ -128,6 +132,7 @@ export const SOURCES = {
     doi: null,
     link: null,
     chFocus: false,
+    isClassic: true,
   },
 
   'plass-wiegandgrefe-2012': {
@@ -144,6 +149,7 @@ export const SOURCES = {
     // bis zur redaktionellen Neu-Verlinkung auf die aktuelle Produkt-Seite.
     link: null,
     chFocus: false,
+    isClassic: true,
   },
   // TODO (Audit 12, redaktionelle Klaerung): Die LITERATUR-Liste zitierte unter
   // demselben Autor:innen-Paar einen Stuttgart/Kohlhammer-Band mit abweichendem
@@ -228,6 +234,7 @@ export const SOURCES = {
     doi: '10.1055/s-2006-940095',
     link: null,
     chFocus: false,
+    isClassic: true,
   },
 
   'leijdesdorff-2017': {

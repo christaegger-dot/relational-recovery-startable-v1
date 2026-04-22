@@ -76,6 +76,38 @@ export const GLOSSARY_GROUPS = [
           'Wird wichtig, wenn eskalierende Situationen wieder in Beobachtung, Sprache und Beziehung übersetzt werden müssen.',
       },
       {
+        id: 'feinfuehligkeit',
+        term: 'Feinfühligkeit',
+        definition:
+          'Die Fähigkeit von Eltern, kindliche Signale und Bedürfnisse aufmerksam wahrzunehmen, richtig einzuschätzen und angemessen darauf zu reagieren — ohne zu überbehüten oder zu vernachlässigen.',
+        practice:
+          'Feinfühligkeit ist kein Dauerzustand. Psychische Erkrankungen können sie zeitweise einschränken. Entscheidend ist nicht Perfektion, sondern die Bereitschaft, hinzuschauen, zu korrigieren und bei Bedarf Hilfe zu holen.',
+      },
+      {
+        id: 'selbstwirksamkeit',
+        term: 'Selbstwirksamkeit',
+        definition:
+          'Die Überzeugung, durch eigenes Handeln etwas bewirken und schwierige Situationen bewältigen zu können. Bei Eltern: das Erleben, dem Kind gerecht zu werden und als Mutter oder Vater wirksam zu sein.',
+        practice:
+          'Selbstwirksamkeit lässt sich durch kleine, gelingende Schritte stärken — nicht durch Appelle. In der Beratung: Erfolge benennen, Lob geben, Handlungsspielräume aufzeigen statt Defizite betonen.',
+      },
+      {
+        id: 'ambivalenz',
+        term: 'Ambivalenz',
+        definition:
+          'Das gleichzeitige Erleben von widersprüchlichen Gefühlen, Wünschen oder Haltungen — zum Beispiel Mitgefühl und Wut, Fürsorge und Erschöpfung, Hilfewunsch und Kontrollangst.',
+        practice:
+          'Ambivalenz ist bei Angehörigen und bei betroffenen Eltern häufig und kein Zeichen von Schwäche. Sie ernst zu nehmen statt aufzulösen schafft oft mehr Vertrauen als schnelle Ratschläge.',
+      },
+      {
+        id: 'anamnese',
+        term: 'Anamnese',
+        definition:
+          'Die systematische Erhebung der Vorgeschichte und aktuellen Situation — in der psychosozialen Arbeit nicht nur medizinisch, sondern auch familienorientiert: Wer lebt im Haushalt? Gibt es Kinder? Wer sorgt für Aufsicht und Alltag?',
+        practice:
+          'Familienorientierte Anamnese fragt von Anfang an nach Kindern, Betreuung, Netzwerk und Belastungsverteilung — nicht erst, wenn ein Problem sichtbar wird.',
+      },
+      {
         id: 'tabuisierung',
         term: 'Tabuisierung',
         definition:
