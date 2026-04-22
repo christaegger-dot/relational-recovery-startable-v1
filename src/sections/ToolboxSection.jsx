@@ -359,6 +359,7 @@ export default function ToolboxSection({
     () => [
       {
         id: 'acute-crisis',
+        surface: 'plain',
         sectionRef: acuteCrisisSectionRef,
         eyebrow: 'Akute Krise',
         titlePrefix: 'Sofort handeln bei',
@@ -394,6 +395,7 @@ export default function ToolboxSection({
       },
       {
         id: 'safety-plan',
+        surface: 'subtle',
         sectionRef: safetyPlanSectionRef,
         eyebrow: 'Krisenvorsorge',
         titlePrefix: 'Ein kurzer',
@@ -448,6 +450,7 @@ export default function ToolboxSection({
       },
       {
         id: 'child-protection',
+        surface: 'warm',
         sectionRef: childProtectionSectionRef,
         legalDisclaimer: true,
         legalDisclaimerCantonal: true,
@@ -474,6 +477,7 @@ export default function ToolboxSection({
       },
       {
         id: 'addiction',
+        surface: 'subtle',
         sectionRef: addictionSectionRef,
         eyebrow: 'Sucht und Komorbidität',
         titlePrefix: 'Substanzkonsum und psychische Symptome',
@@ -496,6 +500,7 @@ export default function ToolboxSection({
       },
       {
         id: 'rights',
+        surface: 'plain',
         sectionRef: rightsSectionRef,
         legalDisclaimer: true,
         eyebrow: 'Rolle und Rechte',

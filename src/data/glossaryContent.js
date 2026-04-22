@@ -22,6 +22,7 @@
 export const GLOSSARY_GROUPS = [
   {
     id: 'glossar-sprache',
+    surface: 'plain',
     eyebrow: 'Cluster 1',
     title: 'Sprache im Kontakt mit Eltern, Kindern und Bezugspersonen',
     description:
@@ -119,6 +120,7 @@ export const GLOSSARY_GROUPS = [
   },
   {
     id: 'glossar-schutz',
+    surface: 'subtle',
     eyebrow: 'Cluster 2',
     title: 'Schutz, Risiko und fachliche Schwellen',
     description:
@@ -226,6 +228,7 @@ export const GLOSSARY_GROUPS = [
   },
   {
     id: 'glossar-netzwerk',
+    surface: 'warm',
     eyebrow: 'Cluster 3',
     title: 'Netzwerk, Koordination und verbindliche Zusammenarbeit',
     description:

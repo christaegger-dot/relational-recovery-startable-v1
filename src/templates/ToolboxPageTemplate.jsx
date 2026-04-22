@@ -106,7 +106,7 @@ function PathwaySection({ pathway }) {
   if (!pathway) return null;
 
   return (
-    <Section spacing="tight" surface="subtle" className="no-print">
+    <Section spacing="tight" surface="warm" className="no-print">
       <div className="ui-stack ui-stack--loose">
         <SectionHeader
           eyebrow={pathway.eyebrow}
@@ -297,7 +297,7 @@ function PracticeBlocksSection({ practice }) {
   if (!practice) return null;
 
   return (
-    <Section spacing="tight" surface="subtle" className="no-print">
+    <Section spacing="tight" surface="warm" className="no-print">
       <div className="ui-stack ui-stack--loose">
         <SectionHeader
           eyebrow={practice.eyebrow}

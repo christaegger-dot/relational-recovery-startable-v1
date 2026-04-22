@@ -192,6 +192,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
   const zones = [
     {
       id: 'evidenz-verstehen',
+      surface: 'plain',
       eyebrow: 'Kapitel 1',
       title: 'Warum das Thema',
       accent: 'früh in die Behandlung gehört',
@@ -242,6 +243,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
     },
     {
       id: 'evidenz-mit-kindern-sprechen',
+      surface: 'subtle',
       eyebrow: 'Kapitel 2',
       title: 'Mit Kindern sprechen –',
       accent: 'klar, altersgerecht und entlastend',
@@ -290,6 +292,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
     },
     {
       id: 'evidenz-mit-eltern-arbeiten',
+      surface: 'warm',
       eyebrow: 'Kapitel 3',
       title: 'Mit Eltern arbeiten –',
       accent: 'respektvoll, transparent und alltagsnah',
@@ -343,6 +346,7 @@ export default function EvidenceSection({ downloadResources = [] }) {
     },
     {
       id: 'evidenz-handeln-und-vernetzen',
+      surface: 'subtle',
       eyebrow: 'Kapitel 4',
       title: 'Handeln und vernetzen –',
       accent: 'mit Schutzfaktoren, Angeboten und nächsten Schritten',
