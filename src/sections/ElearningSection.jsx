@@ -4,6 +4,7 @@ import heroIllustration from '../assets/illustration-learning.webp';
 import { E_MODULES } from '../data/learningContent';
 import LearningPageTemplate from '../templates/LearningPageTemplate';
 import { getPageHeadingId } from '../utils/appHelpers';
+import { createClosingSectionModel } from '../utils/closingModel';
 import { useAppState } from '../context/useAppState';
 
 export default function ElearningSection() {
@@ -117,12 +118,32 @@ export default function ElearningSection() {
     items: moduleItems,
   };
 
+  const closingSection = createClosingSectionModel({
+    id: 'lernmodule-weiter',
+    eyebrow: 'Weiterarbeit',
+    title: 'Vom Modul',
+    accent: 'in die Praxis.',
+    paragraphs: [
+      'Die Lernmodule geben Orientierung — der Transfer passiert im Gespräch, in der Fallbesprechung und im Alltag mit belasteten Familien.',
+    ],
+    relatedLinks: {
+      eyebrow: 'Nächste Schritte',
+      title: 'Direkt weiterarbeiten',
+      items: [
+        { label: 'Vignetten: Trainingsfälle durchspielen', target: 'vignetten' },
+        { label: 'Toolbox: Orientierung und Triage', target: 'toolbox' },
+        { label: 'Glossar: Begriffe nachschlagen', target: 'glossar' },
+      ],
+    },
+  });
+
   return (
     <LearningPageTemplate
       hero={hero}
       pageHeadingId={getPageHeadingId('lernmodule')}
       sequence={sequence}
       modulesSection={modulesSection}
+      closingSection={closingSection}
     />
   );
 }

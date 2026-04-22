@@ -1,4 +1,5 @@
 import { Brain, Check, Circle } from 'lucide-react';
+import ClosingSection from '../components/closing/ClosingSection';
 import Container from '../components/ui/Container';
 import PageHero from '../components/ui/PageHero';
 import Section from '../components/ui/Section';
@@ -146,7 +147,7 @@ function LearningModulesSection({ modulesSection }) {
   );
 }
 
-export default function LearningPageTemplate({ hero, pageHeadingId, sequence, modulesSection }) {
+export default function LearningPageTemplate({ hero, pageHeadingId, sequence, modulesSection, closingSection }) {
   return (
     <article className="ui-stack">
       <Container width="wide">
@@ -154,6 +155,9 @@ export default function LearningPageTemplate({ hero, pageHeadingId, sequence, mo
       </Container>
       <LearningFlowSection sequence={sequence} />
       <LearningModulesSection modulesSection={modulesSection} />
+      {closingSection ? (
+        <ClosingSection section={closingSection} sectionId="lernmodule-weiter" surface="plain" />
+      ) : null}
     </article>
   );
 }

@@ -12,6 +12,7 @@ import {
 import { FACHSTELLEN } from '../data/fachstellenContent';
 import NetworkPageTemplate from '../templates/NetworkPageTemplate';
 import { getPageHeadingId } from '../utils/appHelpers';
+import { createClosingSectionModel } from '../utils/closingModel';
 import { useAppState } from '../context/useAppState';
 
 const LENS_SUMMARY = {
@@ -177,12 +178,32 @@ export default function NetworkSection() {
     nextStepText: LENS_NEXT_STEP[networkLens] ?? LENS_NEXT_STEP.all,
   };
 
+  const closingSection = createClosingSectionModel({
+    id: 'netzwerk-weiter',
+    eyebrow: 'Weiterarbeit',
+    title: 'Netzwerk lesen,',
+    accent: 'Lücken schliessen.',
+    paragraphs: [
+      'Die Netzwerkkarte und das Fachstellenverzeichnis geben Orientierung. Der nächste Schritt liegt darin, konkrete Kontakte aufzunehmen und Zuständigkeiten zu klären.',
+    ],
+    relatedLinks: {
+      eyebrow: 'Nächste Schritte',
+      title: 'Direkt weiterarbeiten',
+      items: [
+        { label: 'Toolbox: Orientierung und Triage', target: 'toolbox' },
+        { label: 'Material: Handouts für das Gespräch', target: 'material' },
+        { label: 'Evidenz: Fachliche Grundlagen', target: 'evidenz' },
+      ],
+    },
+  });
+
   return (
     <NetworkPageTemplate
       hero={hero}
       pageHeadingId={getPageHeadingId('netzwerk')}
       directory={directory}
       mapping={mapping}
+      closingSection={closingSection}
     />
   );
 }

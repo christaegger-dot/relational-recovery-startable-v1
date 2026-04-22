@@ -1,4 +1,5 @@
 import { ExternalLink, MapPin, Search, XCircle } from 'lucide-react';
+import ClosingSection from '../components/closing/ClosingSection';
 import Button from '../components/ui/Button';
 import Container from '../components/ui/Container';
 import Eyebrow from '../components/ui/Eyebrow';
@@ -485,7 +486,7 @@ function NetworkMapSection({ mapping }) {
   );
 }
 
-export default function NetworkPageTemplate({ hero, pageHeadingId, directory, mapping }) {
+export default function NetworkPageTemplate({ hero, pageHeadingId, directory, mapping, closingSection }) {
   return (
     <article className="ui-stack">
       <Container width="wide">
@@ -493,6 +494,9 @@ export default function NetworkPageTemplate({ hero, pageHeadingId, directory, ma
       </Container>
       <ResourceDirectorySection directory={directory} />
       <NetworkMapSection mapping={mapping} />
+      {closingSection ? (
+        <ClosingSection section={closingSection} sectionId="netzwerk-weiter" surface="plain" />
+      ) : null}
     </article>
   );
 }

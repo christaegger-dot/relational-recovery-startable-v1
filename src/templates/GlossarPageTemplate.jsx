@@ -1,3 +1,4 @@
+import ClosingSection from '../components/closing/ClosingSection';
 import EditorialIndex from '../components/ui/EditorialIndex';
 import EditorialIntro from '../components/ui/EditorialIntro';
 import Container from '../components/ui/Container';
@@ -51,7 +52,7 @@ function GlossarGroup({ group }) {
   );
 }
 
-export default function GlossarPageTemplate({ hero, pageHeadingId, intro, groups = [] }) {
+export default function GlossarPageTemplate({ hero, pageHeadingId, intro, groups = [], closingSection }) {
   const letterIndex = buildGlossarLetterIndex(groups);
 
   return (
@@ -73,6 +74,9 @@ export default function GlossarPageTemplate({ hero, pageHeadingId, intro, groups
       {groups.map((group) => (
         <GlossarGroup key={group.id} group={group} />
       ))}
+      {closingSection ? (
+        <ClosingSection section={closingSection} sectionId="glossar-weiter" surface="plain" />
+      ) : null}
     </div>
   );
 }
