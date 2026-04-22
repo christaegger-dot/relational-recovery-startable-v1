@@ -485,6 +485,179 @@ function MaterialAgeGrid({ handout, onNavigate, onPrintHandout }) {
   );
 }
 
+/**
+ * Tier-2-Handout #5: Psychoedukations-Info fuer Eltern an die Schule.
+ * Format E (school-info): Situationsfelder, Support-Items, Boundary-
+ * Callout, Notfall-Kontakte.
+ */
+function MaterialSchoolInfo({ handout, onNavigate, onPrintHandout }) {
+  return (
+    <MaterialHandoutShell handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout}>
+      {handout.situation ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.situation.title}</h4>
+          {handout.situation.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.situation.intro}</p>
+          ) : null}
+          <div className="ui-material-handout__fields">
+            {handout.situation.fields.map((field) => (
+              <div key={field.label} className="ui-material-handout__field">
+                <p className="ui-fact-card__label">{field.label}</p>
+                {field.type === 'textarea' ? (
+                  <div className="ui-material-handout__field-box ui-material-handout__field-box--large">
+                    <p className="ui-material-handout__placeholder">{field.placeholder}</p>
+                  </div>
+                ) : (
+                  <div className="ui-material-handout__field-box">
+                    <p className="ui-material-handout__placeholder">{field.placeholder}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {handout.supportItems?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.supportItems.title}</h4>
+          {handout.supportItems.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.supportItems.intro}</p>
+          ) : null}
+          <ul className="ui-material-handout__checklist">
+            {handout.supportItems.items.map((item) => (
+              <li key={item} className="ui-material-handout__check-item">
+                <span className="ui-material-handout__checkbox" aria-hidden="true">☐</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {handout.boundary ? (
+        <section className="ui-material-handout__section ui-material-handout__callout">
+          <h4 className="ui-material-handout__section-title">{handout.boundary.title}</h4>
+          <p className="ui-material-handout__section-intro">{handout.boundary.text}</p>
+        </section>
+      ) : null}
+
+      {handout.contacts?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.contacts.title}</h4>
+          {handout.contacts.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.contacts.intro}</p>
+          ) : null}
+          <ul className="ui-material-handout__contacts">
+            {handout.contacts.items.map((contact) => (
+              <li key={contact.name} className="ui-material-handout__contact">
+                <p className="ui-material-handout__contact-name">{contact.name}</p>
+                <p className="ui-material-handout__contact-detail">{contact.detail}</p>
+                {contact.number ? (
+                  <a
+                    href={`tel:${contact.number.replace(/\s/g, '')}`}
+                    className="emergency-tel-link ui-material-handout__contact-number"
+                  >
+                    {contact.number}
+                  </a>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+    </MaterialHandoutShell>
+  );
+}
+
+/**
+ * Tier-2-Handout #6: Was darf ich vom Behandlungsteam erwarten?
+ * Format F (rights-overview): Rechte, Realitaeten, Grenzen, Trialog-
+ * Pfad, Eskalation. Aggregiert Glossar-Inhalte + Cluster-3-FAQs.
+ */
+function MaterialRightsOverview({ handout, onNavigate, onPrintHandout }) {
+  return (
+    <MaterialHandoutShell handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout}>
+      {handout.rights?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.rights.title}</h4>
+          {handout.rights.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.rights.intro}</p>
+          ) : null}
+          <ul className="ui-material-handout__notes">
+            {handout.rights.items.map((item) => (
+              <li key={item.right}>
+                <strong>{item.right}:</strong> {item.detail}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {handout.realities?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.realities.title}</h4>
+          {handout.realities.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.realities.intro}</p>
+          ) : null}
+          <ul className="ui-material-handout__notes">
+            {handout.realities.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {handout.limits?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.limits.title}</h4>
+          <ul className="ui-material-handout__thresholds">
+            {handout.limits.items.map((item) => (
+              <li key={item.limit} className="ui-material-handout__threshold">
+                <p className="ui-material-handout__threshold-observation">{item.limit}</p>
+                <p className="ui-material-handout__threshold-escalate">{item.detail}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {handout.trialogPath ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.trialogPath.title}</h4>
+          {handout.trialogPath.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.trialogPath.intro}</p>
+          ) : null}
+          <ol className="ui-material-handout__steps">
+            {handout.trialogPath.steps.map((step, index) => (
+              <li key={step} className="ui-material-handout__step">
+                <span className="ui-material-handout__step-number" aria-hidden="true">{index + 1}</span>
+                <p className="ui-material-handout__step-detail">{step}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : null}
+
+      {handout.escalation?.items?.length ? (
+        <section className="ui-material-handout__section">
+          <h4 className="ui-material-handout__section-title">{handout.escalation.title}</h4>
+          {handout.escalation.intro ? (
+            <p className="ui-material-handout__section-intro">{handout.escalation.intro}</p>
+          ) : null}
+          <ul className="ui-material-handout__notes">
+            {handout.escalation.items.map((item) => (
+              <li key={item.action}>
+                <strong>{item.action}:</strong> {item.detail}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+    </MaterialHandoutShell>
+  );
+}
+
 // ─── Switch (Default-Export) ───────────────────────────────────────────────
 
 export default function MaterialHandoutSwitch({ handout, onNavigate, onPrintHandout }) {
@@ -497,6 +670,10 @@ export default function MaterialHandoutSwitch({ handout, onNavigate, onPrintHand
       return <MaterialThresholdChecklist handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout} />;
     case 'age-grid':
       return <MaterialAgeGrid handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout} />;
+    case 'school-info':
+      return <MaterialSchoolInfo handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout} />;
+    case 'rights-overview':
+      return <MaterialRightsOverview handout={handout} onNavigate={onNavigate} onPrintHandout={onPrintHandout} />;
     default:
       return null;
   }
