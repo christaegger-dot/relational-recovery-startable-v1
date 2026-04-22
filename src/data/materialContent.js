@@ -351,11 +351,11 @@ export const MATERIAL_HANDOUTS = [
       items: [
         {
           observation: 'Mein:e Angehörige:r spricht von Suizid oder davon, niemandem mehr eine Last sein zu wollen.',
-          escalate: 'Sofort: 144 in akuter Lebensgefahr, sonst AERZTEFON oder Behandlungsteam.',
+          escalate: 'Sofort: 144 in akuter Lebensgefahr, sonst AERZTEFON (ärztliche Telefonberatung) oder Behandlungsteam.',
         },
         {
           observation: 'Routinen lösen sich auf (Schlaf-Wach-Rhythmus, Essen, Hygiene) seit mehr als einer Woche.',
-          escalate: 'Bei Verschlechterung: AERZTEFON, Behandlungsteam, ggf. Pro Mente Sana zur Orientierung.',
+          escalate: 'Wenn dieser Zustand anhält: AERZTEFON (ärztliche Telefonberatung), Behandlungsteam, ggf. Pro Mente Sana zur Orientierung.',
         },
         {
           observation: 'Kinder sind nicht mehr verlässlich versorgt (Schulweg, Mahlzeiten, Aufsicht).',
@@ -451,7 +451,7 @@ export const MATERIAL_HANDOUTS = [
   {
     id: 'material-handout-was-kinder-brauchen',
     kind: 'age-grid',
-    eyebrow: 'Handout für Eltern + Fachpersonen',
+    eyebrow: 'Handout für Eltern',
     title: 'Was Kinder in welchem Alter brauchen',
     description:
       'Eine altersdifferenzierte Übersicht für Familien, in denen ein Elternteil psychisch erkrankt ist. Vier Altersphasen, je vier Leitfragen — was zeigt das Kind, was braucht es, was hilft Eltern, wann eine Fachstelle.',
@@ -534,7 +534,7 @@ export const MATERIAL_HANDOUTS = [
           },
           threshold: {
             title: 'Wann eine Fachstelle',
-            text: 'Wenn Ängste, Schuldgefühle oder Regression (z. B. Einnässen, Babysprache) bleiben: Kita-Leitung, Kinderarzt, kjz oder Institut Kinderseele Schweiz.',
+            text: 'Wenn Ängste, Schuldgefühle oder Rückfälle in früheres Verhalten (z. B. wieder Einnässen, Babysprache) bleiben: Kita-Leitung, Kinderarzt, kjz oder Institut Kinderseele Schweiz.',
           },
         },
         {
@@ -565,12 +565,12 @@ export const MATERIAL_HANDOUTS = [
               'Sprechfenster aktiv öffnen: «Hast du gerade Sorgen, die du mir erzählen magst?»',
               'Eine feste Vertrauensperson benennen und diese vorab einbeziehen.',
               'Schule oder Hort informieren, damit das Kind dort einen sicheren Ort hat.',
-              'Auf Parentifizierung achten — das Kind soll nicht für Eltern oder Geschwister sorgen müssen.',
+              'Darauf achten, dass das Kind nicht zu früh Verantwortung für Eltern oder Geschwister übernimmt (Fachbegriff: Parentifizierung).',
             ],
           },
           threshold: {
             title: 'Wann eine Fachstelle',
-            text: 'Bei Schulleistungs-Einbrüchen, Rückzug von Freund:innen oder zunehmender Verantwortungsübernahme im Haushalt: Schulsozialarbeit, Schulpsychologischer Dienst oder kjz.',
+            text: 'Wenn die Schulnoten plötzlich sinken, Ihr Kind sich von Freund:innen zurückzieht oder zunehmend im Haushalt mithilft: Schulsozialarbeit, Schulpsychologischer Dienst oder kjz.',
           },
         },
         {
@@ -738,7 +738,7 @@ export const MATERIAL_HANDOUTS = [
       items: [
         { task: 'Notieren Sie vorher 2–3 konkrete Beobachtungen', hint: 'Was hat sich verändert? Seit wann? Was macht Ihnen am meisten Sorgen?' },
         { task: 'Formulieren Sie Ihr Anliegen in einem Satz', hint: 'z. B. «Ich möchte wissen, wie ich mein Kind in dieser Phase am besten unterstütze.»' },
-        { task: 'Klären Sie: Gibt es eine Entbindung von der Schweigepflicht?', hint: 'Falls nein: Sie dürfen trotzdem Ihre Beobachtungen mitteilen. Das Team darf nur nicht frei antworten.' },
+        { task: 'Klären Sie: Darf das Team mit Ihnen über Details sprechen?', hint: 'Falls es keine Entbindung von der Schweigepflicht (Erlaubnis zur Weitergabe) gibt: Sie dürfen trotzdem Ihre Beobachtungen mitteilen. Das Team darf nur nicht frei antworten.' },
         { task: 'Nehmen Sie dieses Blatt mit', hint: 'Es kann helfen, die eigenen Rechte und Grenzen im Blick zu behalten, wenn das Gespräch emotional wird.' },
       ],
     },
@@ -754,12 +754,12 @@ export const MATERIAL_HANDOUTS = [
     },
     rights: {
       title: 'Was Ihnen zusteht',
-      intro: 'Auch ohne formelle Entbindung von der Schweigepflicht haben Sie bestimmte Möglichkeiten:',
+      intro: 'Auch wenn das Team Ihnen nicht alles sagen darf (Schweigepflicht), haben Sie bestimmte Möglichkeiten:',
       items: [
         { right: 'Eigene Beobachtungen mitteilen', detail: 'Sie dürfen dem Behandlungsteam jederzeit sagen, was Sie im Alltag wahrnehmen — Veränderungen, Krisen, Sorgen um Kinder. Das Team muss Ihnen nichts zurückmelden, aber es darf zuhören.' },
         { right: 'Allgemeine Informationen erhalten', detail: 'Fachpersonen dürfen Ihnen allgemeine Informationen über die Erkrankung, Behandlungsformen und Unterstützungsangebote geben — ohne patientenbezogene Details.' },
         { right: 'An der Angehörigenberatung teilnehmen', detail: 'Die PUK Zürich und viele andere Kliniken bieten eigenständige Angehörigenberatung an. Dort sind Sie die Klient:in, nicht die erkrankte Person.' },
-        { right: 'Eine Entbindung anregen', detail: 'Sie können die erkrankte Person bitten, das Team von der Schweigepflicht zu entbinden — ganz oder für bestimmte Themen. Das Team kann das nicht von sich aus tun.' },
+        { right: 'Eine Entbindung anregen', detail: 'Sie können die erkrankte Person bitten, dem Team zu erlauben, mit Ihnen über bestimmte Themen zu sprechen — ganz oder teilweise. Das Team darf das nicht von sich aus tun.' },
       ],
     },
     realities: {
@@ -767,8 +767,8 @@ export const MATERIAL_HANDOUTS = [
       intro: 'Gute Zusammenarbeit braucht Erwartungen, die der Realität entsprechen:',
       items: [
         'Das Team hat begrenzte Zeit — kurze, konkrete Anliegen werden eher gehört als lange Schilderungen.',
-        'Schweigepflicht schützt die erkrankte Person, nicht das Team. Das kann frustrierend sein, ist aber rechtlich notwendig.',
-        'Trialog-Gesprächsformate (Betroffene + Angehörige + Fachperson gemeinsam) existieren, sind aber nicht überall Standard.',
+        'Die Schweigepflicht (das Recht der erkrankten Person auf Vertraulichkeit) schützt sie, nicht das Team. Das kann frustrierend sein — aber es ist ein wichtiges Schutzrecht.',
+        'Gemeinsame Gespräche (Betroffene + Angehörige + Fachperson, sogenannter «Trialog») gibt es, sie sind aber nicht überall Standard.',
         'Nicht jede Fachperson ist gleich sensibel für Angehörigen-Anliegen. Wenn der Kontakt nicht trägt, ist ein Wechsel der Ansprechperson legitim.',
       ],
     },
@@ -776,13 +776,13 @@ export const MATERIAL_HANDOUTS = [
       title: 'Wo die Grenzen liegen',
       items: [
         { limit: 'Keine Auskünfte ohne Einwilligung', detail: 'Ohne Entbindung darf das Team Ihnen nichts über Diagnose, Therapie oder Medikation sagen — auch wenn Sie die nächste Bezugsperson sind.' },
-        { limit: 'Keine Behandlungsentscheide durch Angehörige', detail: 'Solange die erkrankte Person urteilsfähig ist, entscheidet sie selbst über Behandlung, Aufenthalt und Informationsweitergabe.' },
+        { limit: 'Keine Behandlungsentscheide durch Angehörige', detail: 'Solange die erkrankte Person ihre Entscheidungen selbst treffen kann, bestimmt sie allein über Behandlung, Aufenthalt und was weitergegeben wird.' },
         { limit: 'Keine automatische Einbeziehung', detail: 'Angehörige werden nicht automatisch informiert oder einbezogen — das braucht aktive Schritte von beiden Seiten.' },
       ],
     },
     trialogPath: {
       title: 'Der Weg zum Trialog',
-      intro: 'Ein Trialog ist ein Gespräch auf Augenhöhe zwischen drei Perspektiven: der erkrankten Person, den Angehörigen und den Fachpersonen.',
+      intro: 'Ein Trialog (wörtlich: «Dreier-Gespräch») ist ein Austausch auf Augenhöhe zwischen der erkrankten Person, Ihnen als Angehörige:r und den Fachpersonen.',
       steps: [
         'Eigenen Wunsch nach einem gemeinsamen Gespräch äussern — gegenüber der erkrankten Person und/oder dem Behandlungsteam.',
         'Wenn die erkrankte Person zustimmt: Zeitpunkt, Rahmen und Themen gemeinsam vereinbaren.',
@@ -794,9 +794,9 @@ export const MATERIAL_HANDOUTS = [
       intro: 'Nicht jeder Kontakt mit dem Behandlungsteam funktioniert. Mögliche nächste Schritte:',
       items: [
         { action: 'Ansprechperson wechseln', detail: 'Fragen Sie nach einer anderen Fachperson im Team — das ist kein Affront, sondern Alltag.' },
-        { action: 'Ombudsstelle kontaktieren', detail: 'Jede Klinik hat eine Anlaufstelle für Beschwerden. Diese vermittelt neutral.' },
+        { action: 'Ombudsstelle kontaktieren', detail: 'Jede Klinik hat eine Beschwerde- oder Ombudsstelle. Dort können Sie neutral vermittelte Unterstützung bekommen.' },
         { action: 'Pro Mente Sana anrufen', detail: 'Kostenlose Rechtsberatung für Betroffene und Angehörige (0848 800 858).' },
-        { action: 'KESB-Selbstmeldung', detail: 'Wenn Sie sich Sorgen um Kinder machen und das Team nicht reagiert, können Sie sich direkt an die KESB wenden. Das ist kein Denunzieren — es ist Verantwortung.' },
+        { action: 'KESB-Selbstmeldung', detail: 'Wenn Sie sich Sorgen um Kinder machen und das Team nicht reagiert, können Sie sich direkt an die KESB (Kindes- und Erwachsenenschutzbehörde) wenden. Das ist kein Denunzieren — es ist Verantwortung.' },
       ],
     },
     disclaimer:
