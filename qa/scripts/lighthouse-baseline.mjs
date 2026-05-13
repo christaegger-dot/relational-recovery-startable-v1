@@ -36,7 +36,7 @@ const DEFAULT_URL = 'https://eltern-angehoerige-fa.netlify.app/';
 const targetUrl = process.argv[2] || DEFAULT_URL;
 
 const FORM_FACTORS = [
-  { name: 'mobile', preset: 'mobile' },
+  { name: 'mobile', preset: 'perf' },
   { name: 'desktop', preset: 'desktop' },
 ];
 
